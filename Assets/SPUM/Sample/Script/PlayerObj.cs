@@ -56,7 +56,7 @@ public class PlayerObj : MonoBehaviour
     {
         float x = joy.Horizontal;
         float y = joy.Vertical;
-        transform.Translate(new Vector2(x, y) * moveSpeed * Time.deltaTime);
+        transform.Translate(new Vector2(x, y).normalized * moveSpeed * Time.deltaTime);
 
         //if(!joy.onMove)
         //{
@@ -76,8 +76,8 @@ public class PlayerObj : MonoBehaviour
         //transform.position += (_dirMVec * _charMS * Time.deltaTime );
 
 
-        //if(_dirMVec.x > 0 ) _prefabs.transform.localScale = new Vector3(-1,1,1);
-        //else if (_dirMVec.x < 0) _prefabs.transform.localScale = new Vector3(1,1,1);
+        if (x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
+        else if (x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
     }
 
     public void SetMovePos(Vector2 pos)
