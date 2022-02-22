@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerObj : MonoBehaviour
 {
+    public FloatingJoystick joy;
+    Vector3 moveVec;
+    public float moveSpeed = 5;
+
     public SPUM_Prefabs _prefabs;
     public float _charMS;
     public enum PlayerState
@@ -24,8 +28,20 @@ public class PlayerObj : MonoBehaviour
     }
     void Update()
     {
-        transform.position = new Vector3(transform.position.x,transform.position.y,transform.localPosition.y * 0.01f);
-        switch(_playerState)
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.localPosition.y * 0.01f); // 이건 먼지 모름 한번 지워봐야함
+
+        // 조이스틱에서 bool값 가져와서 이동 기본상태 나눠줌
+        if (joy.onMove)
+        {
+            _playerState = PlayerState.move;
+            _prefabs.PlayAnimation(1);
+        }
+        else
+        {
+            _prefabs.PlayAnimation(0);
+            _playerState = PlayerState.idle;
+        }
+        switch (_playerState)
         {
             case PlayerState.idle:
             break;
@@ -38,20 +54,30 @@ public class PlayerObj : MonoBehaviour
 
     void DoMove()
     {
-        Vector3 _dirVec  = _goalPos - transform.position ;
-        Vector3 _disVec = (Vector2)_goalPos - (Vector2)transform.position ;
-        if( _disVec.sqrMagnitude < 0.1f )
-        {
-            _prefabs.PlayAnimation(0);
-            _playerState = PlayerState.idle;
-            return;
-        }
-        Vector3 _dirMVec = _dirVec.normalized;
-        transform.position += (_dirMVec * _charMS * Time.deltaTime );
-        
+        float x = joy.Horizontal;
+        float y = joy.Vertical;
+        transform.Translate(new Vector2(x, y).normalized * moveSpeed * Time.deltaTime);
 
-        if(_dirMVec.x > 0 ) _prefabs.transform.localScale = new Vector3(-1,1,1);
-        else if (_dirMVec.x < 0) _prefabs.transform.localScale = new Vector3(1,1,1);
+        //if(!joy.onMove)
+        //{
+        //    _prefabs.PlayAnimation(0);
+        //    _playerState = PlayerState.idle;
+        //    return;
+        //}
+        //Vector3 _dirVec  = _goalPos - transform.position ;
+        //Vector3 _disVec = (Vector2)_goalPos - (Vector2)transform.position ;
+        //if( _disVec.sqrMagnitude < 0.1f )
+        //{
+        //    _prefabs.PlayAnimation(0);
+        //    _playerState = PlayerState.idle;
+        //    return;
+        //}
+        //Vector3 _dirMVec = _dirVec.normalized;
+        //transform.position += (_dirMVec * _charMS * Time.deltaTime );
+
+
+        if (x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
+        else if (x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
     }
 
     public void SetMovePos(Vector2 pos)
