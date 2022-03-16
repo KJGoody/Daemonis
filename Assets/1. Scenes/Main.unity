@@ -6040,8 +6040,8 @@ MonoBehaviour:
   - {x: -7.0000095, y: -4.000039, z: 0}
   - {x: -6.9999743, y: -6.00001, z: 0}
   m_ShapePathHash: 0
-  m_Mesh: {fileID: 2089213519}
-  m_InstanceId: 76156
+  m_Mesh: {fileID: 2060514543}
+  m_InstanceId: 81902
 --- !u!114 &1063909079 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8170153791668043265, guid: 0d230cc8be529a542a08cb878ab14b18,
@@ -6088,7 +6088,7 @@ MonoBehaviour:
   joy: {fileID: 1063909079}
   moveSpeed: 5
   moveForce: 365
-  maxSpeed: 365
+  maxSpeed: 200
   _prefabs: {fileID: 446949531}
   _charMS: 0
   _playerState: 0
@@ -6498,7 +6498,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596959662}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
   m_Name: 
@@ -11862,7 +11862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damping: 0
---- !u!43 &2089213519
+--- !u!43 &2060514543
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

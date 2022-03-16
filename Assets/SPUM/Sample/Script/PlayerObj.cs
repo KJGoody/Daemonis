@@ -8,7 +8,7 @@ public class PlayerObj : MonoBehaviour
     Vector3 moveVec;
     public float moveSpeed = 30;
     public float moveForce = 10f;
-    public float maxSpeed = 1;
+    public float maxSpeed = 500;
 
     public SPUM_Prefabs _prefabs;
     public float _charMS;
