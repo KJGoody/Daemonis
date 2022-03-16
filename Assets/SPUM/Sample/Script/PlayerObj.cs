@@ -6,7 +6,9 @@ public class PlayerObj : MonoBehaviour
 {
     public FloatingJoystick joy;
     Vector3 moveVec;
-    public float moveSpeed = 5;
+    public float moveSpeed = 30;
+    public float moveForce = 10f;
+    public float maxSpeed = 1;
 
     public SPUM_Prefabs _prefabs;
     public float _charMS;
@@ -28,7 +30,7 @@ public class PlayerObj : MonoBehaviour
     }
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.localPosition.y * 0.01f); // 이건 먼지 모름 한번 지워봐야함
+        //transform.position = new Vector3(transform.position.x, transform.position.y, transform.localPosition.y * 0.01f); // 이건 먼지 모름 한번 지워봐야함
 
         // 조이스틱에서 bool값 가져와서 이동 기본상태 나눠줌
         if (joy.onMove)
@@ -41,22 +43,31 @@ public class PlayerObj : MonoBehaviour
             _prefabs.PlayAnimation(0);
             _playerState = PlayerState.idle;
         }
+    }
+    private void FixedUpdate()
+    {
         switch (_playerState)
         {
             case PlayerState.idle:
-            break;
+                Rigidbody2D rd2d = gameObject.GetComponent<Rigidbody2D>();
+                rd2d.velocity = Vector2.zero;
+                break;
 
             case PlayerState.move:
-            DoMove();
-            break;
+                DoMove();
+                break;
         }
     }
-
     void DoMove()
     {
         float x = joy.Horizontal;
         float y = joy.Vertical;
-        transform.Translate(new Vector2(x, y).normalized * moveSpeed * Time.deltaTime);
+        //transform.Translate(new Vector2(x, y).normalized * moveSpeed * Time.deltaTime);
+        Rigidbody2D rb2d = gameObject.GetComponent<Rigidbody2D>();
+
+        rb2d.velocity = new Vector2( x , y ) * maxSpeed * Time.deltaTime;
+        
+
 
         //if(!joy.onMove)
         //{
