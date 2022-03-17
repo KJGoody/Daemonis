@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 
+/// 
+///  @@ 강의 따라 하기 전 SPUM만 있을 때 사용한 스크립트임
+///  @@ 2022 03 17 강의에 맞게 Player와 Character 스크립트로 분리함
+///  @@ 어떤 상황이 발생할지 몰라 일단 뒀지만 나중에 삭제하게될 스크립트임
+/// 
+/// 
+/// </summary>
 public class PlayerObj : MonoBehaviour
 {
     public FloatingJoystick joy;
-    Vector3 moveVec;
-    public float moveSpeed = 30;
-    public float moveForce = 10f;
-    public float maxSpeed = 500;
+    public float speed = 500;
 
     public SPUM_Prefabs _prefabs;
     public SPUM_SpriteList _spriteList;
-    public float _charMS;
+    //public float _charMS;
     public enum PlayerState
     {
         idle,
@@ -21,11 +26,11 @@ public class PlayerObj : MonoBehaviour
         death,
     }
     public PlayerState _playerState = PlayerState.idle;
-    public Vector3 _goalPos;
+    //public Vector3 _goalPos;
     // Start is called before the first frame update
 
     // Update is called once per frame
-    void Start()
+    protected virtual void Start()
     {
 
     }
@@ -44,10 +49,12 @@ public class PlayerObj : MonoBehaviour
             _prefabs.PlayAnimation(0);
             _playerState = PlayerState.idle;
         }
+
+        // 테스트용
         if (Input.GetMouseButtonDown(1))
         {
 
-            _spriteList.ChangeItem();
+            //_spriteList.ChangeItem();
         }
     }
     private void FixedUpdate()
@@ -68,39 +75,10 @@ public class PlayerObj : MonoBehaviour
     {
         float x = joy.Horizontal;
         float y = joy.Vertical;
-        //transform.Translate(new Vector2(x, y).normalized * moveSpeed * Time.deltaTime);
         Rigidbody2D rb2d = gameObject.GetComponent<Rigidbody2D>();
-
-        rb2d.velocity = new Vector2( x , y ) * maxSpeed * Time.deltaTime;
-        
-
-
-        //if(!joy.onMove)
-        //{
-        //    _prefabs.PlayAnimation(0);
-        //    _playerState = PlayerState.idle;
-        //    return;
-        //}
-        //Vector3 _dirVec  = _goalPos - transform.position ;
-        //Vector3 _disVec = (Vector2)_goalPos - (Vector2)transform.position ;
-        //if( _disVec.sqrMagnitude < 0.1f )
-        //{
-        //    _prefabs.PlayAnimation(0);
-        //    _playerState = PlayerState.idle;
-        //    return;
-        //}
-        //Vector3 _dirMVec = _dirVec.normalized;
-        //transform.position += (_dirMVec * _charMS * Time.deltaTime );
-
+        rb2d.velocity = new Vector2( x , y ) * speed * Time.deltaTime;
 
         if (x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
         else if (x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
-    }
-
-    public void SetMovePos(Vector2 pos)
-    {
-        _goalPos = pos;
-        _playerState = PlayerState.move;
-        _prefabs.PlayAnimation(1);
     }
 }
