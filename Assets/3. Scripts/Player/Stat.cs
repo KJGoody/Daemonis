@@ -6,8 +6,12 @@ public class Stat : MonoBehaviour
 {
 
     private Image content;
+
+    [SerializeField]
+    private Text statText;
     [SerializeField]
     private float lerpSpeed;
+
     private float currentFill;
     public float MyMaxValue { get; set; }
 
@@ -24,6 +28,7 @@ public class Stat : MonoBehaviour
             else currentValue = value;
 
             currentFill = currentValue / MyMaxValue;
+            statText.text = currentValue + " / " + MyMaxValue;
         }
     }
 
@@ -34,7 +39,6 @@ public class Stat : MonoBehaviour
         content = GetComponent<Image>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (currentFill != content.fillAmount)
