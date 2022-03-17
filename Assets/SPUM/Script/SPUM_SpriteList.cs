@@ -63,10 +63,19 @@ public class SPUM_SpriteList : MonoBehaviour
         {
             if(StringList[i].Length > 1)
             {
-
-                // Assets/SPUM/SPUM_Sprites/BodySource/Species/0_Human/Human_1.png
+                //Assets/SPUM/SPUM_Sprites/BodySource/Species/0_Human/Human_1.png
             }
         }
+    }
+
+
+    public void ChangeItem()
+    {
+        // SPUM_Manager.SetSpriteItem 참조
+        Object[] tObj = Resources.LoadAll<Sprite>("SPUM/SPUM_Sprites/" + "Items/4_Helmet/"); ;
+        Sprite tSpriteHelmet = tObj[1] as Sprite;
+        _hairList[1].sprite = tSpriteHelmet;
+        Debug.Log("바뀜");
     }
 
     public void LoadSprite(SPUM_SpriteList data)

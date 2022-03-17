@@ -11,6 +11,7 @@ public class PlayerObj : MonoBehaviour
     public float maxSpeed = 500;
 
     public SPUM_Prefabs _prefabs;
+    public SPUM_SpriteList _spriteList;
     public float _charMS;
     public enum PlayerState
     {
@@ -42,6 +43,11 @@ public class PlayerObj : MonoBehaviour
         {
             _prefabs.PlayAnimation(0);
             _playerState = PlayerState.idle;
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+
+            _spriteList.ChangeItem();
         }
     }
     private void FixedUpdate()
