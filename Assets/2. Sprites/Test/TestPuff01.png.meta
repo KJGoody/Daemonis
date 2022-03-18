@@ -1,40 +1,25 @@
 fileFormatVersion: 2
-guid: fbe801feadbc4284e8948973236aae48
+guid: 18f48581ebef2e24cbee0a447a8e32d1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2256599991203281371
-    second: "\uC81C\uBAA9 \uC5C6\uC74C-1_0"
+      213: -559441539026184889
+    second: TestPuff01_0
   - first:
-      213: 1882935243438231651
-    second: "\uC81C\uBAA9 \uC5C6\uC74C-1_1"
+      213: -3168342591688213281
+    second: TestPuff01_1
   - first:
-      213: -2191780441370642326
-    second: "\uC81C\uBAA9 \uC5C6\uC74C-1_2"
+      213: 9186240591837536257
+    second: TestPuff01_2
   - first:
-      213: -8087661623911210128
-    second: "\uC81C\uBAA9 \uC5C6\uC74C-1_3"
+      213: 8674026389367659397
+    second: TestPuff01_3
   - first:
-      213: -8473915992797736615
-    second: "\uC81C\uBAA9 \uC5C6\uC74C-1_4"
+      213: 799011808384970448
+    second: TestPuff01_4
   - first:
-      213: -924792422393346948
-    second: "\uC81C\uBAA9 \uC5C6\uC74C-1_5"
-  - first:
-      213: -3258601010468798569
-    second: "\uC81C\uBAA9 \uC5C6\uC74C-1_6"
-  - first:
-      213: -1557013538026691241
-    second: UI_0
-  - first:
-      213: 82707731993968007
-    second: UI_1
-  - first:
-      213: 1080825480604336155
-    second: UI_2
-  - first:
-      213: -9136572144232859775
-    second: UI_3
+      213: 2549277308239108411
+    second: TestPuff01_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -148,221 +133,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uC81C\uBAA9 \uC5C6\uC74C-1_0"
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 453
-        width: 30
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 526cd249342fea0e0800000000000000
-      internalID: -2256599991203281371
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uC81C\uBAA9 \uC5C6\uC74C-1_1"
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 461
-        width: 30
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3601330b0a7812a10800000000000000
-      internalID: 1882935243438231651
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uC81C\uBAA9 \uC5C6\uC74C-1_2"
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 457
-        width: 31
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a6834761d4b3591e0800000000000000
-      internalID: -2191780441370642326
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uC81C\uBAA9 \uC5C6\uC74C-1_3"
-      rect:
-        serializedVersion: 2
-        x: 162
-        y: 454
-        width: 30
-        height: 29
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 073a6337a9ad2cf80800000000000000
-      internalID: -8087661623911210128
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uC81C\uBAA9 \uC5C6\uC74C-1_4"
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 406
-        width: 120
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9511ac02d4a966a80800000000000000
-      internalID: -8473915992797736615
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uC81C\uBAA9 \uC5C6\uC74C-1_5"
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 406
-        width: 30
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c74854c013a7a23f0800000000000000
-      internalID: -924792422393346948
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uC81C\uBAA9 \uC5C6\uC74C-1_6"
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 359
-        width: 120
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 79f374255af17c2d0800000000000000
-      internalID: -3258601010468798569
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_0
+      name: TestPuff01_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 292
-        width: 96
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 755e173cf60646ae0800000000000000
-      internalID: -1557013538026691241
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 276
-        width: 96
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78dbda97e36d52100800000000000000
-      internalID: 82707731993968007
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 260
-        width: 96
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b10cc935c0ddffe00800000000000000
-      internalID: 1080825480604336155
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 276
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -372,8 +147,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 187754eda00643180800000000000000
-      internalID: -9136572144232859775
+      spriteID: 7451fb162e67c38f0800000000000000
+      internalID: -559441539026184889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPuff01_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdcfeaf0339c704d0800000000000000
+      internalID: -3168342591688213281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPuff01_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10020c1c5251c7f70800000000000000
+      internalID: 9186240591837536257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPuff01_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58b9f9e4b05506870800000000000000
+      internalID: 8674026389367659397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPuff01_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dee022a109a61b00800000000000000
+      internalID: 799011808384970448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPuff01_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b395e87843ad06320800000000000000
+      internalID: 2549277308239108411
       vertices: []
       indices: 
       edges: []
@@ -381,7 +261,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 93a054a97f076a64a8b4b741f5deb2ca
+    spriteID: 5a625996ac6034b4cab693913c8fa414
     internalID: 0
     vertices: []
     indices: 

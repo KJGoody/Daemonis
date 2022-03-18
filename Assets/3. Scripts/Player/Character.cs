@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public abstract class Character : MonoBehaviour
 {
 
     [SerializeField]
-    private float speed;
+    protected float speed;
     protected Vector2 direction;
 
     private Rigidbody2D myRigid2D;
@@ -15,6 +17,15 @@ public abstract class Character : MonoBehaviour
 
     protected bool isAttacking = false;
     protected Coroutine attackRoutine;
+
+    [SerializeField]
+    protected Transform hitBox;
+
+    [SerializeField]
+    protected Stat health;
+
+    [SerializeField]
+    private float initHealth;
     public bool IsMoving
     {
         get
@@ -32,6 +43,7 @@ public abstract class Character : MonoBehaviour
     public LayerName _layerName = LayerName.idle;
     protected virtual void Start()
     {
+        health.Initialize(initHealth, initHealth);
         myRigid2D = gameObject.GetComponent<Rigidbody2D>();
     }
     protected virtual void Update()
@@ -52,14 +64,13 @@ public abstract class Character : MonoBehaviour
     }
     public void HandleLayers()
     {
+        // 캐릭터 좌우 보는거
+        if (direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
+        else if (direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
         if (IsMoving && !isAttacking)
         {
             _layerName = LayerName.move;
             _prefabs.PlayAnimation(1);
-
-            // 캐릭터 좌우 보는거
-            if (direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
-            else if (direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
         }
         else if(!IsMoving && !isAttacking)
         {
@@ -68,7 +79,7 @@ public abstract class Character : MonoBehaviour
         }
         if (isAttacking)
         {
-           // _prefabs.PlayAnimation(4);
+            // _prefabs.PlayAnimation(4);
         }
     }
     public void StopAttack()
@@ -78,6 +89,23 @@ public abstract class Character : MonoBehaviour
             StopCoroutine(attackRoutine);
             isAttacking = false;
         }
+    }
+
+    public virtual void TakeDamage(int damage)
+    {
+        health.MyCurrentValue -= damage;
+        if (health.MyCurrentValue <= 0)
+        {
+            _prefabs.PlayAnimation(2);
+            //myAnimator.SetTrigger("die");
+            StartCoroutine("Death");
+        }
+
+    }
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
     }
 
 }
