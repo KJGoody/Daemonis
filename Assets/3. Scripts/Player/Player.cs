@@ -57,15 +57,15 @@ public class Player : Character
             moveVector.x = joy.Horizontal;
             moveVector.y = joy.Vertical;
 
-            direction = moveVector;
+            Direction = moveVector;
         }
          
     }
     private void FindTarget()
     {
-        direction = myTarget.position - transform.position;
-        if (direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
-        else if (direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
+        Direction = myTarget.position - transform.position;
+        if (Direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
+        else if (Direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
     }
     private IEnumerator Attack(int spellIndex)
     {

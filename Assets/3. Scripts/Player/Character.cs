@@ -8,10 +8,34 @@ public abstract class Character : MonoBehaviour
 {
 
     [SerializeField]
-    protected float speed;
-    protected Vector2 direction;
+    private float speed;
+    private Vector2 direction;
+    public Vector2 Direction
+    {
+        get
+        {
+            return direction;
+        }
 
-    private Rigidbody2D myRigid2D;
+        set
+        {
+            direction = value;
+        }
+    }
+
+    public float Speed
+    {
+        get
+        {
+            return speed;
+        }
+
+        set
+        {
+            speed = value;
+        }
+    }
+    protected Rigidbody2D myRigid2D;
     public SPUM_Prefabs _prefabs;
     public SPUM_SpriteList _spriteList;
 

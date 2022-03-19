@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Enemy : NPC
 {
+    private IState currentState;
+
     [SerializeField]
     private CanvasGroup healthGroup;
 
+    [SerializeField]
     private Transform target;
     public Transform Target
     {
@@ -20,10 +23,19 @@ public class Enemy : NPC
             target = value;
         }
     }
+    protected void Awake()
+    {
+        ChangeState(new IdleState());
+    }
     protected override void Update()
     {
-        FollowTarget();
+        currentState.Update();
         base.Update();
+    }
+    protected override void FixedUpdate()
+    {
+        //FollowTarget();
+        base.FixedUpdate();
     }
     public override Transform Select()
     {
@@ -31,6 +43,16 @@ public class Enemy : NPC
         healthGroup.alpha = 1;
 
         return base.Select();
+    }
+    public void ChangeState(IState newState)
+    {
+        if (currentState != null)
+        {
+            currentState.Exit();
+        }
+
+        currentState = newState;
+        currentState.Enter(this);
     }
 
 
@@ -41,14 +63,19 @@ public class Enemy : NPC
 
         base.DeSelect();
     }
-    private void FollowTarget()
-    {
-        if (target != null)
-        {
-            Vector3 targetPosition = target.position;
-            Vector3 myPosition = transform.position;
+    //private void FollowTarget()
+    //{
+    //    if (target != null)
+    //    {
+    //        Vector2 targetPosition = target.position;
+    //        Vector2 myPosition = transform.position;
+    //        direction = targetPosition - myPosition;
 
-            transform.position = Vector2.MoveTowards(myPosition, targetPosition, speed * Time.deltaTime);
-        }
-    }
+
+    //        //transform.position = Vector2.MoveTowards(myPosition, targetPosition, speed * Time.deltaTime);
+    //    }
+    //    else{
+    //        direction = Vector2.zero;
+    //    }
+    //}
 }
