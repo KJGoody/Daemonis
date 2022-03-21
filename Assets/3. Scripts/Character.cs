@@ -35,12 +35,22 @@ public abstract class Character : MonoBehaviour
             speed = value;
         }
     }
+    public bool IsAlive
+    {
+        get
+        {
+            return health.MyCurrentValue > 0;
+        }
+    }
+
     protected Rigidbody2D myRigid2D;
     public SPUM_Prefabs _prefabs;
     public SPUM_SpriteList _spriteList;
 
-    protected bool isAttacking = false;
+    public Transform MyTarget { get; set; }
+    public bool IsAttacking { get; set; }
     protected Coroutine attackRoutine;
+
 
     [SerializeField]
     protected Transform hitBox;
@@ -80,48 +90,55 @@ public abstract class Character : MonoBehaviour
     }
     public void Move()
     {
-        if (isAttacking)
-            myRigid2D.velocity = Vector2.zero;
-        else
-            myRigid2D.velocity = direction.normalized * speed;
-        
+        if (IsAlive)
+        {
+            if (IsAttacking)
+                myRigid2D.velocity = Vector2.zero;
+            else
+                myRigid2D.velocity = direction.normalized * speed;
+        }
     }
     public void HandleLayers()
     {
-        // 캐릭터 좌우 보는거
-        if (direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
-        else if (direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
-        if (IsMoving && !isAttacking)
+        if (IsAlive)
         {
-            _layerName = LayerName.move;
-            _prefabs.PlayAnimation(1);
+            // 캐릭터 좌우 보는거
+            if (direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
+            else if (direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
+            if (IsMoving && !IsAttacking)
+            {
+                _layerName = LayerName.move;
+                _prefabs.PlayAnimation(1);
+            }
+            else if (!IsMoving && !IsAttacking)
+            {
+                _prefabs.PlayAnimation(0);
+                _layerName = LayerName.idle;
+            }
+            if (IsAttacking)
+            {
+                _layerName = LayerName.attack;
+                // _prefabs.PlayAnimation(4);
+            }
         }
-        else if(!IsMoving && !isAttacking)
+        else
         {
-            _prefabs.PlayAnimation(0);
-            _layerName = LayerName.idle;
-        }
-        if (isAttacking)
-        {
-            // _prefabs.PlayAnimation(4);
+            _layerName = LayerName.death;
         }
     }
-    public void StopAttack()
+    
+    public virtual void TakeDamage(int damage, Transform source)
     {
-        if (attackRoutine != null)
+        if (MyTarget == null)
         {
-            StopCoroutine(attackRoutine);
-            isAttacking = false;
+            MyTarget = source;
         }
-    }
-
-    public virtual void TakeDamage(int damage)
-    {
         health.MyCurrentValue -= damage;
         if (health.MyCurrentValue <= 0)
         {
+            Direction = Vector2.zero;
+            myRigid2D.velocity = direction;
             _prefabs.PlayAnimation(2);
-            //myAnimator.SetTrigger("die");
             StartCoroutine("Death");
         }
 

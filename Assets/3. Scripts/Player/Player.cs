@@ -15,7 +15,7 @@ public class Player : Character
 
     private SpellBook spellBook;
 
-    public Transform myTarget { get; set; }
+    //public Transform myTarget { get; set; }
     protected override void Start()
     {
         spellBook = GetComponent<SpellBook>();
@@ -52,7 +52,7 @@ public class Player : Character
 
 
         Vector2 moveVector;
-        if (!isAttacking)
+        if (!IsAttacking)
         {
             moveVector.x = joy.Horizontal;
             moveVector.y = joy.Vertical;
@@ -63,16 +63,16 @@ public class Player : Character
     }
     private void FindTarget()
     {
-        Direction = myTarget.position - transform.position;
+        Direction = MyTarget.position - transform.position;
         if (Direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
         else if (Direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
     }
     private IEnumerator Attack(int spellIndex)
     {
-        Transform currentTarget = myTarget;
+        Transform currentTarget = MyTarget;
         Spell newSpell = spellBook.CastSpell(spellIndex); //스펠북에서 스킬 받아옴
 
-        isAttacking = true;
+        IsAttacking = true;
         FindTarget();
         _prefabs.PlayAnimation(4);
 
@@ -80,17 +80,28 @@ public class Player : Character
         if (currentTarget != null)
         {
             SpellScript s = Instantiate(spell, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
-            s.Initailize(currentTarget, newSpell.MyDamage);
-            s.MyTarget = myTarget;
+            s.Initailize(currentTarget, newSpell.MyDamage,transform);
+            s.MyTarget = MyTarget;
         }
         yield return new WaitForSeconds(0.3f); // 테스트를 위한 코드입니다. 여기다가 후딜넣을까 생각중
         StopAttack();
        
     }
+    public void StopAttack()
+    {
+        if (attackRoutine != null)
+        {
+            StopCoroutine(attackRoutine);
+            IsAttacking = false;
+        }
+    }
+
     public void CastSpell(int spellIndex)
     {
-        if (myTarget == null) return;
-        if (!isAttacking)
+        if (MyTarget == null) return;
+
+        Character EnemyCharacter = MyTarget.GetComponentInParent<Character>();
+        if (!IsAttacking && EnemyCharacter.IsAlive)
         {
             attackRoutine = StartCoroutine(Attack(spellIndex));
         }

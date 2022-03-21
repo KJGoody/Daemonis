@@ -10,7 +10,7 @@ public class SpellScript : MonoBehaviour
     private float speed;
 
     public Transform MyTarget { get; set; } // 공격할 대상
-
+    private Transform source;
     private int damage;
 
     // Use this for initialization
@@ -38,17 +38,19 @@ public class SpellScript : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // 축 중심 각도로 회전
 
     }
-    public void Initailize(Transform target, int damage)
+    public void Initailize(Transform target, int damage, Transform source)
     {
         this.MyTarget = target;
         this.damage = damage;
+        this.source = source;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("HitBox") && collision.transform.position == MyTarget.position)
         {
+            Character c = collision.GetComponentInParent<Character>();
             speed = 0;
-            collision.GetComponentInParent<Enemy>().TakeDamage(damage);
+            c.TakeDamage(damage,source); // 피격된 대상에게 자신의 위치 정보 전달
             GetComponent<Animator>().SetTrigger("impact");
             myRigidbody.velocity = Vector3.zero;
             MyTarget = null;

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
                 }
                 currentTarget = hit.collider.GetComponent<NPC>();
 
-                player.myTarget = currentTarget.Select();
+                player.MyTarget = currentTarget.Select();
                 //if (hit.collider.CompareTag("Enemy"))
                 //{
                 //    player.myTarget = hit.transform.GetChild(0);
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
                 }
  
                 currentTarget = null;
-                player.myTarget = null;
+                player.MyTarget = null;
           }
         }
     }

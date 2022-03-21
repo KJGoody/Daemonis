@@ -17,7 +17,7 @@ public class Range : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            parent.Target = collision.transform;
+            parent.MyTarget = collision.transform;
         }
     }
 
@@ -26,7 +26,7 @@ public class Range : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            parent.Target = null;
+            parent.MyTarget = null;
         }
     }
 

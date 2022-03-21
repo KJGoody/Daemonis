@@ -5,31 +5,40 @@ using UnityEngine;
 public class Enemy : NPC
 {
     private IState currentState;
-
+    public float MyAttackRange { get; set; } // 사거리
+    public float MyAttackTime { get; set; } // 공격 딜레이를 체크하기 위한 속성
     [SerializeField]
     private CanvasGroup healthGroup;
 
-    [SerializeField]
-    private Transform target;
-    public Transform Target
-    {
-        get
-        {
-            return target;
-        }
+    //[SerializeField]
+    //private Transform target;
+    //public Transform Target
+    //{
+    //    get
+    //    {
+    //        return target;
+    //    }
 
-        set
-        {
-            target = value;
-        }
-    }
+    //    set
+    //    {
+    //        target = value;
+    //    }
+    //}
     protected void Awake()
-    {
+    {   
+        MyAttackRange = 1; // 임시 코드
         ChangeState(new IdleState());
     }
     protected override void Update()
     {
-        currentState.Update();
+        if (IsAlive)
+        {
+            if (!IsAttacking)
+            {
+                MyAttackTime += Time.deltaTime;
+            }
+            currentState.Update();
+        }
         base.Update();
     }
     protected override void FixedUpdate()
@@ -63,6 +72,12 @@ public class Enemy : NPC
 
         base.DeSelect();
     }
+    public override void TakeDamage(int damage, Transform source)
+    {
+        base.TakeDamage(damage, source);
+        //OnHealthChanged(health.MyCurrentValue);
+    }
+
     //private void FollowTarget()
     //{
     //    if (target != null)
