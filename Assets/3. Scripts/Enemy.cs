@@ -10,6 +10,18 @@ public class Enemy : NPC
     [SerializeField]
     private CanvasGroup healthGroup;
 
+    [SerializeField]
+    private float initAggroRange;
+    public float MyAggroRange { get; set; }
+    public bool InRange
+    {
+        get
+        {
+            return Vector2.Distance(transform.position, MyTarget.position) < MyAggroRange;
+        }
+    }
+
+
     //[SerializeField]
     //private Transform target;
     //public Transform Target
@@ -25,7 +37,8 @@ public class Enemy : NPC
     //    }
     //}
     protected void Awake()
-    {   
+    {
+        MyAggroRange = initAggroRange;
         MyAttackRange = 1; // 임시 코드
         ChangeState(new IdleState());
     }
@@ -74,9 +87,31 @@ public class Enemy : NPC
     }
     public override void TakeDamage(int damage, Transform source)
     {
+        SetTarget(source);
         base.TakeDamage(damage, source);
         //OnHealthChanged(health.MyCurrentValue);
     }
+
+    public void SetTarget(Transform target)
+    {
+        if (MyTarget == null)
+        {
+            float distance = Vector2.Distance(transform.position, target.position);
+            MyAggroRange = initAggroRange;
+            MyAggroRange += distance;
+            MyTarget = target;
+        }
+    }
+
+    public void Reset()
+    {
+        this.MyTarget = null;
+        this.MyAggroRange = initAggroRange;
+        this.Direction = Vector2.zero;
+        //this.MyHealth.MyCurrentValue = this.MyHealth.MyMaxValue;
+        //OnHealthChanged(health.MyCurrentValue);
+    }
+
 
     //private void FollowTarget()
     //{

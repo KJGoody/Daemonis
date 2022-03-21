@@ -17,17 +17,7 @@ public class Range : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            parent.MyTarget = collision.transform;
+            parent.SetTarget(collision.transform);
         }
     }
-
-    // Player°¡ ³ª°¬À» ¶§
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            parent.MyTarget = null;
-        }
-    }
-
 }
