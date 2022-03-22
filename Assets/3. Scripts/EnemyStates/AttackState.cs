@@ -29,6 +29,7 @@ public class AttackState : IState
         if (parent.MyTarget != null)
         {
             Debug.Log("AttackState");
+
             float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);
 
             // 공격거리 보다 멀리있으면 Follow 상태로 변경한다.
@@ -49,8 +50,10 @@ public class AttackState : IState
     {
         parent.IsAttacking = true;
         parent._prefabs.PlayAnimation(4);
+        //parent.Direction = Vector2.zero;
 
         yield return new WaitForSeconds(1); // 공격 후딜 넣으면 될듯
+        
         parent.IsAttacking = false;
     }
 

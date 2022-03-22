@@ -118,7 +118,7 @@ public abstract class Character : MonoBehaviour
             if (IsAttacking)
             {
                 _layerName = LayerName.attack;
-                // _prefabs.PlayAnimation(4);
+                //_prefabs.PlayAnimation(4);
             }
         }
         else
