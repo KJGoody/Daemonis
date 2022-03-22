@@ -10,7 +10,7 @@ public class Enemy : NPC
     public float MyAttackTime { get; set; } // 공격 딜레이를 체크하기 위한 속성
     [SerializeField]
     private CanvasGroup healthGroup;
-
+    private bool isKnockBack;
     [SerializeField]
     private float initAggroRange;
     public float MyAggroRange { get; set; }
@@ -58,7 +58,8 @@ public class Enemy : NPC
     protected override void FixedUpdate()
     {
         //FollowTarget();
-        base.FixedUpdate();
+        if(!isKnockBack)
+            base.FixedUpdate();
     }
     public override Transform Select()
     {
@@ -88,11 +89,32 @@ public class Enemy : NPC
     }
     public override void TakeDamage(int damage, Transform source)
     {
+        healthGroup.alpha = 1;
+        StartCoroutine(KnockBack(new Vector2(1,1),5));
+        //KnockBack(new Vector2(1, 0), 5);
         SetTarget(source);
         base.TakeDamage(damage, source);
+        if (health.MyCurrentValue <= 0)
+        {
+            //GameObject hitbox = transform.Find("HitBox").gameObject;
+            Destroy(transform.Find("HitBox").gameObject);
+        }
         //OnHealthChanged(health.MyCurrentValue);
     }
-
+    //public void KnockBack(Vector2 direction, float force)
+    //{
+    //    myRigid2D.velocity = direction * force;
+    //    Debug.Log("넉백");
+    //}
+    IEnumerator KnockBack(Vector2 direction, float force)
+    {
+        isKnockBack = true;
+        myRigid2D.velocity = direction * force;
+        yield return new WaitForSeconds(0.1f);
+        myRigid2D.velocity = Vector2.zero;
+        yield return new WaitForSeconds(0.2f);
+        isKnockBack = false;
+    }
     public void SetTarget(Transform target)
     {
         if (MyTarget == null)

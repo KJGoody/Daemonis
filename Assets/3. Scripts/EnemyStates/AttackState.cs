@@ -28,7 +28,7 @@ public class AttackState : IState
 
         if (parent.MyTarget != null)
         {
-            Debug.Log("AttackState");
+            //Debug.Log("AttackState");
 
             float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);
 

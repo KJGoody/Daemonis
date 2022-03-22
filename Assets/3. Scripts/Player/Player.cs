@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Player : Character
 {
@@ -69,6 +70,8 @@ public class Player : Character
     }
     private IEnumerator Attack(int spellIndex)
     {
+        Debug.Log("Attack" + MyTarget);
+
         Transform currentTarget = MyTarget;
         Spell newSpell = spellBook.CastSpell(spellIndex); //스펠북에서 스킬 받아옴
 
@@ -87,6 +90,27 @@ public class Player : Character
         StopAttack();
        
     }
+    private void AutoTarget()
+    {
+        MyTarget = FindNearestObjectByTag("HitBox").GetComponent<Transform>();
+        
+        Debug.Log("AutoTarget" + MyTarget);
+    }
+    private GameObject FindNearestObjectByTag(string tag)
+    {
+        // 탐색할 오브젝트 목록을 List 로 저장합니다.
+        var objects = GameObject.FindGameObjectsWithTag(tag).ToList();
+
+        // LINQ 메소드를 이용해 가장 가까운 적을 찾습니다.
+        var neareastObject = objects
+            .OrderBy(obj =>
+            {
+                return Vector3.Distance(transform.position, obj.transform.position);
+            })
+        .FirstOrDefault();
+
+        return neareastObject;
+    }
     public void StopAttack()
     {
         if (attackRoutine != null)
@@ -98,7 +122,8 @@ public class Player : Character
 
     public void CastSpell(int spellIndex)
     {
-        if (MyTarget == null) return;
+        if (MyTarget == null)
+            AutoTarget();
 
         Character EnemyCharacter = MyTarget.GetComponentInParent<Character>();
         if (!IsAttacking && EnemyCharacter.IsAlive)

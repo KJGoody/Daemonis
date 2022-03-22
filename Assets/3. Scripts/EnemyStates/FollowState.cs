@@ -17,7 +17,7 @@ class FollowState : IState
 
     public void Update()
     {
-        Debug.Log("FollowState");
+        //Debug.Log("FollowState");
         if (parent.MyTarget != null)
         {
 

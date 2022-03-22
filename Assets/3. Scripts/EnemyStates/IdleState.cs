@@ -16,7 +16,7 @@ class IdleState : IState
 
     public void Update()
     {
-        Debug.Log("IdleState");// 어떤상태인지 보려고 만든 임시코드
+        //Debug.Log("IdleState");// 어떤상태인지 보려고 만든 임시코드
         if (parent.MyTarget != null)
         {
             parent.ChangeState(new FollowState());
