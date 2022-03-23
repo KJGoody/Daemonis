@@ -87,25 +87,18 @@ public class Enemy : NPC
 
         base.DeSelect();
     }
-    public override void TakeDamage(int damage, Transform source)
+    public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir)
     {
         healthGroup.alpha = 1;
-        StartCoroutine(KnockBack(new Vector2(1,1),5));
-        //KnockBack(new Vector2(1, 0), 5);
+        StartCoroutine(KnockBack(knockbackDir,1));
         SetTarget(source);
-        base.TakeDamage(damage, source);
+        base.TakeDamage(damage, source, knockbackDir);
         if (health.MyCurrentValue <= 0)
         {
-            //GameObject hitbox = transform.Find("HitBox").gameObject;
             Destroy(transform.Find("HitBox").gameObject);
         }
         //OnHealthChanged(health.MyCurrentValue);
     }
-    //public void KnockBack(Vector2 direction, float force)
-    //{
-    //    myRigid2D.velocity = direction * force;
-    //    Debug.Log("³Ë¹é");
-    //}
     IEnumerator KnockBack(Vector2 direction, float force)
     {
         isKnockBack = true;

@@ -13,7 +13,7 @@ public class SpellScript : MonoBehaviour
     private Transform source;
     private int damage;
     private Vector2 direction;
-
+    List<GameObject> hitEnemy = new List<GameObject>();
     // Use this for initialization
     void Start()
     {
@@ -67,10 +67,24 @@ public class SpellScript : MonoBehaviour
         {
             Character c = collision.GetComponentInParent<Character>();
             speed = 0;
-            c.TakeDamage(damage,source); // 피격된 대상에게 자신의 위치 정보 전달
+            if(!CheckHitEnemy(collision))
+                c.TakeDamage(damage,source, direction); // 피격된 대상에게 자신의 위치 정보 전달
             GetComponent<Animator>().SetTrigger("impact");
             myRigidbody.velocity = Vector3.zero;
             MyTarget = null;
         }
+    }
+
+    private bool CheckHitEnemy(Collider2D collision) // 스킬 한번 맞았으면 다시 안맞게 체크
+    {
+        GameObject g = collision.GetComponent<GameObject>();
+        if (!hitEnemy.Contains(g))
+        {
+            hitEnemy.Add(g);
+            return false;
+        }
+        else
+            return true;
+
     }
 }

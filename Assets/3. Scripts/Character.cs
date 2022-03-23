@@ -127,7 +127,7 @@ public abstract class Character : MonoBehaviour
         }
     }
     
-    public virtual void TakeDamage(int damage, Transform source)
+    public virtual void TakeDamage(int damage, Transform source , Vector2 knockbackDir)
     {
         health.MyCurrentValue -= damage;
         if (health.MyCurrentValue <= 0)
