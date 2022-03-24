@@ -129,6 +129,7 @@ public abstract class Character : MonoBehaviour
     
     public virtual void TakeDamage(int damage, Transform source , Vector2 knockbackDir)
     {
+        DamageText(damage);
         health.MyCurrentValue -= damage;
         if (health.MyCurrentValue <= 0)
         {
@@ -138,6 +139,11 @@ public abstract class Character : MonoBehaviour
             StartCoroutine("Death");
         }
 
+    }
+    private void DamageText(int damage)
+    {
+        GameObject damageTxt = Instantiate(Resources.Load("DamageText/DamageText") as GameObject, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
+        damageTxt.GetComponent<DamageText>().Damage = damage;
     }
     IEnumerator Death()
     {
