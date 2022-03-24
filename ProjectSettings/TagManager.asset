@@ -46,3 +46,6 @@ TagManager:
   - name: TopLayer
     uniqueID: 961690195
     locked: 0
+  - name: EnemyLayer
+    uniqueID: 3087391085
+    locked: 0

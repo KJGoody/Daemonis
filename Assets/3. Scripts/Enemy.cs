@@ -39,6 +39,7 @@ public class Enemy : NPC
     //}
     protected void Awake()
     {
+        MyStartPosition = transform.position;
         MyAggroRange = initAggroRange;
         MyAttackRange = 1; // 임시 코드
         ChangeState(new IdleState());
