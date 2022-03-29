@@ -39,4 +39,11 @@ public class UIManager : MonoBehaviour
         actionButtons[btnIndex].onClick.Invoke();
     }
 
+    public void SetUseable(ActionButton btn)//, IUseable useable)
+    {
+        //btn.MyIcon.sprite = useable.MyIcon;
+        btn.MyIcon.color = Color.white;
+       // btn.MyUseable = useable;
+    }
+
 }
