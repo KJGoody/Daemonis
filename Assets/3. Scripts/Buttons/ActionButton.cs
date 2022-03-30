@@ -54,6 +54,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler
                 if(HandScript.MyInstance.MyMoveable is IUseable)
                 {
                     SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
+                    HandScript.MyInstance.BlindControll();
                 }
             }
         }

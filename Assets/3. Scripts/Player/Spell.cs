@@ -13,9 +13,12 @@ public class Spell : IUseable, IMoveable
     [SerializeField]
     private float speed;
     [SerializeField]
-    private float castTime;
-    [SerializeField]
     private GameObject spellPrefab;
+    [SerializeField]
+    private string description;
+
+    [SerializeField]
+    private float castTime;
     [SerializeField]
     private Color barColor;
     public string MyName
@@ -46,6 +49,22 @@ public class Spell : IUseable, IMoveable
             return speed;
         }
     }
+    
+    public GameObject MySpellPrefab
+    {
+        get
+        {
+            return spellPrefab;
+        }
+    }
+    public String MyDescription
+    {
+        get
+        {
+            return description;
+        }
+    }
+
 
     public float MyCastTime
     {
@@ -55,14 +74,6 @@ public class Spell : IUseable, IMoveable
         }
 
     }
-    public GameObject MySpellPrefab
-    {
-        get
-        {
-            return spellPrefab;
-        }
-    }
-
     public Color MyBarColor
     {
         get
