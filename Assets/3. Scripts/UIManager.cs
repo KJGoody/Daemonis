@@ -51,16 +51,11 @@ public class UIManager : MonoBehaviour
         // UI 가 커져있을 땐 레이케스트 충돌이 되도록 만들고
         // UI 가 꺼져있을 땐 레이케스트 충돌이 무시되어 다른 조작(적 선택 등)을
         // 할 수 있게 만든다.
-        canvasGroup.blocksRaycasts = (canvasGroup.blocksRaycasts) == true ? false : true;
+        Debug.Log(canvasGroup.blocksRaycasts);
+        canvasGroup.blocksRaycasts = (canvasGroup.blocksRaycasts) == true ? true : false;
     }
 
 
-    //public void SetUseable(ActionButton btn ,IUseable useable)
-    //{
-    //    btn.MyIcon.sprite = useable.MyIcon;
-    //    btn.MyIcon.color = Color.white;
-    //    btn.MyUseable = useable;
-    //}
     public void ClickActionButton(string buttonName)
     {
         Array.Find(actionButtons, x => x.gameObject.name == buttonName).MyButton.onClick.Invoke();

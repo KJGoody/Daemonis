@@ -51,8 +51,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler
             if(HandScript.MyInstance.MyMoveable != null)
             {
                 // IUseable 로 변환할 수 있는지 확인.
-                if
-                (HandScript.MyInstance.MyMoveable is IUseable)
+                if(HandScript.MyInstance.MyMoveable is IUseable)
                 {
                     SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
                 }
