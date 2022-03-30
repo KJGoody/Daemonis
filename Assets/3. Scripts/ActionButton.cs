@@ -18,6 +18,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler
             icon = value;
         }
     }
+    [SerializeField]
     private Image icon;
 
 
