@@ -27,12 +27,9 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(actionButtons[0]);
-        SetUseable(actionButtons[0], SpellBook.MyInstance.GetSpell("FireBall"));
-        //SetUseable(actionButtons[1], SpellBook.MyInstance.GetSpell("ShadowBall"));
-        //SetUseable(actionButtons[2], SpellBook.MyInstance.GetSpell("FireBall"));
-        //SetUseable(actionButtons[3], SpellBook.MyInstance.GetSpell("ShadowBall"));
-        //SetUseable(actionButtons[4], SpellBook.MyInstance.GetSpell("FireBall"));
+
+        //SetUseable(actionButtons[0], SpellBook.MyInstance.GetSpell("FireBall"));
+
 
     }
 
@@ -58,12 +55,12 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void SetUseable(ActionButton btn ,IUseable useable)
-    {
-        btn.MyIcon.sprite = useable.MyIcon;
-        btn.MyIcon.color = Color.white;
-        btn.MyUseable = useable;
-    }
+    //public void SetUseable(ActionButton btn ,IUseable useable)
+    //{
+    //    btn.MyIcon.sprite = useable.MyIcon;
+    //    btn.MyIcon.color = Color.white;
+    //    btn.MyUseable = useable;
+    //}
     public void ClickActionButton(string buttonName)
     {
         Array.Find(actionButtons, x => x.gameObject.name == buttonName).MyButton.onClick.Invoke();

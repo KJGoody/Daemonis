@@ -46,6 +46,32 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler
     // IPointerClickHandler 에 명시된 함수이다.
     public void OnPointerClick(PointerEventData eventData)
     {
-        // 다음 강좌에서 작성될듯.
+        if(eventData.button == PointerEventData.InputButton.Left)
+        {
+            if(HandScript.MyInstance.MyMoveable != null)
+            {
+                // IUseable 로 변환할 수 있는지 확인.
+                if
+                (HandScript.MyInstance.MyMoveable is IUseable)
+                {
+                    SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
+                }
+            }
+        }
     }
+    public void SetUseable(IUseable useable)
+    {
+        // MyUseable.Use()는 버튼이 클릭되었을때 호출된다. 
+        // MyUseable은 인터페이스로 Spell 에서 상속받고 있다.
+        this.MyUseable = useable;
+        UpdateVisual();
+    }
+
+    public void UpdateVisual()
+    {
+        // ActionButton의 이미지를 변경한다.
+        MyIcon.sprite= HandScript.MyInstance.Put().MyIcon;
+        MyIcon.color=Color.white;
+    }
+
 }
