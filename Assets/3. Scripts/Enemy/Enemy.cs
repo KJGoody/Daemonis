@@ -12,6 +12,7 @@ public class Enemy : NPC
     private CanvasGroup healthGroup;
     private bool isKnockBack;
     [SerializeField]
+
     private float initAggroRange;
     public float MyAggroRange { get; set; }
     public bool InRange
