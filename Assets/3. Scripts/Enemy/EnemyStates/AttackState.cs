@@ -5,15 +5,28 @@ using UnityEngine;
 public class AttackState : IState
 {
     private Enemy parent;
+    public Transform MyTargert { get; set; }
+    private Transform source;
+    private int damage;
+    private Vector2 direction;
 
-    private float attackCooldown = 1; // 공격 딜레이
+    private float attackCooldown; // 공격 딜레이
     private float extraRange = 0.1f; // 공격 여유 거리    // 공격 여유 거리 + 인식거리 = 플레이어 인식 벗어나는 거리
-
-    
 
     public void Enter(Enemy parent)
     {
         this.parent = parent;
+
+        switch (parent.enemyType)               // 애니미타입에 따라 공격 딜레이 다르게 주기
+        {
+            case Enemy.EnemyType.kobold_melee:
+                    attackCooldown = 1;
+                    break;
+
+            case Enemy.EnemyType.kobold_ranged:
+                    attackCooldown = 2;
+                    break;
+        }
     }
 
     public void Exit()
@@ -26,22 +39,22 @@ public class AttackState : IState
         if (parent.MyAttackTime >= attackCooldown && !parent.IsAttacking)
         {
             parent.MyAttackTime = 0;
-            switch (parent.enemyType)
+            switch (parent.enemyType)                       // 애니미타입에 따라 공격 모션을 다르게 설정
             {
-                
-                case 0: 
-                parent.StartCoroutine(meleeAttack());
+                case Enemy.EnemyType.kobold_melee:
+                    parent.StartCoroutine(meleeAttack());
+                    break;
 
-                break;
+                case Enemy.EnemyType.kobold_ranged:
+                    parent.StartCoroutine(rangedAttack());
+                    break;
             }
         }
 
         if (parent.MyTarget != null)
         {
-            //Debug.Log("AttackState");
-
-            float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);
-
+            //Debug.Log("AttackState")
+            float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position); 
             // 공격거리 보다 멀리있으면 Follow 상태로 변경한다.
             if (distance >= parent.MyAttackRange + extraRange && !parent.IsAttacking)
             {
@@ -58,24 +71,30 @@ public class AttackState : IState
 
     public IEnumerator meleeAttack()
     {
+        Transform currentTarget = MyTargert;
+
         parent.IsAttacking = true;
         parent._prefabs.PlayAnimation(4);
         //parent.Direction = Vector2.zero;
+        yield return new WaitForSeconds(0.15f); // 애니메이션 내려찍기 시작
+        parent.EnemyAttackBox.GetComponent<BoxCollider2D>().enabled = true; // EnemyAttackBox 콜라이더 활성화
+        yield return new WaitForSeconds(0.15f); // 애니메이션 종료
+        parent.EnemyAttackBox.GetComponent<BoxCollider2D>().enabled = false; // EnemyAttackBox 콜라이더 비활성화
 
-        yield return new WaitForSeconds(0.6f); // 공격 후딜 넣으면 될듯
-        
+
+
         parent.IsAttacking = false;
     }
     
-    //public IEnumerator rangedAttack()
-    //{
-    //    parent.IsAttacking = true;
-    //    parent._prefabs.PlayAnimation(4);
-    //    //parent.Direction = Vector2.zero;
+    public IEnumerator rangedAttack()
+    {
+        parent.IsAttacking = true;
+        parent._prefabs.PlayAnimation(5);
+       parent.Direction = Vector2.zero;
 
-    //    yield return new WaitForSeconds(0.6f); // 공격 후딜 넣으면 될듯
+        yield return new WaitForSeconds(0.6f); 
         
-    //    parent.IsAttacking = false;
-    //}
+        parent.IsAttacking = false;
+    }
 
 }

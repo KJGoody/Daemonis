@@ -7,13 +7,24 @@ public class Enemy : NPC
     private IState currentState;
     public enum EnemyType
     {
-        kobold_melee = 0,
-        kobold_ranged = 1,
+        kobold_melee,
+        kobold_ranged
     }
     public EnemyType enemyType;
+    private float myAttackRange;        // 사거리
+    public float MyAttackRange {        
+        get
+        {
+            return myAttackRange;
+        }
+        set
+        {
+            myAttackRange = value;
+        } 
+    }
 
+    public GameObject EnemyAttackBox;            // 애니미공격 박스
     public Vector3 MyStartPosition { get; set; } // 시작 위치
-    public float MyAttackRange { get; set; } // 사거리
     public float MyAttackTime { get; set; } // 공격 딜레이를 체크하기 위한 속성
     [SerializeField]
     private CanvasGroup healthGroup;
@@ -33,7 +44,17 @@ public class Enemy : NPC
     {
         MyStartPosition = transform.position;
         MyAggroRange = initAggroRange;
-        MyAttackRange = 1; // 임시 코드
+
+        switch (enemyType)                  // 애니미 타입에 따라 공격 사거리 변화
+        {
+            case EnemyType.kobold_melee:
+                MyAttackRange = 1;
+                break;
+
+            case EnemyType.kobold_ranged:
+                MyAttackRange = 5;
+                break;
+        }
         ChangeState(new IdleState());
     }
     protected override void Update()
