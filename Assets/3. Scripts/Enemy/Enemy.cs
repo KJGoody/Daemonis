@@ -112,21 +112,4 @@ public class Enemy : NPC
         //this.MyHealth.MyCurrentValue = this.MyHealth.MyMaxValue;
         //OnHealthChanged(health.MyCurrentValue);
     }
-
-
-    //private void FollowTarget()
-    //{
-    //    if (target != null)
-    //    {
-    //        Vector2 targetPosition = target.position;
-    //        Vector2 myPosition = transform.position;
-    //        direction = targetPosition - myPosition;
-
-
-    //        //transform.position = Vector2.MoveTowards(myPosition, targetPosition, speed * Time.deltaTime);
-    //    }
-    //    else{
-    //        direction = Vector2.zero;
-    //    }
-    //}
 }
