@@ -1255,6 +1255,8 @@ GameObject:
   - component: {fileID: 346997384}
   - component: {fileID: 346997386}
   - component: {fileID: 346997385}
+  - component: {fileID: 346997387}
+  - component: {fileID: 346997388}
   m_Layer: 5
   m_Name: SpellBook
   m_TagString: Untagged
@@ -1320,6 +1322,47 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346997383}
   m_CullTransparentMesh: 1
+--- !u!225 &346997387
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346997383}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &346997388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346997383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b120ecfca0cf145b48c59678133866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spells:
+  - name: FireBall
+    damage: 5
+    icon: {fileID: 7822328635747403294, guid: a76d537152a1aa0468fcfb1adce10be5, type: 3}
+    speed: 5
+    castTime: 0
+    spellPrefab: {fileID: 6883316957065971815, guid: ec47943e2299418428d796b7c0b8ef9f,
+      type: 3}
+    barColor: {r: 0, g: 0, b: 0, a: 0}
+  - name: ShadowBall
+    damage: 5
+    icon: {fileID: 7804222819800005201, guid: 9e477fc72390b9b42a0dab02279bf013, type: 3}
+    speed: 5
+    castTime: 0
+    spellPrefab: {fileID: 2522960502962881239, guid: 97c5c39d541f0434d97f28d798bf6db8,
+      type: 3}
+    barColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &355214162
 GameObject:
   m_ObjectHideFlags: 0
@@ -8114,6 +8157,95 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1101609495}
   m_CullTransparentMesh: 1
+--- !u!1 &1136112447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1136112448}
+  - component: {fileID: 1136112451}
+  - component: {fileID: 1136112450}
+  - component: {fileID: 1136112449}
+  m_Layer: 5
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1136112448
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136112447}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1320021081}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1136112449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136112447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6479c114fe7a0469473c35105de545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 30, y: 10, z: 0}
+--- !u!114 &1136112450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136112447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1136112451
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136112447}
+  m_CullTransparentMesh: 1
 --- !u!1 &1173657443
 GameObject:
   m_ObjectHideFlags: 0
@@ -8126,7 +8258,6 @@ GameObject:
   - component: {fileID: 1173657448}
   - component: {fileID: 1173657447}
   - component: {fileID: 1173657446}
-  - component: {fileID: 1173657444}
   - component: {fileID: 1173657449}
   m_Layer: 0
   m_Name: Player
@@ -8135,35 +8266,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1173657444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173657443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23b120ecfca0cf145b48c59678133866, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spells:
-  - name: FireBall
-    damage: 5
-    icon: {fileID: 7822328635747403294, guid: a76d537152a1aa0468fcfb1adce10be5, type: 3}
-    speed: 5
-    castTime: 0
-    spellPrefab: {fileID: 6883316957065971815, guid: ec47943e2299418428d796b7c0b8ef9f,
-      type: 3}
-    barColor: {r: 0, g: 0, b: 0, a: 0}
-  - name: ShadowBall
-    damage: 5
-    icon: {fileID: 7804222819800005201, guid: 9e477fc72390b9b42a0dab02279bf013, type: 3}
-    speed: 5
-    castTime: 0
-    spellPrefab: {fileID: 2522960502962881239, guid: 97c5c39d541f0434d97f28d798bf6db8,
-      type: 3}
-    barColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &1173657445
 Transform:
   m_ObjectHideFlags: 0
@@ -8517,6 +8619,7 @@ RectTransform:
   - {fileID: 1755526542}
   - {fileID: 740773953}
   - {fileID: 765586323}
+  - {fileID: 1136112448}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14912,6 +15015,7 @@ GameObject:
   - component: {fileID: 1780016365}
   - component: {fileID: 1780016364}
   - component: {fileID: 1780016363}
+  - component: {fileID: 1780016367}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -15049,6 +15153,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780016361}
   m_CullTransparentMesh: 1
+--- !u!114 &1780016367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780016361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ff1857cbee04e43bf2e151f869338e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellName: FireBall
 --- !u!1 &1868191485
 GameObject:
   m_ObjectHideFlags: 0
@@ -15416,6 +15533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionButtons:
   - {fileID: 862457617}
+  spellBook: {fileID: 346997387}
 --- !u!4 &2143067572
 Transform:
   m_ObjectHideFlags: 0

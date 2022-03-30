@@ -29,12 +29,9 @@ public class Player : Character
     [SerializeField]
     private Transform exitPoint; // ¹ß»çÃ¼ »ý¼º À§Ä¡
 
-    private SpellBook spellBook;
-
     //public Transform myTarget { get; set; }
     protected override void Start()
     {
-        spellBook = GetComponent<SpellBook>();
         joy = GameObject.Find("Floating Joystick").GetComponent<FloatingJoystick>();
 
         mana.Initialize(initMana, initMana);
@@ -86,7 +83,7 @@ public class Player : Character
     private IEnumerator Attack(string spellIName)
     {
         Transform currentTarget = MyTarget;
-        Spell newSpell = spellBook.CastSpell(spellIName); //½ºÆçºÏ¿¡¼­ ½ºÅ³ ¹Þ¾Æ¿È
+        Spell newSpell = SpellBook.MyInstance.CastSpell(spellIName); //½ºÆçºÏ¿¡¼­ ½ºÅ³ ¹Þ¾Æ¿È
 
         IsAttacking = true;
         FindTarget();

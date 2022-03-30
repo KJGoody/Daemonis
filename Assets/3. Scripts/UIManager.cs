@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private ActionButton[] actionButtons;
+    [SerializeField]
+    private CanvasGroup spellBook;
 
     void Start()
     {
@@ -37,8 +39,24 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            OpenClose(spellBook);
+        }
     }
+    public void OpenClose(CanvasGroup canvasGroup)
+    {
+        Debug.Log(canvasGroup.name);
+
+        // 투명값으로 UI를 끄거나 킨다.
+        canvasGroup.alpha = canvasGroup.alpha > 0 ? 0 : 1;
+
+        // UI 가 커져있을 땐 레이케스트 충돌이 되도록 만들고
+        // UI 가 꺼져있을 땐 레이케스트 충돌이 무시되어 다른 조작(적 선택 등)을
+        // 할 수 있게 만든다.
+        canvasGroup.blocksRaycasts = (canvasGroup.blocksRaycasts) == true ? false : true;
+    }
+
 
     public void SetUseable(ActionButton btn ,IUseable useable)
     {
