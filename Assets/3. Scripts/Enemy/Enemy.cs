@@ -5,6 +5,13 @@ using UnityEngine;
 public class Enemy : NPC
 {
     private IState currentState;
+    public enum EnemyType
+    {
+        kobold_melee = 0,
+        kobold_ranged = 1,
+    }
+    public EnemyType enemyType;
+
     public Vector3 MyStartPosition { get; set; } // 시작 위치
     public float MyAttackRange { get; set; } // 사거리
     public float MyAttackTime { get; set; } // 공격 딜레이를 체크하기 위한 속성
