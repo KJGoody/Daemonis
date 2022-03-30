@@ -22,21 +22,6 @@ public class Enemy : NPC
         }
     }
 
-
-    //[SerializeField]
-    //private Transform target;
-    //public Transform Target
-    //{
-    //    get
-    //    {
-    //        return target;
-    //    }
-
-    //    set
-    //    {
-    //        target = value;
-    //    }
-    //}
     protected void Awake()
     {
         MyStartPosition = transform.position;
@@ -58,7 +43,6 @@ public class Enemy : NPC
     }
     protected override void FixedUpdate()
     {
-        //FollowTarget();
         if(!isKnockBack)
             base.FixedUpdate();
     }
@@ -88,7 +72,7 @@ public class Enemy : NPC
 
         base.DeSelect();
     }
-    public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir)
+    public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir) // 피격
     {
         healthGroup.alpha = 1;
         StartCoroutine(KnockBack(knockbackDir,1));
@@ -100,7 +84,7 @@ public class Enemy : NPC
         }
         //OnHealthChanged(health.MyCurrentValue);
     }
-    IEnumerator KnockBack(Vector2 direction, float force)
+    IEnumerator KnockBack(Vector2 direction, float force) // 피격 시 넉백
     {
         isKnockBack = true;
         myRigid2D.velocity = direction * force;

@@ -7,7 +7,7 @@ public class AttackState : IState
     private Enemy parent;
 
     private float attackCooldown = 1; // 공격 딜레이
-    private float extraRange = 0.1f; // 공격 여유 거리
+    private float extraRange = 0.1f; // 공격 여유 거리    // 공격 여유 거리 + 인식거리 = 플레이어 인식 벗어나는 거리
     public void Enter(Enemy parent)
     {
         this.parent = parent;
