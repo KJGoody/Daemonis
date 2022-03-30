@@ -5,6 +5,21 @@ using System.Linq;
 
 public class Player : Character
 {
+    // ΩÃ±€≈Ê
+    private static Player instance;
+    public static Player MyInstance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<Player>();
+            }
+
+            return instance;
+        }
+    }
+
     private FloatingJoystick joy;
 
     [SerializeField]
@@ -68,12 +83,10 @@ public class Player : Character
         if (Direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
         else if (Direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
     }
-    private IEnumerator Attack(int spellIndex)
+    private IEnumerator Attack(string spellIName)
     {
-        Debug.Log("Attack" + MyTarget);
-
         Transform currentTarget = MyTarget;
-        Spell newSpell = spellBook.CastSpell(spellIndex); //Ω∫∆Á∫œø°º≠ Ω∫≈≥ πﬁæ∆ø»
+        Spell newSpell = spellBook.CastSpell(spellIName); //Ω∫∆Á∫œø°º≠ Ω∫≈≥ πﬁæ∆ø»
 
         IsAttacking = true;
         FindTarget();
@@ -120,7 +133,7 @@ public class Player : Character
         }
     }
 
-    public void CastSpell(int spellIndex)
+    public void CastSpell(string spellIName)
     {
         if (MyTarget == null)
             AutoTarget();
@@ -128,7 +141,7 @@ public class Player : Character
         Character EnemyCharacter = MyTarget.GetComponentInParent<Character>();
         if (!IsAttacking && EnemyCharacter.IsAlive)
         {
-            attackRoutine = StartCoroutine(Attack(spellIndex));
+            attackRoutine = StartCoroutine(Attack(spellIName));
         }
     }
 }

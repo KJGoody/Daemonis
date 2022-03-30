@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,45 +6,50 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    private static UIManager instance;
+
+    public static UIManager MyInstance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<UIManager>();
+            }
+            return instance;
+        }
+    }
 
     [SerializeField]
-    private Button[] actionButtons;
-    private KeyCode action1, action2, action3;
+    private ActionButton[] actionButtons;
 
     void Start()
     {
-        action1 = KeyCode.Alpha1;
-        action2 = KeyCode.Alpha2;
-        action3 = KeyCode.Alpha3;
+        Debug.Log(actionButtons[0]);
+        SetUseable(actionButtons[0], SpellBook.MyInstance.GetSpell("FireBall"));
+        //SetUseable(actionButtons[1], SpellBook.MyInstance.GetSpell("ShadowBall"));
+        //SetUseable(actionButtons[2], SpellBook.MyInstance.GetSpell("FireBall"));
+        //SetUseable(actionButtons[3], SpellBook.MyInstance.GetSpell("ShadowBall"));
+        //SetUseable(actionButtons[4], SpellBook.MyInstance.GetSpell("FireBall"));
+
     }
 
 
     void Update()
     {
-        if (Input.GetKeyDown(action1))
-        {
-            ActionButtonOnClick(0);
-        }
-        if (Input.GetKeyDown(action2))
-        {
-            ActionButtonOnClick(1);
-        }
-        if (Input.GetKeyDown(action3))
-        {
-            ActionButtonOnClick(2);
-        }
+
     }
 
-    private void ActionButtonOnClick(int btnIndex)
+    public void SetUseable(ActionButton btn ,IUseable useable)
     {
-        actionButtons[btnIndex].onClick.Invoke();
+        btn.MyButton.image.sprite = useable.MyIcon;
+        btn.MyButton.image.color = Color.white;
+        btn.MyUseable = useable;
+    }
+    public void ClickActionButton(string buttonName)
+    {
+        Array.Find(actionButtons, x => x.gameObject.name == buttonName).MyButton.onClick.Invoke();
     }
 
-    public void SetUseable(ActionButton btn)//, IUseable useable)
-    {
-        //btn.MyIcon.sprite = useable.MyIcon;
-        btn.MyIcon.color = Color.white;
-       // btn.MyUseable = useable;
-    }
 
 }
