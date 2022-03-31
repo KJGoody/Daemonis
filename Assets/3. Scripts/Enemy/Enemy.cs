@@ -9,9 +9,20 @@ public class Enemy : NPC
     public enum EnemyType               // EnemyType
     {
         kobold_melee,
-        kobold_ranged
+        kobold_ranged,
+        Kobold_rush,
+        Kobold_AOE
     }
     public EnemyType enemyType;
+
+    public Vector3 MyStartPosition { get; set; } // 시작 위치
+    public float MyAttackTime { get; set; } // 공격 딜레이를 체크하기 위한 속성
+    [SerializeField]
+    private CanvasGroup healthGroup;
+    private bool isKnockBack;
+    [SerializeField]
+    private float initAggroRange;
+    public Transform exitPoint; // 발사체 생성 위치
     private float myAttackRange;        // 사거리
     public float MyAttackRange {        
         get
@@ -23,15 +34,16 @@ public class Enemy : NPC
             myAttackRange = value;
         } 
     }
-
-    public Vector3 MyStartPosition { get; set; } // 시작 위치
-    public float MyAttackTime { get; set; } // 공격 딜레이를 체크하기 위한 속성
-    [SerializeField]
-    private CanvasGroup healthGroup;
-    private bool isKnockBack;
-    [SerializeField]
-    private float initAggroRange;
-    public Transform exitPoint; // 발사체 생성 위치
+    public Rigidbody2D myrigid2D {
+        get
+        {
+            return myRigid2D;
+        }
+        set
+        {
+            myrigid2D = value;
+        }
+    }
     public float MyAggroRange { get; set; }
     public bool InRange
     {
@@ -55,6 +67,11 @@ public class Enemy : NPC
             case EnemyType.kobold_ranged:
                 MyAttackRange = 5;
                 break;
+
+            case EnemyType.Kobold_rush:
+                MyAttackRange = 1;
+                break;
+
         }
         ChangeState(new IdleState());
     }
@@ -93,10 +110,11 @@ public class Enemy : NPC
         currentState.Enter(this);
     }
 
-    public void EnemyAttackResource(GameObject EAR, Vector3 vector, Quaternion quaternion) {
+    public void EnemyAttackResource(GameObject EAR, Vector3 vector, Quaternion quaternion) 
+    {
         Instantiate(EAR, vector, quaternion);
-
     }
+
     public override void DeSelect()
     {
         //Hides the healthbar

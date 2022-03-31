@@ -6,7 +6,7 @@ public class EnemyAttack : MonoBehaviour
 {
     public enum EnemyAttackType
     {
-        MeleeAtack1,
+        MeleeAttack1,
         rangedAttack1
     }
     public EnemyAttackType enemyAttackType;
@@ -15,10 +15,11 @@ public class EnemyAttack : MonoBehaviour
 
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private int damage;
 
     public Transform MyTarget { get; set; }
     private Transform source;
-    private int damage;
     private Vector3 direction;
 
 
@@ -27,10 +28,18 @@ public class EnemyAttack : MonoBehaviour
     {
         MyTarget = GameObject.Find("HitBox_Player").GetComponent<Transform>();
         myRigidbody = GetComponent<Rigidbody2D>();
-        Debug.Log(MyTarget.position);
-        Debug.Log(transform.position);
-
         direction = MyTarget.position - transform.position;
+
+        switch (enemyAttackType)
+        {
+            case EnemyAttackType.MeleeAttack1:
+                StartCoroutine(MeleeAttack1());
+                break;
+
+            case EnemyAttackType.rangedAttack1:
+                StartCoroutine(rangedAttack1());
+                break;
+        }
     }
 
     private void FixedUpdate()
@@ -42,42 +51,28 @@ public class EnemyAttack : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    public void Initailize(Transform target, int damage, Transform source)
-    {
-        this.MyTarget = target;
-        this.damage = damage;
-        this.source = source;
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("HitBox_Player"))
         {
             Character c = collision.GetComponentInParent<Character>();
             speed = 0;
+            c.TakeDamage(damage, source, direction);
             myRigidbody.velocity = Vector3.zero;
             MyTarget = null;
+            DestroyObject(gameObject);
         }
     }
 
-
-    private void MeleeAttack1()
+    private IEnumerator MeleeAttack1()
     {
-        Vector2 direction = MyTarget.position - transform.position;
-        myRigidbody.velocity = direction.normalized * speed;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        yield return new WaitForSeconds(0.15f);
+        DestroyObject(gameObject);
+    }
+    private IEnumerator rangedAttack1()
+    {
+        yield return new WaitForSeconds(10);
+        DestroyObject(gameObject);
     }
     
-    private void rangedAttack1()
-    {
-        Vector2 direction = MyTarget.position - transform.position;
-        myRigidbody.velocity = direction.normalized * speed;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    }
-
 }

@@ -6,8 +6,6 @@ public class AttackState : IState
 {
     private Enemy parent;
     private Transform source;
-    private int damage;
-    private Vector2 direction;
 
     private float attackCooldown; // 공격 딜레이
     private float extraRange = 0.1f; // 공격 여유 거리    // 공격 여유 거리 + 인식거리 = 플레이어 인식 벗어나는 거리
@@ -19,12 +17,16 @@ public class AttackState : IState
         switch (parent.enemyType)               // 애니미타입에 따라 공격 딜레이 다르게 주기
         {
             case Enemy.EnemyType.kobold_melee:
-                    attackCooldown = 1;
-                    break;
+                attackCooldown = 1;
+                break;
 
             case Enemy.EnemyType.kobold_ranged:
-                    attackCooldown = 2;
-                    break;
+                attackCooldown = 2;
+                break;
+
+            case Enemy.EnemyType.Kobold_rush:
+                attackCooldown = 3;
+                break;
         }
     }
 
@@ -46,6 +48,10 @@ public class AttackState : IState
 
                 case Enemy.EnemyType.kobold_ranged:
                     parent.StartCoroutine(rangedAttack());
+                    break;
+
+                case Enemy.EnemyType.Kobold_rush:
+                    parent.StartCoroutine(RushAttack());
                     break;
             }
         }
@@ -71,29 +77,40 @@ public class AttackState : IState
    
     public IEnumerator meleeAttack()
     {
-        Transform currentTarget = parent.MyTarget;
-
         parent.IsAttacking = true;
-        parent.FindTarget();
         parent._prefabs.PlayAnimation(4);
 
+        yield return new WaitForSeconds(0.15f); // 애니메이션 내려찍기 시작
         parent.EnemyAttackResource(Resources.Load("EnemyAttack/MeleeAttack1") as GameObject, parent.exitPoint.position, Quaternion.identity);
-        if(currentTarget)
-        {
-           
-        }
-        yield return new WaitForSeconds(0.3f); // 애니메이션 종료
+        yield return new WaitForSeconds(0.15f); // 애니메이션 종료
         parent.IsAttacking = false;
     }
     
     public IEnumerator rangedAttack()
     {
-       parent.IsAttacking = true;
-       parent._prefabs.PlayAnimation(5);
+        parent.IsAttacking = true;
+        parent._prefabs.PlayAnimation(5);
 
-       yield return new WaitForSeconds(0.6f); 
+        yield return new WaitForSeconds(0.2f); 
+        parent.EnemyAttackResource(Resources.Load("EnemyAttack/RangedAttack1") as GameObject, parent.exitPoint.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.1f); 
         
        parent.IsAttacking = false;
     }
 
+    public IEnumerator RushAttack()
+    {
+        parent.IsAttacking = true;
+        parent._prefabs.PlayAnimation(4);
+
+        yield return new WaitForSeconds(0.15f); 
+        parent.EnemyAttackResource(Resources.Load("EnemyAttack/MeleeAttack1") as GameObject, parent.exitPoint.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.3f);
+        parent.Direction = (parent.MyTarget.transform.position - parent.transform.position).normalized;
+        parent.myrigid2D.velocity = parent.Direction * 7f;
+        yield return new WaitForSeconds(1); 
+
+        parent.IsAttacking = false;
+
+    }
 }
