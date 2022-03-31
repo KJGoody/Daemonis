@@ -86,6 +86,8 @@ public class HandScript : MonoBehaviour
         selectDescription.text = null;
         selectImgae.sprite = null;
         MyMoveable = null;
+        skillEquipping = false;
+        blindPanel.SetActive(false);
     }
 
     public IMoveable Put()
