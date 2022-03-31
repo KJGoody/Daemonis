@@ -47,7 +47,8 @@ public class UIManager : MonoBehaviour
 
         // 투명값으로 UI를 끄거나 킨다.
         canvasGroup.alpha = canvasGroup.alpha > 0 ? 0 : 1;
-        HandScript.MyInstance.ResetSelect();
+        if(canvasGroup.name == "SpellBook")
+            HandScript.MyInstance.ResetSelect();
         // UI 가 커져있을 땐 레이케스트 충돌이 되도록 만들고
         // UI 가 꺼져있을 땐 레이케스트 충돌이 무시되어 다른 조작(적 선택 등)을
         // 할 수 있게 만든다.
