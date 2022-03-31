@@ -5,7 +5,6 @@ using UnityEngine;
 public class AttackState : IState
 {
     private Enemy parent;
-    public Transform MyTargert { get; set; }
     private Transform source;
     private int damage;
     private Vector2 direction;
@@ -69,32 +68,32 @@ public class AttackState : IState
         }
     }
 
+   
     public IEnumerator meleeAttack()
     {
-        Transform currentTarget = MyTargert;
+        Transform currentTarget = parent.MyTarget;
 
         parent.IsAttacking = true;
+        parent.FindTarget();
         parent._prefabs.PlayAnimation(4);
-        //parent.Direction = Vector2.zero;
-        yield return new WaitForSeconds(0.15f); // 애니메이션 내려찍기 시작
-        parent.EnemyAttackBox.GetComponent<BoxCollider2D>().enabled = true; // EnemyAttackBox 콜라이더 활성화
-        yield return new WaitForSeconds(0.15f); // 애니메이션 종료
-        parent.EnemyAttackBox.GetComponent<BoxCollider2D>().enabled = false; // EnemyAttackBox 콜라이더 비활성화
 
-
-
+        parent.EnemyAttackResource(Resources.Load("EnemyAttack/MeleeAttack1") as GameObject, parent.exitPoint.position, Quaternion.identity);
+        if(currentTarget)
+        {
+           
+        }
+        yield return new WaitForSeconds(0.3f); // 애니메이션 종료
         parent.IsAttacking = false;
     }
     
     public IEnumerator rangedAttack()
     {
-        parent.IsAttacking = true;
-        parent._prefabs.PlayAnimation(5);
-       parent.Direction = Vector2.zero;
+       parent.IsAttacking = true;
+       parent._prefabs.PlayAnimation(5);
 
-        yield return new WaitForSeconds(0.6f); 
+       yield return new WaitForSeconds(0.6f); 
         
-        parent.IsAttacking = false;
+       parent.IsAttacking = false;
     }
 
 }

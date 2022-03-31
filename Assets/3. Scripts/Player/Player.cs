@@ -74,12 +74,7 @@ public class Player : Character
         }
          
     }
-    private void FindTarget()
-    {
-        Direction = MyTarget.position - transform.position;
-        if (Direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
-        else if (Direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
-    }
+
     private IEnumerator Attack(string spellIName)
     {
         Transform currentTarget = MyTarget;
@@ -93,7 +88,7 @@ public class Player : Character
         if (currentTarget != null)
         {
             SpellScript s = Instantiate(spell, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
-            s.Initailize(currentTarget, newSpell.MyDamage,transform);
+            s.Initailize(currentTarget, newSpell.MyDamage, transform);
             s.MyTarget = MyTarget;
         }
         yield return new WaitForSeconds(0.3f); // 테스트를 위한 코드입니다. 여기다가 후딜넣을까 생각중
@@ -140,5 +135,10 @@ public class Player : Character
         {
             attackRoutine = StartCoroutine(Attack(spellIName));
         }
+    }
+
+    public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir)
+    {
+        base.TakeDamage(damage, source, knockbackDir);
     }
 }

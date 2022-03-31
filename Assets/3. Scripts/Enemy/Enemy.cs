@@ -5,7 +5,8 @@ using UnityEngine;
 public class Enemy : NPC
 {
     private IState currentState;
-    public enum EnemyType
+
+    public enum EnemyType               // EnemyType
     {
         kobold_melee,
         kobold_ranged
@@ -23,7 +24,6 @@ public class Enemy : NPC
         } 
     }
 
-    public GameObject EnemyAttackBox;            // 애니미공격 박스
     public Vector3 MyStartPosition { get; set; } // 시작 위치
     public float MyAttackTime { get; set; } // 공격 딜레이를 체크하기 위한 속성
     [SerializeField]
@@ -31,6 +31,7 @@ public class Enemy : NPC
     private bool isKnockBack;
     [SerializeField]
     private float initAggroRange;
+    public Transform exitPoint; // 발사체 생성 위치
     public float MyAggroRange { get; set; }
     public bool InRange
     {
@@ -92,7 +93,10 @@ public class Enemy : NPC
         currentState.Enter(this);
     }
 
+    public void EnemyAttackResource(GameObject EAR, Vector3 vector, Quaternion quaternion) {
+        Instantiate(EAR, vector, quaternion);
 
+    }
     public override void DeSelect()
     {
         //Hides the healthbar
@@ -108,6 +112,8 @@ public class Enemy : NPC
         base.TakeDamage(damage, source, knockbackDir);
         if (health.MyCurrentValue <= 0)
         {
+            _prefabs.PlayAnimation(2);
+            StartCoroutine("Death");
             Destroy(transform.Find("HitBox").gameObject);
         }
         //OnHealthChanged(health.MyCurrentValue);

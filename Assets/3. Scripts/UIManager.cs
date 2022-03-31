@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
 
-        //SetUseable(actionButtons[0], SpellBook.MyInstance.GetSpell("FireBall"));
+        
 
 
     }

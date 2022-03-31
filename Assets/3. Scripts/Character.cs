@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public abstract class Character : MonoBehaviour
 {
-
+    
     [SerializeField]
     private float speed;
     private Vector2 direction;
@@ -126,7 +126,14 @@ public abstract class Character : MonoBehaviour
             _layerName = LayerName.death;
         }
     }
-    
+
+    public void FindTarget()
+    {
+        Direction = MyTarget.position - transform.position;
+        if (Direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
+        else if (Direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
+    }
+
     public virtual void TakeDamage(int damage, Transform source , Vector2 knockbackDir)
     {
         DamageText(damage);
@@ -135,11 +142,9 @@ public abstract class Character : MonoBehaviour
         {
             Direction = Vector2.zero;
             myRigid2D.velocity = direction;
-            _prefabs.PlayAnimation(2);
-            StartCoroutine("Death");
         }
-
     }
+
     private void DamageText(int damage)
     {
         GameObject damageTxt = Instantiate(Resources.Load("DamageText/DamageText") as GameObject, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
