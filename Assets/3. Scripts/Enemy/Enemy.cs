@@ -17,6 +17,7 @@ public class Enemy : NPC
 
     public Vector3 MyStartPosition { get; set; } // 시작 위치
     public float MyAttackTime { get; set; } // 공격 딜레이를 체크하기 위한 속성
+    public bool IsRushing { get; set; }
     [SerializeField]
     private CanvasGroup healthGroup;
     private bool isKnockBack;
@@ -163,5 +164,21 @@ public class Enemy : NPC
         this.Direction = Vector2.zero;
         //this.MyHealth.MyCurrentValue = this.MyHealth.MyMaxValue;
         //OnHealthChanged(health.MyCurrentValue);
+    }
+
+    public override void Move()
+    {
+        if (IsAlive)
+        {
+            if (IsAttacking)
+            {
+                if(IsRushing)                                           // 돌진공격일시 이동 가능
+                    myRigid2D.velocity = Direction.normalized * 7f;
+                else
+                    myRigid2D.velocity = Vector2.zero;
+            }
+            else
+                myRigid2D.velocity = Direction.normalized * Speed;
+        }
     }
 }

@@ -102,14 +102,16 @@ public class AttackState : IState
     {
         parent.IsAttacking = true;
         parent._prefabs.PlayAnimation(4);
+        yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(0.15f); 
-        parent.EnemyAttackResource(Resources.Load("EnemyAttack/MeleeAttack1") as GameObject, parent.exitPoint.position, Quaternion.identity);
-        yield return new WaitForSeconds(0.3f);
+        parent.IsRushing = true;
+        parent.gameObject.layer = 7; // Rushing레이어로 바꾸기, 플레이어와 충돌무시
+        parent.EnemyAttackResource(Resources.Load("EnemyAttack/RushAttack1") as GameObject, parent.exitPoint.position, Quaternion.identity);
         parent.Direction = (parent.MyTarget.transform.position - parent.transform.position).normalized;
-        parent.myrigid2D.velocity = parent.Direction * 7f;
-        yield return new WaitForSeconds(1); 
+        yield return new WaitForSeconds(0.5f); 
 
+        parent.IsRushing = false;
+        parent.gameObject.layer = 6;
         parent.IsAttacking = false;
 
     }

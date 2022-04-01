@@ -88,7 +88,7 @@ public abstract class Character : MonoBehaviour
     {
         Move();
     }
-    public void Move()
+    public virtual void Move()
     {
         if (IsAlive)
         {

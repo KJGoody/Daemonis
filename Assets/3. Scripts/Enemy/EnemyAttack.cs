@@ -7,7 +7,8 @@ public class EnemyAttack : MonoBehaviour
     public enum EnemyAttackType
     {
         MeleeAttack1,
-        rangedAttack1
+        RangedAttack1,
+        RushAttack1
     }
     public EnemyAttackType enemyAttackType;
 
@@ -15,9 +16,15 @@ public class EnemyAttack : MonoBehaviour
 
     [SerializeField]
     private float speed;
+    public float Speed
+    {
+        get
+        {
+            return speed;
+        }
+    }
     [SerializeField]
     private int damage;
-
     public Transform MyTarget { get; set; }
     private Transform source;
     private Vector3 direction;
@@ -36,8 +43,12 @@ public class EnemyAttack : MonoBehaviour
                 StartCoroutine(MeleeAttack1());
                 break;
 
-            case EnemyAttackType.rangedAttack1:
-                StartCoroutine(rangedAttack1());
+            case EnemyAttackType.RangedAttack1:
+                StartCoroutine(RangedAttack1());
+                break;
+
+            case EnemyAttackType.RushAttack1:
+                StartCoroutine(RushAttack1());
                 break;
         }
     }
@@ -66,13 +77,19 @@ public class EnemyAttack : MonoBehaviour
 
     private IEnumerator MeleeAttack1()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.15f);     // 객체 생존시간
         DestroyObject(gameObject);
     }
-    private IEnumerator rangedAttack1()
+
+    private IEnumerator RangedAttack1()
     {
         yield return new WaitForSeconds(10);
         DestroyObject(gameObject);
     }
-    
+
+    private IEnumerator RushAttack1()
+    {
+        yield return new WaitForSeconds(100);
+        DestroyObject(gameObject);
+    }
 }
