@@ -40,6 +40,10 @@ public class UIManager : MonoBehaviour
         {
             OpenClose(spellBook);
         }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            //InventoryScript.MyInstance.OpenClose();
+        }
     }
     public void OpenClose(CanvasGroup canvasGroup)
     {
@@ -63,5 +67,13 @@ public class UIManager : MonoBehaviour
         Array.Find(actionButtons, x => x.gameObject.name == buttonName).MyButton.onClick.Invoke();
     }
 
+    public void UpdateStackSize(IClickable clickable)
+    {
+        if (clickable.MyCount == 0)
+        {
+            // 해당 슬롯의 아이콘 투명하게 만들기
+            clickable.MyIcon.color = new Color(0, 0, 0, 0);
+        }
+    }
 
 }

@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryScript : MonoBehaviour
 {
-
     private static InventoryScript instance;
     public static InventoryScript MyInstance
     {
@@ -21,36 +21,57 @@ public class InventoryScript : MonoBehaviour
             instance = value;
         }
     }
-
-    // 테스트를 위한 용도
     [SerializeField]
-    private Item[] items;
+    private GameObject slotPrefab;
+    // 가방 안의 슬롯 리스트
+    private List<SlotScript> slots = new List<SlotScript>();
+    // 가방에 슬롯을 추가한다.
+    private CanvasGroup canvasGroup;
 
     private void Awake()
     {
-        // 가방을 생성하고
-        Bag bag = (Bag)Instantiate(items[0]);
-
-        // 가방의 슬롯 갯수를 정의하고
-        bag.Initalize(16);
-
-        // 가방 아이템을 사용한다.
-        bag.Use();
+        canvasGroup = GetComponent<CanvasGroup>();
+        AddSlots(40);
     }
-    public void AddItem(Item item)
+    public Item[] items;
+    private void Update()
     {
- 
-        foreach(Bag bag in bags)
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            // 가방 리스트 중에 빈슬롯 이 있는
-            // 가방을 찾고 해당 가방에 아이템을 추가합니다.
-            if(bag.MyBagScript.AddItem(item))
+            // 테스트를 위해 체력을 3씩 감소
+            Player.MyInstance.MyHealth.MyCurrentValue -= 10;
+
+            // 체력물약 아이템 생성
+            HealthPotion potion = (HealthPotion)Instantiate(items[0]);
+
+            // 가방에 추가한다.
+            AddItem(potion);
+        }
+    }
+
+    public void AddSlots(int slotCount)
+    {
+        for (int i = 0; i < slotCount; i++)
+        {
+            SlotScript slot = Instantiate(slotPrefab, transform).GetComponent<SlotScript>();
+            slots.Add(slot);
+        }
+    }
+
+    public bool AddItem(Item item)
+    {
+        foreach (SlotScript slot in slots)
+        {
+            // 빈 슬롯이 있으면
+            if (slot.IsEmpty)
             {
-                return;
+                // 해당 슬롯에 아이템을 추가한다.
+                slot.AddItem(item);
+                return true;
             }
         }
-        // 빈 슬롯이 아예 없는 경우에 대한 예외처리가 아직 안되었네요.
-    }
 
+        return false;
+    }
 
 }
