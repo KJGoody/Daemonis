@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void ItemCountChanged(Item item);
 public class InventoryScript : MonoBehaviour
 {
     private static InventoryScript instance;
@@ -21,6 +22,8 @@ public class InventoryScript : MonoBehaviour
             instance = value;
         }
     }
+    public event ItemCountChanged itemCountChangedEvent;
+
     [SerializeField]
     private GameObject slotPrefab;
     // 가방 안의 슬롯 리스트
@@ -34,6 +37,7 @@ public class InventoryScript : MonoBehaviour
             return slots;
         }
     }
+    private SlotScript fromSlot;
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -44,14 +48,27 @@ public class InventoryScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            // 테스트를 위해 체력을 3씩 감소
-            Player.MyInstance.MyHealth.MyCurrentValue -= 10;
+            asd();
+        }
+    }
+    public void asd()
+    {
+        // 테스트를 위해 체력을 3씩 감소
+        Player.MyInstance.MyHealth.MyCurrentValue -= 10;
 
-            // 체력물약 아이템 생성
-            HealthPotion potion = (HealthPotion)Instantiate(items[0]);
+        // 체력물약 아이템 생성
+        HealthPotion potion = (HealthPotion)Instantiate(items[0]);
 
-            // 가방에 추가한다.
-            AddItem(potion);
+        // 가방에 추가한다.
+        AddItem(potion);
+    }
+    public void OnItemCountChanged(Item item)
+    {
+        // 이벤트에 등록된 델리게이트에 있다면
+        if (itemCountChangedEvent != null)
+        {
+            // 이벤트에 등록된 모든 델리게이트호출 
+            itemCountChangedEvent.Invoke(item);
         }
     }
 
@@ -80,16 +97,17 @@ public class InventoryScript : MonoBehaviour
     }
     private bool PlaceInStack(Item item)
     {
-            // 인벤토리 슬롯들을 검사합니다.
-            foreach (SlotScript slots in MySlots)
+        // 인벤토리 슬롯들을 검사합니다.
+        foreach (SlotScript slots in MySlots)
+        {
+            // 해당 슬롯에 있는 아이템과 중첩시킬 수 있는지 확인합니다.
+            // 중첩이 가능하면 아이템을 중첩시키고 반복문을 중단합니다.
+            if (slots.StackItem(item))
             {
-                // 해당 슬롯에 있는 아이템과 중첩시킬 수 있는지 확인합니다.
-                // 중첩이 가능하면 아이템을 중첩시키고 반복문을 중단합니다.
-                if (slots.StackItem(item))
-                {
-                    return true;
-                }
+                OnItemCountChanged(item);
+                return true;
             }
+        }
         return false;
     }
     private bool PlaceInEmpty(Item item)
@@ -105,6 +123,49 @@ public class InventoryScript : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public Stack<IUseable> GetUseables(IUseable type)
+    {
+        Stack<IUseable> useables = new Stack<IUseable>();
+        // 가방의 모든 슬롯을 검사
+        foreach (SlotScript slot in MySlots)
+        {
+            // 빈슬롯이 아니고
+            // 슬롯에 등록된 아이템이 type의 아이템과 같은 종류의 아이템이라면
+            if (!slot.IsEmpty && slot.MyItem.GetType() == type.GetType())
+            {
+                // 해당 슬롯에 등록된 모든 아이템을
+                foreach (Item item in slot.MyItems)
+                {
+                    // useables 에 담는다.
+                    useables.Push(item as IUseable);
+                }
+            }
+        }
+        
+
+        return useables;
+    }
+
+
+
+    public SlotScript FromSlot // 흠
+    {
+        get
+        {
+            return fromSlot;
+        }
+
+        set
+        {
+            fromSlot = value;
+            if (value != null)
+            {
+                // 슬롯의 색상을 변경합니다.
+                fromSlot.MyIcon.color = Color.gray;
+            }
+        }
     }
 
 }

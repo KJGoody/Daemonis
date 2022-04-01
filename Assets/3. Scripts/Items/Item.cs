@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Item : ScriptableObject
+public abstract class Item : ScriptableObject, IMoveable
 {
     [SerializeField]
     private Sprite icon;
@@ -49,5 +49,6 @@ public abstract class Item : ScriptableObject
             MySlot.RemoveItem(this);
         }
     }
+
 
 }
