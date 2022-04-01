@@ -37,6 +37,20 @@ public class InventoryScript : MonoBehaviour
         // 가방 아이템을 사용한다.
         bag.Use();
     }
+    public void AddItem(Item item)
+    {
+ 
+        foreach(Bag bag in bags)
+        {
+            // 가방 리스트 중에 빈슬롯 이 있는
+            // 가방을 찾고 해당 가방에 아이템을 추가합니다.
+            if(bag.MyBagScript.AddItem(item))
+            {
+                return;
+            }
+        }
+        // 빈 슬롯이 아예 없는 경우에 대한 예외처리가 아직 안되었네요.
+    }
 
 
 }
