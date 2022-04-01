@@ -27,7 +27,13 @@ public class InventoryScript : MonoBehaviour
     private List<SlotScript> slots = new List<SlotScript>();
     // 가방에 슬롯을 추가한다.
     private CanvasGroup canvasGroup;
-
+    public List<SlotScript> MySlots
+    {
+        get
+        {
+            return slots;
+        }
+    }
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -58,7 +64,35 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
-    public bool AddItem(Item item)
+    public void AddItem(Item item)
+    {
+        // 추가되려는 아이템이 중첩 가능 아이템인지 확인합니다.
+        if (item.MyStackSize > 0)
+        {
+            // 가능하다면 PlaceInStack() 함수를 호출합니다.
+            if (PlaceInStack(item))
+            {
+                return;
+            }
+        }
+        // 중첩이 불가능한 아이템은 빈슬롯에 추가합니다.
+        PlaceInEmpty(item);
+    }
+    private bool PlaceInStack(Item item)
+    {
+            // 인벤토리 슬롯들을 검사합니다.
+            foreach (SlotScript slots in MySlots)
+            {
+                // 해당 슬롯에 있는 아이템과 중첩시킬 수 있는지 확인합니다.
+                // 중첩이 가능하면 아이템을 중첩시키고 반복문을 중단합니다.
+                if (slots.StackItem(item))
+                {
+                    return true;
+                }
+            }
+        return false;
+    }
+    private bool PlaceInEmpty(Item item)
     {
         foreach (SlotScript slot in slots)
         {
@@ -70,7 +104,6 @@ public class InventoryScript : MonoBehaviour
                 return true;
             }
         }
-
         return false;
     }
 
