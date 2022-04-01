@@ -5,8 +5,6 @@ using UnityEngine;
 public class AttackState : IState
 {
     private Enemy parent;
-    private Transform source;
-
     private float attackCooldown; // 공격 딜레이
     private float extraRange = 0.1f; // 공격 여유 거리    // 공격 여유 거리 + 인식거리 = 플레이어 인식 벗어나는 거리
 
@@ -26,6 +24,10 @@ public class AttackState : IState
 
             case Enemy.EnemyType.Kobold_rush:
                 attackCooldown = 3;
+                break;
+
+            case Enemy.EnemyType.Kobold_AOE:
+                attackCooldown = 5;
                 break;
         }
     }
@@ -52,6 +54,10 @@ public class AttackState : IState
 
                 case Enemy.EnemyType.Kobold_rush:
                     parent.StartCoroutine(RushAttack());
+                    break;
+
+                case Enemy.EnemyType.Kobold_AOE:
+                    parent.StartCoroutine(AOEAttack());
                     break;
             }
         }
@@ -102,17 +108,26 @@ public class AttackState : IState
     {
         parent.IsAttacking = true;
         parent._prefabs.PlayAnimation(4);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);        //선딜
 
         parent.IsRushing = true;
-        parent.gameObject.layer = 7; // Rushing레이어로 바꾸기, 플레이어와 충돌무시
-        parent.EnemyAttackResource(Resources.Load("EnemyAttack/RushAttack1") as GameObject, parent.exitPoint.position, Quaternion.identity);
+        parent.gameObject.layer = 7;                // Rushing레이어로 바꾸기, 플레이어와 충돌무시
         parent.Direction = (parent.MyTarget.transform.position - parent.transform.position).normalized;
+        parent.EnemyAttackResource(Resources.Load("EnemyAttack/RushAttack1") as GameObject, parent.exitPoint.position, Quaternion.identity);
         yield return new WaitForSeconds(0.5f); 
 
         parent.IsRushing = false;
         parent.gameObject.layer = 6;
         parent.IsAttacking = false;
 
+    }
+
+    public IEnumerator AOEAttack()
+    {
+        parent.IsAttacking = true;
+        parent._prefabs.PlayAnimation(6);
+        yield return new WaitForSeconds(1f);
+        parent.EnemyAttackResource(Resources.Load("EnemyAttack/AOEAttack1") as GameObject, parent.MyTarget.position, Quaternion.identity);
+        parent.IsAttacking = false;
     }
 }

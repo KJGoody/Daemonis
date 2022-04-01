@@ -48,6 +48,10 @@ MonoBehaviour:
   enemyAttackType: 0
   speed: 0
   damage: 5
+  IsDOTAttack: 1
+  DOTDamage: 5
+  DOTTickTime: 5
+  DOTTime: 5
 --- !u!50 &5574728806096493329
 Rigidbody2D:
   serializedVersion: 4

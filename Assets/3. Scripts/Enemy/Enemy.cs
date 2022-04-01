@@ -70,9 +70,12 @@ public class Enemy : NPC
                 break;
 
             case EnemyType.Kobold_rush:
-                MyAttackRange = 1;
+                MyAttackRange = 3;
                 break;
 
+            case EnemyType.Kobold_AOE:
+                MyAttackRange = 5;
+                break;
         }
         ChangeState(new IdleState());
     }
