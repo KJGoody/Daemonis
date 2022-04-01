@@ -92,7 +92,7 @@ public class Player : Character
         GameObject spell = newSpell.MySpellPrefab;
         if (currentTarget != null)
         {
-            TestParticleSpell s = Instantiate(spell, exitPoint.position, Quaternion.identity).GetComponent<TestParticleSpell>();
+            SpellScript s = Instantiate(spell, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
             s.Initailize(currentTarget, newSpell.MyDamage,transform);
             s.MyTarget = MyTarget;
         }
