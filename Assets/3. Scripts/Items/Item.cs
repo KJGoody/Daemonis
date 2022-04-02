@@ -1,22 +1,17 @@
 using UnityEngine;
 
-public enum Quality { Normal, Advanced, Rare, Epic , Legendary , Relic }
-
-public abstract class Item : ScriptableObject, IMoveable , IDescribable
+public abstract class Item : ScriptableObject
 {
     [SerializeField]
     private Sprite icon;
+
     [SerializeField]
     private int stackSize;
-    [SerializeField]
-    private string title;
-    [SerializeField]
-    private Quality quality;
 
     private SlotScript slot;
 
 
-    public Sprite MyIcon
+    public Sprite Icon
     {
         get
         {
@@ -26,7 +21,7 @@ public abstract class Item : ScriptableObject, IMoveable , IDescribable
     // 아이템이 중첩될 수 있는 개수
     // 예) 소모성 물약의 경우 한개의 Slot에 여러개가
     //     중첩되어서 보관될 수 있음.
-    public int MyStackSize
+    public int StackSize
     {
         get
         {
@@ -34,7 +29,7 @@ public abstract class Item : ScriptableObject, IMoveable , IDescribable
         }
     }
 
-    public SlotScript MySlot
+    protected SlotScript Slot
     {
         get
         {
@@ -46,35 +41,4 @@ public abstract class Item : ScriptableObject, IMoveable , IDescribable
             slot = value;
         }
     }
-    public void Remove()
-    {
-        if (MySlot != null)
-        {
-            MySlot.RemoveItem(this);
-        }
-    }
-    public virtual string GetDescription()
-    {
-        string color = string.Empty;
-
-        switch (quality)
-        {
-            case Quality.Normal:
-                color = "#d6d6d6";
-                break;
-            case Quality.Advanced:
-                color = "#00ff00ff";
-                break;
-            case Quality.Rare:
-                color = "#0000ffff";
-                break;
-            case Quality.Epic:
-                color = "#800080ff";
-                break;
-        }
-
-        return string.Format("<color={0}>{1}</color>", color, title);
-    }
-
-
 }
