@@ -100,5 +100,13 @@ public class HandScript : MonoBehaviour
         // 복사한 스킬의 아이콘 정보를 전달한다.
         return tmp;
     }
-    
+    public void Drop()
+    {
+        // 복사한 스킬 아이콘 정보를 null 로 만든다.
+        MyMoveable = null;
+
+        // Hand 아이콘을 투명하게 만든다.
+        icon.color = new Color(0, 0, 0, 0);
+    }
+
 }
