@@ -23,7 +23,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
     [SerializeField]
     private TextMeshProUGUI stackSize;
 
-
+    
     // 사용 가능 아이템 리스트
     private Stack<IUseable> useables = new Stack<IUseable>();
     private int count;
@@ -160,13 +160,13 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
         // 액션 버튼에 등록된 것이 스킬이라면
         if (MyUseable != null)
         {
-            UIManager.MyInstance.ShowTooltip(transform.position);
+            //UIManager.MyInstance.ShowTooltip(transform.position);
         }
 
         // 액션 버튼에 등록된 것이 아이템이라면
         else if (useables.Count > 0)
         {
-            UIManager.MyInstance.ShowTooltip(transform.position);
+           // UIManager.MyInstance.ShowTooltip(transform.position);
         }
     }
 
