@@ -24,8 +24,6 @@ public class UIManager : MonoBehaviour
     private ActionButton[] actionButtons;
     [SerializeField]
     private CanvasGroup spellBook;
-    [SerializeField]
-    private GameObject tooltip;
 
     void Start()
     {
@@ -63,19 +61,6 @@ public class UIManager : MonoBehaviour
         Debug.Log("2 = " + canvasGroup.blocksRaycasts);
     }
 
-    // Æ«ÆÁUI È°¼ºÈ­
-    public void ShowTooltip(Vector3 position)
-    {
-        tooltip.SetActive(true);
-        tooltip.transform.position = position;
-
-    }
-
-    // Æ«ÆÁUI ºñÈ°¼ºÈ­
-    public void HideTooltip()
-    {
-        tooltip.SetActive(false);
-    }
 
     public void ClickActionButton(string buttonName)
     {
