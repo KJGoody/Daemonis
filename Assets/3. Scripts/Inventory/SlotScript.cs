@@ -131,9 +131,10 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
     {
         if (!IsEmpty)
         {
-            UIManager.MyInstance.ShowTooltip(transform.position);
+            UIManager.MyInstance.ShowTooltip(transform.position, MyItem);
         }
     }
+
 
 
     // 마우스 커서가 Slot 영역 안에서 밖으로 나가면 호출
