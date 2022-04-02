@@ -24,7 +24,18 @@ public class UIManager : MonoBehaviour
     private ActionButton[] actionButtons;
     [SerializeField]
     private CanvasGroup spellBook;
+    [SerializeField]
+    private GameObject tooltip;
+    private Text tooltipText;
+    private void Awake()
+    {
+        // Tag 가 keybind로 설정된 게임오브젝트를 찾습니다.
+        //keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
 
+
+        // 아이템 툴팁 참조
+        tooltipText = tooltip.GetComponentInChildren<Text>();
+    }
     void Start()
     {
 
@@ -39,6 +50,10 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             OpenClose(spellBook);
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            //InventoryScript.MyInstance.OpenClose();
         }
     }
     public void OpenClose(CanvasGroup canvasGroup)
@@ -57,11 +72,53 @@ public class UIManager : MonoBehaviour
         Debug.Log("2 = " + canvasGroup.blocksRaycasts);
     }
 
+    // 튤팁UI 활성화
+    public void ShowTooltip(Vector3 position, IDescribable description)
+    {
+        tooltip.SetActive(true);
+        tooltip.transform.position = position;
+
+        // 아이템의 내용을 툴팁게임오브젝트에 전달
+        tooltipText.text = description.GetDescription();
+    }
+
+
+    // 튤팁UI 비활성화
+    public void HideTooltip()
+    {
+        tooltip.SetActive(false);
+    }
 
     public void ClickActionButton(string buttonName)
     {
         Array.Find(actionButtons, x => x.gameObject.name == buttonName).MyButton.onClick.Invoke();
     }
 
+    public void UpdateStackSize(IClickable clickable)
+    {
+        if (clickable.MyCount > 1)
+        {
+            // 해당 슬롯의 중첩개수 표시하기
+            clickable.MyStackText.text = clickable.MyCount.ToString();
+            clickable.MyStackText.color = Color.white;
+            clickable.MyIcon.color = Color.white;
+        }
+
+        else
+        {
+            // 해당 슬롯의 텍스트 투명하게 만들기
+            clickable.MyStackText.color = new Color(0, 0, 0, 0);
+        }
+
+        if (clickable.MyCount == 0)
+        {
+            // 해당 슬롯의 아이콘 투명하게 만들기
+            clickable.MyIcon.color = new Color(0, 0, 0, 0);
+
+            // 해당 슬롯의 텍스트 투명하게 만들기
+            clickable.MyStackText.color = new Color(0, 0, 0, 0);
+
+        }
+    }
 
 }
