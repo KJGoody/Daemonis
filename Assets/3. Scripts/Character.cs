@@ -57,10 +57,6 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField]
     protected Stat health;
-    public Stat MyHealth
-    {
-        get { return health; }
-    }
 
     [SerializeField]
     private float initHealth;
