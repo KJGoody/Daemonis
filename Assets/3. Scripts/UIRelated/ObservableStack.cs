@@ -12,6 +12,16 @@ public class ObservableStack<T> : Stack<T>
     public event UpdateStackEvent OnPop;
     public event UpdateStackEvent OnClear;
 
+    public ObservableStack(ObservableStack<T> items) : base(items)
+    {
+
+    }
+
+    public ObservableStack()
+    {
+
+    }
+
 
     // 아이템을 Stack 배열에 넣을때
     public new void Push(T item)
