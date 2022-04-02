@@ -26,16 +26,7 @@ public class UIManager : MonoBehaviour
     private CanvasGroup spellBook;
     [SerializeField]
     private GameObject tooltip;
-    private Text tooltipText;
-    private void Awake()
-    {
-        // Tag 가 keybind로 설정된 게임오브젝트를 찾습니다.
-        //keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
 
-
-        // 아이템 툴팁 참조
-        tooltipText = tooltip.GetComponentInChildren<Text>();
-    }
     void Start()
     {
 
@@ -73,15 +64,12 @@ public class UIManager : MonoBehaviour
     }
 
     // 튤팁UI 활성화
-    public void ShowTooltip(Vector3 position, IDescribable description)
+    public void ShowTooltip(Vector3 position)
     {
         tooltip.SetActive(true);
         tooltip.transform.position = position;
 
-        // 아이템의 내용을 툴팁게임오브젝트에 전달
-        tooltipText.text = description.GetDescription();
     }
-
 
     // 튤팁UI 비활성화
     public void HideTooltip()

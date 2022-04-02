@@ -1,11 +1,10 @@
 using UnityEngine;
 
-public abstract class Item : ScriptableObject, IMoveable , IDescribable
+public abstract class Item : ScriptableObject, IMoveable
 {
     [SerializeField]
     private Sprite icon;
-    [SerializeField]
-    private string title;
+
 
     [SerializeField]
     private int stackSize;
@@ -50,9 +49,6 @@ public abstract class Item : ScriptableObject, IMoveable , IDescribable
             MySlot.RemoveItem(this);
         }
     }
-    public string GetDescription()
-    {
-        return title;
-    }
+
 
 }
