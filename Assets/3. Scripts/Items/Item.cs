@@ -22,7 +22,7 @@ public abstract class Item : ScriptableObject
     // 아이템이 중첩될 수 있는 개수
     // 예) 소모성 물약의 경우 한개의 Slot에 여러개가
     //     중첩되어서 보관될 수 있음.
-    public int MyStackSize
+    public int StackSize
     {
         get
         {

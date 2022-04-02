@@ -1,5 +1,4 @@
 using UnityEngine.UI;
-using TMPro;
 
 public interface IClickable
 {
@@ -10,10 +9,6 @@ public interface IClickable
     }
 
     int MyCount
-    {
-        get;
-    }
-    TextMeshProUGUI MyStackText
     {
         get;
     }

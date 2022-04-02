@@ -69,28 +69,10 @@ public class UIManager : MonoBehaviour
 
     public void UpdateStackSize(IClickable clickable)
     {
-        if (clickable.MyCount > 1)
-        {
-            // 해당 슬롯의 중첩개수 표시하기
-            clickable.MyStackText.text = clickable.MyCount.ToString();
-            clickable.MyStackText.color = Color.white;
-            clickable.MyIcon.color = Color.white;
-        }
-
-        else
-        {
-            // 해당 슬롯의 텍스트 투명하게 만들기
-            clickable.MyStackText.color = new Color(0, 0, 0, 0);
-        }
-
         if (clickable.MyCount == 0)
         {
             // 해당 슬롯의 아이콘 투명하게 만들기
             clickable.MyIcon.color = new Color(0, 0, 0, 0);
-
-            // 해당 슬롯의 텍스트 투명하게 만들기
-            clickable.MyStackText.color = new Color(0, 0, 0, 0);
-
         }
     }
 
