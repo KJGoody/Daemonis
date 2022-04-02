@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using TMPro;
 public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
 {
     // 슬롯에 등록된 아이템 리스트
     // 중첩개수가 2개 이상인 아이템이 있을 수 있다.
-    private Stack<Item> items = new Stack<Item>();
+    private ObservableStack<Item> items = new ObservableStack<Item>();
 
 
     // 아이템의 아이콘
@@ -26,7 +26,16 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
             icon = value;
         }
     }
+    [SerializeField]
+    private TextMeshProUGUI stackSize;
 
+    public TextMeshProUGUI MyStackText
+    {
+        get
+        {
+            return stackSize;
+        }
+    }
     public int MyCount
     {
         get
@@ -51,6 +60,15 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
         }
     }
 
+
+
+    private void Awake()
+    {
+        items.OnPop += new UpdateStackEvent(UpdateSlot);
+        items.OnPush += new UpdateStackEvent(UpdateSlot);
+        items.OnClear += new UpdateStackEvent(UpdateSlot);
+    }
+
     // 슬롯에 아이템 추가.
     public bool AddItem(Item item)
     {
@@ -69,7 +87,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
             items.Pop();
 
             // 해당 슬롯의 아이템아이콘을 투명화시킵니다.
-            UIManager.MyInstance.UpdateStackSize(this);
+            //UIManager.MyInstance.UpdateStackSize(this);
         }
     }
     public void OnPointerClick(PointerEventData eventData)
@@ -79,6 +97,30 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
         {
             UseItem();
         }
+    }
+    private void UpdateSlot()
+    {
+        UIManager.MyInstance.UpdateStackSize(this);
+    }
+
+    public bool StackItem(Item item)
+    {
+        // 빈슬롯이 아니고
+        // 해당 슬롯에 있는 아이템 이름과
+        // 추가되려는 아이템의 이름이 동일하다면
+        if (!IsEmpty && item.name == MyItem.name)
+        {
+            // 아이템의 중첩개수가
+            // 아이템의 MyStackSize 보다 작다면
+            if (items.Count < MyItem.MyStackSize)
+            {
+                // 아이템을 중첩시킵니다.
+                items.Push(item);
+                item.MySlot = this;
+                return true;
+            }
+        }
+        return false;
     }
 
     public void UseItem()
