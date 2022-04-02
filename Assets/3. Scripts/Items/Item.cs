@@ -5,14 +5,13 @@ public abstract class Item : ScriptableObject
     [SerializeField]
     private Sprite icon;
 
-
     [SerializeField]
     private int stackSize;
 
     private SlotScript slot;
 
 
-    public Sprite MyIcon
+    public Sprite Icon
     {
         get
         {

@@ -6,7 +6,7 @@ using UnityEngine;
 // 상단 메뉴에 명령버튼 추가.
 [CreateAssetMenu(fileName = "Bag", menuName = "Items/Bag", order = 1)]
 public class Bag : Item, IUseable
-{ 
+{
     private int slots;
 
     [SerializeField]
