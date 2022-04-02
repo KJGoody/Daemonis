@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
-public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
+public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPointerEnterHandler, IPointerExitHandler
 {
     public Image MyIcon
     {
@@ -154,5 +154,26 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
         }
     }
 
+    // 툴팁 켜기
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        // 액션 버튼에 등록된 것이 스킬이라면
+        if (MyUseable != null)
+        {
+            UIManager.MyInstance.ShowTooltip(transform.position);
+        }
+
+        // 액션 버튼에 등록된 것이 아이템이라면
+        else if (useables.Count > 0)
+        {
+            UIManager.MyInstance.ShowTooltip(transform.position);
+        }
+    }
+
+    // 툴팁 끄기
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UIManager.MyInstance.HideTooltip();
+    }
 
 }
