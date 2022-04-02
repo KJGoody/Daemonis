@@ -53,7 +53,7 @@ public abstract class Item : ScriptableObject, IMoveable , IDescribable
             MySlot.RemoveItem(this);
         }
     }
-    public string GetDescription()
+    public virtual string GetDescription()
     {
         string color = string.Empty;
 
