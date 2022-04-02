@@ -9718,13 +9718,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1 &996858420
 GameObject:
-=======
---- !u!43 &996142985
-Mesh:
->>>>>>> parent of 1ff2482 (UI 추가 및 스킬 추가)
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -18167,7 +18162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellName: FireBall
-<<<<<<< HEAD
 --- !u!1 &1838107723
 GameObject:
   m_ObjectHideFlags: 0
@@ -18247,8 +18241,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1838107723}
   m_CullTransparentMesh: 1
-=======
->>>>>>> parent of 1ff2482 (UI 추가 및 스킬 추가)
 --- !u!1 &1868191485
 GameObject:
   m_ObjectHideFlags: 0
@@ -18512,7 +18504,6 @@ MonoBehaviour:
   - {x: -6.9994183, y: -6.00001, z: 0}
   - {x: 5.9994183, y: -6.00001, z: 0}
   m_ShapePathHash: 0
-<<<<<<< HEAD
   m_Mesh: {fileID: 1625443718}
   m_InstanceId: 346358
 --- !u!1 &1928188555
@@ -18650,10 +18641,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928188555}
   m_CullTransparentMesh: 1
-=======
-  m_Mesh: {fileID: 996142985}
-  m_InstanceId: 42264
->>>>>>> parent of 1ff2482 (UI 추가 및 스킬 추가)
 --- !u!1 &1930583709
 GameObject:
   m_ObjectHideFlags: 0
@@ -19589,7 +19576,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD
     - target: {fileID: 1444055772731501003, guid: 16eefb0a141efad448434763686f996c,
         type: 3}
       propertyPath: m_Spacing.x
@@ -19617,9 +19603,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7374041261674863469, guid: 16eefb0a141efad448434763686f996c, type: 3}
-=======
-    m_RemovedComponents: []
->>>>>>> parent of 1ff2482 (UI 추가 및 스킬 추가)
   m_SourcePrefab: {fileID: 100100000, guid: 16eefb0a141efad448434763686f996c, type: 3}
 --- !u!1001 &7284305205873325544
 PrefabInstance:
