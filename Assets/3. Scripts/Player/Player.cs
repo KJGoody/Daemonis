@@ -29,6 +29,7 @@ public class Player : Character
     [SerializeField]
     private Transform exitPoint; // 발사체 생성 위치
 
+    private Vector2 atkDir;
     //public Transform myTarget { get; set; }
     protected override void Start()
     {
@@ -63,47 +64,53 @@ public class Player : Character
             mana.MyCurrentValue += 10;
         }
 
-
         Vector2 moveVector;
         if (!IsAttacking)
         {
             moveVector.x = joy.Horizontal;
             moveVector.y = joy.Vertical;
-
             Direction = moveVector;
+            if(moveVector.x != 0 && moveVector.y != 0)
+                atkDir = moveVector;
         }
+     
          
     }
-    private void FindTarget()
+    private void FindTarget() //공격하는 타겟 방향 바라보기
     {
         Direction = MyTarget.position - transform.position;
+        atkDir = Direction;
         if (Direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
         else if (Direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
     }
     private IEnumerator Attack(string spellIName)
     {
-        Transform currentTarget = MyTarget;
         Spell newSpell = SpellBook.MyInstance.CastSpell(spellIName); //스펠북에서 스킬 받아옴
-
         IsAttacking = true;
-        FindTarget();
         _prefabs.PlayAnimation(4);
 
         GameObject spell = newSpell.MySpellPrefab;
-        if (currentTarget != null)
+
+        SpellScript s = Instantiate(spell, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
+        s.Initailize(newSpell.MyDamage,transform,atkDir);
+        if (MyTarget != null)
         {
-            SpellScript s = Instantiate(spell, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
-            s.Initailize(currentTarget, newSpell.MyDamage,transform);
+            FindTarget();
             s.MyTarget = MyTarget;
         }
+
+        
         yield return new WaitForSeconds(0.3f); // 테스트를 위한 코드입니다. 여기다가 후딜넣을까 생각중
         StopAttack();
        
     }
-    private void AutoTarget()
+    private void AutoTarget() // 가장 가까운적 타겟팅
     {
         MyTarget = FindNearestObjectByTag("HitBox").GetComponent<Transform>();
-        
+        if(Vector2.Distance(MyTarget.position,transform.position) > 7) // 너무 멀면 타겟 해제
+        {
+            MyTarget = null;
+        }
         Debug.Log("AutoTarget" + MyTarget);
     }
     private GameObject FindNearestObjectByTag(string tag)
@@ -129,14 +136,21 @@ public class Player : Character
             IsAttacking = false;
         }
     }
-
+    public bool SearchEnemy() // 씬에 적이 존재하는지 검색
+    {
+        Debug.Log(GameObject.FindWithTag("HitBox"));
+        if (GameObject.FindWithTag("HitBox") == null)
+            return false;
+        else
+            return true;
+    }
     public void CastSpell(string spellIName)
     {
-        if (MyTarget == null)
+        if (MyTarget == null && SearchEnemy())
             AutoTarget();
 
-        Character EnemyCharacter = MyTarget.GetComponentInParent<Character>();
-        if (!IsAttacking && EnemyCharacter.IsAlive)
+
+        if (!IsAttacking)
         {
             attackRoutine = StartCoroutine(Attack(spellIName));
         }
