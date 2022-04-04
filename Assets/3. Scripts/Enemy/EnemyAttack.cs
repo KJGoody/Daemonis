@@ -25,7 +25,7 @@ public class EnemyAttack : MonoBehaviour
     private bool IsAOEAttack = false;
     [SerializeField]                            
     private float WaitWarningSceonds;
-    public Transform AOEexitPoint;              // 장판오브젝트 소환 포인트
+    private Transform AOEexitPoint;              // 장판오브젝트 소환 포인트
     public int AOEDamage;                       // 장판오브젝트 데미지
     [SerializeField]                            
     private int AEtimes;                        // 장판의 공격 횟수
@@ -39,6 +39,7 @@ public class EnemyAttack : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         MyTarget = GameObject.Find("HitBox_Player").GetComponent<Transform>();
         direction = MyTarget.position - transform.position;
+        AOEexitPoint = this.GetComponent<Transform>();
 
         switch (enemyAttackType)
         {
@@ -61,7 +62,7 @@ public class EnemyAttack : MonoBehaviour
                 break;
 
             case EnemyAttackType.BaseAEAttack:
-                StartCoroutine(AETimes());
+                StartCoroutine(BaseAEAttack());
                 break;
         }
     }
@@ -106,8 +107,8 @@ public class EnemyAttack : MonoBehaviour
 
     private IEnumerator BaseAOEAttack()
     {
-        WarningArea warningarea = Instantiate(Resources.Load("EnemyAttack/WaringArea") as GameObject, AOEexitPoint.position, Quaternion.identity).GetComponent<WarningArea>();
-        warningarea.destroyTime = 1f;
+        WarningArea warningarea = Instantiate(Resources.Load("EnemyAttack/WaringArea") as GameObject, this.transform.position, Quaternion.identity).GetComponent<WarningArea>();
+        warningarea.destroyTime = WaitWarningSceonds;
         yield return new WaitForSeconds(WaitWarningSceonds + 0.5f);
         this.GetComponent<SpriteRenderer>().enabled = true;
         StartCoroutine(AETimes());
@@ -117,13 +118,11 @@ public class EnemyAttack : MonoBehaviour
 
     private IEnumerator AETimes()
     {
-        for (int i = 0; i <= AEtimes; i++)
+        for (int i = 0; i < AEtimes; i++)
         {
-            EnemyAttack AEattack = Instantiate(Resources.Load("EnemyAttack/BaseAE_Attack") as GameObject, this.transform.position, Quaternion.identity).GetComponent<EnemyAttack>();
+            EnemyAttack AEattack = Instantiate(Resources.Load("EnemyAttack/BaseAE_Attack") as GameObject, AOEexitPoint.position, Quaternion.identity).GetComponent<EnemyAttack>();
             AEattack.damage = AOEDamage;
             AEattack.AEwaitforseconds = AEwaitforseconds;
-            Debug.Log("!!");
-            Debug.Log(AEwaitforseconds);
             yield return new WaitForSeconds(AEwaitforseconds);
         }
     }

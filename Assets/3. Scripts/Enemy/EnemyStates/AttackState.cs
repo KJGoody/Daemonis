@@ -47,6 +47,7 @@ public class AttackState : IState
         if (parent.MyAttackTime >= attackCooldown && !parent.IsAttacking)
         {
             parent.MyAttackTime = 0;
+            parent.IsAttacking = true;
             switch (parent.enemyType)                       // 애니미타입에 따라 공격 모션을 다르게 설정
             {
                 case Enemy.EnemyType.Basemelee:
@@ -87,30 +88,28 @@ public class AttackState : IState
    
     public IEnumerator meleeAttack()
     {
-        parent.IsAttacking = true;
         parent._prefabs.PlayAnimation(4);
 
         yield return new WaitForSeconds(0.15f); // 애니메이션 내려찍기 시작
         parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseMelee_Attack") as GameObject, parent.exitPoint.position, Quaternion.identity);
         yield return new WaitForSeconds(0.15f); // 애니메이션 종료
+        
         parent.IsAttacking = false;
     }
     
     public IEnumerator rangedAttack()
     {
-        parent.IsAttacking = true;
         parent._prefabs.PlayAnimation(5);
 
         yield return new WaitForSeconds(0.2f); 
         parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseRanged_Attack") as GameObject, parent.exitPoint.position, Quaternion.identity);
         yield return new WaitForSeconds(0.1f); 
         
-       parent.IsAttacking = false;
+        parent.IsAttacking = false;
     }
 
     public IEnumerator RushAttack()
     {
-        parent.IsAttacking = true;
         parent._prefabs.PlayAnimation(4);
         yield return new WaitForSeconds(1f);        //선딜
 
@@ -129,7 +128,6 @@ public class AttackState : IState
 
     public IEnumerator AOEAttack()
     {
-        parent.IsAttacking = true;
         parent._prefabs.PlayAnimation(6);
         yield return new WaitForSeconds(1f);
         parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseAOE_Attack") as GameObject, parent.MyTarget.position, Quaternion.identity);
