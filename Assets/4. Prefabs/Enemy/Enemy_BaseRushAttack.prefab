@@ -475,6 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  RushSpeed: 0
   _prefabs: {fileID: 6488305704398766743}
   _spriteList: {fileID: 1976074611727736207}
   hitBox: {fileID: 4247668423738373633}
