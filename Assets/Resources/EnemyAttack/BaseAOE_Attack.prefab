@@ -52,9 +52,9 @@ MonoBehaviour:
   damage: 0
   WaitWarningSceonds: 1
   AOEexitPoint: {fileID: 5430805271905259515}
-  AOEDamage: 1
-  AOETickTime: 10
-  AOETime: 1
+  AOEDamage: 3
+  AEtimes: 50
+  AEwaitforseconds: 1
 --- !u!50 &2253224186837325089
 Rigidbody2D:
   serializedVersion: 4
