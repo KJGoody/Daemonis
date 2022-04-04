@@ -8,16 +8,15 @@ public class Enemy : NPC
 
     public enum EnemyType               // EnemyType
     {
-        kobold_melee,
-        kobold_ranged,
-        Kobold_rush,
-        Kobold_AOE
+        Basemelee,
+        Baseranged,
+        Baserush,
+        BaseAOE
     }
     public EnemyType enemyType;
 
     public Vector3 MyStartPosition { get; set; } // 시작 위치
     public float MyAttackTime { get; set; } // 공격 딜레이를 체크하기 위한 속성
-    public bool IsRushing { get; set; }
     [SerializeField]
     private CanvasGroup healthGroup;
     private bool isKnockBack;
@@ -61,22 +60,23 @@ public class Enemy : NPC
 
         switch (enemyType)                  // 애니미 타입에 따라 공격 사거리 변화
         {
-            case EnemyType.kobold_melee:
+            case EnemyType.Basemelee:
                 MyAttackRange = 1;
                 break;
 
-            case EnemyType.kobold_ranged:
+            case EnemyType.Baseranged:
                 MyAttackRange = 5;
                 break;
 
-            case EnemyType.Kobold_rush:
+            case EnemyType.Baserush:
                 MyAttackRange = 3;
                 break;
 
-            case EnemyType.Kobold_AOE:
+            case EnemyType.BaseAOE:
                 MyAttackRange = 5;
                 break;
         }
+        MyAttackTime = 1000f;            // 공격상태 돌입 시 바로 공격할 수 있도록 시간을 많이 넣어둠
         ChangeState(new IdleState());
     }
     protected override void Update()
@@ -169,19 +169,4 @@ public class Enemy : NPC
         //OnHealthChanged(health.MyCurrentValue);
     }
 
-    public override void Move()
-    {
-        if (IsAlive)
-        {
-            if (IsAttacking)
-            {
-                if(IsRushing)                                           // 돌진공격일시 이동 가능
-                    myRigid2D.velocity = Direction.normalized * 7f;
-                else
-                    myRigid2D.velocity = Vector2.zero;
-            }
-            else
-                myRigid2D.velocity = Direction.normalized * Speed;
-        }
-    }
 }

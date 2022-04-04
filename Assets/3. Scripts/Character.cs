@@ -9,6 +9,22 @@ public abstract class Character : MonoBehaviour
     
     [SerializeField]
     private float speed;
+    public float Speed
+    {
+        get
+        {
+            return speed;
+        }
+
+        set
+        {
+            speed = value;
+        }
+    }
+
+    public bool IsRushing { get; set; }
+    public float RushSpeed = 0f;
+
     private Vector2 direction;
     public Vector2 Direction
     {
@@ -23,18 +39,6 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    public float Speed
-    {
-        get
-        {
-            return speed;
-        }
-
-        set
-        {
-            speed = value;
-        }
-    }
     public bool IsAlive
     {
         get
@@ -86,14 +90,19 @@ public abstract class Character : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
-        Move();
+        Move(RushSpeed);
     }
-    public virtual void Move()
+    public virtual void Move(float RushSpeed = 0f)
     {
         if (IsAlive)
         {
             if (IsAttacking)
-                myRigid2D.velocity = Vector2.zero;
+            {
+                if (IsRushing)                                           // 돌진공격일시 이동 가능
+                    myRigid2D.velocity = Direction.normalized * RushSpeed;
+                else
+                    myRigid2D.velocity = Vector2.zero;
+            }
             else
                 myRigid2D.velocity = direction.normalized * speed;
         }
@@ -105,6 +114,7 @@ public abstract class Character : MonoBehaviour
             // 캐릭터 좌우 보는거
             if (direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
             else if (direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
+
             if (IsMoving && !IsAttacking)
             {
                 _layerName = LayerName.move;
@@ -126,7 +136,6 @@ public abstract class Character : MonoBehaviour
             _layerName = LayerName.death;
         }
     }
-
     public void FindTarget()
     {
         Direction = MyTarget.position - transform.position;

@@ -6,11 +6,11 @@ public class EnemyAttack : MonoBehaviour
 {
     public enum EnemyAttackType
     {
-        MeleeAttack1,
-        RangedAttack1,
-        RushAttack1,
-        AOEAttack1,                         // 장판을 소환하고 일정시간마다 장판오브젝트를 생성해서 플레이어에게 데미지를 준다.
-        AOEtickObj1                         // 장판 공격의 실질적 데미지
+        BaseMeleeAttack,
+        BaseRangedAttack,
+        BaseRushAttack,
+        BaseAOEAttack,                         // 장판을 소환하고 일정시간마다 장판오브젝트를 생성해서 플레이어에게 데미지를 준다.
+        BaseAOEtickObj                         // 장판 공격의 실질적 데미지
     }
     public EnemyAttackType enemyAttackType;
     private Rigidbody2D myRigidbody;
@@ -24,7 +24,7 @@ public class EnemyAttack : MonoBehaviour
    
     private bool IsAOEAttack = false;
     [SerializeField]                            
-    private float WaitWarningSceonds = 1f;
+    private float WaitWarningSceonds;
     public Transform AOEexitPoint;              // 장판오브젝트 소환 포인트
     public int AOEDamage;                       // 장판오브젝트 데미지
     [SerializeField]                            
@@ -42,24 +42,25 @@ public class EnemyAttack : MonoBehaviour
 
         switch (enemyAttackType)
         {
-            case EnemyAttackType.MeleeAttack1:
+            case EnemyAttackType.BaseMeleeAttack:
                 StartCoroutine(MeleeAttack1());
                 break;
 
-            case EnemyAttackType.RangedAttack1:
+            case EnemyAttackType.BaseRangedAttack:
                 StartCoroutine(RangedAttack1());
                 break;
 
-            case EnemyAttackType.RushAttack1:
+            case EnemyAttackType.BaseRushAttack:
                 StartCoroutine(RushAttack1());
                 break;
 
-            case EnemyAttackType.AOEAttack1:
+            case EnemyAttackType.BaseAOEAttack:
                 IsAOEAttack = true;
+                this.GetComponent<SpriteRenderer>().enabled = false;
                 StartCoroutine(AOEAttack1());
                 break;
 
-            case EnemyAttackType.AOEtickObj1:
+            case EnemyAttackType.BaseAOEtickObj:
                 StartCoroutine(AOEtickObj());
                 break;
         }
@@ -105,7 +106,10 @@ public class EnemyAttack : MonoBehaviour
 
     private IEnumerator AOEAttack1()
     {
-        yield return new WaitForSeconds(WaitWarningSceonds);
+        WarningArea warningarea = Instantiate(Resources.Load("EnemyAttack/WaringArea") as GameObject, AOEexitPoint.position, Quaternion.identity).GetComponent<WarningArea>();
+        warningarea.destroyTime = 1f;
+        yield return new WaitForSeconds(WaitWarningSceonds + 0.5f);
+        this.GetComponent<SpriteRenderer>().enabled = true;
         StartCoroutine(AOEtick());
         yield return new WaitForSeconds(AOETime * AOETickTime);
         Destroy(gameObject);
@@ -121,7 +125,7 @@ public class EnemyAttack : MonoBehaviour
         for (int i = 0; i <= AOETickTime; i++)
         {
             yield return new WaitForSeconds(AOETime);
-            EnemyAttack AOEObj = Instantiate(Resources.Load("EnemyAttack/AOEtickObj1") as GameObject, AOEexitPoint.position, Quaternion.identity).GetComponent<EnemyAttack>();
+            EnemyAttack AOEObj = Instantiate(Resources.Load("EnemyAttack/BaseAE_Attack") as GameObject, AOEexitPoint.position, Quaternion.identity).GetComponent<EnemyAttack>();
             AOEObj.damage = AOEDamage;
             AOEObj.AOETime = AOETime;
         }
