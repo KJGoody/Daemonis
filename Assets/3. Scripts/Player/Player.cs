@@ -76,12 +76,10 @@ public class Player : Character
      
          
     }
-    private void FindTarget() //공격하는 타겟 방향 바라보기
+    public override void FindTarget()   //공격하는 타겟 방향 바라보기
     {
-        Direction = MyTarget.position - transform.position;
         atkDir = Direction;
-        if (Direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
-        else if (Direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
+        base.FindTarget();
     }
     private IEnumerator Attack(string spellIName)
     {

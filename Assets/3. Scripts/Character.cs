@@ -140,7 +140,7 @@ public abstract class Character : MonoBehaviour
             _layerName = LayerName.death;
         }
     }
-    public void FindTarget()
+    public virtual void FindTarget()
     {
         Direction = MyTarget.position - transform.position;
         if (Direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
