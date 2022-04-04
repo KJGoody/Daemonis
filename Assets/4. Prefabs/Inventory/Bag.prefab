@@ -130,3 +130,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 8457644453251192659, guid: 5d161bb55c714ed47b5d64d1881056e3,
     type: 3}
+  items: []

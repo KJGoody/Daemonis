@@ -12,7 +12,8 @@ public class SpellButton : MonoBehaviour, IPointerClickHandler
         // 왼쪽 마우스가 눌린다면
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            HandScript.MyInstance.TakeMoveable(SpellBook.MyInstance.GetSpell(spellName));
+            //HandScript.MyInstance.TakeMoveable(SpellBook.MyInstance.GetSpell(spellName));
         }
     }
+    
 }

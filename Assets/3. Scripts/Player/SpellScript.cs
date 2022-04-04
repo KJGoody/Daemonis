@@ -8,17 +8,26 @@ public class SpellScript : MonoBehaviour
 
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private GameObject puff;
 
     public Transform MyTarget { get; set; } // 공격할 대상
     private Transform source;
     private int damage;
     private Vector2 direction;
+    private Vector2 atkDir;
     List<GameObject> hitEnemy = new List<GameObject>();
     // Use this for initialization
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
-        direction = MyTarget.position - transform.position;
+        if (MyTarget != null)
+            direction = MyTarget.position - transform.position;
+        else
+        {
+            Debug.Log(atkDir);
+            direction = atkDir;
+        }
     }
 
 
@@ -55,29 +64,33 @@ public class SpellScript : MonoBehaviour
     }
 
 
-    public void Initailize(Transform target, int damage, Transform source)
+    public void Initailize(int damage, Transform source, Vector2 atkDir)
     {
-        this.MyTarget = target;
         this.damage = damage;
         this.source = source;
+        this.atkDir = atkDir;
+
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("HitBox"))// && collision.transform.position == MyTarget.position 원래코드 삭제 (유도기능 넣을때 추가하면 좋을듯)
         {
             Character c = collision.GetComponentInParent<Character>();
-            speed = 0;
-            if(!CheckHitEnemy(collision))
+            if (!CheckHitEnemy(collision))
+            {
                 c.TakeDamage(damage, source, direction); // 피격된 대상에게 자신의 위치 정보 전달
-            GetComponent<Animator>().SetTrigger("impact");
-            myRigidbody.velocity = Vector3.zero;
-            MyTarget = null;
+                Instantiate(puff, transform.position, Quaternion.identity);
+                //myRigidbody.velocity = Vector3.zero;
+                //MyTarget = null;
+            }
         }
     }
 
     private bool CheckHitEnemy(Collider2D collision) // 스킬 한번 맞았으면 다시 안맞게 체크
     {
-        GameObject g = collision.GetComponent<GameObject>();
+        GameObject g = collision.transform.parent.gameObject;
+
         if (!hitEnemy.Contains(g))
         {
             hitEnemy.Add(g);

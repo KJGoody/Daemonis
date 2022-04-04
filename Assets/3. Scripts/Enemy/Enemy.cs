@@ -21,6 +21,7 @@ public class Enemy : NPC
     private CanvasGroup healthGroup;
     private bool isKnockBack;
     [SerializeField]
+
     private float initAggroRange;
     public Transform exitPoint; // 발사체 생성 위치
     private float myAttackRange;        // 사거리
