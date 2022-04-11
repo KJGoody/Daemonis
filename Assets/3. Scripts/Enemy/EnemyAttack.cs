@@ -29,18 +29,25 @@ public class EnemyAttack : MonoBehaviour
     public int AOEDamage;                       // 장판오브젝트 데미지
     [SerializeField]                            
     private int AEtimes;                        // 장판의 공격 횟수
-    public float AEwaitforseconds;             // 장판 공격간 쉬는 시간
+    private float LastAttackTime = 1000f;
+    public float AEwaitforseconds = 0f;             // 장판 공격간 쉬는 시간
+    private bool IsPlayerInArea;
+    private bool IsAOEAttacking;
+    private bool IsAOEAttackingNow = false;
 
 
+    Coroutine PlayCoroutine;
 
-
-    private void Start()
+    private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         MyTarget = GameObject.Find("HitBox_Player").GetComponent<Transform>();
         direction = MyTarget.position - transform.position;
         AOEexitPoint = this.GetComponent<Transform>();
+    }
 
+    private void Start()
+    {
         switch (enemyAttackType)
         {
             case EnemyAttackType.BaseMeleeAttack:
@@ -65,6 +72,21 @@ public class EnemyAttack : MonoBehaviour
                 StartCoroutine(BaseAEAttack());
                 break;
         }
+
+    }
+
+    private void Update()
+    {
+        if (IsAOEAttacking && !IsAOEAttackingNow && IsPlayerInArea && LastAttackTime >= AEwaitforseconds)
+        {
+            IsAOEAttackingNow = true;
+            PlayCoroutine = StartCoroutine(AETimes());
+        }
+        else if(IsAOEAttackingNow && !IsPlayerInArea)
+        {
+            IsAOEAttackingNow = false;
+            StopCoroutine(PlayCoroutine);
+        }
     }
 
     private void FixedUpdate()
@@ -72,19 +94,32 @@ public class EnemyAttack : MonoBehaviour
         myRigidbody.velocity = direction.normalized * speed;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        LastAttackTime += Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("HitBox_Player") && !IsAOEAttack)
+        if (collision.CompareTag("HitBox_Player"))
         {
-            Character c = collision.GetComponentInParent<Character>();
-            c.TakeDamage(damage, source, direction);
-            speed = 0;
-            myRigidbody.velocity = Vector3.zero;
-            MyTarget = null;
-            Destroy(gameObject);
+            IsPlayerInArea = true;
+
+            if (!IsAOEAttack)
+            {
+                Character c = collision.GetComponentInParent<Character>();
+                c.TakeDamage(damage, source, direction);
+                speed = 0;
+                myRigidbody.velocity = Vector3.zero;
+                MyTarget = null;
+                Destroy(gameObject);
+            }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("HitBox_Player"))
+            IsPlayerInArea = false;
     }
 
     private IEnumerator BaseMeleeAttack()
@@ -111,24 +146,25 @@ public class EnemyAttack : MonoBehaviour
         warningarea.destroyTime = WaitWarningSceonds;
         yield return new WaitForSeconds(WaitWarningSceonds + 0.5f);
         this.GetComponent<SpriteRenderer>().enabled = true;
-        StartCoroutine(AETimes());
+
+        IsAOEAttacking = true;
         yield return new WaitForSeconds(AEwaitforseconds * AEtimes);
         Destroy(gameObject);
     }
 
     private IEnumerator AETimes()
     {
-        for (int i = 0; i < AEtimes; i++)
+        while (IsAOEAttacking)
         {
             EnemyAttack AEattack = Instantiate(Resources.Load("EnemyAttack/BaseAE_Attack") as GameObject, AOEexitPoint.position, Quaternion.identity).GetComponent<EnemyAttack>();
             AEattack.damage = AOEDamage;
-            AEattack.AEwaitforseconds = AEwaitforseconds;
+            LastAttackTime = 0f;
             yield return new WaitForSeconds(AEwaitforseconds);
         }
     }
     private IEnumerator BaseAEAttack()
     {
-        yield return new WaitForSeconds(AEwaitforseconds);
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
 }

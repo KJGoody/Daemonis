@@ -11,7 +11,7 @@ public class AttackState : IState
     public void Enter(Enemy parent)
     {
         this.parent = parent;
-
+        
         switch (parent.enemyType)               // 애니미타입에 따라 공격 딜레이 다르게 주기
         {
             case Enemy.EnemyType.Basemelee:
@@ -27,7 +27,7 @@ public class AttackState : IState
                 break;
 
             case Enemy.EnemyType.BaseAOE:
-                attackCooldown = 5;
+                attackCooldown = 30;
                 break;
         }
     }
@@ -44,6 +44,7 @@ public class AttackState : IState
         else if((parent.MyTarget.transform.position - parent.transform.position).normalized.x < 0)
             parent._prefabs.transform.localScale = new Vector3(1, 1, 1);
         // 공격시 플레이어 시선처리
+
         if (parent.MyAttackTime >= attackCooldown && !parent.IsAttacking)
         {
             parent.MyAttackTime = 0;
