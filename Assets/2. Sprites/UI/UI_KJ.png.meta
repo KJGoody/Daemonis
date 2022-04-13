@@ -4,7 +4,7 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 4528119504792483502
-    second: UI_KJ_0
+    second: HP_MP_BG
   - first:
       213: 4749175958582865404
     second: UI_KJ_1
@@ -13,10 +13,10 @@ TextureImporter:
     second: UI_KJ_2
   - first:
       213: -3225891489465535168
-    second: UI_KJ_3
+    second: MPBar
   - first:
       213: 1685512942115379035
-    second: UI_KJ_4
+    second: HPBar
   - first:
       213: -8677256145703299452
     second: UI_KJ_5
@@ -133,7 +133,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_KJ_0
+      name: HP_MP_BG
       rect:
         serializedVersion: 2
         x: 500
@@ -196,7 +196,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_KJ_3
+      name: MPBar
       rect:
         serializedVersion: 2
         x: 500
@@ -217,7 +217,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_KJ_4
+      name: HPBar
       rect:
         serializedVersion: 2
         x: 500
@@ -246,7 +246,7 @@ TextureImporter:
         width: 96
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
