@@ -21,37 +21,21 @@ public class Enemy : NPC
     private CanvasGroup healthGroup;
     private bool isKnockBack;
     [SerializeField]
-
     private float initAggroRange;
-    public Transform exitPoint; // 발사체 생성 위치
+    public Transform exitPoint;         // 발사체 생성 위치
     private float myAttackRange;        // 사거리
     public float MyAttackRange {        
-        get
-        {
-            return myAttackRange;
-        }
-        set
-        {
-            myAttackRange = value;
-        } 
+        get { return myAttackRange; }
+        set { myAttackRange = value; } 
     }
     public Rigidbody2D myrigid2D {
-        get
-        {
-            return myRigid2D;
-        }
-        set
-        {
-            myrigid2D = value;
-        }
+        get { return myRigid2D; }
+        set { myrigid2D = value; }
     }
     public float MyAggroRange { get; set; }
     public bool InRange
     {
-        get
-        {
-            return Vector2.Distance(transform.position, MyTarget.position) < MyAggroRange;
-        }
+        get { return Vector2.Distance(transform.position, MyTarget.position) < MyAggroRange; }
     }
 
     protected void Awake()
@@ -70,7 +54,7 @@ public class Enemy : NPC
                 break;
 
             case EnemyType.Baserush:
-                MyAttackRange = 3;
+                MyAttackRange = 5;
                 break;
 
             case EnemyType.BaseAOE:

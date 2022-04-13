@@ -6,7 +6,6 @@ public class AttackState : IState
 {
     private Enemy parent;
     private float attackCooldown; // 공격 딜레이
-    private float extraRange = 0.1f; // 공격 여유 거리    // 공격 여유 거리 + 인식거리 = 플레이어 인식 벗어나는 거리
 
     public void Enter(Enemy parent)
     {
@@ -73,7 +72,7 @@ public class AttackState : IState
         {
             float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position); 
             // 공격거리 보다 멀리있으면 Follow 상태로 변경한다.
-            if (distance >= parent.MyAttackRange + extraRange && !parent.IsAttacking)
+            if (distance >= parent.MyAttackRange * 1.1f && !parent.IsAttacking) // 플레이어 사거리 + 공격 여유 거리(플레이어 사거리 * 0.1f) = 플레이어 인식 벗어나는 거리
             {
                 parent.ChangeState(new FollowState());
             }
@@ -111,20 +110,20 @@ public class AttackState : IState
 
     public IEnumerator RushAttack()
     {
-        parent._prefabs.PlayAnimation(4);
-        yield return new WaitForSeconds(1f);        //선딜
+        parent._prefabs.PlayAnimation(4);           // 선딜 모션
+        yield return new WaitForSeconds(1f);        // 선딜
 
         parent.IsRushing = true;
         parent.gameObject.layer = 7;                // Rushing레이어로 바꾸기, 플레이어와 충돌무시
-        parent.Direction = (parent.MyTarget.transform.position - parent.transform.position).normalized;
+        parent.Direction = parent.MyTarget.transform.position - parent.transform.position;
         parent.RushSpeed = 7f;
         parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseRush_Attack") as GameObject, parent.exitPoint.position, Quaternion.identity);
-        yield return new WaitForSeconds(0.5f); 
+        yield return new WaitForSeconds(0.5f);
 
+        parent.Direction = Vector2.zero;
         parent.IsRushing = false;
         parent.gameObject.layer = 6;
         parent.IsAttacking = false;
-
     }
 
     public IEnumerator AOEAttack()
