@@ -29,7 +29,7 @@ public class Player : Character
     [SerializeField]
     private Transform exitPoint; // 발사체 생성 위치
 
-    private Vector2 atkDir;
+    public Vector2 atkDir;
     //public Transform myTarget { get; set; }
     protected override void Start()
     {

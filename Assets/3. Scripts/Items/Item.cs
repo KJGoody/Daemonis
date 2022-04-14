@@ -5,13 +5,19 @@ public enum Quality { Normal, Advanced, Rare, Epic , Legendary , Relic }
 public abstract class Item : ScriptableObject, IMoveable , IDescribable
 {
     [SerializeField]
-    private Sprite icon;
+    private Sprite icon;    // 아이템 이미지
     [SerializeField]
-    private int stackSize;
+    private int stackSize;  // 중첩 스택
     [SerializeField]
-    private string title;
+    private string itemName;   // 아이템 이름
     [SerializeField]
-    private Quality quality;
+    private Quality quality;// 아이템 등급
+    [SerializeField]
+    private string descript;// 아이템 설명 (배경설정같은것)
+    [SerializeField]
+    private string effect;  // 아이템 효과 서술
+    [SerializeField]
+    private int limitLevel; // 아이템 제한 레벨
 
     private SlotScript slot;
 
@@ -33,7 +39,19 @@ public abstract class Item : ScriptableObject, IMoveable , IDescribable
             return stackSize;
         }
     }
+    public string MyName
+    {
+        get
+        {
 
+            return itemName;
+        }
+
+        set
+        {
+            itemName = value;
+        }
+    }
     public SlotScript MySlot
     {
         get
@@ -44,6 +62,42 @@ public abstract class Item : ScriptableObject, IMoveable , IDescribable
         set
         {
             slot = value;
+        }
+    }
+    public string MyDescript
+    {
+        get
+        {
+            return descript;
+        }
+
+        set
+        {
+            descript = value;
+        }
+    }
+    public string MyEffect
+    {
+        get
+        {
+            return effect;
+        }
+
+        set
+        {
+            effect = value;
+        }
+    }
+    public int MyLimitLevel
+    {
+        get
+        {
+            return limitLevel;
+        }
+
+        set
+        {
+            limitLevel = value;
         }
     }
     public void Remove()
@@ -73,7 +127,7 @@ public abstract class Item : ScriptableObject, IMoveable , IDescribable
                 break;
         }
 
-        return string.Format("<color={0}>{1}</color>", color, title);
+        return string.Format("<color={0}>{1}</color>", color, itemName);
     }
 
 

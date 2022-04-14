@@ -99,7 +99,8 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
         // 오른쪽 마우스가 눌렸다면
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            UseItem();
+            //UseItem();
+            HandScript.MyInstance.SelectItem(MyItem);
         }
     }
     private void UpdateSlot()

@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
   icon: {fileID: 988388304942147450, guid: 2706cbe210c3061428438916a6a4648b, type: 3}
-  title: "\uCCB4\uB825\uC744 10 \uD68C\uBCF5\uD569\uB2C8\uB2E4"
   stackSize: 5
+  itemName: "\uC18C\uD615 \uCCB4\uB825\uD3EC\uC158"
+  quality: 0
+  descript: "\uC791\uC740 \uCCB4\uB825\uD3EC\uC158\uC774\uB2E4. \uB9C8\uC2DC\uBA74
+    \uB2E4\uCE5C \uC0C1\uCC98\uAC00 \uB098\uC744\uAC83 \uAC19\uB2E4."
+  effect: "\uCCB4\uB825 10 \uD68C\uBCF5"
+  limitLevel: 1
   health: 10

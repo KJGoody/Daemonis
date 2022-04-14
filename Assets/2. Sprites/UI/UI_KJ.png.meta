@@ -20,6 +20,12 @@ TextureImporter:
   - first:
       213: -8677256145703299452
     second: UI_KJ_5
+  - first:
+      213: 8582628867808040212
+    second: UI_KJ_6
+  - first:
+      213: -7619759697962333251
+    second: UI_KJ_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -254,6 +260,48 @@ TextureImporter:
       bones: []
       spriteID: 48697427281349780800000000000000
       internalID: -8677256145703299452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_KJ_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 920
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 25, y: 29, z: 25, w: 29}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41516b88b7f9b1770800000000000000
+      internalID: 8582628867808040212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_KJ_7
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 920
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 25, y: 29, z: 25, w: 29}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbb0e190dec214690800000000000000
+      internalID: -7619759697962333251
       vertices: []
       indices: 
       edges: []

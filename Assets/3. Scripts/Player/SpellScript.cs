@@ -25,8 +25,9 @@ public class SpellScript : MonoBehaviour
             direction = MyTarget.position - transform.position;
         else
         {
-            Debug.Log(atkDir);
             direction = atkDir;
+            if (direction.x == 0 && direction.y == 0)
+                direction.x = 1;
         }
     }
 
