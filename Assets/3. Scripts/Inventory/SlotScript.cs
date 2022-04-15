@@ -96,7 +96,12 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-         HandScript.MyInstance.SelectItem(MyItem);
+        // 오른쪽 마우스가 눌렸다면
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            //UseItem();
+            HandScript.MyInstance.SelectItem(MyItem);
+        }
     }
     private void UpdateSlot()
     {
@@ -125,10 +130,10 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
     // 마우스 커서가 Slot 영역 안으로 들어오면 호출
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //if (!IsEmpty)
-        //{
-        //    UIManager.MyInstance.ShowTooltip(transform.position, MyItem);
-        //}
+        if (!IsEmpty)
+        {
+            UIManager.MyInstance.ShowTooltip(transform.position, MyItem);
+        }
     }
 
 
@@ -136,7 +141,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
     // 마우스 커서가 Slot 영역 안에서 밖으로 나가면 호출
     public void OnPointerExit(PointerEventData eventData)
     {
-        //UIManager.MyInstance.HideTooltip();
+        UIManager.MyInstance.HideTooltip();
     }
 
     #region
