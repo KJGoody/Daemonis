@@ -1,7 +1,6 @@
 using UnityEngine;
 
 public enum Quality { Normal, Advanced, Rare, Epic , Legendary , Relic }
-public enum Kinds { Common, Equipment, Potion }
 
 public abstract class Item : ScriptableObject, IMoveable , IDescribable
 {
@@ -19,8 +18,7 @@ public abstract class Item : ScriptableObject, IMoveable , IDescribable
     private string effect;  // 아이템 효과 서술
     [SerializeField]
     private int limitLevel; // 아이템 제한 레벨
-    [SerializeField]
-    private Kinds kind;// 아이템 종류
+
     private SlotScript slot;
 
 
@@ -45,81 +43,13 @@ public abstract class Item : ScriptableObject, IMoveable , IDescribable
     {
         get
         {
-            string color = string.Empty;
 
-            switch (quality)
-            {
-                case Quality.Normal:
-                    color = "#d6d6d6";
-                    break;
-                case Quality.Advanced:
-                    color = "#00ff00ff";
-                    break;
-                case Quality.Rare:
-                    color = "#0000ffff";
-                    break;
-                case Quality.Epic:
-                    color = "#800080ff";
-                    break;
-            }
-
-            return string.Format("<color={0}>{1}</color>", color, itemName);
+            return itemName;
         }
 
         set
         {
             itemName = value;
-        }
-    }
-    public string MyQuality
-    {
-        get
-        {
-            string color = string.Empty;
-            string str="";
-            switch (quality)
-            {
-                case Quality.Normal:
-                    color = "#d6d6d6";
-                    str = "노말";
-                    break;
-                case Quality.Advanced:
-                    color = "#00ff00ff";
-                    str = "고급";
-                    break;
-                case Quality.Rare:
-                    color = "#0000ffff";
-                    str = "희귀";
-                    break;
-                case Quality.Epic:
-                    color = "#800080ff";
-                    str = "영웅";
-                    break;
-            }
-
-            return string.Format("<color={0}>{1}</color>", color, str);
-        }
-
-        set
-        {
-            itemName = value;
-        }
-    }
-    public Kinds GetKind
-    {
-        get
-        {
-            Kinds myKind = Kinds.Common;
-            switch (kind)
-            {
-                case Kinds.Equipment:
-                    myKind = Kinds.Equipment;
-                    break;
-                case Kinds.Potion:
-                    myKind = Kinds.Potion;
-                    break;
-            }
-            return myKind;
         }
     }
     public SlotScript MySlot
