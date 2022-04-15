@@ -88,7 +88,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
                 if(HandScript.MyInstance.MyMoveable is IUseable)
                 {
                     SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
-                    HandScript.MyInstance.BlindControll();
+                    HandScript.MyInstance.SkillBlindControll();
                 }
             }
         }
@@ -105,8 +105,9 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             count = useables.Count;
 
             //  이동모드 상태 해제
-            InventoryScript.MyInstance.FromSlot.MyIcon.color = Color.white;
+            //InventoryScript.MyInstance.FromSlot.MyIcon.color = Color.white;
             InventoryScript.MyInstance.FromSlot = null;
+
         }
         else
         {
@@ -114,6 +115,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             // MyUseable.Use()는 버튼이 클릭되었을때 호출된다. 
             // MyUseable은 인터페이스로 Spell 에서 상속받고 있다.
             this.MyUseable = useable;
+
         }
 
         UpdateVisual();
