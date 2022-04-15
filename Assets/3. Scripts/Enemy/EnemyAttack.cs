@@ -19,15 +19,14 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private int damage;
     public Transform MyTarget { get; set; }
-    private Transform source;
     private Vector3 direction;
-   
+
     private bool IsAOEAttack = false;
-    [SerializeField]                            
+    [SerializeField]
     private float WaitWarningSceonds;
     private Transform AOEexitPoint;              // 장판오브젝트 소환 포인트
     public int AOEDamage;                       // 장판오브젝트 데미지
-    [SerializeField]                            
+    [SerializeField]
     private int AEtimes;                        // 장판의 공격 횟수
     private float LastAttackTime = 1000f;
     public float AEwaitforseconds = 0f;             // 장판 공격간 쉬는 시간
@@ -82,7 +81,7 @@ public class EnemyAttack : MonoBehaviour
             IsAOEAttackingNow = true;
             PlayCoroutine = StartCoroutine(AETimes());
         }
-        else if(IsAOEAttackingNow && !IsPlayerInArea)
+        else if (IsAOEAttackingNow && !IsPlayerInArea)
         {
             IsAOEAttackingNow = false;
             StopCoroutine(PlayCoroutine);
@@ -112,7 +111,8 @@ public class EnemyAttack : MonoBehaviour
             if (!IsAOEAttack)
             {
                 Character c = collision.GetComponentInParent<Character>();
-                c.TakeDamage(damage, source, direction);
+                string tagName = "Player";
+                c.TakeDamage(damage, direction, null, tagName);
                 speed = 0;
                 myRigidbody.velocity = Vector3.zero;
                 MyTarget = null;

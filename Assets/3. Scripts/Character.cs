@@ -6,77 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public abstract class Character : MonoBehaviour
 {
-
-    
-    [SerializeField]
-    private float speed;
-    public float Speed
-    {
-        get
-        {
-            return speed;
-        }
-
-        set
-        {
-            speed = value;
-        }
-    }
-
-    public bool IsRushing { get; set; }
-    public float RushSpeed = 0f;
-
-    private Vector2 direction;
-    public Vector2 Direction
-    {
-        get
-        {
-            return direction;
-        }
-
-        set
-        {
-            direction = value;
-        }
-    }
-
-    public bool IsAlive
-    {
-        get
-        {
-            return health.MyCurrentValue > 0;
-        }
-    }
-
     protected Rigidbody2D myRigid2D;
     public SPUM_Prefabs _prefabs;
     public SPUM_SpriteList _spriteList;
 
-    public Transform MyTarget { get; set; }
-    public bool IsAttacking { get; set; }
-    protected Coroutine attackRoutine;
-
-
     [SerializeField]
-    protected Transform hitBox;
+    protected Transform hitBox;                     // 캐릭터 히트박스
 
-    [SerializeField]
-    protected Stat health;
-    public Stat MyHealth
-    {
-        get { return health; }
-    }
-
-    [SerializeField]
-    private float initHealth;
-    public bool IsMoving
-    {
-        get
-        {
-            return direction.x != 0 || direction.y != 0;
-        }
-    }
-    public enum LayerName
+    public enum LayerName                           
     {
         idle = 0,
         move = 1,
@@ -84,6 +21,57 @@ public abstract class Character : MonoBehaviour
         death = 2,
     }
     public LayerName _layerName = LayerName.idle;
+
+        // 캐릭터 기본 능력치
+    [SerializeField]                // 체력
+    protected Stat health;
+    public Stat MyHealth
+    {
+        get { return health; }
+    }
+    [SerializeField]
+    private float initHealth;
+    public bool IsAlive
+    {
+        get { return health.MyCurrentValue > 0; }
+    }
+
+    [SerializeField]                // 이동속도
+    private float speed;
+    public float Speed
+    {
+        get { return speed; }
+        set { speed = value; }
+    }
+    private Vector2 direction;
+    public Vector2 Direction
+    {
+        get { return direction; }
+        set { direction = value; }
+    }
+    public bool IsMoving
+    {
+        get
+        {
+            return direction.x != 0 || direction.y != 0;
+        }
+    }
+
+    [SerializeField]
+
+    public bool IsRushing { get; set; }
+    public float RushSpeed = 0f;
+
+    public Transform MyTarget { get; set; }
+
+    public bool IsAttacking { get; set; }
+    protected Coroutine attackRoutine;
+
+
+
+
+
+    
     protected virtual void Start()
     {
         health.Initialize(initHealth, initHealth);
@@ -157,9 +145,9 @@ public abstract class Character : MonoBehaviour
         else if (Direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
     }
 
-    public virtual void TakeDamage(int damage, Transform source , Vector2 knockbackDir)
+    public virtual void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string tagName = null)
     {
-        DamageText(damage);
+        DamageText(damage, tagName);
         health.MyCurrentValue -= damage;
         if (health.MyCurrentValue <= 0)
         {
@@ -168,10 +156,11 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    private void DamageText(int damage)
+    private void DamageText(int damage, string tagName)
     {
         GameObject damageTxt = Instantiate(Resources.Load("DamageText/DamageText") as GameObject, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
         damageTxt.GetComponent<DamageText>().Damage = damage;
+        damageTxt.GetComponent<DamageText>().TextType = tagName;
     }
     IEnumerator Death()
     {

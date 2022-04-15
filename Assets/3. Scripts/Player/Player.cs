@@ -154,8 +154,8 @@ public class Player : Character
         }
     }
 
-    public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir)
-    {
-        base.TakeDamage(damage, source, knockbackDir);
-    }
+    //public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir)
+    //{
+    //    base.TakeDamage(damage, knockbackDir);
+    //}
 }

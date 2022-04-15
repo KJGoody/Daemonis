@@ -10,7 +10,7 @@ public class AttackState : IState
     public void Enter(Enemy parent)
     {
         this.parent = parent;
-        
+
         switch (parent.enemyType)               // 애니미타입에 따라 공격 딜레이 다르게 주기
         {
             case Enemy.EnemyType.Basemelee:
@@ -40,7 +40,7 @@ public class AttackState : IState
     {
         if ((parent.MyTarget.transform.position - parent.transform.position).normalized.x > 0)
             parent._prefabs.transform.localScale = new Vector3(-1, 1, 1);
-        else if((parent.MyTarget.transform.position - parent.transform.position).normalized.x < 0)
+        else if ((parent.MyTarget.transform.position - parent.transform.position).normalized.x < 0)
             parent._prefabs.transform.localScale = new Vector3(1, 1, 1);
         // 공격시 플레이어 시선처리
 
@@ -70,7 +70,7 @@ public class AttackState : IState
 
         if (parent.MyTarget != null)
         {
-            float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position); 
+            float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);
             // 공격거리 보다 멀리있으면 Follow 상태로 변경한다.
             if (distance >= parent.MyAttackRange * 1.1f && !parent.IsAttacking) // 플레이어 사거리 + 공격 여유 거리(플레이어 사거리 * 0.1f) = 플레이어 인식 벗어나는 거리
             {
@@ -85,26 +85,28 @@ public class AttackState : IState
         }
     }
 
-   
+
     public IEnumerator meleeAttack()
     {
+        yield return new WaitForSeconds(0.5f); // 선딜
         parent._prefabs.PlayAnimation(4);
 
         yield return new WaitForSeconds(0.15f); // 애니메이션 내려찍기 시작
         parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseMelee_Attack") as GameObject, parent.exitPoint.position, Quaternion.identity);
         yield return new WaitForSeconds(0.15f); // 애니메이션 종료
-        
+
         parent.IsAttacking = false;
     }
-    
+
     public IEnumerator rangedAttack()
     {
+        yield return new WaitForSeconds(0.5f); // 선딜
         parent._prefabs.PlayAnimation(5);
 
-        yield return new WaitForSeconds(0.2f); 
+        yield return new WaitForSeconds(0.2f);
         parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseRanged_Attack") as GameObject, parent.exitPoint.position, Quaternion.identity);
-        yield return new WaitForSeconds(0.1f); 
-        
+        yield return new WaitForSeconds(0.1f);
+
         parent.IsAttacking = false;
     }
 
@@ -128,6 +130,7 @@ public class AttackState : IState
 
     public IEnumerator AOEAttack()
     {
+        yield return new WaitForSeconds(0.5f); // 선딜
         parent._prefabs.PlayAnimation(6);
         yield return new WaitForSeconds(1f);
         parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseAOE_Attack") as GameObject, parent.MyTarget.position, Quaternion.identity);
