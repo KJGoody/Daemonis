@@ -16,8 +16,8 @@ TagManager:
   - UI
   - Clickable
   - RushMode
-  - 
-  - 
+  - Wall
+  - EnemyRigidbody
   - 
   - 
   - 
@@ -47,6 +47,12 @@ TagManager:
   - name: TopLayer
     uniqueID: 961690195
     locked: 0
+  - name: DeathEnemyLayer
+    uniqueID: 3154349635
+    locked: 0
   - name: EnemyLayer
     uniqueID: 3087391085
+    locked: 0
+  - name: TextLayer
+    uniqueID: 3553695235
     locked: 0

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Stat : MonoBehaviour
 {
-
     private Image content;
 
     [SerializeField]

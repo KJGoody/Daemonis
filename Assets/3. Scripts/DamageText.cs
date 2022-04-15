@@ -4,17 +4,32 @@ using UnityEngine;
 using TMPro;
 public class DamageText : MonoBehaviour
 {
-    private float moveSpeed=1;
-    private float alphaSpeed=10;
-    private float destroyTime=1;
-    
-    public int Damage{ get; set; }
+    private float moveSpeed = 1;
+    private float alphaSpeed = 10;
+    private float destroyTime = 1;
+
+    public int Damage { get; set; }
     TextMeshPro text;
     Color alpha;
+
+    public string TextType;
+
+
     void Start()
     {
         text = GetComponent<TextMeshPro>();
         alpha = text.color;
+        switch (TextType)
+        {
+            case "Player":
+                alpha = new Color(194 / 255f, 31 / 255f, 31 / 255f);
+                break;
+
+            case "Critical":
+                alpha = new Color(255 / 255f, 212 / 255f, 0 / 255f);
+                break;
+
+        }
         text.text = Damage.ToString();
         Invoke("DestroyObject", destroyTime);
         StartCoroutine(WaitFadeOut());
@@ -23,7 +38,7 @@ public class DamageText : MonoBehaviour
     void Update()
     {
         transform.Translate(new Vector3(0, moveSpeed * Time.deltaTime, 0));
-       // alpha.a = Mathf.Lerp(alpha.a, 0, Time.deltaTime * alphaSpeed);
+        // alpha.a = Mathf.Lerp(alpha.a, 0, Time.deltaTime * alphaSpeed);
         text.color = alpha;
 
     }

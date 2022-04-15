@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Enemy : NPC
 {
@@ -21,39 +22,25 @@ public class Enemy : NPC
     private CanvasGroup healthGroup;
     private bool isKnockBack;
     [SerializeField]
-
     private float initAggroRange;
-    public Transform exitPoint; // 발사체 생성 위치
+    public Transform exitPoint;         // 발사체 생성 위치
     private float myAttackRange;        // 사거리
-    public float MyAttackRange {        
-        get
-        {
-            return myAttackRange;
-        }
-        set
-        {
-            myAttackRange = value;
-        } 
+    public float MyAttackRange
+    {
+        get { return myAttackRange; }
+        set { myAttackRange = value; }
     }
-    public Rigidbody2D myrigid2D {
-        get
-        {
-            return myRigid2D;
-        }
-        set
-        {
-            myrigid2D = value;
-        }
+    public Rigidbody2D myrigid2D
+    {
+        get { return myRigid2D; }
+        set { myrigid2D = value; }
     }
     public float MyAggroRange { get; set; }
     public bool InRange
     {
-        get
-        {
-            return Vector2.Distance(transform.position, MyTarget.position) < MyAggroRange;
-        }
+        get { return Vector2.Distance(transform.position, MyTarget.position) < MyAggroRange; }
     }
-
+    public GameObject unitroot;
     protected void Awake()
     {
         MyStartPosition = transform.position;
@@ -70,7 +57,7 @@ public class Enemy : NPC
                 break;
 
             case EnemyType.Baserush:
-                MyAttackRange = 3;
+                MyAttackRange = 5;
                 break;
 
             case EnemyType.BaseAOE:
@@ -94,7 +81,7 @@ public class Enemy : NPC
     }
     protected override void FixedUpdate()
     {
-        if(!isKnockBack)
+        if (!isKnockBack)
             base.FixedUpdate();
     }
     public override Transform Select()
@@ -115,7 +102,7 @@ public class Enemy : NPC
         currentState.Enter(this);
     }
 
-    public void EnemyAttackResource(GameObject EAR, Vector3 vector, Quaternion quaternion) 
+    public void EnemyAttackResource(GameObject EAR, Vector3 vector, Quaternion quaternion)
     {
         Instantiate(EAR, vector, quaternion);
     }
@@ -127,17 +114,19 @@ public class Enemy : NPC
 
         base.DeSelect();
     }
-    public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir) // 피격
+    public override void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string tagName = null) // 피격
     {
         healthGroup.alpha = 1;
-        StartCoroutine(KnockBack(knockbackDir,1));
+        StartCoroutine(KnockBack(knockbackDir, 1));
         SetTarget(source);
-        base.TakeDamage(damage, source, knockbackDir);
+        base.TakeDamage(damage, knockbackDir);
         if (health.MyCurrentValue <= 0)
         {
             _prefabs.PlayAnimation(2);
-            StartCoroutine("Death");
+            unitroot.GetComponent<SortingGroup>().sortingLayerName = "DeathEnemyLayer";
             Destroy(transform.Find("HitBox").gameObject);
+            Destroy(transform.Find("EnemyBody").gameObject);
+            StartCoroutine("Death");
         }
         //OnHealthChanged(health.MyCurrentValue);
     }
