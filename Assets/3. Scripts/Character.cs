@@ -145,9 +145,9 @@ public abstract class Character : MonoBehaviour
         else if (Direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
     }
 
-    public virtual void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string tagName = null)
+    public virtual void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string TextType = null)
     {
-        DamageText(damage, tagName);
+        DamageText(damage, TextType);
         health.MyCurrentValue -= damage;
         if (health.MyCurrentValue <= 0)
         {

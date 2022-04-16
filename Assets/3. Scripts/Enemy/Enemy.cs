@@ -114,12 +114,12 @@ public class Enemy : NPC
 
         base.DeSelect();
     }
-    public override void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string tagName = null) // 피격
+    public override void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string TextType = null) // 피격
     {
         healthGroup.alpha = 1;
         StartCoroutine(KnockBack(knockbackDir, 1));
         SetTarget(source);
-        base.TakeDamage(damage, knockbackDir);
+        base.TakeDamage(damage, knockbackDir, null, TextType);
         if (health.MyCurrentValue <= 0)
         {
             _prefabs.PlayAnimation(2);

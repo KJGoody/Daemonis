@@ -86,7 +86,7 @@ public class AttackState : IState
     }
 
 
-    public IEnumerator meleeAttack()
+    IEnumerator meleeAttack()
     {
         yield return new WaitForSeconds(0.5f); // ¼±µô
         parent._prefabs.PlayAnimation(4);
@@ -98,7 +98,7 @@ public class AttackState : IState
         parent.IsAttacking = false;
     }
 
-    public IEnumerator rangedAttack()
+    IEnumerator rangedAttack()
     {
         yield return new WaitForSeconds(0.5f); // ¼±µô
         parent._prefabs.PlayAnimation(5);
@@ -110,7 +110,7 @@ public class AttackState : IState
         parent.IsAttacking = false;
     }
 
-    public IEnumerator RushAttack()
+    IEnumerator RushAttack()
     {
         parent._prefabs.PlayAnimation(4);           // ¼±µô ¸ð¼Ç
         yield return new WaitForSeconds(1f);        // ¼±µô
@@ -128,7 +128,7 @@ public class AttackState : IState
         parent.IsAttacking = false;
     }
 
-    public IEnumerator AOEAttack()
+    IEnumerator AOEAttack()
     {
         yield return new WaitForSeconds(0.5f); // ¼±µô
         parent._prefabs.PlayAnimation(6);

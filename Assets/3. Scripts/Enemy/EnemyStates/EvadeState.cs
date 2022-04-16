@@ -22,9 +22,9 @@ public class EvadeState : IState
 
     public void Update()
     {
+        // 매프레임마다 처음 시작위치로 되돌아감.
         parent.Direction = parent.MyStartPosition - parent.transform.position;
 
-        // 매프레임마다 처음 시작위치로 되돌아감.
         Vector2 parentPosition = parent.transform.position;
         Vector2 startPosition = parent.MyStartPosition;
         //parent.transform.position

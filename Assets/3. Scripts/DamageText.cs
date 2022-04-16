@@ -21,11 +21,11 @@ public class DamageText : MonoBehaviour
         alpha = text.color;
         switch (TextType)
         {
-            case "Player":
+            case "PlayerDamage":
                 alpha = new Color(194 / 255f, 31 / 255f, 31 / 255f);
                 break;
 
-            case "Critical":
+            case "CriticalDamage":
                 alpha = new Color(255 / 255f, 212 / 255f, 0 / 255f);
                 break;
 

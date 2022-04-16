@@ -111,8 +111,8 @@ public class EnemyAttack : MonoBehaviour
             if (!IsAOEAttack)
             {
                 Character c = collision.GetComponentInParent<Character>();
-                string tagName = "Player";
-                c.TakeDamage(damage, direction, null, tagName);
+                string TextType = "PlayerDamage";
+                c.TakeDamage(damage, direction, null, TextType);
                 speed = 0;
                 myRigidbody.velocity = Vector3.zero;
                 MyTarget = null;
@@ -127,25 +127,25 @@ public class EnemyAttack : MonoBehaviour
             IsPlayerInArea = false;
     }
 
-    private IEnumerator BaseMeleeAttack()
+    IEnumerator BaseMeleeAttack()
     {
         yield return new WaitForSeconds(0.15f);     // 객체 생존시간
         Destroy(gameObject);
     }
 
-    private IEnumerator BaseRangedAttack()
+    IEnumerator BaseRangedAttack()
     {
         yield return new WaitForSeconds(10);
         Destroy(gameObject);
     }
 
-    private IEnumerator BaseRushAttack()
+    IEnumerator BaseRushAttack()
     {
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 
-    private IEnumerator BaseAOEAttack()
+    IEnumerator BaseAOEAttack()
     {
         WarningArea warningarea = Instantiate(Resources.Load("EnemyAttack/WaringArea") as GameObject, this.transform.position, Quaternion.identity).GetComponent<WarningArea>();
         warningarea.destroyTime = WaitWarningSceonds;
@@ -157,7 +157,7 @@ public class EnemyAttack : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private IEnumerator AETimes()
+    IEnumerator AETimes()
     {
         while (IsAOEAttacking)
         {
@@ -167,7 +167,7 @@ public class EnemyAttack : MonoBehaviour
             yield return new WaitForSeconds(AEwaitforseconds);
         }
     }
-    private IEnumerator BaseAEAttack()
+    IEnumerator BaseAEAttack()
     {
         yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
