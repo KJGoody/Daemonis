@@ -10,8 +10,8 @@ class FollowState : IState
     {
         this.parent = parent;
 
-        randomNumX = Random.Range(-parent.MyAttackRange, parent.MyAttackRange);
-        randomNumY = Random.Range(-parent.MyAttackRange, parent.MyAttackRange);
+        randomNumX = Random.Range(-parent.MyAttackRange / 2, parent.MyAttackRange / 2);
+        randomNumY = Random.Range(-parent.MyAttackRange / 2, parent.MyAttackRange / 2);
     }
 
     public void Exit()
