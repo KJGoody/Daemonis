@@ -166,9 +166,11 @@ public class HandScript : MonoBehaviour
         MyMoveable = null;
         // 복사된 아이콘을 투명하게 만든다.
         icon.color = new Color(0, 0, 0, 0);
-
-        if(myItem.GetKind == Kinds.Potion)
-            HandScript.MyInstance.ResetEquipPotion(); // 이거만 포션 전용 코드
+        if (myItem != null)
+        {
+            if (myItem.GetKind == Kinds.Potion)
+                HandScript.MyInstance.ResetEquipPotion(); // 이거만 포션 전용 코드
+        }
         // 복사한 스킬의 아이콘 정보를 전달한다.
         return tmp;
     }

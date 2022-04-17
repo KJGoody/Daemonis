@@ -20,10 +20,15 @@ public class DropItem : MonoBehaviour
     [HideInInspector]
     public bool L_Start;
     private bool up = false;
-    DropItem (Item item)
+    DropItem (Item item) //나중에 지울 가능성 큼
     {
         this.item = item;
         sprite.sprite = item.MyIcon;
+    }
+    public void SetDropItem(Item _item) // 몬스터에서 드랍할때 이걸로 추가할 예정
+    {
+        item = _item;
+        sprite.sprite = _item.MyIcon;
     }
     private void Start()
     {
@@ -37,14 +42,20 @@ public class DropItem : MonoBehaviour
     {
         if(collision.name == "Player")
         {
-            Debug.Log(item.MyName + "을 획득하였습니다");
+            // 인벤토리에 아이템 추가
             InventoryScript.MyInstance.AddItem(item);
+
+            // 아이템 획득 알림
+            GameObject notice = Instantiate(Resources.Load("LootNotice") as GameObject, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
+            notice.GetComponent<LootNotice>().SetDescript(item);
+            notice.transform.SetParent(GameObject.Find("ItemLooting").transform);
+
             Destroy(gameObject);
+
         }
     }
     void Update()
     {
-        Debug.Log(playerTransform);
         if (L_Start)
         {
             if (!up)

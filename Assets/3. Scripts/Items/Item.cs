@@ -174,6 +174,8 @@ public abstract class Item : ScriptableObject, IMoveable , IDescribable
     {
         if (MySlot != null)
         {
+            if(MySlot.MyCount == 0)
+               InventoryScript.MyInstance.FindUseSlot(this);
             MySlot.RemoveItem(this);
         }
     }

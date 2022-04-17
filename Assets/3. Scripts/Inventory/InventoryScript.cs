@@ -110,6 +110,15 @@ public class InventoryScript : MonoBehaviour
         }
         return false;
     }
+    public void FindUseSlot(Item item)
+    {
+        foreach (SlotScript slots in MySlots)
+        {
+            if(!slots.IsEmpty && slots.MyItem.name == item.name)
+               item.MySlot = slots;
+        }
+       
+    }
     private bool PlaceInEmpty(Item item)
     {
         foreach (SlotScript slot in slots)
@@ -133,8 +142,9 @@ public class InventoryScript : MonoBehaviour
         {
             // 빈슬롯이 아니고
             // 슬롯에 등록된 아이템이 type의 아이템과 같은 종류의 아이템이라면
-            if (!slot.IsEmpty && slot.MyItem.GetType() == type.GetType())
+            if (!slot.IsEmpty && slot.MyItem.MyName == type.GetName())
             {
+                
                 // 해당 슬롯에 등록된 모든 아이템을
                 foreach (Item item in slot.MyItems)
                 {

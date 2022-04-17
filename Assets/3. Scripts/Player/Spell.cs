@@ -85,5 +85,9 @@ public class Spell : IUseable, IMoveable
     {
         Player.MyInstance.CastSpell(MyName);
     }
+    public String GetName()
+    {
+        return MyName;
+    }
 
 }

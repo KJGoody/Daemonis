@@ -17,11 +17,16 @@ public class HealthPotion : Item, IUseable
         if (Player.MyInstance.MyHealth.MyCurrentValue < Player.MyInstance.MyHealth.MyMaxValue)
         {
             // 사용하는 아이템을 없애고
+
             Remove();
 
             // 체력을 회복한다.
             Player.MyInstance.MyHealth.MyCurrentValue += health;
         }
+    }
+    public string GetName()
+    {
+        return MyName;
     }
     public override string GetDescription()
     {
