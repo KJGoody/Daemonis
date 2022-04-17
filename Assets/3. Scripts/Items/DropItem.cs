@@ -42,7 +42,6 @@ public class DropItem : MonoBehaviour
     {
         if(collision.name == "Player")
         {
-            Debug.Log(item.MyName + "을 획득하였습니다");
             // 인벤토리에 아이템 추가
             InventoryScript.MyInstance.AddItem(item);
 
