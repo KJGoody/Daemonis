@@ -51,8 +51,8 @@ MonoBehaviour:
   damage: 0
   WaitWarningSceonds: 1
   AOEDamage: 3
-  AEtimes: 5
-  AEwaitforseconds: 0.5
+  AEtimes: 10
+  AEwaitforseconds: 3
 --- !u!50 &2253224186837325089
 Rigidbody2D:
   serializedVersion: 4

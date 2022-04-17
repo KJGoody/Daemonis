@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4378477471475960026}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4378477470144513556
 BoxCollider2D:
@@ -238,11 +238,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4378477470144513559}
   - {fileID: 6645855423348224642}
-  - {fileID: 4378477471664592529}
+  - {fileID: 6248889776815402194}
+  - {fileID: 4378477470144513559}
   - {fileID: 4378477470929075059}
   - {fileID: 6472929347542324977}
+  - {fileID: 4378477471664592529}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -259,8 +260,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.33707267}
-  m_Size: {x: 0.5, y: 0.7102846}
+  m_Offset: {x: 0, y: 0.34}
+  m_Size: {x: 0.5, y: 0.7}
   m_Direction: 0
 --- !u!50 &4378477471475960022
 Rigidbody2D:
@@ -314,18 +315,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11677b3d718164945b229e98326e2263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  RushSpeed: 0
   _prefabs: {fileID: 6645855423348224641}
   _spriteList: {fileID: 2116032673953705369}
   hitBox: {fileID: 4378477470144513559}
+  _layerName: 0
   health: {fileID: 4378477470693917716}
   initHealth: 25
-  _layerName: 0
+  speed: 3
+  RushSpeed: 0
   enemyType: 1
   healthGroup: {fileID: 4378477471664592558}
   initAggroRange: 2
   exitPoint: {fileID: 6472929347542324977}
+  unitroot: {fileID: 0}
 --- !u!1 &4378477471664592533
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +361,7 @@ RectTransform:
   m_Children:
   - {fileID: 4378477471694419484}
   m_Father: {fileID: 4378477471475960026}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -546,6 +548,53 @@ Transform:
   m_Father: {fileID: 4378477471475960026}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8589153496145356427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6248889776815402194}
+  - component: {fileID: 4222586665294738901}
+  m_Layer: 0
+  m_Name: EnemyBody
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6248889776815402194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8589153496145356427}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4378477471475960026}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4222586665294738901
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8589153496145356427}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.05
 --- !u!1001 &4378477469993312345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -561,7 +610,7 @@ PrefabInstance:
     - target: {fileID: 2422605159653829522, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2422605159653829522, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}
@@ -596,7 +645,7 @@ PrefabInstance:
     - target: {fileID: 6987801308082639579, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6987801308082639579, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}

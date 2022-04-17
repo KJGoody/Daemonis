@@ -80,7 +80,7 @@ public class SpellScript : MonoBehaviour
             Character c = collision.GetComponentInParent<Character>();
             if (!CheckHitEnemy(collision))
             {
-                c.TakeDamage(damage, source, direction); // 피격된 대상에게 자신의 위치 정보 전달
+                c.TakeDamage(damage, direction, source); // 피격된 대상에게 자신의 위치 정보 전달
                 Instantiate(puff, transform.position, Quaternion.identity);
                 //myRigidbody.velocity = Vector3.zero;
                 //MyTarget = null;
