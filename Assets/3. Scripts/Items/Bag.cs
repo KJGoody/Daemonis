@@ -28,6 +28,10 @@ public class Bag : Item, IUseable
         // Bag의 슬롯갯수 설정
         this.slots = slots;
     }
+    public string GetName()
+    {
+        return MyName;
+    }
 
     //// 아이템 사용
     public void Use()

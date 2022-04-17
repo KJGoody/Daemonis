@@ -142,8 +142,9 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
         if (item is IUseable && useables.Count > 0)
         {
             // useables 에 등록된 아이템과 item 이 같은 타입이라면
-            if (useables.Peek().GetType() == item.GetType())
+            if (useables.Peek().GetName() == item.MyName)
             {
+                
                 // 인벤토리에서 해당 아이템과 같은 모든 아이템을 찾아서
                 // useables 에 담습니다. 
                 useables = InventoryScript.MyInstance.GetUseables(item as IUseable);

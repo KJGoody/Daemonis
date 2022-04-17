@@ -93,7 +93,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
             InventoryScript.MyInstance.OnItemCountChanged(MyItems.Pop());
 
             // 해당 슬롯의 아이템아이콘을 투명화시킵니다.
-            //UIManager.MyInstance.UpdateStackSize(this);
+            UIManager.MyInstance.UpdateStackSize(this);
         }
     }
     public void OnPointerClick(PointerEventData eventData)
