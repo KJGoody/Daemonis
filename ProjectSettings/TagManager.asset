@@ -45,7 +45,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: TopLayer
+  - name: BottomLayer
     uniqueID: 961690195
     locked: 0
   - name: DeathEnemyLayer
@@ -53,6 +53,9 @@ TagManager:
     locked: 0
   - name: EnemyLayer
     uniqueID: 3087391085
+    locked: 0
+  - name: PlayerLayer
+    uniqueID: 1575272487
     locked: 0
   - name: TextLayer
     uniqueID: 3553695235

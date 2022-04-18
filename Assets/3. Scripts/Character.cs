@@ -164,8 +164,8 @@ public abstract class Character : MonoBehaviour
     }
     IEnumerator Death()
     {
+        myRigid2D.simulated = false;
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
-
 }

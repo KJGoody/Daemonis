@@ -41,27 +41,37 @@ public class Enemy : NPC
         get { return Vector2.Distance(transform.position, MyTarget.position) < MyAggroRange; }
     }
     public GameObject unitroot;
+
+    private ComboManager comboManager;
+    private bool IsComboNPC;
+
     protected void Awake()
     {
         MyStartPosition = transform.position;
         MyAggroRange = initAggroRange;
 
+        comboManager = FindObjectOfType<ComboManager>();
+
         switch (enemyType)                  // 애니미 타입에 따라 공격 사거리 변화
         {
             case EnemyType.Basemelee:
                 MyAttackRange = 1;
+                IsComboNPC = true;
                 break;
 
             case EnemyType.Baseranged:
                 MyAttackRange = 5;
+                IsComboNPC = true;
                 break;
 
             case EnemyType.Baserush:
                 MyAttackRange = 5;
+                IsComboNPC = true;
                 break;
 
             case EnemyType.BaseAOE:
                 MyAttackRange = 5;
+                IsComboNPC = true;
                 break;
         }
         MyAttackTime = 1000f;            // 공격상태 돌입 시 바로 공격할 수 있도록 시간을 많이 넣어둠
@@ -123,10 +133,14 @@ public class Enemy : NPC
         if (health.MyCurrentValue <= 0)
         {
             _prefabs.PlayAnimation(2);
+            healthGroup.alpha = 0;
             unitroot.GetComponent<SortingGroup>().sortingLayerName = "DeathEnemyLayer";
             Destroy(transform.Find("HitBox").gameObject);
             Destroy(transform.Find("EnemyBody").gameObject);
+
             StartCoroutine("Death");
+            if (IsComboNPC)
+                comboManager.IncreaseCombo();
         }
         //OnHealthChanged(health.MyCurrentValue);
     }
