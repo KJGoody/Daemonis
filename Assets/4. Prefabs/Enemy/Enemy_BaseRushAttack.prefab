@@ -200,7 +200,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 82707731993968007, guid: fbe801feadbc4284e8948973236aae48, type: 3}
+  m_Sprite: {fileID: 8391660652416901024, guid: fbe801feadbc4284e8948973236aae48,
+    type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -404,7 +405,7 @@ MonoBehaviour:
   healthGroup: {fileID: 7780567224865110200}
   initAggroRange: 2
   exitPoint: {fileID: 1075564639641270503}
-  unitroot: {fileID: 0}
+  unitroot: {fileID: 5360675693758686659}
 --- !u!1 &7780567224843671561
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,7 +472,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1557013538026691241, guid: fbe801feadbc4284e8948973236aae48,
+  m_Sprite: {fileID: -273060469431498887, guid: fbe801feadbc4284e8948973236aae48,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -771,6 +772,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baea2e9758e554909b2367e396d9c5a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5360675693758686659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2422605159653829516, guid: 76af63be2e62e8443b5a065c1e5fa8be,
+    type: 3}
+  m_PrefabInstance: {fileID: 7780567223281602127}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &793628518888627351 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6987801308082639576, guid: 76af63be2e62e8443b5a065c1e5fa8be,
