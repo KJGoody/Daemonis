@@ -293,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 024f5d8ebb329fe46929e66f5165e21f, type: 2}
   DI_Text: {fileID: 703832999}
+  sprite: {fileID: 1411184612657943184}
   L_Start: 0
 --- !u!61 &1411184612657943189
 BoxCollider2D:

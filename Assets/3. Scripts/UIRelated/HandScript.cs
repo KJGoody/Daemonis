@@ -96,6 +96,8 @@ public class HandScript : MonoBehaviour
         selectName.text = spell.MyName;
         selectDescription.text = spell.MyDescription;
         selectImage.sprite = spell.MyIcon;
+        Color color = new Color(1, 1, 1, 1);
+        selectImage.color = color;
     }
     public void EquipSpell()
     {
@@ -117,6 +119,8 @@ public class HandScript : MonoBehaviour
         selectName.text = null;
         selectDescription.text = null;
         selectImage.sprite = null;
+        Color color = new Color(0, 0, 0, 0);
+        selectImage.color = color;
         MyMoveable = null;
         skillEquipping = false;
         blindPanel.SetActive(false);

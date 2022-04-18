@@ -9,6 +9,7 @@ public class DropItem : MonoBehaviour
     Item item;
     [SerializeField]
     Text DI_Text;
+    [SerializeField]
     SpriteRenderer sprite;
 
     private float speed;
@@ -33,6 +34,7 @@ public class DropItem : MonoBehaviour
     private void Start()
     {
         DI_Text.text = item.MyName;
+        sprite.sprite = item.MyIcon;
         speed = 0;
         playerTransform = GameObject.Find("Player").transform.GetChild(1).GetComponent<Transform>();
         startPos = transform.position;
