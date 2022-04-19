@@ -45,12 +45,15 @@ public class Enemy : NPC
     private ComboManager comboManager;
     private bool IsComboNPC;
 
+    public NavManager navManager;
+
     protected void Awake()
     {
         MyStartPosition = transform.position;
         MyAggroRange = initAggroRange;
 
         comboManager = FindObjectOfType<ComboManager>();
+        navManager = FindObjectOfType<NavManager>();
 
         switch (enemyType)                  // 애니미 타입에 따라 공격 사거리 변화
         {
