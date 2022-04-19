@@ -34,7 +34,7 @@ public class ComboManager : MonoBehaviour
         if(nowCoroutine != null)
             StopCoroutine(nowCoroutine);
 
-        currentCombo += 10;
+        currentCombo += 1;
         comboNum.text = string.Format("{0}", currentCombo);
 
         if (currentCombo > 1)
