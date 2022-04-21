@@ -4,18 +4,18 @@ using UnityEngine;
 
 class FollowState : IState
 {
-    private Enemy parent;
+    private EnemyBase parent;
     private float randomNumX;
     private float randomNumY;
 
     private float RubbingTime;
 
-    public void Enter(Enemy parent)
+    public void Enter(EnemyBase parent)
     {
         this.parent = parent;
 
-        randomNumX = Random.Range(-parent.MyAttackRange / 2, parent.MyAttackRange / 2);
-        randomNumY = Random.Range(-parent.MyAttackRange / 2, parent.MyAttackRange / 2);
+        randomNumX = Random.Range(-parent.myAttackRange / 2, parent.myAttackRange / 2);
+        randomNumY = Random.Range(-parent.myAttackRange / 2, parent.myAttackRange / 2);
 
     }
 
@@ -40,7 +40,7 @@ class FollowState : IState
         {
             parent.Direction = new Vector3(parent.MyTarget.position.x + randomNumX, parent.MyTarget.position.y + randomNumY, parent.MyTarget.position.z) - parent.transform.position;            // 사거리 안에 들면 공격상태로 변경
             float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);
-            if (distance <= parent.MyAttackRange)
+            if (distance <= parent.myAttackRange)
             {
                 parent.Direction = Vector2.zero;
                 parent.ChangeState(new AttackState());

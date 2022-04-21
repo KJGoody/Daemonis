@@ -13,17 +13,19 @@ public class EnemyAttack : MonoBehaviour
         BaseAEAttack                         // 장판 공격의 실질적 데미지
     }
     public EnemyAttackType enemyAttackType;
+    public Transform MyTarget { get; set; }
+    private Vector3 direction;
+
     private Rigidbody2D myRigidbody;
     [SerializeField]
     private float speed;
     [SerializeField]
     private int damage;
-    public Transform MyTarget { get; set; }
-    private Vector3 direction;
 
-    private bool IsAOEAttack = false;
     [SerializeField]
     private float WaitWarningSceonds;
+
+    private bool IsAOEAttack = false;
     private Transform AOEexitPoint;              // 장판오브젝트 소환 포인트
     public int AOEDamage;                       // 장판오브젝트 데미지
     [SerializeField]
@@ -100,14 +102,11 @@ public class EnemyAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
-        {
             Destroy(gameObject);
-        }
 
         if (collision.CompareTag("HitBox_Player"))
         {
             IsPlayerInArea = true;
-
             if (!IsAOEAttack)
             {
                 Character c = collision.GetComponentInParent<Character>();

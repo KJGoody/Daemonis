@@ -4,20 +4,18 @@ using UnityEngine;
 
 class IdleState : IState
 {
-    private Enemy parent;
-    private Coroutine PlayCoroutine;
+    private EnemyBase parent;
+    private Coroutine courrentCoroutine;
 
-    public void Enter(Enemy parent)
+    public void Enter(EnemyBase parent)
     {
         this.parent = parent;
-        this.parent.Reset();
-        PlayCoroutine = parent.StartCoroutine(NextPatrol());
+        //courrentCoroutine = parent.StartCoroutine(NextPatrol());
     }
 
     public void Exit()
     {
-        parent.StopCoroutine(PlayCoroutine);
-
+        //parent.StopCoroutine(courrentCoroutine);
     }
 
     public void Update()

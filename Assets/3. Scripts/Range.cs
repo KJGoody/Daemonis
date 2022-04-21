@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Range : MonoBehaviour
 {
-    private Enemy parent;
+    private EnemyBase parent;
 
     private void Start()
     {
-        parent = GetComponentInParent<Enemy>();
+        parent = GetComponentInParent<EnemyBase>();
     }
 
 

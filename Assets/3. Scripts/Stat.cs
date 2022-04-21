@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class Stat : MonoBehaviour
 {
-    private Image content;
-
+    private Image BarImage;
     [SerializeField]
     private Text statText;
     [SerializeField]
     private float lerpSpeed;
 
     private float currentFill;
-    public float MyMaxValue { get; set; }
+    [HideInInspector]
+    public float MyMaxValue;
 
+    private float currentValue;
     public float MyCurrentValue
     {
         get
@@ -22,27 +24,30 @@ public class Stat : MonoBehaviour
         }
         set
         {
-            if (value > MyMaxValue) currentValue = MyMaxValue;
-            else if (value < 0) currentValue = 0;
+            if (value > MyMaxValue)
+                currentValue = MyMaxValue;
+            else if (value < 0) 
+                currentValue = 0;
             else currentValue = value;
 
             currentFill = currentValue / MyMaxValue;
-            if (statText != null) statText.text = currentValue + " / " + MyMaxValue;
+
+            if (statText != null) 
+                statText.text = currentValue + " / " + MyMaxValue;
         }
     }
 
-    private float currentValue;
-
     void Start()
     {
-        content = GetComponent<Image>();
+        BarImage = GetComponent<Image>();
     }
 
     void Update()
     {
-        if (currentFill != content.fillAmount)
+
+        if (currentFill != BarImage.fillAmount)
         {
-            content.fillAmount = Mathf.Lerp(content.fillAmount, currentFill, Time.deltaTime * lerpSpeed);
+            BarImage.fillAmount = Mathf.Lerp(BarImage.fillAmount, currentFill, Time.deltaTime * lerpSpeed);
         }
     }
 

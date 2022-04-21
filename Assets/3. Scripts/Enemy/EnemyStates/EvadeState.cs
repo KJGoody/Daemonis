@@ -5,11 +5,11 @@ using UnityEngine;
 public class EvadeState : IState
 {
 
-    private Enemy parent;
+    private EnemyBase parent;
 
 
 
-    public void Enter(Enemy parent)
+    public void Enter(EnemyBase parent)
     {
         this.parent = parent;
     }
@@ -23,12 +23,10 @@ public class EvadeState : IState
     public void Update()
     {
         // 매프레임마다 처음 시작위치로 되돌아감.
-        parent.Direction = parent.MyStartPosition - parent.transform.position;
+        parent.Direction = parent.myStartPosition - parent.transform.position;
 
         Vector2 parentPosition = parent.transform.position;
-        Vector2 startPosition = parent.MyStartPosition;
-        //parent.transform.position
-        //    = Vector2.MoveTowards(parentPosition, startPosition, parent.Speed * Time.deltaTime);
+        Vector2 startPosition = parent.myStartPosition;
 
         // 시작 위치까지 이동하면 IdleState 상태로 변경시킴
         float distance = Vector2.Distance(startPosition, parentPosition);

@@ -4,31 +4,14 @@ using UnityEngine;
 
 public class AttackState : IState
 {
-    private Enemy parent;
+    private EnemyBase parent;
     private float attackCooldown; // 공격 딜레이
 
-    public void Enter(Enemy parent)
+    public void Enter(EnemyBase parent)
     {
         this.parent = parent;
 
-        switch (parent.enemyType)               // 애니미타입에 따라 공격 딜레이 다르게 주기
-        {
-            case Enemy.EnemyType.Basemelee:
-                attackCooldown = 1;
-                break;
-
-            case Enemy.EnemyType.Baseranged:
-                attackCooldown = 2;
-                break;
-
-            case Enemy.EnemyType.Baserush:
-                attackCooldown = 3;
-                break;
-
-            case Enemy.EnemyType.BaseAOE:
-                attackCooldown = 30;
-                break;
-        }
+        attackCooldown = parent.enemytype.AttackDelay;
     }
 
     public void Exit()
@@ -48,21 +31,21 @@ public class AttackState : IState
         {
             parent.MyAttackTime = 0;
             parent.IsAttacking = true;
-            switch (parent.enemyType)                       // 애니미타입에 따라 공격 모션을 다르게 설정
+            switch (parent.enemytype.enemyType)                       // 애니미타입에 따라 공격 모션을 다르게 설정
             {
-                case Enemy.EnemyType.Basemelee:
+                case EnemyType.EnemyTypes.BaseMelee:
                     parent.StartCoroutine(meleeAttack());
                     break;
 
-                case Enemy.EnemyType.Baseranged:
+                case EnemyType.EnemyTypes.BaseRanged:
                     parent.StartCoroutine(rangedAttack());
                     break;
 
-                case Enemy.EnemyType.Baserush:
+                case EnemyType.EnemyTypes.BaseRush:
                     parent.StartCoroutine(RushAttack());
                     break;
 
-                case Enemy.EnemyType.BaseAOE:
+                case EnemyType.EnemyTypes.BaseAOE:
                     parent.StartCoroutine(AOEAttack());
                     break;
             }
@@ -72,7 +55,7 @@ public class AttackState : IState
         {
             float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);
             // 공격거리 보다 멀리있으면 Follow 상태로 변경한다.
-            if (distance >= parent.MyAttackRange * 1.1f && !parent.IsAttacking) // 플레이어 사거리 + 공격 여유 거리(플레이어 사거리 * 0.1f) = 플레이어 인식 벗어나는 거리
+            if (distance >= parent.myAttackRange * 1.1f && !parent.IsAttacking) // 플레이어 사거리 + 공격 여유 거리(플레이어 사거리 * 0.1f) = 플레이어 인식 벗어나는 거리
             {
                 parent.ChangeState(new FollowState());
             }
@@ -92,7 +75,7 @@ public class AttackState : IState
         parent._prefabs.PlayAnimation(4);
 
         yield return new WaitForSeconds(0.15f); // 애니메이션 내려찍기 시작
-        parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseMelee_Attack") as GameObject, parent.exitPoint.position, Quaternion.identity);
+        parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseMelee_Attack") as GameObject, parent.ExitPoint.position, Quaternion.identity);
         yield return new WaitForSeconds(0.15f); // 애니메이션 종료
 
         parent.IsAttacking = false;
@@ -104,7 +87,7 @@ public class AttackState : IState
         parent._prefabs.PlayAnimation(5);
 
         yield return new WaitForSeconds(0.2f);
-        parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseRanged_Attack") as GameObject, parent.exitPoint.position, Quaternion.identity);
+        parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseRanged_Attack") as GameObject, parent.ExitPoint.position, Quaternion.identity);
         yield return new WaitForSeconds(0.1f);
 
         parent.IsAttacking = false;
@@ -119,7 +102,7 @@ public class AttackState : IState
         parent.gameObject.layer = 7;                // Rushing레이어로 바꾸기, 플레이어와 충돌무시
         parent.Direction = parent.MyTarget.transform.position - parent.transform.position;
         parent.RushSpeed = 7f;
-        parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseRush_Attack") as GameObject, parent.exitPoint.position, Quaternion.identity);
+        parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseRush_Attack") as GameObject, parent.ExitPoint.position, Quaternion.identity);
         yield return new WaitForSeconds(0.5f);
 
         parent.Direction = Vector2.zero;

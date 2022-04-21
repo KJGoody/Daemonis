@@ -5,10 +5,10 @@ using UnityEngine;
 public interface IState
 {
     //Prepare the State
-    void Enter(Enemy parent);
+    void Enter(EnemyBase parent);
 
-    void Update();
 
     void Exit();
 
+    void Update();
 }

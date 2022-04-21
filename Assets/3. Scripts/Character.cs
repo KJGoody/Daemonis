@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
+
 public abstract class Character : MonoBehaviour
 {
     protected Rigidbody2D myRigid2D;
@@ -13,6 +14,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField]
     protected Transform hitBox;                     // 캐릭터 히트박스
 
+        // 애니메이션
     public enum LayerName                           
     {
         idle = 0,
@@ -21,8 +23,9 @@ public abstract class Character : MonoBehaviour
         death = 2,
     }
     public LayerName _layerName = LayerName.idle;
+    public bool IsAttacking { get; set; }
 
-        // 캐릭터 기본 능력치
+    // 캐릭터 기본 능력치
     [SerializeField]                // 체력
     protected Stat health;
     public Stat MyHealth
@@ -56,20 +59,13 @@ public abstract class Character : MonoBehaviour
             return direction.x != 0 || direction.y != 0;
         }
     }
-
-    [SerializeField]
-
     public bool IsRushing { get; set; }
+    [HideInInspector]
     public float RushSpeed = 0f;
 
     public Transform MyTarget { get; set; }
 
-    public bool IsAttacking { get; set; }
     protected Coroutine attackRoutine;
-
-
-
-
 
     
     protected virtual void Start()

@@ -4,13 +4,13 @@ using UnityEngine;
 
 class PatrolState : IState
 {
-    private Enemy parent;
+    private EnemyBase parent;
     private Vector3 PatrolPoint;
 
     private RaycastHit2D hitTop;
     private RaycastHit2D hitBottom;
 
-    public void Enter(Enemy parent)
+    public void Enter(EnemyBase parent)
     {
         this.parent = parent;
             
@@ -20,7 +20,7 @@ class PatrolState : IState
             {
                 float randomNumX = Random.Range(-3f, 3f);
                 float randomNumY = Random.Range(-3f, 3f);
-                PatrolPoint = new Vector3(parent.MyStartPosition.x + randomNumX, parent.MyStartPosition.y + randomNumY, parent.MyStartPosition.z);
+                PatrolPoint = new Vector3(parent.myStartPosition.x + randomNumX, parent.myStartPosition.y + randomNumY, parent.myStartPosition.z);
 
                 float radius = (PatrolPoint - parent.transform.position).sqrMagnitude;
                 if (radius < 3f * 3f)
