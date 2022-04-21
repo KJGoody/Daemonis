@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DropItem : MonoBehaviour
 {
     [SerializeField]
-    Item item;
+    ItemBase item;
     [SerializeField]
     Text DI_Text;
     [SerializeField]
@@ -21,12 +21,12 @@ public class DropItem : MonoBehaviour
     [HideInInspector]
     public bool L_Start;
     private bool up = false;
-    DropItem (Item item) //나중에 지울 가능성 큼
+    DropItem (ItemBase item) //나중에 지울 가능성 큼
     {
         this.item = item;
         sprite.sprite = item.MyIcon;
     }
-    public void SetDropItem(Item _item) // 몬스터에서 드랍할때 이걸로 추가할 예정
+    public void SetDropItem(ItemBase _item) // 몬스터에서 드랍할때 이걸로 추가할 예정
     {
         item = _item;
         sprite.sprite = _item.MyIcon;

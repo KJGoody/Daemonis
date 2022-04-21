@@ -135,7 +135,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             UIManager.MyInstance.UpdateStackSize(this);
         }
     }
-    public void UpdateItemCount(Item item)
+    public void UpdateItemCount(ItemBase item)
     {
         // 아이템이 IUseable(인터페이스)을 상속받았으며
         // useables 배열의 아이템개수가 1개 이상이면

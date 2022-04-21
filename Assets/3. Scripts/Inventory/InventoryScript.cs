@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void ItemCountChanged(Item item);
+public delegate void ItemCountChanged(ItemBase item);
 public class InventoryScript : MonoBehaviour
 {
     private static InventoryScript instance;
@@ -57,12 +57,12 @@ public class InventoryScript : MonoBehaviour
         Player.MyInstance.MyHealth.MyCurrentValue -= 10;
 
         // 체력물약 아이템 생성
-        HealthPotion potion = (HealthPotion)Instantiate(items[0]);
+        //HealthPotion potion = (HealthPotion)Instantiate(items[0]);
 
-        // 가방에 추가한다.
-        AddItem(potion);
+        //// 가방에 추가한다.
+        //AddItem(potion);
     }
-    public void OnItemCountChanged(Item item)
+    public void OnItemCountChanged(ItemBase item)
     {
         // 이벤트에 등록된 델리게이트에 있다면
         if (itemCountChangedEvent != null)
@@ -81,7 +81,7 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
-    public void AddItem(Item item)
+    public void AddItem(ItemBase item)
     {
         // 추가되려는 아이템이 중첩 가능 아이템인지 확인합니다.
         if (item.MyStackSize > 0)
@@ -95,7 +95,7 @@ public class InventoryScript : MonoBehaviour
         // 중첩이 불가능한 아이템은 빈슬롯에 추가합니다.
         PlaceInEmpty(item);
     }
-    private bool PlaceInStack(Item item)
+    private bool PlaceInStack(ItemBase item)
     {
         // 인벤토리 슬롯들을 검사합니다.
         foreach (SlotScript slots in MySlots)
@@ -110,16 +110,16 @@ public class InventoryScript : MonoBehaviour
         }
         return false;
     }
-    public void FindUseSlot(Item item)
+    public void FindUseSlot(ItemBase item)
     {
         foreach (SlotScript slots in MySlots)
         {
-            if(!slots.IsEmpty && slots.MyItem.name == item.name)
+            if(!slots.IsEmpty && slots.MyItem.MyName == item.MyName)
                item.MySlot = slots;
         }
        
     }
-    private bool PlaceInEmpty(Item item)
+    private bool PlaceInEmpty(ItemBase item)
     {
         foreach (SlotScript slot in slots)
         {
@@ -146,7 +146,7 @@ public class InventoryScript : MonoBehaviour
             {
                 
                 // 해당 슬롯에 등록된 모든 아이템을
-                foreach (Item item in slot.MyItems)
+                foreach (ItemBase item in slot.MyItems)
                 {
                     // useables 에 담는다.
                     useables.Push(item as IUseable);

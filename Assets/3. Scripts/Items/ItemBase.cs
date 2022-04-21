@@ -1,34 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public enum Quality { Normal, Advanced, Rare, Epic , Legendary , Relic }
-public enum Kinds { Common, Equipment, Potion }
-
-public abstract class Item : ScriptableObject
+public class ItemBase : IMoveable, IDescribable, IUseable
 {
-    [SerializeField]
-    private Sprite icon;    // 아이템 이미지
-    [SerializeField]
-    private int stackSize;  // 중첩 스택
-    [SerializeField]
-    private string itemName;   // 아이템 이름
+    public Item itemInfo;
     [SerializeField]
     private Quality quality;// 아이템 등급
-    [SerializeField]
-    private string descript;// 아이템 설명 (배경설정같은것)
-    [SerializeField]
-    private string effect;  // 아이템 효과 서술
-    [SerializeField]
-    private int limitLevel; // 아이템 제한 레벨
-    [SerializeField]
-    private Kinds kind;// 아이템 종류
-    private SlotScript slot;
-
 
     public Sprite MyIcon
     {
         get
         {
-            return icon;
+            return itemInfo.MyIcon;
         }
     }
     // 아이템이 중첩될 수 있는 개수
@@ -38,7 +22,7 @@ public abstract class Item : ScriptableObject
     {
         get
         {
-            return stackSize;
+            return itemInfo.MyStackSize;
         }
     }
     public string MyName
@@ -63,20 +47,16 @@ public abstract class Item : ScriptableObject
                     break;
             }
 
-            return string.Format("<color={0}>{1}</color>", color, itemName);
+            return string.Format("<color={0}>{1}</color>", color, itemInfo.MyName);
         }
 
-        set
-        {
-            itemName = value;
-        }
     }
-    public string MyQuality
+    public string MyQualityText
     {
         get
         {
             string color = string.Empty;
-            string str="";
+            string str = "";
             switch (quality)
             {
                 case Quality.Normal:
@@ -98,86 +78,56 @@ public abstract class Item : ScriptableObject
             }
 
             return string.Format("<color={0}>{1}</color>", color, str);
-        }
 
-        set
-        {
-            itemName = value;
         }
     }
     public Kinds GetKind
     {
         get
         {
-            Kinds myKind = Kinds.Common;
-            switch (kind)
-            {
-                case Kinds.Equipment:
-                    myKind = Kinds.Equipment;
-                    break;
-                case Kinds.Potion:
-                    myKind = Kinds.Potion;
-                    break;
-            }
-            return myKind;
+            return itemInfo.GetKind;
         }
     }
     public SlotScript MySlot
     {
         get
         {
-            return slot;
+            return itemInfo.MySlot;
         }
-
         set
         {
-            slot = value;
+            itemInfo.MySlot = value;
         }
     }
     public string MyDescript
     {
         get
         {
-            return descript;
-        }
-
-        set
-        {
-            descript = value;
+            return itemInfo.MyDescript;
         }
     }
     public string MyEffect
     {
         get
         {
-            return effect;
-        }
-
-        set
-        {
-            effect = value;
+            return itemInfo.MyEffect;
         }
     }
     public int MyLimitLevel
     {
         get
         {
-            return limitLevel;
-        }
-
-        set
-        {
-            limitLevel = value;
+            return itemInfo.MyLimitLevel;
         }
     }
     public void Remove()
     {
-        //if (MySlot != null)
-        //{
-        //    if(MySlot.MyCount == 0)
-        //       InventoryScript.MyInstance.FindUseSlot(this);
-        //    MySlot.RemoveItem(this);
-        //}
+        if (MySlot != null)
+        {
+            if (MySlot.MyCount == 0)
+                InventoryScript.MyInstance.FindUseSlot(this);
+            MySlot.RemoveItem(this);
+        }
     }
     public virtual string GetDescription()
     {
@@ -199,7 +149,16 @@ public abstract class Item : ScriptableObject
                 break;
         }
 
-        return string.Format("<color={0}>{1}</color>", color, itemName);
+        return string.Format("<color={0}>{1}</color>", color, itemInfo.MyName);
+    }
+    public void Use()
+    {
+        HealthPotion healthPotion = itemInfo as HealthPotion;
+        healthPotion.Use();
+    }
+    public string GetName() // 일단 useable때문에 넣어두긴함
+    {
+        return MyName;
     }
 
 }

@@ -8,8 +8,8 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
 {
     // 슬롯에 등록된 아이템 리스트
     // 중첩개수가 2개 이상인 아이템이 있을 수 있다.
-    private ObservableStack<Item> items = new ObservableStack<Item>();
-    public ObservableStack<Item> MyItems
+    private ObservableStack<ItemBase> items = new ObservableStack<ItemBase>();
+    public ObservableStack<ItemBase> MyItems
     {
         get
         {
@@ -53,7 +53,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
     {
         get { return MyItems.Count == 0; }
     }
-    public Item MyItem
+    public ItemBase MyItem
     {
         get
         {
@@ -74,7 +74,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
     }
 
     // 슬롯에 아이템 추가.
-    public bool AddItem(Item item)
+    public bool AddItem(ItemBase item)
     {
         MyItems.Push(item);
         icon.sprite = item.MyIcon;
@@ -82,7 +82,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
         item.MySlot = this;
         return true;
     }
-    public void RemoveItem(Item item)
+    public void RemoveItem(ItemBase item)
     {
         Debug.Log(MyCount);
         // 자기 자신이 빈슬롯이 아니라면
@@ -105,12 +105,12 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
         UIManager.MyInstance.UpdateStackSize(this);
     }
 
-    public bool StackItem(Item item)
+    public bool StackItem(ItemBase item)
     {
         // 빈슬롯이 아니고
         // 해당 슬롯에 있는 아이템 이름과
         // 추가되려는 아이템의 이름이 동일하다면
-        if (!IsEmpty && item.name == MyItem.name)
+        if (!IsEmpty && item.MyName == MyItem.MyName)
         {
             // 아이템의 중첩개수가
             // 아이템의 MyStackSize 보다 작다면

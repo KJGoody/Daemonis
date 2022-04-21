@@ -33,7 +33,7 @@ public class HandScript : MonoBehaviour
     private bool skillEquipping = false;
     #endregion
 
-    private Item myItem;    // 아이템 정보
+    private ItemBase myItem;    // 아이템 정보
     [Header ("Select Item Tooltip")]
     #region 아이템 선택관련 변수 SI = Select Item
     [SerializeField]
@@ -125,12 +125,12 @@ public class HandScript : MonoBehaviour
         skillEquipping = false;
         blindPanel.SetActive(false);
     }
-    public void SelectItem(Item item) // 아이템 선택
+    public void SelectItem(ItemBase item) // 아이템 선택
     {
         myItem = item;
         SI_Image.sprite = myItem.MyIcon;
         SI_Name.text = myItem.MyName;
-        SI_Quality.text = myItem.MyQuality;
+        SI_Quality.text = myItem.MyQualityText;
         SI_LimitLvl.text = "제한 레벨 : "+myItem.MyLimitLevel;
         SI_DefaultStat.text = "사용 효과 : "+myItem.MyEffect;
         SI_Descript.text = myItem.MyDescript;
