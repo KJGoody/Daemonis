@@ -29,14 +29,14 @@ public class DropItem : MonoBehaviour
     public void SetDropItem(Item _item) // 몬스터에서 드랍할때 이걸로 추가할 예정
     {
         item = new ItemBase();
+        item.itemInfo = _item;
         int a = Random.Range(0, 2);
         if (a == 0)
             item.MyQuality = Quality.Rare;
         else
             item.MyQuality = Quality.Epic;
-        item.itemInfo = _item;
-        sprite.sprite = _item.MyIcon;
-        DI_Text.text = _item.MyName;
+        sprite.sprite = item.MyIcon;
+        DI_Text.text = item.MyName;
     }
     private void Start()
     {
