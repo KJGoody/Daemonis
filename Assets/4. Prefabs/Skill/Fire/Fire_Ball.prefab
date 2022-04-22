@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 954079744089848340}
   - component: {fileID: 3318411572377474205}
   - component: {fileID: 4348590965333436126}
+  - component: {fileID: -4260425782238387153}
   m_Layer: 0
   m_Name: Fire_Ball
   m_TagString: Untagged
@@ -173,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  puff: {fileID: 5885712524259933871, guid: 88ea030be923ff94ea38ac6cc4382261, type: 3}
+  puff: {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b, type: 3}
 --- !u!50 &954079744089848340
 Rigidbody2D:
   serializedVersion: 4
@@ -240,3 +241,14 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
+--- !u!210 &-4260425782238387153
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440346083036277406}
+  m_Enabled: 1
+  m_SortingLayerID: -822470091
+  m_SortingLayer: 5
+  m_SortingOrder: 0

@@ -11191,6 +11191,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 862457614}
   stackSize: {fileID: 0}
+--- !u!1 &872375083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1265892613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!210 &872375087
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872375083}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &895722953
 GameObject:
   m_ObjectHideFlags: 0

@@ -54,6 +54,12 @@ TagManager:
   - name: EnemyLayer
     uniqueID: 3087391085
     locked: 0
+  - name: SkillHitLayer
+    uniqueID: 735885497
+    locked: 0
+  - name: SkillLayer
+    uniqueID: 3472497205
+    locked: 0
   - name: PlayerLayer
     uniqueID: 1575272487
     locked: 0
