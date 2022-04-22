@@ -111,6 +111,7 @@ public class EnemyAttack : MonoBehaviour
             {
                 Character c = collision.GetComponentInParent<Character>();
                 string TextType = "PlayerDamage";
+                c.NewBuff("BaseBuff");
                 c.TakeDamage(damage, direction, null, TextType);
                 speed = 0;
                 myRigidbody.velocity = Vector3.zero;
@@ -146,7 +147,7 @@ public class EnemyAttack : MonoBehaviour
 
     IEnumerator BaseAOEAttack()
     {
-        WarningArea warningarea = Instantiate(Resources.Load("EnemyAttack/WaringArea") as GameObject, this.transform.position, Quaternion.identity).GetComponent<WarningArea>();
+        WarningArea warningarea = Instantiate(Resources.Load("EnemyAttack/WaringArea") as GameObject, this.transform).GetComponent<WarningArea>();
         warningarea.destroyTime = WaitWarningSceonds;
         yield return new WaitForSeconds(WaitWarningSceonds + 0.5f);
         this.GetComponent<SpriteRenderer>().enabled = true;
@@ -160,7 +161,7 @@ public class EnemyAttack : MonoBehaviour
     {
         while (IsAOEAttacking)
         {
-            EnemyAttack AEattack = Instantiate(Resources.Load("EnemyAttack/BaseAE_Attack") as GameObject, AOEexitPoint.position, Quaternion.identity).GetComponent<EnemyAttack>();
+            EnemyAttack AEattack = Instantiate(Resources.Load("EnemyAttack/BaseAE_Attack") as GameObject, AOEexitPoint).GetComponent<EnemyAttack>();
             AEattack.damage = AOEDamage;
             LastAttackTime = 0f;
             yield return new WaitForSeconds(AEwaitforseconds);

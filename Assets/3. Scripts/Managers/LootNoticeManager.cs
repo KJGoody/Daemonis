@@ -22,6 +22,7 @@ public class LootNoticeManager : MonoBehaviour
     [SerializeField]
     private ContentSizeFitter noticeManagerPanel;
     // Update is called once per frame
+
     void Update()
     {
         if (noticeList.Count >= 4)
@@ -30,6 +31,7 @@ public class LootNoticeManager : MonoBehaviour
         }
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)noticeManagerPanel.transform);
     }
+
     public void AddLootNotice(GameObject notice)
     {
         noticeList.Add(notice);

@@ -259,8 +259,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 894972729840216767}
-  - component: {fileID: 7782529544631918906}
   - component: {fileID: 6219858118112120361}
+  - component: {fileID: 7782529544631918906}
+  - component: {fileID: 1530950419950964358}
   - component: {fileID: 894972729840216766}
   - component: {fileID: 894972729840216755}
   - component: {fileID: 894972729840216764}
@@ -291,6 +292,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6219858118112120361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894972729840216760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c961ae8b32d68e4f833eb0aaceed63a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabs: {fileID: 7823382231672393956}
+  _spriteList: {fileID: 3311630591564763132}
+  hitBox: {fileID: 894972730089825394}
+  _layerName: 0
+  stat: {fileID: 1530950419950964358}
+  RushSpeed: 0
+  enemytype: {fileID: 7782529544631918906}
+  myStartPosition: {x: 0, y: 0, z: 0}
+  healthGroup: {fileID: 894972729444791499}
+  unitroot: {fileID: 3311630592438233520}
+  ExitPoint: {fileID: 3774030598729366747}
+  myAggroRange: 0
+  myAttackRange: 0
+  MyAttackTime: 0
 --- !u!114 &7782529544631918906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +335,7 @@ MonoBehaviour:
   ExitPoint: {x: 0, y: 0, z: 0}
   AttackRnage: 0
   AttackDelay: 0
---- !u!114 &6219858118112120361
+--- !u!114 &1530950419950964358
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -317,25 +344,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 894972729840216760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c961ae8b32d68e4f833eb0aaceed63a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0835c92c8659ecc4093642ed5f363bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabs: {fileID: 7823382231672393956}
-  _spriteList: {fileID: 3311630591564763132}
-  hitBox: {fileID: 894972730089825394}
-  _layerName: 0
-  health: {fileID: 894972730622518897}
-  initHealth: 25
-  speed: 3
-  RushSpeed: 0
-  enemytype: {fileID: 7782529544631918906}
-  myStartPosition: {x: 0, y: 0, z: 0}
-  healthGroup: {fileID: 894972729444791499}
-  unitroot: {fileID: 3311630592438233520}
-  ExitPoint: {fileID: 3774030598729366747}
-  myAggroRange: 0
-  myAttackRange: 0
-  MyAttackTime: 0
+  HealthBar: {fileID: 894972730622518897}
+  MaxHealth: 10
+  HealthRegen: 0
+  ManaBar: {fileID: 0}
+  MaxMana: 0
+  ManaRegen: 0
+  Attack: 0
+  Defence: 0
+  MagicRegist: 0
+  Speed: 0
+  AttackSpeed: 0
+  DodgePercent: 0
+  HitPercent: 0
+  CriticalPercent: 0
+  CriticalDamage: 0
+  CoolDown: 0
 --- !u!70 &894972729840216766
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -538,9 +565,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8886bde0ac27d0b4d8535696be0182bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statText: {fileID: 0}
+  StatBarText: {fileID: 0}
   lerpSpeed: 4
-  MyMaxValue: 0
+  StatBarMaxValue: 0
 --- !u!1 &1932808088458978582
 GameObject:
   m_ObjectHideFlags: 0

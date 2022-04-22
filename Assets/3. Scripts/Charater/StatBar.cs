@@ -51,7 +51,7 @@ public class StatBar : MonoBehaviour
         }
     }
 
-    public void Initialize(float currentValue, float maxValue)
+    public void Initialize(float maxValue, float currentValue)
     {
         StatBarMaxValue = maxValue;
         StatBarCurrentValue = currentValue;

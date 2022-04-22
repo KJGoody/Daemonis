@@ -30,13 +30,15 @@ public class EnemyBase : NPC
     private bool IsKnockBack = false;
 
 
-    protected void Awake()
+    protected override void Awake()
     {
         ChangeState(new IdleState());
         myStartPosition = transform.position;
 
         comboManager = FindObjectOfType<ComboManager>();
         navManager = FindObjectOfType<NavManager>();
+
+        base.Awake();
     }
 
     protected override void Start()
@@ -95,9 +97,9 @@ public class EnemyBase : NPC
         base.DeSelect();
     }
 
-    public void EnemyAttackResource(GameObject EnemyAttackResource, Vector3 vector, Quaternion quaternion)
+    public void EnemyAttackResource(GameObject EnemyAttackResource, Transform transform)
     {
-        Instantiate(EnemyAttackResource, vector, quaternion);
+        Instantiate(EnemyAttackResource, transform);
     }
 
     public override void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string TextType = null) // ÇÇ°Ý
@@ -107,7 +109,7 @@ public class EnemyBase : NPC
         //SetTarget(source);
         base.TakeDamage(damage, knockbackDir, null, TextType);
 
-        if (health.StatBarCurrentValue <= 0)
+        if (stat.CurrentHealth <= 0)
         {
             _prefabs.PlayAnimation(2);
             healthGroup.alpha = 0;

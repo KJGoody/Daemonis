@@ -5,26 +5,21 @@ using System.Linq;
 
 public class Player : Character
 {
-    // ½Ì±ÛÅæ
+        // ½Ì±ÛÅæ
     private static Player instance;
     public static Player MyInstance
     {
         get
         {
-            if (instance == null)
+            if(instance == null)
             {
                 instance = FindObjectOfType<Player>();
             }
-
             return instance;
         }
     }
 
     private FloatingJoystick joy;
-
-    [SerializeField]
-    private StatBar mana;
-    private float initMana = 50;
 
     [SerializeField]
     private Transform exitPoint; // ¹ß»çÃ¼ »ý¼º À§Ä¡
@@ -35,7 +30,6 @@ public class Player : Character
     {
         joy = GameObject.Find("Floating Joystick").GetComponent<FloatingJoystick>();
 
-        mana.Initialize(initMana, initMana);
         base.Start();
     }
     protected override void Update()
@@ -55,13 +49,13 @@ public class Player : Character
         ///
         if (Input.GetKeyDown(KeyCode.I))
         {
-            health.StatBarCurrentValue -= 10;
-            mana.StatBarCurrentValue -= 10;
+            stat.CurrentHealth -= 10;
+            stat.CurrentMana -= 10;
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            health.StatBarCurrentValue += 10;
-            mana.StatBarCurrentValue += 10;
+            stat.CurrentHealth += 10;
+            stat.CurrentMana += 10;
         }
 
         Vector2 moveVector;
