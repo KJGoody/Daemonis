@@ -109,7 +109,6 @@ public class Player : Character
         {
             MyTarget = null;
         }
-        Debug.Log("AutoTarget" + MyTarget);
     }
     private GameObject FindNearestObjectByTag(string tag)
     {
@@ -136,7 +135,6 @@ public class Player : Character
     }
     public bool SearchEnemy() // 씬에 적이 존재하는지 검색
     {
-        Debug.Log(GameObject.FindWithTag("HitBox"));
         if (GameObject.FindWithTag("HitBox") == null)
             return false;
         else
