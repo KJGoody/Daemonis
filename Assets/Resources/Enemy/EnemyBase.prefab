@@ -332,10 +332,9 @@ MonoBehaviour:
   myStartPosition: {x: 0, y: 0, z: 0}
   healthGroup: {fileID: 894972729444791499}
   unitroot: {fileID: 3311630592438233520}
-  ExitPoint: {fileID: 1932808088458978582}
+  ExitPoint: {fileID: 3774030598729366747}
   myAggroRange: 0
   myAttackRange: 0
-  myExitPoint: {x: 0, y: 0, z: 0}
   MyAttackTime: 0
 --- !u!70 &894972729840216766
 CapsuleCollider2D:
@@ -541,6 +540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statText: {fileID: 0}
   lerpSpeed: 4
+  MyMaxValue: 0
 --- !u!1 &1932808088458978582
 GameObject:
   m_ObjectHideFlags: 0

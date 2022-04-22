@@ -14,14 +14,14 @@ public class HealthPotion : Item, IUseable
     public void Use()
     {
         // 체력이 최대체력보다 낮으면
-        if (Player.MyInstance.MyHealth.MyCurrentValue < Player.MyInstance.MyHealth.MyMaxValue)
+        if (Player.MyInstance.MyHealth.StatBarCurrentValue < Player.MyInstance.MyHealth.StatBarMaxValue)
         {
             // 사용하는 아이템을 없애고
 
             Remove();
 
             // 체력을 회복한다.
-            Player.MyInstance.MyHealth.MyCurrentValue += health;
+            Player.MyInstance.MyHealth.StatBarCurrentValue += health;
         }
     }
     public string GetName()

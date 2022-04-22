@@ -25,18 +25,21 @@ public abstract class Character : MonoBehaviour
     public LayerName _layerName = LayerName.idle;
     public bool IsAttacking { get; set; }
 
+    [SerializeField]
+    protected Stat stat;
+
     // 캐릭터 기본 능력치
     [SerializeField]                // 체력
-    protected Stat health;
-    public Stat MyHealth
+    protected StatBar health;
+    public StatBar MyHealth
     {
-        get { return health; }
+        get { return stat.HealthBar; }
     }
     [SerializeField]
     private float initHealth;
     public bool IsAlive
     {
-        get { return health.MyCurrentValue > 0; }
+        get { return health.StatBarCurrentValue > 0; }
     }
 
     [SerializeField]                // 이동속도
@@ -67,9 +70,15 @@ public abstract class Character : MonoBehaviour
 
     protected Coroutine attackRoutine;
 
+    protected virtual void Awake()
+    {
+        Debug.Log(stat.MaxHealth);
+
+    }
     
     protected virtual void Start()
     {
+        //health.Initialize(stat.MaxHealth, stat.MaxHealth);
         health.Initialize(initHealth, initHealth);
         myRigid2D = gameObject.GetComponent<Rigidbody2D>();
     }
@@ -144,8 +153,8 @@ public abstract class Character : MonoBehaviour
     public virtual void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string TextType = null)
     {
         DamageText(damage, TextType);
-        health.MyCurrentValue -= damage;
-        if (health.MyCurrentValue <= 0)
+        health.StatBarCurrentValue -= damage;
+        if (health.StatBarCurrentValue <= 0)
         {
             Direction = Vector2.zero;
             myRigid2D.velocity = direction;

@@ -107,7 +107,7 @@ public class EnemyBase : NPC
         //SetTarget(source);
         base.TakeDamage(damage, knockbackDir, null, TextType);
 
-        if (health.MyCurrentValue <= 0)
+        if (health.StatBarCurrentValue <= 0)
         {
             _prefabs.PlayAnimation(2);
             healthGroup.alpha = 0;

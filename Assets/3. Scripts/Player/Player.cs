@@ -23,7 +23,7 @@ public class Player : Character
     private FloatingJoystick joy;
 
     [SerializeField]
-    private Stat mana;
+    private StatBar mana;
     private float initMana = 50;
 
     [SerializeField]
@@ -55,13 +55,13 @@ public class Player : Character
         ///
         if (Input.GetKeyDown(KeyCode.I))
         {
-            health.MyCurrentValue -= 10;
-            mana.MyCurrentValue -= 10;
+            health.StatBarCurrentValue -= 10;
+            mana.StatBarCurrentValue -= 10;
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            health.MyCurrentValue += 10;
-            mana.MyCurrentValue += 10;
+            health.StatBarCurrentValue += 10;
+            mana.StatBarCurrentValue += 10;
         }
 
         Vector2 moveVector;
