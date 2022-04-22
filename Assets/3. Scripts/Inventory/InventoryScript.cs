@@ -43,7 +43,7 @@ public class InventoryScript : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         AddSlots(40);
     }
-    public Item[] items;
+    public ItemBase[] items;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
@@ -114,7 +114,7 @@ public class InventoryScript : MonoBehaviour
     {
         foreach (SlotScript slots in MySlots)
         {
-            if(!slots.IsEmpty && slots.MyItem.MyName == item.MyName)
+            if(!slots.IsEmpty && slots.MyItem.MyName == item.MyName && slots.MyItem.MyQuality == item.MyQuality)
                item.MySlot = slots;
         }
        
@@ -128,6 +128,8 @@ public class InventoryScript : MonoBehaviour
             {
                 // 해당 슬롯에 아이템을 추가한다.
                 slot.AddItem(item);
+                OnItemCountChanged(item);
+
                 return true;
             }
         }

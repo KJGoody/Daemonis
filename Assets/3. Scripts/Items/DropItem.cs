@@ -26,15 +26,20 @@ public class DropItem : MonoBehaviour
         this.item = item;
         sprite.sprite = item.MyIcon;
     }
-    public void SetDropItem(ItemBase _item) // 몬스터에서 드랍할때 이걸로 추가할 예정
+    public void SetDropItem(Item _item) // 몬스터에서 드랍할때 이걸로 추가할 예정
     {
-        item = _item;
+        item = new ItemBase();
+        int a = Random.Range(0, 2);
+        if (a == 0)
+            item.MyQuality = Quality.Rare;
+        else
+            item.MyQuality = Quality.Epic;
+        item.itemInfo = _item;
         sprite.sprite = _item.MyIcon;
+        DI_Text.text = _item.MyName;
     }
     private void Start()
     {
-        DI_Text.text = item.MyName;
-        sprite.sprite = item.MyIcon;
         speed = 0;
         playerTransform = GameObject.Find("Player").transform.GetChild(1).GetComponent<Transform>();
         startPos = transform.position;

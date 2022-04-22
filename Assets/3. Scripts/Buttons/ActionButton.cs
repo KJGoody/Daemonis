@@ -97,7 +97,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
     public void SetUseable(IUseable useable)
     {
         // 액션 퀵슬롯에 등록되려는 것이 아이템이라면
-        if (useable is Item)
+        if (useable is ItemBase)
         {
             // 해당 아이템과 같은 종류의 아이템을 가진 리스트를 저장하고
             useables = InventoryScript.MyInstance.GetUseables(useable);

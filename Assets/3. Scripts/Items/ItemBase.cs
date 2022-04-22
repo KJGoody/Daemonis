@@ -1,13 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum Quality { Normal, Advanced, Rare, Epic, Legendary, Relic }
 public class ItemBase : IMoveable, IDescribable, IUseable
 {
     public Item itemInfo;
     [SerializeField]
     private Quality quality;// 아이템 등급
 
+    public Quality MyQuality
+    {
+        get
+        {
+            return quality;
+        }
+        set
+        {
+            quality = value;
+        }
+    }
     public Sprite MyIcon
     {
         get
@@ -124,7 +135,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
     {
         if (MySlot != null)
         {
-            if (MySlot.MyCount == 0)
+            //if (MySlot.MyCount == 0) // 나중에 다시 넣을수도 있음 포션 아이템슬롯 0일때 새로 하나 찾는거
                 InventoryScript.MyInstance.FindUseSlot(this);
             MySlot.RemoveItem(this);
         }
@@ -155,6 +166,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
     {
         HealthPotion healthPotion = itemInfo as HealthPotion;
         healthPotion.Use();
+        Remove();
     }
     public string GetName() // 일단 useable때문에 넣어두긴함
     {
