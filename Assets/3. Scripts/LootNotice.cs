@@ -16,7 +16,7 @@ public class LootNotice : MonoBehaviour
         LootNoticeManager.MyInstance.AddLootNotice(gameObject);
         
     }
-    public void SetDescript(Item _Item)
+    public void SetDescript(ItemBase _Item)
     {
         image.sprite = _Item.MyIcon;
         text.text = _Item.MyName;
