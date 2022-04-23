@@ -11903,6 +11903,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EX_Run
       objectReference: {fileID: 0}
+    - target: {fileID: 1841044408800002298, guid: 9c7b98a354516a043abe83a7abdedffc,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1841044408800002299, guid: 9c7b98a354516a043abe83a7abdedffc,
         type: 3}
       propertyPath: m_RootOrder
