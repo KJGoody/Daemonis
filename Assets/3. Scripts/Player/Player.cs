@@ -86,17 +86,20 @@ public class Player : Character
         Spell newSpell = SpellBook.MyInstance.CastSpell(spellIName); //스펠북에서 스킬 받아옴
         IsAttacking = true;
         _prefabs.PlayAnimation(4);
+        if (MyTarget != null) // 밑에랑 나눠둘수밖에 없음
+        {
+            FindTarget();
+        }
 
         GameObject spell = newSpell.MySpellPrefab;
 
         SpellScript s = Instantiate(spell, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
         s.Initailize(newSpell.MyDamage,transform,atkDir);
-        if (MyTarget != null)
+
+        if (MyTarget != null) //위에랑 나눠둘수밖에 없음
         {
-            FindTarget();
             s.MyTarget = MyTarget;
         }
-
         
         yield return new WaitForSeconds(0.3f); // 테스트를 위한 코드입니다. 여기다가 후딜넣을까 생각중
         StopAttack();

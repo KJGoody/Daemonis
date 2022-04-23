@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -291,9 +291,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46b2296a6b64d048852f1ca18c12b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 024f5d8ebb329fe46929e66f5165e21f, type: 2}
   DI_Text: {fileID: 703832999}
   sprite: {fileID: 1411184612657943184}
+  goldImage: {fileID: 21300000, guid: cc6fffbd9690a9343bd105f7ed213a12, type: 3}
   L_Start: 0
 --- !u!61 &1411184612657943189
 BoxCollider2D:

@@ -6,6 +6,34 @@ using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager instance;
+
+    public static GameManager MyInstance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<GameManager>();
+            }
+            return instance;
+        }
+    }
+    private int gold;
+    public int MyGold
+    {
+        get
+        {
+            return gold;
+        }
+        set
+        {
+            if (value <= 0)
+                value = 0;
+            gold = value;
+        }
+    }
+    
     [SerializeField]
     private Player player;
 

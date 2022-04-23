@@ -141,6 +141,9 @@ public class Enemy : NPC
             Destroy(transform.Find("HitBox").gameObject);
             Destroy(transform.Find("EnemyBody").gameObject);
 
+            ItemDropManager.MyInstance.DropGold(transform);
+            ItemDropManager.MyInstance.DropItem(transform);
+
             StartCoroutine("Death");
             if (IsComboNPC)
                 comboManager.IncreaseCombo();

@@ -21,6 +21,11 @@ public class LootNotice : MonoBehaviour
         image.sprite = _Item.MyIcon;
         text.text = _Item.MyName;
     }
+    public void SetGoldInfo(int _gold, Sprite _sprite)
+    {
+        image.sprite = _sprite;
+        text.text = _gold + " °ñµå";
+    }
     void Start()
     {
         Invoke("Off", 3);

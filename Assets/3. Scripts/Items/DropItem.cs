@@ -11,9 +11,15 @@ public class DropItem : MonoBehaviour
     Text DI_Text;
     [SerializeField]
     SpriteRenderer sprite;
-
+    [SerializeField]
+    Sprite goldImage;
+    private int gold;
     private float speed;
-
+    private enum IsKind
+    {
+        Gold,Item
+    }
+    IsKind isKind;
     private Vector2 startPos;
     private Transform playerTransform;
     private float upTime;
@@ -26,17 +32,22 @@ public class DropItem : MonoBehaviour
         this.item = item;
         sprite.sprite = item.MyIcon;
     }
-    public void SetDropItem(Item _item) // 몬스터에서 드랍할때 이걸로 추가할 예정
+    public void SetDropItem(Item _item, Quality _quality) // 몬스터에서 드랍할때 이걸로 추가할 예정
     {
+        isKind = IsKind.Item;
         item = new ItemBase();
         item.itemInfo = _item;
-        int a = Random.Range(0, 2);
-        if (a == 0)
-            item.MyQuality = Quality.Rare;
-        else
-            item.MyQuality = Quality.Epic;
+        item.MyQuality = _quality;
         sprite.sprite = item.MyIcon;
         DI_Text.text = item.MyName;
+    }
+    public void SetGold(int _gold)
+    {
+        isKind = IsKind.Gold;
+        gold = _gold;
+       // DI_Text.color = new Color(171, 164, 36);
+        DI_Text.text = _gold + " 골드";
+        sprite.sprite = goldImage;
     }
     private void Start()
     {
@@ -49,14 +60,21 @@ public class DropItem : MonoBehaviour
     {
         if(collision.name == "Player")
         {
-            // 인벤토리에 아이템 추가
-            InventoryScript.MyInstance.AddItem(item);
-
-            // 아이템 획득 알림
             GameObject notice = Instantiate(Resources.Load("LootNotice") as GameObject, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
-            notice.GetComponent<LootNotice>().SetDescript(item);
             notice.transform.SetParent(GameObject.Find("ItemLooting").transform);
-
+            switch (isKind)
+            {
+                case IsKind.Gold:
+                    GameManager.MyInstance.MyGold += gold;
+                    notice.GetComponent<LootNotice>().SetGoldInfo(gold, goldImage);
+                    break;
+                case IsKind.Item:
+                    // 인벤토리에 아이템 추가
+                    InventoryScript.MyInstance.AddItem(item);
+                    // 아이템 획득 알림
+                    notice.GetComponent<LootNotice>().SetDescript(item);
+                    break;
+            }
             Destroy(gameObject);
 
         }
