@@ -74,7 +74,6 @@ public class Player : Character
                 atkDir = moveVector;
             if (IsMoving)
             {
-                Debug.Log(Direction);
                 Animator runParticle = GetComponent<Animator>();
                 runParticle.SetTrigger("Run");
             }
