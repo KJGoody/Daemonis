@@ -20,7 +20,6 @@ public class SpellScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Invoke("DestroySpell", 7);
         myRigidbody = GetComponent<Rigidbody2D>();
         if (MyTarget != null)
             direction = MyTarget.position - transform.position;
@@ -101,9 +100,5 @@ public class SpellScript : MonoBehaviour
         else
             return true;
 
-    }
-    private void DestroySpell()
-    {
-        Destroy(gameObject);
     }
 }
