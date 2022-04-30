@@ -72,6 +72,11 @@ public class Player : Character
             Direction = moveVector;
             if(moveVector.x != 0 && moveVector.y != 0)
                 atkDir = moveVector;
+            if (IsMoving)
+            {
+                Animator runParticle = GetComponent<Animator>();
+                runParticle.SetTrigger("Run");
+            }
         }
      
          
