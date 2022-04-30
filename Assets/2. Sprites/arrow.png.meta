@@ -109,12 +109,12 @@ TextureImporter:
       name: arrow_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 5
-        width: 22
-        height: 22
+        x: 8
+        y: 8
+        width: 18
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

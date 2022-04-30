@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 131317162366283872}
   - component: {fileID: 6020417662250588925}
   - component: {fileID: 4869722830177248732}
-  - component: {fileID: 8917016000366144472}
+  - component: {fileID: 4820348759910683643}
   m_Layer: 0
   m_Name: BaseRanged_Attack
   m_TagString: Untagged
@@ -50,9 +50,10 @@ MonoBehaviour:
   speed: 5
   damage: 3
   WaitWarningSceonds: 0
+  AOEexitPoint: {fileID: 0}
   AOEDamage: 0
-  AEtimes: 0
-  AEwaitforseconds: 0
+  AOETickTime: 0
+  AOETime: 0
 --- !u!212 &6020417662250588925
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -126,8 +127,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &8917016000366144472
-BoxCollider2D:
+--- !u!58 &4820348759910683643
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -136,19 +137,9 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0010582507}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6875, y: 0.6875}
-    newSize: {x: 0.5625, y: 0.5625}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.6875, y: 0.18166131}
-  m_EdgeRadius: 0
+  m_Radius: 0.28125
