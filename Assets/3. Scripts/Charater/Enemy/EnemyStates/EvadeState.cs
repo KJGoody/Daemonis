@@ -25,16 +25,12 @@ public class EvadeState : IState
         // 매프레임마다 처음 시작위치로 되돌아감.
         parent.Direction = parent.myStartPosition - parent.transform.position;
 
-        Vector2 parentPosition = parent.transform.position;
-        Vector2 startPosition = parent.myStartPosition;
-
         // 시작 위치까지 이동하면 IdleState 상태로 변경시킴
-        float distance = Vector2.Distance(startPosition, parentPosition);
+        float distance = Vector2.Distance(parent.myStartPosition, parent.transform.position);
         if (distance <= 0.5f)
         {
             parent.ChangeState(new IdleState());
         }
-
     }
 }
 

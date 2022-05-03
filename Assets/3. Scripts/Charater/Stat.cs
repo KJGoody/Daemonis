@@ -10,14 +10,11 @@ public class Stat : MonoBehaviour
     private float currentHealth;
     public float CurrentHealth
     {
-        get
-        {
-            return currentHealth;
-        }
-        set
-        {
-            currentHealth = value;
-            HealthBar.StatBarCurrentValue = value;
+        get { return currentHealth; }
+        set 
+        { 
+            currentHealth = value; 
+            HealthBar.StatBarCurrentValue = value; 
         }
     }
     public float HealthRegen;
@@ -27,14 +24,11 @@ public class Stat : MonoBehaviour
     private float currentMana;
     public float CurrentMana
     {
-        get
-        {
-            return currentMana;
-        }
-        set
-        {
+        get { return currentMana; }
+        set 
+        { 
             currentMana = value;
-            ManaBar.StatBarCurrentValue = value;
+            ManaBar.StatBarCurrentValue = value; 
         }
     }
     public float ManaRegen;

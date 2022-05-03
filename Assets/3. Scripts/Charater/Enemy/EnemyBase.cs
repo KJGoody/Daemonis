@@ -22,7 +22,6 @@ public class EnemyBase : NPC
     public float myAggroRange;
     [HideInInspector]
     public float myAttackRange;
-    public bool InRange { get { return Vector2.Distance(transform.position, MyTarget.position) < myAggroRange; } }
     
     [HideInInspector]
     public float MyAttackTime = 1000f;
@@ -147,4 +146,6 @@ public class EnemyBase : NPC
         this.MyTarget = null;
         this.Direction = Vector2.zero;
     }
+
+
 }
