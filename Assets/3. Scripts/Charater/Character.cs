@@ -179,8 +179,8 @@ public abstract class Character : MonoBehaviour
     private void NewDamageText(int damage, string tagName)
     {
         GameObject newText = Instantiate(Resources.Load("NewText") as GameObject, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
-        newText.GetComponent<DamageText>().Damage = damage;
         newText.GetComponent<DamageText>().TextType = tagName;
+        newText.GetComponent<DamageText>().Damage = damage;
     }
 
     IEnumerator Death()

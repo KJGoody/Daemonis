@@ -7,16 +7,14 @@ public class EnemyBase : NPC
 {
     public EnemyType enemytype;
     private IState currentState;
+
     [HideInInspector]
     public Vector3 myStartPosition;
-
     [SerializeField]
     private CanvasGroup healthGroup;
     public GameObject unitroot;
     public Transform ExitPoint;
-
-    private ComboManager comboManager;
-    private NavManager navManager;
+    public float RubbingTime = 0f;
 
     [HideInInspector]
     public float myAggroRange;
@@ -33,9 +31,6 @@ public class EnemyBase : NPC
     {
         ChangeState(new IdleState());
         myStartPosition = transform.position;
-
-        comboManager = FindObjectOfType<ComboManager>();
-        navManager = FindObjectOfType<NavManager>();
 
         base.Awake();
     }
@@ -117,7 +112,7 @@ public class EnemyBase : NPC
             Destroy(transform.Find("EnemyBody").gameObject);
 
             StartCoroutine("Death");
-            comboManager.IncreaseCombo();
+            ComboManager.Instance.IncreaseCombo();
         }
     }
 

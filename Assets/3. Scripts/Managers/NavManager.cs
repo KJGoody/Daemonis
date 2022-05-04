@@ -16,6 +16,19 @@ public class Node
 
 public class NavManager : MonoBehaviour
 {
+    private static NavManager instance;
+    public static NavManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<NavManager>();
+            }
+            return instance;
+        }
+    }
+
     public Vector2Int bottomLeft, topRight, startPos, targetPos;
     public List<Node> FinalNodeList;
     public bool allowDiagonal = true;

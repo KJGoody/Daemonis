@@ -5,6 +5,19 @@ using UnityEngine.UI;
 
 public class ComboManager : MonoBehaviour
 {
+    private static ComboManager instance;
+    public static ComboManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<ComboManager>();
+            }
+            return instance;
+        }
+    }
+
     [SerializeField]
     private GameObject ComboView;
     private Text comboNum;

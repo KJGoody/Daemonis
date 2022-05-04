@@ -22,19 +22,12 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private int damage;
 
-    [SerializeField]
-    private float WaitWarningSceonds;
-
     private bool IsAOEAttack = false;
-    private Transform AOEexitPoint;              // 장판오브젝트 소환 포인트
-    public int AOEDamage;                       // 장판오브젝트 데미지
-    [SerializeField]
-    private int AEtimes;                        // 장판의 공격 횟수
-    private float LastAttackTime = 1000f;
-    public float AEwaitforseconds = 0f;             // 장판 공격간 쉬는 시간
-    private bool IsPlayerInArea;
-    private bool IsAOEAttacking;
-    private bool IsAOEAttackingNow = false;
+    private Transform AOEexitPoint;         // 장판오브젝트 소환 포인트
+    public int AoeRadius;                   // 장판 반지름
+    public int AoeDamage;                   // 장판오브젝트 데미지
+    public int AoeTimes;                     // 장판의 공격 횟수
+    public float AoeWaitforSeconds = 0f;    // 장판 공격간 쉬는 시간
 
 
     Coroutine PlayCoroutine;
@@ -44,7 +37,7 @@ public class EnemyAttack : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         MyTarget = GameObject.Find("HitBox_Player").GetComponent<Transform>();
         direction = MyTarget.position - transform.position;
-        AOEexitPoint = this.GetComponent<Transform>();
+        
     }
 
     private void Start()
@@ -65,6 +58,7 @@ public class EnemyAttack : MonoBehaviour
 
             case EnemyAttackType.BaseAOEAttack:
                 IsAOEAttack = true;
+                AOEexitPoint = this.GetComponent<Transform>();
                 this.GetComponent<SpriteRenderer>().enabled = false;
                 StartCoroutine(BaseAOEAttack());
                 break;
@@ -76,27 +70,11 @@ public class EnemyAttack : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (IsAOEAttacking && !IsAOEAttackingNow && IsPlayerInArea && LastAttackTime >= AEwaitforseconds)
-        {
-            IsAOEAttackingNow = true;
-            PlayCoroutine = StartCoroutine(AETimes());
-        }
-        else if (IsAOEAttackingNow && !IsPlayerInArea)
-        {
-            IsAOEAttackingNow = false;
-            StopCoroutine(PlayCoroutine);
-        }
-    }
-
     private void FixedUpdate()
     {
         myRigidbody.velocity = direction.normalized * speed;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        LastAttackTime += Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -106,13 +84,10 @@ public class EnemyAttack : MonoBehaviour
 
         if (collision.CompareTag("HitBox_Player"))
         {
-            IsPlayerInArea = true;
             if (!IsAOEAttack)
             {
-                Character c = collision.GetComponentInParent<Character>();
-                string TextType = "PlayerDamage";
-                c.NewBuff("BaseBuff");
-                c.TakeDamage(damage, direction, null, TextType);
+                SpendDamage(collision);
+
                 speed = 0;
                 myRigidbody.velocity = Vector3.zero;
                 MyTarget = null;
@@ -121,10 +96,12 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void SpendDamage(Collider2D collision)
     {
-        if (collision.CompareTag("HitBox_Player"))
-            IsPlayerInArea = false;
+        Character character = collision.GetComponentInParent<Character>();
+        
+        string TextType = "PlayerDamage";                                   // 텍스트 타입 설정
+        character.TakeDamage(damage, direction, null, TextType);            // 데미지 전송
     }
 
     IEnumerator BaseMeleeAttack()
@@ -147,26 +124,24 @@ public class EnemyAttack : MonoBehaviour
 
     IEnumerator BaseAOEAttack()
     {
+            // 위험지역 표시
         WarningArea warningarea = Instantiate(Resources.Load("EnemyAttack/WaringArea") as GameObject, this.transform).GetComponent<WarningArea>();
-        warningarea.destroyTime = WaitWarningSceonds;
-        yield return new WaitForSeconds(WaitWarningSceonds + 0.5f);
+        warningarea.destroyTime = 1f;
+        yield return new WaitForSeconds(1f + 0.5f);
         this.GetComponent<SpriteRenderer>().enabled = true;
 
-        IsAOEAttacking = true;
-        yield return new WaitForSeconds(AEwaitforseconds * AEtimes);
+        // AOE 공격 시작
+        for(int i = 0; i < AoeTimes; i++)
+        {
+            Collider2D collider = Physics2D.OverlapCircle(AOEexitPoint.position, AoeRadius, LayerMask.GetMask("Player"));
+            if (collider != null)
+                SpendDamage(collider);
+
+            yield return new WaitForSeconds(AoeWaitforSeconds);
+        }
         Destroy(gameObject);
     }
 
-    IEnumerator AETimes()
-    {
-        while (IsAOEAttacking)
-        {
-            EnemyAttack AEattack = Instantiate(Resources.Load("EnemyAttack/BaseAE_Attack") as GameObject, AOEexitPoint).GetComponent<EnemyAttack>();
-            AEattack.damage = AOEDamage;
-            LastAttackTime = 0f;
-            yield return new WaitForSeconds(AEwaitforseconds);
-        }
-    }
     IEnumerator BaseAEAttack()
     {
         yield return new WaitForSeconds(0.1f);
