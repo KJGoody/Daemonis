@@ -91,9 +91,9 @@ public class EnemyBase : NPC
         base.DeSelect();
     }
 
-    public void EnemyAttackResource(GameObject EnemyAttackResource, Transform transform)
+    public void CreateResource(GameObject resource, Transform transform)
     {
-        Instantiate(EnemyAttackResource, transform);
+        Instantiate(resource, transform);
     }
 
     public override void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string TextType = null) // ÇÇ°Ý

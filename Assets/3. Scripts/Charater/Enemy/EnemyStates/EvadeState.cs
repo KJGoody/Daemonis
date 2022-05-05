@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class EvadeState : IState
 {
-
     private EnemyBase parent;
 
-
+    private ANav aNav;
+    
 
     public void Enter(EnemyBase parent)
     {
         this.parent = parent;
+
+        parent.CreateResource(Resources.Load("ANav") as GameObject, parent.transform);
+        aNav = parent.GetComponentInChildren<ANav>();
     }
 
     public void Exit()
@@ -22,14 +25,20 @@ public class EvadeState : IState
 
     public void Update()
     {
-        // 매프레임마다 처음 시작위치로 되돌아감.
-        parent.Direction = parent.myStartPosition - parent.transform.position;
-
-        // 시작 위치까지 이동하면 IdleState 상태로 변경시킴
-        float distance = Vector2.Distance(parent.myStartPosition, parent.transform.position);
-        if (distance <= 0.5f)
+        if (aNav.EndPathFinding)
         {
-            parent.ChangeState(new IdleState());
+            parent.Direction = aNav.path[aNav.CurrentPathNode].worldPos - parent.transform.position;
+
+            float distacne = Vector2.Distance(aNav.path[aNav.CurrentPathNode].worldPos, parent.transform.position);
+            if(distacne < 0.1f)
+            {
+                aNav.CurrentPathNode -= 1;
+                if (aNav.CurrentPathNode < 0)
+                {
+                    parent.ChangeState(new IdleState());
+                    aNav.DestroyANav();
+                }
+            }
         }
     }
 }

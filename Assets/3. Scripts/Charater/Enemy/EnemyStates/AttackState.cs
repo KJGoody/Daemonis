@@ -75,7 +75,7 @@ public class AttackState : IState
         parent._prefabs.PlayAnimation(4);
 
         yield return new WaitForSeconds(0.15f); // 애니메이션 내려찍기 시작
-        parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseMelee_Attack") as GameObject, parent.ExitPoint);
+        parent.CreateResource(Resources.Load("EnemyAttack/BaseMelee_Attack") as GameObject, parent.ExitPoint);
         yield return new WaitForSeconds(0.15f); // 애니메이션 종료
 
         parent.IsAttacking = false;
@@ -87,7 +87,7 @@ public class AttackState : IState
         parent._prefabs.PlayAnimation(5);
 
         yield return new WaitForSeconds(0.2f);
-        parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseRanged_Attack") as GameObject, parent.ExitPoint);
+        parent.CreateResource(Resources.Load("EnemyAttack/BaseRanged_Attack") as GameObject, parent.ExitPoint);
         yield return new WaitForSeconds(0.1f);
 
         parent.IsAttacking = false;
@@ -102,7 +102,7 @@ public class AttackState : IState
         parent.gameObject.layer = 7;                // Rushing레이어로 바꾸기, 플레이어와 충돌무시
         parent.Direction = parent.MyTarget.transform.position - parent.transform.position;
         parent.RushSpeed = 7f;
-        parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseRush_Attack") as GameObject, parent.ExitPoint);
+        parent.CreateResource(Resources.Load("EnemyAttack/BaseRush_Attack") as GameObject, parent.ExitPoint);
         yield return new WaitForSeconds(0.5f);
 
         parent.Direction = Vector2.zero;
@@ -116,7 +116,7 @@ public class AttackState : IState
         yield return new WaitForSeconds(0.5f); // 선딜
         parent._prefabs.PlayAnimation(6);
         yield return new WaitForSeconds(1f);
-        parent.EnemyAttackResource(Resources.Load("EnemyAttack/BaseAOE_Attack") as GameObject, parent.MyTarget);
+        parent.CreateResource(Resources.Load("EnemyAttack/BaseAOE_Attack") as GameObject, parent.MyTarget);
         parent.IsAttacking = false;
     }
 }
