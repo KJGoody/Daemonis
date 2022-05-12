@@ -28,7 +28,7 @@ public class ANode
 
 public class ANav : MonoBehaviour
 {
-        // 그리드 생성
+    // 그리드 생성
     public LayerMask WallMask;
 
     private ANode[,] Grid;
@@ -41,7 +41,7 @@ public class ANav : MonoBehaviour
 
     public List<ANode> path = new List<ANode>();    // 탐색완료 경로
 
-        // 탐색
+    // 탐색
     private EnemyBase parent;
 
     private Vector3 StartPoint;
@@ -55,8 +55,7 @@ public class ANav : MonoBehaviour
         parent = GetComponentInParent<EnemyBase>();
 
         CreateGrid();
-        GridCenter = new Vector3(Mathf.Floor(parent.transform.position.x), Mathf.Floor(parent.transform.position.y));
-        
+
         StartPoint = parent.transform.position;
         TargetPoint = parent.myStartPosition;
     }
@@ -68,6 +67,7 @@ public class ANav : MonoBehaviour
 
     private void CreateGrid()
     {
+        GridCenter = new Vector3(Mathf.Floor(parent.transform.position.x), Mathf.Floor(parent.transform.position.y));
         GridSizeX = Mathf.RoundToInt(GridSize.x);   // 그리드의 가로 크기
         GridSizeY = Mathf.RoundToInt(GridSize.y);   // 그리드의 세로 크기
 
@@ -98,9 +98,10 @@ public class ANav : MonoBehaviour
                 int CheckX = node.GridX + x;
                 int CheckY = node.GridY + y;
 
-                // x, y의 값이 Grid 범위 안에 있을 경우
-                if (CheckX >= 0 && CheckX < GridSizeX && CheckY >= 0 && CheckY < GridSizeY)
-                    neighobours.Add(Grid[CheckX, CheckY]);
+                if (CheckX >= 0 && CheckX < GridSizeX && CheckY >= 0 && CheckY < GridSizeY)     // x, y의 값이 Grid 범위 안에 있을 경우
+                    if (!Grid[node.GridX, CheckY].isWall && !Grid[CheckX, node.GridY].isWall)     // 벽 사이로 통과 안됨
+                        if (!Grid[node.GridX, CheckX].isWall || !Grid[CheckX, node.GridY].isWall) // 코너를 가로질러 갈때 이동중 수직 수평 장애물이 있으면 안됨
+                            neighobours.Add(Grid[CheckX, CheckY]);
             }
         }
         return neighobours;
@@ -108,10 +109,8 @@ public class ANav : MonoBehaviour
 
     public ANode GetNodeFromWorldPoint(Vector3 worldPosition)               // 노드의 월드 좌표찾기
     {
-        float percentX = (worldPosition.x + GridSize.x / 2) / GridSize.x;
-        float percentY = (worldPosition.y + GridSize.y / 2) / GridSize.y;
-        percentX = Mathf.Clamp01(percentX);
-        percentY = Mathf.Clamp01(percentY);
+        float percentX = Mathf.Clamp01((worldPosition.x - (GridCenter.x - GridSize.x / 2)) / GridSize.x);
+        float percentY = Mathf.Clamp01((worldPosition.y - (GridCenter.y - GridSize.y / 2) + 0.3f) / GridSize.y);
 
         int x = Mathf.RoundToInt((GridSizeX - 1) * percentX);
         int y = Mathf.RoundToInt((GridSizeY - 1) * percentY);
@@ -146,7 +145,7 @@ public class ANav : MonoBehaviour
                 RetracePath(startNode, targetNode);
                 break;
             }
-            
+
             foreach (ANode n in GetNeighbours(CurrentNode))
             {
                 if (n.isWall || closedList.Contains(n)) // 현재 노드가 벽일 경우 OR 닫힌목록에 포함되어 있는 경우 스킵
@@ -195,22 +194,22 @@ public class ANav : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(transform.position, new Vector3(GridSize.x, GridSize.y));
-        if (Grid != null)
-        {
-            foreach (ANode n in Grid)
-            {
-                Gizmos.color = (n.isWall) ? Color.red : Color.white;
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireCube(transform.position, new Vector3(GridSize.x, GridSize.y));
+    //    if (Grid != null)
+    //    {
+    //        foreach (ANode n in Grid)
+    //        {
+    //            Gizmos.color = (n.isWall) ? Color.red : Color.white;
 
-                if (path != null)
-                {
-                    if (path.Contains(n))
-                        Gizmos.color = Color.black;
-                }
-                Gizmos.DrawCube(n.worldPos, Vector3.one * (nodeRadius * 2 - 0.1f));
-            }
-        }
-    }
+    //            if (path != null)
+    //            {
+    //                if (path.Contains(n))
+    //                    Gizmos.color = Color.black;
+    //            }
+    //            Gizmos.DrawCube(n.worldPos, Vector3.one * (nodeRadius * 2 - 0.1f));
+    //        }
+    //    }
+    //}
 }
