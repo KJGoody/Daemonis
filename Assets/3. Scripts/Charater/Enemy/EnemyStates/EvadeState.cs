@@ -5,9 +5,7 @@ using UnityEngine;
 public class EvadeState : IState
 {
     private EnemyBase parent;
-
     private ANav aNav;
-    
 
     public void Enter(EnemyBase parent)
     {
@@ -15,22 +13,23 @@ public class EvadeState : IState
 
         parent.CreateResource(Resources.Load("ANav") as GameObject, parent.transform);
         aNav = parent.GetComponentInChildren<ANav>();
+        aNav.TargetPoint = parent.myStartPosition;
     }
 
     public void Exit()
     {
         parent.Direction = Vector2.zero;
-        parent.Reset();
+        parent.MyTarget = null;
     }
 
     public void Update()
     {
-        if (aNav.EndPathFinding)
+        if (aNav.SucessPathFinding)
         {
             parent.Direction = aNav.path[aNav.CurrentPathNode].worldPos - parent.transform.position;
 
             float distacne = Vector2.Distance(aNav.path[aNav.CurrentPathNode].worldPos, parent.transform.position);
-            if(distacne < 0.1f)
+            if(distacne < 0.5f)
             {
                 aNav.CurrentPathNode -= 1;
                 if (aNav.CurrentPathNode < 0)

@@ -53,7 +53,7 @@ public class EnemyType : MonoBehaviour
                 AggroRnage = 3;
                 ExitPoint = new Vector3(-0.1f, 0.2f, 0);
                 AttackRnage = 3;
-                AttackDelay = 5;
+                AttackDelay = 3;
                 break;
         }
 

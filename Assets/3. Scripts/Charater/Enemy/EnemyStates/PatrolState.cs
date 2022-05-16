@@ -5,56 +5,74 @@ using UnityEngine;
 class PatrolState : IState
 {
     private EnemyBase parent;
-    private Vector3 PatrolPoint;
+    private ANav aNav;
 
-    private RaycastHit2D hitTop;
-    private RaycastHit2D hitBottom;
+    private Vector3 PatrolPoint;
 
     public void Enter(EnemyBase parent)
     {
         this.parent = parent;
-            
-        do
-        {
-            while (true)
-            {
-                float randomNumX = Random.Range(-3f, 3f);
-                float randomNumY = Random.Range(-3f, 3f);
-                PatrolPoint = new Vector3(parent.myStartPosition.x + randomNumX, parent.myStartPosition.y + randomNumY, parent.myStartPosition.z);
 
-                float radius = (PatrolPoint - parent.transform.position).sqrMagnitude;
-                if (radius < 3f * 3f)
-                    break;
-            }
-
-            hitTop = Physics2D.Raycast(parent.transform.position, PatrolPoint + new Vector3(0, 0.75f, 0), 3f, LayerMask.GetMask("Wall"));
-            hitBottom = Physics2D.Raycast(parent.transform.position, PatrolPoint, 3f, LayerMask.GetMask("Wall"));
-        } while (hitTop.collider != null && hitBottom.collider != null);
-
-
-
+        PatrolPointPathFinding();
     }
 
     public void Exit()
     {
-
+        parent.Direction = Vector2.zero;
     }
 
     public void Update()
     {
-
-        parent.Direction = PatrolPoint - parent.transform.position;
-        float distance = Vector2.Distance(parent.transform.position, PatrolPoint);
-        if (distance <= 0.5f)
+        if (aNav.EndPathFinding)
         {
-            parent.ChangeState(new IdleState());
+            if (aNav.SucessPathFinding)
+            {
+                parent.Direction = aNav.path[aNav.CurrentPathNode].worldPos - parent.transform.position;
+
+                float distacne = Vector2.Distance(aNav.path[aNav.CurrentPathNode].worldPos, parent.transform.position);
+                if (distacne < 0.5f)
+                {
+                    aNav.CurrentPathNode -= 1;
+                    if (aNav.CurrentPathNode < 0)
+                    {
+                        parent.ChangeState(new IdleState());
+                        aNav.DestroyANav();
+                    }
+                }
+            }
+            else
+            {
+                PatrolPointPathFinding();
+            }
         }
 
         if (parent.MyTarget != null)
         {
             parent.ChangeState(new FollowState());
+            aNav.DestroyANav();
         }
     }
 
-    
+    private void PatrolPointPathFinding()
+    {
+        if (aNav != null)
+        {
+            aNav.DestroyANav();
+            Debug.Log(aNav);
+        }
+
+        while (true)
+        {
+            //PatrolPoint = Random.insideUnitCircle * parent.myAggroRange;
+            PatrolPoint = Random.insideUnitCircle;
+            PatrolPoint += parent.myStartPosition;
+
+            Collider2D collider = Physics2D.OverlapCircle(PatrolPoint, 0.5f, LayerMask.GetMask("Wall"));
+            if (collider == null) break;
+        }
+
+        parent.CreateResource(Resources.Load("ANav") as GameObject, parent.transform);
+        aNav = parent.GetComponentInChildren<ANav>();
+        aNav.TargetPoint = PatrolPoint;
+    }
 }

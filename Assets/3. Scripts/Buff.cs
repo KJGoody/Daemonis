@@ -45,7 +45,7 @@ public class Buff : MonoBehaviour
     void DeActivationBuff()
     {
         Target.onBuff.Remove(this);
-        BuffManager.myInstance.BuffList.Remove(gameObject);
+        BuffManager.Instance.BuffList.Remove(gameObject);
         Destroy(gameObject);
     }
 }

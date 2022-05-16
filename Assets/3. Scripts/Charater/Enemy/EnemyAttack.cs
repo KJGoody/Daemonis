@@ -24,7 +24,7 @@ public class EnemyAttack : MonoBehaviour
 
     private bool IsAOEAttack = false;
     private Transform AOEexitPoint;         // 장판오브젝트 소환 포인트
-    public int AoeRadius;                   // 장판 반지름
+    public float AoeRadius;                   // 장판 반지름
     public int AoeDamage;                   // 장판오브젝트 데미지
     public int AoeTimes;                     // 장판의 공격 횟수
     public float AoeWaitforSeconds = 0f;    // 장판 공격간 쉬는 시간

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class ANode
 {
     public bool isWall;
@@ -13,7 +14,6 @@ public class ANode
     public int hCost;
 
     public ANode parentNode;
-
 
     public ANode(bool nisWall, Vector3 nWorldPos, int nGridX, int nGridY)
     {
@@ -45,24 +45,32 @@ public class ANav : MonoBehaviour
     private EnemyBase parent;
 
     private Vector3 StartPoint;
-    private Vector3 TargetPoint;
+    public Vector3 TargetPoint;
 
     public bool EndPathFinding = false;
+    public bool SucessPathFinding = false;
     public int CurrentPathNode;
 
     private void Awake()
     {
         parent = GetComponentInParent<EnemyBase>();
 
-        CreateGrid();
-
         StartPoint = parent.transform.position;
-        TargetPoint = parent.myStartPosition;
+
     }
 
     private void Start()
     {
-        FindPath(StartPoint, TargetPoint);
+        if (Vector2.Distance(StartPoint, TargetPoint) > 1f)
+        {
+            CreateGrid();
+            FindPath(StartPoint, TargetPoint);
+        }
+        else
+        {
+            EndPathFinding = true;
+            Debug.Log(SucessPathFinding);
+        }
     }
 
     private void CreateGrid()
@@ -143,6 +151,8 @@ public class ANav : MonoBehaviour
             if (CurrentNode == targetNode)  // 현재 노드가 타겟노드일 경우 탐색을 종료 한다.
             {
                 RetracePath(startNode, targetNode);
+                SucessPathFinding = true;
+                CurrentPathNode = path.Count - 1;
                 break;
             }
 
@@ -165,7 +175,6 @@ public class ANav : MonoBehaviour
         }
 
         EndPathFinding = true;
-        CurrentPathNode = path.Count - 1;
     }
 
     void RetracePath(ANode startNode, ANode endNode)
@@ -191,7 +200,10 @@ public class ANav : MonoBehaviour
 
     public void DestroyANav()
     {
+        Debug.Log("Anav : "+ gameObject);
+        gameObject.SetActive(false);
         Destroy(gameObject);
+        
     }
 
     //private void OnDrawGizmos()

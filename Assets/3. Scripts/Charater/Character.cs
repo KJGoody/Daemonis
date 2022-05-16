@@ -10,43 +10,31 @@ public abstract class Character : MonoBehaviour
     protected Rigidbody2D myRigid2D;
     public SPUM_Prefabs _prefabs;
     public SPUM_SpriteList _spriteList;
-
     [SerializeField]
     protected Transform hitBox; // 캐릭터 히트박스
 
-        // 애니메이션
+    // 애니메이션
     public enum LayerName { idle = 0, move = 1, attack = 4, death = 2, }
     public LayerName _layerName = LayerName.idle;
-    public bool IsMoving
-    {
-        get
-        {
-            return direction.x != 0 || direction.y != 0;
-        }
-    }
+
+    public bool IsAlive { get { return stat.CurrentHealth > 0; } }      // 생존 확인
+    // 상태확인
+    public bool IsMoving { get { return direction.x != 0 || direction.y != 0; } }
     public bool IsAttacking { get; set; }
 
-        // 스탯
+    // 스탯
     [SerializeField]
     protected Stat stat;
-    public Stat MyHealth    // 체력
-    {
-        get { return stat; }
-    }
+    public Stat MyStat { get { return stat; } }   // 스탯 가져오기
 
-    public bool IsAlive
-    {
-        get { return stat.CurrentHealth > 0; }
-    }
-
-        // 이동관련
+    // 이동관련
     private Vector2 direction;
     public Vector2 Direction
     {
         get { return direction; }
         set { direction = value; }
     }
-
+    
     public Transform MyTarget { get; set; }
 
     protected Coroutine attackRoutine;
@@ -55,25 +43,29 @@ public abstract class Character : MonoBehaviour
     [HideInInspector]
     public float RushSpeed = 0f;
 
+    [HideInInspector]
     public List<Buff> onBuff = new List<Buff>();
 
     protected virtual void Awake()
     {
-
-    }
-    
-    protected virtual void Start()
-    {
         myRigid2D = gameObject.GetComponent<Rigidbody2D>();
     }
+
+    protected virtual void Start()
+    {
+
+    }
+
     protected virtual void Update()
     {
         HandleLayers();
     }
+
     protected virtual void FixedUpdate()
     {
         Move(RushSpeed);
     }
+
     public virtual void Move(float RushSpeed = 0f)
     {
         if (IsAlive)
@@ -91,11 +83,12 @@ public abstract class Character : MonoBehaviour
                 myRigid2D.velocity = direction.normalized * stat.Speed;
         }
     }
+
     public void HandleLayers()
     {
         if (IsAlive)
         {
-                // 캐릭터 좌우 보는거
+            // 캐릭터 좌우 보는거
             if (direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
             else if (direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
 
@@ -126,6 +119,7 @@ public abstract class Character : MonoBehaviour
             _layerName = LayerName.death;
         }
     }
+
     public virtual void FindTarget()
     {
         Direction = MyTarget.position - transform.position;
@@ -145,9 +139,9 @@ public abstract class Character : MonoBehaviour
 
     public void StartBuff(string buffName)
     {
-        if(onBuff.Count > 0)
+        if (onBuff.Count > 0)
         {
-            for(int i = 0; i < onBuff.Count; i++)
+            for (int i = 0; i < onBuff.Count; i++)
             {
                 if (onBuff[i].BuffName.Equals(buffName))
                 {
@@ -155,19 +149,19 @@ public abstract class Character : MonoBehaviour
                 }
                 else
                 {
-                    BuffManager.myInstance.AddBuffImage(this);
+                    BuffManager.Instance.AddBuffImage(this);
                 }
             }
         }
         else
         {
-            BuffManager.myInstance.AddBuffImage(this);
+            BuffManager.Instance.AddBuffImage(this);
         }
     }
 
-    public virtual void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string TextType = null)
+    public virtual void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string texttype = "EnemyDamage")
     {
-        NewDamageText(damage, TextType);
+        NewDamageText(damage, texttype);
         stat.CurrentHealth -= damage;
         if (stat.CurrentHealth <= 0)
         {
@@ -176,14 +170,29 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    private void NewDamageText(int damage, string tagName)
+    private void NewDamageText(int damage, string texttype)
     {
-        GameObject newText = Instantiate(Resources.Load("NewText") as GameObject, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
-        newText.GetComponent<DamageText>().TextType = tagName;
-        newText.GetComponent<DamageText>().Damage = damage;
+        GameObject newText;
+        switch (texttype)
+        {
+            case "PlayerDamage":
+                newText = Instantiate(Resources.Load("Text/PlayerDamageText") as GameObject, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
+                newText.GetComponent<DamageText>().Damage = damage;
+                break;
+
+            case "EnemyDamage":
+                newText = Instantiate(Resources.Load("Text/EnemyDamageText") as GameObject, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
+                newText.GetComponent<DamageText>().Damage = damage;
+                break;
+
+            case "CriticalDamage":
+                newText = Instantiate(Resources.Load("Text/CriticalDamageText") as GameObject, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
+                newText.GetComponent<DamageText>().Damage = damage;
+                break;
+        }
     }
 
-    IEnumerator Death()
+    protected IEnumerator Death()
     {
         myRigid2D.simulated = false;
         yield return new WaitForSeconds(3f);

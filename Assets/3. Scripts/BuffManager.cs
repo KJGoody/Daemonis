@@ -5,7 +5,7 @@ using UnityEngine;
 public class BuffManager : MonoBehaviour
 {
     private static BuffManager instance;
-    public static BuffManager myInstance
+    public static BuffManager Instance
     {
         get
         {

@@ -12,24 +12,11 @@ public class DamageText : MonoBehaviour
     TextMeshPro text;
     Color alpha;
 
-    public string TextType;
-
-
     void Start()
     {
         text = GetComponent<TextMeshPro>();
         alpha = text.color;
-        switch (TextType)
-        {
-            case "PlayerDamage":
-                alpha = new Color(194 / 255f, 31 / 255f, 31 / 255f);
-                break;
-
-            case "CriticalDamage":
-                alpha = new Color(255 / 255f, 212 / 255f, 0 / 255f);
-                break;
-
-        }
+        
         text.text = Damage.ToString();
         Invoke("DestroyObject", destroyTime);
         StartCoroutine(WaitFadeOut());

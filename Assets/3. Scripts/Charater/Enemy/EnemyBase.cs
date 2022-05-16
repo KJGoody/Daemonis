@@ -110,8 +110,8 @@ public class EnemyBase : NPC
             unitroot.GetComponent<SortingGroup>().sortingLayerName = "DeathEnemyLayer";
             Destroy(transform.Find("HitBox").gameObject);
             Destroy(transform.Find("EnemyBody").gameObject);
-
-            StartCoroutine("Death");
+            
+            StartCoroutine(Death());
             ComboManager.Instance.IncreaseCombo();
         }
     }
@@ -135,12 +135,4 @@ public class EnemyBase : NPC
             MyTarget = target;
         }
     }
-
-    public void Reset()
-    {
-        this.MyTarget = null;
-        this.Direction = Vector2.zero;
-    }
-
-
 }
