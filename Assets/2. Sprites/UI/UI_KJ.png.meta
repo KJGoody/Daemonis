@@ -29,6 +29,27 @@ TextureImporter:
   - first:
       213: -5478348151329099693
     second: UI_KJ_8
+  - first:
+      213: 2803183435154248996
+    second: UI_KJ_9
+  - first:
+      213: -4939973864208295026
+    second: UI_KJ_10
+  - first:
+      213: 6728594022497356921
+    second: UI_KJ_11
+  - first:
+      213: 2251139301112284151
+    second: UI_KJ_12
+  - first:
+      213: 2944218356201308525
+    second: UI_KJ_13
+  - first:
+      213: 7191772962123925891
+    second: UI_KJ_14
+  - first:
+      213: 6585358495032515678
+    second: UI_KJ_15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -318,7 +339,7 @@ TextureImporter:
         width: 160
         height: 160
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 13, y: 13, z: 13, w: 13}
       outline: []
       physicsShape: []
@@ -326,6 +347,153 @@ TextureImporter:
       bones: []
       spriteID: 3507c14c16ff8f3b0800000000000000
       internalID: -5478348151329099693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_KJ_9
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 347
+        width: 245
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 425d0ac7b78e6e620800000000000000
+      internalID: 2803183435154248996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_KJ_10
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 382
+        width: 245
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8b962091ffa17bb0800000000000000
+      internalID: -4939973864208295026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_KJ_11
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 382
+        width: 26
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97c85c42d94c06d50800000000000000
+      internalID: 6728594022497356921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_KJ_12
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 328
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f308be6447ad3f10800000000000000
+      internalID: 2251139301112284151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_KJ_13
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 328
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d61409eeef6fbd820800000000000000
+      internalID: 2944218356201308525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_KJ_14
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 440
+        width: 500
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 389c7a8c76f4ec360800000000000000
+      internalID: 7191772962123925891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_KJ_15
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 475
+        width: 500
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5c930719a4e36b50800000000000000
+      internalID: 6585358495032515678
       vertices: []
       indices: 
       edges: []
