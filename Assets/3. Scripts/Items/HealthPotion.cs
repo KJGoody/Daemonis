@@ -4,7 +4,7 @@ using UnityEngine;
 
 // 상단 메뉴 버튼 만들기
 [CreateAssetMenu(fileName = "HealthPotion", menuName = "Items/Potion", order = 2)]
-public class HealthPotion : Item
+public class HealthPotion : Item, IUseable
 {
     // 포션아이템의 회복량
     [SerializeField]
@@ -14,14 +14,14 @@ public class HealthPotion : Item
     public void Use()
     {
         // 체력이 최대체력보다 낮으면
-        if (Player.MyInstance.MyHealth.MyCurrentValue < Player.MyInstance.MyHealth.MyMaxValue)
+        if (Player.MyInstance.MyStat.CurrentHealth < Player.MyInstance.MyStat.MaxHealth)
         {
             // 사용하는 아이템을 없애고
-            //Remove();
+
+            Remove();
 
             // 체력을 회복한다.
-            Player.MyInstance.MyHealth.MyCurrentValue += health;
-            Debug.Log("USE");
+            Player.MyInstance.MyStat.CurrentHealth += health;
         }
     }
     public string GetName()

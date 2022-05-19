@@ -5,6 +5,19 @@ using UnityEngine.UI;
 
 public class ComboManager : MonoBehaviour
 {
+    private static ComboManager instance;
+    public static ComboManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<ComboManager>();
+            }
+            return instance;
+        }
+    }
+
     [SerializeField]
     private GameObject ComboView;
     private Text comboNum;
@@ -24,11 +37,6 @@ public class ComboManager : MonoBehaviour
         comboText = ComboView.transform.Find("ComboText").gameObject.GetComponent<Text>();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void IncreaseCombo()
     {
         if(nowCoroutine != null)
@@ -44,11 +52,11 @@ public class ComboManager : MonoBehaviour
             switch (currentCombo)
             {
                 case 50:
-                    StartCoroutine(comboUp());
+                    StartCoroutine(ComboUp());
                     break;
 
                 case 300:
-                    StartCoroutine(comboUp());
+                    StartCoroutine(ComboUp());
                     break;
             }
 
@@ -56,7 +64,7 @@ public class ComboManager : MonoBehaviour
         }
     }
 
-    private IEnumerator comboUp()
+    private IEnumerator ComboUp()
     {
         if(currentCombo > 299)
         {

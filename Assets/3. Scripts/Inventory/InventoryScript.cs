@@ -54,7 +54,7 @@ public class InventoryScript : MonoBehaviour
     public void asd()
     {
         // 테스트를 위해 체력을 3씩 감소
-        Player.MyInstance.MyHealth.MyCurrentValue -= 10;
+        Player.MyInstance.MyStat.CurrentHealth -= 10;
 
         // 체력물약 아이템 생성
         //HealthPotion potion = (HealthPotion)Instantiate(items[0]);
