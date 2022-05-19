@@ -9,7 +9,6 @@ class IdleState : IState
 
     public void Enter(EnemyBase parent)
     {
-        Debug.Log(1);
         this.parent = parent;
         
         // 일정 범위 안에 존재하는 오브젝트를 찾는다. 첫번째 값: 위치, 두번쨰 값: 작용범위
