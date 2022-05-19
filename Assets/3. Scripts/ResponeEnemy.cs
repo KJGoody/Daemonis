@@ -19,7 +19,7 @@ public class ResponeEnemy : MonoBehaviour
     {
         while (true)
         {
-            Instantiate(Resources.Load("Enemy/Enemy_BaseMeleeAttack") as GameObject, transform.position, Quaternion.identity);
+            Instantiate(Resources.Load("Enemy/EnemyBase") as GameObject, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(1f);
         }
     }

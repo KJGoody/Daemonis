@@ -110,7 +110,10 @@ public class EnemyBase : NPC
             unitroot.GetComponent<SortingGroup>().sortingLayerName = "DeathEnemyLayer";
             Destroy(transform.Find("HitBox").gameObject);
             Destroy(transform.Find("EnemyBody").gameObject);
-            
+
+            ItemDropManager.MyInstance.DropGold(transform);
+            ItemDropManager.MyInstance.DropItem(transform);
+
             StartCoroutine(Death());
             ComboManager.Instance.IncreaseCombo();
         }
