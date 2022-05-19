@@ -6,8 +6,6 @@ class FollowState : IState
 {
     private EnemyBase parent;
 
-    private float RubbingTime;
-
     public void Enter(EnemyBase parent)
     {
         this.parent = parent;

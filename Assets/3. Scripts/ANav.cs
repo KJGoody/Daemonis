@@ -61,16 +61,8 @@ public class ANav : MonoBehaviour
 
     private void Start()
     {
-        if (Vector2.Distance(StartPoint, TargetPoint) > 1f)
-        {
             CreateGrid();
             FindPath(StartPoint, TargetPoint);
-        }
-        else
-        {
-            EndPathFinding = true;
-            Debug.Log(SucessPathFinding);
-        }
     }
 
     private void CreateGrid()
@@ -131,47 +123,53 @@ public class ANav : MonoBehaviour
         ANode startNode = GetNodeFromWorldPoint(startPos);
         ANode targetNode = GetNodeFromWorldPoint(targetPos);
 
-        List<ANode> openList = new List<ANode>();
-        HashSet<ANode> closedList = new HashSet<ANode>();
-        openList.Add(startNode);
-
-        while (openList.Count > 0)
+        if(startNode == targetNode)
+            SucessPathFinding = false;
+        else
         {
-            ANode CurrentNode = openList[0];
+            List<ANode> openList = new List<ANode>();
+            HashSet<ANode> closedList = new HashSet<ANode>();
+            openList.Add(startNode);
 
-            // 열린목록에서 Fcost가 가장 작은 노드를 찾는다. 만약 Fcost가 같다면 Hcout가 가장 작은 노드를 선택한다.
-            for (int i = 1; i < openList.Count; i++)
-                if (openList[i].fCost < CurrentNode.fCost || openList[i].fCost == CurrentNode.fCost && openList[i].hCost < CurrentNode.hCost)
-                    CurrentNode = openList[i];
-
-            // 탐색시작 탐색할 노드를 열린 목록에서 제외하고 닫힌목록에 추가한다.
-            openList.Remove(CurrentNode);
-            closedList.Add(CurrentNode);
-
-            if (CurrentNode == targetNode)  // 현재 노드가 타겟노드일 경우 탐색을 종료 한다.
+            while (openList.Count > 0)
             {
-                RetracePath(startNode, targetNode);
-                SucessPathFinding = true;
-                CurrentPathNode = path.Count - 1;
-                break;
-            }
+                ANode CurrentNode = openList[0];
 
-            foreach (ANode n in GetNeighbours(CurrentNode))
-            {
-                if (n.isWall || closedList.Contains(n)) // 현재 노드가 벽일 경우 OR 닫힌목록에 포함되어 있는 경우 스킵
-                    continue;
+                // 열린목록에서 Fcost가 가장 작은 노드를 찾는다. 만약 Fcost가 같다면 Hcout가 가장 작은 노드를 선택한다.
+                for (int i = 1; i < openList.Count; i++)
+                    if (openList[i].fCost < CurrentNode.fCost || openList[i].fCost == CurrentNode.fCost && openList[i].hCost < CurrentNode.hCost)
+                        CurrentNode = openList[i];
 
-                int newCurrentToNeightbourCost = CurrentNode.gCost + GetDistanceCost(CurrentNode, n);
-                if (newCurrentToNeightbourCost < n.gCost || !openList.Contains(n))
+                // 탐색시작 탐색할 노드를 열린 목록에서 제외하고 닫힌목록에 추가한다.
+                openList.Remove(CurrentNode);
+                closedList.Add(CurrentNode);
+
+                if (CurrentNode == targetNode)  // 현재 노드가 타겟노드일 경우 탐색을 종료 한다.
                 {
-                    n.gCost = newCurrentToNeightbourCost;
-                    n.hCost = GetDistanceCost(n, targetNode);
-                    n.parentNode = CurrentNode;
+                    RetracePath(startNode, targetNode);
+                    SucessPathFinding = true;
+                    CurrentPathNode = path.Count - 1;
+                    break;
+                }
 
-                    if (!openList.Contains(n))
-                        openList.Add(n);
+                foreach (ANode n in GetNeighbours(CurrentNode))
+                {
+                    if (n.isWall || closedList.Contains(n)) // 현재 노드가 벽일 경우 OR 닫힌목록에 포함되어 있는 경우 스킵
+                        continue;
+
+                    int newCurrentToNeightbourCost = CurrentNode.gCost + GetDistanceCost(CurrentNode, n);
+                    if (newCurrentToNeightbourCost < n.gCost || !openList.Contains(n))
+                    {
+                        n.gCost = newCurrentToNeightbourCost;
+                        n.hCost = GetDistanceCost(n, targetNode);
+                        n.parentNode = CurrentNode;
+
+                        if (!openList.Contains(n))
+                            openList.Add(n);
+                    }
                 }
             }
+
         }
 
         EndPathFinding = true;
@@ -200,7 +198,6 @@ public class ANav : MonoBehaviour
 
     public void DestroyANav()
     {
-        Debug.Log("Anav : "+ gameObject);
         gameObject.SetActive(false);
         Destroy(gameObject);
         

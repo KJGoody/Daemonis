@@ -55,20 +55,16 @@ class PatrolState : IState
 
     private void PatrolPointPathFinding()
     {
-        if (aNav != null)
-        {
-            aNav.DestroyANav();
-            Debug.Log(aNav);
-        }
+        if (aNav != null) aNav.DestroyANav();
 
         while (true)
         {
-            //PatrolPoint = Random.insideUnitCircle * parent.myAggroRange;
-            PatrolPoint = Random.insideUnitCircle;
+            PatrolPoint = Random.insideUnitCircle * parent.myAggroRange;
+            //PatrolPoint = Random.insideUnitCircle;
             PatrolPoint += parent.myStartPosition;
 
             Collider2D collider = Physics2D.OverlapCircle(PatrolPoint, 0.5f, LayerMask.GetMask("Wall"));
-            if (collider == null) break;
+            if (collider == null && Vector2.Distance(PatrolPoint, parent.transform.position) > 1f) break;
         }
 
         parent.CreateResource(Resources.Load("ANav") as GameObject, parent.transform);
