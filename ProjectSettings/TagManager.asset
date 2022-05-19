@@ -15,11 +15,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Clickable
-  - RushMode
   - Wall
-  - EnemyRigidbody
   - Player
+  - Clickable
+  - EnemyCollider
+  - RushMode
   - 
   - 
   - 
