@@ -43,7 +43,7 @@
       "dependencies": {}
     },
     "com.unity.2d.tilemap.extras": {
-      "version": "file:C:/Users/lionk/Downloads/2d-extras-1.8.2-preview/2d-extras-1.8.2-preview",
+      "version": "file:../2d-extras-1.8.2-preview/2d-extras-1.8.2-preview",
       "depth": 0,
       "source": "local",
       "dependencies": {
