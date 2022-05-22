@@ -122,9 +122,16 @@ public abstract class Character : MonoBehaviour
 
     public virtual void FindTarget()
     {
-        Direction = MyTarget.position - transform.position;
-        if (Direction.x > 0) _prefabs.transform.localScale = new Vector3(-1, 1, 1);
-        else if (Direction.x < 0) _prefabs.transform.localScale = new Vector3(1, 1, 1);
+        //Direction = MyTarget.position - transform.position;
+        //if (Direction.x > 0)
+        //    _prefabs.transform.localScale = new Vector3(-1, 1, 1);
+        //else if (Direction.x < 0) 
+        //    _prefabs.transform.localScale = new Vector3(1, 1, 1);
+        
+        if ((MyTarget.transform.position - transform.position).x > 0)
+            _prefabs.transform.localScale = new Vector3(-1, 1, 1);
+        else if ((MyTarget.transform.position - transform.position).x < 0) 
+            _prefabs.transform.localScale = new Vector3(1, 1, 1);
     }
 
     public void NewBuff(string buffName)

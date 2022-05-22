@@ -21,66 +21,21 @@ public class Spell : IUseable, IMoveable
     private float castTime;
     [SerializeField]
     private Color barColor;
-    public string MyName
-    {
-        get
-        {
-            return name;
-        }
-    }
-    public int MyDamage
-    {
-        get
-        {
-            return damage;
-        }
-    }
-    public Sprite MyIcon
-    {
-        get
-        {
-            return icon;
-        }
-    }
-    public float MySpeed
-    {
-        get
-        {
-            return speed;
-        }
-    }
-    
-    public GameObject MySpellPrefab
-    {
-        get
-        {
-            return spellPrefab;
-        }
-    }
-    public String MyDescription
-    {
-        get
-        {
-            return description;
-        }
-    }
 
 
-    public float MyCastTime
-    {
-        get
-        {
-            return castTime;
-        }
+    public string MyName { get { return name; } }
+    public int MyDamage { get { return damage; } }
+    public Sprite MyIcon { get { return icon; } }
+    public float MySpeed { get { return speed; } }
 
-    }
-    public Color MyBarColor
-    {
-        get
-        {
-            return barColor;
-        }
-    }
+    public GameObject MySpellPrefab { get { return spellPrefab; } }
+    public String MyDescription { get { return description; } }
+
+
+    public float MyCastTime { get { return castTime; } }
+    public Color MyBarColor { get { return barColor; } }
+
+
     public void Use()
     {
         Player.MyInstance.CastSpell(MyName);

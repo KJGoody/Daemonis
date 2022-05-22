@@ -30,6 +30,7 @@ public class SpellBook : MonoBehaviour
         
         return spell;
     }
+
     public Spell GetSpell(string spellName)
     {
         Spell spell =  Array.Find(spells, x => x.MyName == spellName); 

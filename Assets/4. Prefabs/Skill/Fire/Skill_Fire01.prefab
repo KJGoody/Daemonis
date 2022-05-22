@@ -84,11 +84,11 @@ GameObject:
   - component: {fileID: 7089291890261483673}
   - component: {fileID: 7527969048852949218}
   - component: {fileID: 954079744089848340}
-  - component: {fileID: 3318411572377474205}
   - component: {fileID: 4348590965333436126}
   - component: {fileID: -4260425782238387153}
+  - component: {fileID: 3318411572377474205}
   m_Layer: 0
-  m_Name: Fire_Ball
+  m_Name: Skill_Fire01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,25 +196,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!95 &3318411572377474205
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8440346083036277406}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 503ceb54bca71a0489312609df4adf06, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!61 &4348590965333436126
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -252,3 +233,22 @@ SortingGroup:
   m_SortingLayerID: -822470091
   m_SortingLayer: 5
   m_SortingOrder: 0
+--- !u!95 &3318411572377474205
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440346083036277406}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 503ceb54bca71a0489312609df4adf06, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -64,15 +64,13 @@ public class SpellScript : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // 축 중심 각도로 회전
     }
 
-
     public void Initailize(int damage, Transform source, Vector2 atkDir)
     {
         this.damage = damage;
         this.source = source;
         this.atkDir = atkDir;
-
-
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("HitBox"))// && collision.transform.position == MyTarget.position 원래코드 삭제 (유도기능 넣을때 추가하면 좋을듯)

@@ -8,39 +8,20 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
 {
     public Image MyIcon
     {
-        get
-        {
-            return icon;
-        }
-
-        set
-        {
-            icon = value;
-        }
+        get { return icon; }
+        set { icon = value; }
     }
     [SerializeField]
     private Image icon;
     [SerializeField]
     private TextMeshProUGUI stackSize;
 
-    
+
     // 사용 가능 아이템 리스트
     private Stack<IUseable> useables = new Stack<IUseable>();
     private int count;
-    public int MyCount
-    {
-        get
-        {
-            return count;
-        }
-    }
-    public TextMeshProUGUI MyStackText
-    {
-        get
-        {
-            return stackSize;
-        }
-    }
+    public int MyCount { get { return count; } }
+    public TextMeshProUGUI MyStackText { get { return stackSize; } }
     public IUseable MyUseable { get; set; }
     public Button MyButton { get; private set; }
 
@@ -64,7 +45,6 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
                 MyUseable.Use();
             }
 
-
             // 액션퀵슬롯에 사용가능한 아이템이 등록되었고
             // 그등록된 아이템의 개수가 1개 이상이라면
             if (useables != null && useables.Count > 0)
@@ -81,12 +61,12 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
     // IPointerClickHandler 에 명시된 함수이다.
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Left)
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if(HandScript.MyInstance.MyMoveable != null)
+            if (HandScript.MyInstance.MyMoveable != null)
             {
                 // IUseable 로 변환할 수 있는지 확인.
-                if(HandScript.MyInstance.MyMoveable is IUseable)
+                if (HandScript.MyInstance.MyMoveable is IUseable)
                 {
                     SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
                     HandScript.MyInstance.SkillBlindControll();
@@ -126,8 +106,8 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
     public void UpdateVisual()
     {
         // ActionButton의 이미지를 변경한다.
-        MyIcon.sprite= HandScript.MyInstance.Put().MyIcon;
-        MyIcon.color=Color.white;
+        MyIcon.sprite = HandScript.MyInstance.Put().MyIcon;
+        MyIcon.color = Color.white;
         if (count > 1)
         {
             // UpdateStackSize 는 아이템 중첩개수를 표시할 때 호출합니다.
@@ -144,7 +124,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             // useables 에 등록된 아이템과 item 이 같은 타입이라면
             if (useables.Peek().GetName() == item.MyName)
             {
-                
+
                 // 인벤토리에서 해당 아이템과 같은 모든 아이템을 찾아서
                 // useables 에 담습니다. 
                 useables = InventoryScript.MyInstance.GetUseables(item as IUseable);
@@ -170,7 +150,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
         // 액션 버튼에 등록된 것이 아이템이라면
         else if (useables.Count > 0)
         {
-           // UIManager.MyInstance.ShowTooltip(transform.position);
+            // UIManager.MyInstance.ShowTooltip(transform.position);
         }
     }
 

@@ -5,13 +5,13 @@ using System.Linq;
 
 public class Player : Character
 {
-        // 싱글톤
+    // 싱글톤
     private static Player instance;
     public static Player MyInstance
     {
         get
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = FindObjectOfType<Player>();
             }
@@ -20,12 +20,11 @@ public class Player : Character
     }
 
     private FloatingJoystick joy;
-
     [SerializeField]
     private Transform exitPoint; // 발사체 생성 위치
 
     public Vector2 atkDir;
-    //public Transform myTarget { get; set; }
+
     protected override void Start()
     {
         joy = GameObject.Find("Floating Joystick").GetComponent<FloatingJoystick>();
@@ -63,51 +62,49 @@ public class Player : Character
         {
             moveVector.x = joy.Horizontal;
             moveVector.y = joy.Vertical;
+
             Direction = moveVector;
-            if(moveVector.x != 0 && moveVector.y != 0)
+            if (moveVector.x != 0 && moveVector.y != 0)
                 atkDir = moveVector;
+
             if (IsMoving)
             {
                 Animator runParticle = GetComponent<Animator>();
                 runParticle.SetTrigger("Run");
             }
         }
-     
-         
     }
+
     public override void FindTarget()   //공격하는 타겟 방향 바라보기
     {
         atkDir = Direction;
         base.FindTarget();
     }
+
     private IEnumerator Attack(string spellIName)
     {
-        Spell newSpell = SpellBook.MyInstance.CastSpell(spellIName); //스펠북에서 스킬 받아옴
         IsAttacking = true;
-        _prefabs.PlayAnimation(4);
+        _prefabs.PlayAnimation(4);  // 공격 애니메이션 재생
         if (MyTarget != null) // 밑에랑 나눠둘수밖에 없음
-        {
             FindTarget();
-        }
 
+        Spell newSpell = SpellBook.MyInstance.CastSpell(spellIName); //스펠북에서 스킬 받아옴
         GameObject spell = newSpell.MySpellPrefab;
-
         SpellScript s = Instantiate(spell, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
-        s.Initailize(newSpell.MyDamage,transform,atkDir);
-
+        s.Initailize(newSpell.MyDamage, transform, atkDir);
         if (MyTarget != null) //위에랑 나눠둘수밖에 없음
         {
             s.MyTarget = MyTarget;
         }
-        
+
         yield return new WaitForSeconds(0.3f); // 테스트를 위한 코드입니다. 여기다가 후딜넣을까 생각중
         StopAttack();
-       
+
     }
     private void AutoTarget() // 가장 가까운적 타겟팅
     {
         MyTarget = FindNearestObjectByTag("HitBox").GetComponent<Transform>();
-        if(Vector2.Distance(MyTarget.position,transform.position) > 7) // 너무 멀면 타겟 해제
+        if (Vector2.Distance(MyTarget.position, transform.position) > 7) // 너무 멀면 타겟 해제
         {
             MyTarget = null;
         }
