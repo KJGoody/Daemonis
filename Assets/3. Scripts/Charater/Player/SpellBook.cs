@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpellBook : MonoBehaviour
 {
-    
+
     [SerializeField]
     private Spell[] spells; // 스킬 리스트
 
@@ -24,17 +24,17 @@ public class SpellBook : MonoBehaviour
         }
     }
 
-    public Spell CastSpell(string spellName)
-    {
-        Spell spell =  Array.Find(spells, x => x.MyName == spellName); 
-        
-        return spell;
-    }
+    //public Spell CastSpell(string spellName)
+    //{
+    //    Spell spell = Array.Find(spells, x => x.MyName == spellName);
+
+    //    return spell;
+    //}
 
     public Spell GetSpell(string spellName)
     {
-        Spell spell =  Array.Find(spells, x => x.MyName == spellName); 
-        
+        Spell spell = Array.Find(spells, x => x.MyName == spellName);
+
         return spell;
     }
 }

@@ -96,12 +96,11 @@ public class EnemyBase : NPC
         Instantiate(resource, transform);
     }
 
-    public override void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string TextType = null) // 피격
+    public override void TakeDamage(int damage, Vector2 knockbackDir, string TextType = null) // 피격
     {
         healthGroup.alpha = 1;
         StartCoroutine(KnockBack(knockbackDir, 1));
-        //SetTarget(source);
-        base.TakeDamage(damage, knockbackDir, null, TextType);
+        base.TakeDamage(damage, knockbackDir, TextType);
 
         if (stat.CurrentHealth <= 0)
         {

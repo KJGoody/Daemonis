@@ -15,7 +15,7 @@ public class Spell : IUseable, IMoveable
     [SerializeField]
     private GameObject spellPrefab;
     [SerializeField]
-    private string description;
+    private string description;     // 설명란
 
     [SerializeField]
     private float castTime;
@@ -30,7 +30,6 @@ public class Spell : IUseable, IMoveable
 
     public GameObject MySpellPrefab { get { return spellPrefab; } }
     public String MyDescription { get { return description; } }
-
 
     public float MyCastTime { get { return castTime; } }
     public Color MyBarColor { get { return barColor; } }

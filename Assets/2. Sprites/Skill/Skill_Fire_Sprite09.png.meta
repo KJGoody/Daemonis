@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: f5b7c9c2df5e5e9408df0617dbec0240
+guid: d2fc3abb99d31ab418292911a7c30839
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3465286685962602723
-    second: 6_0
+      213: -3853505009514594305
+    second: Skill_Fire_Sprite09_0
   - first:
-      213: 6653994858678897968
-    second: 6_1
+      213: 5403501602649555048
+    second: Skill_Fire_Sprite09_1
   - first:
-      213: -9091539399625358973
-    second: 6_2
+      213: 2751388791911741801
+    second: Skill_Fire_Sprite09_2
   - first:
-      213: 781045095500365311
-    second: 6_3
+      213: -8922751133865219955
+    second: Skill_Fire_Sprite09_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -58,7 +58,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -111,23 +111,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 6_0
+      name: Skill_Fire_Sprite09_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,14 +129,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e801b981eb271030800000000000000
-      internalID: 3465286685962602723
+      spriteID: fffb1bf4c99958ac0800000000000000
+      internalID: -3853505009514594305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 6_1
+      name: Skill_Fire_Sprite09_1
       rect:
         serializedVersion: 2
         x: 128
@@ -162,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03dc4d0d11db75c50800000000000000
-      internalID: 6653994858678897968
+      spriteID: 8604e2124181dfa40800000000000000
+      internalID: 5403501602649555048
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 6_2
+      name: Skill_Fire_Sprite09_2
       rect:
         serializedVersion: 2
         x: 0
@@ -183,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 381ccd7c51d54d180800000000000000
-      internalID: -9091539399625358973
+      spriteID: 969f3ec5785ee2620800000000000000
+      internalID: 2751388791911741801
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 6_3
+      name: Skill_Fire_Sprite09_3
       rect:
         serializedVersion: 2
         x: 128
@@ -204,8 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffd3cde4064d6da00800000000000000
-      internalID: 781045095500365311
+      spriteID: d88efb65e150c2480800000000000000
+      internalID: -8922751133865219955
       vertices: []
       indices: 
       edges: []

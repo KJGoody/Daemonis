@@ -166,7 +166,7 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(int damage, Vector2 knockbackDir, Transform source = null, string texttype = "EnemyDamage")
+    public virtual void TakeDamage(int damage, Vector2 knockbackDir, string texttype = "EnemyDamage")
     {
         NewDamageText(damage, texttype);
         stat.CurrentHealth -= damage;
