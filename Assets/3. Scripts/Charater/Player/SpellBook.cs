@@ -23,14 +23,7 @@ public class SpellBook : MonoBehaviour
             return instance;
         }
     }
-
-    //public Spell CastSpell(string spellName)
-    //{
-    //    Spell spell = Array.Find(spells, x => x.MyName == spellName);
-
-    //    return spell;
-    //}
-
+    
     public Spell GetSpell(string spellName)
     {
         Spell spell = Array.Find(spells, x => x.MyName == spellName);

@@ -86,9 +86,8 @@ GameObject:
   - component: {fileID: 954079744089848340}
   - component: {fileID: 4348590965333436126}
   - component: {fileID: -4260425782238387153}
-  - component: {fileID: 3318411572377474205}
   m_Layer: 0
-  m_Name: Skill_Fire01
+  m_Name: Skill_Fire_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,8 +148,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 5353841184698615464, guid: c5e1ba4df68a902499ef6b50306dd84e,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 222672fd7364a7144b32fba544f684e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -174,8 +172,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puff: {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b, type: 3}
-  speed: 5
-  damage: 5
+  spellType: 1
+  atkDir: {x: 0, y: 0}
+  speed: 0
+  damage: 0
+  CastTime: 0.3
 --- !u!50 &954079744089848340
 Rigidbody2D:
   serializedVersion: 4
@@ -214,7 +215,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
+    oldSize: {x: 16, y: 16}
     newSize: {x: 3, y: 3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -234,22 +235,3 @@ SortingGroup:
   m_SortingLayerID: -822470091
   m_SortingLayer: 5
   m_SortingOrder: 0
---- !u!95 &3318411572377474205
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8440346083036277406}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 503ceb54bca71a0489312609df4adf06, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

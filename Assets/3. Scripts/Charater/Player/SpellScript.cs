@@ -7,11 +7,10 @@ public class SpellScript : MonoBehaviour
     private Rigidbody2D myRigidbody;
     [SerializeField]
     private GameObject puff;
-    
+
     public enum SpellType
     {
         Skill_File_01,
-        Skill_File_02,
         Skill_File_03,
         Skill_File_04,
         Skill_File_05,
@@ -22,15 +21,18 @@ public class SpellScript : MonoBehaviour
     }
     [SerializeField]
     private SpellType spellType;
+    private bool IsAOEAttack = false;
 
     public Transform MyTarget { get; set; } // 공격할 대상
     private Vector2 direction;
+    [HideInInspector]
     public Vector2 atkDir;
 
     [SerializeField]
     private float speed;
     [SerializeField]
     private int damage;
+    public float CastTime;
 
     private List<GameObject> hitEnemy = new List<GameObject>();
 
@@ -59,6 +61,11 @@ public class SpellScript : MonoBehaviour
             case SpellType.Skill_File_01:
                 StartCoroutine(Skill_Fire_01());
                 break;
+
+            case SpellType.Skill_File_03:
+                IsAOEAttack = true;
+                StartCoroutine(Skill_Fire_03());
+                break;
         }
     }
 
@@ -76,17 +83,25 @@ public class SpellScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("HitBox"))// && collision.transform.position == MyTarget.position 원래코드 삭제 (유도기능 넣을때 추가하면 좋을듯)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+            Destroy(gameObject);
+
+        if (collision.CompareTag("HitBox") && !IsAOEAttack)// && collision.transform.position == MyTarget.position 원래코드 삭제 (유도기능 넣을때 추가하면 좋을듯)
         {
-            Character c = collision.GetComponentInParent<Character>();
             if (!CheckHitEnemy(collision))
             {
-                c.TakeDamage(damage, direction); // 피격된 대상에게 자신의 위치 정보 전달
+                SpendDamage(collision, damage);
                 Instantiate(puff, transform.position, Quaternion.identity);
-                //myRigidbody.velocity = Vector3.zero;
-                //MyTarget = null;
             }
         }
+    }
+
+    private void SpendDamage(Collider2D collision, int damage)
+    {
+        Character character = collision.GetComponentInParent<Character>();
+
+        string TextType = "EnemyDamage";                                   // 텍스트 타입 설정
+        character.TakeDamage(damage, direction, TextType);            // 데미지 전송
     }
 
     private bool CheckHitEnemy(Collider2D collision) // 스킬 한번 맞았으면 다시 안맞게 체크
@@ -108,15 +123,25 @@ public class SpellScript : MonoBehaviour
         yield return new WaitForSeconds(10f);
         Destroy(gameObject);
     }
-    //private void Misile()
-    //{
-    //    Vector2 direction = MyTarget.position - transform.position; // 타겟과 스펠의 방향과 크기 구함
-    //    myRigidbody.velocity = direction.normalized * speed; // direction을 normalized하여 방향값으로 바꿔주고 발사하는 힘 적용
 
-    //    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    //    // Math.Atan2 탄젠트 값으로 각도를 산출 https://m.blog.naver.com/PostView.nhn?blogId=sang9151&logNo=220821255191&categoryNo=50&proxyReferer=https%3A%2F%2Fwww.google.com%2F
-    //    // Mathf.Rad2Deg 라디안 각도 변환해주는 상수 http://jw910911.tistory.com/6
+    private IEnumerator Skill_Fire_03()
+    {
+        float AOERadius = 0.5f;     // 장판 범위
+        int AOETimes = 5;       // 장판 피격 횟수
+        float AOEWaitForSeconds = 0.5f;     // 다음 피격 시간
+        int AOEDamage = 1;      // 장판 데미지
 
-    //    transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // 축 중심 각도로 회전
-    //}
+        for (int i = 0; i < AOETimes; i++)
+        {
+            Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, AOERadius, LayerMask.GetMask("Enemy_HitBox"));
+            if (collider != null)
+            {
+                for (int j = 0; j < collider.Length; j++)
+                    SpendDamage(collider[j], AOEDamage);
+            }
+
+            yield return new WaitForSeconds(AOEWaitForSeconds);
+        }
+        Destroy(gameObject);
+    }
 }

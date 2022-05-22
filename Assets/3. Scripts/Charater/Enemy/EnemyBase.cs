@@ -96,7 +96,7 @@ public class EnemyBase : NPC
         Instantiate(resource, transform);
     }
 
-    public override void TakeDamage(int damage, Vector2 knockbackDir, string TextType = null) // 피격
+    public override void TakeDamage(int damage, Vector2 knockbackDir, string TextType) // 피격
     {
         healthGroup.alpha = 1;
         StartCoroutine(KnockBack(knockbackDir, 1));

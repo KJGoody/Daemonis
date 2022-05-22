@@ -75,30 +75,25 @@ public class Player : Character
         }
     }
 
-    public override void FindTarget()   //공격하는 타겟 방향 바라보기
+    public void CastSpell(string spellIName)
     {
-        atkDir = Direction;
-        base.FindTarget();
+        if (MyTarget == null && SearchEnemy())
+            AutoTarget();
+        
+        if (!IsAttacking)
+        {
+            attackRoutine = StartCoroutine(Attack(spellIName));
+        }
     }
 
-    private IEnumerator Attack(string spellIName)
+    private bool SearchEnemy() // 씬에 적이 존재하는지 검색
     {
-        IsAttacking = true;
-        _prefabs.PlayAnimation(4);  // 공격 애니메이션 재생
-        if (MyTarget != null) // 밑에랑 나눠둘수밖에 없음
-            FindTarget();
-
-        Spell newSpell = SpellBook.MyInstance.GetSpell(spellIName); //스펠북에서 스킬 받아옴
-        GameObject spell = newSpell.MySpellPrefab;
-        SpellScript s = Instantiate(spell, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
-        s.atkDir = atkDir;
-        if (MyTarget != null) //위에랑 나눠둘수밖에 없음
-            s.MyTarget = MyTarget;
-
-        yield return new WaitForSeconds(newSpell.MyCastTime); // 테스트를 위한 코드입니다. 여기다가 후딜넣을까 생각중
-        StopAttack();
-
+        if (GameObject.FindWithTag("HitBox") == null)
+            return false;
+        else
+            return true;
     }
+
     private void AutoTarget() // 가장 가까운적 타겟팅
     {
         MyTarget = FindNearestObjectByTag("HitBox").GetComponent<Transform>();
@@ -107,6 +102,7 @@ public class Player : Character
             MyTarget = null;
         }
     }
+    
     private GameObject FindNearestObjectByTag(string tag)
     {
         // 탐색할 오브젝트 목록을 List 로 저장합니다.
@@ -122,7 +118,48 @@ public class Player : Character
 
         return neareastObject;
     }
-    public void StopAttack()
+
+    private IEnumerator Attack(string spellIName)
+    {
+        IsAttacking = true;
+        _prefabs.PlayAnimation(4);  // 공격 애니메이션 재생
+        if (MyTarget != null) // 밑에랑 나눠둘수밖에 없음
+            FindTarget();
+
+        Spell newSpell = SpellBook.MyInstance.GetSpell(spellIName); //스펠북에서 스킬 받아옴
+        SpellScript spellScript = InstantiateSpell(newSpell);
+        spellScript.atkDir = atkDir;
+        if (MyTarget != null) //위에랑 나눠둘수밖에 없음
+            spellScript.MyTarget = MyTarget;
+
+        yield return new WaitForSeconds(spellScript.CastTime); // 테스트를 위한 코드입니다. 여기다가 후딜넣을까 생각중
+        StopAttack();
+    }
+
+    public override void FindTarget()   //공격하는 타겟 방향 바라보기
+    {
+        atkDir = Direction;
+        base.FindTarget();
+    }
+
+    private SpellScript InstantiateSpell(Spell spell)
+    {
+        switch (spell.spellLaunchType)
+        {
+            case Spell.SpellLaunchType.Launch:
+                return Instantiate(spell.MySpellPrefab, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
+
+            case Spell.SpellLaunchType.AE:
+                return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
+
+            case Spell.SpellLaunchType.AOE:
+                return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
+        }
+
+        return null;
+    }
+
+    private void StopAttack()
     {
         if (attackRoutine != null)
         {
@@ -130,25 +167,7 @@ public class Player : Character
             IsAttacking = false;
         }
     }
-    public bool SearchEnemy() // 씬에 적이 존재하는지 검색
-    {
-        if (GameObject.FindWithTag("HitBox") == null)
-            return false;
-        else
-            return true;
-    }
-    public void CastSpell(string spellIName)
-    {
-        if (MyTarget == null && SearchEnemy())
-            AutoTarget();
-
-
-        if (!IsAttacking)
-        {
-            attackRoutine = StartCoroutine(Attack(spellIName));
-        }
-    }
-
+    
     //public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir)
     //{
     //    base.TakeDamage(damage, knockbackDir);
