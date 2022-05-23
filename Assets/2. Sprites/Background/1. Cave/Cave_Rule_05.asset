@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: Cave_Rule_05
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: -7590927427139646717, guid: 44628146ecb25e340b2b481d3c6d7ee2,
+    type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: -7590927427139646717, guid: 44628146ecb25e340b2b481d3c6d7ee2, type: 3}
+    - {fileID: 8752885197375271287, guid: 44628146ecb25e340b2b481d3c6d7ee2, type: 3}
+    - {fileID: 1775500110259563070, guid: 44628146ecb25e340b2b481d3c6d7ee2, type: 3}
+    - {fileID: -4176085168058075323, guid: 44628146ecb25e340b2b481d3c6d7ee2, type: 3}
+    - {fileID: 4722568556308202396, guid: 44628146ecb25e340b2b481d3c6d7ee2, type: 3}
+    - {fileID: 5709158539782648241, guid: 44628146ecb25e340b2b481d3c6d7ee2, type: 3}
+    - {fileID: 4359052470023988395, guid: 44628146ecb25e340b2b481d3c6d7ee2, type: 3}
+    - {fileID: 7856593814730743516, guid: 44628146ecb25e340b2b481d3c6d7ee2, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 1
+    m_ColliderType: 1
+    m_RandomTransform: 0
+    m_Neighbors: 
+    m_NeighborPositions:
+    - {x: -1, y: 1, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: -1, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 1, y: -1, z: 0}
+    m_RuleTransform: 0
