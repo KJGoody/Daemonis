@@ -6,18 +6,19 @@ public class Stat : MonoBehaviour
 {
     public StatBar HealthBar;       // 체력바 이미지
     public StatBar ManaBar;         // 마나바 이미지
-    
+
+    [SerializeField] private int level;               // 레벨
     [Header("기본 스탯")]
     [SerializeField] private int attack;              // 공격력
     [SerializeField] private float maxHealth;         // 최대 체력
     [SerializeField] private float maxMana;           // 최대 마나
-    [SerializeField] private float currentHealth;    // 현재 체력
-    [SerializeField] private float currentMana;      // 현재 마나
+    [SerializeField] private float currentHealth;     // 현재 체력
+    [SerializeField] private float currentMana;       // 현재 마나
 
     [Header("부가스탯")]
     [SerializeField] private int defence;             // 물리 방어력
     [SerializeField] private int magicRegist;         // 마법 방어력
-    [SerializeField] private float moveSpeed;             // 이동속도
+    [SerializeField] private float moveSpeed;         // 이동속도
     [SerializeField] private float attackSpeed;       // 공격속도
     [SerializeField] private float dodgePercent;      // 회피 확률
     [SerializeField] private float hitPercent;        // 명중률
@@ -34,6 +35,11 @@ public class Stat : MonoBehaviour
     [SerializeField] private float expPlus;           // 경험치 획득량 증가
     [SerializeField] private float vampiricRate;      // 흡혈률
 
+    public int Level
+    {
+        get { return level; }
+        set { level = value; }
+    }
     public float CurrentHealth
     {
         get { return currentHealth; }

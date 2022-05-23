@@ -164,9 +164,12 @@ public class ItemBase : IMoveable, IDescribable, IUseable
     }
     public void Use()
     {
-        HealthPotion healthPotion = itemInfo as HealthPotion;
-        healthPotion.Use();
-        Remove();
+        if(this.GetKind == Kinds.Potion)
+        {
+            HealthPotion healthPotion = itemInfo as HealthPotion;
+            healthPotion.Use();
+            Remove();
+        }
     }
     public string GetName() // 일단 useable때문에 넣어두긴함
     {
