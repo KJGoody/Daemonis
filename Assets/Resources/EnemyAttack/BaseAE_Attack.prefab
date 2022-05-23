@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5670253348522399996}
   - component: {fileID: -4364036116728036650}
   - component: {fileID: 3539185808470845978}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BaseAE_Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,11 +49,6 @@ MonoBehaviour:
   enemyAttackType: 4
   speed: 0
   damage: 0
-  WaitWarningSceonds: 0
-  AOEexitPoint: {fileID: 0}
-  AOEDamage: 0
-  AOETickTime: 0
-  AOETime: 0
 --- !u!212 &5670253348522399996
 SpriteRenderer:
   m_ObjectHideFlags: 0

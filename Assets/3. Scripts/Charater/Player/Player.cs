@@ -88,7 +88,7 @@ public class Player : Character
 
     private bool SearchEnemy() // 씬에 적이 존재하는지 검색
     {
-        if (GameObject.FindWithTag("HitBox") == null)
+        if (GameObject.FindWithTag("Enemy") == null)
             return false;
         else
             return true;
@@ -96,7 +96,7 @@ public class Player : Character
 
     private void AutoTarget() // 가장 가까운적 타겟팅
     {
-        MyTarget = FindNearestObjectByTag("HitBox").GetComponent<Transform>();
+        MyTarget = FindNearestObjectByTag("Enemy").transform.Find("HitBox").transform;
         if (Vector2.Distance(MyTarget.position, transform.position) > 7) // 너무 멀면 타겟 해제
         {
             MyTarget = null;
@@ -108,6 +108,13 @@ public class Player : Character
         // 탐색할 오브젝트 목록을 List 로 저장합니다.
         var objects = GameObject.FindGameObjectsWithTag(tag).ToList();
 
+        // 오브젝트가 죽었는지 살아있는지 확인
+        for (int i = 0; i < objects.Count; i++)
+        {
+            if (!objects[i].GetComponent<EnemyBase>().IsAlive)
+                objects.RemoveAt(i);
+        }
+        
         // LINQ 메소드를 이용해 가장 가까운 적을 찾습니다.
         var neareastObject = objects
             .OrderBy(obj =>

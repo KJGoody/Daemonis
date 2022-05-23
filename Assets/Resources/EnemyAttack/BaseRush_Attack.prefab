@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7458871476036841312}
   - component: {fileID: 2250078769641600227}
   - component: {fileID: 5422155681091254517}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BaseRush_Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,11 +48,6 @@ MonoBehaviour:
   enemyAttackType: 2
   speed: 7
   damage: 7
-  WaitWarningSceonds: 0
-  AOEexitPoint: {fileID: 0}
-  AOEDamage: 0
-  AOETickTime: 0
-  AOETime: 0
 --- !u!50 &2250078769641600227
 Rigidbody2D:
   serializedVersion: 4

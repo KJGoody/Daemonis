@@ -5,9 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - HitBox
-  - HitBox_Player
   - Item
+  - HitBox
   layers:
   - Default
   - TransparentFX
@@ -18,12 +17,12 @@ TagManager:
   - Clickable
   - RushMode
   - Wall
-  - EnemyRigidbody
+  - BodyCollider
   - Minimap
-  - Player
-  - 
-  - 
-  - 
+  - PlayerCam
+  - TriggerCollider
+  - HitBox
+  - AttackCollider
   - 
   - 
   - 
@@ -48,16 +47,19 @@ TagManager:
   - name: BottomLayer
     uniqueID: 961690195
     locked: 0
+  - name: EffectLayer_Bottom
+    uniqueID: 735885497
+    locked: 0
   - name: DeathEnemyLayer
     uniqueID: 3154349635
     locked: 0
   - name: EnemyLayer
     uniqueID: 3087391085
     locked: 0
-  - name: SkillHitLayer
-    uniqueID: 735885497
+  - name: EffectLayer_Mibble
+    uniqueID: 3317442327
     locked: 0
-  - name: SkillLayer
+  - name: EffectLayer_Top
     uniqueID: 3472497205
     locked: 0
   - name: PlayerLayer

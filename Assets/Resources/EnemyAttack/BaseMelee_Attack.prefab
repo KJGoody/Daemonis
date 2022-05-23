@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -2226778229481276208}
   - component: {fileID: 5574728806096493329}
   - component: {fileID: 3275400742386984791}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BaseMelee_Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,10 +48,6 @@ MonoBehaviour:
   enemyAttackType: 0
   speed: 0
   damage: 0
-  WaitWarningSceonds: 0
-  AOEDamage: 0
-  AEtimes: 0
-  AEwaitforseconds: 0
 --- !u!50 &5574728806096493329
 Rigidbody2D:
   serializedVersion: 4

@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 954079744089848340}
   - component: {fileID: 4348590965333436126}
   - component: {fileID: -4260425782238387153}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Skill_Fire_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,6 +232,6 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8440346083036277406}
   m_Enabled: 1
-  m_SortingLayerID: -822470091
-  m_SortingLayer: 5
+  m_SortingLayerID: 735885497
+  m_SortingLayer: 2
   m_SortingOrder: 0

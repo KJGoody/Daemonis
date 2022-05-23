@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4348590965333436126}
   - component: {fileID: -4260425782238387153}
   - component: {fileID: 3318411572377474205}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Skill_Fire_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

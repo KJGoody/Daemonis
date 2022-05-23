@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6020417662250588925}
   - component: {fileID: 4869722830177248732}
   - component: {fileID: 4820348759910683643}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BaseRanged_Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,11 +49,6 @@ MonoBehaviour:
   enemyAttackType: 1
   speed: 5
   damage: 3
-  WaitWarningSceonds: 0
-  AOEexitPoint: {fileID: 0}
-  AOEDamage: 0
-  AOETickTime: 0
-  AOETime: 0
 --- !u!212 &6020417662250588925
 SpriteRenderer:
   m_ObjectHideFlags: 0

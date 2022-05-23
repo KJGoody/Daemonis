@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class ResponeEnemy : MonoBehaviour
 {
+    [SerializeField]
+    private float ResponeTime;
+
     void Start()
     {
         StartCoroutine(SponeEnemy());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     IEnumerator SponeEnemy()
@@ -20,7 +17,7 @@ public class ResponeEnemy : MonoBehaviour
         while (true)
         {
             Instantiate(Resources.Load("Enemy/EnemyBase") as GameObject, transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(ResponeTime);
         }
     }
 }

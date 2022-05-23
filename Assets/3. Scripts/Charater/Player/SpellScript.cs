@@ -39,6 +39,10 @@ public class SpellScript : MonoBehaviour
     private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
         if (MyTarget != null)
             direction = MyTarget.position - transform.position;
         else
@@ -52,10 +56,7 @@ public class SpellScript : MonoBehaviour
                     direction = new Vector2(-1, 0);
             }
         }
-    }
 
-    private void Start()
-    {
         switch (spellType)
         {
             case SpellType.Skill_File_01:
@@ -86,8 +87,9 @@ public class SpellScript : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
             Destroy(gameObject);
 
-        if (collision.CompareTag("HitBox") && !IsAOEAttack)// && collision.transform.position == MyTarget.position 원래코드 삭제 (유도기능 넣을때 추가하면 좋을듯)
+        if (collision.CompareTag("Enemy") && !IsAOEAttack)// && collision.transform.position == MyTarget.position 원래코드 삭제 (유도기능 넣을때 추가하면 좋을듯)
         {
+            Debug.Log(collision);
             if (!CheckHitEnemy(collision))
             {
                 SpendDamage(collision, damage);
@@ -129,15 +131,16 @@ public class SpellScript : MonoBehaviour
         float AOERadius = 0.5f;     // 장판 범위
         int AOETimes = 5;       // 장판 피격 횟수
         float AOEWaitForSeconds = 0.5f;     // 다음 피격 시간
-        int AOEDamage = 1;      // 장판 데미지
+        int AOEDamage = 5;      // 장판 데미지
 
         for (int i = 0; i < AOETimes; i++)
         {
-            Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, AOERadius, LayerMask.GetMask("Enemy_HitBox"));
+            Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, AOERadius, LayerMask.GetMask("HitBox"));
             if (collider != null)
             {
                 for (int j = 0; j < collider.Length; j++)
-                    SpendDamage(collider[j], AOEDamage);
+                    if(collider[j].CompareTag("Enemy"))
+                        SpendDamage(collider[j], AOEDamage);
             }
 
             yield return new WaitForSeconds(AOEWaitForSeconds);

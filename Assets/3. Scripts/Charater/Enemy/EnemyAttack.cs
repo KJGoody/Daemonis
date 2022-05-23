@@ -29,7 +29,7 @@ public class EnemyAttack : MonoBehaviour
     private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
-        MyTarget = GameObject.Find("HitBox_Player").GetComponent<Transform>();
+        MyTarget = GameObject.Find("Player").GetComponent<Transform>();
         direction = MyTarget.position - transform.position;
         
     }
@@ -75,7 +75,7 @@ public class EnemyAttack : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
             Destroy(gameObject);
 
-        if (collision.CompareTag("HitBox_Player") && !IsAOEAttack)
+        if (collision.CompareTag("Player") && !IsAOEAttack)
         {
             SpendDamage(collision, damage);
             speed = 0;
