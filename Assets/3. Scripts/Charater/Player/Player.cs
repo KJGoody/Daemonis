@@ -169,7 +169,7 @@ public class Player : Character
             case Part.Cloth:
                 partNum = 1;
                 break;
-            case Part.Pants:
+            case Part.Shoes:
                 partNum = 2;
                 break;
             case Part.Weapon:
@@ -185,7 +185,7 @@ public class Player : Character
         if(usingEquipment[partNum] == null)
         {
             usingEquipment[partNum] = newItem;
-
+            _spriteList.ChangeItem(partNum);
             useEquipment(partNum); // 델리게이트 실행
         }
 
