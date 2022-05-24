@@ -140,6 +140,11 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             MySlot.RemoveItem(this);
         }
     }
+    public void EquipmentRemove()
+    {
+        InventoryScript.MyInstance.FindEquipment(this);
+        MySlot.RemoveItem(this);
+    }
     public virtual string GetDescription()
     {
         string color = string.Empty;
@@ -169,6 +174,12 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             HealthPotion healthPotion = itemInfo as HealthPotion;
             healthPotion.Use();
             Remove();
+        }
+        else if(this.GetKind == Kinds.Equipment)
+        {
+            EquipmentItem equipmentItem = itemInfo as EquipmentItem;
+            equipmentItem.Equip();
+            EquipmentRemove();
         }
     }
     public string GetName() // 일단 useable때문에 넣어두긴함

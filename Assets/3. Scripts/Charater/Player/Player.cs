@@ -19,6 +19,11 @@ public class Player : Character
         }
     }
 
+    public EquipmentItem[] usingEquipment = new EquipmentItem[6];
+
+    public delegate void UseEquipment(int partNum);
+    public event UseEquipment useEquipment;
+
     private FloatingJoystick joy;
 
     [SerializeField]
@@ -153,7 +158,38 @@ public class Player : Character
             attackRoutine = StartCoroutine(Attack(spellIName));
         }
     }
+    public void EquipItem(EquipmentItem newItem)
+    {
+        int partNum = 0;
+        switch (newItem.GetPart)
+        {
+            case Part.Helmet:
+                partNum = 0;
+                break;
+            case Part.Cloth:
+                partNum = 1;
+                break;
+            case Part.Pants:
+                partNum = 2;
+                break;
+            case Part.Weapon:
+                partNum = 3;
+                break;
+            case Part.Shoulder:
+                partNum = 4;
+                break;
+            case Part.Back:
+                partNum = 5;
+                break;
+        }
+        if(usingEquipment[partNum] == null)
+        {
+            usingEquipment[partNum] = newItem;
 
+            useEquipment(partNum); // 델리게이트 실행
+        }
+
+    }
     //public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir)
     //{
     //    base.TakeDamage(damage, knockbackDir);

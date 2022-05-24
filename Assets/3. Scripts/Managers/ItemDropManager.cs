@@ -19,7 +19,7 @@ public class ItemDropManager : MonoBehaviour
     }
 
     public DropItem dropItem;
-    public Item itemInfo;
+    public Item[] itemInfo;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +30,8 @@ public class ItemDropManager : MonoBehaviour
         if (ChanceMaker.GetThisChanceResult_Percentage(100))
         {
             DropItem item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<DropItem>();
-            item.SetDropItem(itemInfo, Quality.Rare);
+            int a = Random.Range(0, 2);
+            item.SetDropItem(itemInfo[a], Quality.Rare);
         }
     }
 

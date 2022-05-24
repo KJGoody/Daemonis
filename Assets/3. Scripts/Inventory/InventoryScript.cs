@@ -117,7 +117,16 @@ public class InventoryScript : MonoBehaviour
             if(!slots.IsEmpty && slots.MyItem.MyName == item.MyName && slots.MyItem.MyQuality == item.MyQuality)
                item.MySlot = slots;
         }
-       
+    }
+    public void FindEquipment(ItemBase item)
+    {
+        foreach (SlotScript slots in MySlots)
+        {
+            if (!slots.IsEmpty  && slots.MyItem.MyName == item.MyName && slots.MyItem.MyQuality == item.MyQuality && slots.MyItem == item)
+            {
+                item.MySlot = slots;
+            }
+        }    
     }
     private bool PlaceInEmpty(ItemBase item)
     {

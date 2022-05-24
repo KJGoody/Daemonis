@@ -140,6 +140,10 @@ public class HandScript : MonoBehaviour
                 SI_Obj_Option.SetActive(false);
                 SI_Obj_SetOption.SetActive(false);
                 break;
+            case Kinds.Equipment:
+                SI_Obj_Option.SetActive(true);
+                SI_Obj_SetOption.SetActive(false); // 나중에 세트장비 조건문으로 활성화
+                break;
             default:
                 break;
         }
@@ -147,11 +151,27 @@ public class HandScript : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)SI_CSF_Descript.transform); // content size filtter 바로 안늘어나는 버그 해결
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)SI_CSF_Panel.transform);
     }
+
+    public void EquipButton() // 장착버튼용 (포션이랑 장비 나누기 위함)
+    {
+        if (myItem.GetKind == Kinds.Potion)
+            EquipPotion();
+        else if (myItem.GetKind == Kinds.Equipment)
+            UseEquipment();
+        
+    }
     public void EquipPotion() // 포션 등록 시작
     {
         MyMoveable = myItem;
         SI_Panel.SetActive(false);
         SI_Obj_Blind.SetActive(true);
+    }
+    public void UseEquipment() // 장비 장착할때
+    {
+        //MyMoveable = myItem;
+        myItem.Use();
+        //Player.MyInstance.asdf(MyMoveable as EquipmentItem);
+        SI_Panel.SetActive(false);
     }
     public void ResetEquipPotion() // 포션 등록 취소
     {
