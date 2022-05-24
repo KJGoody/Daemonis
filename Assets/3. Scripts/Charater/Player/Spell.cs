@@ -14,7 +14,8 @@ public class Spell : IUseable, IMoveable
     {
         Launch,
         AOE,
-        AE
+        AE,
+        Toggle
     }
     public SpellLaunchType spellLaunchType;
     [SerializeField]

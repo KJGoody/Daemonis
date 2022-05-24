@@ -4,16 +4,16 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -2554913593723263831
-    second: phoenix_0
+    second: Skill_Fire_Sprite04_0
   - first:
       213: 2709242892945654914
-    second: phoenix_1
+    second: Skill_Fire_Sprite04_1
   - first:
       213: -3203648102257179148
-    second: phoenix_2
+    second: Skill_Fire_Sprite04_2
   - first:
       213: -7137383548675325358
-    second: phoenix_3
+    second: Skill_Fire_Sprite04_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,7 +127,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: phoenix_0
+      name: Skill_Fire_Sprite04_0
       rect:
         serializedVersion: 2
         x: 0
@@ -135,7 +135,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -148,7 +148,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: phoenix_1
+      name: Skill_Fire_Sprite04_1
       rect:
         serializedVersion: 2
         x: 96
@@ -156,7 +156,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -169,7 +169,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: phoenix_2
+      name: Skill_Fire_Sprite04_2
       rect:
         serializedVersion: 2
         x: 0
@@ -177,7 +177,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,7 +190,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: phoenix_3
+      name: Skill_Fire_Sprite04_3
       rect:
         serializedVersion: 2
         x: 96
@@ -198,7 +198,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

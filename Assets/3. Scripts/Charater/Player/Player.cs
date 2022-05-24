@@ -96,36 +96,34 @@ public class Player : Character
 
     private void AutoTarget() // 가장 가까운적 타겟팅
     {
-        MyTarget = FindNearestObjectByTag("Enemy").transform.Find("HitBox").transform;
-        if (Vector2.Distance(MyTarget.position, transform.position) > 7) // 너무 멀면 타겟 해제
-        {
+        if (FindNearestObject() != null)
+            MyTarget = FindNearestObject().transform.Find("HitBox").transform;
+        else
             MyTarget = null;
-        }
     }
-    
-    private GameObject FindNearestObjectByTag(string tag)
-    {
-        // 탐색할 오브젝트 목록을 List 로 저장합니다.
-        var objects = GameObject.FindGameObjectsWithTag(tag).ToList();
 
-        // 오브젝트가 죽었는지 살아있는지 확인
-        for (int i = 0; i < objects.Count; i++)
-        {
-            if (!objects[i].GetComponent<EnemyBase>().IsAlive)
-                objects.RemoveAt(i);
-        }
+    private GameObject FindNearestObject()
+    {
+        Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, 7, LayerMask.GetMask("HitBox"));
         
-        // LINQ 메소드를 이용해 가장 가까운 적을 찾습니다.
-        var neareastObject = objects
+        List<GameObject> objects = new List<GameObject>();
+        for (int i = 0; i < collisions.Length; i++)
+            if(collisions[i].CompareTag("Enemy"))       // 테그가 적인것을 찾는다.
+                objects.Add(collisions[i].gameObject);
+
+        if (objects.Count == 0)     // 만약 리스트가 비었다면 null을 반환
+            return null;
+
+        var neareastObject = objects        // 거리가 가장 짧은 오브젝트를 구한다.
             .OrderBy(obj =>
             {
                 return Vector3.Distance(transform.position, obj.transform.position);
             })
         .FirstOrDefault();
 
-        return neareastObject;
+        return neareastObject.transform.parent.gameObject;
     }
-
+    
     private IEnumerator Attack(string spellIName)
     {
         IsAttacking = true;
@@ -157,10 +155,39 @@ public class Player : Character
                 return Instantiate(spell.MySpellPrefab, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
 
             case Spell.SpellLaunchType.AE:
-                return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
+                if (MyTarget != null)
+                    return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
+                else
+                {
+                    Vector3 ExitPoint = transform.position + new Vector3(atkDir.x, atkDir.y, 0).normalized * 2;
+                    if (ExitPoint == transform.position)
+                    {
+                        if (_prefabs.transform.localScale.x == -1)
+                            ExitPoint += new Vector3(1, 0, 0).normalized * 2;
+                        else
+                            ExitPoint += new Vector3(-1, 0, 0).normalized * 2;
+                    }
+                    return Instantiate(spell.MySpellPrefab, ExitPoint, Quaternion.identity).GetComponent<SpellScript>();
+                }
 
             case Spell.SpellLaunchType.AOE:
-                return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
+                if(MyTarget != null)        // 타겟이 있을 때 정상 출력
+                    return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
+                else        // 타겟이 없을 때 생성 위치 설정
+                {
+                    Vector3 ExitPoint = transform.position + new Vector3(atkDir.x, atkDir.y, 0).normalized * 2;
+                    if(ExitPoint == transform.position)
+                    {
+                        if (_prefabs.transform.localScale.x == -1)
+                            ExitPoint += new Vector3(1, 0, 0).normalized * 2;
+                        else
+                            ExitPoint += new Vector3(-1, 0, 0).normalized * 2;
+                    }
+                    return Instantiate(spell.MySpellPrefab, ExitPoint, Quaternion.identity).GetComponent<SpellScript>();
+                }
+
+            case Spell.SpellLaunchType.Toggle:
+                return Instantiate(spell.MySpellPrefab, transform).GetComponent<SpellScript>(); 
         }
 
         return null;
@@ -174,9 +201,4 @@ public class Player : Character
             IsAttacking = false;
         }
     }
-    
-    //public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir)
-    //{
-    //    base.TakeDamage(damage, knockbackDir);
-    //}
 }

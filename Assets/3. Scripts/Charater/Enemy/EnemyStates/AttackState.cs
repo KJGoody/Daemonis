@@ -36,11 +36,14 @@ public class AttackState : IState
             parent.ChangeState(new IdleState());
         }
 
-        // 공격시 플레이어 시선처리
-        if ((parent.MyTarget.transform.position - parent.transform.position).x > 0)
-            parent._prefabs.transform.localScale = new Vector3(-1, 1, 1);
-        else if ((parent.MyTarget.transform.position - parent.transform.position).x < 0)
-            parent._prefabs.transform.localScale = new Vector3(1, 1, 1);
+        if (parent.MyTarget != null)
+        {
+            // 공격시 플레이어 시선처리
+            if ((parent.MyTarget.transform.position - parent.transform.position).x > 0)
+                parent._prefabs.transform.localScale = new Vector3(-1, 1, 1);
+            else if ((parent.MyTarget.transform.position - parent.transform.position).x < 0)
+                parent._prefabs.transform.localScale = new Vector3(1, 1, 1);
+        }
 
         if (parent.MyAttackTime >= attackCooldown && !parent.IsAttacking)
         {

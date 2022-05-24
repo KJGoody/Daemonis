@@ -81,12 +81,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7759483420088328454}
-  - component: {fileID: 7089291890261483673}
   - component: {fileID: 7527969048852949218}
-  - component: {fileID: 954079744089848340}
-  - component: {fileID: 4348590965333436126}
+  - component: {fileID: 7089291890261483673}
   - component: {fileID: -4260425782238387153}
   - component: {fileID: 3318411572377474205}
+  - component: {fileID: 4348590965333436126}
+  - component: {fileID: 954079744089848340}
   m_Layer: 14
   m_Name: Skill_Fire_01
   m_TagString: Untagged
@@ -103,12 +103,30 @@ Transform:
   m_GameObject: {fileID: 8440346083036277406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 3232571191555017598}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7527969048852949218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440346083036277406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc06bfb1b97f074fb1b63e0f2f06c3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puff: {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b, type: 3}
+  spellType: 0
+  atkDir: {x: 0, y: 0}
+  speed: 5
+  damage: 5
+  CastTime: 0.3
 --- !u!212 &7089291890261483673
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -161,45 +179,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7527969048852949218
-MonoBehaviour:
+--- !u!210 &-4260425782238387153
+SortingGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8440346083036277406}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fc06bfb1b97f074fb1b63e0f2f06c3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  puff: {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b, type: 3}
-  spellType: 0
-  atkDir: {x: 0, y: 0}
-  speed: 5
-  damage: 5
-  CastTime: 0.3
---- !u!50 &954079744089848340
-Rigidbody2D:
-  serializedVersion: 4
+  m_SortingLayerID: -822470091
+  m_SortingLayer: 6
+  m_SortingOrder: 0
+--- !u!95 &3318411572377474205
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8440346083036277406}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f20e89e673c82634699ca87ee83107cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!61 &4348590965333436126
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -226,33 +235,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.3}
   m_EdgeRadius: 0
---- !u!210 &-4260425782238387153
-SortingGroup:
+--- !u!50 &954079744089848340
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8440346083036277406}
-  m_Enabled: 1
-  m_SortingLayerID: -822470091
-  m_SortingLayer: 5
-  m_SortingOrder: 0
---- !u!95 &3318411572377474205
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8440346083036277406}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 503ceb54bca71a0489312609df4adf06, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

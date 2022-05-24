@@ -84,9 +84,11 @@ GameObject:
   - component: {fileID: 7527969048852949218}
   - component: {fileID: 7089291890261483673}
   - component: {fileID: -4260425782238387153}
+  - component: {fileID: 3318411572377474205}
+  - component: {fileID: -7265900354657436126}
   - component: {fileID: 954079744089848340}
   m_Layer: 14
-  m_Name: Skill_Fire_03
+  m_Name: Skill_Fire_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +103,7 @@ Transform:
   m_GameObject: {fileID: 8440346083036277406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 3232571191555017598}
   m_Father: {fileID: 0}
@@ -120,11 +122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puff: {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b, type: 3}
-  spellType: 1
-  IsToggleAttack: 0
+  spellType: 7
   MyTarget: {fileID: 0}
   atkDir: {x: 0, y: 0}
-  speed: 0
+  speed: 2
   damage: 0
   CastTime: 0.3
 --- !u!212 &7089291890261483673
@@ -167,7 +168,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: 222672fd7364a7144b32fba544f684e9, type: 3}
+  m_Sprite: {fileID: -3853505009514594305, guid: d2fc3abb99d31ab418292911a7c30839,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -186,9 +188,54 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8440346083036277406}
   m_Enabled: 1
-  m_SortingLayerID: 735885497
-  m_SortingLayer: 2
+  m_SortingLayerID: -822470091
+  m_SortingLayer: 6
   m_SortingOrder: 0
+--- !u!95 &3318411572377474205
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440346083036277406}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c63b448329617da4984b66025a7679ea, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &-7265900354657436126
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440346083036277406}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.46875, y: 0.15625}
+    oldSize: {x: 4, y: 4}
+    newSize: {x: 3, y: 3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!50 &954079744089848340
 Rigidbody2D:
   serializedVersion: 4
