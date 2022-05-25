@@ -10,14 +10,15 @@ public class Spell : IUseable, IMoveable
     private string name;
     [SerializeField]
     private string description;     // 설명란
-    public enum SpellLaunchType
+    public enum SpellType
     {
         Launch,
+        Buff,
         AOE,
-        AE,
-        Toggle
+        Toggle,
+        AE
     }
-    public SpellLaunchType spellLaunchType;
+    public SpellType spellType;
     [SerializeField]
     private GameObject spellPrefab;
 
@@ -31,7 +32,10 @@ public class Spell : IUseable, IMoveable
 
     public void Use()
     {
-        Player.MyInstance.CastSpell(MyName);
+        if (spellType == SpellType.Buff)
+            Player.MyInstance.NewBuff(MyName);
+        else
+            Player.MyInstance.CastSpell(MyName);
     }
     public String GetName()
     {

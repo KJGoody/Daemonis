@@ -82,7 +82,7 @@ public class Player : Character
         
         if (!IsAttacking)
         {
-            attackRoutine = StartCoroutine(Attack(spellIName));
+            attackRoutine = StartCoroutine(CastingSpell(spellIName));
         }
     }
 
@@ -124,7 +124,7 @@ public class Player : Character
         return neareastObject.transform.parent.gameObject;
     }
     
-    private IEnumerator Attack(string spellIName)
+    private IEnumerator CastingSpell(string spellIName)
     {
         IsAttacking = true;
         _prefabs.PlayAnimation(4);  // 공격 애니메이션 재생
@@ -149,12 +149,12 @@ public class Player : Character
 
     private SpellScript InstantiateSpell(Spell spell)
     {
-        switch (spell.spellLaunchType)
+        switch (spell.spellType)
         {
-            case Spell.SpellLaunchType.Launch:
+            case Spell.SpellType.Launch:
                 return Instantiate(spell.MySpellPrefab, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
 
-            case Spell.SpellLaunchType.AE:
+            case Spell.SpellType.AE:
                 if (MyTarget != null)
                     return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
                 else
@@ -170,7 +170,7 @@ public class Player : Character
                     return Instantiate(spell.MySpellPrefab, ExitPoint, Quaternion.identity).GetComponent<SpellScript>();
                 }
 
-            case Spell.SpellLaunchType.AOE:
+            case Spell.SpellType.AOE:
                 if(MyTarget != null)        // 타겟이 있을 때 정상 출력
                     return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
                 else        // 타겟이 없을 때 생성 위치 설정
@@ -186,7 +186,7 @@ public class Player : Character
                     return Instantiate(spell.MySpellPrefab, ExitPoint, Quaternion.identity).GetComponent<SpellScript>();
                 }
 
-            case Spell.SpellLaunchType.Toggle:
+            case Spell.SpellType.Toggle:
                 return Instantiate(spell.MySpellPrefab, transform).GetComponent<SpellScript>(); 
         }
 

@@ -141,10 +141,14 @@ public abstract class Character : MonoBehaviour
             case "BaseBuff":
                 StartBuff(buffName);
                 break;
+
+            case "¹ßÈ­":
+                StartBuff(buffName);
+                break;
         }
     }
 
-    public void StartBuff(string buffName)
+    private void StartBuff(string buffName)
     {
         if (onBuff.Count > 0)
         {
