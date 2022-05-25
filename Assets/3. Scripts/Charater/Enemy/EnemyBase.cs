@@ -5,15 +5,16 @@ using UnityEngine.Rendering;
 
 public class EnemyBase : NPC
 {
+    [HideInInspector]
     public EnemyType enemytype;
     private IState currentState;
 
     [HideInInspector]
     public Vector3 myStartPosition;
     [SerializeField]
-    private CanvasGroup healthGroup;
-    public GameObject unitroot;
+    private GameObject HealthBarImage;
     public Transform ExitPoint;
+    [HideInInspector]
     public float RubbingTime = 0f;
 
     [HideInInspector]
@@ -29,8 +30,9 @@ public class EnemyBase : NPC
 
     protected override void Awake()
     {
-        ChangeState(new IdleState());
+        enemytype = gameObject.GetComponent<EnemyType>();
         myStartPosition = transform.position;
+        ChangeState(new IdleState());
 
         base.Awake();
     }
@@ -79,14 +81,14 @@ public class EnemyBase : NPC
 
     public override Transform Select()
     {
-        healthGroup.alpha = 1;
+        HealthBarImage.SetActive(true);
 
         return base.Select();
     }
 
     public override void DeSelect()
     {
-        healthGroup.alpha = 0;
+        HealthBarImage.SetActive(false);
 
         base.DeSelect();
     }
@@ -98,15 +100,16 @@ public class EnemyBase : NPC
 
     public override void TakeDamage(int damage, Vector2 knockbackDir, string TextType) // ÇÇ°Ý
     {
-        healthGroup.alpha = 1;
-        StartCoroutine(KnockBack(knockbackDir, 1));
+        HealthBarImage.SetActive(true);
+        if(knockbackDir != Vector2.zero)
+            StartCoroutine(KnockBack(knockbackDir, 1));
         base.TakeDamage(damage, knockbackDir, TextType);
 
         if (stat.CurrentHealth <= 0)
         {
             _prefabs.PlayAnimation(2);
-            healthGroup.alpha = 0;
-            unitroot.GetComponent<SortingGroup>().sortingLayerName = "DeathEnemyLayer";
+            HealthBarImage.SetActive(false);
+            _prefabs.GetComponent<SortingGroup>().sortingLayerName = "DeathEnemyLayer";
             Destroy(transform.Find("HitBox").gameObject);
             Destroy(transform.Find("EnemyBody").gameObject);
 

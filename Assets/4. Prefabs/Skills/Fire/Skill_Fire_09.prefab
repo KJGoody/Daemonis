@@ -85,10 +85,10 @@ GameObject:
   - component: {fileID: 7089291890261483673}
   - component: {fileID: -4260425782238387153}
   - component: {fileID: 3318411572377474205}
-  - component: {fileID: 4348590965333436126}
+  - component: {fileID: -7265900354657436126}
   - component: {fileID: 954079744089848340}
   m_Layer: 14
-  m_Name: Skill_Fire_04
+  m_Name: Skill_Fire_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ Transform:
   m_GameObject: {fileID: 8440346083036277406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 3232571191555017598}
   m_Father: {fileID: 0}
@@ -121,11 +121,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc06bfb1b97f074fb1b63e0f2f06c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puff: {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b, type: 3}
-  spellType: 2
+  PuffList:
+  - {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b, type: 3}
+  - {fileID: 4256228517437817992, guid: 7ab99f1c7d095984fa863f01ce08f928, type: 3}
+  spellType: 7
+  MyTarget: {fileID: 0}
   atkDir: {x: 0, y: 0}
-  speed: 5
-  damage: 5
+  speed: 2
+  damage: 0
   CastTime: 0.3
 --- !u!212 &7089291890261483673
 SpriteRenderer:
@@ -167,7 +170,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: -2554913593723263831, guid: 1033160627b693443a43f1781a4dadce,
+  m_Sprite: {fileID: -3853505009514594305, guid: d2fc3abb99d31ab418292911a7c30839,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -200,7 +203,7 @@ Animator:
   m_GameObject: {fileID: 8440346083036277406}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d0769a23a38e10b4ba6f412ae84d01aa, type: 2}
+  m_Controller: {fileID: 9100000, guid: c63b448329617da4984b66025a7679ea, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -209,7 +212,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &4348590965333436126
+--- !u!61 &-7265900354657436126
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,18 +225,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.22, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
+    pivot: {x: 0.46875, y: 0.15625}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 3, y: 3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 1}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &954079744089848340
 Rigidbody2D:

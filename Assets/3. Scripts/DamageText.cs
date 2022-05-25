@@ -9,8 +9,8 @@ public class DamageText : MonoBehaviour
     private float destroyTime = 1;
 
     public int Damage { get; set; }
-    TextMeshPro text;
-    Color alpha;
+    private TextMeshPro text;
+    private Color alpha;
 
     void Start()
     {

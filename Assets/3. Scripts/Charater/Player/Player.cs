@@ -22,7 +22,7 @@ public class Player : Character
     private FloatingJoystick joy;
     [SerializeField]
     private Transform exitPoint; // 발사체 생성 위치
-
+    [HideInInspector]
     public Vector2 atkDir;
 
     protected override void Start()
@@ -97,7 +97,7 @@ public class Player : Character
     private void AutoTarget() // 가장 가까운적 타겟팅
     {
         if (FindNearestObject() != null)
-            MyTarget = FindNearestObject().transform.Find("HitBox").transform;
+            MyTarget = FindNearestObject().transform;
         else
             MyTarget = null;
     }
@@ -121,7 +121,7 @@ public class Player : Character
             })
         .FirstOrDefault();
 
-        return neareastObject.transform.parent.gameObject;
+        return neareastObject;
     }
     
     private IEnumerator CastingSpell(string spellIName)

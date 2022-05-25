@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5821058998736763724}
   - component: {fileID: 7980708413654311299}
   m_Layer: 5
-  m_Name: BaseBuff
+  m_Name: Skill_Fire_02_Buff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuffFillImage: {fileID: 3632800514072586103}
-  BuffName: BaseBuff
-  Duration: 5
+  BuffName: Skill_Fire_02_Buff
+  Duration: 10
 --- !u!222 &5821058998736763724
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -82,7 +82,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 988388304942147450, guid: 2706cbe210c3061428438916a6a4648b, type: 3}
+  m_Sprite: {fileID: 3121093022292234586, guid: 7f016270761387b4886bba14e7d8a4db,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -157,7 +158,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 988388304942147450, guid: 2706cbe210c3061428438916a6a4648b, type: 3}
+  m_Sprite: {fileID: 3121093022292234586, guid: 7f016270761387b4886bba14e7d8a4db,
+    type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

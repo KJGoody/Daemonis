@@ -1,28 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BuffManager : MonoBehaviour
 {
-    private static BuffManager instance;
-    public static BuffManager Instance
-    {
-        get
-        {
-            if (instance == null)
-                instance = FindObjectOfType<BuffManager>();
-
-            return instance;
-        }
-    }
-
+    [HideInInspector]
     public List<GameObject> BuffList = new List<GameObject>();
+    [SerializeField]
+    private Buff[] buffs;
 
-    public void AddBuffImage(Character target)
+    public void AddBuffImage(string BuffName, Character target)
     {
-        GameObject buff = Instantiate(Resources.Load("Buff/BaseBuff") as GameObject, transform);
-        BuffList.Add(buff);
-        buff.GetComponent<Buff>().ExecuteBuff(target);
+        Buff buff = Array.Find(buffs, source => source.BuffName == BuffName);
+        GameObject Buff = Instantiate(buff.gameObject, transform);
+        BuffList.Add(Buff);
+        Buff.GetComponent<Buff>().ExecuteBuff(this, target);
     }
-
 }

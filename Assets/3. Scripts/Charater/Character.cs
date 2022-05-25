@@ -23,7 +23,6 @@ public abstract class Character : MonoBehaviour
     public bool IsAttacking { get; set; }
 
     // 스탯
-    [SerializeField]
     protected Stat stat;
     public Stat MyStat { get { return stat; } }   // 스탯 가져오기
 
@@ -43,11 +42,14 @@ public abstract class Character : MonoBehaviour
     [HideInInspector]
     public float RushSpeed = 0f;
 
+    [SerializeField]
+    private BuffManager buffManager;
     [HideInInspector]
-    public List<Buff> onBuff = new List<Buff>();
+    public List<Buff> OnBuff = new List<Buff>();
 
     protected virtual void Awake()
     {
+        stat = gameObject.GetComponent<Stat>();
         myRigid2D = gameObject.GetComponent<Rigidbody2D>();
     }
 
@@ -138,11 +140,12 @@ public abstract class Character : MonoBehaviour
     {
         switch (buffName)
         {
-            case "BaseBuff":
+            case "발화":
+                buffName = "Skill_Fire_02_Buff";
                 StartBuff(buffName);
                 break;
 
-            case "발화":
+            case "Skill_Fire_02_Debuff":
                 StartBuff(buffName);
                 break;
         }
@@ -150,24 +153,38 @@ public abstract class Character : MonoBehaviour
 
     private void StartBuff(string buffName)
     {
-        if (onBuff.Count > 0)
+        if (OnBuff.Count > 0)
         {
-            for (int i = 0; i < onBuff.Count; i++)
+            for (int i = 0; i < OnBuff.Count; i++)
             {
-                if (onBuff[i].BuffName.Equals(buffName))
-                {
-                    onBuff[i].ResetBuff();
-                }
+                if (OnBuff[i].BuffName.Equals(buffName))
+                    OnBuff[i].ResetBuff();
                 else
-                {
-                    BuffManager.Instance.AddBuffImage(this);
-                }
+                    buffManager.AddBuffImage(buffName, this);
             }
         }
         else
+            buffManager.AddBuffImage(buffName, this);
+    }
+
+    public void OffBuff(string buffName)
+    {
+
+    }
+
+    public bool IsOnBuff(string buffName)
+    {
+        if(OnBuff.Count > 0)
         {
-            BuffManager.Instance.AddBuffImage(this);
+            for (int i = 0; i < OnBuff.Count; i++)
+            {
+                if (OnBuff[i].BuffName.Equals(buffName))
+                    return true;
+                else 
+                    return false;
+            }
         }
+        return false;
     }
 
     public virtual void TakeDamage(int damage, Vector2 knockbackDir, string texttype)

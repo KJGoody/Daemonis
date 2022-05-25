@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class SpellScript : MonoBehaviour
 {
     private Rigidbody2D myRigidbody;
     [SerializeField]
-    private GameObject puff;
+    private List<GameObject> PuffList = new List<GameObject>();
 
     public enum SpellType
     {
@@ -129,11 +130,13 @@ public class SpellScript : MonoBehaviour
         {
             if (!CheckHitEnemy(collision) && spellType != SpellType.Skill_File_09)
             {
+                if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))
+                    collision.transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
                 SpendDamage(collision, damage);
                 if (!IsToggleAttack)
-                    Instantiate(puff, transform.position, Quaternion.identity);
+                    InstantiatePuff(transform.position);
                 else
-                    Instantiate(puff, collision.transform.position, Quaternion.identity);
+                    InstantiatePuff(collision.transform.position);
             }
 
             if (spellType == SpellType.Skill_File_09 && TickCoroutine == null)
@@ -169,6 +172,15 @@ public class SpellScript : MonoBehaviour
         hitEnemy.Remove(Object);
     }
 
+    private void InstantiatePuff(Vector3 position)
+    {
+        if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))
+            Instantiate(PuffList[1], MyTarget);
+        else
+            Instantiate(PuffList[0], position, Quaternion.identity);
+
+    }
+
     private IEnumerator Skill_Fire_01()
     {
         yield return new WaitForSeconds(10f);
@@ -191,7 +203,7 @@ public class SpellScript : MonoBehaviour
                     if (collider[j].CompareTag("Enemy"))
                     {
                         SpendDamage(collider[j], AOEDamage);
-                        Instantiate(puff, collider[j].transform.position, Quaternion.identity);
+                        InstantiatePuff(collider[j].transform.position);
                     }
             }
 
@@ -255,7 +267,7 @@ public class SpellScript : MonoBehaviour
                     if (collider[j].CompareTag("Enemy"))
                     {
                         SpendDamage(collider[j], TickDamage);
-                        Instantiate(puff, collider[j].transform.position, Quaternion.identity);
+                        InstantiatePuff(collider[j].transform.position);
                     }
             }
             yield return new WaitForSeconds(WaitForSconds);
