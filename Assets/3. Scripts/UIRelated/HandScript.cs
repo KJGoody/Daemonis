@@ -33,6 +33,8 @@ public class HandScript : MonoBehaviour
     private bool skillEquipping = false;
     #endregion
 
+    public GameObject usingEquipment_Panel;
+    public PlayerInfoPanel playerInfoPanel;
     private ItemBase myItem;    // 아이템 정보
     [Header ("Select Item Tooltip")]
     #region 아이템 선택관련 변수 SI = Select Item
@@ -143,7 +145,34 @@ public class HandScript : MonoBehaviour
             case Kinds.Equipment:
                 SI_Obj_Option.SetActive(true);
                 SI_Obj_SetOption.SetActive(false); // 나중에 세트장비 조건문으로 활성화
+                int partNum=0;
+                switch (item.GetPart)
+                { 
+                    case Part.Helmet:
+                        partNum = 0;
+                        break;
+                    case Part.Cloth:
+                        partNum = 1;
+                        break;
+                    case Part.Shoes:
+                        partNum = 2;
+                        break;
+                    case Part.Weapon:
+                        partNum = 3;
+                        break;
+                    case Part.Shoulder:
+                        partNum = 4;
+                        break;
+                    case Part.Back:
+                        partNum = 5;
+                        break;
+                }
+                if(Player.MyInstance.usingEquipment[partNum] != null)
+                {
+                    playerInfoPanel.ShowUsingEquipment(partNum);
+                }
                 break;
+
             default:
                 break;
         }
@@ -168,9 +197,7 @@ public class HandScript : MonoBehaviour
     }
     public void UseEquipment() // 장비 장착할때
     {
-        //MyMoveable = myItem;
         myItem.Use();
-        //Player.MyInstance.asdf(MyMoveable as EquipmentItem);
         SI_Panel.SetActive(false);
     }
     public void ResetEquipPotion() // 포션 등록 취소

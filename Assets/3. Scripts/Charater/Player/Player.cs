@@ -19,7 +19,7 @@ public class Player : Character
         }
     }
 
-    public EquipmentItem[] usingEquipment = new EquipmentItem[6];
+    public ItemBase[] usingEquipment = new ItemBase[6];
 
     public delegate void UseEquipment(int partNum);
     public event UseEquipment useEquipment;
@@ -158,7 +158,7 @@ public class Player : Character
             attackRoutine = StartCoroutine(Attack(spellIName));
         }
     }
-    public void EquipItem(EquipmentItem newItem)
+    public void EquipItem(ItemBase newItem)
     {
         int partNum = 0;
         switch (newItem.GetPart)
@@ -182,12 +182,24 @@ public class Player : Character
                 partNum = 5;
                 break;
         }
-        if(usingEquipment[partNum] == null)
+        if(usingEquipment[partNum] != null)
         {
-            usingEquipment[partNum] = newItem;
-            _spriteList.ChangeItem(partNum);
-            useEquipment(partNum); // 델리게이트 실행
+            InventoryScript.MyInstance.AddItem(usingEquipment[partNum]);
         }
+        usingEquipment[partNum] = newItem;
+        _spriteList.ChangeItem(partNum);
+        useEquipment(partNum); // 델리게이트 실행
+
+
+
+    }
+
+    public void UnequipItem(int partNum)
+    {
+        
+        InventoryScript.MyInstance.AddItem(usingEquipment[partNum]);
+        usingEquipment[partNum] = null;
+        _spriteList.ChangeItem(partNum);
 
     }
     //public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir)

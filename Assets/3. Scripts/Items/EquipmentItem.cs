@@ -27,11 +27,11 @@ public class EquipmentItem : Item
     }
     
     // 아이템 사용시
-    public void Equip()
-    {
+    //public void Equip()
+    //{
 
-        Player.MyInstance.EquipItem(this);
-    }
+    //    Player.MyInstance.EquipItem(this);
+    //}
 
 
 

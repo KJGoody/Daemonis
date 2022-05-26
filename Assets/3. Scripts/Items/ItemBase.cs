@@ -36,6 +36,28 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             return itemInfo.MyStackSize;
         }
     }
+
+    #region 장비아이템 관련
+    private Part part;
+    public Part GetPart
+    {
+        get
+        {
+            EquipmentItem equipmentItem = itemInfo as EquipmentItem;
+            return equipmentItem.GetPart;
+        }
+    }
+    private Sprite[] sprite;
+    public Sprite[] itemSprite
+    {
+        get
+        {
+            EquipmentItem equipmentItem = itemInfo as EquipmentItem;
+            return equipmentItem.itemSprite;
+        }
+    }
+    #endregion
+
     public string MyName
     {
         get
@@ -178,7 +200,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
         else if(this.GetKind == Kinds.Equipment)
         {
             EquipmentItem equipmentItem = itemInfo as EquipmentItem;
-            equipmentItem.Equip();
+            Player.MyInstance.EquipItem(this);
             EquipmentRemove();
         }
     }
