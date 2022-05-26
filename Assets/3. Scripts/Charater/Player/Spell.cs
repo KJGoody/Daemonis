@@ -16,6 +16,7 @@ public class Spell : IUseable, IMoveable
         Buff,
         AOE,
         Toggle,
+        Immediate,
         AE
     }
     public SpellType spellType;
@@ -32,11 +33,12 @@ public class Spell : IUseable, IMoveable
 
     public void Use()
     {
-        if (spellType == SpellType.Buff)
+        if (spellType.Equals(SpellType.Buff))
             Player.MyInstance.NewBuff(MyName);
         else
             Player.MyInstance.CastSpell(MyName);
     }
+
     public String GetName()
     {
         return MyName;

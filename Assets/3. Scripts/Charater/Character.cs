@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
-
 public abstract class Character : MonoBehaviour
 {
     protected Rigidbody2D myRigid2D;
@@ -33,12 +33,12 @@ public abstract class Character : MonoBehaviour
         get { return direction; }
         set { direction = value; }
     }
-    
-    public Transform MyTarget { get; set; }
 
-    protected Coroutine attackRoutine;
+    [HideInInspector]
+    public Transform MyTarget;
 
-    public bool IsRushing { get; set; }
+    [HideInInspector]
+    public bool IsRushing;
     [HideInInspector]
     public float RushSpeed = 0f;
 
@@ -122,17 +122,11 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    public virtual void FindTarget()
+    public virtual void LookAtTarget()
     {
-        //Direction = MyTarget.position - transform.position;
-        //if (Direction.x > 0)
-        //    _prefabs.transform.localScale = new Vector3(-1, 1, 1);
-        //else if (Direction.x < 0) 
-        //    _prefabs.transform.localScale = new Vector3(1, 1, 1);
-        
         if ((MyTarget.transform.position - transform.position).x > 0)
             _prefabs.transform.localScale = new Vector3(-1, 1, 1);
-        else if ((MyTarget.transform.position - transform.position).x < 0) 
+        else if ((MyTarget.transform.position - transform.position).x < 0)
             _prefabs.transform.localScale = new Vector3(1, 1, 1);
     }
 
@@ -155,10 +149,10 @@ public abstract class Character : MonoBehaviour
     {
         if (OnBuff.Count > 0)
         {
-            for (int i = 0; i < OnBuff.Count; i++)
+            foreach (Buff buff in OnBuff)
             {
-                if (OnBuff[i].BuffName.Equals(buffName))
-                    OnBuff[i].ResetBuff();
+                if (buff.BuffName.Equals(buffName))
+                    buff.ResetBuff();
                 else
                     buffManager.AddBuffImage(buffName, this);
             }
@@ -169,22 +163,41 @@ public abstract class Character : MonoBehaviour
 
     public void OffBuff(string buffName)
     {
-
+        for (int i = OnBuff.Count - 1; i >= 0; i--)
+        {
+            if (OnBuff[i].BuffName.Equals(buffName))
+                OnBuff[i].DeActivationBuff();
+        }
     }
 
     public bool IsOnBuff(string buffName)
     {
-        if(OnBuff.Count > 0)
+        if (OnBuff.Count > 0)
         {
-            for (int i = 0; i < OnBuff.Count; i++)
+            foreach (Buff buff in OnBuff)
             {
-                if (OnBuff[i].BuffName.Equals(buffName))
+                if (buff.BuffName.Equals(buffName))
                     return true;
-                else 
+                else
                     return false;
             }
         }
         return false;
+    }
+
+    public Buff GetBuff(string buffName)
+    {
+        if (IsOnBuff(buffName))
+        {
+            foreach (Buff buff in OnBuff)
+            {
+                if (buff.BuffName.Equals(buffName))
+                    return buff;
+            }
+            return null;
+        }
+        else
+            return null;
     }
 
     public virtual void TakeDamage(int damage, Vector2 knockbackDir, string texttype)

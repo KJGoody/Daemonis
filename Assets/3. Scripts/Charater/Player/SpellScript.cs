@@ -8,9 +8,9 @@ public class SpellScript : MonoBehaviour
 {
     private Rigidbody2D myRigidbody;
     [SerializeField]
-    private List<GameObject> PuffList = new List<GameObject>();
+    private GameObject PuffObject;
 
-    public enum SpellType
+    public enum SpellName
     {
         Skill_File_01,
         Skill_File_03,
@@ -22,7 +22,7 @@ public class SpellScript : MonoBehaviour
         Skill_File_09
     }
     [SerializeField]
-    private SpellType spellType;
+    private SpellName spellName;
     private bool IsAOEAttack = false;
     private bool IsToggleAttack = false;
 
@@ -34,8 +34,7 @@ public class SpellScript : MonoBehaviour
 
     [SerializeField]
     private float speed;
-    [SerializeField]
-    private int damage;
+    public int damage;
     public float CastTime;
 
     private Coroutine TickCoroutine;
@@ -44,35 +43,39 @@ public class SpellScript : MonoBehaviour
 
     private void Start()
     {
-        switch (spellType)
+        switch (spellName)
         {
-            case SpellType.Skill_File_01:   // 화염구
+            case SpellName.Skill_File_01:   // 화염구
                 StartCoroutine(Skill_Fire_01());
                 break;
 
-            case SpellType.Skill_File_03:   // 용암 지대
+            case SpellName.Skill_File_03:   // 용암 지대
                 IsAOEAttack = true;
                 StartCoroutine(Skill_Fire_03());
                 break;
 
-            case SpellType.Skill_File_04:   // 피닉스
+            case SpellName.Skill_File_04:   // 피닉스
                 StartCoroutine(Skill_Fire_04());
                 break;
 
-            case SpellType.Skill_File_05:   // 화염 위성
+            case SpellName.Skill_File_05:   // 화염 위성
                 IsToggleAttack = true;
                 StartCoroutine(Skill_Fire_05());
                 break;
 
-            case SpellType.Skill_File_09:   // 화염 토네이도
+            case SpellName.Skill_File_07:   // 점화
+                StartCoroutine(Skill_Fire_07());
+                break;
+
+            case SpellName.Skill_File_09:   // 화염 토네이도
                 StartCoroutine(Skill_Fire_09());
                 break;
         }
 
-        if (!IsToggleAttack)    // 토글 공격은 리기드바디가 없음
-            myRigidbody = GetComponent<Rigidbody2D>();
+        if (IsToggleAttack || spellName.Equals(SpellName.Skill_File_07))        // 토글 공격은 리기드바디가 없음
+            transform.position += new Vector3(0, 0.3f);                         // 토글 중심점 위치 변경
         else
-            transform.position += new Vector3(0, 0.3f); // 토글 중심점 위치 변경
+            myRigidbody = GetComponent<Rigidbody2D>();
 
         if (MyTarget != null)
             direction = MyTarget.position - transform.position;
@@ -81,8 +84,8 @@ public class SpellScript : MonoBehaviour
             direction = atkDir;
             if (direction == Vector2.zero)
             {
-                if (Player.MyInstance._prefabs.transform.localScale.x == -1) // 플레이어가 바라보고 있는 방향확인
-                    direction = new Vector2(1, 0);      // localscale이 -1일때 왼쪽을 보고 있음
+                if (Player.MyInstance._prefabs.transform.localScale.x == -1)    // 플레이어가 바라보고 있는 방향확인
+                    direction = new Vector2(1, 0);                              // localscale이 -1일때 왼쪽을 보고 있음
                 else
                     direction = new Vector2(-1, 0);
             }
@@ -92,55 +95,63 @@ public class SpellScript : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (MyTarget == null && spellType == SpellType.Skill_File_09)    // 토네이도 공격 시 오토타겟팅
+        if (!spellName.Equals(SpellName.Skill_File_07))
         {
-            if (GameObject.FindWithTag("Enemy") != null)
+            if (MyTarget == null && spellName.Equals(SpellName.Skill_File_09))    // 토네이도 공격 시 오토타겟팅
             {
-                if (FindNearestObject() != null)
-                    MyTarget = FindNearestObject().transform.Find("HitBox").transform;
-                else
-                    MyTarget = null;
+                if (GameObject.FindWithTag("Enemy") != null)
+                {
+                    if (FindNearestObject() != null)
+                        MyTarget = FindNearestObject().transform.Find("HitBox").transform;
+                    else
+                        MyTarget = null;
+                }
             }
-        }
 
-        if (spellType == SpellType.Skill_File_09)
-        {
-            if(MyTarget != null)
-                direction = MyTarget.position - transform.position; // 타겟과 스펠의 방향과 크기 구함
-            myRigidbody.velocity = direction.normalized * speed; // direction을 normalized하여 방향값으로 바꿔주고 발사하는 힘 적용
+            if (spellName.Equals(SpellName.Skill_File_09))
+            {
+                if (MyTarget != null)
+                    direction = MyTarget.position - transform.position; // 타겟과 스펠의 방향과 크기 구함
+                myRigidbody.velocity = direction.normalized * speed;    // direction을 normalized하여 방향값으로 바꿔주고 발사하는 힘 적용
+            }
+            else if (!IsToggleAttack)
+            {
+                myRigidbody.velocity = direction.normalized * speed; // direction을 normalized하여 방향값으로 바꿔주고 발사하는 힘 적용
+                                                                     // Math.Atan2 탄젠트 값으로 각도를 산출 https://m.blog.naver.com/PostView.nhn?blogId=sang9151&logNo=220821255191&categoryNo=50&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+                                                                     // Mathf.Rad2Deg 라디안 각도 변환해주는 상수 http://jw910911.tistory.com/6
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // 축 중심 각도로 회전
+            }
+            else
+                transform.Rotate(new Vector3(0, 0, Time.deltaTime * -300));
         }
-        else if (!IsToggleAttack)
-        {
-            myRigidbody.velocity = direction.normalized * speed; // direction을 normalized하여 방향값으로 바꿔주고 발사하는 힘 적용
-                                                                 // Math.Atan2 탄젠트 값으로 각도를 산출 https://m.blog.naver.com/PostView.nhn?blogId=sang9151&logNo=220821255191&categoryNo=50&proxyReferer=https%3A%2F%2Fwww.google.com%2F
-                                                                 // Mathf.Rad2Deg 라디안 각도 변환해주는 상수 http://jw910911.tistory.com/6
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // 축 중심 각도로 회전
-        }
-        else
-            transform.Rotate(new Vector3(0, 0, Time.deltaTime * -300));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall") && !IsToggleAttack)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall") && !IsToggleAttack)     // 벽과 접촉시 파괴
             Destroy(gameObject);
 
         if (collision.CompareTag("Enemy") && !IsAOEAttack)
         {
-            if (!CheckHitEnemy(collision) && spellType != SpellType.Skill_File_09)
+            if (spellName.Equals(SpellName.Skill_File_09))
             {
-                if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))
-                    collision.transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
-                SpendDamage(collision, damage);
-                if (!IsToggleAttack)
-                    InstantiatePuff(transform.position);
-                else
-                    InstantiatePuff(collision.transform.position);
+                if (TickCoroutine == null)      // 토네이도에 접촉 시 코루틴 시작
+                    TickCoroutine = StartCoroutine(TickDamage());
             }
-
-            if (spellType == SpellType.Skill_File_09 && TickCoroutine == null)
-                TickCoroutine = StartCoroutine(TickDamage());
+            else
+            {
+                if (!CheckHitEnemy(collision))
+                {
+                    if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))       // 발화 중일 시 디버프 생성
+                        collision.transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
+                    SpendDamage(collision, damage);
+                    if (!IsToggleAttack)
+                        Instantiate(PuffObject, transform.position, Quaternion.identity);
+                    else
+                        Instantiate(PuffObject, collision.transform.position, Quaternion.identity);
+                }
+            }
         }
     }
 
@@ -172,15 +183,6 @@ public class SpellScript : MonoBehaviour
         hitEnemy.Remove(Object);
     }
 
-    private void InstantiatePuff(Vector3 position)
-    {
-        if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))
-            Instantiate(PuffList[1], MyTarget);
-        else
-            Instantiate(PuffList[0], position, Quaternion.identity);
-
-    }
-
     private IEnumerator Skill_Fire_01()
     {
         yield return new WaitForSeconds(10f);
@@ -189,21 +191,23 @@ public class SpellScript : MonoBehaviour
 
     private IEnumerator Skill_Fire_03()
     {
-        float AOERadius = 0.5f;     // 장판 범위
-        int AOETimes = 5;       // 장판 피격 횟수
+        float AOERadius = 0.5f;             // 장판 범위
+        int AOETimes = 5;                   // 장판 피격 횟수
         float AOEWaitForSeconds = 0.5f;     // 다음 피격 시간
-        int AOEDamage = 5;      // 장판 데미지
+        int AOEDamage = 5;                  // 장판 데미지
 
         for (int i = 0; i < AOETimes; i++)
         {
-            Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, AOERadius, LayerMask.GetMask("HitBox"));
-            if (collider != null)
+            Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, AOERadius, LayerMask.GetMask("HitBox"));
+            if (collisions != null)
             {
-                for (int j = 0; j < collider.Length; j++)
-                    if (collider[j].CompareTag("Enemy"))
+                for (int j = 0; j < collisions.Length; j++)
+                    if (collisions[j].CompareTag("Enemy"))
                     {
-                        SpendDamage(collider[j], AOEDamage);
-                        InstantiatePuff(collider[j].transform.position);
+                        if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))
+                            collisions[j].transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
+                        SpendDamage(collisions[j], AOEDamage);
+                        Instantiate(PuffObject, collisions[j].transform.position, Quaternion.identity);
                     }
             }
 
@@ -221,6 +225,13 @@ public class SpellScript : MonoBehaviour
     private IEnumerator Skill_Fire_05()
     {
         yield return new WaitForSeconds(10f);
+        Destroy(gameObject);
+    }
+
+    private IEnumerator Skill_Fire_07()
+    {
+        MyTarget.GetComponent<EnemyBase>().TakeDamage(damage, Vector2.zero, "EnemyDamage");
+        yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }
 
@@ -260,14 +271,16 @@ public class SpellScript : MonoBehaviour
 
         while (true)
         {
-            Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, Radius, LayerMask.GetMask("HitBox"));
-            if (collider != null)
+            Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, Radius, LayerMask.GetMask("HitBox"));
+            if (collisions != null)
             {
-                for (int j = 0; j < collider.Length; j++)
-                    if (collider[j].CompareTag("Enemy"))
+                for (int j = 0; j < collisions.Length; j++)
+                    if (collisions[j].CompareTag("Enemy"))
                     {
-                        SpendDamage(collider[j], TickDamage);
-                        InstantiatePuff(collider[j].transform.position);
+                        if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))
+                            collisions[j].transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
+                        SpendDamage(collisions[j], TickDamage);
+                        Instantiate(PuffObject, collisions[j].transform.position, Quaternion.identity);
                     }
             }
             yield return new WaitForSeconds(WaitForSconds);

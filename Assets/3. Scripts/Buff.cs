@@ -11,6 +11,8 @@ public class Buff : MonoBehaviour
     private Image BuffFillImage;
     private BuffManager MyManager;
     [SerializeField]
+    private GameObject PuffObject;
+    [SerializeField]
     private TextMeshProUGUI StackText;
     private Color TextColor;
     public enum BuffType
@@ -23,10 +25,13 @@ public class Buff : MonoBehaviour
     private BuffType buffType;
 
     public string BuffName;
-    private Character Target;
     [SerializeField]
     private float Duration;
     private float currentTime;
+    
+    private Character Target;
+    private bool InTargetGroup = false;
+    [HideInInspector]
     public int BuffStack = 1;
 
 
@@ -43,13 +48,20 @@ public class Buff : MonoBehaviour
         }
     }
 
-    public void ResetBuff()
+    private void Update()
+    {
+        if (!Target.IsAlive)
+            DeActivationBuff();
+    }
+
+    public void ResetBuff() // 버프 갱신
     {
         currentTime = Duration;
         BuffFillImage.fillAmount = 1;
         if (buffType == BuffType.Stack)
         {
-            BuffStack++;
+            if (BuffStack < 5)
+                BuffStack++;
             StackText.text = BuffStack.ToString();
         }
     }
@@ -85,17 +97,26 @@ public class Buff : MonoBehaviour
     {
         Target.OnBuff.Remove(this);
         MyManager.BuffList.Remove(gameObject);
+        if (PuffObject != null)
+            Destroy(PuffObject);
+        if (InTargetGroup)
+            Player.MyInstance.RemoveTarget(BuffName, Target.transform);
         Destroy(gameObject);
     }
 
     private IEnumerator Skill_Fire_02_Debuff()
     {
+        Player.MyInstance.AddTarget(BuffName, Target.transform);
+        InTargetGroup = true;
+        PuffObject = Instantiate(PuffObject, Target.transform);
+
         float WaitForSconds = 0.5f;
         int TickDamage = 1;
 
         while (true)
         {
-            Target.TakeDamage(TickDamage * BuffStack, Vector2.zero, "EnemyDamage");
+            if(Target.IsAlive)
+                Target.TakeDamage(TickDamage * BuffStack, Vector2.zero, "EnemyDamage");
             yield return new WaitForSeconds(WaitForSconds);
         }
     }

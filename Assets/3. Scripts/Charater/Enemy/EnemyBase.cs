@@ -109,7 +109,7 @@ public class EnemyBase : NPC
         {
             _prefabs.PlayAnimation(2);
             HealthBarImage.SetActive(false);
-            _prefabs.GetComponent<SortingGroup>().sortingLayerName = "DeathEnemyLayer";
+            _prefabs.transform.GetChild(0).GetComponent<SortingGroup>().sortingLayerName = "DeathEnemyLayer";
             Destroy(transform.Find("HitBox").gameObject);
             Destroy(transform.Find("EnemyBody").gameObject);
 

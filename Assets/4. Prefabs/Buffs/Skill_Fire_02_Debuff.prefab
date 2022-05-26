@@ -203,6 +203,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuffFillImage: {fileID: 3632800514072586103}
+  PuffObject: {fileID: 4256228517437817992, guid: 7ab99f1c7d095984fa863f01ce08f928,
+    type: 3}
   StackText: {fileID: 8844340277030855180}
   buffType: 1
   BuffName: Skill_Fire_02_Debuff

@@ -165,10 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc06bfb1b97f074fb1b63e0f2f06c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PuffList:
-  - {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b, type: 3}
-  - {fileID: 4256228517437817992, guid: 7ab99f1c7d095984fa863f01ce08f928, type: 3}
-  spellType: 3
+  PuffObject: {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b,
+    type: 3}
+  spellName: 3
   MyTarget: {fileID: 0}
   atkDir: {x: 0, y: 0}
   speed: 0
