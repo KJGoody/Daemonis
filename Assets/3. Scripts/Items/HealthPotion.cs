@@ -4,7 +4,7 @@ using UnityEngine;
 
 // 상단 메뉴 버튼 만들기
 [CreateAssetMenu(fileName = "HealthPotion", menuName = "Items/Potion", order = 2)]
-public class HealthPotion : Item, IUseable
+public class HealthPotion : Item
 {
     // 포션아이템의 회복량
     [SerializeField]
@@ -24,10 +24,11 @@ public class HealthPotion : Item, IUseable
             Player.MyInstance.MyStat.CurrentHealth += health;
         }
     }
-    public string GetName()
-    {
-        return MyName;
-    }
+
+    //public string GetName()
+    //{
+    //    return MyName;
+    //}
     public override string GetDescription()
     {
         return base.GetDescription() + string.Format("\n<color=#00ff00ff>Use: 체력 {0} 회복</color>", health);

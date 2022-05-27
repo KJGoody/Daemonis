@@ -36,6 +36,33 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             return itemInfo.MyStackSize;
         }
     }
+
+    #region 장비아이템 관련
+    private Part part;
+    public Part GetPart
+    {
+        get
+        {
+            EquipmentItem equipmentItem = itemInfo as EquipmentItem;
+            return equipmentItem.GetPart;
+        }
+    }
+    private Sprite[] sprite;
+    public Sprite[] itemSprite
+    {
+        get
+        {
+            EquipmentItem equipmentItem = itemInfo as EquipmentItem;
+            return equipmentItem.itemSprite;
+        }
+    }
+    public void ActiveEquipment(bool isActive)
+    {
+        EquipmentItem equipmentItem = itemInfo as EquipmentItem;
+        equipmentItem.ActiveEquipment(isActive);
+    }
+    #endregion
+
     public string MyName
     {
         get
@@ -140,6 +167,11 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             MySlot.RemoveItem(this);
         }
     }
+    public void EquipmentRemove()
+    {
+        InventoryScript.MyInstance.FindEquipment(this);
+        MySlot.RemoveItem(this);
+    }
     public virtual string GetDescription()
     {
         string color = string.Empty;
@@ -164,9 +196,18 @@ public class ItemBase : IMoveable, IDescribable, IUseable
     }
     public void Use()
     {
-        HealthPotion healthPotion = itemInfo as HealthPotion;
-        healthPotion.Use();
-        Remove();
+        if(this.GetKind == Kinds.Potion)
+        {
+            HealthPotion healthPotion = itemInfo as HealthPotion;
+            healthPotion.Use();
+            Remove();
+        }
+        else if(this.GetKind == Kinds.Equipment)
+        {
+            EquipmentItem equipmentItem = itemInfo as EquipmentItem;
+            Player.MyInstance.EquipItem(this);
+            EquipmentRemove();
+        }
     }
     public string GetName() // 일단 useable때문에 넣어두긴함
     {

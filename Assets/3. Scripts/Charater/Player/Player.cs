@@ -18,7 +18,7 @@ public class TargetGroup
 
 public class Player : Character
 {
-    // ½Ì±ÛÅæ
+    // ï¿½Ì±ï¿½ï¿½ï¿½
     private static Player instance;
     public static Player MyInstance
     {
@@ -32,13 +32,18 @@ public class Player : Character
         }
     }
 
+    public ItemBase[] usingEquipment = new ItemBase[6];
+
+    public delegate void UseEquipment(int partNum);
+    public event UseEquipment useEquipment;
+
     private FloatingJoystick joy;
     [SerializeField]
-    private Transform exitPoint;    // ¹ß»çÃ¼ »ý¼º À§Ä¡
+    private Transform exitPoint;    // ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
     [HideInInspector]
-    public Vector2 atkDir;          // ³Ë¹é ¹æÇâ º¤ÅÍ
+    public Vector2 atkDir;          // ï¿½Ë¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    [SerializeField]                // ¹ßÈ­¿Í Æ¯Á¤ Å¸°ÙµéÀÇ ¹­À½
+    [SerializeField]                // ï¿½ï¿½È­ï¿½ï¿½ Æ¯ï¿½ï¿½ Å¸ï¿½Ùµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private List<TargetGroup> targetGroups = new List<TargetGroup>();
 
     protected override void Start()
@@ -60,7 +65,7 @@ public class Player : Character
 
     private void GetInput()
     {
-        Vector2 moveVector;         // Á¶ÀÌ½ºÆ½¿¡¼­ ¿òÁ÷À» ¹Þ±âÀ§ÇÑ º¤ÅÍ
+        Vector2 moveVector;         // ï¿½ï¿½ï¿½Ì½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (!IsAttacking)
         {
             moveVector.x = joy.Horizontal;
@@ -87,7 +92,7 @@ public class Player : Character
             StartCoroutine(CastingSpell(spellIName));
     }
 
-    private bool SearchEnemy() // ¾À¿¡ ÀûÀÌ Á¸ÀçÇÏ´ÂÁö °Ë»ö
+    private bool SearchEnemy() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
     {
         if (GameObject.FindWithTag("Enemy") == null)
             return false;
@@ -95,7 +100,7 @@ public class Player : Character
             return true;
     }
 
-    private void AutoTarget() // °¡Àå °¡±î¿îÀû Å¸°ÙÆÃ
+    private void AutoTarget() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½
     {
         if (FindNearestObject() != null)
             MyTarget = FindNearestObject().transform;
@@ -109,13 +114,13 @@ public class Player : Character
 
         List<GameObject> objects = new List<GameObject>();
         for (int i = 0; i < collisions.Length; i++)
-            if (collisions[i].CompareTag("Enemy"))       // Å×±×°¡ ÀûÀÎ°ÍÀ» Ã£´Â´Ù.
+            if (collisions[i].CompareTag("Enemy"))       // ï¿½×±×°ï¿½ ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½ Ã£ï¿½Â´ï¿½.
                 objects.Add(collisions[i].gameObject);
 
-        if (objects.Count == 0)     // ¸¸¾à ¸®½ºÆ®°¡ ºñ¾ú´Ù¸é nullÀ» ¹ÝÈ¯
+        if (objects.Count == 0)     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ nullï¿½ï¿½ ï¿½ï¿½È¯
             return null;
 
-        var neareastObject = objects        // °Å¸®°¡ °¡Àå ÂªÀº ¿ÀºêÁ§Æ®¸¦ ±¸ÇÑ´Ù.
+        var neareastObject = objects        // ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Âªï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
             .OrderBy(obj =>
             {
                 return Vector3.Distance(transform.position, obj.transform.position);
@@ -128,22 +133,22 @@ public class Player : Character
     private IEnumerator CastingSpell(string spellIName)
     {
         IsAttacking = true;
-        _prefabs.PlayAnimation(4);                                  // °ø°Ý ¾Ö´Ï¸ÞÀÌ¼Ç Àç»ý
-        if (MyTarget != null) LookAtTarget();                       // Å¸°Ù ¹Ù¶óº¸±â
+        _prefabs.PlayAnimation(4);                                  // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½
+        if (MyTarget != null) LookAtTarget();                       // Å¸ï¿½ï¿½ ï¿½Ù¶óº¸±ï¿½
 
-        Spell newSpell = SpellBook.MyInstance.GetSpell(spellIName); // ½ºÆçºÏ¿¡¼­ ½ºÅ³ ¹Þ¾Æ¿È
-        if (newSpell.spellType.Equals(Spell.SpellType.Immediate))   // Á¡È­ °ø°ÝÀÎÁö È®ÀÎ   
+        Spell newSpell = SpellBook.MyInstance.GetSpell(spellIName); // ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½Þ¾Æ¿ï¿½
+        if (newSpell.spellType.Equals(Spell.SpellType.Immediate))   // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½   
         {
-            for (int i = targetGroups.Count - 1; i >= 0; i--)       // Á¡È­ °ø°Ý Å¸°Ù ±×·ìÈ®ÀÎ
+            for (int i = targetGroups.Count - 1; i >= 0; i--)       // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½×·ï¿½È®ï¿½ï¿½
             {
                 if (targetGroups[i].GroupName.Equals("Skill_Fire_02_Debuff"))
                     for (int j = targetGroups[i].Targets.Count - 1; j >= 0; j--)
                     {
-                        if (Vector2.Distance(transform.position, targetGroups[i].Targets[j].position) < 7)      // ³Ê¹« ¸Ö¸®ÀÖ´Â Å¸ÄÏÀº °ø°ÝÇÏÁö ¾ÊÀ½
+                        if (Vector2.Distance(transform.position, targetGroups[i].Targets[j].position) < 7)      // ï¿½Ê¹ï¿½ ï¿½Ö¸ï¿½ï¿½Ö´ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                         {
                             SpellScript spellScript = Instantiate(newSpell.MySpellPrefab, targetGroups[i].Targets[j]).GetComponent<SpellScript>();
                             spellScript.MyTarget = targetGroups[i].Targets[j];
-                            // ¹ßÈ­ ½ºÅÃÀ» °¡Áö°í µ¥¹ÌÁö ¼³Á¤
+                            // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                             spellScript.damage = targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().GetBuff("Skill_Fire_02_Debuff").BuffStack * 1;
                             targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().OffBuff("Skill_Fire_02_Debuff");
                         }
@@ -165,7 +170,7 @@ public class Player : Character
         }
     }
 
-    private SpellScript InstantiateSpell(Spell spell)       // ½ºÆÓ »ý¼º ÇÔ¼ö
+    private SpellScript InstantiateSpell(Spell spell)       // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     {
         switch (spell.spellType)
         {
@@ -173,9 +178,9 @@ public class Player : Character
                 return Instantiate(spell.MySpellPrefab, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
 
             case Spell.SpellType.AOE:
-                if (MyTarget != null)           // Å¸°ÙÀÌ ÀÖÀ» ¶§ Á¤»ó Ãâ·Â
+                if (MyTarget != null)           // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                     return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
-                else                            // Å¸°ÙÀÌ ¾øÀ» ¶§ »ý¼º À§Ä¡ ¼³Á¤
+                else                            // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
                 {
                     Vector3 ExitPoint = transform.position + new Vector3(atkDir.x, atkDir.y, 0).normalized * 2;
                     if (ExitPoint == transform.position)
@@ -209,6 +214,37 @@ public class Player : Character
         }
         return null;
     }
+    public void EquipItem(ItemBase newItem)
+    {
+        int partNum = 0;
+        switch (newItem.GetPart)
+        {
+            case Part.Helmet:
+                partNum = 0;
+                break;
+            case Part.Cloth:
+                partNum = 1;
+                break;
+            case Part.Shoes:
+                partNum = 2;
+                break;
+            case Part.Weapon:
+                partNum = 3;
+                break;
+            case Part.Shoulder:
+                partNum = 4;
+                break;
+            case Part.Back:
+                partNum = 5;
+                break;
+        }
+        if(usingEquipment[partNum] != null)
+        {
+            InventoryScript.MyInstance.AddItem(usingEquipment[partNum]);
+        }
+        usingEquipment[partNum] = newItem;
+        _spriteList.ChangeItem(partNum);
+        useEquipment(partNum); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 
     public void AddTarget(string TargetGroupName, Transform Target)
     {
@@ -226,7 +262,7 @@ public class Player : Character
 
             if (IsAlreadyIn)
             {
-                if (!targetGroups[Index].Targets.Contains(Target.transform))    // Áßº¹ È®ÀÎ
+                if (!targetGroups[Index].Targets.Contains(Target.transform))    // ï¿½ßºï¿½ È®ï¿½ï¿½
                     targetGroups[Index].Targets.Add(Target.transform);
             }
             else
@@ -249,4 +285,25 @@ public class Player : Character
     }
 
 
+
+
+    }
+
+    public void UnequipItem(int partNum)
+    {
+        
+        InventoryScript.MyInstance.AddItem(usingEquipment[partNum]);
+        usingEquipment[partNum] = null;
+        _spriteList.ChangeItem(partNum);
+
+    }
+
+    private void Plus()
+    {
+
+    }
+    //public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir)
+    //{
+    //    base.TakeDamage(damage, knockbackDir);
+    //}
 }

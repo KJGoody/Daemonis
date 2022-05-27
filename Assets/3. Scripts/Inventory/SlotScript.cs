@@ -96,6 +96,10 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
             UIManager.MyInstance.UpdateStackSize(this);
         }
     }
+    public void DeleteItem(ItemBase item)
+    {
+
+    }
     public void OnPointerClick(PointerEventData eventData)
     {
          HandScript.MyInstance.SelectItem(MyItem);
