@@ -10,14 +10,19 @@ public class Spell : IUseable, IMoveable
     private string name;
     [SerializeField]
     private string description;     // 설명란
+    [SerializeField]
+    private float SpellCoolTime;
+
     public enum SpellType
     {
+        #region 스킬 타입
         Launch,
         Buff,
         AOE,
         Toggle,
         Immediate,
         AE
+        #endregion
     }
     public SpellType spellType;
     [SerializeField]
@@ -28,7 +33,12 @@ public class Spell : IUseable, IMoveable
     public Sprite MyIcon { get { return icon; } }
 
     public GameObject MySpellPrefab { get { return spellPrefab; } }
-    public String MyDescription { get { return description; } }
+    public String MyDescription
+    {
+        get { return description; }
+        set { description = value; }
+    }
+    public float MySpellCoolTime { get { return SpellCoolTime; } }
 
 
     public void Use()

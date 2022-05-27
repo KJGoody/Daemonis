@@ -6,18 +6,18 @@ using UnityEngine.EventSystems;
 using TMPro;
 public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField]
+    private Image icon;
     public Image MyIcon
     {
         get { return icon; }
         set { icon = value; }
     }
-    [SerializeField]
-    private Image icon;
+
     [SerializeField]
     private TextMeshProUGUI stackSize;
-
-
     // 사용 가능 아이템 리스트
+
     private Stack<IUseable> useables = new Stack<IUseable>();
     private int count;
     public int MyCount { get { return count; } }
@@ -25,6 +25,10 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
     public IUseable MyUseable { get; set; }
     public Button MyButton { get; private set; }
 
+    [SerializeField]
+    private Image CoolTimeFillImage;
+    private float CoolTime;
+    private float CurrentCollTime = 0f;
 
     void Start()
     {
@@ -42,7 +46,12 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             // 액션퀵슬롯에 등록된 것이 사용할 수 있는거라면
             if (MyUseable != null)
             {
-                MyUseable.Use();
+                if (CurrentCollTime == 0)
+                {
+                    CoolTime = (MyUseable as Spell).MySpellCoolTime;
+                    StartCoroutine(StartCoolDown());
+                    MyUseable.Use();
+                }
             }
 
             // 액션퀵슬롯에 사용가능한 아이템이 등록되었고
@@ -66,7 +75,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             if (HandScript.MyInstance.MyMoveable != null)
             {
                 // IUseable 로 변환할 수 있는지 확인.
-                if (HandScript.MyInstance.MyMoveable is IUseable)
+                if (HandScript.MyInstance.MyMoveable is IUseable && CurrentCollTime == 0)
                 {
                     SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
                     HandScript.MyInstance.SkillBlindControll();
@@ -74,6 +83,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             }
         }
     }
+
     public void SetUseable(IUseable useable)
     {
         // 액션 퀵슬롯에 등록되려는 것이 아이템이라면
@@ -92,16 +102,12 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
         }
         else
         {
-
             // MyUseable.Use()는 버튼이 클릭되었을때 호출된다. 
             // MyUseable은 인터페이스로 Spell 에서 상속받고 있다.
             this.MyUseable = useable;
-
         }
-
         UpdateVisual();
     }
-
 
     public void UpdateVisual()
     {
@@ -115,6 +121,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             UIManager.MyInstance.UpdateStackSize(this);
         }
     }
+
     public void UpdateItemCount(ItemBase item)
     {
         // 아이템이 IUseable(인터페이스)을 상속받았으며
@@ -160,4 +167,20 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
         UIManager.MyInstance.HideTooltip();
     }
 
+    private IEnumerator StartCoolDown()
+    {
+        CoolTimeFillImage.gameObject.SetActive(true);
+
+        CurrentCollTime = CoolTime;
+        while (CurrentCollTime > 0)
+        {
+            CurrentCollTime -= 0.1f;
+            CoolTimeFillImage.fillAmount = CurrentCollTime / CoolTime;
+            yield return new WaitForSeconds(0.1f);
+        }
+        CoolTimeFillImage.fillAmount = 0;
+        CurrentCollTime = 0;
+
+        CoolTimeFillImage.gameObject.SetActive(false);
+    }
 }

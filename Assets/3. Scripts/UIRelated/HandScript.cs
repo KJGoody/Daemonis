@@ -19,6 +19,7 @@ public class HandScript : MonoBehaviour
             return instance;
         }
     }
+
     private Spell spell;
     [Header ("Select Skill")]
     #region 스킬 선택관련 변수
@@ -87,7 +88,6 @@ public class HandScript : MonoBehaviour
         // 클릭한 스킬 아이콘 정보를 Icon 에 담는다.
         icon.sprite = moveable.MyIcon;
         icon.color = Color.white;
-
     }
 
     public void SelectSpell(string spellName)
@@ -99,6 +99,7 @@ public class HandScript : MonoBehaviour
         Color color = new Color(1, 1, 1, 1);
         selectImage.color = color;
     }
+
     public void EquipSpell()
     {
         if (selectImage.sprite != null)
@@ -107,6 +108,7 @@ public class HandScript : MonoBehaviour
             SkillBlindControll();
         }
     }
+
     public void SkillBlindControll() // 스킬 등록할때 나오는 검은화면
     {
         skillEquipping = !skillEquipping;
@@ -114,6 +116,7 @@ public class HandScript : MonoBehaviour
             MyMoveable = null;
         blindPanel.SetActive(skillEquipping);
     }
+
     public void ResetSelect()
     {
         selectName.text = null;
@@ -125,6 +128,8 @@ public class HandScript : MonoBehaviour
         skillEquipping = false;
         blindPanel.SetActive(false);
     }
+
+    // 아이템 구현 함수 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public void SelectItem(ItemBase item) // 아이템 선택
     {
         myItem = item;

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private static UIManager instance;
-
     public static UIManager MyInstance
     {
         get
@@ -27,23 +26,15 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject tooltip;
     private Text tooltipText;
+
     private void Awake()
     {
         // Tag 가 keybind로 설정된 게임오브젝트를 찾습니다.
         //keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
 
-
         // 아이템 툴팁 참조
         tooltipText = tooltip.GetComponentInChildren<Text>();
     }
-    void Start()
-    {
-
-        
-
-
-    }
-
 
     void Update()
     {
@@ -56,6 +47,7 @@ public class UIManager : MonoBehaviour
             //InventoryScript.MyInstance.OpenClose();
         }
     }
+
     public void OpenClose(CanvasGroup canvasGroup)
     {
         // 투명값으로 UI를 끄거나 킨다.
@@ -80,7 +72,6 @@ public class UIManager : MonoBehaviour
         // 아이템의 내용을 툴팁게임오브젝트에 전달
         tooltipText.text = description.GetDescription();
     }
-
 
     // 튤팁UI 비활성화
     public void HideTooltip()
