@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/2. Sprites/Skill/Skill_Fire_Sprite03.png.meta
 guid: 222672fd7364a7144b32fba544f684e9
+========
+guid: d2fc3abb99d31ab418292911a7c30839
+>>>>>>>> main:Assets/2. Sprites/Skill/whirlwind.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

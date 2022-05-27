@@ -1,13 +1,11 @@
 fileFormatVersion: 2
-guid: 7f016270761387b4886bba14e7d8a4db
+<<<<<<<< HEAD:Assets/2. Sprites/Skill/Skill_Fire_Sprite03.png.meta
+guid: 222672fd7364a7144b32fba544f684e9
+========
+guid: d2fc3abb99d31ab418292911a7c30839
+>>>>>>>> main:Assets/2. Sprites/Skill/whirlwind.png.meta
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 3121093022292234586
-    second: Skill_Fire_Sprite02_0
-  - first:
-      213: 8581168140313058977
-    second: Skill_Fire_Sprite02_1
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -47,7 +45,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -107,49 +105,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Skill_Fire_Sprite02_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a51dda84199505b20800000000000000
-      internalID: 3121093022292234586
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skill_Fire_Sprite02_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1ae524965fe661770800000000000000
-      internalID: 8581168140313058977
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []

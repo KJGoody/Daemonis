@@ -67,15 +67,118 @@ public class SPUM_SpriteList : MonoBehaviour
             }
         }
     }
-
-
-    public void ChangeItem()
+    public void ChangeItem(int partNum)
     {
-        // SPUM_Manager.SetSpriteItem 참조
-        Object[] tObj = Resources.LoadAll<Sprite>("SPUM/SPUM_Sprites/" + "Items/4_Helmet/");
-        Sprite tSpriteHelmet = tObj[1] as Sprite;
-        _hairList[1].sprite = tSpriteHelmet;
-        Debug.Log("바뀜");
+        if (Player.MyInstance.usingEquipment[partNum] != null) // 착용한 장비가 있음
+        {
+            switch (partNum)
+            {
+                case 0:  // 모자
+                    _hairList[1].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[0];
+
+                    break;
+
+                case 1:  // 옷
+                    for (var i = 0; i < Player.MyInstance.usingEquipment[partNum].itemSprite.Length; i++)
+                    {
+                        switch (Player.MyInstance.usingEquipment[partNum].itemSprite[i].name)
+                        {
+                            case "Body":
+                                _clothList[0].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                break;
+
+                            case "Left":
+                                _clothList[1].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                break;
+
+                            case "Right":
+                                _clothList[2].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                break;
+
+                        }
+                    }
+                    break;
+
+                case 2: // 신발
+                    for (var i = 0; i < Player.MyInstance.usingEquipment[partNum].itemSprite.Length; i++)
+                    {
+                        switch (Player.MyInstance.usingEquipment[partNum].itemSprite[i].name)
+                        {
+                            case "Left":
+                                _pantList[0].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                break;
+
+                            case "Right":
+                                _pantList[1].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                break;
+                        }
+                    }
+                    break;
+
+                case 3:  // 무기
+                    _weaponList[0].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[0];
+                    break;
+
+                case 4:  // 어깨
+                    for (var i = 0; i < Player.MyInstance.usingEquipment[partNum].itemSprite.Length; i++)
+                    {
+                        switch (Player.MyInstance.usingEquipment[partNum].itemSprite[i].name)
+                        {
+                            case "Left":
+                                _armorList[1].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                break;
+
+                            case "Right":
+                                _armorList[2].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                break;
+                        }
+                    }
+                    break;
+
+                case 5:  // 망토
+                    _backList[0].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[0];
+                    break;
+
+            }
+        }
+        else // 착용한 장비가 없음
+        {
+            switch (partNum)
+            {
+                case 0:  // 모자
+                    _hairList[1].sprite = null;
+                    break;
+
+                case 1:  // 옷
+                    for (var i = 0; i < 3; i++)
+                    {
+                        _clothList[i].sprite = null;
+                    }
+                    break;
+
+                case 2: // 신발
+                    for (var i = 0; i < 2; i++)
+                    {
+                        _pantList[i].sprite = null;
+                    }
+                    break;
+                case 3:  // 무기
+                    _weaponList[0].sprite = null;
+                    break;
+
+                case 4:  // 어깨
+                    for (var i = 0; i < 2; i++)
+                    {
+                        _armorList[i].sprite = null;
+                    }
+                    break;
+
+                case 5:  // 망토
+                    _backList[0].sprite = null;
+                    break;
+
+            }
+        }
     }
 
     public void LoadSprite(SPUM_SpriteList data)

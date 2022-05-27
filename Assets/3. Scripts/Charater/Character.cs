@@ -82,7 +82,7 @@ public abstract class Character : MonoBehaviour
                     myRigid2D.velocity = Vector2.zero;
             }
             else
-                myRigid2D.velocity = direction.normalized * stat.Speed;
+                myRigid2D.velocity = direction.normalized * stat.MoveSpeed;
         }
     }
 

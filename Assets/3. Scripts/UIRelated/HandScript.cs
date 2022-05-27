@@ -34,6 +34,8 @@ public class HandScript : MonoBehaviour
     private bool skillEquipping = false;
     #endregion
 
+    public GameObject usingEquipment_Panel;
+    public PlayerInfoPanel playerInfoPanel;
     private ItemBase myItem;    // 아이템 정보
     [Header ("Select Item Tooltip")]
     #region 아이템 선택관련 변수 SI = Select Item
@@ -145,6 +147,37 @@ public class HandScript : MonoBehaviour
                 SI_Obj_Option.SetActive(false);
                 SI_Obj_SetOption.SetActive(false);
                 break;
+            case Kinds.Equipment:
+                SI_Obj_Option.SetActive(true);
+                SI_Obj_SetOption.SetActive(false); // 나중에 세트장비 조건문으로 활성화
+                int partNum=0;
+                switch (item.GetPart)
+                { 
+                    case Part.Helmet:
+                        partNum = 0;
+                        break;
+                    case Part.Cloth:
+                        partNum = 1;
+                        break;
+                    case Part.Shoes:
+                        partNum = 2;
+                        break;
+                    case Part.Weapon:
+                        partNum = 3;
+                        break;
+                    case Part.Shoulder:
+                        partNum = 4;
+                        break;
+                    case Part.Back:
+                        partNum = 5;
+                        break;
+                }
+                if(Player.MyInstance.usingEquipment[partNum] != null)
+                {
+                    playerInfoPanel.ShowUsingEquipment(partNum);
+                }
+                break;
+
             default:
                 break;
         }
@@ -152,11 +185,25 @@ public class HandScript : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)SI_CSF_Descript.transform); // content size filtter 바로 안늘어나는 버그 해결
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)SI_CSF_Panel.transform);
     }
+
+    public void EquipButton() // 장착버튼용 (포션이랑 장비 나누기 위함)
+    {
+        if (myItem.GetKind == Kinds.Potion)
+            EquipPotion();
+        else if (myItem.GetKind == Kinds.Equipment)
+            UseEquipment();
+        
+    }
     public void EquipPotion() // 포션 등록 시작
     {
         MyMoveable = myItem;
         SI_Panel.SetActive(false);
         SI_Obj_Blind.SetActive(true);
+    }
+    public void UseEquipment() // 장비 장착할때
+    {
+        myItem.Use();
+        SI_Panel.SetActive(false);
     }
     public void ResetEquipPotion() // 포션 등록 취소
     {
