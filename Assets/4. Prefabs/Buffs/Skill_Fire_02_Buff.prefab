@@ -52,8 +52,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuffFillImage: {fileID: 3632800514072586103}
+  buffType: 3
   BuffName: Skill_Fire_02_Buff
-  Duration: 10
+  Duration: 0
+  PuffObject: {fileID: 0}
+  StackText: {fileID: 0}
+  BuffStack: 1
 --- !u!222 &5821058998736763724
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -82,7 +86,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3121093022292234586, guid: 7f016270761387b4886bba14e7d8a4db,
+  m_Sprite: {fileID: 3121093022292234586, guid: d151e51b2abb06142b4bd9a08669a741,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -158,9 +162,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3121093022292234586, guid: 7f016270761387b4886bba14e7d8a4db,
+  m_Sprite: {fileID: 3121093022292234586, guid: d151e51b2abb06142b4bd9a08669a741,
     type: 3}
-  m_Type: 3
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

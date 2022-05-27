@@ -5,6 +5,8 @@ using UnityEngine;
 public class Spell : IUseable, IMoveable
 {
     [SerializeField]
+    private GameObject spellPrefab;
+    [SerializeField]
     private Sprite icon;
     [SerializeField]
     private string name;
@@ -25,14 +27,10 @@ public class Spell : IUseable, IMoveable
         #endregion
     }
     public SpellType spellType;
-    [SerializeField]
-    private GameObject spellPrefab;
-
-
-    public string MyName { get { return name; } }
-    public Sprite MyIcon { get { return icon; } }
 
     public GameObject MySpellPrefab { get { return spellPrefab; } }
+    public Sprite MyIcon { get { return icon; } }
+    public string MyName { get { return name; } }
     public String MyDescription
     {
         get { return description; }

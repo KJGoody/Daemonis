@@ -9,25 +9,26 @@ public class Buff : MonoBehaviour
 {
     [SerializeField]
     private Image BuffFillImage;
+    public enum BuffType
+    {
+        Standard,
+        Stack,
+        Toggle,
+        Passive
+    }
+    [SerializeField]
+    private BuffType buffType;
+    public string BuffName;
+    [SerializeField]
+    private float Duration;
+    private float currentTime;
+
     private BuffManager MyManager;
     [SerializeField]
     private GameObject PuffObject;
     [SerializeField]
     private TextMeshProUGUI StackText;
     private Color TextColor;
-    public enum BuffType
-    {
-        Standard,
-        Stack,
-        Toggle
-    }
-    [SerializeField]
-    private BuffType buffType;
-
-    public string BuffName;
-    [SerializeField]
-    private float Duration;
-    private float currentTime;
     
     private Character Target;
     private bool InTargetGroup = false;
@@ -37,14 +38,21 @@ public class Buff : MonoBehaviour
 
     private void Awake()
     {
-        currentTime = Duration;
-
-        if (buffType == BuffType.Stack)
+        if (buffType.Equals(BuffType.Passive))
         {
-            TextColor = StackText.color;
-            TextColor.a = 1;
-            StackText.color = TextColor;
-            StackText.text = BuffStack.ToString();
+            BuffFillImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            currentTime = Duration;
+
+            if (buffType == BuffType.Stack)
+            {
+                TextColor = StackText.color;
+                TextColor.a = 1;
+                StackText.color = TextColor;
+                StackText.text = BuffStack.ToString();
+            }
         }
     }
 
@@ -71,7 +79,9 @@ public class Buff : MonoBehaviour
         MyManager = buffManager;
         Target = target;
         Target.OnBuff.Add(this);
-        StartCoroutine(ActivationBuff());
+
+        if(!buffType.Equals(BuffType.Passive))
+            StartCoroutine(ActivationBuff());
 
         switch (BuffName)
         {

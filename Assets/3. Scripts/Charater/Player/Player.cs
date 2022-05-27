@@ -39,18 +39,26 @@ public class Player : Character
 
     private FloatingJoystick joy;
     [SerializeField]
-    private Transform exitPoint;    // �߻�ü ���� ��ġ
+    private Transform exitPoint;
     [HideInInspector]
-    public Vector2 atkDir;          // �˹� ���� ����
+    public Vector2 atkDir;
 
-    [SerializeField]                // ��ȭ�� Ư�� Ÿ�ٵ��� ����
     private List<TargetGroup> targetGroups = new List<TargetGroup>();
 
     protected override void Start()
     {
         joy = GameObject.Find("Floating Joystick").GetComponent<FloatingJoystick>();
 
-        base.Start();
+        if (stat.Level < 11)
+            Debug.Log("LowLevel");
+        else
+        {
+            NewBuff("Skill_Fire_02_Buff");
+        }
+
+
+
+            base.Start();
     }
     protected override void Update()
     {
@@ -65,7 +73,7 @@ public class Player : Character
 
     private void GetInput()
     {
-        Vector2 moveVector;         // ���̽�ƽ���� ������ �ޱ����� ����
+        Vector2 moveVector;
         if (!IsAttacking)
         {
             moveVector.x = joy.Horizontal;
@@ -92,7 +100,7 @@ public class Player : Character
             StartCoroutine(CastingSpell(spellIName));
     }
 
-    private bool SearchEnemy() // ���� ���� �����ϴ��� �˻�
+    private bool SearchEnemy()
     {
         if (GameObject.FindWithTag("Enemy") == null)
             return false;
@@ -100,7 +108,7 @@ public class Player : Character
             return true;
     }
 
-    private void AutoTarget() // ���� ������� Ÿ����
+    private void AutoTarget()
     {
         if (FindNearestObject() != null)
             MyTarget = FindNearestObject().transform;
@@ -114,13 +122,13 @@ public class Player : Character
 
         List<GameObject> objects = new List<GameObject>();
         for (int i = 0; i < collisions.Length; i++)
-            if (collisions[i].CompareTag("Enemy"))       // �ױװ� ���ΰ��� ã�´�.
+            if (collisions[i].CompareTag("Enemy"))
                 objects.Add(collisions[i].gameObject);
 
-        if (objects.Count == 0)     // ���� ����Ʈ�� ����ٸ� null�� ��ȯ
+        if (objects.Count == 0)
             return null;
 
-        var neareastObject = objects        // �Ÿ��� ���� ª�� ������Ʈ�� ���Ѵ�.
+        var neareastObject = objects
             .OrderBy(obj =>
             {
                 return Vector3.Distance(transform.position, obj.transform.position);
@@ -133,18 +141,18 @@ public class Player : Character
     private IEnumerator CastingSpell(string spellIName)
     {
         IsAttacking = true;
-        _prefabs.PlayAnimation(4);                                  // ���� �ִϸ��̼� ���
-        if (MyTarget != null) LookAtTarget();                       // Ÿ�� �ٶ󺸱�
+        _prefabs.PlayAnimation(4);
+        if (MyTarget != null) LookAtTarget();
 
-        Spell newSpell = SpellBook.MyInstance.GetSpell(spellIName); // ����Ͽ��� ��ų �޾ƿ�
-        if (newSpell.spellType.Equals(Spell.SpellType.Immediate))   // ��ȭ �������� Ȯ��   
+        Spell newSpell = SpellBook.MyInstance.GetSpell(spellIName);
+        if (newSpell.spellType.Equals(Spell.SpellType.Immediate))
         {
-            for (int i = targetGroups.Count - 1; i >= 0; i--)       // ��ȭ ���� Ÿ�� �׷�Ȯ��
+            for (int i = targetGroups.Count - 1; i >= 0; i--)
             {
                 if (targetGroups[i].GroupName.Equals("Skill_Fire_02_Debuff"))
                     for (int j = targetGroups[i].Targets.Count - 1; j >= 0; j--)
                     {
-                        if (Vector2.Distance(transform.position, targetGroups[i].Targets[j].position) < 7)      // �ʹ� �ָ��ִ� Ÿ���� �������� ����
+                        if (Vector2.Distance(transform.position, targetGroups[i].Targets[j].position) < 7)
                         {
                             SpellScript spellScript = Instantiate(newSpell.MySpellPrefab, targetGroups[i].Targets[j]).GetComponent<SpellScript>();
                             spellScript.MyTarget = targetGroups[i].Targets[j];
@@ -170,7 +178,7 @@ public class Player : Character
         }
     }
 
-    private SpellScript InstantiateSpell(Spell spell)       // ���� ���� �Լ�
+    private SpellScript InstantiateSpell(Spell spell)
     {
         switch (spell.spellType)
         {
@@ -178,9 +186,9 @@ public class Player : Character
                 return Instantiate(spell.MySpellPrefab, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
 
             case Spell.SpellType.AOE:
-                if (MyTarget != null)           // Ÿ���� ���� �� ���� ���
+                if (MyTarget != null)
                     return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
-                else                            // Ÿ���� ���� �� ���� ��ġ ����
+                else
                 {
                     Vector3 ExitPoint = transform.position + new Vector3(atkDir.x, atkDir.y, 0).normalized * 2;
                     if (ExitPoint == transform.position)
@@ -214,6 +222,45 @@ public class Player : Character
         }
         return null;
     }
+
+    public void AddTarget(string TargetGroupName, Transform Target)
+    {
+        bool IsAlreadyIn = false;
+        int Index = 0;
+
+        if (targetGroups.Count > 0)
+        {
+            for (int i = 0; i < targetGroups.Count; i++)
+                if (targetGroups[i].GroupName.Equals(TargetGroupName))
+                {
+                    IsAlreadyIn = true;
+                    Index = i;
+                }
+
+            if (IsAlreadyIn)
+            {
+                if (!targetGroups[Index].Targets.Contains(Target.transform))
+                    targetGroups[Index].Targets.Add(Target.transform);
+            }
+            else
+                targetGroups.Add(new TargetGroup(TargetGroupName, Target.transform));
+        }
+        else
+            targetGroups.Add(new TargetGroup(TargetGroupName, Target.transform));
+    }
+
+    public void RemoveTarget(string TargetGroupName, Transform Target)
+    {
+        for (int i = targetGroups.Count - 1; i >= 0; i--)
+            if (targetGroups[i].GroupName.Equals(TargetGroupName))
+                if (targetGroups[i].Targets.Contains(Target))
+                {
+                    targetGroups[i].Targets.Remove(Target);
+                    if (targetGroups[i].Targets.Count == 0)
+                        targetGroups.Remove(targetGroups[i]);
+                }
+    }
+
     public void EquipItem(ItemBase newItem)
     {
         int partNum = 0;
@@ -238,72 +285,26 @@ public class Player : Character
                 partNum = 5;
                 break;
         }
-        if(usingEquipment[partNum] != null)
+        if (usingEquipment[partNum] != null)
         {
             InventoryScript.MyInstance.AddItem(usingEquipment[partNum]);
         }
         usingEquipment[partNum] = newItem;
         _spriteList.ChangeItem(partNum);
-        useEquipment(partNum); // ��������Ʈ ����
-
-    public void AddTarget(string TargetGroupName, Transform Target)
-    {
-        bool IsAlreadyIn = false;
-        int Index = 0;
-
-        if (targetGroups.Count > 0)
-        {
-            for (int i = 0; i < targetGroups.Count; i++)
-                if (targetGroups[i].GroupName.Equals(TargetGroupName))
-                {
-                    IsAlreadyIn = true;
-                    Index = i;
-                }
-
-            if (IsAlreadyIn)
-            {
-                if (!targetGroups[Index].Targets.Contains(Target.transform))    // �ߺ� Ȯ��
-                    targetGroups[Index].Targets.Add(Target.transform);
-            }
-            else
-                targetGroups.Add(new TargetGroup(TargetGroupName, Target.transform));
-        }
-        else
-            targetGroups.Add(new TargetGroup(TargetGroupName, Target.transform));
-    }
-
-    public void RemoveTarget(string TargetGroupName, Transform Target)
-    {
-        for (int i = targetGroups.Count - 1; i >= 0; i--)
-            if (targetGroups[i].GroupName.Equals(TargetGroupName))
-                if (targetGroups[i].Targets.Contains(Target))
-                {
-                    targetGroups[i].Targets.Remove(Target);
-                    if (targetGroups[i].Targets.Count == 0)
-                        targetGroups.Remove(targetGroups[i]);
-                }
-    }
-
-
-
-
+        useEquipment(partNum);
     }
 
     public void UnequipItem(int partNum)
     {
-        
+
         InventoryScript.MyInstance.AddItem(usingEquipment[partNum]);
         usingEquipment[partNum] = null;
         _spriteList.ChangeItem(partNum);
 
     }
 
-    private void Plus()
+    public void Plus(int i, float f)
     {
 
     }
-    //public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir)
-    //{
-    //    base.TakeDamage(damage, knockbackDir);
-    //}
 }

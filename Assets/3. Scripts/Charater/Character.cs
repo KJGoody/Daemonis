@@ -134,8 +134,7 @@ public abstract class Character : MonoBehaviour
     {
         switch (buffName)
         {
-            case "¹ßÈ­":
-                buffName = "Skill_Fire_02_Buff";
+            case "Skill_Fire_02_Buff":
                 StartBuff(buffName);
                 break;
 
