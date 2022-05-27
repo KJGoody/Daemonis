@@ -61,6 +61,12 @@ public class ItemBase : IMoveable, IDescribable, IUseable
         EquipmentItem equipmentItem = itemInfo as EquipmentItem;
         equipmentItem.ActiveEquipment(isActive);
     }
+    public float GetWeaponxDamage()
+    {
+        EquipmentItem equipmentItem = itemInfo as EquipmentItem;
+        //return equipmentItem.WeaponxDamage;
+        return 1;
+    }
     #endregion
 
     public string MyName

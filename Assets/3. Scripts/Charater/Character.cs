@@ -46,6 +46,9 @@ public abstract class Character : MonoBehaviour
     private BuffManager buffManager;
     [HideInInspector]
     public List<Buff> OnBuff = new List<Buff>();
+    private float BuffxDamage = 1;
+    private float DebuffxDamage = 1;
+    public float xDamage { get { return BuffxDamage * DebuffxDamage; } }
 
     protected virtual void Awake()
     {
@@ -199,15 +202,45 @@ public abstract class Character : MonoBehaviour
             return null;
     }
 
-    public virtual void TakeDamage(int damage, Vector2 knockbackDir, string texttype)
+    public virtual void TakeDamage(float pureDamage, int FromLevel, Vector2 knockbackDir, string texttype, bool IsPhysic)
     {
-        NewDamageText(damage, texttype);
-        stat.CurrentHealth -= damage;
+        float PureDamage = pureDamage * xDamage;
+        int Damage;
+        if(IsPhysic)
+            Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.Defence + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
+        else
+            Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.MagicRegist + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
+
+        NewDamageText(Damage, texttype);
+        stat.CurrentHealth -= Damage;
         if (stat.CurrentHealth <= 0)
         {
             Direction = Vector2.zero;
             myRigid2D.velocity = direction;
         }
+    }
+
+    private float LevelGapxDamage(int FromLevel, int ToLevel)
+    {
+        int LevelGap = ToLevel - FromLevel;
+        float xDamage = 1;
+
+        if (LevelGap < -10)     xDamage = 1.3f;
+        else if (LevelGap < 0)
+        {
+            for (int i = 0; i < -LevelGap; i++)
+                xDamage += 0.025f;
+        }
+        else if (LevelGap < 3)  xDamage = 1;
+        else if (LevelGap == 3) xDamage = 0.95f;
+        else if (LevelGap == 4) xDamage = 0.9f;
+        else
+        {
+            xDamage = 0.9f;
+            for (int i = 4; i < LevelGap; i++)
+                xDamage -= 0.025f;
+        }
+        return xDamage > 0 ? xDamage : 0;
     }
 
     private void NewDamageText(int damage, string texttype)

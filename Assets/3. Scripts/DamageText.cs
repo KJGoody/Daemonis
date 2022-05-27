@@ -8,7 +8,7 @@ public class DamageText : MonoBehaviour
     private float alphaSpeed = 10;
     private float destroyTime = 1;
 
-    public int Damage { get; set; }
+    public float Damage;
     private TextMeshPro text;
     private Color alpha;
 

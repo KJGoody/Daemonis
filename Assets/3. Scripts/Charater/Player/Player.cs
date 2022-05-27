@@ -33,7 +33,6 @@ public class Player : Character
     }
 
     public ItemBase[] usingEquipment = new ItemBase[6];
-
     public delegate void UseEquipment(int partNum);
     public event UseEquipment useEquipment;
 
@@ -156,8 +155,7 @@ public class Player : Character
                         {
                             SpellScript spellScript = Instantiate(newSpell.MySpellPrefab, targetGroups[i].Targets[j]).GetComponent<SpellScript>();
                             spellScript.MyTarget = targetGroups[i].Targets[j];
-                            // ��ȭ ������ ������ ������ ����
-                            spellScript.damage = targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().GetBuff("Skill_Fire_02_Debuff").BuffStack * 1;
+                            spellScript.spellxDamage = targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().GetBuff("Skill_Fire_02_Debuff").BuffStack;
                             targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().OffBuff("Skill_Fire_02_Debuff");
                         }
                     }

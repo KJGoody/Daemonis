@@ -30,6 +30,8 @@ public class EquipmentItem : Item
     [SerializeField]
     private float optionValue;
 
+    public float WeaponxDamage { get; private set; }
+
     public void ActiveEquipment(bool isActive)
     {
         if (isActive)
@@ -48,10 +50,6 @@ public class EquipmentItem : Item
 
     //    Player.MyInstance.EquipItem(this);
     //}
-
-
-
-
 
     public override string GetDescription()
     {

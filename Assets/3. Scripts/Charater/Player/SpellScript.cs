@@ -12,6 +12,7 @@ public class SpellScript : MonoBehaviour
 
     public enum SpellName
     {
+        #region 스킬 이름
         Skill_File_01,
         Skill_File_03,
         Skill_File_04,
@@ -20,6 +21,7 @@ public class SpellScript : MonoBehaviour
         Skill_File_07,
         Skill_File_08,
         Skill_File_09
+        #endregion
     }
     [SerializeField]
     private SpellName spellName;
@@ -34,7 +36,13 @@ public class SpellScript : MonoBehaviour
 
     [SerializeField]
     private float speed;
-    public int damage;
+    private float SpellxDamage;
+    public float spellxDamage     // 스킬 계수
+    {
+        get { return SpellxDamage; }
+        set { SpellxDamage *= value; }
+    }
+
     public float CastTime;
 
     private Coroutine TickCoroutine;
@@ -46,28 +54,34 @@ public class SpellScript : MonoBehaviour
         switch (spellName)
         {
             case SpellName.Skill_File_01:   // 화염구
+                SpellxDamage = 1;
                 StartCoroutine(Skill_Fire_01());
                 break;
 
             case SpellName.Skill_File_03:   // 용암 지대
                 IsAOEAttack = true;
+                SpellxDamage = 1;
                 StartCoroutine(Skill_Fire_03());
                 break;
 
             case SpellName.Skill_File_04:   // 피닉스
+                SpellxDamage = 1;
                 StartCoroutine(Skill_Fire_04());
                 break;
 
             case SpellName.Skill_File_05:   // 화염 위성
                 IsToggleAttack = true;
+                SpellxDamage = 1;
                 StartCoroutine(Skill_Fire_05());
                 break;
 
             case SpellName.Skill_File_07:   // 점화
+                SpellxDamage = 1;
                 StartCoroutine(Skill_Fire_07());
                 break;
 
             case SpellName.Skill_File_09:   // 화염 토네이도
+                SpellxDamage = 1;
                 StartCoroutine(Skill_Fire_09());
                 break;
         }
@@ -145,7 +159,7 @@ public class SpellScript : MonoBehaviour
                 {
                     if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))       // 발화 중일 시 디버프 생성
                         collision.transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
-                    SpendDamage(collision, damage);
+                    SpendDamage(collision, SpellxDamage);
                     if (!IsToggleAttack)
                         Instantiate(PuffObject, transform.position, Quaternion.identity);
                     else
@@ -155,12 +169,19 @@ public class SpellScript : MonoBehaviour
         }
     }
 
-    private void SpendDamage(Collider2D collision, int damage)
+    private void SpendDamage(Collider2D collision, float spellxDamage)
     {
         Character character = collision.GetComponentInParent<Character>();
 
-        string TextType = "EnemyDamage";                                   // 텍스트 타입 설정
-        character.TakeDamage(damage, direction, TextType);            // 데미지 전송
+        float WeaponxDamage;
+        if (Player.MyInstance.usingEquipment[3] != null)
+            WeaponxDamage = Player.MyInstance.usingEquipment[3].GetWeaponxDamage();
+        else
+            WeaponxDamage = 1;
+
+                           // 무기 배수    // 플레이어 공격력               // 스킬 배수
+        float PureDamage = WeaponxDamage * Player.MyInstance.MyStat.Attak * spellxDamage;
+        character.TakeDamage(PureDamage, Player.MyInstance.MyStat.Level, direction, "EnemyDamage", false);
     }
 
     private bool CheckHitEnemy(Collider2D collision) // 스킬 한번 맞았으면 다시 안맞게 체크
@@ -230,7 +251,7 @@ public class SpellScript : MonoBehaviour
 
     private IEnumerator Skill_Fire_07()
     {
-        MyTarget.GetComponent<EnemyBase>().TakeDamage(damage, Vector2.zero, "EnemyDamage");
+        SpendDamage(MyTarget.GetComponent<Collider2D>(), SpellxDamage);
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }

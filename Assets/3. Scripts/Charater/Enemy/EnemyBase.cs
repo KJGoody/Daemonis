@@ -21,7 +21,7 @@ public class EnemyBase : NPC
     public float myAggroRange;
     [HideInInspector]
     public float myAttackRange;
-    
+
     [HideInInspector]
     public float MyAttackTime = 1000f;
 
@@ -53,7 +53,7 @@ public class EnemyBase : NPC
             {
                 MyAttackTime += Time.deltaTime;
             }
-            
+
             currentState.Update();
         }
         base.Update();
@@ -61,7 +61,7 @@ public class EnemyBase : NPC
 
     protected override void FixedUpdate()
     {
-        if (!IsKnockBack) 
+        if (!IsKnockBack)
         {
             base.FixedUpdate();
         }
@@ -95,15 +95,17 @@ public class EnemyBase : NPC
 
     public void CreateResource(GameObject resource, Transform transform)
     {
-        Instantiate(resource, transform);
+        GameObject EnemyAttackPrefab = Instantiate(resource, transform);
+        EnemyAttackPrefab.GetComponent<EnemyAttack>().parent = this;
     }
 
-    public override void TakeDamage(int damage, Vector2 knockbackDir, string TextType) // 피격
+    public override void TakeDamage(float PureDamage, int FromLevel, Vector2 knockbackDir, string TextType, bool IsPhysic) // 피격
     {
         HealthBarImage.SetActive(true);
-        if(knockbackDir != Vector2.zero)
+        if (knockbackDir != Vector2.zero)
             StartCoroutine(KnockBack(knockbackDir, 1));
-        base.TakeDamage(damage, knockbackDir, TextType);
+
+        base.TakeDamage(PureDamage, FromLevel, knockbackDir, TextType, IsPhysic);
 
         if (stat.CurrentHealth <= 0)
         {

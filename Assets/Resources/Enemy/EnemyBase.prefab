@@ -310,21 +310,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthBar: {fileID: 894972730622518897}
-  MaxHealth: 10
-  HealthRegen: 0
   ManaBar: {fileID: 0}
-  MaxMana: 0
-  ManaRegen: 0
-  Attack: 0
-  Defence: 0
-  MagicRegist: 0
-  Speed: 3
-  AttackSpeed: 0
-  DodgePercent: 0
-  HitPercent: 0
-  CriticalPercent: 0
-  CriticalDamage: 0
-  CoolDown: 0
+  level: 0
+  attack: 0
+  maxHealth: 100
+  maxMana: 0
+  currentHealth: 0
+  currentMana: 0
+  defence: 0
+  magicRegist: 0
+  moveSpeed: 0
+  attackSpeed: 0
+  dodgePercent: 0
+  hitPercent: 0
+  criticalPercent: 0
+  criticalDamage: 0
+  healthRegen: 0
+  manaRegen: 0
+  recoverHealth_onhit: 0
+  recoverMana_onhit: 0
+  coolDown: 0
+  itemLootRange: 0
+  itemDropPercent: 0
+  goldPlus: 0
+  expPlus: 0
+  vampiricRate: 0
 --- !u!114 &6219858118112120361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,9 +351,11 @@ MonoBehaviour:
   _spriteList: {fileID: 3311630591564763132}
   hitBox: {fileID: 894972730089825394}
   _layerName: 0
+  MyTarget: {fileID: 0}
+  IsRushing: 0
   RushSpeed: 0
   buffManager: {fileID: 6042072577549636243}
-  onBuff: []
+  OnBuff: []
   enemytype: {fileID: 7782529544631918906}
   myStartPosition: {x: 0, y: 0, z: 0}
   HealthBarImage: {fileID: 894972729353884794}
