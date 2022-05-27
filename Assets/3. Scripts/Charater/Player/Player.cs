@@ -202,6 +202,11 @@ public class Player : Character
         _spriteList.ChangeItem(partNum);
 
     }
+
+    private void Plus()
+    {
+
+    }
     //public override void TakeDamage(int damage, Transform source, Vector2 knockbackDir)
     //{
     //    base.TakeDamage(damage, knockbackDir);

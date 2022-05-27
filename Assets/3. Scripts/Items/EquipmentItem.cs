@@ -25,7 +25,23 @@ public class EquipmentItem : Item
             return sprite;
         }
     }
-    
+    [SerializeField]
+    private int baseOption;
+    [SerializeField]
+    private float optionValue;
+
+    public void ActiveEquipment(bool isActive)
+    {
+        if (isActive)
+        {
+            Player.MyInstance.Plus(baseOption, optionValue);
+        }
+        else
+        {
+            Player.MyInstance.Plus(baseOption, -optionValue);
+
+        }
+    }
     // 아이템 사용시
     //public void Equip()
     //{

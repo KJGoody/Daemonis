@@ -56,6 +56,11 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             return equipmentItem.itemSprite;
         }
     }
+    public void ActiveEquipment(bool isActive)
+    {
+        EquipmentItem equipmentItem = itemInfo as EquipmentItem;
+        equipmentItem.ActiveEquipment(isActive);
+    }
     #endregion
 
     public string MyName
