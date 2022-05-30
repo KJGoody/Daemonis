@@ -27,18 +27,19 @@ public class EnemyBase : NPC
 
     private bool IsKnockBack = false;
 
+    private MonsterGate ParentGate;
 
     protected override void Awake()
     {
         enemytype = gameObject.GetComponent<EnemyType>();
         myStartPosition = transform.position;
-        ChangeState(new IdleState());
 
         base.Awake();
     }
 
     protected override void Start()
     {
+        ChangeState(new IdleState());
         myAggroRange = enemytype.AggroRnage;
         myAttackRange = enemytype.AttackRnage;
 
@@ -53,7 +54,6 @@ public class EnemyBase : NPC
             {
                 MyAttackTime += Time.deltaTime;
             }
-
             currentState.Update();
         }
         base.Update();
@@ -71,12 +71,15 @@ public class EnemyBase : NPC
     public void ChangeState(IState newState)
     {
         if (currentState != null)
-        {
             currentState.Exit();
-        }
 
         currentState = newState;
         currentState.Enter(this);
+    }
+
+    public void ExitState(IState currentstate)
+    {
+        currentstate.Exit();
     }
 
     public override Transform Select()
@@ -93,27 +96,31 @@ public class EnemyBase : NPC
         base.DeSelect();
     }
 
-    public void CreateResource(GameObject resource, Transform transform)
+    public void CreateResource(GameObject resource, Transform transform, bool IsAttack = false)
     {
         GameObject EnemyAttackPrefab = Instantiate(resource, transform);
-        EnemyAttackPrefab.GetComponent<EnemyAttack>().parent = this;
+        if(IsAttack)
+            EnemyAttackPrefab.GetComponent<EnemyAttack>().parent = this;
     }
 
-    public override void TakeDamage(float PureDamage, int FromLevel, Vector2 knockbackDir, string TextType, bool IsPhysic) // 피격
+    public override void TakeDamage(bool IsPhysic, float HitPercent, float PureDamage, int FromLevel, Vector2 knockbackDir, string TextType) // 피격
     {
         HealthBarImage.SetActive(true);
         if (knockbackDir != Vector2.zero)
             StartCoroutine(KnockBack(knockbackDir, 1));
 
-        base.TakeDamage(PureDamage, FromLevel, knockbackDir, TextType, IsPhysic);
+        base.TakeDamage(IsPhysic, HitPercent, PureDamage, FromLevel, knockbackDir, TextType);
 
         if (stat.CurrentHealth <= 0)
         {
+            ChangeState(new IdleState());
+
             _prefabs.PlayAnimation(2);
             HealthBarImage.SetActive(false);
             _prefabs.transform.GetChild(0).GetComponent<SortingGroup>().sortingLayerName = "DeathEnemyLayer";
-            Destroy(transform.Find("HitBox").gameObject);
-            Destroy(transform.Find("EnemyBody").gameObject);
+            transform.Find("HitBox").gameObject.SetActive(false);
+            transform.Find("EnemyBody").gameObject.SetActive(false);
+            myRigid2D.simulated = false;
 
             ItemDropManager.MyInstance.DropGold(transform);
             ItemDropManager.MyInstance.DropItem(transform);
@@ -141,5 +148,33 @@ public class EnemyBase : NPC
             myAggroRange += distance;
             MyTarget = target;
         }
+    }
+
+    private IEnumerator Death()
+    {
+        yield return new WaitForSeconds(3f);
+        MonsterPool.Instance.ReturnObject(this);
+        InitializeEnemyBase();
+        ParentGate.CurrentEnemyNum--;
+    }
+
+    public void PositioningEnemyBase(MonsterGate parentGate, Vector3 startPosition)
+    {
+        ParentGate = parentGate;
+        myStartPosition = startPosition;
+        transform.position = startPosition;
+    }
+    
+    
+    public void InitializeEnemyBase()
+    {
+        MyStat.InitializeHealth();
+        _spriteList.transform.rotation = Quaternion.identity;
+
+        _prefabs.transform.GetChild(0).GetComponent<SortingGroup>().sortingLayerName = "EnemyLayer";
+        transform.Find("HitBox").gameObject.SetActive(true);
+        transform.Find("EnemyBody").gameObject.SetActive(true);
+        myRigid2D.simulated = true;
+        MyTarget = null;
     }
 }

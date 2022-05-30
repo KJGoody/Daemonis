@@ -10,7 +10,6 @@ public class EvadeState : IState
     public void Enter(EnemyBase parent)
     {
         this.parent = parent;
-
         parent.CreateResource(Resources.Load("ANav") as GameObject, parent.transform);
         aNav = parent.GetComponentInChildren<ANav>();
         aNav.TargetPoint = parent.myStartPosition;

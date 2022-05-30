@@ -58,7 +58,7 @@ public class DropItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.name == "Player")
+        if (collision.CompareTag("Player"))
         {
             GameObject notice = Instantiate(Resources.Load("LootNotice") as GameObject, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
             notice.transform.SetParent(GameObject.Find("ItemLooting").transform);

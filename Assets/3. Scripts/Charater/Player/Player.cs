@@ -18,7 +18,6 @@ public class TargetGroup
 
 public class Player : Character
 {
-    // �̱���
     private static Player instance;
     public static Player MyInstance
     {
@@ -54,10 +53,8 @@ public class Player : Character
         {
             NewBuff("Skill_Fire_02_Buff");
         }
-
-
-
-            base.Start();
+        
+        base.Start();
     }
     protected override void Update()
     {
@@ -92,7 +89,7 @@ public class Player : Character
 
     public void CastSpell(string spellIName)
     {
-        if (MyTarget == null && SearchEnemy())
+        if (SearchEnemy())
             AutoTarget();
 
         if (!IsAttacking)

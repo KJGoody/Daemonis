@@ -126,7 +126,7 @@ public class Buff : MonoBehaviour
         while (true)
         {
             if(Target.IsAlive)
-                Target.TakeDamage(TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, "EnemyDamage", false);
+                Target.TakeDamage(false, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, "EnemyDamage");
             yield return new WaitForSeconds(WaitForSconds);
         }
     }

@@ -250,7 +250,6 @@ GameObject:
   - component: {fileID: 7782529544631918906}
   - component: {fileID: 1530950419950964358}
   - component: {fileID: 6219858118112120361}
-  - component: {fileID: 894972729840216766}
   - component: {fileID: 894972729840216755}
   - component: {fileID: 894972729840216764}
   m_Layer: 6
@@ -311,18 +310,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthBar: {fileID: 894972730622518897}
   ManaBar: {fileID: 0}
-  level: 0
-  attack: 0
+  level: 1
+  attack: 1
   maxHealth: 100
   maxMana: 0
   currentHealth: 0
   currentMana: 0
   defence: 0
   magicRegist: 0
-  moveSpeed: 0
+  moveSpeed: 2
   attackSpeed: 0
   dodgePercent: 0
-  hitPercent: 0
+  hitPercent: 0.95
   criticalPercent: 0
   criticalDamage: 0
   healthRegen: 0
@@ -356,6 +355,7 @@ MonoBehaviour:
   RushSpeed: 0
   buffManager: {fileID: 6042072577549636243}
   OnBuff: []
+  BuffxDamage: 1
   enemytype: {fileID: 7782529544631918906}
   myStartPosition: {x: 0, y: 0, z: 0}
   HealthBarImage: {fileID: 894972729353884794}
@@ -364,22 +364,6 @@ MonoBehaviour:
   myAggroRange: 0
   myAttackRange: 0
   MyAttackTime: 0
---- !u!70 &894972729840216766
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 894972729840216760}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.34}
-  m_Size: {x: 0.5, y: 0.7}
-  m_Direction: 0
 --- !u!50 &894972729840216755
 Rigidbody2D:
   serializedVersion: 4

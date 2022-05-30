@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Enemy
   - Item
-  - HitBox
   layers:
   - Default
   - TransparentFX
@@ -20,11 +19,11 @@ TagManager:
   - BodyCollider
   - Minimap
   - PlayerCam
-  - TriggerCollider
+  - FindCollider
   - HitBox
   - AttackCollider
-  - 
-  - 
+  - TargetCollider
+  - PlayerHitBox
   - 
   - 
   - 

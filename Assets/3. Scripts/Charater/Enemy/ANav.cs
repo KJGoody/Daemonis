@@ -29,11 +29,10 @@ public class ANode
 public class ANav : MonoBehaviour
 {
     // 그리드 생성
-    public LayerMask WallMask;
-
     private ANode[,] Grid;
     private Vector3 GridCenter;
-    public Vector2 GridSize;    // 그리드 크기
+    [SerializeField]
+    private Vector2 GridSize;    // 그리드 크기
     private int GridSizeX;      // 그리드 x 크기
     private int GridSizeY;      // 그리드 y 크기
 
@@ -79,7 +78,7 @@ public class ANav : MonoBehaviour
             for (int y = 0; y < GridSizeY; y++)
             {
                 worldPosition = worldBottomLeft + Vector3.right * (x + nodeRadius) + Vector3.up * (y + nodeRadius);
-                bool iswall = Physics2D.OverlapCircle(worldPosition, nodeRadius - 0.1f, WallMask);    // 해당 노드의 레이어 확인
+                bool iswall = Physics2D.OverlapCircle(worldPosition, nodeRadius - 0.1f, LayerMask.GetMask("Wall"));    // 해당 노드의 레이어 확인
                 Grid[x, y] = new ANode(iswall, worldPosition, x, y);
             }
         }

@@ -196,9 +196,14 @@ public class Stat : MonoBehaviour
 
     private void Awake()
     {
-        currentHealth = MaxHealth;
-        HealthBar.Initialize(MaxHealth, MaxHealth);
+        InitializeHealth();
         if (ManaBar != null)
             ManaBar.Initialize(MaxMana, MaxMana);
+    }
+
+    public void InitializeHealth()
+    {
+        currentHealth = MaxHealth;
+        HealthBar.Initialize(MaxHealth, MaxHealth);
     }
 }

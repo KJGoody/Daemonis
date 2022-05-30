@@ -46,9 +46,9 @@ public abstract class Character : MonoBehaviour
     private BuffManager buffManager;
     [HideInInspector]
     public List<Buff> OnBuff = new List<Buff>();
-    private float BuffxDamage = 1;
+    [HideInInspector]
+    public float BuffxDamage = 1;
     private float DebuffxDamage = 1;
-    public float xDamage { get { return BuffxDamage * DebuffxDamage; } }
 
     protected virtual void Awake()
     {
@@ -202,22 +202,27 @@ public abstract class Character : MonoBehaviour
             return null;
     }
 
-    public virtual void TakeDamage(float pureDamage, int FromLevel, Vector2 knockbackDir, string texttype, bool IsPhysic)
+    public virtual void TakeDamage(bool IsPhysic, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, string texttype)
     {
-        float PureDamage = pureDamage * xDamage;
-        int Damage;
-        if(IsPhysic)
-            Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.Defence + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
-        else
-            Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.MagicRegist + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
-
-        NewDamageText(Damage, texttype);
-        stat.CurrentHealth -= Damage;
-        if (stat.CurrentHealth <= 0)
+        if (Random.value < HitPercent - MyStat.DodgePercent)
         {
-            Direction = Vector2.zero;
-            myRigid2D.velocity = direction;
+            float PureDamage = pureDamage * DebuffxDamage;
+            int Damage;
+            if (IsPhysic)
+                Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.Defence + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
+            else
+                Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.MagicRegist + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
+            stat.CurrentHealth -= Damage;
+
+            NewDamageText(texttype, Damage);
+            if (stat.CurrentHealth <= 0)
+            {
+                Direction = Vector2.zero;
+                myRigid2D.velocity = direction;
+            }
         }
+        else
+            NewDamageText(texttype);
     }
 
     private float LevelGapxDamage(int FromLevel, int ToLevel)
@@ -243,7 +248,8 @@ public abstract class Character : MonoBehaviour
         return xDamage > 0 ? xDamage : 0;
     }
 
-    private void NewDamageText(int damage, string texttype)
+
+    private void NewDamageText(string texttype, int damage = 0)
     {
         GameObject newText;
         switch (texttype)
@@ -263,12 +269,5 @@ public abstract class Character : MonoBehaviour
                 newText.GetComponent<DamageText>().Damage = damage;
                 break;
         }
-    }
-
-    protected IEnumerator Death()
-    {
-        myRigid2D.simulated = false;
-        yield return new WaitForSeconds(3f);
-        Destroy(gameObject);
     }
 }
