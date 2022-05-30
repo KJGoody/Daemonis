@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Reflection;
 
 [System.Serializable]
 public class TargetGroup
@@ -54,10 +55,7 @@ public class Player : Character
         {
             NewBuff("Skill_Fire_02_Buff");
         }
-
-
-
-            base.Start();
+        base.Start();
     }
     protected override void Update()
     {
@@ -290,19 +288,23 @@ public class Player : Character
         usingEquipment[partNum] = newItem;
         _spriteList.ChangeItem(partNum);
         useEquipment(partNum);
+        newItem.ActiveEquipment(true);
     }
 
     public void UnequipItem(int partNum)
     {
-
+        usingEquipment[partNum].ActiveEquipment(false);
         InventoryScript.MyInstance.AddItem(usingEquipment[partNum]);
         usingEquipment[partNum] = null;
         _spriteList.ChangeItem(partNum);
-
     }
 
-    public void Plus(int i, float f)
+    public void Plus(string option, float value)
     {
+        PropertyInfo optionName = stat.GetType().GetProperty(option);
 
+        //float a = (float)System.Convert.ToDouble(optionName.GetValue(stat));
+        float b = (float)optionName.GetValue(stat);
+        optionName.SetValue(stat,  b + value);
     }
 }

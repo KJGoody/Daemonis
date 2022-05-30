@@ -26,7 +26,7 @@ public class EquipmentItem : Item
         }
     }
     [SerializeField]
-    private int baseOption;
+    private string baseOption;
     [SerializeField]
     private float optionValue;
 

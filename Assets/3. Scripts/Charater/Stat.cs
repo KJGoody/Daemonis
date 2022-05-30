@@ -18,7 +18,8 @@ public class Stat : MonoBehaviour
     [Header("부가스탯")]
     [SerializeField] private int defence;             // 물리 방어력
     [SerializeField] private int magicRegist;         // 마법 방어력
-    [SerializeField] private float moveSpeed;         // 이동속도
+    [SerializeField] private float moveSpeed;         // 실제 이동속도
+    [SerializeField] private float moveSpeedPercent;  // 이동속도 추가 퍼센트
     [SerializeField] private float attackSpeed;       // 공격속도
     [SerializeField] private float dodgePercent;      // 회피 확률
     [SerializeField] private float hitPercent;        // 명중률
@@ -34,7 +35,6 @@ public class Stat : MonoBehaviour
     [SerializeField] private float goldPlus;          // 골드 획득량 증가
     [SerializeField] private float expPlus;           // 경험치 획득량 증가
     [SerializeField] private float vampiricRate;      // 흡혈률
-
     public int Level
     {
         get { return level; }
@@ -58,7 +58,7 @@ public class Stat : MonoBehaviour
             ManaBar.StatBarCurrentValue = value; 
         }
     }
-    public int Attak
+    public int Attack
     {
         get { return attack; }
         set { attack = value; }
@@ -83,20 +83,24 @@ public class Stat : MonoBehaviour
         get { return magicRegist; }
         set { magicRegist = value; }
     }
-    public float MoveSpeed
+    public float MoveSpeedPercent
     {
-        get { return moveSpeed; }
+        get { return moveSpeedPercent; }
         set 
         {
             if(value > 200)
             {
-                moveSpeed = 200;
+                moveSpeedPercent = 200;
             }
             else
             {
-            moveSpeed = value;
+                moveSpeedPercent = value;
             }
         } 
+    }
+    public float MoveSpeed
+    {
+        get { return moveSpeed * (moveSpeedPercent / 100); }
     }
     public float AttackSpeed
     {
@@ -200,5 +204,10 @@ public class Stat : MonoBehaviour
         HealthBar.Initialize(MaxHealth, MaxHealth);
         if (ManaBar != null)
             ManaBar.Initialize(MaxMana, MaxMana);
+    }
+    public void SetHpMP()
+    {
+        HealthBar.SetMax(MaxHealth);
+        ManaBar.SetMax(MaxMana);
     }
 }

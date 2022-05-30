@@ -35,12 +35,21 @@ public class GameManager : MonoBehaviour
     
     [SerializeField]
     private Player player;
+    [SerializeField]
+    private GameObject quitPanel;
 
     private NPC currentTarget;
     
     void Update()
     {
-        ClickTarget();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!quitPanel.activeSelf)
+                quitPanel.SetActive(true);
+            else
+                quitPanel.SetActive(false);
+        }
+            ClickTarget();
     }
     
     private void ClickTarget()
@@ -67,5 +76,10 @@ public class GameManager : MonoBehaviour
                 player.MyTarget = null;
             }
         }
+    }
+    public void GameQuit()
+    {
+
+        Application.Quit();
     }
 }
