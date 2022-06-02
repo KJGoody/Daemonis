@@ -96,7 +96,7 @@ public class EnemyAttack : MonoBehaviour
         Character character = collision.GetComponentInParent<Character>();
 
         float PureDamage = (parent.MyStat.Attak * AttackxDamage) * parent.BuffxDamage;
-        character.TakeDamage(true, parent.MyStat.HitPercent, PureDamage, parent.MyStat.Level, direction, "PlayerDamage");            // 데미지 전송
+        character.TakeDamage(true, parent.MyStat.HitPercent, PureDamage, parent.MyStat.Level, direction, DamageTextPool.DamageTextPrefabsName.Player);            // 데미지 전송
     }
 
     IEnumerator BaseMeleeAttack()

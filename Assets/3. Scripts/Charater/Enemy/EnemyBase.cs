@@ -103,7 +103,7 @@ public class EnemyBase : NPC
             EnemyAttackPrefab.GetComponent<EnemyAttack>().parent = this;
     }
 
-    public override void TakeDamage(bool IsPhysic, float HitPercent, float PureDamage, int FromLevel, Vector2 knockbackDir, string TextType) // 피격
+    public override void TakeDamage(bool IsPhysic, float HitPercent, float PureDamage, int FromLevel, Vector2 knockbackDir, DamageTextPool.DamageTextPrefabsName TextType) // 피격
     {
         HealthBarImage.SetActive(true);
         if (knockbackDir != Vector2.zero)
@@ -153,9 +153,20 @@ public class EnemyBase : NPC
     private IEnumerator Death()
     {
         yield return new WaitForSeconds(3f);
+        SetLayersRecursively(_prefabs.transform, "None");
+        yield return new WaitForSeconds(0.1f);
+        SetLayersRecursively(_prefabs.transform, "Default");
         MonsterPool.Instance.ReturnObject(this);
+
         InitializeEnemyBase();
         ParentGate.CurrentEnemyNum--;
+    }
+
+    private void SetLayersRecursively(Transform Object, string name)
+    {
+        Object.gameObject.layer = LayerMask.NameToLayer(name);
+        foreach (Transform Child in Object)
+            SetLayersRecursively(Child, name);
     }
 
     public void PositioningEnemyBase(MonsterGate parentGate, Vector3 startPosition)
@@ -169,8 +180,6 @@ public class EnemyBase : NPC
     public void InitializeEnemyBase()
     {
         MyStat.InitializeHealth();
-        _spriteList.transform.rotation = Quaternion.identity;
-
         _prefabs.transform.GetChild(0).GetComponent<SortingGroup>().sortingLayerName = "EnemyLayer";
         transform.Find("HitBox").gameObject.SetActive(true);
         transform.Find("EnemyBody").gameObject.SetActive(true);

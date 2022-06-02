@@ -46,7 +46,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             // 액션퀵슬롯에 등록된 것이 사용할 수 있는거라면
             if (MyUseable != null)
             {
-                if (CurrentCollTime == 0)
+                if (CurrentCollTime == 0)   // 현재 쿨타임이 0일 경우에만 사용할 수 있다.
                 {
                     CoolTime = (MyUseable as Spell).MySpellCoolTime;
                     StartCoroutine(StartCoolDown());

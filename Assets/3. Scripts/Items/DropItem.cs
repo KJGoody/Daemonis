@@ -17,7 +17,7 @@ public class DropItem : MonoBehaviour
     private float speed;
     private enum IsKind
     {
-        Gold,Item
+        Gold, Item
     }
     IsKind isKind;
     private Vector2 startPos;
@@ -27,11 +27,12 @@ public class DropItem : MonoBehaviour
     [HideInInspector]
     public bool L_Start;
     private bool up = false;
-    DropItem (ItemBase item) //나중에 지울 가능성 큼
+    DropItem(ItemBase item) //나중에 지울 가능성 큼
     {
         this.item = item;
         sprite.sprite = item.MyIcon;
     }
+
     public void SetDropItem(Item _item, Quality _quality) // 몬스터에서 드랍할때 이걸로 추가할 예정
     {
         isKind = IsKind.Item;
@@ -41,19 +42,36 @@ public class DropItem : MonoBehaviour
         sprite.sprite = item.MyIcon;
         DI_Text.text = item.MyName;
     }
+
     public void SetGold(int _gold)
     {
         isKind = IsKind.Gold;
         gold = _gold;
-       // DI_Text.color = new Color(171, 164, 36);
+        // DI_Text.color = new Color(171, 164, 36);
         DI_Text.text = _gold + " 골드";
         sprite.sprite = goldImage;
     }
+
     private void Start()
     {
         speed = 0;
         playerTransform = GameObject.Find("Player").transform.GetChild(1).GetComponent<Transform>();
         startPos = transform.position;
+    }
+
+    void Update()
+    {
+        if (L_Start)
+        {
+            if (!up)
+            {
+                Looting_Start();
+            }
+            else if (up)
+            {
+                Looting_ToPlayer();
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -79,26 +97,12 @@ public class DropItem : MonoBehaviour
 
         }
     }
-    void Update()
-    {
-        if (L_Start)
-        {
-            if (!up)
-            {
-                Looting_Start();
-            }
-            else if(up )
-            {
-                Looting_ToPlayer();
-            }
-        }
-    }
 
     public void Looting_Start()
     {
-        transform.position = Vector2.Lerp(transform.position, new Vector2(startPos.x, startPos.y + 0.3f),Time.deltaTime *3);
+        transform.position = Vector2.Lerp(transform.position, new Vector2(startPos.x, startPos.y + 0.3f), Time.deltaTime * 3);
         upTime += Time.deltaTime;
-        if(upTime >= 0.7f)
+        if (upTime >= 0.7f)
         {
             up = true;
         }
@@ -107,6 +111,6 @@ public class DropItem : MonoBehaviour
     {
         Vector2 dir = playerTransform.position - transform.position;
         speed += Time.deltaTime * 15;
-        transform.Translate(dir.normalized * speed*Time.deltaTime);
+        transform.Translate(dir.normalized * speed * Time.deltaTime);
     }
 }

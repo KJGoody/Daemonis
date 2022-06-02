@@ -14622,6 +14622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8815432756072557750}
+  - component: {fileID: -4153006467574409405}
   - component: {fileID: 8815432756072557749}
   - component: {fileID: 8815432756072557748}
   - component: {fileID: 3838644710311635952}
@@ -14652,6 +14653,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4153006467574409405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8815432756072557739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7682a7859cd000499b821555cf6a07e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PuffLifeTime: 1
 --- !u!198 &8815432756072557749
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -14660,13 +14674,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8815432756072557739}
   serializedVersion: 7
-  lengthInSec: 5
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -14735,7 +14749,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
