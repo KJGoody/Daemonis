@@ -38,8 +38,21 @@ public class DropItem : MonoBehaviour
         item = new ItemBase();
         item.itemInfo = _item;
         item.MyQuality = _quality;
+        if(item.GetKind == Kinds.Equipment)
+        {
+            item.MyQuality = (Quality)AddOptionManager.MyInstance.SetRandomEquipmentQuality();
+            item.SetAddOption();
+        }
         sprite.sprite = item.MyIcon;
         DI_Text.text = item.MyName;
+
+    }
+
+    public void SetEquipmentItem(ItemBase item)
+    {
+        item.MyQuality = (Quality)AddOptionManager.MyInstance.SetRandomEquipmentQuality();
+        item.SetAddOption();
+
     }
     public void SetGold(int _gold)
     {

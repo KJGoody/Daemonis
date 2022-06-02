@@ -23,26 +23,11 @@ public class AddOptionManager : MonoBehaviour
     List<Dictionary<string, object>> tierProb; // 옵션 티어 확률표
     List<Dictionary<string, object>> valueProb; // 옵션값 확률표
     
-    float[] tierProbx = new float[]{ 5, 4, 3f, 2f, 1f, 0.5f};
+    float[] equipmentQualityProb = new float[]{ 5f, 4f, 3f, 2f, 1f, 0.5f};
     void Start()
     {
         valueProb = CSVReader.Read("AddOptionValueProb");
         tierProb = CSVReader.Read("OptionTierProb");
-        Debug.Log(tierProb[0].Keys);
-        Debug.Log(tierProb[0].Keys.Count);
-        
-        int a = 0;
-        foreach(var value in tierProb[3].Values) 
-        {
-            tierProbx[a] = (float)System.Convert.ToDouble(value);   
-            a++;
-        }
-        
-        
-        for(int i=0; i<10000; i++)
-        {
-            Debug.Log(Choose(tierProbx));
-        }
     }
 
     float Choose(float[] probs) // 가중치 랜덤뽑기
@@ -71,27 +56,51 @@ public class AddOptionManager : MonoBehaviour
         return probs.Length - 1;
     }
 
-    float[] GetTierProp(ItemBase item) // 아이템 티어를 토대로 옵션 티어확률 가져오기;
+    float[] GetTierProp(Quality quality) // 아이템 티어를 토대로 옵션 티어확률 가져오기;
     {
         float[] addOptionTierProp = new float[6];
-        int itemTierNum = (int)item.MyQuality;
+        int itemTierNum = (int)quality;
 
         int a = 0;
         foreach (var value in tierProb[itemTierNum].Values)
         {
-            tierProbx[a] = (float)System.Convert.ToDouble(value);
+            addOptionTierProp[a] = (float)System.Convert.ToDouble(value);
             a++;
         }
 
         return addOptionTierProp;
     }
 
-
-    public void GetRandomTier(ItemBase item)
+    public int SetRandomEquipmentQuality() // 장비 퀄리티 랜덤
     {
-        Debug.Log(Choose(GetTierProp(item)));
+        return (int)Choose(equipmentQualityProb);
     }
+    public int SetRandomTier(Quality quality) // 옵션 티어 랜덤
+    {
+        return (int)Choose(GetTierProp(quality));
+    }
+    public int SetRandomKind() // 옵션 종류 랜덤
+    {
+        return Random.Range(0, 22);
+    }
+    public float SetRandomValue(AddOption option) // 옵션 수치 랜덤
+    {
+        Debug.LogWarning(option.tier+" "+ option.option_Num);
+        float min = (float)System.Convert.ToDouble(valueProb[option.option_Num]["Tier"+option.tier+"_Min"]);
+        float max = (float)System.Convert.ToDouble(valueProb[option.option_Num]["Tier" + option.tier + "_Max"]);
+        Debug.Log(min);
+        Debug.Log(max);
 
+        return Random.Range(min, max);
+    }
+    public string GetOptionString(int optionNum) // 옵션 변수명 받기
+    {
+        return (string)valueProb[optionNum]["Option_String"];
+    }
+    public string GetOptionName(int optionNum) // 옵션 한글문자열 받기
+    {
+        return (string)valueProb[optionNum]["Option_Name"];
+    }
 
     public int GetOptionNum(string optionName) // 옵션 string을 int로 변환
     {

@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class AddOption
 {
-    public string optionName;
-    public string optionString;
-    public AddOption(string _optionName, string _optionString)
+    public int tier;
+    public int option_Num;
+    public float value;
+    public AddOption(int _tier, int _optionNum, float _value)
     {
-        optionName = _optionName;
-        optionString = _optionString;
+        tier = _tier;
+        option_Num = _optionNum;
+        value = _value;
     }
 }

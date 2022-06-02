@@ -304,7 +304,10 @@ public class Player : Character
         PropertyInfo optionName = stat.GetType().GetProperty(option);
 
         //float a = (float)System.Convert.ToDouble(optionName.GetValue(stat));
-        float b = (float)optionName.GetValue(stat);
+        Debug.Log(optionName.GetValue(stat));
+        Debug.Log(optionName.GetValue(stat).GetType());
+
+        float b = (float)System.Convert.ToDouble(optionName.GetValue(stat));
         optionName.SetValue(stat,  b + value);
     }
 }

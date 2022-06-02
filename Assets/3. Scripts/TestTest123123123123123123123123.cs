@@ -12,7 +12,7 @@ public class TestTest123123123123123123123123 : MonoBehaviour
 
         for (var i = 0; i < data.Count; i++)
         {
-            Debug.Log("index " + (i).ToString() + " : " + data[i]["Name"] + " " + data[i]["Tier0_Min"].ToString() + " " + data[i]["Tier0_Max"].ToString());
+            Debug.Log("index " + (i).ToString() + " : " + data[i]["Option_Name"] + " " + data[i]["Tier0_Min"].ToString() + " " + data[i]["Tier0_Max"].ToString());
         }
 
     }

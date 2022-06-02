@@ -60,6 +60,8 @@ public class HandScript : MonoBehaviour
     [SerializeField]
     private GameObject SI_Obj_Blind;// 블라인드 패널 오브젝트
     [SerializeField]
+    private GameObject[] SI_Obj_AddOptions;// 추가옵션들
+    [SerializeField]
     private ContentSizeFitter SI_CSF_Descript;
     [SerializeField]
     private ContentSizeFitter SI_CSF_Panel;
@@ -149,29 +151,20 @@ public class HandScript : MonoBehaviour
                 break;
             case Kinds.Equipment:
                 SI_Obj_Option.SetActive(true);
-                SI_Obj_SetOption.SetActive(false); // 나중에 세트장비 조건문으로 활성화
-                int partNum=0;
-                switch (item.GetPart)
-                { 
-                    case Part.Helmet:
-                        partNum = 0;
-                        break;
-                    case Part.Cloth:
-                        partNum = 1;
-                        break;
-                    case Part.Shoes:
-                        partNum = 2;
-                        break;
-                    case Part.Weapon:
-                        partNum = 3;
-                        break;
-                    case Part.Shoulder:
-                        partNum = 4;
-                        break;
-                    case Part.Back:
-                        partNum = 5;
-                        break;
+
+                for(int i = 0; i < myItem.addOptionList.Count; i++)
+                {
+                    AddOptionInfo optionInfo = SI_Obj_AddOptions[i].GetComponent<AddOptionInfo>();
+                    optionInfo.SetAddOptionPrefab(myItem.addOptionList[i]);
+                    SI_Obj_AddOptions[i].SetActive(true);
                 }
+                for(int i = 6; i > myItem.addOptionList.Count; i--)
+                {
+                    SI_Obj_AddOptions[i-1].SetActive(false);
+                }
+
+                SI_Obj_SetOption.SetActive(false); // 나중에 세트장비 조건문으로 활성화
+                int partNum = (int)item.GetPart;
                 if(Player.MyInstance.usingEquipment[partNum] != null)
                 {
                     playerInfoPanel.ShowUsingEquipment(partNum);

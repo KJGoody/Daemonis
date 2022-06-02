@@ -31,7 +31,6 @@ public class EquipmentItem : Item
     private float optionValue;
 
     public float WeaponxDamage { get; private set; }
-
     public void ActiveEquipment(bool isActive)
     {
         if (isActive)
@@ -44,6 +43,7 @@ public class EquipmentItem : Item
 
         }
     }
+    
     // 아이템 사용시
     //public void Equip()
     //{

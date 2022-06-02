@@ -38,6 +38,26 @@ public class ItemBase : IMoveable, IDescribable, IUseable
     }
 
     #region 장비아이템 관련
+    public List<AddOption> addOptionList = new List<AddOption>();
+    public void SetAddOption()
+    {
+        //if (addOptionList[0] != null)
+        //    addOptionList.Clear();
+        Debug.LogWarning("NewItem, Quality = " + quality);
+        for (int i = 0; i < (int)(quality)+1; i++)
+        {
+            int newTier = AddOptionManager.MyInstance.SetRandomTier(quality);
+            int newOption = AddOptionManager.MyInstance.SetRandomKind();
+            float newValue = 0;
+            addOptionList.Add(new AddOption(newTier, newOption, newValue));
+            Debug.Log(i);
+            newValue =    AddOptionManager.MyInstance.SetRandomValue(addOptionList[i]);
+            Debug.Log(newValue);
+            addOptionList[i].value = newValue; 
+            
+        }
+        
+    }
     private Part part;
     public Part GetPart
     {
@@ -118,6 +138,14 @@ public class ItemBase : IMoveable, IDescribable, IUseable
                 case Quality.Epic:
                     color = "#800080ff";
                     str = "영웅";
+                    break;
+                case Quality.Legendary:
+                    color = "#800080ff";
+                    str = "전설";
+                    break;
+                case Quality.Relic:
+                    color = "#800080ff";
+                    str = "유물";
                     break;
             }
 

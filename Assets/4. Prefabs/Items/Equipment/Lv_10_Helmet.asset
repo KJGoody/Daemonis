@@ -22,5 +22,5 @@ MonoBehaviour:
   part: 0
   sprite:
   - {fileID: 21300000, guid: ebddea11e6da78f4e8383f3a26db8a02, type: 3}
-  baseOption: MaxHealth
+  baseOption: BaseMaxHealth
   optionValue: 75
