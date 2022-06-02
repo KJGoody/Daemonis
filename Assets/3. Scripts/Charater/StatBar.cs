@@ -50,8 +50,13 @@ public class StatBar : MonoBehaviour
             StatBarImage.fillAmount = Mathf.Lerp(StatBarImage.fillAmount, currentFill, Time.deltaTime * lerpSpeed);
         }
     }
-
-    public void Initialize(float maxValue, float currentValue)
+    public void SetMax(int maxValue)
+    {
+        StatBarMaxValue = maxValue;
+        StatBarText.text = currentValue + " / " + StatBarMaxValue;
+        currentFill = currentValue / StatBarMaxValue;
+    }
+    public void Initialize(int maxValue, int currentValue)
     {
         StatBarMaxValue = maxValue;
         StatBarCurrentValue = currentValue;

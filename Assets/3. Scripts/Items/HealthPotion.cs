@@ -14,7 +14,7 @@ public class HealthPotion : Item
     public void Use()
     {
         // 체력이 최대체력보다 낮으면
-        if (Player.MyInstance.MyStat.CurrentHealth < Player.MyInstance.MyStat.MaxHealth)
+        if (Player.MyInstance.MyStat.CurrentHealth < Player.MyInstance.MyStat.CurrentMaxHealth)
         {
             // 사용하는 아이템을 없애고
 

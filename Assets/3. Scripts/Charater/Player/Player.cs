@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Reflection;
 
 [System.Serializable]
 public class TargetGroup
@@ -18,6 +19,7 @@ public class TargetGroup
 
 public class Player : Character
 {
+    // �̱���
     private static Player instance;
     public static Player MyInstance
     {
@@ -53,7 +55,6 @@ public class Player : Character
         {
             NewBuff("Skill_Fire_02_Buff");
         }
-        
         base.Start();
     }
     protected override void Update()
@@ -89,7 +90,7 @@ public class Player : Character
 
     public void CastSpell(string spellIName)
     {
-        if (SearchEnemy())
+        if (MyTarget == null && SearchEnemy())
             AutoTarget();
 
         if (!IsAttacking)
@@ -137,8 +138,8 @@ public class Player : Character
     private IEnumerator CastingSpell(string spellIName)
     {
         IsAttacking = true;
-        if (MyTarget != null) LookAtTarget();
         _prefabs.PlayAnimation(4);
+        if (MyTarget != null) LookAtTarget();
 
         Spell newSpell = SpellBook.MyInstance.GetSpell(spellIName);
         if (newSpell.spellType.Equals(Spell.SpellType.Immediate))
@@ -287,19 +288,23 @@ public class Player : Character
         usingEquipment[partNum] = newItem;
         _spriteList.ChangeItem(partNum);
         useEquipment(partNum);
+        newItem.ActiveEquipment(true);
     }
 
     public void UnequipItem(int partNum)
     {
-
+        usingEquipment[partNum].ActiveEquipment(false);
         InventoryScript.MyInstance.AddItem(usingEquipment[partNum]);
         usingEquipment[partNum] = null;
         _spriteList.ChangeItem(partNum);
-
     }
 
-    public void Plus(int i, float f)
+    public void Plus(string option, float value)
     {
+        PropertyInfo optionName = stat.GetType().GetProperty(option);
 
+        //float a = (float)System.Convert.ToDouble(optionName.GetValue(stat));
+        float b = (float)optionName.GetValue(stat);
+        optionName.SetValue(stat,  b + value);
     }
 }
