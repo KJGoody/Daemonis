@@ -24,8 +24,7 @@ public class Buff : MonoBehaviour
     private float currentTime;
 
     private BuffManager MyManager;
-    [SerializeField]
-    private GameObject PuffObject;
+    private Puff PuffObject;
     [SerializeField]
     private TextMeshProUGUI StackText;
     private Color TextColor;
@@ -108,7 +107,7 @@ public class Buff : MonoBehaviour
         Target.OnBuff.Remove(this);
         MyManager.BuffList.Remove(gameObject);
         if (PuffObject != null)
-            Destroy(PuffObject);
+            PuffPool.Instance.ReturnObject(PuffObject, PuffPool.PuffPrefabsName.Fire);
         if (InTargetGroup)
             Player.MyInstance.RemoveTarget(BuffName, Target.transform);
         Destroy(gameObject);
@@ -118,7 +117,8 @@ public class Buff : MonoBehaviour
     {
         Player.MyInstance.AddTarget(BuffName, Target.transform);
         InTargetGroup = true;
-        PuffObject = Instantiate(PuffObject, Target.transform);
+        PuffObject = PuffPool.Instance.GetObject(PuffPool.PuffPrefabsName.Fire);
+        PuffObject.PositioningPuff(Target.transform);
 
         float WaitForSconds = 0.5f;
         int TickDamage = 1;
@@ -126,7 +126,7 @@ public class Buff : MonoBehaviour
         while (true)
         {
             if(Target.IsAlive)
-                Target.TakeDamage(false, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, "EnemyDamage");
+                Target.TakeDamage(false, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, DamageTextPool.DamageTextPrefabsName.Enemy);
             yield return new WaitForSeconds(WaitForSconds);
         }
     }

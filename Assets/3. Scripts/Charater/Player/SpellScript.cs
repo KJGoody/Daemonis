@@ -7,8 +7,6 @@ using System;
 public class SpellScript : MonoBehaviour
 {
     private Rigidbody2D myRigidbody;
-    [SerializeField]
-    private GameObject PuffObject;
 
     public enum SpellName
     {
@@ -161,9 +159,9 @@ public class SpellScript : MonoBehaviour
                         collision.transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
                     SpendDamage(collision);
                     if (!IsToggleAttack)
-                        Instantiate(PuffObject, transform.position, Quaternion.identity);
+                        PuffPool.Instance.GetObject(PuffPool.PuffPrefabsName.Hit_01).PositioningPuff(transform.position);
                     else
-                        Instantiate(PuffObject, collision.transform.position, Quaternion.identity);
+                        PuffPool.Instance.GetObject(PuffPool.PuffPrefabsName.Hit_01).PositioningPuff(collision.transform.position);
                 }
             }
         }
@@ -181,7 +179,7 @@ public class SpellScript : MonoBehaviour
 
                            // 무기 배수    // 플레이어 공격력               // 스킬 배수
         float PureDamage = (WeaponxDamage * Player.MyInstance.MyStat.Attak * SpellxDamage) * Player.MyInstance.BuffxDamage;
-        character.TakeDamage(false, Player.MyInstance.MyStat.HitPercent, PureDamage, Player.MyInstance.MyStat.Level, direction, "EnemyDamage");
+        character.TakeDamage(false, Player.MyInstance.MyStat.HitPercent, PureDamage, Player.MyInstance.MyStat.Level, direction, DamageTextPool.DamageTextPrefabsName.Enemy);
     }
 
     private bool CheckHitEnemy(Collider2D collision) // 스킬 한번 맞았으면 다시 안맞게 체크
@@ -227,7 +225,7 @@ public class SpellScript : MonoBehaviour
                         if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))
                             collisions[j].transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
                         SpendDamage(collisions[j]);
-                        Instantiate(PuffObject, collisions[j].transform.position, Quaternion.identity);
+                        PuffPool.Instance.GetObject(PuffPool.PuffPrefabsName.Hit_01).PositioningPuff(collisions[j].transform.position);
                     }
             }
 
@@ -299,7 +297,7 @@ public class SpellScript : MonoBehaviour
                         if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))
                             collisions[j].transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
                         SpendDamage(collisions[j]);
-                        Instantiate(PuffObject, collisions[j].transform.position, Quaternion.identity);
+                        PuffPool.Instance.GetObject(PuffPool.PuffPrefabsName.Hit_01).PositioningPuff(collisions[j].transform.position);
                     }
             }
             yield return new WaitForSeconds(WaitForSconds);

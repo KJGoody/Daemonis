@@ -135,16 +135,7 @@ public abstract class Character : MonoBehaviour
 
     public void NewBuff(string buffName)
     {
-        switch (buffName)
-        {
-            case "Skill_Fire_02_Buff":
-                StartBuff(buffName);
-                break;
-
-            case "Skill_Fire_02_Debuff":
-                StartBuff(buffName);
-                break;
-        }
+        StartBuff(buffName);
     }
 
     private void StartBuff(string buffName)
@@ -202,7 +193,7 @@ public abstract class Character : MonoBehaviour
             return null;
     }
 
-    public virtual void TakeDamage(bool IsPhysic, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, string texttype)
+    public virtual void TakeDamage(bool IsPhysic, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, DamageTextPool.DamageTextPrefabsName TextType)
     {
         if (Random.value < HitPercent - MyStat.DodgePercent)
         {
@@ -214,7 +205,7 @@ public abstract class Character : MonoBehaviour
                 Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.MagicRegist + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
             stat.CurrentHealth -= Damage;
 
-            NewDamageText(texttype, Damage);
+            NewDamageText(TextType, Damage);
             if (stat.CurrentHealth <= 0)
             {
                 Direction = Vector2.zero;
@@ -222,7 +213,7 @@ public abstract class Character : MonoBehaviour
             }
         }
         else
-            NewDamageText(texttype);
+            NewDamageText(TextType);
     }
 
     private float LevelGapxDamage(int FromLevel, int ToLevel)
@@ -249,25 +240,11 @@ public abstract class Character : MonoBehaviour
     }
 
 
-    private void NewDamageText(string texttype, int damage = 0)
+    private void NewDamageText(DamageTextPool.DamageTextPrefabsName TextType, int damage = 0)
     {
-        GameObject newText;
-        switch (texttype)
-        {
-            case "PlayerDamage":
-                newText = Instantiate(Resources.Load("Text/PlayerDamageText") as GameObject, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
-                newText.GetComponent<DamageText>().Damage = damage;
-                break;
-
-            case "EnemyDamage":
-                newText = Instantiate(Resources.Load("Text/EnemyDamageText") as GameObject, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
-                newText.GetComponent<DamageText>().Damage = damage;
-                break;
-
-            case "CriticalDamage":
-                newText = Instantiate(Resources.Load("Text/CriticalDamageText") as GameObject, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
-                newText.GetComponent<DamageText>().Damage = damage;
-                break;
-        }
+        DamageText damageText = DamageTextPool.Instance.GetObject(TextType);
+        damageText.InitializeDamageText();
+        damageText.PositioningDamageText(transform);
+        damageText.Damage = damage;
     }
 }

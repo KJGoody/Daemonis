@@ -47,13 +47,11 @@ public class Player : Character
     {
         joy = GameObject.Find("Floating Joystick").GetComponent<FloatingJoystick>();
 
-        if (stat.Level < 11)
+        if (stat.Level < 11)    // 레벨에 따른 버프 생성
             Debug.Log("LowLevel");
         else
-        {
             NewBuff("Skill_Fire_02_Buff");
-        }
-        
+
         base.Start();
     }
     protected override void Update()
@@ -89,9 +87,8 @@ public class Player : Character
 
     public void CastSpell(string spellIName)
     {
-        if (SearchEnemy())
-            AutoTarget();
-
+        if (SearchEnemy()) AutoTarget();
+        
         if (!IsAttacking)
             StartCoroutine(CastingSpell(spellIName));
     }
@@ -114,6 +111,7 @@ public class Player : Character
 
     private GameObject FindNearestObject()
     {
+                                                                                 // 확인 범위
         Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, 7, LayerMask.GetMask("HitBox"));
 
         List<GameObject> objects = new List<GameObject>();
@@ -121,8 +119,7 @@ public class Player : Character
             if (collisions[i].CompareTag("Enemy"))
                 objects.Add(collisions[i].gameObject);
 
-        if (objects.Count == 0)
-            return null;
+        if (objects.Count == 0) return null;
 
         var neareastObject = objects
             .OrderBy(obj =>
@@ -142,7 +139,7 @@ public class Player : Character
 
         Spell newSpell = SpellBook.MyInstance.GetSpell(spellIName);
         if (newSpell.spellType.Equals(Spell.SpellType.Immediate))
-        {
+        {   // 점화 스킬 구현방식
             for (int i = targetGroups.Count - 1; i >= 0; i--)
             {
                 if (targetGroups[i].GroupName.Equals("Skill_Fire_02_Debuff"))
@@ -291,11 +288,9 @@ public class Player : Character
 
     public void UnequipItem(int partNum)
     {
-
         InventoryScript.MyInstance.AddItem(usingEquipment[partNum]);
         usingEquipment[partNum] = null;
         _spriteList.ChangeItem(partNum);
-
     }
 
     public void Plus(int i, float f)
