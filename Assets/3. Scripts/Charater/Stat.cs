@@ -11,18 +11,18 @@ public class Stat : MonoBehaviour
     [Header("기본 스탯")]
     [SerializeField] private int attack;              // 공격력
     [SerializeField] private float attackPercent;     // 공격력 %증가
-    [SerializeField] private int maxHealth;         // 최대 체력
+    [SerializeField] private int maxHealth;           // 최대 체력
     [SerializeField] private float maxHealthPercent;  // 최대 체력 %증가
-    [SerializeField] private int maxMana;           // 최대 마나
+    [SerializeField] private int maxMana;             // 최대 마나
     [SerializeField] private float maxManaPercent;    // 최대 마나 %증가
-    [SerializeField] private int currentHealth;     // 현재 체력
-    [SerializeField] private int currentMana;       // 현재 마나
+    [SerializeField] private int currentHealth;       // 현재 체력
+    [SerializeField] private int currentMana;         // 현재 마나
 
     [Header("부가스탯")]
     [SerializeField] private int defence;             // 물리 방어력
-    [SerializeField] private float defencePercent;      // 물리 방어력 %증가
+    [SerializeField] private float defencePercent;    // 물리 방어력 %증가
     [SerializeField] private int magicRegist;         // 마법 방어력
-    [SerializeField] private float magicRegistPercent;  // 마법 방어력 %증가
+    [SerializeField] private float magicRegistPercent;// 마법 방어력 %증가
     [SerializeField] private float moveSpeed;         // 실제 이동속도
     [SerializeField] private float moveSpeedPercent;  // 이동속도 %증가
     [SerializeField] private float attackSpeed;       // 공격속도
@@ -42,6 +42,7 @@ public class Stat : MonoBehaviour
     [SerializeField] private float goldPlus;          // 골드 획득량 증가
     [SerializeField] private float expPlus;           // 경험치 획득량 증가
     [SerializeField] private float vampiricRate;      // 흡혈률
+    [SerializeField] private float potionCooldown;    // 포션 쿨타임감소
     public int Level // 레벨
     {
         get { return level; }
@@ -357,6 +358,21 @@ public class Stat : MonoBehaviour
     {
         get { return vampiricRate; }
         set { vampiricRate = value; }
+    }
+    public float PotionCoolDown // 포션쿨감
+    {
+        get { return potionCooldown; }
+        set
+        {
+            if (value > 100)
+            {
+                potionCooldown = 100f;
+            }
+            else
+            {
+                potionCooldown = value;
+            }
+        }
     }
 
     private void Awake()
