@@ -20,7 +20,6 @@ public class GNode
 
 public class MonsterGate : MonoBehaviour
 {
-    [SerializeField]
     private int TotalEnemyNum;
     [HideInInspector]
     public int CurrentEnemyNum;
@@ -46,7 +45,7 @@ public class MonsterGate : MonoBehaviour
     {
         while (TotalEnemyNum < 100)
         {
-            if (CurrentEnemyNum < 2)
+            if (CurrentEnemyNum < 20)
             {
                 GNode newStartPosition;
                 do

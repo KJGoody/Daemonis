@@ -137,8 +137,8 @@ public class Player : Character
     private IEnumerator CastingSpell(string spellIName)
     {
         IsAttacking = true;
-        _prefabs.PlayAnimation(4);
         if (MyTarget != null) LookAtTarget();
+        _prefabs.PlayAnimation(4);
 
         Spell newSpell = SpellBook.MyInstance.GetSpell(spellIName);
         if (newSpell.spellType.Equals(Spell.SpellType.Immediate))

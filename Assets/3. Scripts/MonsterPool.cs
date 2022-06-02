@@ -22,7 +22,7 @@ public class MonsterPool : MonoBehaviour
 
     private void Awake()
     {
-        Initialize(1);
+        Initialize(20);
     }
 
     private void Initialize(int initCount)
