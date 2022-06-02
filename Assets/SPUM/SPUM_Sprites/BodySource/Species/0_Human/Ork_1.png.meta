@@ -19,7 +19,7 @@ TextureImporter:
     second: Arm_L
   - first:
       213: 7074057133460107809
-    second: Arm_L
+    second: Arm_R
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -217,7 +217,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arm_R
+      name: Arm_L
       rect:
         serializedVersion: 2
         x: 15
@@ -238,7 +238,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arm_L
+      name: Arm_R
       rect:
         serializedVersion: 2
         x: 15

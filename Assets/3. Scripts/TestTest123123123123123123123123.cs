@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class TestTest123123123123123123123123 : MonoBehaviour
 {
-    public int _exp = 0;
-
-    void Start()
+    public GameObject drop;
+    public GameObject droppppppp;
+    public GameObject Noticeeeeeeeee;
+    public GameObject nPanel;
+    public Item item;
+   public void MMMMMMM()
     {
-        List<Dictionary<string, object>> data = CSVReader.Read("AddOptionTest");
-
-        for (var i = 0; i < data.Count; i++)
-        {
-            Debug.Log("index " + (i).ToString() + " : " + data[i]["Name"] + " " + data[i]["Tier0_Min"].ToString() + " " + data[i]["Tier0_Max"].ToString());
-        }
-
+        Instantiate(drop, droppppppp.transform).GetComponent<DropItem>();
     }
 
+    public void VVVVVV()
+    {
+        GameObject.Instantiate(Noticeeeeeeeee, new Vector3(0, 0, 0), Quaternion.identity).transform.SetParent(nPanel.transform);
+    }
 }

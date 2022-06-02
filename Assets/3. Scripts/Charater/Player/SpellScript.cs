@@ -159,7 +159,7 @@ public class SpellScript : MonoBehaviour
                 {
                     if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))       // 발화 중일 시 디버프 생성
                         collision.transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
-                    SpendDamage(collision, SpellxDamage);
+                    SpendDamage(collision);
                     if (!IsToggleAttack)
                         Instantiate(PuffObject, transform.position, Quaternion.identity);
                     else
@@ -169,7 +169,7 @@ public class SpellScript : MonoBehaviour
         }
     }
 
-    private void SpendDamage(Collider2D collision, float spellxDamage)
+    private void SpendDamage(Collider2D collision)
     {
         Character character = collision.GetComponentInParent<Character>();
 
@@ -180,8 +180,8 @@ public class SpellScript : MonoBehaviour
             WeaponxDamage = 1;
 
                            // 무기 배수    // 플레이어 공격력               // 스킬 배수
-        float PureDamage = WeaponxDamage * Player.MyInstance.MyStat.CurrentAttack * spellxDamage;
-        character.TakeDamage(PureDamage, Player.MyInstance.MyStat.Level, direction, "EnemyDamage", false);
+        float PureDamage = (WeaponxDamage * Player.MyInstance.MyStat.Attak * SpellxDamage) * Player.MyInstance.BuffxDamage;
+        character.TakeDamage(false, Player.MyInstance.MyStat.HitPercent, PureDamage, Player.MyInstance.MyStat.Level, direction, "EnemyDamage");
     }
 
     private bool CheckHitEnemy(Collider2D collision) // 스킬 한번 맞았으면 다시 안맞게 체크
@@ -215,7 +215,6 @@ public class SpellScript : MonoBehaviour
         float AOERadius = 0.5f;             // 장판 범위
         int AOETimes = 5;                   // 장판 피격 횟수
         float AOEWaitForSeconds = 0.5f;     // 다음 피격 시간
-        int AOEDamage = 5;                  // 장판 데미지
 
         for (int i = 0; i < AOETimes; i++)
         {
@@ -227,7 +226,7 @@ public class SpellScript : MonoBehaviour
                     {
                         if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))
                             collisions[j].transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
-                        SpendDamage(collisions[j], AOEDamage);
+                        SpendDamage(collisions[j]);
                         Instantiate(PuffObject, collisions[j].transform.position, Quaternion.identity);
                     }
             }
@@ -251,7 +250,7 @@ public class SpellScript : MonoBehaviour
 
     private IEnumerator Skill_Fire_07()
     {
-        SpendDamage(MyTarget.GetComponent<Collider2D>(), SpellxDamage);
+        SpendDamage(MyTarget.GetComponent<Collider2D>());
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }
@@ -288,7 +287,6 @@ public class SpellScript : MonoBehaviour
     {
         float Radius = 0.5f;
         float WaitForSconds = 0.3f;
-        int TickDamage = 2;
 
         while (true)
         {
@@ -300,7 +298,7 @@ public class SpellScript : MonoBehaviour
                     {
                         if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))
                             collisions[j].transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
-                        SpendDamage(collisions[j], TickDamage);
+                        SpendDamage(collisions[j]);
                         Instantiate(PuffObject, collisions[j].transform.position, Quaternion.identity);
                     }
             }

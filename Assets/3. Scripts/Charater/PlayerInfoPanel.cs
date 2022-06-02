@@ -37,36 +37,12 @@ public class PlayerInfoPanel : MonoBehaviour
     private ContentSizeFitter UE_CSF_Panel;
     #endregion
 
-    [Header("Stat Text")]
-    #region 스탯창 텍스트
-    public Text ATK;
-    public Text HP;
-    public Text MP;
-    public Text Def;
-    public Text mDef;
-    public Text moveSpeed;
-    public Text atkSpeed;
-    public Text dodge;
-    public Text hitPercent;
-    public Text criPercent;
-    public Text criDamage;
-    public Text hpRegen;
-    public Text mpRegen;
-    public Text onHitHp;
-    public Text onHitMp;
-    public Text coolDown;
-    public Text lootRange;
-    public Text dropPercent;
-    public Text goldPlus;
-    public Text expPlus;
-    public Text vampiric;
-    #endregion
-
     void Start()
     {
         Player.MyInstance.useEquipment += ChangeEquipment;
         initEquipment();
     }
+
     public void initEquipment()
     {
         for(int i = 0; i < equipment_Img.Length; i++)
@@ -126,32 +102,6 @@ public class PlayerInfoPanel : MonoBehaviour
     }
     void Update()
     {
-        UpdateStat();
-    }
-    void UpdateStat()
-    {
-        Stat stat = Player.MyInstance.MyStat;
-        ATK.text = "" + stat.CurrentAttack;
-        HP.text = "" + stat.CurrentMaxHealth;
-        MP.text = "" + stat.CurrentMaxMana;
-        Def.text = "" + stat.CurrentDefence;
-        mDef.text = "" + stat.CurrentMagicRegist;
-        moveSpeed.text = "" + stat.MoveSpeedPercent + "%";
-        atkSpeed.text = "" + stat.CurrentAttackSpeed;
-        dodge.text = "" + stat.DodgePercent + "%";
-        hitPercent.text = "" + stat.HitPercent + "%";
-        criPercent.text = "" + stat.CriticalPercent + "%";
-        criDamage.text = "" + stat.CriticalDamage + "%";
-        hpRegen.text = "" + stat.HealthRegen;
-        mpRegen.text = "" + stat.ManaRegen;
-        onHitHp.text = "" + stat.RecoverHealth_onhit;
-        onHitMp.text = "" + stat.RecoverMana_onhit;
-        coolDown.text = "" + stat.CoolDown + "%";
-        lootRange.text = "" + stat.ItemLootRangePercent + "%";
-        dropPercent.text = "" + stat.ItemDropPercent + "%";
-        goldPlus.text = "" + stat.GoldPlus + "%";
-        expPlus.text = "" + stat.ExpPlus + "%";
-        vampiric.text = "" + stat.VampiricRate + "%";
-        stat.SetHpMP();
+        
     }
 }
