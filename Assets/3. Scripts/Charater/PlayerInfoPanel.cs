@@ -131,13 +131,13 @@ public class PlayerInfoPanel : MonoBehaviour
     void UpdateStat()
     {
         Stat stat = Player.MyInstance.MyStat;
-        ATK.text = "" + stat.Attack;
-        HP.text = "" + stat.MaxHealth;
-        MP.text = "" + stat.MaxMana;
-        Def.text = "" + stat.Defence;
-        mDef.text = "" + stat.MagicRegist;
+        ATK.text = "" + stat.CurrentAttack;
+        HP.text = "" + stat.CurrentMaxHealth;
+        MP.text = "" + stat.CurrentMaxMana;
+        Def.text = "" + stat.CurrentDefence;
+        mDef.text = "" + stat.CurrentMagicRegist;
         moveSpeed.text = "" + stat.MoveSpeedPercent + "%";
-        atkSpeed.text = "" + stat.AttackSpeed;
+        atkSpeed.text = "" + stat.CurrentAttackSpeed;
         dodge.text = "" + stat.DodgePercent + "%";
         hitPercent.text = "" + stat.HitPercent + "%";
         criPercent.text = "" + stat.CriticalPercent + "%";
@@ -147,7 +147,7 @@ public class PlayerInfoPanel : MonoBehaviour
         onHitHp.text = "" + stat.RecoverHealth_onhit;
         onHitMp.text = "" + stat.RecoverMana_onhit;
         coolDown.text = "" + stat.CoolDown + "%";
-        lootRange.text = "" + stat.ItemLootRange;
+        lootRange.text = "" + stat.ItemLootRangePercent + "%";
         dropPercent.text = "" + stat.ItemDropPercent + "%";
         goldPlus.text = "" + stat.GoldPlus + "%";
         expPlus.text = "" + stat.ExpPlus + "%";

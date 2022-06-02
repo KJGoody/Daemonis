@@ -180,7 +180,7 @@ public class SpellScript : MonoBehaviour
             WeaponxDamage = 1;
 
                            // 무기 배수    // 플레이어 공격력               // 스킬 배수
-        float PureDamage = WeaponxDamage * Player.MyInstance.MyStat.Attack * spellxDamage;
+        float PureDamage = WeaponxDamage * Player.MyInstance.MyStat.CurrentAttack * spellxDamage;
         character.TakeDamage(PureDamage, Player.MyInstance.MyStat.Level, direction, "EnemyDamage", false);
     }
 

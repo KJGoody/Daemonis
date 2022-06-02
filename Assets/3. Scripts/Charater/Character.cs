@@ -207,9 +207,9 @@ public abstract class Character : MonoBehaviour
         float PureDamage = pureDamage * xDamage;
         int Damage;
         if(IsPhysic)
-            Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.Defence + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
+            Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.CurrentDefence + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
         else
-            Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.MagicRegist + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
+            Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.CurrentMagicRegist + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
 
         NewDamageText(Damage, texttype);
         stat.CurrentHealth -= Damage;

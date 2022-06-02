@@ -94,7 +94,7 @@ public class EnemyAttack : MonoBehaviour
     private void SpendDamage(Collider2D collision)
     {
         Character character = collision.GetComponentInParent<Character>();
-        float PureDamage = parent.MyStat.Attack * AttackxDamage;
+        float PureDamage = parent.MyStat.CurrentAttack * AttackxDamage;
         character.TakeDamage(PureDamage, parent.MyStat.Level, direction, "PlayerDamage", true);            // 데미지 전송
     }
 
