@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Reflection;
 
 [System.Serializable]
 public class TargetGroup
@@ -293,9 +294,9 @@ public class Player : Character
         _spriteList.ChangeItem(partNum);
     }
 
-    public void Plus(int i, float f)
+    public void Plus(string option, float value)
     {
-
+        PropertyInfo optionName = stat.GetType().GetProperty(option);
         //float a = (float)System.Convert.ToDouble(optionName.GetValue(stat));
         float b = (float)System.Convert.ToDouble(optionName.GetValue(stat));
         switch (option)

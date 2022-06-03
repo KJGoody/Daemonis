@@ -387,4 +387,10 @@ public class Stat : MonoBehaviour
         HealthBar.SetMax(CurrentMaxHealth);
         ManaBar.SetMax(CurrentMaxMana);
     }
+
+    public void InitializeHealth()
+    {
+        currentHealth = CurrentMaxHealth;
+        HealthBar.Initialize(CurrentMaxHealth, CurrentMaxHealth);
+    }
 }
