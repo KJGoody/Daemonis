@@ -285,10 +285,12 @@ public class Player : Character
         usingEquipment[partNum] = newItem;
         _spriteList.ChangeItem(partNum);
         useEquipment(partNum);
+        newItem.ActiveEquipment(true);
     }
 
     public void UnequipItem(int partNum)
     {
+        usingEquipment[partNum].ActiveEquipment(false);
         InventoryScript.MyInstance.AddItem(usingEquipment[partNum]);
         usingEquipment[partNum] = null;
         _spriteList.ChangeItem(partNum);
