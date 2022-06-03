@@ -162,7 +162,6 @@ public class HandScript : MonoBehaviour
                 {
                     SI_Obj_AddOptions[i-1].SetActive(false);
                 }
-
                 SI_Obj_SetOption.SetActive(false); // 나중에 세트장비 조건문으로 활성화
                 int partNum = (int)item.GetPart;
                 if(Player.MyInstance.usingEquipment[partNum] != null)
@@ -195,7 +194,13 @@ public class HandScript : MonoBehaviour
     }
     public void UseEquipment() // 장비 장착할때
     {
+        int partNum = (int)myItem.GetPart;
+        if (Player.MyInstance.usingEquipment[partNum] != null)
+        {
+            Player.MyInstance.UnequipItem(partNum);
+        }    
         myItem.Use();
+        playerInfoPanel.ShowUsingEquipment(partNum,false);
         SI_Panel.SetActive(false);
     }
     public void ResetEquipPotion() // 포션 등록 취소

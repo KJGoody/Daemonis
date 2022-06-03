@@ -304,10 +304,18 @@ public class Player : Character
         PropertyInfo optionName = stat.GetType().GetProperty(option);
 
         //float a = (float)System.Convert.ToDouble(optionName.GetValue(stat));
-
         float b = (float)System.Convert.ToDouble(optionName.GetValue(stat));
-        Debug.Log(b.GetType());
-        Debug.Log(value.GetType());
-        optionName.SetValue(stat,  (int)(b + value));
+        switch (option)
+        {
+            case "BaseAttack": case "BaseMaxHealth": case "BaseMaxMana": case "BaseDefence":
+            case "BaseMagicRegist": case "BaseAttackSpeed" : case "HealthRegen":
+            case "ManaRegen": case "RecoverHealth_onhit": case "RecoverMana_onhit":
+                optionName.SetValue(stat, (int)(b + value));
+                break;
+            default:
+                optionName.SetValue(stat, (float)(b + value));
+                break;
+
+        } 
     }
 }

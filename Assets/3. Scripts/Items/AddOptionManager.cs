@@ -85,11 +85,8 @@ public class AddOptionManager : MonoBehaviour
     }
     public float SetRandomValue(AddOption option) // 옵션 수치 랜덤
     {
-        Debug.LogWarning(option.tier+" "+ option.option_Num);
         float min = (float)System.Convert.ToDouble(valueProb[option.option_Num]["Tier"+option.tier+"_Min"]);
         float max = (float)System.Convert.ToDouble(valueProb[option.option_Num]["Tier" + option.tier + "_Max"]);
-        Debug.Log(min);
-        Debug.Log(max);
 
         return Random.Range(min, max);
     }

@@ -31,10 +31,10 @@ public class Stat : MonoBehaviour
     [SerializeField] private float hitPercent;        // 명중률
     [SerializeField] private float criticalPercent;   // 크리티컬 확률
     [SerializeField] private float criticalDamage;    // 크리티컬 데미지
-    [SerializeField] private float healthRegen;       // 초당 체력 재생
-    [SerializeField] private float manaRegen;         // 초당 마나 재생
-    [SerializeField] private float recoverHealth_onhit;// 적중시 체력회복
-    [SerializeField] private float recoverMana_onhit; // 적중시 마나회복
+    [SerializeField] private int healthRegen;       // 초당 체력 재생
+    [SerializeField] private int manaRegen;         // 초당 마나 재생
+    [SerializeField] private int recoverHealth_onhit;// 적중시 체력회복
+    [SerializeField] private int recoverMana_onhit; // 적중시 마나회복
     [SerializeField] private float coolDown;          // 재사용시간 감소
     [SerializeField] private float itemLootRange;     // 아이템 획득 범위
     [SerializeField] private float lootRangePercent;  // 아이템 획득 범위 %증가
@@ -290,22 +290,22 @@ public class Stat : MonoBehaviour
         get { return criticalDamage; }
         set { criticalDamage = value; }
     }
-    public float HealthRegen // 체젠
+    public int HealthRegen // 체젠
     {
         get { return healthRegen; }
         set { healthRegen = value; }
     }
-    public float ManaRegen // 마젠
+    public int ManaRegen // 마젠
     {
         get { return manaRegen; }
         set { manaRegen = value; }
     }
-    public float RecoverHealth_onhit // 적중시 체력
+    public int RecoverHealth_onhit // 적중시 체력
     {
         get { return recoverHealth_onhit; }
         set { recoverHealth_onhit = value; }
     }
-    public float RecoverMana_onhit // 적중시 마나
+    public int RecoverMana_onhit // 적중시 마나
     {
         get { return recoverMana_onhit; }
         set { recoverMana_onhit = value; }

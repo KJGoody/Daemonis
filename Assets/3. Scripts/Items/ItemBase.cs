@@ -41,18 +41,14 @@ public class ItemBase : IMoveable, IDescribable, IUseable
     public List<AddOption> addOptionList = new List<AddOption>();
     public void SetAddOption()
     {
-        //if (addOptionList[0] != null)
-        //    addOptionList.Clear();
-        Debug.LogWarning("NewItem, Quality = " + quality);
         for (int i = 0; i < (int)(quality)+1; i++)
         {
             int newTier = AddOptionManager.MyInstance.SetRandomTier(quality);
             int newOption = AddOptionManager.MyInstance.SetRandomKind();
             float newValue = 0;
+
             addOptionList.Add(new AddOption(newTier, newOption, newValue));
-            Debug.Log(i);
-            newValue =    AddOptionManager.MyInstance.SetRandomValue(addOptionList[i]);
-            Debug.Log(newValue);
+            newValue = AddOptionManager.MyInstance.SetRandomValue(addOptionList[i]);
             addOptionList[i].value = newValue; 
             
         }
@@ -76,10 +72,30 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             return equipmentItem.itemSprite;
         }
     }
-    public void ActiveEquipment(bool isActive)
+    public void ActiveEquipment(bool isActive) // 장비 착용 & 해제
     {
         EquipmentItem equipmentItem = itemInfo as EquipmentItem;
-        equipmentItem.ActiveEquipment(isActive);
+        equipmentItem.ActiveEquipment(isActive); // 장비 베이스 스탯 증감
+        if (addOptionList[0] != null) // 추가 옵션 증감
+        {
+            for(int i = 0; i < addOptionList.Count; i++)
+            {
+                string optionName = AddOptionManager.MyInstance.GetOptionString(addOptionList[i].option_Num);
+                float optionValue = addOptionList[i].value;
+                if(optionName == "ItemLevel")
+                {
+
+                }
+                else
+                {
+                    if (isActive)
+                       Player.MyInstance.Plus(optionName, optionValue);
+                    else    
+                       Player.MyInstance.Plus(optionName, -optionValue);
+                }
+            }
+        }
+
     }
     public float GetWeaponxDamage()
     {
