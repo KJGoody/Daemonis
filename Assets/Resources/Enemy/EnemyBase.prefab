@@ -311,16 +311,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthBar: {fileID: 894972730622518897}
   ManaBar: {fileID: 0}
+  ExpBar: {fileID: 0}
   level: 1
+  levelUpEXP: 0
+  currentEXP: 0
   attack: 1
+  attackPercent: 0
   maxHealth: 100
-  maxMana: 0
+  maxHealthPercent: 0
   currentHealth: 0
+  maxMana: 0
+  maxManaPercent: 0
   currentMana: 0
   defence: 0
+  defencePercent: 0
   magicRegist: 0
+  magicRegistPercent: 0
   moveSpeed: 2
+  moveSpeedPercent: 0
   attackSpeed: 0
+  attackSpeedPercent: 0
   dodgePercent: 0
   hitPercent: 0.95
   criticalPercent: 0
@@ -331,10 +341,12 @@ MonoBehaviour:
   recoverMana_onhit: 0
   coolDown: 0
   itemLootRange: 0
+  lootRangePercent: 0
   itemDropPercent: 0
   goldPlus: 0
   expPlus: 0
   vampiricRate: 0
+  potionCooldown: 0
 --- !u!114 &6219858118112120361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +377,7 @@ MonoBehaviour:
   myAggroRange: 0
   myAttackRange: 0
   MyAttackTime: 0
+  EnemyEXP: 10
 --- !u!70 &9198583228697994435
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -48,10 +48,7 @@ public class Player : Character
     {
         joy = GameObject.Find("Floating Joystick").GetComponent<FloatingJoystick>();
 
-        if (stat.Level < 11)    // 레벨에 따른 버프 생성
-            Debug.Log("LowLevel");
-        else
-            NewBuff("Skill_Fire_02_Buff");
+        NewBuff("Skill_Fire_02_Buff");
 
         base.Start();
     }
@@ -312,6 +309,36 @@ public class Player : Character
                 optionName.SetValue(stat, (float)(b + value));
                 break;
 
-        } 
+        }
+    }
+
+    public void SpendEXP(float MonsterExP, bool Repeat = false)
+    {
+        float EXP;
+        if (Repeat)
+            EXP = MonsterExP;
+        else
+            EXP = MonsterExP * MyStat.ExpPlus;
+
+        if (MyStat.LevelUpEXP > MyStat.CurrentEXP + EXP)
+            MyStat.CurrentEXP += EXP;
+        else
+        {
+            float surPlusEXP = MyStat.CurrentEXP + EXP - MyStat.LevelUpEXP;
+            MyStat.Level++;
+            MyStat.CurrentEXP = 0;
+            MyStat.ExpBar.Initialize(MyStat.LevelUpEXP, MyStat.CurrentEXP);
+            SpendEXP(surPlusEXP, true);
+        }
+    }
+
+    public override void TakeDamage(bool IsPhysic, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, DamageTextPool.DamageTextPrefabsName TextType)
+    {
+        base.TakeDamage(IsPhysic, HitPercent, pureDamage, FromLevel, knockbackDir, TextType);
+
+        if(MyStat.CurrentHealth <= 0)
+        {
+
+        }
     }
 }

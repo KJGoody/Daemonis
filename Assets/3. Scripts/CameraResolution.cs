@@ -27,7 +27,9 @@ public class CameraResolution : MonoBehaviour
     {
         OnPreCull();
     }
+
     void OnPreCull() => GL.Clear(true, true, Color.black);
+
     //void OnPreCull()
     //{
     //    if (Application.isEditor) return;

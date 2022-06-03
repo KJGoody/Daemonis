@@ -14,6 +14,8 @@ public class Spell : IUseable, IMoveable
     private string description;     // 설명란
     [SerializeField]
     private float SpellCoolTime;
+    [SerializeField]
+    private int SpellMana;
 
     public enum SpellType
     {
@@ -23,7 +25,9 @@ public class Spell : IUseable, IMoveable
         AOE,
         Toggle,
         Immediate,
-        AE
+        AE,
+        Passive,
+        None
         #endregion
     }
     public SpellType spellType;
@@ -37,6 +41,7 @@ public class Spell : IUseable, IMoveable
         set { description = value; }
     }
     public float MySpellCoolTime { get { return SpellCoolTime; } }
+    public int MySpellMana { get { return SpellMana; } }
 
 
     public void Use()
