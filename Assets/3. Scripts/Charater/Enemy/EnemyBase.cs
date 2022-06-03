@@ -29,6 +29,9 @@ public class EnemyBase : NPC
 
     private MonsterGate ParentGate;
 
+    [SerializeField]
+    private int EnemyEXP;
+
     protected override void Awake()
     {
         enemytype = gameObject.GetComponent<EnemyType>();
@@ -113,6 +116,7 @@ public class EnemyBase : NPC
 
         if (stat.CurrentHealth <= 0)
         {
+            Player.MyInstance.SpendEXP(EnemyEXP);
             ChangeState(new IdleState());
 
             _prefabs.PlayAnimation(2);

@@ -141,7 +141,7 @@ public class SpellScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall") && !IsToggleAttack)     // º®°ú Á¢ÃË½Ã ÆÄ±«
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall") && !spellName.Equals(SpellName.Skill_File_04) && !spellName.Equals(SpellName.Skill_File_05) && !spellName.Equals(SpellName.Skill_File_09))     // º®°ú Á¢ÃË½Ã ÆÄ±«
             Destroy(gameObject);
 
         if (collision.CompareTag("Enemy") && !IsAOEAttack)

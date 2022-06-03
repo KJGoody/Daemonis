@@ -18,10 +18,7 @@ public class StatBar : MonoBehaviour
     private float currentValue;
     public float StatBarCurrentValue
     {
-        get
-        {
-            return currentValue;
-        }
+        get { return currentValue; }
         set
         {
             if (value > StatBarMaxValue)
@@ -44,11 +41,8 @@ public class StatBar : MonoBehaviour
 
     void Update()
     {
-
         if (currentFill != StatBarImage.fillAmount)
-        {
             StatBarImage.fillAmount = Mathf.Lerp(StatBarImage.fillAmount, currentFill, Time.deltaTime * lerpSpeed);
-        }
     }
 
     public void Initialize(float maxValue, float currentValue)

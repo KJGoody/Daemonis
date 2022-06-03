@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class SpellBook : MonoBehaviour
 {
-
-    [SerializeField]
-    private Spell[] spells; // 스킬 리스트
-
     // 싱글톤
     private static SpellBook instance;
     public static SpellBook MyInstance
@@ -16,14 +12,15 @@ public class SpellBook : MonoBehaviour
         get
         {
             if (instance == null)
-            {
                 instance = FindObjectOfType<SpellBook>();
-            }
 
             return instance;
         }
     }
-    
+
+    [SerializeField]
+    private Spell[] spells; // 스킬 리스트
+
     public Spell GetSpell(string spellName)
     {
         Spell spell = Array.Find(spells, x => x.MyName == spellName);

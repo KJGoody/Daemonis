@@ -6,16 +6,19 @@ public class Stat : MonoBehaviour
 {
     public StatBar HealthBar;       // 체력바 이미지
     public StatBar ManaBar;         // 마나바 이미지
+    public StatBar ExpBar;            // 경험치 이미지
 
     [SerializeField] private int level;               // 레벨
+    [SerializeField] private int levelUpEXP;          // 레벨업 필요 경험치
+    [SerializeField] private float currentEXP;        // 경험치
     [Header("기본 스탯")]
     [SerializeField] private int attack;              // 공격력
     [SerializeField] private float attackPercent;     // 공격력 %증가
     [SerializeField] private int maxHealth;           // 최대 체력
     [SerializeField] private float maxHealthPercent;  // 최대 체력 %증가
+    [SerializeField] private int currentHealth;       // 현재 체력
     [SerializeField] private int maxMana;             // 최대 마나
     [SerializeField] private float maxManaPercent;    // 최대 마나 %증가
-    [SerializeField] private int currentHealth;       // 현재 체력
     [SerializeField] private int currentMana;         // 현재 마나
 
     [Header("부가스탯")]
@@ -43,29 +46,27 @@ public class Stat : MonoBehaviour
     [SerializeField] private float expPlus;           // 경험치 획득량 증가
     [SerializeField] private float vampiricRate;      // 흡혈률
     [SerializeField] private float potionCooldown;    // 포션 쿨타임감소
+
     public int Level // 레벨
     {
         get { return level; }
         set { level = value; }
     }
-    public int CurrentHealth // 현재 체력
+    public int LevelUpEXP
     {
-        get { return currentHealth; }
+        get { return levelUpEXP; }
+        set { levelUpEXP = value; }
+    }
+    public float CurrentEXP
+    {
+        get { return currentEXP; }
         set 
-        { 
-            currentHealth = value; 
-            HealthBar.StatBarCurrentValue = value; 
+        {
+            currentEXP = value;
+            ExpBar.StatBarCurrentValue = value;
         }
     }
-    public int CurrentMana // 현재 마나
-    {
-        get { return currentMana; }
-        set 
-        { 
-            currentMana = value;
-            ManaBar.StatBarCurrentValue = value; 
-        }
-    }
+    // 공격력 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public int BaseAttack // 공격력 // 베이스 수치
     {
         get { return attack; }
@@ -73,16 +74,12 @@ public class Stat : MonoBehaviour
     }
     public int CurrentAttack // 퍼센트 증가 적용된 수치
     {
-        get 
-        { 
-            if(attackPercent != 0)
-            {
+        get
+        {
+            if (attackPercent != 0)
                 return (int)(attack + attack * (attackPercent / 100));
-            }
             else
-            {
-                return attack; 
-            }
+                return attack;
         }
     }
     public float AttackPercent // 퍼센트 증가 수치
@@ -90,6 +87,8 @@ public class Stat : MonoBehaviour
         get { return attackPercent; }
         set { attackPercent = value; }
     }
+
+    // 체력 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public int BaseMaxHealth // 최대 체력
     {
         get { return maxHealth; }
@@ -114,6 +113,17 @@ public class Stat : MonoBehaviour
         get { return maxHealthPercent; }
         set { maxHealthPercent = value; }
     }
+    public int CurrentHealth // 현재 체력
+    {
+        get { return currentHealth; }
+        set
+        {
+            currentHealth = value;
+            HealthBar.StatBarCurrentValue = value;
+        }
+    }
+
+    // 마나 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public int BaseMaxMana // 최대 마나
     {
         get { return maxMana; }
@@ -124,13 +134,9 @@ public class Stat : MonoBehaviour
         get
         {
             if (maxManaPercent != 0)
-            {
                 return (int)(maxMana + maxMana * (maxManaPercent / 100));
-            }
             else
-            {
                 return (int)maxMana;
-            }
         }
     }
     public float MaxManaPercent
@@ -138,6 +144,17 @@ public class Stat : MonoBehaviour
         get { return maxManaPercent; }
         set { maxManaPercent = value; }
     }
+    public int CurrentMana // 현재 마나
+    {
+        get { return currentMana; }
+        set
+        {
+            currentMana = value;
+            ManaBar.StatBarCurrentValue = value;
+        }
+    }
+
+    // 방어력 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public int BaseDefence // 물리 방어력
     {
         get { return defence; }
@@ -148,13 +165,9 @@ public class Stat : MonoBehaviour
         get
         {
             if (defencePercent != 0)
-            {
                 return (int)(defence + defence * (defencePercent / 100));
-            }
             else
-            {
                 return (int)defence;
-            }
         }
     }
     public float DefencePercent
@@ -162,6 +175,8 @@ public class Stat : MonoBehaviour
         get { return defencePercent; }
         set { defencePercent = value; }
     }
+
+    // 마법 방어력 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public int BaseMagicRegist // 마법 방어력
     {
         get { return magicRegist; }
@@ -172,13 +187,9 @@ public class Stat : MonoBehaviour
         get
         {
             if (magicRegistPercent != 0)
-            {
                 return (int)(magicRegist + magicRegist * (magicRegistPercent / 100));
-            }
             else
-            {
                 return (int)magicRegist;
-            }
         }
     }
     public float MagicRegistPercent
@@ -186,48 +197,40 @@ public class Stat : MonoBehaviour
         get { return magicRegistPercent; }
         set { magicRegistPercent = value; }
     }
+
+    // 이동속도 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public float MoveSpeed // 이동속도
     {
-        get {
+        get
+        {
             if (moveSpeedPercent != 0)
-            {
                 return moveSpeed + moveSpeed * (moveSpeedPercent / 100);
-            }
             else
-            {
                 return moveSpeed;
-            }
-
         }
     }
-    public float MoveSpeedPercent 
+    public float MoveSpeedPercent
     {
         get { return moveSpeedPercent; }
-        set 
+        set
         {
-            if(value > 200)
-            {
+            if (value > 200)
                 moveSpeedPercent = 200;
-            }
             else
-            {
                 moveSpeedPercent = value;
-            }
-        } 
+        }
     }
+
+    // 공격 속도 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public float BaseAttackSpeed // 공격 속도
     {
         get { return attackSpeed; }
         set
         {
             if (value < 0.1)
-            {
                 attackSpeed = 0.1f;
-            }
             else
-            {
                 attackSpeed = value;
-            }
         }
     }
     public float CurrentAttackSpeed
@@ -235,13 +238,9 @@ public class Stat : MonoBehaviour
         get
         {
             if (attackSpeedPercent != 0)
-            {
                 return attackSpeed - attackSpeed * (attackSpeedPercent / 100);
-            }
             else
-            {
                 return attackSpeedPercent;
-            }
         }
     }
     public float AttackSpeedPercent
@@ -250,26 +249,27 @@ public class Stat : MonoBehaviour
         set
         {
             if (value > 90)
-            {
                 attackSpeedPercent = 90;
-            }
             else
-            {
                 attackSpeedPercent = value;
-            }
         }
     }
 
+    // 회피 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public float DodgePercent // 회피
     {
         get { return dodgePercent; }
         set { dodgePercent = value; }
     }
+
+    // 적중 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public float HitPercent // 적중
     {
         get { return hitPercent; }
         set { hitPercent = value; }
     }
+
+    // 크리티컬 확률 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public float CriticalPercent // 크확
     {
         get { return criticalPercent; }
@@ -285,21 +285,28 @@ public class Stat : MonoBehaviour
             }
         }
     }
+
+    // 크리티컬 데미지 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public float CriticalDamage // 크댐
     {
         get { return criticalDamage; }
         set { criticalDamage = value; }
     }
+
+    // 체력 재생 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public int HealthRegen // 체젠
     {
         get { return healthRegen; }
         set { healthRegen = value; }
     }
+
+    // 마나 재생 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public int ManaRegen // 마젠
     {
         get { return manaRegen; }
         set { manaRegen = value; }
     }
+
     public int RecoverHealth_onhit // 적중시 체력
     {
         get { return recoverHealth_onhit; }
@@ -315,23 +322,21 @@ public class Stat : MonoBehaviour
         get { return coolDown; }
         set { coolDown = value; }
     }
+
+    // 아이템 획득 반경 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public float BaseItemLootRange // 아이템 획득반경
     {
         get { return itemLootRange; }
         set { itemLootRange = value; }
     }
-    public float CurrentItemLootRange 
+    public float CurrentItemLootRange
     {
         get
         {
             if (lootRangePercent != 0)
-            {
                 return (itemLootRange + itemLootRange * (lootRangePercent / 100));
-            }
             else
-            {
                 return itemLootRange;
-            }
         }
     }
     public float ItemLootRangePercent
@@ -339,6 +344,8 @@ public class Stat : MonoBehaviour
         get { return lootRangePercent; }
         set { lootRangePercent = value; }
     }
+
+    // 아이템 획득률 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public float ItemDropPercent // 아획
     {
         get { return itemDropPercent; }
@@ -351,7 +358,12 @@ public class Stat : MonoBehaviour
     }
     public float ExpPlus // 경추
     {
-        get { return expPlus; }
+        get
+        {
+            if (expPlus < 0)
+                return 0;
+            return expPlus;
+        }
         set { expPlus = value; }
     }
     public float VampiricRate // 흡혈
@@ -365,13 +377,9 @@ public class Stat : MonoBehaviour
         set
         {
             if (value > 100)
-            {
                 potionCooldown = 100f;
-            }
             else
-            {
                 potionCooldown = value;
-            }
         }
     }
 
@@ -379,8 +387,18 @@ public class Stat : MonoBehaviour
     {
         currentHealth = CurrentMaxHealth;
         HealthBar.Initialize(CurrentMaxHealth, CurrentMaxHealth);
+
         if (ManaBar != null)
+        {
+            currentMana = CurrentMaxMana;
             ManaBar.Initialize(CurrentMaxMana, CurrentMaxMana);
+        }
+
+        if(ExpBar != null)
+        {
+            currentEXP = 0;
+            ExpBar.Initialize(LevelUpEXP, currentEXP);
+        }
     }
     public void SetHpMP()
     {

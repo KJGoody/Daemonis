@@ -106,7 +106,7 @@ public class HandScript : MonoBehaviour
 
     public void EquipSpell()
     {
-        if (selectImage.sprite != null)
+        if (selectImage.sprite != null && !spell.spellType.Equals(Spell.SpellType.Passive))
         {
             MyMoveable = spell;
             SkillBlindControll();
