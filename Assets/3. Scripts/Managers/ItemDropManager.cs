@@ -45,8 +45,8 @@ public class ItemDropManager : MonoBehaviour
         }
     }
     // Update is called once per frame
-    void Update()
+    public void asdf()
     {
-        
+        DropItem(transform);
     }
 }

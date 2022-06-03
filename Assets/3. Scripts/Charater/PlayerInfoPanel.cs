@@ -29,6 +29,8 @@ public class PlayerInfoPanel : MonoBehaviour
     private GameObject UE_Obj_Option;// 추가옵션 오브젝트
     [SerializeField]
     private GameObject UE_Obj_SetOption;// 세트옵션 오브젝트
+    [SerializeField]
+    private GameObject[] UE_Obj_AddOptions;// 추가옵션들
     //[SerializeField]
     //private GameObject UE_Obj_Blind;// 블라인드 패널 오브젝트
     [SerializeField]
@@ -37,12 +39,36 @@ public class PlayerInfoPanel : MonoBehaviour
     private ContentSizeFitter UE_CSF_Panel;
     #endregion
 
+    [Header("Stat Text")]
+    #region 스탯창 텍스트
+    public Text ATK;
+    public Text HP;
+    public Text MP;
+    public Text Def;
+    public Text mDef;
+    public Text moveSpeed;
+    public Text atkSpeed;
+    public Text dodge;
+    public Text hitPercent;
+    public Text criPercent;
+    public Text criDamage;
+    public Text hpRegen;
+    public Text mpRegen;
+    public Text onHitHp;
+    public Text onHitMp;
+    public Text coolDown;
+    public Text lootRange;
+    public Text dropPercent;
+    public Text goldPlus;
+    public Text expPlus;
+    public Text vampiric;
+    #endregion
+
     void Start()
     {
         Player.MyInstance.useEquipment += ChangeEquipment;
         initEquipment();
     }
-
     public void initEquipment()
     {
         for(int i = 0; i < equipment_Img.Length; i++)
@@ -69,7 +95,7 @@ public class PlayerInfoPanel : MonoBehaviour
         Player.MyInstance.UnequipItem(itemNum);
         ChangeEquipment(itemNum);
     }
-    public void ShowUsingEquipment(int partNum)
+    public void ShowUsingEquipment(int partNum, bool setActive = true)
     {
         if(Player.MyInstance.usingEquipment[partNum] != null)
         {
@@ -90,18 +116,56 @@ public class PlayerInfoPanel : MonoBehaviour
                     break;
                 case Kinds.Equipment:
                     UE_Obj_Option.SetActive(true);
+
+                    for (int i = 0; i < ueItem.addOptionList.Count; i++)
+                    {
+                        AddOptionInfo optionInfo = UE_Obj_AddOptions[i].GetComponent<AddOptionInfo>();
+                        optionInfo.SetAddOptionPrefab(ueItem.addOptionList[i]);
+                        UE_Obj_AddOptions[i].SetActive(true);
+                    }
+                    for (int i = 6; i > ueItem.addOptionList.Count; i--)
+                    {
+                        UE_Obj_AddOptions[i - 1].SetActive(false);
+                    }
+
                     UE_Obj_SetOption.SetActive(false); // 나중에 세트장비 조건문으로 활성화
                     break;
                 default:
                     break;
             }
-            UE_Panel.SetActive(true);
+            UE_Panel.SetActive(setActive);
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)UE_CSF_Descript.transform); // content size filtter 바로 안늘어나는 버그 해결
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)UE_CSF_Panel.transform);
         }
     }
     void Update()
     {
-        
+        UpdateStat();
+    }
+    void UpdateStat()
+    {
+        Stat stat = Player.MyInstance.MyStat;
+        ATK.text = "" + stat.CurrentAttack;
+        HP.text = "" + stat.CurrentMaxHealth;
+        MP.text = "" + stat.CurrentMaxMana;
+        Def.text = "" + stat.CurrentDefence;
+        mDef.text = "" + stat.CurrentMagicRegist;
+        moveSpeed.text = "" + stat.MoveSpeedPercent.ToString("F2") + "%";
+        atkSpeed.text = "" + stat.CurrentAttackSpeed;
+        dodge.text = "" + stat.DodgePercent.ToString("F2") + "%";
+        hitPercent.text = "" + stat.HitPercent.ToString("F2") + "%";
+        criPercent.text = "" + stat.CriticalPercent.ToString("F2") + "%";
+        criDamage.text = "" + stat.CriticalDamage.ToString("F2") + "%";
+        hpRegen.text = "" + stat.HealthRegen;
+        mpRegen.text = "" + stat.ManaRegen;
+        onHitHp.text = "" + stat.RecoverHealth_onhit;
+        onHitMp.text = "" + stat.RecoverMana_onhit;
+        coolDown.text = "" + stat.CoolDown.ToString("F2") + "%";
+        lootRange.text = "" + stat.ItemLootRangePercent.ToString("F2") + "%";
+        dropPercent.text = "" + stat.ItemDropPercent.ToString("F2") + "%";
+        goldPlus.text = "" + stat.GoldPlus.ToString("F2") + "%";
+        expPlus.text = "" + stat.ExpPlus.ToString("F2") + "%";
+        vampiric.text = "" + stat.VampiricRate.ToString("F2") + "%";
+        stat.SetHpMP();
     }
 }

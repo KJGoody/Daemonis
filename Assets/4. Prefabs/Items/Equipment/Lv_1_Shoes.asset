@@ -23,3 +23,5 @@ MonoBehaviour:
   sprite:
   - {fileID: 4738757708402743111, guid: 55f6d7a0ee94a45438d4256b2ae46eeb, type: 3}
   - {fileID: -8029725008789171279, guid: 55f6d7a0ee94a45438d4256b2ae46eeb, type: 3}
+  baseOption: 
+  optionValue: 0

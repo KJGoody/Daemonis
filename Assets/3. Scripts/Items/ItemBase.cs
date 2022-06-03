@@ -38,6 +38,22 @@ public class ItemBase : IMoveable, IDescribable, IUseable
     }
 
     #region 장비아이템 관련
+    public List<AddOption> addOptionList = new List<AddOption>();
+    public void SetAddOption()
+    {
+        for (int i = 0; i < (int)(quality)+1; i++)
+        {
+            int newTier = AddOptionManager.MyInstance.SetRandomTier(quality);
+            int newOption = AddOptionManager.MyInstance.SetRandomKind();
+            float newValue = 0;
+
+            addOptionList.Add(new AddOption(newTier, newOption, newValue));
+            newValue = AddOptionManager.MyInstance.SetRandomValue(addOptionList[i]);
+            addOptionList[i].value = newValue; 
+            
+        }
+        
+    }
     private Part part;
     public Part GetPart
     {
@@ -56,10 +72,30 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             return equipmentItem.itemSprite;
         }
     }
-    public void ActiveEquipment(bool isActive)
+    public void ActiveEquipment(bool isActive) // 장비 착용 & 해제
     {
         EquipmentItem equipmentItem = itemInfo as EquipmentItem;
-        equipmentItem.ActiveEquipment(isActive);
+        equipmentItem.ActiveEquipment(isActive); // 장비 베이스 스탯 증감
+        if (addOptionList[0] != null) // 추가 옵션 증감
+        {
+            for(int i = 0; i < addOptionList.Count; i++)
+            {
+                string optionName = AddOptionManager.MyInstance.GetOptionString(addOptionList[i].option_Num);
+                float optionValue = addOptionList[i].value;
+                if(optionName == "ItemLevel")
+                {
+
+                }
+                else
+                {
+                    if (isActive)
+                       Player.MyInstance.Plus(optionName, optionValue);
+                    else    
+                       Player.MyInstance.Plus(optionName, -optionValue);
+                }
+            }
+        }
+
     }
     public float GetWeaponxDamage()
     {
@@ -118,6 +154,14 @@ public class ItemBase : IMoveable, IDescribable, IUseable
                 case Quality.Epic:
                     color = "#800080ff";
                     str = "영웅";
+                    break;
+                case Quality.Legendary:
+                    color = "#800080ff";
+                    str = "전설";
+                    break;
+                case Quality.Relic:
+                    color = "#800080ff";
+                    str = "유물";
                     break;
             }
 

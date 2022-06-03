@@ -84,11 +84,9 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
     }
     public void RemoveItem(ItemBase item)
     {
-        Debug.Log(MyCount);
         // 자기 자신이 빈슬롯이 아니라면
         if (!IsEmpty)
         {
-            Debug.Log("RemoveItem");
             // Items 의 제일 마지막 아이템을 꺼냅니다.
             InventoryScript.MyInstance.OnItemCountChanged(MyItems.Pop());
 
