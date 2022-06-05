@@ -16,11 +16,11 @@ MonoBehaviour:
   stackSize: 0
   itemName: "\uD5C8\uB984\uD55C \uBAA8\uC790"
   descript: "\uD5C8\uB984\uD55C \uBAA8\uC790\uC774\uB2E4."
-  effect: "\uCCB4\uB825 10"
-  limitLevel: 0
+  effect: 
+  limitLevel: 1
   kind: 1
   part: 0
   sprite:
   - {fileID: 21300000, guid: 74508065a3f116040adc0b3a7031f77f, type: 3}
   baseOption: BaseMaxHealth
-  optionValue: 50
+  optionValue: 25

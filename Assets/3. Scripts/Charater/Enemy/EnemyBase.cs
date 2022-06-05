@@ -127,7 +127,7 @@ public class EnemyBase : NPC
             myRigid2D.simulated = false;
 
             ItemDropManager.MyInstance.DropGold(transform);
-            ItemDropManager.MyInstance.DropItem(transform);
+            ItemDropManager.MyInstance.DropItem(transform, stat.Level);
 
             StartCoroutine(Death());
             ComboManager.Instance.IncreaseCombo();
