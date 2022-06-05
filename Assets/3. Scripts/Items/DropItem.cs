@@ -19,6 +19,7 @@ public class DropItem : MonoBehaviour
     {
         Gold, Item
     }
+    public ItemBase Item{ get { return item; } }
     IsKind isKind;
     private Vector2 startPos;
     private Transform playerTransform;
