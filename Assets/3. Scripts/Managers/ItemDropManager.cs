@@ -26,6 +26,7 @@ public class ItemDropManager : MonoBehaviour
     public DropItem dropItem; // 드랍아이템 프리팹
 
     private float equipmentDropProb = 10;
+    private int baseGold = 100;
     public float EquipmentDropProb // 장비 드랍확률
     {
         get { return equipmentDropProb + equipmentDropProb * Player.MyInstance.MyStat.ItemDropPercent; }
@@ -45,12 +46,13 @@ public class ItemDropManager : MonoBehaviour
         }
     }
 
-    public void DropGold(Transform dropPosition)
+    public void DropGold(Transform dropPosition, int m_Level)
     {
         if (ChanceMaker.GetThisChanceResult_Percentage(60))
         {
             DropItem item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<DropItem>();
-            int randomGold = Random.Range(1, 100 + 1);
+            // 골드량 계산식 (((몬스터 레벨 * 기본골드) * 골획 배율) * 난수범위0.9~1.1)
+            int randomGold = (int)(((m_Level * baseGold) + (m_Level * baseGold * (Player.MyInstance.MyStat.GoldPlus / 100))) * Random.Range(0.9f, 1.1f));
             item.SetGold(randomGold);
         }
     }
