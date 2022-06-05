@@ -106,7 +106,7 @@ public class EnemyBase : NPC
             EnemyAttackPrefab.GetComponent<EnemyAttack>().parent = this;
     }
 
-    public override void TakeDamage(bool IsPhysic, float HitPercent, float PureDamage, int FromLevel, Vector2 knockbackDir, DamageTextPool.DamageTextPrefabsName TextType) // 피격
+    public override void TakeDamage(bool IsPhysic, float HitPercent, float PureDamage, int FromLevel, Vector2 knockbackDir, NewTextPool.NewTextPrefabsName TextType) // 피격
     {
         HealthBarImage.SetActive(true);
         if (knockbackDir != Vector2.zero)
@@ -158,10 +158,10 @@ public class EnemyBase : NPC
     {
         yield return new WaitForSeconds(3f);
         SetLayersRecursively(_prefabs.transform, "None");
+
         yield return new WaitForSeconds(0.1f);
         SetLayersRecursively(_prefabs.transform, "Default");
         MonsterPool.Instance.ReturnObject(this);
-
         InitializeEnemyBase();
         ParentGate.CurrentEnemyNum--;
     }

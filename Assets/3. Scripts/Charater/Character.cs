@@ -64,6 +64,7 @@ public abstract class Character : MonoBehaviour
     protected virtual void Update()
     {
         HandleLayers();
+        
     }
 
     protected virtual void FixedUpdate()
@@ -193,9 +194,9 @@ public abstract class Character : MonoBehaviour
             return null;
     }
 
-    public virtual void TakeDamage(bool IsPhysic, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, DamageTextPool.DamageTextPrefabsName TextType)
+    public virtual void TakeDamage(bool IsPhysic, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, NewTextPool.NewTextPrefabsName TextType)
     {
-        if (Random.value < HitPercent - MyStat.DodgePercent)
+        if (ChanceMaker.GetThisChanceResult_Percentage(HitPercent, MyStat.DodgePercent))
         {
             float PureDamage = pureDamage * DebuffxDamage;
             int Damage;
@@ -204,8 +205,8 @@ public abstract class Character : MonoBehaviour
             else
                 Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.BaseMagicRegist + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
             stat.CurrentHealth -= Damage;
+            NEWText(TextType, Damage);
 
-            NewDamageText(TextType, Damage);
             if (stat.CurrentHealth <= 0)
             {
                 Direction = Vector2.zero;
@@ -213,7 +214,7 @@ public abstract class Character : MonoBehaviour
             }
         }
         else
-            NewDamageText(TextType);
+            NEWText(TextType);
     }
 
     private float LevelGapxDamage(int FromLevel, int ToLevel)
@@ -239,12 +240,21 @@ public abstract class Character : MonoBehaviour
         return xDamage > 0 ? xDamage : 0;
     }
 
-
-    private void NewDamageText(DamageTextPool.DamageTextPrefabsName TextType, int damage = 0)
+    public virtual void TakeHeal(float HealValue)
     {
-        DamageText damageText = DamageTextPool.Instance.GetObject(TextType);
+        if(HealValue > 0)
+        {
+            stat.CurrentHealth += (int)Mathf.Floor(HealValue);
+        }
+        NEWText(NewTextPool.NewTextPrefabsName.Heal, (int)Mathf.Floor(HealValue));
+    }
+
+
+    private void NEWText(NewTextPool.NewTextPrefabsName TextType, int value = 0)
+    {
+        NewText damageText = NewTextPool.Instance.GetObject(TextType);
+        damageText.Value = value;
         damageText.InitializeDamageText();
         damageText.PositioningDamageText(transform);
-        damageText.Damage = damage;
     }
 }

@@ -332,7 +332,7 @@ MonoBehaviour:
   attackSpeed: 0
   attackSpeedPercent: 0
   dodgePercent: 0
-  hitPercent: 0.95
+  hitPercent: 95
   criticalPercent: 0
   criticalDamage: 0
   healthRegen: 0
@@ -580,8 +580,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8886bde0ac27d0b4d8535696be0182bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StatBarImage: {fileID: 894972730622518899}
   StatBarText: {fileID: 0}
-  lerpSpeed: 4
   StatBarMaxValue: 0
 --- !u!1 &1932808088458978582
 GameObject:

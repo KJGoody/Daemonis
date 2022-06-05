@@ -118,8 +118,21 @@ public class Stat : MonoBehaviour
         get { return currentHealth; }
         set
         {
-            currentHealth = value;
-            HealthBar.StatBarCurrentValue = value;
+            if (value > currentHealth)
+            {
+                currentHealth = BaseMaxHealth;
+                HealthBar.StatBarCurrentValue = BaseMaxHealth;
+            }
+            else if (value < 0)
+            {
+                currentHealth = 0;
+                HealthBar.StatBarCurrentValue = 0;
+            }
+            else
+            {
+                currentHealth = value;
+                HealthBar.StatBarCurrentValue = value;
+            }
         }
     }
 
@@ -149,8 +162,21 @@ public class Stat : MonoBehaviour
         get { return currentMana; }
         set
         {
-            currentMana = value;
-            ManaBar.StatBarCurrentValue = value;
+            if (value > currentMana)
+            {
+                currentMana = BaseMaxMana;
+                ManaBar.StatBarCurrentValue = BaseMaxMana;
+            }
+            else if (value < 0)
+            {
+                currentMana = 0;
+                ManaBar.StatBarCurrentValue = 0;
+            }
+            else
+            {
+                currentMana = value; 
+                ManaBar.StatBarCurrentValue = value;
+            }
         }
     }
 
@@ -397,7 +423,7 @@ public class Stat : MonoBehaviour
         if(ExpBar != null)
         {
             currentEXP = 0;
-            ExpBar.Initialize(LevelUpEXP, currentEXP);
+            ExpBar.Initialize(LevelUpEXP, currentEXP, true);
         }
     }
     public void SetHpMP()

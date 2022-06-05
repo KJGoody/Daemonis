@@ -332,7 +332,7 @@ public class Player : Character
         }
     }
 
-    public override void TakeDamage(bool IsPhysic, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, DamageTextPool.DamageTextPrefabsName TextType)
+    public override void TakeDamage(bool IsPhysic, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, NewTextPool.NewTextPrefabsName TextType)
     {
         base.TakeDamage(IsPhysic, HitPercent, pureDamage, FromLevel, knockbackDir, TextType);
 

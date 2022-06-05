@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class StatBar : MonoBehaviour
 {
+    [SerializeField]
     private Image StatBarImage;
     [SerializeField]
     private Text StatBarText;
-    [SerializeField]
-    private float lerpSpeed;
 
     private float currentFill;
     [HideInInspector]
@@ -21,12 +20,7 @@ public class StatBar : MonoBehaviour
         get { return currentValue; }
         set
         {
-            if (value > StatBarMaxValue)
-                currentValue = StatBarMaxValue;
-            else if (value < 0) 
-                currentValue = 0;
-            else currentValue = value;
-
+            currentValue = value;
             currentFill = currentValue / StatBarMaxValue;
 
             if (StatBarText != null)
@@ -34,21 +28,18 @@ public class StatBar : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        StatBarImage = GetComponent<Image>();
-    }
-
     void Update()
     {
         if (currentFill != StatBarImage.fillAmount)
-            StatBarImage.fillAmount = Mathf.Lerp(StatBarImage.fillAmount, currentFill, Time.deltaTime * lerpSpeed);
+            StatBarImage.fillAmount = Mathf.Lerp(StatBarImage.fillAmount, currentFill, Time.deltaTime * 2);
     }
 
-    public void Initialize(float maxValue, float currentValue)
+    public void Initialize(float maxValue, float currentValue, bool FillAmountPass = false)
     {
         StatBarMaxValue = maxValue;
         StatBarCurrentValue = currentValue;
+        if(!FillAmountPass)
+            StatBarImage.fillAmount = 1;
     }
 
     public void SetMax(int maxValue)
