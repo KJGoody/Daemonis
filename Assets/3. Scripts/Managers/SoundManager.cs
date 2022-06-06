@@ -9,15 +9,12 @@ using UnityEngine.SceneManagement;
 public class SoundManager : MonoBehaviour
 {
     private static SoundManager instance;
-
     public static SoundManager Instance
     {
         get
         {
             if (instance == null)
-            {
                 instance = FindObjectOfType<SoundManager>();
-            }
             return instance;
         }
     } // Sound를 관리해주는 스크립트는 하나만 존재해야하고 instance프로퍼티로 언제 어디에서나 불러오기위해 싱글톤 사용
@@ -65,6 +62,7 @@ public class SoundManager : MonoBehaviour
         {
             audioClipsDic.Add(audioclip.name, audioclip);
         }
+
         if (!PlayerPrefs.HasKey("BGMVolume"))
         {
             PlayerPrefs.SetFloat("BGMVolume", 1f);
@@ -98,6 +96,25 @@ public class SoundManager : MonoBehaviour
             return;
         }
         sfxPlayer.PlayOneShot(audioClipsDic[name], volume * masterVolumeSFX);
+    }
+
+    public void PlaySFXSound(AudioSource parent, string name, float volume = 1f)
+    {
+        if (audioClipsDic.ContainsKey(name) == false)
+            return;
+        parent.PlayOneShot(audioClipsDic[name], volume * masterVolumeSFX);
+    }
+
+    public void PlaySFXSoundLoop(string name, Transform parent, float volume = 1f)
+    {
+        if (audioClipsDic.ContainsKey(name) == false)
+            return;
+        
+        AudioSource audioSource = Instantiate(Resources.Load("SFXSoundPlayer") as GameObject, parent).GetComponent<AudioSource>();
+        audioSource.loop = true; 
+        audioSource.clip = audioClipsDic[name];
+        audioSource.volume = volume * masterVolumeSFX;
+        audioSource.Play();
     }
 
     //BGM 사운드 재생 : 볼륨을 선택적 매개변수로 지정

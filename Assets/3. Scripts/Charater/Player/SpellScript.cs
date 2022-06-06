@@ -52,17 +52,20 @@ public class SpellScript : MonoBehaviour
         switch (spellName)
         {
             case SpellName.Skill_File_01:   // 화염구
+                SoundManager.Instance.PlaySFXSound("Skill_Fire_01");
                 SpellxDamage = 1;
                 StartCoroutine(Skill_Fire_01());
                 break;
 
             case SpellName.Skill_File_03:   // 용암 지대
+                SoundManager.Instance.PlaySFXSoundLoop("Skill_Fire_04", transform);
                 IsAOEAttack = true;
                 SpellxDamage = 1;
                 StartCoroutine(Skill_Fire_03());
                 break;
 
             case SpellName.Skill_File_04:   // 피닉스
+                SoundManager.Instance.PlaySFXSound("Skill_Fire_04");
                 SpellxDamage = 1;
                 StartCoroutine(Skill_Fire_04());
                 break;
@@ -74,11 +77,13 @@ public class SpellScript : MonoBehaviour
                 break;
 
             case SpellName.Skill_File_07:   // 점화
+                SoundManager.Instance.PlaySFXSound("Skill_Fire_07", 0.2f);
                 SpellxDamage = 1;
                 StartCoroutine(Skill_Fire_07());
                 break;
 
             case SpellName.Skill_File_09:   // 화염 토네이도
+                SoundManager.Instance.PlaySFXSoundLoop("Skill_Fire_09", transform);
                 SpellxDamage = 1;
                 StartCoroutine(Skill_Fire_09());
                 break;
