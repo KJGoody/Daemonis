@@ -125,6 +125,12 @@ public class ItemBase : IMoveable, IDescribable, IUseable
                 case Quality.Epic:
                     color = "#800080ff";
                     break;
+                case Quality.Legendary:
+                    color = "#ffff00ff";
+                    break;
+                case Quality.Relic:
+                    color = "#ff6600ff";
+                    break;
             }
 
             return string.Format("<color={0}>{1}</color>", color, itemInfo.MyName);
@@ -156,11 +162,11 @@ public class ItemBase : IMoveable, IDescribable, IUseable
                     str = "영웅";
                     break;
                 case Quality.Legendary:
-                    color = "#800080ff";
+                    color = "#ffff00ff";
                     str = "전설";
                     break;
                 case Quality.Relic:
-                    color = "#800080ff";
+                    color = "#ff6600ff";
                     str = "유물";
                     break;
             }

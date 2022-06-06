@@ -9,7 +9,14 @@ public class Looting : MonoBehaviour
         if (collision.tag == "Item")
         {
             DropItem D_item = collision.GetComponent<DropItem>();
-            D_item.L_Start = true;
+            if(D_item.isKind == DropItem.IsKind.Gold) // 골드면 그냥 루팅
+            {
+                D_item.L_Start = true;
+            }
+            else if (OptionPanel.MyInstance.lootingQuality[(int)D_item.Item.MyQuality].isOn) // 옵션에서 해당 등급이 선택돼있는지
+            {
+                D_item.L_Start = true;
+            }
         }
     }
 }
