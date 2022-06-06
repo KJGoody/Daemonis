@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: "\uD5C8\uB984\uD55C \uC637"
   descript: "\uD5C8\uB984\uD55C \uC637\uC774\uB2E4."
   effect: 
-  limitLevel: 0
+  limitLevel: 1
   kind: 1
   part: 1
   sprite:
@@ -25,4 +25,4 @@ MonoBehaviour:
   - {fileID: -8885491863550766914, guid: 4f02dac3803218740a6b6c344d0184a8, type: 3}
   - {fileID: -2284963529676358950, guid: 4f02dac3803218740a6b6c344d0184a8, type: 3}
   baseOption: BaseMaxHealth
-  optionValue: 25
+  optionValue: 50

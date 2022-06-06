@@ -95,9 +95,18 @@ public class PlayerInfoPanel : MonoBehaviour
         Player.MyInstance.UnequipItem(itemNum);
         ChangeEquipment(itemNum);
     }
-    public void ShowUsingEquipment(int partNum, bool setActive = true)
+    public void ShowUsingEquipment(int partNum, bool setActive = true) // 인수 하나가 더 필요한 상황이 있어서 만든것
     {
         if(Player.MyInstance.usingEquipment[partNum] != null)
+        {
+
+            ShowUsingEquipment(partNum);// 기존 ShowUsingEquipment 기능은 같음
+            UE_Panel.SetActive(setActive); // false인 경우 패널 닫아주는것
+        }
+    }
+    public void ShowUsingEquipment(int partNum)
+    {
+        if (Player.MyInstance.usingEquipment[partNum] != null)
         {
             itemNum = partNum;
             ueItem = Player.MyInstance.usingEquipment[partNum];
@@ -133,7 +142,7 @@ public class PlayerInfoPanel : MonoBehaviour
                 default:
                     break;
             }
-            UE_Panel.SetActive(setActive);
+            UE_Panel.SetActive(true);
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)UE_CSF_Descript.transform); // content size filtter 바로 안늘어나는 버그 해결
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)UE_CSF_Panel.transform);
         }

@@ -17,11 +17,11 @@ MonoBehaviour:
   itemName: "\uD5C8\uB984\uD55C \uC2E0\uBC1C"
   descript: "\uD5C8\uB984\uD55C \uC2E0\uBC1C\uC774\uB2E4."
   effect: 
-  limitLevel: 0
+  limitLevel: 1
   kind: 1
   part: 2
   sprite:
   - {fileID: 4738757708402743111, guid: 55f6d7a0ee94a45438d4256b2ae46eeb, type: 3}
   - {fileID: -8029725008789171279, guid: 55f6d7a0ee94a45438d4256b2ae46eeb, type: 3}
-  baseOption: 
-  optionValue: 0
+  baseOption: BaseMaxMana
+  optionValue: 25

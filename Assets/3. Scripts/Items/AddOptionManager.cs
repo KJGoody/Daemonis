@@ -19,7 +19,6 @@ public class AddOptionManager : MonoBehaviour
     }
 
     // 엑셀기반 확률표
-    //List<Dictionary<string, object>> kindProb; // 옵션 종류 확률표
     List<Dictionary<string, object>> tierProb; // 옵션 티어 확률표
     List<Dictionary<string, object>> valueProb; // 옵션값 확률표
     
@@ -28,32 +27,6 @@ public class AddOptionManager : MonoBehaviour
     {
         valueProb = CSVReader.Read("AddOptionValueProb");
         tierProb = CSVReader.Read("OptionTierProb");
-    }
-
-    float Choose(float[] probs) // 가중치 랜덤뽑기
-    {
-
-        float total = 0;
-
-        foreach (float elem in probs)
-        {
-            total += elem;
-        }
-
-        float randomPoint = Random.value * total;
-
-        for (int i = 0; i < probs.Length; i++)
-        {
-            if (randomPoint < probs[i])
-            {
-                return i;
-            }
-            else
-            {
-                randomPoint -= probs[i];
-            }
-        }
-        return probs.Length - 1;
     }
 
     float[] GetTierProp(Quality quality) // 아이템 티어를 토대로 옵션 티어확률 가져오기;
@@ -73,11 +46,11 @@ public class AddOptionManager : MonoBehaviour
 
     public int SetRandomEquipmentQuality() // 장비 퀄리티 랜덤
     {
-        return (int)Choose(equipmentQualityProb);
+        return (int)ChanceMaker.Choose(equipmentQualityProb);
     }
     public int SetRandomTier(Quality quality) // 옵션 티어 랜덤
     {
-        return (int)Choose(GetTierProp(quality));
+        return (int)ChanceMaker.Choose(GetTierProp(quality));
     }
     public int SetRandomKind() // 옵션 종류 랜덤
     {

@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e024271b387c1f94788a088cbd8ccc0c, type: 3}
-  m_Name: Lv_1_Helmet
+  m_Name: Lv_20_Back
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 74508065a3f116040adc0b3a7031f77f, type: 3}
+  icon: {fileID: 0}
   stackSize: 0
-  itemName: "\uD5C8\uB984\uD55C \uBAA8\uC790"
-  descript: "\uD5C8\uB984\uD55C \uBAA8\uC790\uC774\uB2E4."
+  itemName: 
+  descript: 
   effect: 
-  limitLevel: 1
-  kind: 1
+  limitLevel: 0
+  kind: 0
   part: 0
-  sprite:
-  - {fileID: 21300000, guid: 74508065a3f116040adc0b3a7031f77f, type: 3}
-  baseOption: BaseMaxHealth
-  optionValue: 25
+  sprite: []
+  baseOption: 
+  optionValue: 0
