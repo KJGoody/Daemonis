@@ -23,32 +23,32 @@ public class OptionPanel : MonoBehaviour
     public Slider volume_SFX;
     public Toggle isMute_BGM;
     public Toggle isMute_SFX;
+    public Text text_BGM;
+    public Text text_SFX;
+
 
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void BGMSlider()
     {
-        if (isMute_BGM.isOn)
-        {
-            SoundManager.Instance.SetBGMMute(isMute_BGM.isOn);
-        }
-        else
-        {
-            SoundManager.Instance.SetBGMMute(isMute_BGM.isOn);
-            SoundManager.Instance.SetBGMVolume(volume_BGM.value);
-        }
-        if (isMute_SFX.isOn)
-        {
-            SoundManager.Instance.SetSFXMute(isMute_SFX.isOn);
-        }
-        else
-        {
-            SoundManager.Instance.SetSFXMute(isMute_SFX.isOn);
-            SoundManager.Instance.SetSFXVolume(volume_SFX.value);
-        }
+        SoundManager.Instance.SetBGMVolume(volume_BGM.value);
+        text_BGM.text = ""+(int)(volume_BGM.value * 100);
     }
+    public void SFXSlider()
+    {
+        SoundManager.Instance.SetSFXVolume(volume_SFX.value);
+        text_SFX.text = "" + (int)(volume_SFX.value * 100);
+    }
+    public void BGMToggle()
+    {
+        SoundManager.Instance.SetBGMMute(isMute_BGM.isOn);
+    }
+    public void SFXToggle()
+    {
+        SoundManager.Instance.SetSFXMute(isMute_SFX.isOn);
+    }
+
 }
