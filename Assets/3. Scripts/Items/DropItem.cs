@@ -15,12 +15,12 @@ public class DropItem : MonoBehaviour
     Sprite goldImage;
     private int gold;
     private float speed;
-    private enum IsKind
+    public enum IsKind
     {
         Gold, Item
     }
     public ItemBase Item{ get { return item; } }
-    IsKind isKind;
+    public IsKind isKind;
     private Vector2 startPos;
     private Transform playerTransform;
     private float upTime;
@@ -92,22 +92,25 @@ public class DropItem : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameObject notice = Instantiate(Resources.Load("LootNotice") as GameObject, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
-            notice.transform.SetParent(GameObject.Find("ItemLooting").transform);
-            switch (isKind)
+            if(isKind == IsKind.Gold || OptionPanel.MyInstance.lootingQuality[(int)item.MyQuality]) // 골드 아니면 설정한 아이템 등급 아이템만 획득
             {
-                case IsKind.Gold:
-                    GameManager.MyInstance.MyGold += gold;
-                    notice.GetComponent<LootNotice>().SetGoldInfo(gold, goldImage);
-                    break;
-                case IsKind.Item:
-                    // 인벤토리에 아이템 추가
-                    InventoryScript.MyInstance.AddItem(item);
-                    // 아이템 획득 알림
-                    notice.GetComponent<LootNotice>().SetDescript(item);
-                    break;
+                GameObject notice = Instantiate(Resources.Load("LootNotice") as GameObject, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
+                notice.transform.SetParent(GameObject.Find("ItemLooting").transform);
+                switch (isKind)
+                {
+                    case IsKind.Gold:
+                        GameManager.MyInstance.MyGold += gold;
+                        notice.GetComponent<LootNotice>().SetGoldInfo(gold, goldImage);
+                        break;
+                    case IsKind.Item:
+                        // 인벤토리에 아이템 추가
+                        InventoryScript.MyInstance.AddItem(item);
+                        // 아이템 획득 알림
+                        notice.GetComponent<LootNotice>().SetDescript(item);
+                        break;
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
 
         }
     }
