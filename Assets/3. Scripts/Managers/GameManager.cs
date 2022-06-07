@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,12 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
 
+    // 페이드인 효과
+    Color color;
+    [SerializeField]
+    Image fadeIn_IMG;
+    [SerializeField]
+    GameObject fadeIn_OBJ;
     public static GameManager MyInstance
     {
         get
@@ -44,10 +51,11 @@ public class GameManager : MonoBehaviour
     private NPC currentTarget;
     private void Awake()
     {
-        for(int i = 0; i < dontDestroyObj.Length; i++)
-        {
-            DontDestroyOnLoad(dontDestroyObj[i]);
-        }
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        //for(int i = 0; i < dontDestroyObj.Length; i++)
+        //{
+        //    DontDestroyOnLoad(dontDestroyObj[i]);
+        //}
     }
     void Update()
     {
@@ -86,16 +94,55 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) // 씬이 로딩될때 실행
+    {
+        Debug.Log("a");
+
+            Debug.Log("b");
+            StartCoroutine(FadeIn());
+
+
+    }
+    public IEnumerator FadeIn()
+    {
+        Debug.Log("c");
+        fadeIn_OBJ.SetActive(true);
+        Debug.Log("d");
+        while (color.a > 0)
+        {
+            color.a -= Time.deltaTime;
+            fadeIn_IMG.color = color;
+            yield return null;
+        }
+        Debug.Log("e");
+        fadeIn_OBJ.SetActive(false);
+        color.a = 1;
+        fadeIn_IMG.color = color;
+        Debug.Log("f");
+
+    }
     public void GameQuit()
     {
         Application.Quit();
     }
-    public void asdf()
+    public void GoLobby()
     {
-        SceneManager.LoadScene("1_Cave");
+        if(SceneManager.GetSceneByName("1_Cave").IsValid())
+        {
+            Debug.Log("asdf");
+            SceneManager.UnloadSceneAsync("1_Cave");
+        }
+        LoadingSceneManager.LoadScene("Main");
     }
-    public void ffsdf()
+
+    public void GoCave()
     {
-        SceneManager.LoadScene("Main");
+        if (SceneManager.GetSceneByName("Main").IsValid())
+        {
+            SceneManager.UnloadSceneAsync("Main");
+        }
+        LoadingSceneManager.LoadScene("1_Cave");
+        //SceneManager.LoadScene("1_Cave", LoadSceneMode.Additive);
+
     }
 }
