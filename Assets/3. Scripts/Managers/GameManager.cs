@@ -96,29 +96,22 @@ public class GameManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) // 씬이 로딩될때 실행
     {
-        Debug.Log("a");
-
-            Debug.Log("b");
             StartCoroutine(FadeIn());
 
 
     }
     public IEnumerator FadeIn()
     {
-        Debug.Log("c");
         fadeIn_OBJ.SetActive(true);
-        Debug.Log("d");
         while (color.a > 0)
         {
             color.a -= Time.deltaTime;
             fadeIn_IMG.color = color;
             yield return null;
         }
-        Debug.Log("e");
         fadeIn_OBJ.SetActive(false);
         color.a = 1;
         fadeIn_IMG.color = color;
-        Debug.Log("f");
 
     }
     public void GameQuit()

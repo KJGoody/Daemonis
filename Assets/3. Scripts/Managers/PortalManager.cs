@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PortalManager : MonoBehaviour
@@ -20,11 +21,46 @@ public class PortalManager : MonoBehaviour
 
     [SerializeField]
     GameObject teleport_Panel;
-    void Start()
+    [SerializeField]
+    GameObject returnPortal;
+    [SerializeField]
+    Button returnButton;
+    [SerializeField]
+    private GameObject usingPortal;
+    
+    void Awake()
     {
-        
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+    public void CreateReturnPortal()
+    {
+        if(usingPortal != null)
+        {
+            Destroy(usingPortal);
+        }
+        usingPortal = Instantiate(returnPortal, Player.MyInstance.transform.position,Quaternion.identity);
 
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) // 씬이 로딩될때 실행
+    {
+        aSDF();
+    }
+    public void aSDF()
+    {
+        Debug.Log(SceneManager.GetActiveScene().name);
+        
+        Scene scene = SceneManager.GetSceneByName("Main");
+        Debug.Log(scene.name);
+        if(scene.name == "Main")
+        {
+            returnButton.interactable = false;
+        }
+        else
+        {
+            Debug.Log("asdfasdfasdf");
+            returnButton.interactable = true;
+        }
+    }
 
     public void ShowTeleportList()
     {
@@ -37,6 +73,7 @@ public class PortalManager : MonoBehaviour
             SceneManager.UnloadSceneAsync("1_Cave");
         }
         LoadingSceneManager.LoadScene("Main");
+        Destroy(usingPortal);
     }
 
     public void GoCave()
