@@ -29,6 +29,7 @@ public class HealthPotion : Item
     //{
     //    return MyName;
     //}
+
     public override string GetDescription()
     {
         return base.GetDescription() + string.Format("\n<color=#00ff00ff>Use: 체력 {0} 회복</color>", health);

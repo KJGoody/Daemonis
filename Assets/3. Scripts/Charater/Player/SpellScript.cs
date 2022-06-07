@@ -163,6 +163,7 @@ public class SpellScript : MonoBehaviour
                     if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))       // 발화 중일 시 디버프 생성
                         collision.transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
                     SpendDamage(collision);
+                    Player.MyInstance.RecoverOnHit();
                     if (!IsToggleAttack)
                         PuffPool.Instance.GetObject(PuffPool.PuffPrefabsName.Hit_01).PositioningPuff(transform.position);
                     else
@@ -230,6 +231,7 @@ public class SpellScript : MonoBehaviour
                         if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))
                             collisions[j].transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
                         SpendDamage(collisions[j]);
+                        Player.MyInstance.RecoverOnHit();
                         PuffPool.Instance.GetObject(PuffPool.PuffPrefabsName.Hit_01).PositioningPuff(collisions[j].transform.position);
                     }
             }
@@ -254,6 +256,7 @@ public class SpellScript : MonoBehaviour
     private IEnumerator Skill_Fire_07()
     {
         SpendDamage(MyTarget.GetComponent<Collider2D>());
+        Player.MyInstance.RecoverOnHit();
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }
@@ -302,6 +305,7 @@ public class SpellScript : MonoBehaviour
                         if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))
                             collisions[j].transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
                         SpendDamage(collisions[j]);
+                        Player.MyInstance.RecoverOnHit();
                         PuffPool.Instance.GetObject(PuffPool.PuffPrefabsName.Hit_01).PositioningPuff(collisions[j].transform.position);
                     }
             }

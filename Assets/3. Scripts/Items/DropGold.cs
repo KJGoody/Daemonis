@@ -31,7 +31,7 @@ public class DropGold : MonoBehaviour
     {
         if(collision.name == "Player")
         {
-            GameManager.MyInstance.MyGold += gold;
+            GameManager.MyInstance.DATA.Gold += gold;
             GameObject notice = Instantiate(Resources.Load("LootNotice") as GameObject, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
             notice.GetComponent<LootNotice>().SetGoldInfo(gold,sprite);
             notice.transform.SetParent(GameObject.Find("ItemLooting").transform);

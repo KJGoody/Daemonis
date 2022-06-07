@@ -316,7 +316,7 @@ MonoBehaviour:
   level: 1
   levelUpEXP: 0
   currentEXP: 0
-  attack: 1
+  attack: 10
   attackPercent: 0
   maxHealth: 100
   maxHealthPercent: 0

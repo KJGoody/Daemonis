@@ -5,7 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class PuffPoolQueue
 {
-    public Queue<Puff> puffScripts = new Queue<Puff>();
+    public Queue<Puff> puffScripts;
+
+    public PuffPoolQueue()
+    {
+        puffScripts = new Queue<Puff>();
+    }
 }
 
 public class PuffPool : MonoBehaviour
@@ -23,8 +28,7 @@ public class PuffPool : MonoBehaviour
 
     [SerializeField]
     private GameObject[] PuffPrefabs;
-    [SerializeField]
-    private PuffPoolQueue[] puffPoolQueues;
+    private PuffPoolQueue[] puffPoolQueues = new PuffPoolQueue[2];
 
     public enum PuffPrefabsName
     {
@@ -34,6 +38,10 @@ public class PuffPool : MonoBehaviour
     
     void Start()
     {
+        puffPoolQueues = new PuffPoolQueue[PuffPrefabs.Length];
+        for (int i = 0; i < puffPoolQueues.Length; i++)
+            puffPoolQueues[i] = new PuffPoolQueue();
+
         Initialize(10, PuffPrefabsName.Hit_01);
         Initialize(10, PuffPrefabsName.Fire);
     }

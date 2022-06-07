@@ -43,6 +43,8 @@ public class Player : Character
     public Vector2 atkDir;
 
     private List<TargetGroup> targetGroups = new List<TargetGroup>();
+    [SerializeField]
+    private GameObject YOUDIEWindow;
 
     protected override void Start()
     {
@@ -338,7 +340,9 @@ public class Player : Character
 
         if(MyStat.CurrentHealth <= 0)
         {
-
+            YOUDIEWindow.SetActive(true);
+            transform.Find("HitBox_Player").gameObject.SetActive(false);
+            myRigid2D.simulated = false;
         }
     }
 }

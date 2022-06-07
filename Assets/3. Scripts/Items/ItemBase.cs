@@ -5,43 +5,31 @@ public enum Quality { Normal, Advanced, Rare, Epic, Legendary, Relic }
 public class ItemBase : IMoveable, IDescribable, IUseable
 {
     public Item itemInfo;
+
     [SerializeField]
     private Quality quality;// 아이템 등급
-
     public Quality MyQuality
     {
-        get
-        {
-            return quality;
-        }
-        set
-        {
-            quality = value;
-        }
+        get { return quality; }
+        set { quality = value; }
     }
+
     public Sprite MyIcon
     {
-        get
-        {
-            return itemInfo.MyIcon;
-        }
+        get { return itemInfo.MyIcon; }
     }
+    
     // 아이템이 중첩될 수 있는 개수
     // 예) 소모성 물약의 경우 한개의 Slot에 여러개가
     //     중첩되어서 보관될 수 있음.
-    public int MyStackSize
-    {
-        get
-        {
-            return itemInfo.MyStackSize;
-        }
-    }
+
+    public int MyStackSize { get { return itemInfo.MyStackSize; } }
 
     #region 장비아이템 관련
     public List<AddOption> addOptionList = new List<AddOption>();
     public void SetAddOption()
     {
-        for (int i = 0; i < (int)(quality)+1; i++)
+        for (int i = 0; i < (int)(quality) + 1; i++)
         {
             int newTier = AddOptionManager.MyInstance.SetRandomTier(quality);
             int newOption = AddOptionManager.MyInstance.SetRandomKind();
@@ -49,10 +37,8 @@ public class ItemBase : IMoveable, IDescribable, IUseable
 
             addOptionList.Add(new AddOption(newTier, newOption, newValue));
             newValue = AddOptionManager.MyInstance.SetRandomValue(addOptionList[i]);
-            addOptionList[i].value = newValue; 
-            
+            addOptionList[i].value = newValue;
         }
-        
     }
     private Part part;
     public Part GetPart
@@ -78,20 +64,20 @@ public class ItemBase : IMoveable, IDescribable, IUseable
         equipmentItem.ActiveEquipment(isActive); // 장비 베이스 스탯 증감
         if (addOptionList[0] != null) // 추가 옵션 증감
         {
-            for(int i = 0; i < addOptionList.Count; i++)
+            for (int i = 0; i < addOptionList.Count; i++)
             {
                 string optionName = AddOptionManager.MyInstance.GetOptionString(addOptionList[i].option_Num);
                 float optionValue = addOptionList[i].value;
-                if(optionName == "ItemLevel")
+                if (optionName == "ItemLevel")
                 {
 
                 }
                 else
                 {
                     if (isActive)
-                       Player.MyInstance.Plus(optionName, optionValue);
-                    else    
-                       Player.MyInstance.Plus(optionName, -optionValue);
+                        Player.MyInstance.Plus(optionName, optionValue);
+                    else
+                        Player.MyInstance.Plus(optionName, -optionValue);
                 }
             }
         }
@@ -175,45 +161,16 @@ public class ItemBase : IMoveable, IDescribable, IUseable
 
         }
     }
-    public Kinds GetKind
-    {
-        get
-        {
-            return itemInfo.GetKind;
-        }
-    }
+    public Kinds GetKind { get { return itemInfo.GetKind; } }
     public SlotScript MySlot
     {
-        get
-        {
-            return itemInfo.MySlot;
-        }
-        set
-        {
-            itemInfo.MySlot = value;
-        }
+        get { return itemInfo.MySlot; }
+        set { itemInfo.MySlot = value; }
     }
-    public string MyDescript
-    {
-        get
-        {
-            return itemInfo.MyDescript;
-        }
-    }
-    public string MyEffect
-    {
-        get
-        {
-            return itemInfo.MyEffect;
-        }
-    }
-    public int MyLimitLevel
-    {
-        get
-        {
-            return itemInfo.MyLimitLevel;
-        }
-    }
+    public string MyDescript { get { return itemInfo.MyDescript; } }
+    public string MyEffect { get { return itemInfo.MyEffect; } }
+    public int MyLimitLevel { get { return itemInfo.MyLimitLevel; } }
+
     public void Remove()
     {
         if (MySlot != null)
@@ -265,6 +222,12 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             EquipmentRemove();
         }
     }
+
+    public void GetItemCoolDown()
+    {
+
+    }
+
     public string GetName() // 일단 useable때문에 넣어두긴함
     {
         return MyName;

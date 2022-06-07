@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+
 public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
@@ -63,8 +64,13 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             {
                 // useables 에 등록된 아이템을 사용합니다.
                 // Peek() 은 아이템을 배열에서 제거하지 않습니다.
-                Debug.Log(useables.Count);
-                useables.Peek().Use();
+                if(CurrentCollTime == 0)
+                {
+                    CoolTime = 3f;
+                    StartCoroutine(StartCoolDown());
+                    ItemBase itemBase = useables.Peek() as ItemBase;
+                    itemBase.Use();
+                }
             }
         }
     }

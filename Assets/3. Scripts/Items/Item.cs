@@ -22,36 +22,15 @@ public abstract class Item : ScriptableObject
     private Kinds kind;// 아이템 종류
     private SlotScript slot;
 
-
-    public Sprite MyIcon
-    {
-        get
-        {
-            return icon;
-        }
-    }
+    public Sprite MyIcon { get { return icon; } }
     // 아이템이 중첩될 수 있는 개수
     // 예) 소모성 물약의 경우 한개의 Slot에 여러개가
     //     중첩되어서 보관될 수 있음.
-    public int MyStackSize
-    {
-        get
-        {
-            return stackSize;
-        }
-    }
+    public int MyStackSize { get { return stackSize; } }
     public string MyName
     {
-        get
-        {
-
-            return itemName;
-        }
-
-        set
-        {
-            itemName = value;
-        }
+        get { return itemName; }
+        set { itemName = value; }
     }
 
     public Kinds GetKind
@@ -71,54 +50,28 @@ public abstract class Item : ScriptableObject
             return myKind;
         }
     }
+
     public SlotScript MySlot
     {
-        get
-        {
-            return slot;
-        }
-
-        set
-        {
-            slot = value;
-        }
+        get { return slot; }
+        set { slot = value; }
     }
     public string MyDescript
     {
-        get
-        {
-            return descript;
-        }
-
-        set
-        {
-            descript = value;
-        }
+        get { return descript; }
+        set { descript = value; }
     }
     public string MyEffect
     {
-        get
-        {
-            return effect;
-        }
-
-        set
-        {
-            effect = value;
-        }
+        get { return effect; }
+        set { effect = value; }
     }
     public int MyLimitLevel
     {
-        get
-        {
-            return limitLevel;
-        }
-
-        set
-        {
-            limitLevel = value;
-        }
+        get { return limitLevel; }
+        set { limitLevel = value; }
     }
+
     public void Remove()
     {
         //if (MySlot != null)
@@ -130,7 +83,6 @@ public abstract class Item : ScriptableObject
     }
     public virtual string GetDescription()
     {
-
         return itemName;
     }
 
