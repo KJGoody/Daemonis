@@ -5,7 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class NewTextPoolQueue
 {
-    public Queue<NewText> damageTexts = new Queue<NewText>();
+    public Queue<NewText> Texts;
+
+    public NewTextPoolQueue()
+    {
+        Texts = new Queue<NewText>();
+    }
 }
 
 public class NewTextPool : MonoBehaviour
@@ -22,9 +27,8 @@ public class NewTextPool : MonoBehaviour
     }
 
     [SerializeField]
-    private GameObject[] DamageTextPrefabs;
-    [SerializeField]
-    private NewTextPoolQueue[] DamageTextPoolQueues;
+    private GameObject[] TextPrefabs;
+    private NewTextPoolQueue[] TextPoolQueues;
 
     public enum NewTextPrefabsName
     {
@@ -36,6 +40,10 @@ public class NewTextPool : MonoBehaviour
 
     void Start()
     {
+        TextPoolQueues = new NewTextPoolQueue[TextPrefabs.Length];
+        for (int i = 0; i < TextPoolQueues.Length; i++)
+            TextPoolQueues[i] = new NewTextPoolQueue();
+
         Initialize(10, NewTextPrefabsName.Player);
         Initialize(10, NewTextPrefabsName.Critical);
         Initialize(10, NewTextPrefabsName.Enemy);
@@ -45,12 +53,12 @@ public class NewTextPool : MonoBehaviour
     private void Initialize(int initCount, NewTextPrefabsName index)
     {
         for (int i = 0; i < initCount; i++)
-            DamageTextPoolQueues[(int)index].damageTexts.Enqueue(CreateNewObject(index));
+            TextPoolQueues[(int)index].Texts.Enqueue(CreateNewObject(index));
     }
 
     private NewText CreateNewObject(NewTextPrefabsName index)
     {
-        NewText newObj = Instantiate(DamageTextPrefabs[(int)index]).GetComponent<NewText>();
+        NewText newObj = Instantiate(TextPrefabs[(int)index]).GetComponent<NewText>();
         newObj.gameObject.SetActive(false);
         newObj.transform.SetParent(transform);
         return newObj;
@@ -58,9 +66,9 @@ public class NewTextPool : MonoBehaviour
 
     public NewText GetObject(NewTextPrefabsName index)
     {
-        if (DamageTextPoolQueues[(int)index].damageTexts.Count > 0)
+        if (TextPoolQueues[(int)index].Texts.Count > 0)
         {
-            NewText obj = DamageTextPoolQueues[(int)index].damageTexts.Dequeue();
+            NewText obj = TextPoolQueues[(int)index].Texts.Dequeue();
             obj.transform.SetParent(null);
             obj.gameObject.SetActive(true);
             return obj;
@@ -78,6 +86,6 @@ public class NewTextPool : MonoBehaviour
     {
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(transform);
-        DamageTextPoolQueues[(int)index].damageTexts.Enqueue(obj);
+        TextPoolQueues[(int)index].Texts.Enqueue(obj);
     }
 }

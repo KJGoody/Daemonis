@@ -58,13 +58,12 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Start()
     {
-
+        StartCoroutine(RegenHPMP());
     }
 
     protected virtual void Update()
     {
         HandleLayers();
-        
     }
 
     protected virtual void FixedUpdate()
@@ -222,13 +221,13 @@ public abstract class Character : MonoBehaviour
         int LevelGap = ToLevel - FromLevel;
         float xDamage = 1;
 
-        if (LevelGap < -10)     xDamage = 1.3f;
+        if (LevelGap < -10) xDamage = 1.3f;
         else if (LevelGap < 0)
         {
             for (int i = 0; i < -LevelGap; i++)
                 xDamage += 0.025f;
         }
-        else if (LevelGap < 3)  xDamage = 1;
+        else if (LevelGap < 3) xDamage = 1;
         else if (LevelGap == 3) xDamage = 0.95f;
         else if (LevelGap == 4) xDamage = 0.9f;
         else
@@ -240,15 +239,23 @@ public abstract class Character : MonoBehaviour
         return xDamage > 0 ? xDamage : 0;
     }
 
-    public virtual void TakeHeal(float HealValue)
+    public virtual void RecoverOnHit()
     {
-        if(HealValue > 0)
-        {
-            stat.CurrentHealth += (int)Mathf.Floor(HealValue);
-        }
-        NEWText(NewTextPool.NewTextPrefabsName.Heal, (int)Mathf.Floor(HealValue));
+        stat.CurrentHealth += stat.RecoverHealth_onhit;
+        if (stat.ManaBar != null)
+            stat.CurrentMana += stat.RecoverMana_onhit;
     }
 
+    public IEnumerator RegenHPMP()
+    {
+        do
+        {
+            stat.CurrentHealth += stat.HealthRegen;
+            if (stat.ManaBar != null)
+                stat.CurrentMana += stat.ManaRegen;
+            yield return new WaitForSeconds(1);
+        } while (IsAlive);
+    }
 
     private void NEWText(NewTextPool.NewTextPrefabsName TextType, int value = 0)
     {

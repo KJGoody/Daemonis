@@ -184,4 +184,14 @@ public class SoundManager : MonoBehaviour
     {
         PlayBGMSound();
     }
+
+    public void PlayUISound()
+    {
+        if (audioClipsDic.ContainsKey("ClickSound") == false)
+        {
+            Debug.Log("ClickSound" + " is not Contained audioClipsDic");
+            return;
+        }
+        sfxPlayer.PlayOneShot(audioClipsDic["ClickSound"], masterVolumeSFX);
+    }
 }

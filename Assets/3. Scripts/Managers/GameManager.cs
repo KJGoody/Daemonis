@@ -7,33 +7,19 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-
     public static GameManager MyInstance
     {
         get
         {
             if (instance == null)
-            {
                 instance = FindObjectOfType<GameManager>();
-            }
             return instance;
         }
     }
-    private int gold;
-    public int MyGold
-    {
-        get
-        {
-            return gold;
-        }
-        set
-        {
-            if (value <= 0)
-                value = 0;
-            gold = value;
-        }
-    }
-    
+
+    public SaveLoadData SavedData { get; private set; }
+    public SaveLoadData DATA;
+
     [SerializeField]
     private Player player;
     [SerializeField]
@@ -42,13 +28,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject[] dontDestroyObj;
     private NPC currentTarget;
+
     private void Awake()
     {
+        LoadData();
         for(int i = 0; i < dontDestroyObj.Length; i++)
         {
             DontDestroyOnLoad(dontDestroyObj[i]);
         }
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -60,7 +49,7 @@ public class GameManager : MonoBehaviour
         }
         ClickTarget();
     }
-    
+
     private void ClickTarget()
     {
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
@@ -77,10 +66,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 if (currentTarget != null)
-                {
                     currentTarget.DeSelect();
-                }
-
                 currentTarget = null;
                 player.MyTarget = null;
             }
@@ -97,5 +83,34 @@ public class GameManager : MonoBehaviour
     public void ffsdf()
     {
         SceneManager.LoadScene("Main");
+    }
+
+
+    public void SaveData()
+    {
+        // 지금까지의 변경사항을 저장한다.
+        SaveLoadManager.DataSave(DATA, "Data");
+    }
+
+    public void LoadData()
+    {
+        if (SaveLoadManager.FileExists("Data"))
+            SavedData = SaveLoadManager.DataLoad<SaveLoadData>("Data");
+        else
+            SavedData = new SaveLoadData();
+
+        // 저장되어있는 사항을 저장한다.
+        DATA = SavedData;
+    }
+}
+
+[System.Serializable]
+public class SaveLoadData
+{
+    public int Gold;
+
+    public SaveLoadData()
+    {
+        Gold = 0;
     }
 }

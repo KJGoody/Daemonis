@@ -118,7 +118,7 @@ public class Stat : MonoBehaviour
         get { return currentHealth; }
         set
         {
-            if (value > currentHealth)
+            if (value > BaseMaxHealth)
             {
                 currentHealth = BaseMaxHealth;
                 HealthBar.StatBarCurrentValue = BaseMaxHealth;
@@ -162,7 +162,7 @@ public class Stat : MonoBehaviour
         get { return currentMana; }
         set
         {
-            if (value > currentMana)
+            if (value > BaseMaxMana)
             {
                 currentMana = BaseMaxMana;
                 ManaBar.StatBarCurrentValue = BaseMaxMana;
@@ -426,6 +426,7 @@ public class Stat : MonoBehaviour
             ExpBar.Initialize(LevelUpEXP, currentEXP, true);
         }
     }
+
     public void SetHpMP()
     {
         HealthBar.SetMax(CurrentMaxHealth);

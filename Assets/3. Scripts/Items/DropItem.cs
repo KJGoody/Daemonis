@@ -47,14 +47,12 @@ public class DropItem : MonoBehaviour
         }
         sprite.sprite = item.MyIcon;
         DI_Text.text = item.MyName;
-
     }
 
     public void SetEquipmentItem(ItemBase item)
     {
         item.MyQuality = (Quality)AddOptionManager.MyInstance.SetRandomEquipmentQuality();
         item.SetAddOption();
-
     }
 
     public void SetGold(int _gold)
@@ -78,13 +76,9 @@ public class DropItem : MonoBehaviour
         if (L_Start)
         {
             if (!up)
-            {
                 Looting_Start();
-            }
             else if (up)
-            {
                 Looting_ToPlayer();
-            }
         }
     }
 
@@ -99,7 +93,7 @@ public class DropItem : MonoBehaviour
                 switch (isKind)
                 {
                     case IsKind.Gold:
-                        GameManager.MyInstance.MyGold += gold;
+                        GameManager.MyInstance.DATA.Gold += gold;
                         notice.GetComponent<LootNotice>().SetGoldInfo(gold, goldImage);
                         break;
                     case IsKind.Item:
