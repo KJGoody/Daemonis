@@ -39,6 +39,8 @@ public class Player : Character
     private FloatingJoystick joy;
     [SerializeField]
     private Transform exitPoint;
+    [SerializeField]
+    private GameObject lvUp_Particle;
     [HideInInspector]
     public Vector2 atkDir;
 
@@ -328,6 +330,7 @@ public class Player : Character
             MyStat.Level++;
             MyStat.CurrentEXP = 0;
             MyStat.ExpBar.Initialize(MyStat.LevelUpEXP, MyStat.CurrentEXP);
+            Instantiate(lvUp_Particle, transform).transform.SetParent(transform);
             SpendEXP(surPlusEXP, true);
         }
     }
