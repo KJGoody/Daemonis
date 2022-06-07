@@ -51,7 +51,7 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        DontDestroyOnLoad(this.gameObject); //여러 씬에서 사용할 것.
+        //DontDestroyOnLoad(this.gameObject); //여러 씬에서 사용할 것.
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 

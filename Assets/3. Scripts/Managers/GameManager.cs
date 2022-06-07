@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,8 +39,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject quitPanel;
 
+    [SerializeField]
+    private GameObject[] dontDestroyObj;
     private NPC currentTarget;
-    
+    private void Awake()
+    {
+        for(int i = 0; i < dontDestroyObj.Length; i++)
+        {
+            DontDestroyOnLoad(dontDestroyObj[i]);
+        }
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -80,5 +89,13 @@ public class GameManager : MonoBehaviour
     public void GameQuit()
     {
         Application.Quit();
+    }
+    public void asdf()
+    {
+        SceneManager.LoadScene("1_Cave");
+    }
+    public void ffsdf()
+    {
+        SceneManager.LoadScene("Main");
     }
 }
