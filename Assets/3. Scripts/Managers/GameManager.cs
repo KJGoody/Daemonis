@@ -89,13 +89,18 @@ public class GameManager : MonoBehaviour
     public IEnumerator FadeIn()
     {
         fadeIn_OBJ.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+
         while (color.a > 0)
         {
             color.a -= Time.deltaTime;
             fadeIn_IMG.color = color;
             yield return null;
         }
-        fadeIn_OBJ.SetActive(false);
+
+        if(fadeIn_IMG.color.a <=0)
+            fadeIn_OBJ.SetActive(false);
+
         color.a = 1;
         fadeIn_IMG.color = color;
 

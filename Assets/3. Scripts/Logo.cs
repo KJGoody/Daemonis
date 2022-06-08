@@ -22,17 +22,15 @@ public class Logo : MonoBehaviour
         asyncOper.allowSceneActivation = false;
         asyncOper1.allowSceneActivation = false;
 
+
         yield return new WaitForSeconds(3);
-        while (color.a > 0)
+        while (color.a <= 1)
         {
-            color.a -= Time.deltaTime;
+            color.a += Time.deltaTime;
             image.color = color;
             yield return null;
         }
-
-        asyncOper1.allowSceneActivation = true;
         asyncOper.allowSceneActivation = true;
-        
-
+        asyncOper1.allowSceneActivation = true;
     }
 }
