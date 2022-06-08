@@ -122,7 +122,6 @@ public class SoundManager : MonoBehaviour
     {
         bgmPlayer.loop = true; //BGM 사운드이므로 루프설정
         //bgmPlayer.volume = volume * masterVolumeBGM;
-        Debug.Log(SceneManager.GetActiveScene().name);
         if (scene.name == "Main")
         {
             bgmPlayer.clip = lobbyBgmAudioClip;

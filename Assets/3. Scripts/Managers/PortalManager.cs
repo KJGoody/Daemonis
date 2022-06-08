@@ -47,8 +47,6 @@ public class PortalManager : MonoBehaviour
     }
     public void ReturnPortalButton()
     {
-        Debug.Log(SceneManager.GetActiveScene().name);
-        
         Scene scene = SceneManager.GetSceneByName("Main");
         if(scene.name == "Main")
         {
@@ -56,7 +54,6 @@ public class PortalManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("asdfasdfasdf");
             returnButton.interactable = true;
         }
     }
