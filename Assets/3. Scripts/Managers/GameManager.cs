@@ -85,8 +85,6 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) // 씬이 로딩될때 실행
     {
         StartCoroutine(FadeIn());
-
-
     }
     public IEnumerator FadeIn()
     {
