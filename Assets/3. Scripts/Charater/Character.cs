@@ -230,6 +230,10 @@ public abstract class Character : MonoBehaviour
                 Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.BaseDefence + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
             else
                 Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.BaseMagicRegist + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
+
+            if (TextType.Equals(NewTextPool.NewTextPrefabsName.Critical))
+                Damage *= (int)Player.MyInstance.MyStat.CriticalDamage / 100;
+
             stat.CurrentHealth -= Damage;
             NEWText(TextType, Damage);
 

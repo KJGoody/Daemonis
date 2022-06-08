@@ -184,9 +184,13 @@ public class SpellScript : MonoBehaviour
         else
             WeaponxDamage = 1;
 
-        // 무기 배수    // 플레이어 공격력               // 스킬 배수
         float PureDamage = (WeaponxDamage * Player.MyInstance.MyStat.BaseAttack * SpellxDamage) * Player.MyInstance.BuffxDamage;
-        character.TakeDamage(false, Player.MyInstance.MyStat.HitPercent, PureDamage, Player.MyInstance.MyStat.Level, direction, NewTextPool.NewTextPrefabsName.Enemy);
+            
+        if(ChanceMaker.GetThisChanceResult_Percentage(Player.MyInstance.MyStat.CriticalPercent))
+            character.TakeDamage(false, Player.MyInstance.MyStat.HitPercent, PureDamage, Player.MyInstance.MyStat.Level, direction, NewTextPool.NewTextPrefabsName.Critical);
+        else
+            character.TakeDamage(false, Player.MyInstance.MyStat.HitPercent, PureDamage, Player.MyInstance.MyStat.Level, direction, NewTextPool.NewTextPrefabsName.Enemy);
+        // 무기 배수    // 플레이어 공격력               // 스킬 배수
     }
 
     private bool CheckHitEnemy(Collider2D collision) // 스킬 한번 맞았으면 다시 안맞게 체크

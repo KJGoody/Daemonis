@@ -129,8 +129,13 @@ public class Buff : MonoBehaviour
 
         while (true)
         {
-            if(Target.IsAlive)
-                Target.TakeDamage(false, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, NewTextPool.NewTextPrefabsName.Enemy);
+            if (Target.IsAlive)
+            {
+                if(ChanceMaker.GetThisChanceResult_Percentage(Player.MyInstance.MyStat.CriticalPercent))
+                    Target.TakeDamage(false, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, NewTextPool.NewTextPrefabsName.Critical);
+                else    
+                    Target.TakeDamage(false, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, NewTextPool.NewTextPrefabsName.Enemy);
+            }
             yield return new WaitForSeconds(WaitForSconds);
         }
     }
