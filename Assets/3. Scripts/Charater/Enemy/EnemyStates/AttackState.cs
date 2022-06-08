@@ -66,6 +66,14 @@ public class AttackState : IState
                 case EnemyType.EnemyTypes.BaseAOE:
                     parent.StartCoroutine(AOEAttack());
                     break;
+
+                case EnemyType.EnemyTypes.Koblod_Melee:
+                    parent.StartCoroutine(Kobold_Melee_Attack());
+                    break;
+
+                case EnemyType.EnemyTypes.Koblod_Ranged:
+                    parent.StartCoroutine(Kobold_Ranged_Attack());
+                    break;
             }
         }
     }
@@ -118,6 +126,30 @@ public class AttackState : IState
         parent._prefabs.PlayAnimation(6);
         yield return new WaitForSeconds(1f);
         parent.CreateResource(Resources.Load("EnemyAttack/BaseAOE_Attack") as GameObject, parent.MyTarget, true);
+        parent.IsAttacking = false;
+    }
+
+    private IEnumerator Kobold_Melee_Attack()
+    {
+        yield return new WaitForSeconds(0.5f); // 선딜
+        parent._prefabs.PlayAnimation(4);
+
+        yield return new WaitForSeconds(0.15f); // 애니메이션 내려찍기 시작
+        parent.CreateResource(Resources.Load("EnemyAttack/Kobold_Melee_Attack") as GameObject, parent.ExitPoint, true);
+        yield return new WaitForSeconds(0.15f); // 애니메이션 종료
+
+        parent.IsAttacking = false;
+    }
+
+    private IEnumerator Kobold_Ranged_Attack()
+    {
+        yield return new WaitForSeconds(0.5f); // 선딜
+        parent._prefabs.PlayAnimation(4);
+
+        yield return new WaitForSeconds(0.15f);
+        parent.CreateResource(Resources.Load("EnemyAttack/Kobold_Ranged_Attack") as GameObject, parent.ExitPoint, true);
+        yield return new WaitForSeconds(0.15f);
+
         parent.IsAttacking = false;
     }
 }

@@ -584,6 +584,7 @@ MonoBehaviour:
   lvUp_Particle: {fileID: 2519135805120060049, guid: fccf02c2b9e9ac449883630847c81f30,
     type: 3}
   atkDir: {x: 0, y: 0}
+  YOUDIEWindow: {fileID: 1947283025}
 --- !u!4 &54665777
 Transform:
   m_ObjectHideFlags: 0
@@ -1651,12 +1652,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acf4c2f592de314d8c79588b418edb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageTextPrefabs:
+  TextPrefabs:
   - {fileID: 7839222037845629363, guid: 2d6324834e921134f87dbe2dd0cf45a2, type: 3}
   - {fileID: 7839222037845629363, guid: 62db0154cdd67a343b2986e6804774d8, type: 3}
   - {fileID: 7839222037845629363, guid: 41d92e75d7bc51e48baa2c563ec13156, type: 3}
   - {fileID: 7839222037845629363, guid: 235c863235f9a7d41823e11c10d1b7b1, type: 3}
-  DamageTextPoolQueues: []
 --- !u!1 &115585401
 GameObject:
   m_ObjectHideFlags: 0
@@ -9574,6 +9574,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d4c2fc7018779d84f87971f32684b944, type: 2}
   dropItem: {fileID: 1411184612657943188, guid: 2c677614418dfb64b8277b05c990cdb8,
     type: 3}
+  Item: {fileID: 0}
 --- !u!1 &618137756
 GameObject:
   m_ObjectHideFlags: 0
@@ -12237,7 +12238,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793317085}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1183.012, y: -597.3589, z: -10}
+  m_LocalPosition: {x: -1183.0139, y: -597.3589, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 900256415}
@@ -18379,7 +18380,6 @@ MonoBehaviour:
   PuffPrefabs:
   - {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b, type: 3}
   - {fileID: 4256228517437817992, guid: 7ab99f1c7d095984fa863f01ce08f928, type: 3}
-  puffPoolQueues: []
 --- !u!1 &1158958788
 GameObject:
   m_ObjectHideFlags: 0
@@ -20922,8 +20922,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e4a8c75f164f44db8b88d0c33198e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterPrefab: {fileID: 894972729840216760, guid: 3ca78dc3840d6c54e98a98dcb0f365da,
-    type: 3}
+  MonsterPrefab:
+  - {fileID: 894972729840216760, guid: 235e917d23583cf4c965f8458e8a9919, type: 3}
+  - {fileID: 894972729840216760, guid: 80616871d1c1f7140806156ca2189fff, type: 3}
 --- !u!1 &1352016262
 GameObject:
   m_ObjectHideFlags: 0
@@ -24770,7 +24771,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598727260}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1183.012, y: -597.3589, z: -10}
+  m_LocalPosition: {x: -1183.0139, y: -597.3589, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1675068945}
@@ -27989,6 +27990,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeIn_IMG: {fileID: 880840951}
   fadeIn_OBJ: {fileID: 880840949}
+  DATA:
+    Gold: 0
   player: {fileID: 54665776}
   quitPanel: {fileID: 1947283025}
   dontDestroyObj:

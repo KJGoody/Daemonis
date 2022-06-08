@@ -2,6 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class MonsterPoolQueue
+{
+    public Queue<EnemyBase> EnemyScripts;
+
+    public MonsterPoolQueue()
+    {
+        EnemyScripts = new Queue<EnemyBase>();
+    }
+}
+
 public class MonsterPool : MonoBehaviour
 {
     private static MonsterPool instance;
@@ -16,51 +27,60 @@ public class MonsterPool : MonoBehaviour
     }
 
     [SerializeField]
-    private GameObject MonsterPrefab;
+    private GameObject[] MonsterPrefab;
+    private MonsterPoolQueue[] MonsterPoolQueues;
 
-    Queue<EnemyBase> poolingObjectQueue = new Queue<EnemyBase>();
+    public enum MonsterPrefabName
+    {
+        Kobold_Melee,
+        Kobold_Ranged
+    }
 
     private void Awake()
     {
-        Initialize(20);
+        MonsterPoolQueues = new MonsterPoolQueue[MonsterPrefab.Length];
+        for (int i = 0; i < MonsterPoolQueues.Length; i++)
+            MonsterPoolQueues[i] = new MonsterPoolQueue();
+        Initialize(20, MonsterPrefabName.Kobold_Melee);
+        Initialize(20, MonsterPrefabName.Kobold_Ranged);
     }
 
-    private void Initialize(int initCount)
+    private void Initialize(int initCount, MonsterPrefabName index)
     {
         for (int i = 0; i < initCount; i++)
-            poolingObjectQueue.Enqueue(CreateNewObject());
+            MonsterPoolQueues[(int)index].EnemyScripts.Enqueue(CreateNewObject(index));
     }
 
-    private EnemyBase CreateNewObject()
+    private EnemyBase CreateNewObject(MonsterPrefabName index)
     {
-        var newObj = Instantiate(MonsterPrefab).GetComponent<EnemyBase>();
+        var newObj = Instantiate(MonsterPrefab[(int)index]).GetComponent<EnemyBase>();
         newObj.gameObject.SetActive(false);
         newObj.transform.SetParent(transform);
         return newObj;
     }
 
-    public EnemyBase GetObject()
+    public EnemyBase GetObject(MonsterPrefabName index)
     {
-        if (poolingObjectQueue.Count > 0)
+        if (MonsterPoolQueues[(int)index].EnemyScripts.Count > 0)
         {
-            var obj = poolingObjectQueue.Dequeue();
+            var obj = MonsterPoolQueues[(int)index].EnemyScripts.Dequeue();
             obj.transform.SetParent(null);
             obj.gameObject.SetActive(true);
             return obj;
         }
         else
         {
-            var newObj = CreateNewObject();
+            var newObj = CreateNewObject(index);
             newObj.gameObject.SetActive(true);
             newObj.transform.SetParent(null);
             return newObj;
         }
     }
 
-    public void ReturnObject(EnemyBase obj)
+    public void ReturnObject(EnemyBase obj, MonsterPrefabName index)
     {
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(transform);
-        poolingObjectQueue.Enqueue(obj);
+        MonsterPoolQueues[(int)index].EnemyScripts.Enqueue(obj);
     }
 }

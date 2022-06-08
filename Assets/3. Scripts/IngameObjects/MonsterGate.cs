@@ -53,7 +53,11 @@ public class MonsterGate : MonoBehaviour
                     newStartPosition = Grid[Random.Range(0, GridSizeX), Random.Range(0, GridSizeY)];
                 } while (newStartPosition.IsWall);
 
-                MonsterPool.Instance.GetObject().PositioningEnemyBase(this, newStartPosition.WorldPos);
+                if (ChanceMaker.GetThisChanceResult_Percentage(50))
+                    MonsterPool.Instance.GetObject(MonsterPool.MonsterPrefabName.Kobold_Melee).PositioningEnemyBase(this, newStartPosition.WorldPos);
+                else
+                    MonsterPool.Instance.GetObject(MonsterPool.MonsterPrefabName.Kobold_Ranged).PositioningEnemyBase(this, newStartPosition.WorldPos);
+
                 TotalEnemyNum++;
                 CurrentEnemyNum++;
                 //yield return new WaitForSeconds(Random.value);

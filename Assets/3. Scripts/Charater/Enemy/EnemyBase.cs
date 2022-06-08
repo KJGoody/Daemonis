@@ -163,7 +163,18 @@ public class EnemyBase : NPC
 
         yield return new WaitForSeconds(0.1f);
         SetLayersRecursively(_prefabs.transform, "Default");
-        MonsterPool.Instance.ReturnObject(this);
+
+        switch (enemytype.enemyType)
+        {
+            case EnemyType.EnemyTypes.Koblod_Melee:
+                MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Melee);
+                break;
+
+            case EnemyType.EnemyTypes.Koblod_Ranged:
+                MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Ranged);
+                break;
+        }
+
         InitializeEnemyBase();
         ParentGate.CurrentEnemyNum--;
     }

@@ -9,7 +9,9 @@ public class EnemyType : MonoBehaviour
         BaseMelee,
         BaseRanged,
         BaseRush,
-        BaseAOE
+        BaseAOE,
+        Koblod_Melee,
+        Koblod_Ranged
     }
     public EnemyTypes enemyType;
 
@@ -55,8 +57,20 @@ public class EnemyType : MonoBehaviour
                 AttackRnage = 3;
                 AttackDelay = 3;
                 break;
+
+            case EnemyTypes.Koblod_Melee:
+                AggroRnage = 3;
+                ExitPoint = new Vector3(-0.1f, 0.2f, 0);
+                AttackRnage = 0.5f;
+                AttackDelay = 1;
+                break;
+
+            case EnemyTypes.Koblod_Ranged:
+                AggroRnage = 3;
+                ExitPoint = new Vector3(-0.1f, 0.2f, 0);
+                AttackRnage = 3;
+                AttackDelay = 2;
+                break;
         }
-
     }
-
 }

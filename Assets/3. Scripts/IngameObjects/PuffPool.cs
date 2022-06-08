@@ -28,7 +28,7 @@ public class PuffPool : MonoBehaviour
 
     [SerializeField]
     private GameObject[] PuffPrefabs;
-    private PuffPoolQueue[] puffPoolQueues = new PuffPoolQueue[2];
+    private PuffPoolQueue[] puffPoolQueues;
 
     public enum PuffPrefabsName
     {

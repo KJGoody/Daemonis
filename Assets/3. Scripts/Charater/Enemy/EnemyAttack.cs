@@ -10,12 +10,15 @@ public class EnemyAttack : MonoBehaviour
         BaseRangedAttack,
         BaseRushAttack,
         BaseAOEAttack,                         // 장판을 소환하고 일정시간마다 장판오브젝트를 생성해서 플레이어에게 데미지를 준다.
-        BaseAEAttack                         // 장판 공격의 실질적 데미지
+        BaseAEAttack,                         // 장판 공격의 실질적 데미지
+        Kobold_Melee_Attack,
+        Kobold_Ranged_Attack
     }
     [SerializeField]
     private EnemyAttackType enemyAttackType;
     private bool IsAOEAttack = false;
 
+    [HideInInspector]
     public EnemyBase parent;
 
     private Transform MyTarget;
@@ -65,15 +68,33 @@ public class EnemyAttack : MonoBehaviour
                 AttackxDamage = 1;
                 StartCoroutine(BaseAEAttack());
                 break;
+
+            case EnemyAttackType.Kobold_Melee_Attack:
+                AttackxDamage = 1;
+                StartCoroutine(Kobold_Melee_Attack());
+                break;
+
+            case EnemyAttackType.Kobold_Ranged_Attack:
+                AttackxDamage = 1;
+                StartCoroutine(Kobold_Ranged_Attack());
+                break;
         }
 
     }
 
     private void FixedUpdate()
     {
-        myRigidbody.velocity = direction.normalized * speed;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        if (enemyAttackType.Equals(EnemyAttackType.Kobold_Ranged_Attack))
+        {
+            myRigidbody.velocity = direction.normalized * speed;
+            transform.Rotate(new Vector3(0, 0, Time.deltaTime * -600));
+        }
+        else
+        {
+            myRigidbody.velocity = direction.normalized * speed;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -144,6 +165,18 @@ public class EnemyAttack : MonoBehaviour
     IEnumerator BaseAEAttack()
     {
         yield return new WaitForSeconds(0.1f);
+        Destroy(gameObject);
+    }
+
+    private IEnumerator Kobold_Melee_Attack()
+    {
+        yield return new WaitForSeconds(0.15f);     // 객체 생존시간
+        Destroy(gameObject);
+    }
+
+    private IEnumerator Kobold_Ranged_Attack()
+    {
+        yield return new WaitForSeconds(100000);
         Destroy(gameObject);
     }
 }
