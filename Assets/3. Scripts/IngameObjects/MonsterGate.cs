@@ -23,6 +23,8 @@ public class MonsterGate : MonoBehaviour
     private int TotalEnemyNum;
     [HideInInspector]
     public int CurrentEnemyNum;
+    [HideInInspector]
+    public int DeathEnemyNum = 0;
 
     private GNode[,] Grid;
     private Vector3 GridCenter;
@@ -32,19 +34,37 @@ public class MonsterGate : MonoBehaviour
     private int GridSizeY;      // 그리드 y 크기
     private readonly float Radius = 0.5f;
 
+    private Coroutine CurrentCoroutine;
+
+    private void Start()
+    {
+        CreateGrid();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && CurrentCoroutine == null)
+            CurrentCoroutine = StartCoroutine(SponeEnemy());
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player") && CurrentCoroutine != null)
         {
-            CreateGrid();
-            StartCoroutine(SponeEnemy());
+            StopCoroutine(CurrentCoroutine);
+            TotalEnemyNum = 0;
+            CurrentCoroutine = null;
         }
+            
     }
 
     private IEnumerator SponeEnemy()
     {
-        while (TotalEnemyNum < 20)
+        while (TotalEnemyNum < 20 - DeathEnemyNum)
         {
+            if (DeathEnemyNum >= 20)
+                Destroy(gameObject);
+
             if (CurrentEnemyNum < 20)
             {
                 GNode newStartPosition;
@@ -66,8 +86,6 @@ public class MonsterGate : MonoBehaviour
             else
                 yield return new WaitForSeconds(0.1f);
         }
-
-        Destroy(gameObject);
     }
 
     private void CreateGrid()

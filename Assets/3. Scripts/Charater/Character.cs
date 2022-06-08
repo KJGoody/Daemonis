@@ -276,7 +276,6 @@ public abstract class Character : MonoBehaviour
     {
         NewText damageText = NewTextPool.Instance.GetObject(TextType);
         damageText.Value = value;
-        Debug.Log(value);
         damageText.InitializeDamageText();
         damageText.PositioningDamageText(transform);
     }

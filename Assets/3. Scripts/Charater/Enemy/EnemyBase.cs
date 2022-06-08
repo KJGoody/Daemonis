@@ -59,6 +59,25 @@ public class EnemyBase : NPC
             }
             currentState.Update();
         }
+
+        if(Vector2.Distance(transform.position, Player.MyInstance.transform.position) > 20)
+        {
+            ChangeState(new IdleState());
+            switch (enemytype.enemyType)
+            {
+                case EnemyType.EnemyTypes.Koblod_Melee:
+                    MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Melee);
+                    break;
+
+                case EnemyType.EnemyTypes.Koblod_Ranged:
+                    MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Ranged);
+                    break;
+            }
+            InitializeEnemyBase();
+            ParentGate.CurrentEnemyNum--;
+        }
+
+
         base.Update();
     }
 
@@ -78,11 +97,6 @@ public class EnemyBase : NPC
 
         currentState = newState;
         currentState.Enter(this);
-    }
-
-    public void ExitState(IState currentstate)
-    {
-        currentstate.Exit();
     }
 
     public override Transform Select()
@@ -177,6 +191,7 @@ public class EnemyBase : NPC
 
         InitializeEnemyBase();
         ParentGate.CurrentEnemyNum--;
+        ParentGate.DeathEnemyNum++;
     }
 
     private void SetLayersRecursively(Transform Object, string name)
