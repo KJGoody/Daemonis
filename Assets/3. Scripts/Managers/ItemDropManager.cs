@@ -38,6 +38,7 @@ public class ItemDropManager : MonoBehaviour
     private void Start()
     {
         qualityProb = CSVReader.Read("EquipmentQualityProb"); // Àåºñ µî±Þ È®·üÇ¥ ÀÐ¾î¿È
+        Invoke("TestDrop",1);
     }
     public void DropItem(Transform dropPosition, int m_Level)
     {
@@ -96,4 +97,15 @@ public class ItemDropManager : MonoBehaviour
         int levelNum = monsterLv / 10;
         return levelNum;
     }
+    public void TestDrop()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            DropItem item = Instantiate(dropItem, transform.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<DropItem>();
+            
+            int m_Level = 0;
+            item.SetDropItem(equipmentPerLv[SetLvNum(m_Level)].items[i], (Quality)(int)Random.Range(0,4));
+        }
+    }
+    
 }

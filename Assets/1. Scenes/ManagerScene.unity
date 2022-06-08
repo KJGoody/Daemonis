@@ -698,7 +698,7 @@ MonoBehaviour:
   attackSpeedPercent: 0
   dodgePercent: 0
   hitPercent: 100
-  criticalPercent: 0
+  criticalPercent: 30
   criticalDamage: 200
   healthRegen: 1
   manaRegen: 1
