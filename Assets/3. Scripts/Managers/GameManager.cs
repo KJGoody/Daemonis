@@ -40,11 +40,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         LoadData();
-        SaveData();
-        //for (int i = 0; i < dontDestroyObj.Length; i++)
-        //{
-        //    DontDestroyOnLoad(dontDestroyObj[i]);
-        //}
+        for (int i = 0; i < dontDestroyObj.Length; i++)
+        {
+            DontDestroyOnLoad(dontDestroyObj[i]);
+        }
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 

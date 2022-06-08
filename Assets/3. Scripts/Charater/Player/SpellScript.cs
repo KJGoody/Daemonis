@@ -35,11 +35,8 @@ public class SpellScript : MonoBehaviour
     [SerializeField]
     private float speed;
     private float SpellxDamage;
-    public float spellxDamage     // 스킬 계수
-    {
-        get { return SpellxDamage; }
-        set { SpellxDamage *= value; }
-    }
+    [HideInInspector]
+    public float StackxDamage;
 
     public float CastTime;
 
@@ -60,31 +57,31 @@ public class SpellScript : MonoBehaviour
             case SpellName.Skill_File_03:   // 용암 지대
                 SoundManager.Instance.PlaySFXSoundLoop("Skill_Fire_04", transform);
                 IsAOEAttack = true;
-                SpellxDamage = 1;
+                SpellxDamage = 0.1f;
                 StartCoroutine(Skill_Fire_03());
                 break;
 
             case SpellName.Skill_File_04:   // 피닉스
                 SoundManager.Instance.PlaySFXSound("Skill_Fire_04");
-                SpellxDamage = 1;
+                SpellxDamage = 2;
                 StartCoroutine(Skill_Fire_04());
                 break;
 
             case SpellName.Skill_File_05:   // 화염 위성
                 IsToggleAttack = true;
-                SpellxDamage = 1;
+                SpellxDamage = 0.1f;
                 StartCoroutine(Skill_Fire_05());
                 break;
 
             case SpellName.Skill_File_07:   // 점화
                 SoundManager.Instance.PlaySFXSound("Skill_Fire_07", 0.2f);
-                SpellxDamage = 1;
+                SpellxDamage = 0.5f * StackxDamage;
                 StartCoroutine(Skill_Fire_07());
                 break;
 
             case SpellName.Skill_File_09:   // 화염 토네이도
                 SoundManager.Instance.PlaySFXSoundLoop("Skill_Fire_09", transform);
-                SpellxDamage = 1;
+                SpellxDamage = 0.2f;
                 StartCoroutine(Skill_Fire_09());
                 break;
         }
@@ -127,6 +124,10 @@ public class SpellScript : MonoBehaviour
 
             if (spellName.Equals(SpellName.Skill_File_09))
             {
+                if (MyTarget != null)
+                    if (!MyTarget.parent.gameObject.GetComponent<EnemyBase>().IsAlive)
+                        MyTarget = null;
+
                 if (MyTarget != null)
                     direction = MyTarget.position - transform.position; // 타겟과 스펠의 방향과 크기 구함
                 myRigidbody.velocity = direction.normalized * speed;    // direction을 normalized하여 방향값으로 바꿔주고 발사하는 힘 적용
@@ -183,7 +184,7 @@ public class SpellScript : MonoBehaviour
         else
             WeaponxDamage = 1;
 
-                           // 무기 배수    // 플레이어 공격력               // 스킬 배수
+        // 무기 배수    // 플레이어 공격력               // 스킬 배수
         float PureDamage = (WeaponxDamage * Player.MyInstance.MyStat.BaseAttack * SpellxDamage) * Player.MyInstance.BuffxDamage;
         character.TakeDamage(false, Player.MyInstance.MyStat.HitPercent, PureDamage, Player.MyInstance.MyStat.Level, direction, NewTextPool.NewTextPrefabsName.Enemy);
     }

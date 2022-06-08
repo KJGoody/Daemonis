@@ -43,7 +43,6 @@ public static class ChanceMaker
     public static bool GetThisChanceResult_Percentage(float HitPercent, float DodgePercent)
     {
         return GetThisChanceResult(HitPercent - DodgePercent);
-
     }
     
     public static float Choose(float[] probs) // °¡ÁßÄ¡ ·£´ý»Ì±â

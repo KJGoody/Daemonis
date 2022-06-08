@@ -677,12 +677,12 @@ MonoBehaviour:
   HealthBar: {fileID: 1928098329}
   ManaBar: {fileID: 1531559611}
   ExpBar: {fileID: 133555253}
-  level: 1
+  level: 30
   levelUpEXP: 100
   currentEXP: 0
-  attack: 10
+  attack: 200
   attackPercent: 0
-  maxHealth: 100
+  maxHealth: 1000
   maxHealthPercent: 0
   currentHealth: 0
   maxMana: 100
@@ -10215,7 +10215,7 @@ MonoBehaviour:
     name: "\uD53C\uB2C9\uC2A4"
     description: "\uD654\uC5FC\uC0C8\uAC00 \uB0A0\uB77C\uAC00\uBA70 \uC801\uC744
       \uD0C0\uACA9\uD55C\uB2E4."
-    SpellCoolTime: 5
+    SpellCoolTime: 8
     SpellMana: 1
     spellType: 0
   - spellPrefab: {fileID: 6560157993589730388, guid: 8314b60243b9a1046bebfd2b13b95391,
@@ -10225,7 +10225,7 @@ MonoBehaviour:
     description: "\uCE90\uB9AD\uD130 \uC8FC\uBCC0\uC73C\uB85C \uBD88\uAF43\uC774
       \uB3CC\uC544\uAC04\uB2E4. \uBD88\uAF43\uC5D0 \uB9DE\uC740 \uC801\uC740 \uD53C\uD574\uB97C
       \uC785\uB294\uB2E4."
-    SpellCoolTime: 0
+    SpellCoolTime: 15
     SpellMana: 1
     spellType: 3
   - spellPrefab: {fileID: 0}
@@ -10235,22 +10235,22 @@ MonoBehaviour:
     SpellCoolTime: 0
     SpellMana: 1
     spellType: 7
-  - spellPrefab: {fileID: 3087472177879209508, guid: a371412eb89ac92479aeaa40a03132c8,
+  - spellPrefab: {fileID: 3087472177879209508, guid: 4cdcb2e0056b2cb4a93e364d310c8045,
       type: 3}
     icon: {fileID: -2521561739700421220, guid: 0831e0e07071a344cb2d1cff639a77b8, type: 3}
     name: "\uC810\uD654"
     description: "\uC801\uC758 \uD654\uC0C1 \uC2A4\uD0DD\uC744 \uBAA8\uB450 \uC18C\uBAA8\uD558\uC5EC
       \uD55C\uBC88\uC5D0 \uAC15\uB825\uD55C \uB300\uBBF8\uC9C0\uB97C \uC900\uB2E4."
-    SpellCoolTime: 5
+    SpellCoolTime: 3
     SpellMana: 1
     spellType: 4
   - spellPrefab: {fileID: 8440346083036277406, guid: 031b9a5d66eb14043a140305c7456a8e,
       type: 3}
-    icon: {fileID: -3853505009514594305, guid: d2fc3abb99d31ab418292911a7c30839, type: 3}
+    icon: {fileID: -5382658593099287584, guid: 879fbd420ee13334ca8000a0477a6511, type: 3}
     name: "\uD654\uC5FC \uD1A0\uB124\uC774\uB3C4"
     description: "\uBAAC\uC2A4\uD130\uB97C \uC790\uB3D9\uC73C\uB85C \uCD94\uC801\uD558\uC5EC
       \uACF5\uACA9\uD558\uB294 \uD654\uC5FC \uD1A0\uB124\uC774\uB3C4\uB97C \uC18C\uD658\uD55C\uB2E4."
-    SpellCoolTime: 5
+    SpellCoolTime: 15
     SpellMana: 1
     spellType: 0
 --- !u!114 &683259552
@@ -15038,7 +15038,7 @@ RectTransform:
   - {fileID: 1222211184}
   - {fileID: 1893305982}
   m_Father: {fileID: 1263047424}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19030,7 +19030,7 @@ RectTransform:
   m_Children:
   - {fileID: 1955470599}
   m_Father: {fileID: 1263047424}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -20300,8 +20300,8 @@ RectTransform:
   - {fileID: 279463796}
   - {fileID: 1571899091}
   - {fileID: 872524182}
-  - {fileID: 1166497303}
   - {fileID: 925436311}
+  - {fileID: 1166497303}
   m_Father: {fileID: 1414563679}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20310,14 +20310,29 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: -540}
   m_SizeDelta: {x: 600, y: 600}
   m_Pivot: {x: 1, y: 0}
---- !u!222 &1263047425
-CanvasRenderer:
+--- !u!114 &1263047425
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263047423}
-  m_CullTransparentMesh: 1
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a7385b3c12b45c4a86afb731892da39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpellActionButton:
+  - {fileID: 1401042047}
+  - {fileID: 1567556285}
+  - {fileID: 1170085820}
+  - {fileID: 1179850466}
+  - {fileID: 496391626}
+  ItemActionButton:
+  - {fileID: 372122474}
+  - {fileID: 2132536044}
+  - {fileID: 107954830}
+  - {fileID: 2098819102}
 --- !u!1 &1263196478
 GameObject:
   m_ObjectHideFlags: 0
@@ -26822,7 +26837,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3853505009514594305, guid: d2fc3abb99d31ab418292911a7c30839,
+  m_Sprite: {fileID: -5382658593099287584, guid: 879fbd420ee13334ca8000a0477a6511,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0

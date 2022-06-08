@@ -89,7 +89,12 @@ public class Player : Character
 
     public void CastSpell(string spellIName)
     {
-        if (SearchEnemy()) AutoTarget();
+        if (MyTarget != null)
+            if (!MyTarget.parent.gameObject.GetComponent<EnemyBase>().IsAlive)
+                MyTarget = null;
+
+        if (MyTarget == null && SearchEnemy()) 
+            AutoTarget();
         
         if (!IsAttacking)
             StartCoroutine(CastingSpell(spellIName));
@@ -151,7 +156,7 @@ public class Player : Character
                         {
                             SpellScript spellScript = Instantiate(newSpell.MySpellPrefab, targetGroups[i].Targets[j]).GetComponent<SpellScript>();
                             spellScript.MyTarget = targetGroups[i].Targets[j];
-                            spellScript.spellxDamage = targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().GetBuff("Skill_Fire_02_Debuff").BuffStack;
+                            spellScript.StackxDamage = targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().GetBuff("Skill_Fire_02_Debuff").BuffStack;
                             targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().OffBuff("Skill_Fire_02_Debuff");
                         }
                     }
