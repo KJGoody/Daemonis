@@ -43,7 +43,7 @@ public class MonsterGate : MonoBehaviour
 
     private IEnumerator SponeEnemy()
     {
-        while (TotalEnemyNum < 100)
+        while (TotalEnemyNum < 20)
         {
             if (CurrentEnemyNum < 20)
             {

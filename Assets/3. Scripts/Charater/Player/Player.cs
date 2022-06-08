@@ -317,7 +317,6 @@ public class Player : Character
             default:
                 optionName.SetValue(stat, (float)(b + value));
                 break;
-
         }
     }
 

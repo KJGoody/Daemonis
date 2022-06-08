@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
         Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
         Player.MyInstance.rigid2D.simulated = true;
         Player.MyInstance.transform.Find("HitBox_Player").gameObject.SetActive(true);
-
+        Player.MyInstance.NewBuff("Skill_Fire_02_Buff");
         LoadingSceneManager.LoadScene("1_Cave");
         //SceneManager.LoadScene("1_Cave", LoadSceneMode.Additive);
     }
