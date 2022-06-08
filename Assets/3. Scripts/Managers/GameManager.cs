@@ -41,10 +41,10 @@ public class GameManager : MonoBehaviour
     {
         LoadData();
         SaveData();
-        for (int i = 0; i < dontDestroyObj.Length; i++)
-        {
-            DontDestroyOnLoad(dontDestroyObj[i]);
-        }
+        //for (int i = 0; i < dontDestroyObj.Length; i++)
+        //{
+        //    DontDestroyOnLoad(dontDestroyObj[i]);
+        //}
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -116,7 +116,13 @@ public class GameManager : MonoBehaviour
             Debug.Log("asdf");
             SceneManager.UnloadSceneAsync("1_Cave");
         }
+        Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
+        Player.MyInstance.rigid2D.simulated = true;
+        Player.MyInstance.transform.Find("HitBox_Player").gameObject.SetActive(true);
+
         LoadingSceneManager.LoadScene("Main");
+
+        
     }
 
     public void GoCave()
@@ -128,6 +134,19 @@ public class GameManager : MonoBehaviour
         LoadingSceneManager.LoadScene("1_Cave");
         //SceneManager.LoadScene("1_Cave", LoadSceneMode.Additive);
 
+    }
+    public void RestartCave()
+    {
+        if (SceneManager.GetSceneByName("1_Cave").IsValid())
+        {
+            SceneManager.UnloadSceneAsync("1_Cave");
+        }
+        Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
+        Player.MyInstance.rigid2D.simulated = true;
+        Player.MyInstance.transform.Find("HitBox_Player").gameObject.SetActive(true);
+
+        LoadingSceneManager.LoadScene("1_Cave");
+        //SceneManager.LoadScene("1_Cave", LoadSceneMode.Additive);
     }
 
 

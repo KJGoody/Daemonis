@@ -63,6 +63,7 @@ public class PlayerInfoPanel : MonoBehaviour
     public Text expPlus;
     public Text vampiric;
     public Text level_UI;
+    public Text gold_Inventory;
     #endregion
 
     void Start()
@@ -177,6 +178,7 @@ public class PlayerInfoPanel : MonoBehaviour
         expPlus.text = "" + stat.ExpPlus.ToString("F2") + "%";
         vampiric.text = "" + stat.VampiricRate.ToString("F2") + "%";
         level_UI.text = "" + stat.Level;
+        gold_Inventory.text = "" + GameManager.MyInstance.DATA.Gold;
         stat.SetHpMP();
     }
 }

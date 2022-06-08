@@ -50,6 +50,10 @@ public abstract class Character : MonoBehaviour
     public float BuffxDamage = 1;
     private float DebuffxDamage = 1;
 
+    public Rigidbody2D rigid2D //юс╫ц
+    {
+        get { return myRigid2D; }
+    }
     protected virtual void Awake()
     {
         stat = gameObject.GetComponent<Stat>();
