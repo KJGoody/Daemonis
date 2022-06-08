@@ -54,6 +54,9 @@ public abstract class Character : MonoBehaviour
     {
         get { return myRigid2D; }
     }
+
+    private float RegenTime = 0f;
+
     protected virtual void Awake()
     {
         stat = gameObject.GetComponent<Stat>();
@@ -62,12 +65,21 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Start()
     {
-        StartCoroutine(RegenHPMP());
+
     }
 
     protected virtual void Update()
     {
         HandleLayers();
+
+        RegenTime += Time.deltaTime;
+        if (IsAlive && RegenTime >= 1)
+        {
+            stat.CurrentHealth += stat.HealthRegen;
+            if (stat.ManaBar != null)
+                stat.CurrentMana += stat.ManaRegen;
+            RegenTime = 0;
+        }
     }
 
     protected virtual void FixedUpdate()
@@ -259,17 +271,6 @@ public abstract class Character : MonoBehaviour
         stat.CurrentHealth += stat.RecoverHealth_onhit;
         if (stat.ManaBar != null)
             stat.CurrentMana += stat.RecoverMana_onhit;
-    }
-
-    public IEnumerator RegenHPMP()
-    {
-        do
-        {
-            stat.CurrentHealth += stat.HealthRegen;
-            if (stat.ManaBar != null)
-                stat.CurrentMana += stat.ManaRegen;
-            yield return new WaitForSeconds(1);
-        } while (IsAlive);
     }
 
     private void NEWText(NewTextPool.NewTextPrefabsName TextType, int value = 0)

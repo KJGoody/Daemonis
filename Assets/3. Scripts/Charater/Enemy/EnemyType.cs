@@ -61,7 +61,7 @@ public class EnemyType : MonoBehaviour
             case EnemyTypes.Koblod_Melee:
                 AggroRnage = 3;
                 ExitPoint = new Vector3(-0.1f, 0.2f, 0);
-                AttackRnage = 0.5f;
+                AttackRnage = 0.75f;
                 AttackDelay = 1;
                 break;
 

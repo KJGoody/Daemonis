@@ -207,7 +207,6 @@ public class EnemyBase : NPC
         myStartPosition = startPosition;
         transform.position = startPosition;
 
-        StartCoroutine(RegenHPMP());
         if(ChanceMaker.GetThisChanceResult_Percentage(50))
             SoundManager.Instance.PlaySFXSound(GetComponent<AudioSource>(), "MoiusesquealSound" + Random.Range(1, 5));
     }

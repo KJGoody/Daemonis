@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour
         Player.MyInstance.rigid2D.simulated = true;
         Player.MyInstance.transform.Find("HitBox_Player").gameObject.SetActive(true);
 
+
         LoadingSceneManager.LoadScene("Main");
 
         
