@@ -140,15 +140,25 @@ public abstract class Character : MonoBehaviour
 
     private void StartBuff(string buffName)
     {
+        bool IsAlreadyIn = false;
+        int Index = 0;
+
         if (OnBuff.Count > 0)
         {
-            foreach (Buff buff in OnBuff)
+            for (int i = 0; i < OnBuff.Count; i++)
             {
-                if (buff.BuffName.Equals(buffName))
-                    buff.ResetBuff();
-                else
-                    buffManager.AddBuffImage(buffName, this);
+                if (OnBuff[i].BuffName.Equals(buffName))
+                {
+                    IsAlreadyIn = true;
+                    Index = i;
+                }
             }
+            if (IsAlreadyIn)
+                OnBuff[Index].ResetBuff();
+            else
+                buffManager.AddBuffImage(buffName, this);
+
+
         }
         else
             buffManager.AddBuffImage(buffName, this);
@@ -165,6 +175,7 @@ public abstract class Character : MonoBehaviour
 
     public bool IsOnBuff(string buffName)
     {
+
         if (OnBuff.Count > 0)
         {
             foreach (Buff buff in OnBuff)

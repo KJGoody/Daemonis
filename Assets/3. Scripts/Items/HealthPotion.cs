@@ -13,16 +13,19 @@ public class HealthPotion : Item
     // 아이템 사용시
     public void Use()
     {
+        Player.MyInstance.NewBuff("HealPotion_Buff");
+
+        Remove();
         // 체력이 최대체력보다 낮으면
-        if (Player.MyInstance.MyStat.CurrentHealth < Player.MyInstance.MyStat.BaseMaxHealth)
-        {
-            // 사용하는 아이템을 없애고
+        //if (Player.MyInstance.MyStat.CurrentHealth < Player.MyInstance.MyStat.BaseMaxHealth)
+        //{
+        //    // 사용하는 아이템을 없애고
 
-            Remove();
+        //    Remove();
 
-            // 체력을 회복한다.
-            Player.MyInstance.MyStat.CurrentHealth += health;
-        }
+        //    // 체력을 회복한다.
+        //    Player.MyInstance.MyStat.CurrentHealth += health;
+        //}
     }
 
     //public string GetName()

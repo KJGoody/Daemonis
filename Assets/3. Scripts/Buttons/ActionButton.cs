@@ -19,7 +19,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
     private TextMeshProUGUI stackSize;
     // 사용 가능 아이템 리스트
 
-    private Stack<IUseable> useables = new Stack<IUseable>();
+    public Stack<IUseable> useables = new Stack<IUseable>();
     private int count;
     public int MyCount { get { return count; } }
     public TextMeshProUGUI MyStackText { get { return stackSize; } }
@@ -55,6 +55,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
                     Player.MyInstance.MyStat.CurrentMana -= (MyUseable as Spell).MySpellMana;
 
                     MyUseable.Use();
+                    ActionButtonManager.Instance.IsCoolDownOtherButton_Spell(MyUseable);
                 }
             }
 
@@ -70,6 +71,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
                     StartCoroutine(StartCoolDown());
                     ItemBase itemBase = useables.Peek() as ItemBase;
                     itemBase.Use();
+                    ActionButtonManager.Instance.IsCoolDownOtherButton_Item(itemBase);
                 }
             }
         }

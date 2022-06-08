@@ -24,7 +24,7 @@ public class ItemDropManager : MonoBehaviour
     }
     public Items[] equipmentPerLv; // 기본 장비 아이템 리스트 열에 해당되는 이름
     public DropItem dropItem; // 드랍아이템 프리팹
-
+    public Item Item;
     private float equipmentDropProb = 10;
     private int baseGold = 100;
     public float EquipmentDropProb // 장비 드랍확률
@@ -89,5 +89,11 @@ public class ItemDropManager : MonoBehaviour
         {
             Debug.Log(equipmentPerLv[0].items[0]);
         }
+    }
+
+    public void fun()
+    {
+        DropItem item = Instantiate(dropItem, Vector2.zero, Quaternion.identity).GetComponent<DropItem>();
+        item.SetDropItem(Item, Quality.Advanced);
     }
 }

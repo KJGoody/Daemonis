@@ -123,6 +123,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
         }
 
     }
+    
     public string MyQualityText
     {
         get

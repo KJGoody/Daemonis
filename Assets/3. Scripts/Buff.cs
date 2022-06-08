@@ -87,6 +87,10 @@ public class Buff : MonoBehaviour
             case "Skill_Fire_02_Debuff":
                 StartCoroutine(Skill_Fire_02_Debuff());
                 break;
+
+            case "HealPotion_Buff":
+                StartCoroutine(HealPotion_Buff());
+                break;
         }
     }
 
@@ -128,6 +132,15 @@ public class Buff : MonoBehaviour
             if(Target.IsAlive)
                 Target.TakeDamage(false, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, NewTextPool.NewTextPrefabsName.Enemy);
             yield return new WaitForSeconds(WaitForSconds);
+        }
+    }
+
+    private IEnumerator HealPotion_Buff()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            Player.MyInstance.MyStat.CurrentHealth += 1;
         }
     }
 }
