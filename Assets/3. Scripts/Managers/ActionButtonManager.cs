@@ -15,6 +15,9 @@ public class ActionButtonManager : MonoBehaviour
         }
     }
 
+    public ActionButtonData SavedData { get; private set; }
+    public ActionButtonData DATA;
+
     [SerializeField]
     private ActionButton[] SpellActionButton;
     [SerializeField]
@@ -38,5 +41,33 @@ public class ActionButtonManager : MonoBehaviour
                 if ((actionButton.useables.Peek() as ItemBase).MyName.Equals(useable.MyName))
                     Debug.Log(10);
         }
+    }
+
+    public void SaveData()
+    {
+        // 지금까지의 변경사항을 저장한다.
+        SaveLoadManager.DataSave(DATA, "ActionButtonData");
+    }
+
+    public void LoadData()
+    {
+        if (SaveLoadManager.FileExists("ActionButtonData"))
+            SavedData = SaveLoadManager.DataLoad<ActionButtonData>("ActionButtonData");
+        else
+            SavedData = new ActionButtonData(SpellActionButton, ItemActionButton);
+
+        // 저장되어있는 사항을 저장한다.
+        DATA = SavedData;
+    }
+}
+
+public class ActionButtonData
+{
+    public ActionButton[] SpellActionButton;
+    public ActionButton[] ItemActionButton;
+
+    public ActionButtonData(ActionButton[] Spell, ActionButton[] Item)
+    {
+
     }
 }

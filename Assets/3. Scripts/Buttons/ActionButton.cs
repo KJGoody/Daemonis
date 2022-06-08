@@ -55,7 +55,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
                     Player.MyInstance.MyStat.CurrentMana -= (MyUseable as Spell).MySpellMana;
 
                     MyUseable.Use();
-                    ActionButtonManager.Instance.IsCoolDownOtherButton_Spell(MyUseable);
+                    //ActionButtonManager.Instance.IsCoolDownOtherButton_Spell(MyUseable);
                 }
             }
 
@@ -71,7 +71,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
                     StartCoroutine(StartCoolDown());
                     ItemBase itemBase = useables.Peek() as ItemBase;
                     itemBase.Use();
-                    ActionButtonManager.Instance.IsCoolDownOtherButton_Item(itemBase);
+                    //ActionButtonManager.Instance.IsCoolDownOtherButton_Item(itemBase);
                 }
             }
         }

@@ -4,16 +4,16 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -5382658593099287584
-    second: "\uD68C\uC624\uB9AC \uB3C4\uD2B8_0"
+    second: Skill_Fire_Sprite09_0
   - first:
       213: 7098901061456845513
-    second: "\uD68C\uC624\uB9AC \uB3C4\uD2B8_1"
+    second: Skill_Fire_Sprite09_1
   - first:
       213: 391037587640954579
-    second: "\uD68C\uC624\uB9AC \uB3C4\uD2B8_2"
+    second: Skill_Fire_Sprite09_2
   - first:
       213: -1097240988421966906
-    second: "\uD68C\uC624\uB9AC \uB3C4\uD2B8_3"
+    second: Skill_Fire_Sprite09_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,7 +127,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uD68C\uC624\uB9AC \uB3C4\uD2B8_0"
+      name: Skill_Fire_Sprite09_0
       rect:
         serializedVersion: 2
         x: 0
@@ -135,7 +135,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -148,7 +148,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uD68C\uC624\uB9AC \uB3C4\uD2B8_1"
+      name: Skill_Fire_Sprite09_1
       rect:
         serializedVersion: 2
         x: 128
@@ -156,7 +156,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -169,7 +169,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uD68C\uC624\uB9AC \uB3C4\uD2B8_2"
+      name: Skill_Fire_Sprite09_2
       rect:
         serializedVersion: 2
         x: 0
@@ -177,7 +177,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,7 +190,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uD68C\uC624\uB9AC \uB3C4\uD2B8_3"
+      name: Skill_Fire_Sprite09_3
       rect:
         serializedVersion: 2
         x: 128
@@ -198,7 +198,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

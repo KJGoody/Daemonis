@@ -125,7 +125,7 @@ public class Buff : MonoBehaviour
         PuffObject.PositioningPuff(Target.transform);
 
         float WaitForSconds = 0.5f;
-        int TickDamage = 1;
+        int TickDamage = Player.MyInstance.MyStat.BaseAttack / 25;
 
         while (true)
         {
