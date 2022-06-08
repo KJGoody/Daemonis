@@ -6,6 +6,10 @@ public class ActPortal : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PortalManager.MyInstance.ShowTeleportList();
+        PortalManager.MyInstance.ShowTeleportList(true);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        PortalManager.MyInstance.ShowTeleportList(false);
     }
 }

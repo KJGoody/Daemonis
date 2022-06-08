@@ -43,9 +43,9 @@ public class PortalManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) // 씬이 로딩될때 실행
     {
-        aSDF();
+        ReturnPortalButton();
     }
-    public void aSDF()
+    public void ReturnPortalButton()
     {
         Debug.Log(SceneManager.GetActiveScene().name);
         
@@ -62,9 +62,9 @@ public class PortalManager : MonoBehaviour
         }
     }
 
-    public void ShowTeleportList()
+    public void ShowTeleportList(bool _bool)
     {
-        teleport_Panel.SetActive(true);
+        teleport_Panel.SetActive(_bool);
     }
     public void GoLobby()
     {
