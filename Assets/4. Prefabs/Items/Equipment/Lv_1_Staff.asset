@@ -16,7 +16,7 @@ MonoBehaviour:
   stackSize: 0
   itemName: "\uD5C8\uB984\uD55C \uC9C0\uD321\uC774"
   descript: "\uD5C8\uB984\uD55C \uC9C0\uD321\uC774\uB2E4."
-  effect: 
+  effect: "\uACF5\uACA9\uB825 10"
   limitLevel: 1
   kind: 1
   part: 3

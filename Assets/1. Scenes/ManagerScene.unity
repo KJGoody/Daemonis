@@ -347,7 +347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &34106422
 RectTransform:
   m_ObjectHideFlags: 0
@@ -682,7 +682,7 @@ MonoBehaviour:
   currentEXP: 0
   attack: 200
   attackPercent: 0
-  maxHealth: 1000
+  maxHealth: 500
   maxHealthPercent: 0
   currentHealth: 0
   maxMana: 100
@@ -700,8 +700,8 @@ MonoBehaviour:
   hitPercent: 100
   criticalPercent: 0
   criticalDamage: 200
-  healthRegen: 0
-  manaRegen: 0
+  healthRegen: 1
+  manaRegen: 1
   recoverHealth_onhit: 0
   recoverMana_onhit: 0
   coolDown: 0
@@ -2158,6 +2158,7 @@ MonoBehaviour:
   BuffList: []
   buffs:
   - {fileID: 5934066812242723445, guid: 1ceaa1b1d6ec86b45b47da8d34505858, type: 3}
+  - {fileID: 5934066812242723445, guid: 679fbc4d9ec4e78439181812bd71b447, type: 3}
 --- !u!114 &164136519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5362,7 +5363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &362401311
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9645,6 +9646,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b930d7ef3c31d3a4c8ee6e2c4f2e05f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropItem: {fileID: 1411184612657943188, guid: 2c677614418dfb64b8277b05c990cdb8,
+    type: 3}
   equipmentPerLv:
   - items:
     - {fileID: 11400000, guid: f6fd31f718dbc9b46bf6e4c03b82df86, type: 2}
@@ -9653,9 +9656,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4d0d09c53ca147b4fbdb636cfb85ad2e, type: 2}
     - {fileID: 11400000, guid: 4fb87f7dc022459468b3fe795055f131, type: 2}
     - {fileID: 11400000, guid: d4c2fc7018779d84f87971f32684b944, type: 2}
-  dropItem: {fileID: 1411184612657943188, guid: 2c677614418dfb64b8277b05c990cdb8,
-    type: 3}
-  Item: {fileID: 0}
+  potion: {fileID: 11400000, guid: 024f5d8ebb329fe46929e66f5165e21f, type: 2}
 --- !u!1 &618137756
 GameObject:
   m_ObjectHideFlags: 0
@@ -12398,7 +12399,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793317085}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1183.0139, y: -597.3589, z: -10}
+  m_LocalPosition: {x: -1183.012, y: -597.3589, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 900256415}
@@ -25589,7 +25590,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598727260}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1183.0139, y: -597.3589, z: -10}
+  m_LocalPosition: {x: -1183.012, y: -597.3589, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1675068945}
@@ -33670,8 +33671,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterVolumeSFX: 1
   masterVolumeBGM: 1
-  inGameBgmAudioClip: {fileID: 8300000, guid: 9e221d1cfc370964f8f534b8f2836e9f, type: 3}
-  menuBgmAudioClip: {fileID: 0}
+  lobbyBgmAudioClip: {fileID: 8300000, guid: f38d136d32ec45d4d9fb61f1d3c60047, type: 3}
+  caveBgmAudioClip: {fileID: 8300000, guid: 9e221d1cfc370964f8f534b8f2836e9f, type: 3}
   sfxAudioClips:
   - {fileID: 8300000, guid: 06aeeff0433de5c4d9fa4abd3dfe395c, type: 3}
   - {fileID: 8300000, guid: ec4bd8626d2027b4a9b5330d5e5ea0d9, type: 3}

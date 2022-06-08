@@ -316,9 +316,9 @@ MonoBehaviour:
   level: 30
   levelUpEXP: 0
   currentEXP: 0
-  attack: 20
+  attack: 30
   attackPercent: 0
-  maxHealth: 1000
+  maxHealth: 800
   maxHealthPercent: 0
   currentHealth: 0
   maxMana: 0
@@ -378,7 +378,7 @@ MonoBehaviour:
   myAggroRange: 0
   myAttackRange: 0
   MyAttackTime: 0
-  EnemyEXP: 10
+  EnemyEXP: 1
 --- !u!70 &9198583228697994435
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

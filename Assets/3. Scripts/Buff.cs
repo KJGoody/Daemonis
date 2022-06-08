@@ -140,7 +140,7 @@ public class Buff : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1);
-            Player.MyInstance.MyStat.CurrentHealth += 1;
+            Player.MyInstance.MyStat.CurrentHealth += 20;
         }
     }
 }

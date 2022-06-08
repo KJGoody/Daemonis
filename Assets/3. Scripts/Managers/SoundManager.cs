@@ -25,9 +25,9 @@ public class SoundManager : MonoBehaviour
     public float masterVolumeSFX = 1f;
     public float masterVolumeBGM = 1f;
     [SerializeField]
-    private AudioClip inGameBgmAudioClip; // 인게임에서 사용할 BGM
+    private AudioClip lobbyBgmAudioClip; // 로비에서 사용할 BGM
     [SerializeField]
-    private AudioClip menuBgmAudioClip; // 메인메뉴에서 사용할 BGM
+    private AudioClip caveBgmAudioClip; // 액트1 동굴에서 사용할 BGM
     //[SerializeField]
     //private AudioClip loadingBgmAudioClip; // 로딩씬에서 사용할 BGM
     //[SerializeField]
@@ -118,21 +118,21 @@ public class SoundManager : MonoBehaviour
     }
 
     //BGM 사운드 재생 : 볼륨을 선택적 매개변수로 지정
-    public void PlayBGMSound(float volume = 1f)
+    public void PlayBGMSound(Scene scene ,float volume = 1f)
     {
         bgmPlayer.loop = true; //BGM 사운드이므로 루프설정
         //bgmPlayer.volume = volume * masterVolumeBGM;
-
-        if (SceneManager.GetActiveScene().name == "Main")
+        Debug.Log(SceneManager.GetActiveScene().name);
+        if (scene.name == "Main")
         {
-            bgmPlayer.clip = inGameBgmAudioClip;
+            bgmPlayer.clip = lobbyBgmAudioClip;
             bgmPlayer.Play();
         }
-        //else if (SceneManager.GetActiveScene().name == "MenuScene")
-        //{
-        //    bgmPlayer.clip = menuBgmAudioClip;
-        //    bgmPlayer.Play();
-        //}
+        else if (scene.name == "1_Cave")
+        {
+            bgmPlayer.clip = caveBgmAudioClip;
+            bgmPlayer.Play();
+        }
         //else if (SceneManager.GetActiveScene().name == "LoadingScene")
         //{
         //    bgmPlayer.clip = loadingBgmAudioClip;
@@ -157,9 +157,9 @@ public class SoundManager : MonoBehaviour
             //case "Credit":
             //    playClip = CreditAudioClip;
             //    break;
-            case "Menu":
-                playClip = menuBgmAudioClip;
-                break;
+            //case "Menu":
+            //    playClip = menuBgmAudioClip;
+            //    break;
         }
         bgmPlayer.clip = playClip;
         bgmPlayer.Play();
@@ -182,7 +182,7 @@ public class SoundManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) // 씬이 로딩될때 실행
     {
-        PlayBGMSound();
+        PlayBGMSound(scene);
     }
 
     public void PlayUISound()

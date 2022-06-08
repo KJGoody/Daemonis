@@ -50,7 +50,6 @@ public class PortalManager : MonoBehaviour
         Debug.Log(SceneManager.GetActiveScene().name);
         
         Scene scene = SceneManager.GetSceneByName("Main");
-        Debug.Log(scene.name);
         if(scene.name == "Main")
         {
             returnButton.interactable = false;
