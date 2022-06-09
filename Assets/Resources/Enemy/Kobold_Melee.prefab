@@ -313,7 +313,7 @@ MonoBehaviour:
   HealthBar: {fileID: 894972730622518897}
   ManaBar: {fileID: 0}
   ExpBar: {fileID: 0}
-  level: 30
+  level: 1
   levelUpEXP: 0
   currentEXP: 0
   attack: 30

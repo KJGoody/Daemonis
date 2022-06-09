@@ -38,7 +38,9 @@ public class ItemDropManager : MonoBehaviour
     private void Start()
     {
         qualityProb = CSVReader.Read("EquipmentQualityProb"); // 장비 등급 확률표 읽어옴
-        Invoke("TestDrop",1);
+        //Invoke("TestDrop",1);
+        Invoke("InitItem",0.1f);
+
     }
     public void DropItem(Transform dropPosition, int m_Level)
     {
@@ -97,7 +99,7 @@ public class ItemDropManager : MonoBehaviour
         int levelNum = monsterLv / 10;
         return levelNum;
     }
-    public void TestDrop()
+    public void TestDrop() // 장비 한세트 드랍 (테스트용)
     {
         for (int i = 0; i < 6; i++)
         {
@@ -106,6 +108,19 @@ public class ItemDropManager : MonoBehaviour
             int m_Level = 0;
             item.SetDropItem(equipmentPerLv[SetLvNum(m_Level)].items[i], (Quality)(int)Random.Range(0,4));
         }
+    }
+    public void InitItem() // 게임 시작할때 기본장비 착용
+    {
+        ItemBase[] items = new ItemBase[4];
+
+        for(int i = 0; i < 4; i++)
+        {
+            items[i] = new ItemBase();
+            items[i].itemInfo = equipmentPerLv[0].items[i];
+            Player.MyInstance.EquipItem(items[i]);
+        }
+        Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
+        Player.MyInstance.MyStat.CurrentMana = Player.MyInstance.MyStat.CurrentMaxMana;
     }
     
 }

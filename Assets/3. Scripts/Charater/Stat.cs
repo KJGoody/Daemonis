@@ -118,10 +118,10 @@ public class Stat : MonoBehaviour
         get { return currentHealth; }
         set
         {
-            if (value > BaseMaxHealth)
+            if (value > CurrentMaxHealth)
             {
-                currentHealth = BaseMaxHealth;
-                HealthBar.StatBarCurrentValue = BaseMaxHealth;
+                currentHealth = CurrentMaxHealth;
+                HealthBar.StatBarCurrentValue = CurrentMaxHealth;
             }
             else if (value < 0)
             {
@@ -162,10 +162,10 @@ public class Stat : MonoBehaviour
         get { return currentMana; }
         set
         {
-            if (value > BaseMaxMana)
+            if (value > CurrentMaxMana)
             {
-                currentMana = BaseMaxMana;
-                ManaBar.StatBarCurrentValue = BaseMaxMana;
+                currentMana = CurrentMaxMana;
+                ManaBar.StatBarCurrentValue = CurrentMaxMana;
             }
             else if (value < 0)
             {
@@ -437,5 +437,11 @@ public class Stat : MonoBehaviour
     {
         currentHealth = CurrentMaxHealth;
         HealthBar.Initialize(CurrentMaxHealth, CurrentMaxHealth);
+    }
+    private void Update()
+    {
+        levelUpEXP = level * 10;
+        if(ExpBar != null)
+            ExpBar.SetMax(levelUpEXP);
     }
 }

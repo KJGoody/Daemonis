@@ -45,7 +45,8 @@ public class StatBar : MonoBehaviour
     public void SetMax(int maxValue)
     {
         StatBarMaxValue = maxValue;
-        StatBarText.text = currentValue + " / " + StatBarMaxValue;
         currentFill = currentValue / StatBarMaxValue;
+        if(StatBarText != null)
+            StatBarText.text = currentValue + " / " + StatBarMaxValue;
     }
 }

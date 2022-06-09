@@ -209,6 +209,12 @@ public class HandScript : MonoBehaviour
         SI_Obj_Blind.SetActive(false);
 
     }
+    public void RemoveItem()
+    {
+        myItem.Remove();
+        SI_Panel.SetActive(false);
+        myItem = null;
+    }
     public void Close_SI_Panel() // 선택 아이템 패널 닫기
     {
         SI_Panel.SetActive(false);

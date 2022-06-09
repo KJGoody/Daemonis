@@ -62,7 +62,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
     {
         EquipmentItem equipmentItem = itemInfo as EquipmentItem;
         equipmentItem.ActiveEquipment(isActive); // 장비 베이스 스탯 증감
-        if (addOptionList[0] != null) // 추가 옵션 증감
+        if (addOptionList.Count > 0) // 추가 옵션 증감
         {
             for (int i = 0; i < addOptionList.Count; i++)
             {

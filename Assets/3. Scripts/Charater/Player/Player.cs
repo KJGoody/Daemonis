@@ -326,7 +326,7 @@ public class Player : Character
         if (Repeat)
             EXP = MonsterExP;
         else
-            EXP = MonsterExP * MyStat.ExpPlus;
+            EXP = MonsterExP + MonsterExP * ( MyStat.ExpPlus / 100f );
 
         if (MyStat.LevelUpEXP > MyStat.CurrentEXP + EXP)
             MyStat.CurrentEXP += EXP;
@@ -334,6 +334,8 @@ public class Player : Character
         {
             float surPlusEXP = MyStat.CurrentEXP + EXP - MyStat.LevelUpEXP;
             MyStat.Level++;
+            MyStat.CurrentHealth = MyStat.CurrentMaxHealth;
+            MyStat.CurrentMana = MyStat.CurrentMaxMana;
             MyStat.CurrentEXP = 0;
             MyStat.ExpBar.Initialize(MyStat.LevelUpEXP, MyStat.CurrentEXP);
             Instantiate(lvUp_Particle, transform).transform.SetParent(transform);

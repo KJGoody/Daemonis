@@ -28,11 +28,11 @@ public class DropItem : MonoBehaviour
     [HideInInspector]
     public bool L_Start;
     private bool up = false;
-    DropItem(ItemBase item) //나중에 지울 가능성 큼
-    {
-        this.item = item;
-        sprite.sprite = item.MyIcon;
-    }
+    //DropItem(ItemBase item) //나중에 지울 가능성 큼
+    //{
+    //    this.item = item;
+    //    sprite.sprite = item.MyIcon;
+    //}
 
     public void SetDropItem(Item _item, Quality _quality) // 몬스터에서 드랍할때 이걸로 추가할 예정
     {

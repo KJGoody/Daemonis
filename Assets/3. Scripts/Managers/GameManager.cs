@@ -40,10 +40,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         LoadData();
-        for (int i = 0; i < dontDestroyObj.Length; i++)
-        {
-            DontDestroyOnLoad(dontDestroyObj[i]);
-        }
+        //for (int i = 0; i < dontDestroyObj.Length; i++)
+        //{
+        //    DontDestroyOnLoad(dontDestroyObj[i]);
+        //}
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -116,13 +116,11 @@ public class GameManager : MonoBehaviour
             SceneManager.UnloadSceneAsync("1_Cave");
         }
         Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
+        Player.MyInstance.MyStat.CurrentMana = Player.MyInstance.MyStat.CurrentMaxMana;
         Player.MyInstance.rigid2D.simulated = true;
         Player.MyInstance.transform.Find("HitBox_Player").gameObject.SetActive(true);
-
-
+        Player.MyInstance.NewBuff("Skill_Fire_02_Buff");
         LoadingSceneManager.LoadScene("Main");
-
-        
     }
 
     public void GoCave()
@@ -142,13 +140,13 @@ public class GameManager : MonoBehaviour
             SceneManager.UnloadSceneAsync("1_Cave");
         }
         Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
+        Player.MyInstance.MyStat.CurrentMana = Player.MyInstance.MyStat.CurrentMaxMana;
         Player.MyInstance.rigid2D.simulated = true;
         Player.MyInstance.transform.Find("HitBox_Player").gameObject.SetActive(true);
         Player.MyInstance.NewBuff("Skill_Fire_02_Buff");
         LoadingSceneManager.LoadScene("1_Cave");
         //SceneManager.LoadScene("1_Cave", LoadSceneMode.Additive);
     }
-
 
     public void SaveData()
     {
