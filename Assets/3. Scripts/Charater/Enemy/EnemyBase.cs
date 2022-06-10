@@ -133,7 +133,7 @@ public class EnemyBase : NPC
             Player.MyInstance.SpendEXP(EnemyEXP);
             ChangeState(new IdleState());
 
-            SoundManager.Instance.PlaySFXSound(GetComponent<AudioSource>(), "BodyExploding" + Random.Range(1, 3));
+            SoundManager.Instance.PlaySFXSound("BodyExploding" + Random.Range(1, 3));
             _prefabs.PlayAnimation(2);
             HealthBarImage.SetActive(false);
             _prefabs.transform.GetChild(0).GetComponent<SortingGroup>().sortingLayerName = "DeathEnemyLayer";
@@ -208,7 +208,7 @@ public class EnemyBase : NPC
         transform.position = startPosition;
 
         if(ChanceMaker.GetThisChanceResult_Percentage(50))
-            SoundManager.Instance.PlaySFXSound(GetComponent<AudioSource>(), "MoiusesquealSound" + Random.Range(1, 5));
+            SoundManager.Instance.PlaySFXSound("MoiusesquealSound" + Random.Range(1, 5));
     }
     
     

@@ -378,7 +378,7 @@ MonoBehaviour:
   myAggroRange: 0
   myAttackRange: 0
   MyAttackTime: 0
-  EnemyEXP: 1
+  EnemyEXP: 3
 --- !u!70 &9198583228697994435
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
