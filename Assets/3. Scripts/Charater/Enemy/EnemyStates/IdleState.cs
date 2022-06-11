@@ -32,7 +32,7 @@ class IdleState : IState
     }
 
     IEnumerator NextPatrol()
-    {
+    {   // 일정시간 후 정찰 상태로 돌입
         float NextPatrolSeconds = Random.Range(5f, 15f);
         yield return new WaitForSeconds(NextPatrolSeconds);
         parent.ChangeState(new PatrolState());

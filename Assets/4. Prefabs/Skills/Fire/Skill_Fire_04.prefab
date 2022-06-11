@@ -121,13 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc06bfb1b97f074fb1b63e0f2f06c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PuffObject: {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b,
-    type: 3}
   spellName: 2
   MyTarget: {fileID: 0}
   atkDir: {x: 0, y: 0}
   speed: 5
-  damage: 5
+  StackxDamage: 0
   CastTime: 0.3
 --- !u!212 &7089291890261483673
 SpriteRenderer:
@@ -202,7 +200,7 @@ Animator:
   m_GameObject: {fileID: 8440346083036277406}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d0769a23a38e10b4ba6f412ae84d01aa, type: 2}
+  m_Controller: {fileID: 9100000, guid: f6c7643f011e4b545abb58b8d8d4bdf1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

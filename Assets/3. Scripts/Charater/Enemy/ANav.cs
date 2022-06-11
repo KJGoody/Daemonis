@@ -5,15 +5,15 @@ using UnityEngine;
 [System.Serializable]
 public class ANode
 {
-    public bool isWall;
-    public Vector3 worldPos;
-    public int GridX;
-    public int GridY;
+    public bool isWall;         // 해당지점이 벽인지 아닌지
+    public Vector3 worldPos;    // 월드 좌표
+    public int GridX;           // 그리드 x좌표
+    public int GridY;           // 그리드 y좌표
 
-    public int gCost;
-    public int hCost;
+    public int gCost;           // 시작 노드부터 현재 노드까지의 비용
+    public int hCost;           // 현재 노드에서 목표 노드까지의 비용
 
-    public ANode parentNode;
+    public ANode parentNode;    // 부모 노드
 
     public ANode(bool nisWall, Vector3 nWorldPos, int nGridX, int nGridY)
     {
@@ -32,7 +32,7 @@ public class ANav : MonoBehaviour
     private ANode[,] Grid;
     private Vector3 GridCenter;
     [SerializeField]
-    private Vector2 GridSize;    // 그리드 크기
+    private Vector2 GridSize;   // 그리드 크기
     private int GridSizeX;      // 그리드 x 크기
     private int GridSizeY;      // 그리드 y 크기
 

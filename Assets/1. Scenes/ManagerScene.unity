@@ -10373,7 +10373,7 @@ MonoBehaviour:
     spellType: 2
   - spellPrefab: {fileID: 8440346083036277406, guid: 80446584eacf25a4ea59e5979c9b3c25,
       type: 3}
-    icon: {fileID: -2554913593723263831, guid: 1033160627b693443a43f1781a4dadce, type: 3}
+    icon: {fileID: 8778979201212029339, guid: 561a501040a5ff34087ea555b8c1b1b9, type: 3}
     name: "\uD53C\uB2C9\uC2A4"
     description: "\uD654\uC5FC\uC0C8\uAC00 \uB0A0\uB77C\uAC00\uBA70 \uC801\uC744
       \uD0C0\uACA9\uD55C\uB2E4."
@@ -32767,7 +32767,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2554913593723263831, guid: 1033160627b693443a43f1781a4dadce,
+  m_Sprite: {fileID: 8778979201212029339, guid: 561a501040a5ff34087ea555b8c1b1b9,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0

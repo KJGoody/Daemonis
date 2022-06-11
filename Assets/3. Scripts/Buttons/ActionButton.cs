@@ -47,7 +47,8 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             // 액션퀵슬롯에 등록된 것이 사용할 수 있는거라면
             if (MyUseable != null)
             {
-                if (CurrentCollTime == 0 && Player.MyInstance.MyStat.CurrentMana - (MyUseable as Spell).MySpellMana >= 0)   // 현재 쿨타임이 0일 경우에만 사용할 수 있다. && 플레이어의 현재 마나가 스킬 마나보다 많아야 한다.
+                // 현재 쿨타임이 0일 경우에만 사용할 수 있다. && 플레이어의 현재 마나가 스킬 마나보다 많아야 한다.
+                if (CurrentCollTime == 0 && Player.MyInstance.MyStat.CurrentMana - (MyUseable as Spell).MySpellMana >= 0)   
                 {
                     CoolTime = (MyUseable as Spell).MySpellCoolTime;
                     StartCoroutine(StartCoolDown());
@@ -55,7 +56,6 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
                     Player.MyInstance.MyStat.CurrentMana -= (MyUseable as Spell).MySpellMana;
 
                     MyUseable.Use();
-                    //ActionButtonManager.Instance.IsCoolDownOtherButton_Spell(MyUseable);
                 }
             }
 
@@ -66,12 +66,11 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
                 // useables 에 등록된 아이템을 사용합니다.
                 // Peek() 은 아이템을 배열에서 제거하지 않습니다.
                 if(CurrentCollTime == 0)
-                {
+                {   // 물약 쿨타임 설정 후 쿨다운 이미지 생성 코루틴 시작
                     CoolTime = 3f;
                     StartCoroutine(StartCoolDown());
                     ItemBase itemBase = useables.Peek() as ItemBase;
                     itemBase.Use();
-                    //ActionButtonManager.Instance.IsCoolDownOtherButton_Item(itemBase);
                 }
             }
         }
@@ -179,7 +178,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
     }
 
     private IEnumerator StartCoolDown()
-    {
+    {   // 재사용 대기시간 이미지를 보이도록 하는 코루틴
         CoolTimeFillImage.gameObject.SetActive(true);
 
         CurrentCollTime = CoolTime;
