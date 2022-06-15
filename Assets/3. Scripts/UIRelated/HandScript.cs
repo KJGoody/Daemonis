@@ -68,6 +68,8 @@ public class HandScript : MonoBehaviour
     [SerializeField]
     private ContentSizeFitter SI_CSF_Panel;
     #endregion
+    [SerializeField]
+    private GameObject UE_Panel;// 장착아이템 패널
 
     // IMoveable은 Spell에서 상속받는다.
     public IMoveable MyMoveable { get; set; }
@@ -232,6 +234,10 @@ public class HandScript : MonoBehaviour
     public void Close_SI_Panel() // 선택 아이템 패널 닫기
     {
         SI_Panel.SetActive(false);
+    }
+    public void Close_UE_Panel() // 선택 아이템 패널 닫기
+    {
+        UE_Panel.SetActive(false);
     }
     public IMoveable Put() // MyMoveable에 넣어져있는것 슬롯에 넣는 함수
     {

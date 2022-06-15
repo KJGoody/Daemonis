@@ -62,9 +62,18 @@ public class UIManager : MonoBehaviour
         // 투명값으로 UI를 끄거나 킨다.
         canvasGroup.alpha = canvasGroup.alpha > 0 ? 0 : 1;
         if(canvasGroup.name == "SpellBook")
+        {
             HandScript.MyInstance.ResetSelect();
-        if (canvasGroup.name == "Inventory")
+        }
+        if (canvasGroup.name == "Inventory") 
+        { 
             HandScript.MyInstance.Close_SI_Panel();
+            if(menu[0].alpha != 1)
+                HandScript.MyInstance.Close_UE_Panel();
+        }
+        if (canvasGroup.name == "Charactor")
+            if(menu[2].alpha != 1 || menu[0].alpha != 1)
+                HandScript.MyInstance.Close_UE_Panel();
         // UI 가 커져있을 땐 레이케스트 충돌이 되도록 만들고
         // UI 가 꺼져있을 땐 레이케스트 충돌이 무시되어 다른 조작(적 선택 등)을
         // 할 수 있게 만든다.
