@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private ActionButton[] actionButtons;
     [SerializeField]
-    private CanvasGroup spellBook;
+    private CanvasGroup[] menu; // 컴퓨터 키보드 호환용
     [SerializeField]
     private GameObject tooltip;
     private Text tooltipText;
@@ -39,13 +39,21 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
-            OpenClose(spellBook);
+            OpenClose(menu[0]);
         }
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.U))
         {
-            //InventoryScript.MyInstance.OpenClose();
+            OpenClose(menu[1]);
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            OpenClose(menu[2]);
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            OpenClose(menu[3]);
         }
     }
 
