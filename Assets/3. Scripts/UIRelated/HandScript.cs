@@ -32,6 +32,8 @@ public class HandScript : MonoBehaviour
     [SerializeField]
     private GameObject blindPanel;
     private bool skillEquipping = false;
+    [SerializeField]
+    private GameObject SpellEquipButton;
     #endregion
 
     public GameObject usingEquipment_Panel;
@@ -97,7 +99,19 @@ public class HandScript : MonoBehaviour
     public void SelectSpell(string spellName)
     {
         spell = SpellBook.MyInstance.GetSpell(spellName);
-        selectName.text = spell.MyName;
+
+        switch (spell.spellType) 
+        {
+            case Spell.SpellType.Passive:
+                SpellEquipButton.SetActive(false);
+                selectName.text = spell.MyName + " (ÆÐ½Ãºê)";
+                break;
+
+            default:
+                SpellEquipButton.SetActive(true);
+                selectName.text = spell.MyName;
+                break;
+        }
         selectDescription.text = spell.MyDescription;
         selectImage.sprite = spell.MyIcon;
         Color color = new Color(1, 1, 1, 1);

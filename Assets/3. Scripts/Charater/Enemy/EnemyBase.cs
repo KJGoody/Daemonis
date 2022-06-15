@@ -164,7 +164,7 @@ public class EnemyBase : NPC
         if (MyTarget == null)
         {
             float distance = Vector2.Distance(transform.position, target.position);
-            myAggroRange += distance;
+            myAggroRange = distance;
             MyTarget = target;
         }
     }
