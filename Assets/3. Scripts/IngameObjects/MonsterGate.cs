@@ -102,6 +102,9 @@ public class MonsterGate : MonoBehaviour
             {
                 worldPosition = worldBottomLeft + Vector3.right * (x + Radius) + Vector3.up * (y + Radius);
                 bool iswall = Physics2D.OverlapCircle(worldPosition, Radius - 0.1f, LayerMask.GetMask("Wall"));    // 해당 노드의 레이어 확인
+                if(!iswall)
+                    iswall = Physics2D.OverlapCircle(worldPosition, Radius - 0.1f, LayerMask.GetMask("Water"));    // 해당 노드의 레이어 확인
+
                 Grid[x, y] = new GNode(iswall, worldPosition, x, y);
             }
     }
