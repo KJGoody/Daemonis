@@ -32,6 +32,8 @@ public class UIManager : MonoBehaviour
     private Sprite[] menuActiveImage; //메뉴 활성화 이미지
     [SerializeField]
     private GameObject tooltip;
+    [SerializeField]
+    private CanvasGroup bigMap;
     private Text tooltipText;
 
     private void Awake()
@@ -61,6 +63,10 @@ public class UIManager : MonoBehaviour
         {
             OpenClose(menu[3]);
         }
+    }
+    public void BigMapOnOff()
+    {
+        bigMap.alpha = bigMap.alpha > 0 ? 0 : 1;
     }
 
     public void OpenClose(CanvasGroup canvasGroup)
