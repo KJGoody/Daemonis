@@ -177,7 +177,8 @@ public class ItemBase : IMoveable, IDescribable, IUseable
         if (MySlot != null)
         {
             //if (MySlot.MyCount == 0) // 나중에 다시 넣을수도 있음 포션 아이템슬롯 0일때 새로 하나 찾는거
-                InventoryScript.MyInstance.FindUseSlot(this);
+            
+            InventoryScript.MyInstance.FindUseSlot(this);
             MySlot.RemoveItem(this);
         }
     }

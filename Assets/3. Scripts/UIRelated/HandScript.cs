@@ -227,7 +227,10 @@ public class HandScript : MonoBehaviour
     }
     public void RemoveItem()
     {
-        myItem.Remove();
+        if (myItem.itemInfo.GetKind == Kinds.Equipment)
+            myItem.EquipmentRemove();
+        else
+            myItem.Remove();
         SI_Panel.SetActive(false);
         myItem = null;
     }
