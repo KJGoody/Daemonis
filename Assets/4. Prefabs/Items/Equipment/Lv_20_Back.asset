@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e024271b387c1f94788a088cbd8ccc0c, type: 3}
   m_Name: Lv_20_Back
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: d99dd3b722fdf2545a41305e3215fc95, type: 3}
   stackSize: 0
   itemName: "\uC815\uC2DD \uB9DD\uD1A0"
   descript: "\uC815\uC2DD \uB9DD\uD1A0\uC774\uB2E4."
@@ -20,6 +20,7 @@ MonoBehaviour:
   limitLevel: 10
   kind: 1
   part: 5
-  sprite: []
+  sprite:
+  - {fileID: 21300000, guid: d99dd3b722fdf2545a41305e3215fc95, type: 3}
   baseOption: BaseMagicRegist
   optionValue: 5

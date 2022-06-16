@@ -71,7 +71,7 @@ public class ItemDropManager : MonoBehaviour
         // 아이템 프리팹 생성
         DropItem item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<DropItem>();
         // 장비 종류 설정
-        int setKind = Random.Range(0, 6);
+        int setKind = Random.Range(0, 42);
 
         // 등급 설정
         float[] myQualityProb = new float[6];

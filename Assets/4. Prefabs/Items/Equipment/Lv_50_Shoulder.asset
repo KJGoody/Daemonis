@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e024271b387c1f94788a088cbd8ccc0c, type: 3}
   m_Name: Lv_50_Shoulder
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 3853730050919906448, guid: 59f453d63a917464684bd4854d965672, type: 3}
   stackSize: 0
   itemName: "\uC804\uC124 \uC5B4\uAE68"
   descript: "\uC804\uC124 \uC5B4\uAE68\uC774\uB2E4."
@@ -20,6 +20,8 @@ MonoBehaviour:
   limitLevel: 20
   kind: 1
   part: 4
-  sprite: []
+  sprite:
+  - {fileID: 3853730050919906448, guid: 59f453d63a917464684bd4854d965672, type: 3}
+  - {fileID: 5400357115669149885, guid: 59f453d63a917464684bd4854d965672, type: 3}
   baseOption: BaseDefence
   optionValue: 5

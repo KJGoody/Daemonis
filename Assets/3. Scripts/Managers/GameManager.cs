@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
     }
     public void Testt()
     {
-        player.MyStat.Level = 19;
+        player.MyStat.Level = 20;
     }
     public void LoadData()
     {

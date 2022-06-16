@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e024271b387c1f94788a088cbd8ccc0c, type: 3}
   m_Name: Lv_20_Shoes
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: -4342839759397353244, guid: 225f9b1f621cf714b99f0ea88df19c4d, type: 3}
   stackSize: 0
   itemName: "\uC815\uC2DD \uC2E0\uBC1C"
   descript: "\uC815\uC2DD \uC2E0\uBC1C\uC774\uB2E4."
@@ -20,6 +20,8 @@ MonoBehaviour:
   limitLevel: 10
   kind: 1
   part: 2
-  sprite: []
+  sprite:
+  - {fileID: -396368632950617393, guid: 4dd5c0cf624569b41adca138b4aa9548, type: 3}
+  - {fileID: 6418639292818469836, guid: 225f9b1f621cf714b99f0ea88df19c4d, type: 3}
   baseOption: BaseMaxMana
   optionValue: 25

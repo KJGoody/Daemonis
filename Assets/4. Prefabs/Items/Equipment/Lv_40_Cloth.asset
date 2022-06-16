@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e024271b387c1f94788a088cbd8ccc0c, type: 3}
   m_Name: Lv_40_Cloth
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: -344823183603718786, guid: e6a774623cb086e4b9a4d9e696c18d64, type: 3}
   stackSize: 0
   itemName: "\uC601\uC6C5\uC758 \uC637"
   descript: "\uC601\uC6C5\uC758 \uC637\uC774\uB2E4."
@@ -20,6 +20,9 @@ MonoBehaviour:
   limitLevel: 20
   kind: 1
   part: 1
-  sprite: []
+  sprite:
+  - {fileID: -344823183603718786, guid: e6a774623cb086e4b9a4d9e696c18d64, type: 3}
+  - {fileID: -6226057413040655639, guid: e6a774623cb086e4b9a4d9e696c18d64, type: 3}
+  - {fileID: 7977069301131654761, guid: e6a774623cb086e4b9a4d9e696c18d64, type: 3}
   baseOption: BaseMaxHealth
   optionValue: 50

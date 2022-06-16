@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e024271b387c1f94788a088cbd8ccc0c, type: 3}
   m_Name: Lv_20_Cloth
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: -6702876299118751804, guid: db59c41ad41d7fa4da7717734c4781ec, type: 3}
   stackSize: 0
   itemName: "\uC815\uC2DD \uC637"
   descript: "\uC815\uC2DD \uC637\uC774\uB2E4."
@@ -20,6 +20,9 @@ MonoBehaviour:
   limitLevel: 10
   kind: 1
   part: 1
-  sprite: []
+  sprite:
+  - {fileID: -6702876299118751804, guid: db59c41ad41d7fa4da7717734c4781ec, type: 3}
+  - {fileID: 8032732682986528544, guid: db59c41ad41d7fa4da7717734c4781ec, type: 3}
+  - {fileID: -3380439360112706912, guid: db59c41ad41d7fa4da7717734c4781ec, type: 3}
   baseOption: BaseMaxHealth
   optionValue: 50
