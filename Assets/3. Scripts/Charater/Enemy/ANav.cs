@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class ANode
 {
-    public bool isWall;         // 해당지점이 벽인지 아닌지
+    public bool isWW;         // 해당지점이 벽인지 아닌지
     public Vector3 worldPos;    // 월드 좌표
     public int GridX;           // 그리드 x좌표
     public int GridY;           // 그리드 y좌표
@@ -15,9 +15,9 @@ public class ANode
 
     public ANode parentNode;    // 부모 노드
 
-    public ANode(bool nisWall, Vector3 nWorldPos, int nGridX, int nGridY)
+    public ANode(bool nisWW, Vector3 nWorldPos, int nGridX, int nGridY)
     {
-        isWall = nisWall;
+        isWW = nisWW;
         worldPos = nWorldPos;
         GridX = nGridX;
         GridY = nGridY;
@@ -79,6 +79,9 @@ public class ANav : MonoBehaviour
             {
                 worldPosition = worldBottomLeft + Vector3.right * (x + nodeRadius) + Vector3.up * (y + nodeRadius);
                 bool iswall = Physics2D.OverlapCircle(worldPosition, nodeRadius - 0.1f, LayerMask.GetMask("Wall"));    // 해당 노드의 레이어 확인
+                if(!iswall)
+                    iswall = Physics2D.OverlapCircle(worldPosition, nodeRadius - 0.1f, LayerMask.GetMask("Water"));    // 해당 노드의 레이어 확인
+
                 Grid[x, y] = new ANode(iswall, worldPosition, x, y);
             }
         }
@@ -99,8 +102,8 @@ public class ANav : MonoBehaviour
                 int CheckY = node.GridY + y;
 
                 if (CheckX >= 0 && CheckX < GridSizeX && CheckY >= 0 && CheckY < GridSizeY)     // x, y의 값이 Grid 범위 안에 있을 경우
-                    if (!Grid[node.GridX, CheckY].isWall && !Grid[CheckX, node.GridY].isWall)     // 벽 사이로 통과 안됨
-                        if (!Grid[node.GridX, CheckX].isWall || !Grid[CheckX, node.GridY].isWall) // 코너를 가로질러 갈때 이동중 수직 수평 장애물이 있으면 안됨
+                    if (!Grid[node.GridX, CheckY].isWW && !Grid[CheckX, node.GridY].isWW)     // 벽 사이로 통과 안됨
+                        if (!Grid[node.GridX, CheckX].isWW || !Grid[CheckX, node.GridY].isWW) // 코너를 가로질러 갈때 이동중 수직 수평 장애물이 있으면 안됨
                             neighobours.Add(Grid[CheckX, CheckY]);
             }
         }
@@ -154,7 +157,7 @@ public class ANav : MonoBehaviour
 
                 foreach (ANode n in GetNeighbours(CurrentNode))
                 {
-                    if (n.isWall || closedList.Contains(n)) // 현재 노드가 벽일 경우 OR 닫힌목록에 포함되어 있는 경우 스킵
+                    if (n.isWW || closedList.Contains(n)) // 현재 노드가 벽일 경우 OR 닫힌목록에 포함되어 있는 경우 스킵
                         continue;
 
                     int newCurrentToNeightbourCost = CurrentNode.gCost + GetDistanceCost(CurrentNode, n);

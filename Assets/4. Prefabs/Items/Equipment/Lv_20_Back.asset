@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   stackSize: 0
-  itemName: 
-  descript: 
-  effect: 
-  limitLevel: 0
-  kind: 0
-  part: 0
+  itemName: "\uC815\uC2DD \uB9DD\uD1A0"
+  descript: "\uC815\uC2DD \uB9DD\uD1A0\uC774\uB2E4."
+  effect: "\uB9C8\uBC95\uBC29\uC5B4\uB825 5"
+  limitLevel: 10
+  kind: 1
+  part: 5
   sprite: []
-  baseOption: 
-  optionValue: 0
+  baseOption: BaseMagicRegist
+  optionValue: 5

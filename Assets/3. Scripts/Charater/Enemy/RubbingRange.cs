@@ -13,13 +13,13 @@ public class RubbingRange : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall") || collision.gameObject.layer.Equals(LayerMask.NameToLayer("Water")))
             parent.RubbingTime += Time.deltaTime;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall") || collision.gameObject.layer.Equals(LayerMask.NameToLayer("Water")))
             parent.RubbingTime = 0f;
     }
 }

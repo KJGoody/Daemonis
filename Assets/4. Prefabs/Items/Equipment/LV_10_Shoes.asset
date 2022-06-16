@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   stackSize: 0
-  itemName: 
-  descript: 
-  effect: 
-  limitLevel: 0
-  kind: 0
-  part: 0
+  itemName: "\uACAC\uC2B5 \uC2E0\uBC1C"
+  descript: "\uACAC\uC2B5 \uC2E0\uBC1C\uC774\uB2E4."
+  effect: "\uCD5C\uB300 \uB9C8\uB098 25"
+  limitLevel: 10
+  kind: 1
+  part: 2
   sprite: []
-  baseOption: 
-  optionValue: 0
+  baseOption: BaseMaxMana
+  optionValue: 25
