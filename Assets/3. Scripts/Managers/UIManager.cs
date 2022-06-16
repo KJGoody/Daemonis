@@ -23,7 +23,13 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private ActionButton[] actionButtons;
     [SerializeField]
-    private CanvasGroup[] menu; // 컴퓨터 키보드 호환용
+    private CanvasGroup[] menu; // 메뉴창 0:캐릭터 1:스킬 2:인벤토리 3:옵션 4:메뉴리스트
+    [SerializeField]
+    private Image[] menuImage; //메뉴 이미지
+    [SerializeField]
+    private Sprite[] menuNormalImage; //메뉴 평소 이미지
+    [SerializeField]
+    private Sprite[] menuActiveImage; //메뉴 활성화 이미지
     [SerializeField]
     private GameObject tooltip;
     private Text tooltipText;
@@ -61,19 +67,68 @@ public class UIManager : MonoBehaviour
     {
         // 투명값으로 UI를 끄거나 킨다.
         canvasGroup.alpha = canvasGroup.alpha > 0 ? 0 : 1;
-        if(canvasGroup.name == "SpellBook")
+
+        switch (canvasGroup.name)
         {
-            HandScript.MyInstance.ResetSelect();
+            case "Charactor":
+                if (canvasGroup.alpha == 1)
+                    menuImage[0].sprite = menuActiveImage[0];
+                else if(canvasGroup.alpha == 0)
+                    menuImage[0].sprite = menuNormalImage[0];
+
+                if (menu[2].alpha != 1 || menu[0].alpha != 1)
+                    HandScript.MyInstance.Close_UE_Panel();
+                break;
+
+            case "SpellBook":
+                if (canvasGroup.alpha == 1)
+                    menuImage[1].sprite = menuActiveImage[1];
+                else if (canvasGroup.alpha == 0)
+                    menuImage[1].sprite = menuNormalImage[1];
+
+                HandScript.MyInstance.ResetSelect();
+                break;
+
+            case "Inventory":
+                if (canvasGroup.alpha == 1)
+                    menuImage[2].sprite = menuActiveImage[2];
+                else if (canvasGroup.alpha == 0)
+                    menuImage[2].sprite = menuNormalImage[2];
+
+                HandScript.MyInstance.Close_SI_Panel();
+                if (menu[0].alpha != 1)
+                    HandScript.MyInstance.Close_UE_Panel();
+                break;
+
+            case "Option":
+                if (canvasGroup.alpha == 1)
+                    menuImage[3].sprite = menuActiveImage[3];
+                else if (canvasGroup.alpha == 0)
+                    menuImage[3].sprite = menuNormalImage[3];
+                break;
+
+            case "MenuPanel":
+                if (canvasGroup.alpha == 1)
+                    menuImage[4].sprite = menuActiveImage[4];
+                else if (canvasGroup.alpha == 0)
+                    menuImage[4].sprite = menuNormalImage[4];
+                break;
         }
-        if (canvasGroup.name == "Inventory") 
-        { 
-            HandScript.MyInstance.Close_SI_Panel();
-            if(menu[0].alpha != 1)
-                HandScript.MyInstance.Close_UE_Panel();
-        }
-        if (canvasGroup.name == "Charactor")
-            if(menu[2].alpha != 1 || menu[0].alpha != 1)
-                HandScript.MyInstance.Close_UE_Panel();
+
+        //if(canvasGroup.name == "SpellBook")
+        //{
+        //    HandScript.MyInstance.ResetSelect();
+        //}
+        //if (canvasGroup.name == "Inventory") 
+        //{ 
+        //    HandScript.MyInstance.Close_SI_Panel();
+        //    if(menu[0].alpha != 1)
+        //        HandScript.MyInstance.Close_UE_Panel();
+        //}
+        //if (canvasGroup.name == "Charactor")
+        //    if(menu[2].alpha != 1 || menu[0].alpha != 1)
+        //        HandScript.MyInstance.Close_UE_Panel();
+
         // UI 가 커져있을 땐 레이케스트 충돌이 되도록 만들고
         // UI 가 꺼져있을 땐 레이케스트 충돌이 무시되어 다른 조작(적 선택 등)을
         // 할 수 있게 만든다.

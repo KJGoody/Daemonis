@@ -153,7 +153,10 @@ public class GameManager : MonoBehaviour
         // 지금까지의 변경사항을 저장한다.
         SaveLoadManager.DataSave(DATA, "Data");
     }
-
+    public void Testt()
+    {
+        player.MyStat.Level = 19;
+    }
     public void LoadData()
     {
         if (SaveLoadManager.FileExists("Data"))
