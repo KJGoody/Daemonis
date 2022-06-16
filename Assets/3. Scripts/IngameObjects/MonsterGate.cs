@@ -60,12 +60,12 @@ public class MonsterGate : MonoBehaviour
 
     private IEnumerator SponeEnemy()
     {
-        while (TotalEnemyNum < 20 - DeathEnemyNum)
+        while (TotalEnemyNum < 15 - DeathEnemyNum)
         {
-            if (DeathEnemyNum >= 20)
+            if (DeathEnemyNum >= 15)
                 Destroy(gameObject);
 
-            if (CurrentEnemyNum < 20)
+            if (CurrentEnemyNum < 15)
             {
                 GNode newStartPosition;
                 do

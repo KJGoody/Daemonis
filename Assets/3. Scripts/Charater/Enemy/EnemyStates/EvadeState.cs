@@ -20,6 +20,7 @@ public class EvadeState : IState
     {
         parent.Direction = Vector2.zero;
         parent.MyTarget = null;
+        if (aNav != null) aNav.DestroyANav();
     }
 
     public void Update()

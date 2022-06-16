@@ -93,6 +93,7 @@ public class ANav : MonoBehaviour
             for (int y = -1; y <= 1; y++)
             {
                 if (x == 0 && y == 0) continue; // 자기 자신일 경우 스킵
+                if ((x == 1 && y == 1) || (x == -1 && y == -1) || (x == 1 && y == -1) || (x == -1 && y == 1)) continue; // 모서리 부분 스킵
 
                 int CheckX = node.GridX + x;
                 int CheckY = node.GridY + y;

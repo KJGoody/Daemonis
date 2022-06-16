@@ -47,8 +47,8 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             // 액션퀵슬롯에 등록된 것이 사용할 수 있는거라면
             if (MyUseable != null)
             {
-                // 현재 쿨타임이 0일 경우에만 사용할 수 있다. && 플레이어의 현재 마나가 스킬 마나보다 많아야 한다.
-                if (CurrentCollTime == 0 && Player.MyInstance.MyStat.CurrentMana - (MyUseable as Spell).MySpellMana >= 0)   
+                // 현재 쿨타임이 0일 경우에만 사용할 수 있다. && 플레이어의 현재 마나가 스킬 마나보다 많아야 한다. && 공격중이 아니여야 한다.
+                if (CurrentCollTime == 0 && Player.MyInstance.MyStat.CurrentMana - (MyUseable as Spell).MySpellMana >= 0 && !Player.MyInstance.IsAttacking)   
                 {
                     CoolTime = (MyUseable as Spell).MySpellCoolTime;
                     StartCoroutine(StartCoolDown());

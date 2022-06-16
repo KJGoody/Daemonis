@@ -60,7 +60,7 @@ public class EnemyBase : NPC
             currentState.Update();
         }
 
-        if(Vector2.Distance(transform.position, Player.MyInstance.transform.position) > 20)
+        if(Vector2.Distance(transform.position, Player.MyInstance.transform.position) > 10)
         {
             ChangeState(new IdleState());
             switch (enemytype.enemyType)
