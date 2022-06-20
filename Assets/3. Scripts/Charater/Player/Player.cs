@@ -32,21 +32,21 @@ public class Player : Character
         }
     }
 
-    public ItemBase[] usingEquipment = new ItemBase[6];
+    public ItemBase[] usingEquipment = new ItemBase[6]; // 장착중인 장비 아이템
     public delegate void UseEquipment(int partNum);
     public event UseEquipment useEquipment;
 
-    private FloatingJoystick joy;
+    private FloatingJoystick joy; //조이스틱
     [SerializeField]
-    private Transform exitPoint;
+    private Transform exitPoint; // 스킬 발사 위치
     [SerializeField]
-    private GameObject lvUp_Particle;
+    private GameObject lvUp_Particle; // 레벨업 이펙트
     [HideInInspector]
-    public Vector2 atkDir;
+    public Vector2 atkDir; // 공격 방향
 
     private List<TargetGroup> targetGroups = new List<TargetGroup>();
     [SerializeField]
-    private GameObject YOUDIEWindow;
+    private GameObject YOUDIEWindow; // 캐릭터 사망 패널
 
     protected override void Start()
     {
@@ -67,7 +67,7 @@ public class Player : Character
         base.FixedUpdate();
     }
 
-    private void GetInput()
+    private void GetInput() // 조이스틱 사용한 캐릭터 방향잡기
     {
         Vector2 moveVector;
         if (!IsAttacking)
@@ -87,7 +87,7 @@ public class Player : Character
         }
     }
 
-    public void CastSpell(string spellIName)
+    public void CastSpell(string spellIName) // 스킬 사용
     {
         if (MyTarget != null)
             if (!MyTarget.parent.gameObject.GetComponent<EnemyBase>().IsAlive)
@@ -100,7 +100,7 @@ public class Player : Character
             StartCoroutine(CastingSpell(spellIName));
     }
 
-    private bool SearchEnemy()
+    private bool SearchEnemy() // 적이 있는지 검색
     {
         if (GameObject.FindWithTag("Enemy") == null)
             return false;
@@ -108,7 +108,7 @@ public class Player : Character
             return true;
     }
 
-    private void AutoTarget()
+    private void AutoTarget() // 자동 타겟팅
     {
         if (FindNearestObject() != null)
             MyTarget = FindNearestObject().transform;
@@ -116,7 +116,7 @@ public class Player : Character
             MyTarget = null;
     }
 
-    private GameObject FindNearestObject()
+    private GameObject FindNearestObject() // 가까운 적 타겟팅
     {
                                                                                  // 확인 범위
         Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, 7, LayerMask.GetMask("HitBox"));
@@ -260,7 +260,7 @@ public class Player : Character
                 }
     }
 
-    public void EquipItem(ItemBase newItem)
+    public void EquipItem(ItemBase newItem) // 장비 장착
     {
         int partNum = 0;
         switch (newItem.GetPart)
@@ -294,7 +294,7 @@ public class Player : Character
         newItem.ActiveEquipment(true);
     }
 
-    public void UnequipItem(int partNum)
+    public void UnequipItem(int partNum) // 장비 해제
     {
         usingEquipment[partNum].ActiveEquipment(false);
         InventoryScript.MyInstance.AddItem(usingEquipment[partNum]);
@@ -302,7 +302,7 @@ public class Player : Character
         _spriteList.ChangeItem(partNum);
     }
 
-    public void Plus(string option, float value)
+    public void Plus(string option, float value) // 추가옵션 스탯 적용
     {
         PropertyInfo optionName = stat.GetType().GetProperty(option);
         //float a = (float)System.Convert.ToDouble(optionName.GetValue(stat));
@@ -320,7 +320,7 @@ public class Player : Character
         }
     }
 
-    public void SpendEXP(float MonsterExP, bool Repeat = false)
+    public void SpendEXP(float MonsterExP, bool Repeat = false) // 경험치 증가
     {
         float EXP;
         if (Repeat)

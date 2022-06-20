@@ -10,8 +10,6 @@ public abstract class Item : ScriptableObject
     private int stackSize;  // 중첩 스택
     [SerializeField]
     private string itemName;   // 아이템 이름
-    //[SerializeField]
-    //private Quality quality;// 아이템 등급
     [SerializeField]
     private string descript;// 아이템 설명 (배경설정같은것)
     [SerializeField]
@@ -72,15 +70,6 @@ public abstract class Item : ScriptableObject
         set { limitLevel = value; }
     }
 
-    public void Remove()
-    {
-        //if (MySlot != null)
-        //{
-        //    if(MySlot.MyCount == 0)
-        //       InventoryScript.MyInstance.FindUseSlot(this);
-        //    MySlot.RemoveItem(this);
-        //}
-    }
     public virtual string GetDescription()
     {
         return itemName;

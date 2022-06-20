@@ -19,12 +19,12 @@ public class OptionPanel : MonoBehaviour
         }
     }
     public Toggle[] lootingQuality = new Toggle[6];
-    public Slider volume_BGM;
-    public Slider volume_SFX;
-    public Toggle isMute_BGM;
-    public Toggle isMute_SFX;
-    public Text text_BGM;
-    public Text text_SFX;
+    public Slider volume_BGM; // 배경음악 볼륨
+    public Slider volume_SFX; // 효과음 볼륨
+    public Toggle isMute_BGM; // 배경음악 음소거
+    public Toggle isMute_SFX; // 효과음 음소거
+    public Text text_BGM; // 배경음악 음량표시
+    public Text text_SFX; // 효과음 음량표시
 
 
     void Start()
@@ -32,21 +32,21 @@ public class OptionPanel : MonoBehaviour
         
     }
 
-    public void BGMSlider()
+    public void BGMSlider() // 배경음량 설정
     {
         SoundManager.Instance.SetBGMVolume(volume_BGM.value);
         text_BGM.text = ""+(int)(volume_BGM.value * 100);
     }
-    public void SFXSlider()
+    public void SFXSlider() // 효과음량 설정
     {
         SoundManager.Instance.SetSFXVolume(volume_SFX.value);
         text_SFX.text = "" + (int)(volume_SFX.value * 100);
     }
-    public void BGMToggle()
+    public void BGMToggle() // 배경 음소거
     {
         SoundManager.Instance.SetBGMMute(isMute_BGM.isOn);
     }
-    public void SFXToggle()
+    public void SFXToggle() // 효과 음소거
     {
         SoundManager.Instance.SetSFXMute(isMute_SFX.isOn);
     }

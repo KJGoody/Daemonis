@@ -21,7 +21,7 @@ public class SpellBook : MonoBehaviour
     [SerializeField]
     private Spell[] spells; // 스킬 리스트
 
-    public Spell GetSpell(string spellName)
+    public Spell GetSpell(string spellName) // 스킬 검색
     {
         Spell spell = Array.Find(spells, x => x.MyName == spellName);
 

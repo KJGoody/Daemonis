@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
-public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPointerEnterHandler, IPointerExitHandler
+public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
 {
     // 슬롯에 등록된 아이템 리스트
     // 중첩개수가 2개 이상인 아이템이 있을 수 있다.
@@ -94,10 +94,6 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
             UIManager.MyInstance.UpdateStackSize(this);
         }
     }
-    public void DeleteItem(ItemBase item)
-    {
-
-    }
     public void OnPointerClick(PointerEventData eventData)
     {
          HandScript.MyInstance.SelectItem(MyItem);
@@ -126,22 +122,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IPoin
         }
         return false;
     }
-    // 마우스 커서가 Slot 영역 안으로 들어오면 호출
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        //if (!IsEmpty)
-        //{
-        //    UIManager.MyInstance.ShowTooltip(transform.position, MyItem);
-        //}
-    }
 
-
-
-    // 마우스 커서가 Slot 영역 안에서 밖으로 나가면 호출
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        //UIManager.MyInstance.HideTooltip();
-    }
 
     #region
     public bool IsFull

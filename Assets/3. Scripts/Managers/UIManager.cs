@@ -31,10 +31,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Sprite[] menuActiveImage; //메뉴 활성화 이미지
     [SerializeField]
-    private GameObject tooltip;
-    [SerializeField]
-    private CanvasGroup bigMap;
+    private GameObject tooltip; //툴팁
     private Text tooltipText;
+    [SerializeField]
+    private CanvasGroup bigMap; // 전체맵
 
     private void Awake()
     {
@@ -47,7 +47,8 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y))
+        // 개발용 키보드 단축키
+        if (Input.GetKeyDown(KeyCode.Y)) 
         {
             OpenClose(menu[0]);
         }
@@ -64,7 +65,7 @@ public class UIManager : MonoBehaviour
             OpenClose(menu[3]);
         }
     }
-    public void BigMapOnOff()
+    public void BigMapOnOff() // 맵 온오프
     {
         bigMap.alpha = bigMap.alpha > 0 ? 0 : 1;
     }
@@ -82,8 +83,8 @@ public class UIManager : MonoBehaviour
                 else if(canvasGroup.alpha == 0)
                     menuImage[0].sprite = menuNormalImage[0];
 
-                if (menu[2].alpha != 1 || menu[0].alpha != 1)
-                    HandScript.MyInstance.Close_UE_Panel();
+                if (menu[2].alpha != 1 || menu[0].alpha != 1) // 캐릭터창과 아이템창이 모두 닫혀있으면
+                    HandScript.MyInstance.Close_UE_Panel(); // 장착아이템창을 끈다
                 break;
 
             case "SpellBook":
@@ -92,7 +93,7 @@ public class UIManager : MonoBehaviour
                 else if (canvasGroup.alpha == 0)
                     menuImage[1].sprite = menuNormalImage[1];
 
-                HandScript.MyInstance.ResetSelect();
+                HandScript.MyInstance.ResetSelect(); // 선택 스킬 초기화
                 break;
 
             case "Inventory":
@@ -101,9 +102,9 @@ public class UIManager : MonoBehaviour
                 else if (canvasGroup.alpha == 0)
                     menuImage[2].sprite = menuNormalImage[2];
 
-                HandScript.MyInstance.Close_SI_Panel();
-                if (menu[0].alpha != 1)
-                    HandScript.MyInstance.Close_UE_Panel();
+                HandScript.MyInstance.Close_SI_Panel(); // 선택아이템창 끄기
+                if (menu[0].alpha != 1) // 캐릭터창이 닫혀있으면
+                    HandScript.MyInstance.Close_UE_Panel(); // 장착 아이템창 끄기
                 break;
 
             case "Option":
@@ -120,20 +121,6 @@ public class UIManager : MonoBehaviour
                     menuImage[4].sprite = menuNormalImage[4];
                 break;
         }
-
-        //if(canvasGroup.name == "SpellBook")
-        //{
-        //    HandScript.MyInstance.ResetSelect();
-        //}
-        //if (canvasGroup.name == "Inventory") 
-        //{ 
-        //    HandScript.MyInstance.Close_SI_Panel();
-        //    if(menu[0].alpha != 1)
-        //        HandScript.MyInstance.Close_UE_Panel();
-        //}
-        //if (canvasGroup.name == "Charactor")
-        //    if(menu[2].alpha != 1 || menu[0].alpha != 1)
-        //        HandScript.MyInstance.Close_UE_Panel();
 
         // UI 가 커져있을 땐 레이케스트 충돌이 되도록 만들고
         // UI 가 꺼져있을 땐 레이케스트 충돌이 무시되어 다른 조작(적 선택 등)을

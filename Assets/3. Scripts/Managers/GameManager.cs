@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) // 게임종료 열기
         {
             if (!quitPanel.activeSelf)
                 quitPanel.SetActive(true);
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         ClickTarget();
     }
 
-    private void ClickTarget()
+    private void ClickTarget() // 타겟 선택
     {
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(FadeIn());
     }
-    public IEnumerator FadeIn()
+    public IEnumerator FadeIn() // 검정색 페이드인
     {
         fadeIn_OBJ.SetActive(true);
         yield return new WaitForSeconds(0.1f);
@@ -104,11 +104,11 @@ public class GameManager : MonoBehaviour
         fadeIn_IMG.color = color;
 
     }
-    public void GameQuit()
+    public void GameQuit() //게임 종료
     {
         Application.Quit();
     }
-    public void GoLobby()
+    public void GoLobby() // 사망시 마을로 귀환
     {
         if (SceneManager.GetSceneByName("1_Cave").IsValid())
         {
@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
         LoadingSceneManager.LoadScene("Main");
     }
 
-    public void GoCave()
+    public void GoCave() // 전투필드 이동 (임시)
     {
         if (SceneManager.GetSceneByName("Main").IsValid())
         {
@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
         //SceneManager.LoadScene("1_Cave", LoadSceneMode.Additive);
 
     }
-    public void RestartCave()
+    public void RestartCave() // 사망시 전투필드 재시작(임시)
     {
         if (SceneManager.GetSceneByName("1_Cave").IsValid())
         {
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
         // 지금까지의 변경사항을 저장한다.
         SaveLoadManager.DataSave(DATA, "Data");
     }
-    public void Testt()
+    public void Testt() // 테스트 빌드용 레벨점핑
     {
         player.MyStat.Level = 20;
     }

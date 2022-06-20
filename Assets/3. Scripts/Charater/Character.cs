@@ -50,7 +50,7 @@ public abstract class Character : MonoBehaviour
     public float BuffxDamage = 1;
     private float DebuffxDamage = 1;
 
-    public Rigidbody2D rigid2D //임시
+    public Rigidbody2D rigid2D
     {
         get { return myRigid2D; }
     }
@@ -141,7 +141,7 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    public virtual void LookAtTarget()
+    public virtual void LookAtTarget() // 타겟 바라보기
     {
         if ((MyTarget.transform.position - transform.position).x > 0)
             _prefabs.transform.localScale = new Vector3(-1, 1, 1);
@@ -220,6 +220,7 @@ public abstract class Character : MonoBehaviour
             return null;
     }
 
+    // 대미지 계산
     public virtual void TakeDamage(bool IsPhysic, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, NewTextPool.NewTextPrefabsName TextType)
     {
         if (ChanceMaker.GetThisChanceResult_Percentage(HitPercent, MyStat.DodgePercent))
@@ -247,7 +248,7 @@ public abstract class Character : MonoBehaviour
             NEWText(TextType);
     }
 
-    private float LevelGapxDamage(int FromLevel, int ToLevel)
+    private float LevelGapxDamage(int FromLevel, int ToLevel) // 대미지 레벨차이 증감
     {
         int LevelGap = ToLevel - FromLevel;
         float xDamage = 1;
@@ -270,7 +271,7 @@ public abstract class Character : MonoBehaviour
         return xDamage > 0 ? xDamage : 0;
     }
 
-    public virtual void RecoverOnHit()
+    public virtual void RecoverOnHit() // 적중시 회복
     {
         stat.CurrentHealth += stat.RecoverHealth_onhit;
         if (stat.ManaBar != null)
