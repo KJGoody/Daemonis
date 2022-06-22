@@ -7,14 +7,14 @@ public class ItemBase : IMoveable, IDescribable, IUseable
     public Item itemInfo;
 
     [SerializeField]
-    private Quality quality;// 아이템 등급
-    public Quality MyQuality
+    private Quality quality; // 아이템 등급
+    public Quality MyQuality 
     {
         get { return quality; }
         set { quality = value; }
     }
 
-    public Sprite MyIcon
+    public Sprite MyIcon // 아이콘 이미지
     {
         get { return itemInfo.MyIcon; }
     }
@@ -22,12 +22,11 @@ public class ItemBase : IMoveable, IDescribable, IUseable
     // 아이템이 중첩될 수 있는 개수
     // 예) 소모성 물약의 경우 한개의 Slot에 여러개가
     //     중첩되어서 보관될 수 있음.
-
     public int MyStackSize { get { return itemInfo.MyStackSize; } }
 
     #region 장비아이템 관련
     public List<AddOption> addOptionList = new List<AddOption>();
-    public void SetAddOption()
+    public void SetAddOption() // 추가옵션 설정
     {
         for (int i = 0; i < (int)(quality) + 1; i++)
         {
@@ -40,7 +39,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             addOptionList[i].value = newValue;
         }
     }
-    private Part part;
+    private Part part; // 장비 부위
     public Part GetPart
     {
         get
@@ -49,7 +48,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             return equipmentItem.GetPart;
         }
     }
-    private Sprite[] sprite;
+    private Sprite[] sprite; // 캐릭터에 적용될 장비 이미지
     public Sprite[] itemSprite
     {
         get
@@ -74,7 +73,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
                 }
                 else
                 {
-                    if (isActive)
+                    if (isActive) // 추가옵션 스탯적용
                         Player.MyInstance.Plus(optionName, optionValue);
                     else
                         Player.MyInstance.Plus(optionName, -optionValue);
@@ -91,7 +90,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
     }
     #endregion
 
-    public string MyName
+    public string MyName // 아이템 이름 표시
     {
         get
         {
@@ -124,7 +123,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
 
     }
     
-    public string MyQualityText
+    public string MyQualityText // 아이템 등급 표시
     {
         get
         {
@@ -162,17 +161,17 @@ public class ItemBase : IMoveable, IDescribable, IUseable
 
         }
     }
-    public Kinds GetKind { get { return itemInfo.GetKind; } }
-    public SlotScript MySlot
+    public Kinds GetKind { get { return itemInfo.GetKind; } } // 아이템 종류
+    public SlotScript MySlot 
     {
         get { return itemInfo.MySlot; }
         set { itemInfo.MySlot = value; }
     }
-    public string MyDescript { get { return itemInfo.MyDescript; } }
-    public string MyEffect { get { return itemInfo.MyEffect; } }
-    public int MyLimitLevel { get { return itemInfo.MyLimitLevel; } }
+    public string MyDescript { get { return itemInfo.MyDescript; } } // 아이템 배경설명
+    public string MyEffect { get { return itemInfo.MyEffect; } } // 아이템 효과
+    public int MyLimitLevel { get { return itemInfo.MyLimitLevel; } } // 아이템 사용 제한 레벨
 
-    public void Remove()
+    public void Remove() // 삭제
     {
         if (MySlot != null)
         {
@@ -182,7 +181,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             MySlot.RemoveItem(this);
         }
     }
-    public void EquipmentRemove()
+    public void EquipmentRemove() // 장비아이템 삭제
     {
         InventoryScript.MyInstance.FindEquipment(this);
         MySlot.RemoveItem(this);
@@ -209,7 +208,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
 
         return string.Format("<color={0}>{1}</color>", color, itemInfo.MyName);
     }
-    public void Use()
+    public void Use() // 사용
     {
         if(this.GetKind == Kinds.Potion)
         {

@@ -50,7 +50,7 @@ public class HandScript : MonoBehaviour
     [SerializeField]
     private Text SI_DefaultStat;// 기본효과(기본스탯같은) 설명
     [SerializeField]
-    private Text SI_Descript;// 아이템 배경?설명 (아이템 소개)
+    private Text SI_Descript;// 아이템 배경설명 (아이템 소개)
     [SerializeField]
     private Text SI_Quality;// 아이템 등급
     [SerializeField]
@@ -98,13 +98,13 @@ public class HandScript : MonoBehaviour
         icon.color = Color.white;
     }
 
-    public void SelectSpell(string spellName)
+    public void SelectSpell(string spellName) // 스킬 선택
     {
-        spell = SpellBook.MyInstance.GetSpell(spellName);
+        spell = SpellBook.MyInstance.GetSpell(spellName); // 이름으로 스킬 찾기
 
         switch (spell.spellType) 
         {
-            case Spell.SpellType.Passive:
+            case Spell.SpellType.Passive: // 스킬이 패시브일시 버튼 비활성화
                 SpellEquipButton.SetActive(false);
                 selectName.text = spell.MyName + " (패시브)";
                 break;
@@ -114,13 +114,15 @@ public class HandScript : MonoBehaviour
                 selectName.text = spell.MyName;
                 break;
         }
+
+        // 스킬 선택창에 표시
         selectDescription.text = spell.MyDescription;
         selectImage.sprite = spell.MyIcon;
         Color color = new Color(1, 1, 1, 1);
         selectImage.color = color;
     }
 
-    public void EquipSpell()
+    public void EquipSpell() //스킬 장착
     {
         if (selectImage.sprite != null && !spell.spellType.Equals(Spell.SpellType.Passive))
         {
@@ -137,7 +139,7 @@ public class HandScript : MonoBehaviour
         blindPanel.SetActive(skillEquipping);
     }
 
-    public void ResetSelect()
+    public void ResetSelect() // 선택 스킬 초기화
     {
         selectName.text = null;
         selectDescription.text = null;
@@ -152,6 +154,7 @@ public class HandScript : MonoBehaviour
     // 아이템 구현 함수 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public void SelectItem(ItemBase item) // 아이템 선택
     {
+        // 선택한 아이템 정보 표시
         myItem = item;
         SI_Image.sprite = myItem.MyIcon;
         SI_Name.text = myItem.MyName;
@@ -161,14 +164,14 @@ public class HandScript : MonoBehaviour
         SI_Descript.text = myItem.MyDescript;
         switch (myItem.GetKind)
         {
-            case Kinds.Potion:
+            case Kinds.Potion: // 선택한 아이템이 포션일 때 추옵,세트옵 감추기
                 SI_Obj_Option.SetActive(false);
                 SI_Obj_SetOption.SetActive(false);
                 break;
-            case Kinds.Equipment:
+            case Kinds.Equipment: // 선택한 아이템이 장비일 때 추옵, 세트옵 표시
                 SI_Obj_Option.SetActive(true);
 
-                for(int i = 0; i < myItem.addOptionList.Count; i++)
+                for(int i = 0; i < myItem.addOptionList.Count; i++) // 추옵 표시
                 {
                     AddOptionInfo optionInfo = SI_Obj_AddOptions[i].GetComponent<AddOptionInfo>();
                     optionInfo.SetAddOptionPrefab(myItem.addOptionList[i]);
@@ -179,6 +182,8 @@ public class HandScript : MonoBehaviour
                     SI_Obj_AddOptions[i-1].SetActive(false);
                 }
                 SI_Obj_SetOption.SetActive(false); // 나중에 세트장비 조건문으로 활성화
+
+                // 장비 부위에 따라 착용중인 장비 표시
                 int partNum = (int)item.GetPart;
                 if(Player.MyInstance.usingEquipment[partNum] != null)
                 {
@@ -190,7 +195,9 @@ public class HandScript : MonoBehaviour
                 break;
         }
         SI_Panel.SetActive(true);
-        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)SI_CSF_Descript.transform); // content size filtter 바로 안늘어나는 버그 해결
+
+        // content size filtter 바로 안늘어나는 버그 해결용
+        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)SI_CSF_Descript.transform); 
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)SI_CSF_Panel.transform);
     }
 
@@ -225,7 +232,7 @@ public class HandScript : MonoBehaviour
         SI_Obj_Blind.SetActive(false);
 
     }
-    public void RemoveItem()
+    public void RemoveItem() // 아이템 삭제 버튼
     {
         if (myItem.itemInfo.GetKind == Kinds.Equipment)
             myItem.EquipmentRemove();

@@ -79,7 +79,7 @@ public class PlayerInfoPanel : MonoBehaviour
         }
     }
 
-    public void ChangeEquipment(int partNum)
+    public void ChangeEquipment(int partNum) // 착용된 장비 이미지 교체
     {
         if (Player.MyInstance.usingEquipment[partNum] != null)
         {
@@ -92,7 +92,7 @@ public class PlayerInfoPanel : MonoBehaviour
             equipment_Img[partNum].color= new Color(1,1,1,0.5f);
         }
     }
-    public void UnequipButton()
+    public void UnequipButton() // 장착해제 버튼
     {
         Player.MyInstance.UnequipItem(itemNum);
         ChangeEquipment(itemNum);
@@ -106,7 +106,7 @@ public class PlayerInfoPanel : MonoBehaviour
             UE_Panel.SetActive(setActive); // false인 경우 패널 닫아주는것
         }
     }
-    public void ShowUsingEquipment(int partNum)
+    public void ShowUsingEquipment(int partNum) // 장착중인 장비 표시
     {
         if (Player.MyInstance.usingEquipment[partNum] != null)
         {
@@ -153,7 +153,7 @@ public class PlayerInfoPanel : MonoBehaviour
     {
         UpdateStat();
     }
-    void UpdateStat()
+    void UpdateStat() // 스탯 표시
     {
         Stat stat = Player.MyInstance.MyStat;
         ATK.text = "" + stat.CurrentAttack;

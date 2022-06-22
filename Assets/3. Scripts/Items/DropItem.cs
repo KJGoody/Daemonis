@@ -109,7 +109,7 @@ public class DropItem : MonoBehaviour
         }
     }
 
-    public void Looting_Start()
+    public void Looting_Start() // 루팅 시작
     {
         transform.position = Vector2.Lerp(transform.position, new Vector2(startPos.x, startPos.y + 0.3f), Time.deltaTime * 3);
         upTime += Time.deltaTime;
@@ -118,7 +118,7 @@ public class DropItem : MonoBehaviour
             up = true;
         }
     }
-    private void Looting_ToPlayer()
+    private void Looting_ToPlayer() // 아이템 플레이어쪽으로
     {
         Vector2 dir = playerTransform.position - transform.position;
         speed += Time.deltaTime * 15;

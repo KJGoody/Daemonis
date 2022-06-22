@@ -23,7 +23,7 @@ public class LoadingSceneManager : MonoBehaviour
         nextScene = sceneNmae;
         SceneManager.LoadSceneAsync("LoadingScene", LoadSceneMode.Additive);
     }
-    public void InitScene()
+    public void InitScene() // ¾À ±³Ã¼ ½Ã ÃÊ±âÈ­
     {
         Player.MyInstance.transform.position = new Vector3(0, 0, 0);
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
@@ -38,7 +38,7 @@ public class LoadingSceneManager : MonoBehaviour
         }
     }
 
-    IEnumerator LoadScene()
+    IEnumerator LoadScene() // ¾À ·Îµù
     {
         yield return null;
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive);
