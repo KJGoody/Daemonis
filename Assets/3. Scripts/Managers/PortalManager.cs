@@ -12,9 +12,7 @@ public class PortalManager : MonoBehaviour
         get
         {
             if (instance == null)
-            {
                 instance = FindObjectOfType<PortalManager>();
-            }
             return instance;
         }
     }
@@ -25,26 +23,18 @@ public class PortalManager : MonoBehaviour
     GameObject returnPortal;
     [SerializeField]
     Button returnButton;
-    [SerializeField]
     private GameObject usingPortal;
     
     void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    public void CreateReturnPortal()
-    {
-        if(usingPortal != null)
-        {
-            Destroy(usingPortal);
-        }
-        usingPortal = Instantiate(returnPortal, Player.MyInstance.transform.position,Quaternion.identity);
 
-    }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) // 씬이 로딩될때 실행
     {
         ReturnPortalButton();
     }
+
     public void ReturnPortalButton()
     {
         Scene scene = SceneManager.GetSceneByName("Main");
@@ -62,22 +52,41 @@ public class PortalManager : MonoBehaviour
     {
         teleport_Panel.SetActive(_bool);
     }
-    public void GoLobby()
+
+    public void _CreateReturnPortal()
     {
-        if (SceneManager.GetSceneByName("1_Cave").IsValid())
-        {
-            SceneManager.UnloadSceneAsync("1_Cave");
-        }
-        LoadingSceneManager.LoadScene("Main");
-        Destroy(usingPortal);
+        if(usingPortal != null)
+            Destroy(usingPortal);
+    
+        usingPortal = Instantiate(returnPortal, Player.MyInstance.transform.position,Quaternion.identity);
     }
 
-    public void GoCave()
+    public void _UnloadSceneName(string UnloeadSceneName)
     {
-        if (SceneManager.GetSceneByName("Main").IsValid())
+        if (SceneManager.GetSceneByName(UnloeadSceneName).IsValid())
+            SceneManager.UnloadSceneAsync(UnloeadSceneName);
+    }
+
+    public void _LoadSceneName(string LoadSceneName)
+    {
+        GameManager.MyInstance.SaveData();
+
+        LoadingSceneManager.LoadScene(LoadSceneName);
+
+        if (!Player.MyInstance.IsAlive)
         {
-            SceneManager.UnloadSceneAsync("Main");
+            Player.MyInstance.transform.Find("HitBox_Player").gameObject.SetActive(true);
+            Player.MyInstance.rigid2D.simulated = true;
+            Player.MyInstance.NewBuff("Skill_Fire_02_Buff");
         }
-        LoadingSceneManager.LoadScene("1_Cave");
+        Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
+        Player.MyInstance.MyStat.CurrentMana = Player.MyInstance.MyStat.CurrentMaxMana;
+
+        switch (LoadSceneName)
+        {
+            case "Main":
+                Destroy(usingPortal);
+                break;
+        }
     }
 }

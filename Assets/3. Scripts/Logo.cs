@@ -8,28 +8,29 @@ public class Logo : MonoBehaviour
 {
     Color color;
     [SerializeField]
-    Image image;
+    Image BlackBackImage;
 
     private void Start()
     {
-        color = image.color;
+        color = BlackBackImage.color;
         StartCoroutine(FadeOut());
     }
     IEnumerator FadeOut()
     {
+        // 비동기로 씬을 불러온다.
         AsyncOperation asyncOper = SceneManager.LoadSceneAsync("ManagerScene");
         AsyncOperation asyncOper1 = SceneManager.LoadSceneAsync("Main", LoadSceneMode.Additive);
         asyncOper.allowSceneActivation = false;
         asyncOper1.allowSceneActivation = false;
 
-
         yield return new WaitForSeconds(3);
         while (color.a <= 1)
         {
             color.a += Time.deltaTime;
-            image.color = color;
+            BlackBackImage.color = color;
             yield return null;
         }
+
         asyncOper.allowSceneActivation = true;
         asyncOper1.allowSceneActivation = true;
     }

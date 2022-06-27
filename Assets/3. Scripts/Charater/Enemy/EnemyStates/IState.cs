@@ -4,9 +4,7 @@ using UnityEngine;
  
 public interface IState
 {
-    //Prepare the State
     void Enter(EnemyBase parent);
-
 
     void Exit();
 

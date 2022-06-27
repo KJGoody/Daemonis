@@ -33,7 +33,6 @@ public static class SaveLoadManager
 
             formatter.Serialize(fileStream, json);
             fileStream.Close();
-            Debug.Log(json);
         }
         catch (FileNotFoundException e)
         {
@@ -48,7 +47,6 @@ public static class SaveLoadManager
             Debug.Log("The file could not be opened:" + e.Message);
         }
     }
-
 
     public static T DataLoad<T>(string _fileName)
     {
@@ -70,7 +68,6 @@ public static class SaveLoadManager
                 Debug.Log(json);
                 return data;
             }
-
         }
         catch (FileNotFoundException e)
         {
@@ -84,7 +81,6 @@ public static class SaveLoadManager
         {
             Debug.Log("The file could not be opened:" + e.Message);
         }
-        // return default(T);
         return default;
     }
 }

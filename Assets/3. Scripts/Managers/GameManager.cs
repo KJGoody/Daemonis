@@ -40,10 +40,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         LoadData();
-        //for (int i = 0; i < dontDestroyObj.Length; i++)
-        //{
-        //    DontDestroyOnLoad(dontDestroyObj[i]);
-        //}
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -108,55 +104,14 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
-    public void GoLobby() // 사망시 마을로 귀환
-    {
-        if (SceneManager.GetSceneByName("1_Cave").IsValid())
-        {
-            Debug.Log("asdf");
-            SceneManager.UnloadSceneAsync("1_Cave");
-        }
-        Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
-        Player.MyInstance.MyStat.CurrentMana = Player.MyInstance.MyStat.CurrentMaxMana;
-        Player.MyInstance.rigid2D.simulated = true;
-        Player.MyInstance.transform.Find("HitBox_Player").gameObject.SetActive(true);
-        Player.MyInstance.NewBuff("Skill_Fire_02_Buff");
-        LoadingSceneManager.LoadScene("Main");
-    }
 
-    public void GoCave() // 전투필드 이동 (임시)
-    {
-        if (SceneManager.GetSceneByName("Main").IsValid())
-        {
-            SceneManager.UnloadSceneAsync("Main");
-        }
-        LoadingSceneManager.LoadScene("1_Cave");
-        //SceneManager.LoadScene("1_Cave", LoadSceneMode.Additive);
-
-    }
-    public void RestartCave() // 사망시 전투필드 재시작(임시)
-    {
-        if (SceneManager.GetSceneByName("1_Cave").IsValid())
-        {
-            SceneManager.UnloadSceneAsync("1_Cave");
-        }
-        Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
-        Player.MyInstance.MyStat.CurrentMana = Player.MyInstance.MyStat.CurrentMaxMana;
-        Player.MyInstance.rigid2D.simulated = true;
-        Player.MyInstance.transform.Find("HitBox_Player").gameObject.SetActive(true);
-        Player.MyInstance.NewBuff("Skill_Fire_02_Buff");
-        LoadingSceneManager.LoadScene("1_Cave");
-        //SceneManager.LoadScene("1_Cave", LoadSceneMode.Additive);
-    }
 
     public void SaveData()
     {
         // 지금까지의 변경사항을 저장한다.
         SaveLoadManager.DataSave(DATA, "Data");
     }
-    public void Testt() // 테스트 빌드용 레벨점핑
-    {
-        player.MyStat.Level = 20;
-    }
+
     public void LoadData()
     {
         if (SaveLoadManager.FileExists("Data"))
@@ -166,6 +121,8 @@ public class GameManager : MonoBehaviour
 
         // 저장되어있는 사항을 저장한다.
         DATA = SavedData;
+        DATA.LoadData();
+        Debug.Log(DATA.ActionButtonIUseable);
     }
 }
 
@@ -174,8 +131,21 @@ public class SaveLoadData
 {
     public int Gold;
 
+    // 액션버튼 인스턴스
+    public ActionButton[] ActionButtons;
+    public IUseable[] ActionButtonIUseable = new IUseable[9];
+
+
     public SaveLoadData()
     {
         Gold = 0;
+    }
+
+    public void LoadData()
+    {
+        // 설정되어 있지 않은 액션버튼 인스턴스에 저장되어 있던 IUseable을 대입한다.
+        for(int i = 0; i < 9; i++)
+            if(ActionButtonIUseable[i] != null)
+                ActionButtons[i].SetUseable(ActionButtonIUseable[i]);
     }
 }

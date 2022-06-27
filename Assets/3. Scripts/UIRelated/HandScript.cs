@@ -124,7 +124,7 @@ public class HandScript : MonoBehaviour
 
     public void EquipSpell() //스킬 장착
     {
-        if (selectImage.sprite != null && !spell.spellType.Equals(Spell.SpellType.Passive))
+        if (selectImage.sprite != null)
         {
             MyMoveable = spell;
             SkillBlindControll();
@@ -215,6 +215,7 @@ public class HandScript : MonoBehaviour
         SI_Panel.SetActive(false);
         SI_Obj_Blind.SetActive(true);
     }
+
     public void UseEquipment() // 장비 장착할때
     {
         int partNum = (int)myItem.GetPart;
@@ -272,5 +273,4 @@ public class HandScript : MonoBehaviour
         // Hand 아이콘을 투명하게 만든다.
         icon.color = new Color(0, 0, 0, 0);
     }
-
 }

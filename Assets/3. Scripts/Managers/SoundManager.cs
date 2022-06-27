@@ -142,24 +142,24 @@ public class SoundManager : MonoBehaviour
     public void PlayCoustomBGM(string name)
     {
         AudioClip playClip = null;
-        switch (name)
-        {
-            //case "Boss":
-            //    playClip = BossBgmAudioClip;
-            //    break;
-            //case "NightStage":
-            //    playClip = nightBgmAudioClip;
-            //    break;
-            //case "ChaosStage":
-            //    playClip = chaosBgmAudioClip;
-            //    break;
-            //case "Credit":
-            //    playClip = CreditAudioClip;
-            //    break;
-            //case "Menu":
-            //    playClip = menuBgmAudioClip;
-            //    break;
-        }
+        //switch (name)
+        //{
+        //    case "Boss":
+        //        playClip = BossBgmAudioClip;
+        //        break;
+        //    case "NightStage":
+        //        playClip = nightBgmAudioClip;
+        //        break;
+        //    case "ChaosStage":
+        //        playClip = chaosBgmAudioClip;
+        //        break;
+        //    case "Credit":
+        //        playClip = CreditAudioClip;
+        //        break;
+        //    case "Menu":
+        //        playClip = menuBgmAudioClip;
+        //        break;
+        //}
         bgmPlayer.clip = playClip;
         bgmPlayer.Play();
     }

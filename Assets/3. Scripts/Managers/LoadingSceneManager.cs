@@ -13,16 +13,19 @@ public class LoadingSceneManager : MonoBehaviour
     [SerializeField]
     private Slider slider;
     private float time = 0;
+
     void Start()
     {
         StartCoroutine(LoadScene());
         InitScene();
     }
+
     public static void LoadScene(string sceneNmae)
     {
         nextScene = sceneNmae;
         SceneManager.LoadSceneAsync("LoadingScene", LoadSceneMode.Additive);
     }
+
     public void InitScene() // 씬 교체 시 초기화
     {
         Player.MyInstance.transform.position = new Vector3(0, 0, 0);

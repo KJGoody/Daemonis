@@ -27,11 +27,11 @@ public class NewText : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        float time = 0;
-        while(time < 1)
+        while(true)
         {
             alpha.a = Mathf.Lerp(alpha.a, 0, Time.deltaTime * 10);
-            time += 0.01f;
+            if (alpha.a == 0)
+                break;
             yield return new WaitForSeconds(0.01f);
         }
     }
