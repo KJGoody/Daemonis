@@ -12,7 +12,7 @@ class PatrolState : IState
     public void Enter(EnemyBase parent)
     {
         this.parent = parent;
-
+        aNav = parent.GetComponent<ANav>();
         PatrolPointPathFinding();
     }
 
@@ -38,7 +38,7 @@ class PatrolState : IState
                     if (aNav.CurrentPathNode < 0)
                     {
                         parent.ChangeState(new IdleState());
-                        aNav.DestroyANav();
+                        aNav.ResetANav();
                     }
                 }
             }
@@ -50,13 +50,13 @@ class PatrolState : IState
         if (parent.MyTarget != null)
         {
             parent.ChangeState(new FollowState());
-            aNav.DestroyANav();
+            parent.StartCoroutine(aNav.WaitForPathFindingEnd());
         }
     }
 
     private void PatrolPointPathFinding()
-    {   
-        if (aNav != null) aNav.DestroyANav();   // 이미 A*알고리즘이 실행중이라면 해당알고리즘을 폐기
+    {
+        parent.StartCoroutine(aNav.WaitForPathFindingEnd());
 
         while (true)
         {
@@ -69,8 +69,6 @@ class PatrolState : IState
             if (collider == null && Vector2.Distance(PatrolPoint, parent.transform.position) > 1f) break;
         }
 
-        parent.CreateResource(Resources.Load("ANav") as GameObject, parent.transform);
-        aNav = parent.GetComponentInChildren<ANav>();
-        aNav.TargetPoint = PatrolPoint;
+        parent.StartCoroutine(aNav.StartPathFinding(PatrolPoint));
     }
 }

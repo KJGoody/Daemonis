@@ -10,17 +10,16 @@ public class EvadeState : IState
     public void Enter(EnemyBase parent)
     {
         this.parent = parent;
-        // A*알고리즘을 사용하기위한 오브젝트 생성후 스크립트 받아오기
-        parent.CreateResource(Resources.Load("ANav") as GameObject, parent.transform);
-        aNav = parent.GetComponentInChildren<ANav>();   // 움직일 대상 전달
-        aNav.TargetPoint = parent.myStartPosition;      // 목표지점 설정
+        aNav = parent.GetComponent<ANav>();
+        parent.StartCoroutine(aNav.StartPathFinding(parent.myStartPosition));
     }
 
     public void Exit()
     {
         parent.Direction = Vector2.zero;
         parent.MyTarget = null;
-        if (aNav != null) aNav.DestroyANav();
+
+        parent.StartCoroutine(aNav.WaitForPathFindingEnd());
     }
 
     public void Update()
@@ -39,7 +38,7 @@ public class EvadeState : IState
                     if (aNav.CurrentPathNode < 0) // 다음 목표가 없을 시 실행
                     {
                         parent.ChangeState(new IdleState());
-                        aNav.DestroyANav();
+                        aNav.ResetANav();
                     }
                 }
             }
@@ -50,7 +49,7 @@ public class EvadeState : IState
                 if(Vector2.Distance(parent.myStartPosition, parent.transform.position) < 0.5f)
                 {
                     parent.ChangeState(new IdleState());
-                    aNav.DestroyANav();
+                    aNav.ResetANav();
                 }
             }
         }

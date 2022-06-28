@@ -2,30 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class ANode
-{
-    public bool isWW;         // 해당지점이 벽인지 아닌지
-    public Vector3 worldPos;    // 월드 좌표
-    public int GridX;           // 그리드 x좌표
-    public int GridY;           // 그리드 y좌표
-
-    public int gCost;           // 시작 노드부터 현재 노드까지의 비용
-    public int hCost;           // 현재 노드에서 목표 노드까지의 비용
-
-    public ANode parentNode;    // 부모 노드
-
-    public ANode(bool nisWW, Vector3 nWorldPos, int nGridX, int nGridY)
-    {
-        isWW = nisWW;
-        worldPos = nWorldPos;
-        GridX = nGridX;
-        GridY = nGridY;
-    }
-
-    public int fCost { get { return gCost + hCost; } }
-}
-
 public class ANav : MonoBehaviour
 {
     // 그리드 생성
@@ -43,25 +19,29 @@ public class ANav : MonoBehaviour
     // 탐색
     private EnemyBase parent;
 
-    private Vector3 StartPoint;
+    [HideInInspector]
     public Vector3 TargetPoint;
 
+    private bool CanUse = true;
+    [HideInInspector]
     public bool EndPathFinding = false;
+    [HideInInspector]
     public bool SucessPathFinding = false;
+    [HideInInspector]
     public int CurrentPathNode;
 
     private void Awake()
     {
-        parent = GetComponentInParent<EnemyBase>();
-
-        StartPoint = parent.transform.position;
-
+        parent = GetComponent<EnemyBase>();
     }
 
-    private void Start()
+    public IEnumerator StartPathFinding(Vector3 targetPoint)
     {
-            CreateGrid();
-            FindPath(StartPoint, TargetPoint);
+        while (!CanUse)
+            yield return null;
+        CanUse = false;
+        CreateGrid();
+        FindPath(transform.position, targetPoint);
     }
 
     private void CreateGrid()
@@ -79,7 +59,7 @@ public class ANav : MonoBehaviour
             {
                 worldPosition = worldBottomLeft + Vector3.right * (x + nodeRadius) + Vector3.up * (y + nodeRadius);
                 bool iswall = Physics2D.OverlapCircle(worldPosition, nodeRadius - 0.1f, LayerMask.GetMask("Wall"));    // 해당 노드의 레이어 확인
-                if(!iswall)
+                if (!iswall)
                     iswall = Physics2D.OverlapCircle(worldPosition, nodeRadius - 0.1f, LayerMask.GetMask("Water"));    // 해당 노드의 레이어 확인
 
                 Grid[x, y] = new ANode(iswall, worldPosition, x, y);
@@ -126,7 +106,7 @@ public class ANav : MonoBehaviour
         ANode startNode = GetNodeFromWorldPoint(startPos);
         ANode targetNode = GetNodeFromWorldPoint(targetPos);
 
-        if(startNode == targetNode)
+        if (startNode == targetNode)
             SucessPathFinding = false;
         else
         {
@@ -152,6 +132,9 @@ public class ANav : MonoBehaviour
                     RetracePath(startNode, targetNode);
                     SucessPathFinding = true;
                     CurrentPathNode = path.Count - 1;
+
+                    parent.transform.Find("EnemyBody").gameObject.SetActive(false);
+                    parent.MyStat.MoveSpeedPercent = 50;
                     break;
                 }
 
@@ -199,11 +182,25 @@ public class ANav : MonoBehaviour
         return 14 * distX + 10 * (distY - distX);
     }
 
-    public void DestroyANav()
+    public IEnumerator WaitForPathFindingEnd()
     {
-        gameObject.SetActive(false);
-        Destroy(gameObject);
-        
+        while (!EndPathFinding)
+        {
+            yield return null;
+        }
+        ResetANav();
+    }
+
+    public void ResetANav()
+    {
+        path = new List<ANode>();
+        EndPathFinding = false;
+        SucessPathFinding = false;
+        TargetPoint = Vector3.zero;
+        CurrentPathNode = 0;
+        CanUse = true;
+        parent.transform.Find("EnemyBody").gameObject.SetActive(true);
+        parent.MyStat.MoveSpeedPercent = 0;
     }
 
     //private void OnDrawGizmos()

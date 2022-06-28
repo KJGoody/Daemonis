@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public enum Quality { Normal, Advanced, Rare, Epic, Legendary, Relic }
+
 public class ItemBase : IMoveable, IDescribable, IUseable
 {
-    public Item itemInfo;
+    public ItemInfo itemInfo;
 
     public Quality quality; // 아이템 등급
 
@@ -20,7 +22,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
 
     #region 장비아이템 관련
     public List<AddOption> addOptionList = new List<AddOption>();
-    public void SetAddOption() // 추가옵션 설정
+        public void SetAddOption() // 추가옵션 설정
     {
         for (int i = 0; i < (int)(quality) + 1; i++)
         {
@@ -33,7 +35,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             addOptionList[i].value = newValue;
         }
     }
-    private Part part; // 장비 부위
+
     public Part GetPart
     {
         get
@@ -42,6 +44,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             return equipmentItem.GetPart;
         }
     }
+
     private Sprite[] sprite; // 캐릭터에 적용될 장비 이미지
     public Sprite[] itemSprite
     {
@@ -51,6 +54,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
             return equipmentItem.itemSprite;
         }
     }
+
     public void ActiveEquipment(bool isActive) // 장비 착용 & 해제
     {
         EquipmentItem equipmentItem = itemInfo as EquipmentItem;
@@ -76,6 +80,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
         }
 
     }
+
     public float GetWeaponxDamage()
     {
         EquipmentItem equipmentItem = itemInfo as EquipmentItem;
@@ -112,7 +117,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
                     break;
             }
 
-            return string.Format("<color={0}>{1}</color>", color, itemInfo.MyName);
+            return string.Format("<color={0}>{1}</color>", color, itemInfo.itemName);
         }
 
     }
@@ -158,12 +163,12 @@ public class ItemBase : IMoveable, IDescribable, IUseable
     public Kinds GetKind { get { return itemInfo.GetKind; } } // 아이템 종류
     public SlotScript MySlot 
     {
-        get { return itemInfo.MySlot; }
-        set { itemInfo.MySlot = value; }
+        get { return itemInfo.slot; }
+        set { itemInfo.slot = value; }
     }
-    public string MyDescript { get { return itemInfo.MyDescript; } } // 아이템 배경설명
-    public string MyEffect { get { return itemInfo.MyEffect; } } // 아이템 효과
-    public int MyLimitLevel { get { return itemInfo.MyLimitLevel; } } // 아이템 사용 제한 레벨
+    public string MyDescript { get { return itemInfo.descript; } } // 아이템 배경설명
+    public string MyEffect { get { return itemInfo.effect; } } // 아이템 효과
+    public int MyLimitLevel { get { return itemInfo.limitLevel; } } // 아이템 사용 제한 레벨
 
     public void Remove() // 삭제
     {
@@ -200,7 +205,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
                 break;
         }
 
-        return string.Format("<color={0}>{1}</color>", color, itemInfo.MyName);
+        return string.Format("<color={0}>{1}</color>", color, itemInfo.itemName);
     }
     public void Use() // 사용
     {

@@ -9,58 +9,27 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
     // 슬롯에 등록된 아이템 리스트
     // 중첩개수가 2개 이상인 아이템이 있을 수 있다.
     private ObservableStack<ItemBase> items = new ObservableStack<ItemBase>();
-    public ObservableStack<ItemBase> MyItems
-    {
-        get
-        {
-            return items;
-        }
-    }
+    public ObservableStack<ItemBase> MyItems { get { return items; } }
     // 아이템의 아이콘
-    [SerializeField]
-    private Image icon;
+    public Image icon;
     public Image MyIcon
     {
-        get
-        {
-            return icon;
-        }
-
-        set
-        {
-            icon = value;
-        }
+        get { return icon; }
+        set { icon = value; }
     }
     [SerializeField]
     private TextMeshProUGUI stackSize;
 
-    public TextMeshProUGUI MyStackText
-    {
-        get
-        {
-            return stackSize;
-        }
-    }
-    public int MyCount
-    {
-        get
-        {
-            return MyItems.Count;
-        }
-    }
+    public TextMeshProUGUI MyStackText { get { return stackSize; } }
+    public int MyCount { get { return MyItems.Count; } }
     // 빈 슬롯 여부
-    public bool IsEmpty
-    {
-        get { return MyItems.Count == 0; }
-    }
+    public bool IsEmpty { get { return MyItems.Count == 0; } }
     public ItemBase MyItem
     {
         get
         {
             if (!IsEmpty)
-            {
                 return MyItems.Peek();
-            }
             return null;
         }
     }
@@ -82,6 +51,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
         item.MySlot = this;
         return true;
     }
+
     public void RemoveItem(ItemBase item)
     {
         // 자기 자신이 빈슬롯이 아니라면
@@ -96,7 +66,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-         HandScript.MyInstance.SelectItem(MyItem);
+        HandScript.MyInstance.SelectItem(MyItem);
     }
     private void UpdateSlot()
     {

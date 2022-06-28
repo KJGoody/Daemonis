@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Items //행에 해당되는 이름
 {
-    public Item[] items;
+    public ItemInfo[] items;
 }
 
 public class ItemDropManager : MonoBehaviour
@@ -23,7 +23,7 @@ public class ItemDropManager : MonoBehaviour
     
     public DropItem dropItem; // 드랍아이템 프리팹
     public Items[] equipmentPerLv; // 기본 장비 아이템 리스트 열에 해당되는 이름
-    public Item potion;
+    public ItemInfo potion;
 
     private float equipmentDropProb = 10; // 장비 드랍 기본확률
     public float EquipmentDropProb // 장비 드랍확률
@@ -39,20 +39,9 @@ public class ItemDropManager : MonoBehaviour
         qualityProb = CSVReader.Read("EquipmentQualityProb"); // 장비 등급 확률표 읽어옴
         StartCoroutine(InitItem());
     }
-    public void DropItem(Transform dropPosition, int m_Level)
-    {
-        if (ChanceMaker.GetThisChanceResult_Percentage(EquipmentDropProb)) // 장비 드랍확률 통해서 장비 드랍
-        {
-            DropEquipment(dropPosition, m_Level);
-        }
-        if (ChanceMaker.GetThisChanceResult_Percentage(20)) // 포션 드랍 (임시)
-        {
-            DropPotion(dropPosition, m_Level);
-        }
-    }
 
     public void DropGold(Transform dropPosition, int m_Level)
-    {
+    {   // Enemy에서 골드를 드랍하게 하는 함수
         if (ChanceMaker.GetThisChanceResult_Percentage(60))
         {
             DropItem item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<DropItem>();
@@ -60,7 +49,15 @@ public class ItemDropManager : MonoBehaviour
             int randomGold = (int)(((m_Level * baseGold) + (m_Level * baseGold * (Player.MyInstance.MyStat.GoldPlus / 100))) * Random.Range(0.9f, 1.1f));
             item.SetGold(randomGold);
         }
+    }
 
+    public void DropItem(Transform dropPosition, int m_Level)
+    {   // Enemy에서 사용 아이템을 드랍하게 하는 함수
+        if (ChanceMaker.GetThisChanceResult_Percentage(EquipmentDropProb)) // 장비 드랍확률 통해서 장비 드랍
+            DropEquipment(dropPosition, m_Level);
+
+        if (ChanceMaker.GetThisChanceResult_Percentage(20)) // 포션 드랍
+            DropPotion(dropPosition, m_Level);
     }
 
     public void DropEquipment(Transform dropPosition, int m_Level)  // 장비 드랍함수
@@ -74,37 +71,25 @@ public class ItemDropManager : MonoBehaviour
         float[] myQualityProb = new float[6];
         int a = 0;
         foreach (var value in qualityProb[SetLvNum(m_Level)].Values) // 레벨마다 다른 확률을 엑셀로 가져와서 배열에 할당
-        {
-            myQualityProb[a] = (float)System.Convert.ToDouble(value);
-            a++;
-        }
+            myQualityProb[a++] = (float)System.Convert.ToDouble(value);
         Quality newQuality = (Quality)(int)ChanceMaker.Choose(myQualityProb); // 할당된 확률 배열로 가중치 랜덤뽑기로 등급 설정
         m_Level = 0;
         item.SetDropItem(equipmentPerLv[SetLvNum(m_Level)].items[setKind], newQuality); // 설정한 정보 아이템에 넣어주기
 
     }
+
     public void DropPotion(Transform dropPosition, int m_Level) // 임시
     {
         DropItem item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<DropItem>();
         item.SetDropItem(potion, Quality.Normal); 
-
     }
+
     public int SetLvNum(int monsterLv) // 몬스터 레벨로 설정 레벨 잡아주기
     {
         if (monsterLv > 50)
             monsterLv = 50;
         int levelNum = monsterLv / 10;
         return levelNum;
-    }
-    public void TestDrop() // 장비 한세트 드랍 (테스트용)
-    {
-        for (int i = 0; i < 6; i++)
-        {
-            DropItem item = Instantiate(dropItem, transform.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<DropItem>();
-            
-            int m_Level = 0;
-            item.SetDropItem(equipmentPerLv[SetLvNum(m_Level)].items[i], (Quality)(int)Random.Range(0,4));
-        }
     }
     
     private IEnumerator InitItem()

@@ -31,7 +31,7 @@ public class DropItem : MonoBehaviour
     public bool L_Start;
     private bool up = false;
 
-    public void SetDropItem(Item _item, Quality _quality) // 몬스터에서 드랍할때 이걸로 추가할 예정
+    public void SetDropItem(ItemInfo _item, Quality _quality) // 몬스터에서 드랍할때 이걸로 추가할 예정
     {
         isKind = IsKind.Item;
         item = new ItemBase();
@@ -44,12 +44,6 @@ public class DropItem : MonoBehaviour
         }
         sprite.sprite = item.MyIcon;
         DI_Text.text = item.MyName;
-    }
-
-    public void SetEquipmentItem(ItemBase item)
-    {
-        item.quality = (Quality)AddOptionManager.MyInstance.SetRandomEquipmentQuality();
-        item.SetAddOption();
     }
 
     public void SetGold(int _gold)

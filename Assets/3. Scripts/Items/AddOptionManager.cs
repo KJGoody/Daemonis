@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class AddOptionManager : MonoBehaviour
 {
-        
     private static AddOptionManager instance;
     public static AddOptionManager MyInstance
     {
         get
         {
             if (instance == null)
-            {
                 instance = FindObjectOfType<AddOptionManager>();
-            }
             return instance;
         }
     }
@@ -23,6 +20,7 @@ public class AddOptionManager : MonoBehaviour
     List<Dictionary<string, object>> valueProb; // 옵션값 확률표
     
     float[] equipmentQualityProb = new float[]{ 5f, 4f, 3f, 2f, 1f, 0.5f}; // 장비 등급 확률
+    
     void Start()
     {
         valueProb = CSVReader.Read("AddOptionValueProb");

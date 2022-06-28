@@ -51,9 +51,7 @@ public static class ChanceMaker
         float total = 0;
 
         foreach (float elem in probs)
-        {
             total += elem;
-        }
 
         float randomPoint = Random.value * total;
 

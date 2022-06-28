@@ -5,7 +5,7 @@ using UnityEngine;
 public enum Part { Helmet, Cloth, Shoes, Weapon, Shoulder, Back }
 // 상단 메뉴 버튼 만들기
 [CreateAssetMenu(fileName = "EquipmentItem", menuName = "Items/Equipment", order = 3)]
-public class EquipmentItem : Item
+public class EquipmentItem : ItemInfo
 {
     [SerializeField]
     private Part part;

@@ -250,12 +250,13 @@ GameObject:
   - component: {fileID: 7782529544631918906}
   - component: {fileID: 1530950419950964358}
   - component: {fileID: 6219858118112120361}
+  - component: {fileID: 7473943990315529614}
   - component: {fileID: 9198583228697994435}
   - component: {fileID: 894972729840216755}
   - component: {fileID: 894972729840216764}
   - component: {fileID: 773316890317846061}
   m_Layer: 6
-  m_Name: Kobold_Melee
+  m_Name: Kobold_Melee(Champion)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -379,6 +380,24 @@ MonoBehaviour:
   myAttackRange: 0
   MyAttackTime: 0
   EnemyEXP: 3
+--- !u!114 &7473943990315529614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894972729840216760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d9783f3f7d72c44b9fec4ec111bd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GridSize: {x: 20, y: 20}
+  path: []
+  TargetPoint: {x: 0, y: 0, z: 0}
+  EndPathFinding: 0
+  SucessPathFinding: 0
+  CurrentPathNode: 0
 --- !u!70 &9198583228697994435
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

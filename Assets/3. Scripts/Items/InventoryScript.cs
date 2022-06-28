@@ -98,6 +98,7 @@ public class InventoryScript : MonoBehaviour
             }
         }
     }
+
     private bool PlaceInEmpty(ItemBase item)
     {
         foreach (SlotScript slot in slots)
