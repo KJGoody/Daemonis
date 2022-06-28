@@ -7,8 +7,7 @@ using TMPro;
 
 public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
 {
-    [SerializeField]
-    private Image icon;
+    public Image icon;
     public Image MyIcon
     {
         get { return icon; }
@@ -17,19 +16,21 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
 
     [SerializeField]
     private TextMeshProUGUI stackSize;
-    // 사용 가능 아이템 리스트
+    public TextMeshProUGUI MyStackText { get { return stackSize; } }
 
-    public Stack<IUseable> useables = new Stack<IUseable>();
+    private IUseable UseableSpell;
+    // 사용 가능 아이템 리스트
+    private Stack<IUseable> UseableItem = new Stack<IUseable>();
     private int count;
     public int MyCount { get { return count; } }
-    public TextMeshProUGUI MyStackText { get { return stackSize; } }
-    public IUseable MyUseable { get; set; }
     public Button MyButton { get; private set; }
 
     [SerializeField]
     private Image CoolTimeFillImage;
     private float CoolTime;
     private float CurrentCollTime = 0f;
+
+    private ActionButton AlreadySetButton;
 
     void Start()
     {
@@ -45,23 +46,23 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
         if (HandScript.MyInstance.MyMoveable == null)
         {
             // 액션퀵슬롯에 등록된 것이 사용할 수 있는거라면
-            if (MyUseable != null)
+            if (UseableSpell != null)
             {
                 // 현재 쿨타임이 0일 경우에만 사용할 수 있다. && 플레이어의 현재 마나가 스킬 마나보다 많아야 한다. && 공격중이 아니여야 한다.
-                if (CurrentCollTime == 0 && Player.MyInstance.MyStat.CurrentMana - (MyUseable as Spell).MySpellMana >= 0 && !Player.MyInstance.IsAttacking)   
+                if (CurrentCollTime == 0 && Player.MyInstance.MyStat.CurrentMana - (UseableSpell as Spell).MySpellMana >= 0 && !Player.MyInstance.IsAttacking)   
                 {
-                    CoolTime = (MyUseable as Spell).MySpellCoolTime;
+                    CoolTime = (UseableSpell as Spell).MySpellCoolTime;
                     StartCoroutine(StartCoolDown());
 
-                    Player.MyInstance.MyStat.CurrentMana -= (MyUseable as Spell).MySpellMana;
+                    Player.MyInstance.MyStat.CurrentMana -= (UseableSpell as Spell).MySpellMana;
 
-                    MyUseable.Use();
+                    UseableSpell.Use();
                 }
             }
 
             // 액션퀵슬롯에 사용가능한 아이템이 등록되었고
             // 그등록된 아이템의 개수가 1개 이상이라면
-            if (useables != null && useables.Count > 0)
+            if (UseableItem != null && UseableItem.Count > 0)
             {
                 // useables 에 등록된 아이템을 사용합니다.
                 // Peek() 은 아이템을 배열에서 제거하지 않습니다.
@@ -69,7 +70,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
                 {   // 물약 쿨타임 설정 후 쿨다운 이미지 생성 코루틴 시작
                     CoolTime = 3f;
                     StartCoroutine(StartCoolDown());
-                    ItemBase itemBase = useables.Peek() as ItemBase;
+                    ItemBase itemBase = UseableItem.Peek() as ItemBase;
                     itemBase.Use();
                 }
             }
@@ -90,27 +91,31 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
                     // 이미 ActionButton에 설정이 되어있는지 확인한다.
                     if(IsSetIUseable(HandScript.MyInstance.MyMoveable as IUseable))
                     {
-                        foreach (ActionButton actionButton in GameManager.MyInstance.DATA.ActionButtons)
-                            if(actionButton.MyUseable != null)
-                                // 이미 설정되어 있는 ActionButton을 찾는다.
-                                if (actionButton.MyUseable.GetName().Equals((HandScript.MyInstance.MyMoveable as IUseable).GetName()))
-                                {
-                                    // 설정되어 있는 ActionButton을 초기화한다.
-                                    actionButton.MyUseable = null;
-                                    actionButton.MyIcon.sprite = null;
-                                    actionButton.MyIcon.color = new Color(0, 0, 0, 0); 
-                                    // 저장관련
-                                    for (int i = 0; i < 9; i++)
-                                        if (GameManager.MyInstance.DATA.ActionButtons[i] == actionButton)
-                                        {
-                                            GameManager.MyInstance.DATA.ActionButtonIUseable[i] = null;
-                                            break;
-                                        }
+                        if(AlreadySetButton.CurrentCollTime == 0)
+                        {
+                            if(HandScript.MyInstance.MyMoveable is ItemBase)
+                            {
+                                AlreadySetButton.UseableItem = new Stack<IUseable>();
+                                AlreadySetButton.count = 0;
+                                AlreadySetButton.MyIcon.sprite = null;
+                                AlreadySetButton.MyIcon.color = new Color(0, 0, 0, 0);
+                                UIManager.MyInstance.UpdateStackSize(AlreadySetButton);
+                                AlreadySetButton = null;
 
-                                    SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
-                                    HandScript.MyInstance.SkillBlindControll();
-                                    break;
-                                }
+                                SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
+                                HandScript.MyInstance.SkillBlindControll();
+                            }
+                            else
+                            {
+                                AlreadySetButton.UseableSpell = null;
+                                AlreadySetButton.MyIcon.sprite = null;
+                                AlreadySetButton.MyIcon.color = new Color(0, 0, 0, 0);
+                                AlreadySetButton = null;
+
+                                SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
+                                HandScript.MyInstance.SkillBlindControll();
+                            }
+                        }
                     }
                     // 설정되어 있지 않다면 정상적으로 등록한다.
                     else
@@ -129,32 +134,22 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
         if (useable is ItemBase)
         {
             // 해당 아이템과 같은 종류의 아이템을 가진 리스트를 저장하고
-            useables = InventoryScript.MyInstance.GetUseables(useable);
+            UseableItem = InventoryScript.MyInstance.GetUseables(useable);
 
             // 개수 저장
-            count = useables.Count;
+            count = UseableItem.Count;
 
             //  이동모드 상태 해제
             //InventoryScript.MyInstance.FromSlot.MyIcon.color = Color.white;
             InventoryScript.MyInstance.FromSlot = null;
-
         }
         else
         {
             // MyUseable.Use()는 버튼이 클릭되었을때 호출된다. 
             // MyUseable은 인터페이스로 Spell 에서 상속받고 있다.
-            this.MyUseable = useable;
-
+            this.UseableSpell = useable;
         }
         UpdateVisual();
-
-        // 저장
-        for(int i = 0; i < 9; i++)
-            if(GameManager.MyInstance.DATA.ActionButtons[i] == this)
-            {
-                GameManager.MyInstance.DATA.ActionButtonIUseable[i] = useable;
-                break;
-            }
     }
 
     public void UpdateVisual()
@@ -174,17 +169,17 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
     {
         // 아이템이 IUseable(인터페이스)을 상속받았으며
         // useables 배열의 아이템개수가 1개 이상이면
-        if (item is IUseable && useables.Count > 0)
+        if (item is IUseable && UseableItem.Count > 0)
         {
             // useables 에 등록된 아이템과 item 이 같은 타입이라면
-            if (useables.Peek().GetName() == item.MyName)
+            if (UseableItem.Peek().GetName() == item.MyName)
             {
 
                 // 인벤토리에서 해당 아이템과 같은 모든 아이템을 찾아서
                 // useables 에 담습니다. 
-                useables = InventoryScript.MyInstance.GetUseables(item as IUseable);
+                UseableItem = InventoryScript.MyInstance.GetUseables(item);
 
-                count = useables.Count;
+                count = UseableItem.Count;
 
                 // UpdateStackSize 는 아이템 중첩개수를 표시할 때 호출합니다.
                 // 매개변수로 Clickable 타입을 받습니다.
@@ -214,9 +209,19 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
     {   // IUseable이 이미 설정이 되어있는지 확인하는 함수
         foreach (ActionButton actionButton in GameManager.MyInstance.DATA.ActionButtons)
         {
-            if (actionButton.MyUseable != null)
-                if (actionButton.MyUseable.GetName().Equals(useable.GetName()))
+            if (actionButton.UseableSpell != null)
+                if (actionButton.UseableSpell.GetName().Equals(useable.GetName()))
+                {
+                    AlreadySetButton = actionButton;
                     return true;
+                }
+
+            if (actionButton.UseableItem.Count > 0)
+                if (actionButton.UseableItem.Peek().GetName().Equals(useable.GetName()))
+                {
+                    AlreadySetButton = actionButton;
+                    return true;
+                }
         }
 
         return false;

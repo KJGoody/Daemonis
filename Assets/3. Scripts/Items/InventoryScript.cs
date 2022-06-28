@@ -10,16 +10,8 @@ public class InventoryScript : MonoBehaviour
         get
         {
             if (instance == null)
-            {
                 instance = FindObjectOfType<InventoryScript>();
-            }
             return instance;
-        }
-
-        set
-        {
-
-            instance = value;
         }
     }
     public event ItemCountChanged itemCountChangedEvent;
@@ -30,38 +22,16 @@ public class InventoryScript : MonoBehaviour
     private List<SlotScript> slots = new List<SlotScript>();
     // 가방에 슬롯을 추가한다.
     private CanvasGroup canvasGroup;
-    public List<SlotScript> MySlots
-    {
-        get
-        {
-            return slots;
-        }
-    }
+    public List<SlotScript> MySlots { get { return slots; } }
     private SlotScript fromSlot;
+    public ItemBase[] items;
+    
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         AddSlots(40);
     }
-    public ItemBase[] items;
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            asd();
-        }
-    }
-    public void asd()
-    {
-        // 테스트를 위해 체력을 3씩 감소
-        Player.MyInstance.MyStat.CurrentHealth -= 10;
-
-        // 체력물약 아이템 생성
-        //HealthPotion potion = (HealthPotion)Instantiate(items[0]);
-
-        //// 가방에 추가한다.
-        //AddItem(potion);
-    }
+    
     public void OnItemCountChanged(ItemBase item)
     {
         // 이벤트에 등록된 델리게이트에 있다면
@@ -114,19 +84,19 @@ public class InventoryScript : MonoBehaviour
     {
         foreach (SlotScript slots in MySlots)
         {
-            if(!slots.IsEmpty && slots.MyItem.MyName == item.MyName && slots.MyItem.MyQuality == item.MyQuality)
-               item.MySlot = slots;
+            if (!slots.IsEmpty && slots.MyItem.MyName == item.MyName && slots.MyItem.quality == item.quality)
+                item.MySlot = slots;
         }
     }
     public void FindEquipment(ItemBase item)
     {
         foreach (SlotScript slots in MySlots)
         {
-            if (!slots.IsEmpty  && slots.MyItem.MyName == item.MyName && slots.MyItem.MyQuality == item.MyQuality && slots.MyItem == item)
+            if (!slots.IsEmpty && slots.MyItem.MyName == item.MyName && slots.MyItem.quality == item.quality && slots.MyItem == item)
             {
                 item.MySlot = slots;
             }
-        }    
+        }
     }
     private bool PlaceInEmpty(ItemBase item)
     {
@@ -155,7 +125,7 @@ public class InventoryScript : MonoBehaviour
             // 슬롯에 등록된 아이템이 type의 아이템과 같은 종류의 아이템이라면
             if (!slot.IsEmpty && slot.MyItem.MyName == type.GetName())
             {
-                
+
                 // 해당 슬롯에 등록된 모든 아이템을
                 foreach (ItemBase item in slot.MyItems)
                 {
@@ -164,7 +134,7 @@ public class InventoryScript : MonoBehaviour
                 }
             }
         }
-        
+
 
         return useables;
     }

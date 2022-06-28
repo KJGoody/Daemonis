@@ -13,7 +13,7 @@ public class Looting : MonoBehaviour
             {
                 D_item.L_Start = true;
             }
-            else if (OptionPanel.MyInstance.lootingQuality[(int)D_item.Item.MyQuality].isOn) // 옵션에서 해당 등급이 선택돼있는지
+            else if (OptionPanel.MyInstance.lootingQuality[(int)D_item.Item.quality].isOn) // 옵션에서 해당 등급이 선택돼있는지
             {
                 D_item.L_Start = true;
             }

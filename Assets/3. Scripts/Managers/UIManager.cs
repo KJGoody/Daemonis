@@ -13,9 +13,7 @@ public class UIManager : MonoBehaviour
         get
         {
             if (instance == null)
-            {
                 instance = FindObjectOfType<UIManager>();
-            }
             return instance;
         }
     }
@@ -175,10 +173,5 @@ public class UIManager : MonoBehaviour
             clickable.MyStackText.color = new Color(0, 0, 0, 0);
 
         }
-    }
-
-    public void _LoadSceneName(string SceneName)
-    {
-        SceneManager.LoadScene(SceneName);
     }
 }

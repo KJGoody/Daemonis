@@ -7,20 +7,22 @@ public class DropItem : MonoBehaviour
 {
     [SerializeField]
     ItemBase item;
+    public ItemBase Item{ get { return item; } }
     [SerializeField]
     Text DI_Text;
     [SerializeField]
     SpriteRenderer sprite;
     [SerializeField]
     Sprite goldImage;
-    private int gold;
-    private float speed;
+
     public enum IsKind
     {
         Gold, Item
     }
-    public ItemBase Item{ get { return item; } }
     public IsKind isKind;
+    
+    private int gold;
+    private float speed;
     private Vector2 startPos;
     private Transform playerTransform;
     private float upTime;
@@ -28,21 +30,16 @@ public class DropItem : MonoBehaviour
     [HideInInspector]
     public bool L_Start;
     private bool up = false;
-    //DropItem(ItemBase item) //나중에 지울 가능성 큼
-    //{
-    //    this.item = item;
-    //    sprite.sprite = item.MyIcon;
-    //}
 
     public void SetDropItem(Item _item, Quality _quality) // 몬스터에서 드랍할때 이걸로 추가할 예정
     {
         isKind = IsKind.Item;
         item = new ItemBase();
         item.itemInfo = _item;
-        item.MyQuality = _quality;
+        item.quality = _quality;
         if(item.GetKind == Kinds.Equipment)
         {
-            item.MyQuality = (Quality)AddOptionManager.MyInstance.SetRandomEquipmentQuality();
+            item.quality = (Quality)AddOptionManager.MyInstance.SetRandomEquipmentQuality();
             item.SetAddOption();
         }
         sprite.sprite = item.MyIcon;
@@ -51,7 +48,7 @@ public class DropItem : MonoBehaviour
 
     public void SetEquipmentItem(ItemBase item)
     {
-        item.MyQuality = (Quality)AddOptionManager.MyInstance.SetRandomEquipmentQuality();
+        item.quality = (Quality)AddOptionManager.MyInstance.SetRandomEquipmentQuality();
         item.SetAddOption();
     }
 
@@ -86,7 +83,7 @@ public class DropItem : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if(isKind == IsKind.Gold || OptionPanel.MyInstance.lootingQuality[(int)item.MyQuality]) // 골드 아니면 설정한 아이템 등급 아이템만 획득
+            if(isKind == IsKind.Gold || OptionPanel.MyInstance.lootingQuality[(int)item.quality]) // 골드 아니면 설정한 아이템 등급 아이템만 획득
             {
                 GameObject notice = Instantiate(Resources.Load("LootNotice") as GameObject, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
                 notice.transform.SetParent(GameObject.Find("ItemLooting").transform);

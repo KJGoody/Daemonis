@@ -6,13 +6,7 @@ public class ItemBase : IMoveable, IDescribable, IUseable
 {
     public Item itemInfo;
 
-    [SerializeField]
-    private Quality quality; // 아이템 등급
-    public Quality MyQuality 
-    {
-        get { return quality; }
-        set { quality = value; }
-    }
+    public Quality quality; // 아이템 등급
 
     public Sprite MyIcon // 아이콘 이미지
     {
@@ -224,14 +218,8 @@ public class ItemBase : IMoveable, IDescribable, IUseable
         }
     }
 
-    public void GetItemCoolDown()
-    {
-
-    }
-
     public string GetName() // 일단 useable때문에 넣어두긴함
     {
         return MyName;
     }
-
 }

@@ -7,40 +7,37 @@ public class Items //행에 해당되는 이름
 {
     public Item[] items;
 }
+
 public class ItemDropManager : MonoBehaviour
 {
     private static ItemDropManager instance;
-
     public static ItemDropManager MyInstance
     {
         get
         {
             if (instance == null)
-            {
                 instance = FindObjectOfType<ItemDropManager>();
-            }
             return instance;
         }
     }
+    
     public DropItem dropItem; // 드랍아이템 프리팹
     public Items[] equipmentPerLv; // 기본 장비 아이템 리스트 열에 해당되는 이름
     public Item potion;
 
     private float equipmentDropProb = 10; // 장비 드랍 기본확률
-    private int baseGold = 100; // 골드 기본 획득량
     public float EquipmentDropProb // 장비 드랍확률
     {
         get { return equipmentDropProb + equipmentDropProb * Player.MyInstance.MyStat.ItemDropPercent; }
     }
+    private int baseGold = 100; // 골드 기본 획득량
 
     List<Dictionary<string, object>> qualityProb; // 장비 등급 확률표
 
     private void Start()
     {
         qualityProb = CSVReader.Read("EquipmentQualityProb"); // 장비 등급 확률표 읽어옴
-        //Invoke("TestDrop",1);
-        Invoke("InitItem",0.1f);
-
+        StartCoroutine(InitItem());
     }
     public void DropItem(Transform dropPosition, int m_Level)
     {
@@ -109,11 +106,14 @@ public class ItemDropManager : MonoBehaviour
             item.SetDropItem(equipmentPerLv[SetLvNum(m_Level)].items[i], (Quality)(int)Random.Range(0,4));
         }
     }
-    public void InitItem() // 게임 시작할때 기본장비 착용
+    
+    private IEnumerator InitItem()
     {
+        yield return new WaitForSeconds(0.1f);
+
         ItemBase[] items = new ItemBase[4];
 
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             items[i] = new ItemBase();
             items[i].itemInfo = equipmentPerLv[0].items[i];
@@ -122,5 +122,4 @@ public class ItemDropManager : MonoBehaviour
         Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
         Player.MyInstance.MyStat.CurrentMana = Player.MyInstance.MyStat.CurrentMaxMana;
     }
-    
 }

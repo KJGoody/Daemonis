@@ -121,8 +121,6 @@ public class GameManager : MonoBehaviour
 
         // 저장되어있는 사항을 저장한다.
         DATA = SavedData;
-        DATA.LoadData();
-        Debug.Log(DATA.ActionButtonIUseable);
     }
 }
 
@@ -133,19 +131,10 @@ public class SaveLoadData
 
     // 액션버튼 인스턴스
     public ActionButton[] ActionButtons;
-    public IUseable[] ActionButtonIUseable = new IUseable[9];
 
 
     public SaveLoadData()
     {
         Gold = 0;
-    }
-
-    public void LoadData()
-    {
-        // 설정되어 있지 않은 액션버튼 인스턴스에 저장되어 있던 IUseable을 대입한다.
-        for(int i = 0; i < 9; i++)
-            if(ActionButtonIUseable[i] != null)
-                ActionButtons[i].SetUseable(ActionButtonIUseable[i]);
     }
 }
