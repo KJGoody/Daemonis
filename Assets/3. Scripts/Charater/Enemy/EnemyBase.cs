@@ -12,7 +12,7 @@ public class EnemyBase : NPC
     [HideInInspector]
     public Vector3 myStartPosition;
     [SerializeField]
-    private GameObject HealthBarImage;
+    protected GameObject HealthBarImage;
     public Transform ExitPoint;
     [HideInInspector]
     public float RubbingTime = 0f;
@@ -30,7 +30,7 @@ public class EnemyBase : NPC
     private MonsterGate ParentGate;
 
     [SerializeField]
-    private int EnemyEXP;
+    protected int EnemyEXP;
 
     protected override void Awake()
     {
@@ -148,7 +148,7 @@ public class EnemyBase : NPC
         }
     }
 
-    IEnumerator KnockBack(Vector2 direction, float force) // ÇÇ°Ý ½Ã ³Ë¹é
+    protected IEnumerator KnockBack(Vector2 direction, float force) // ÇÇ°Ý ½Ã ³Ë¹é
     {
         IsKnockBack = true;
         myRigid2D.velocity = direction * force;
@@ -166,7 +166,7 @@ public class EnemyBase : NPC
         }
     }
 
-    private IEnumerator Death()
+    protected IEnumerator Death()
     {
 
         yield return new WaitForSeconds(3f);

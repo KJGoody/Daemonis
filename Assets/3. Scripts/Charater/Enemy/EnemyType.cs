@@ -15,6 +15,12 @@ public class EnemyType : MonoBehaviour
     }
     public EnemyTypes enemyType;
 
+    [HideInInspector]
+    public string EnemyName;
+
+    public enum EnemyGrade { Normal, Elite, Guv }
+    public EnemyGrade enemyGrade;
+
     [HideInInspector]   // 어그로 범위
     public float AggroRnage;
     [HideInInspector]   // 공격 발사 위치
@@ -23,7 +29,6 @@ public class EnemyType : MonoBehaviour
     public float AttackRnage;
     [HideInInspector]   // 공격 딜레이
     public float AttackDelay;
-
 
     void Awake()
     {
@@ -59,6 +64,7 @@ public class EnemyType : MonoBehaviour
                 break;
 
             case EnemyTypes.Koblod_Melee:
+                EnemyName = "코블드 근거리";
                 AggroRnage = 5;
                 ExitPoint = new Vector3(-0.1f, 0.2f, 0);
                 AttackRnage = 0.75f;
@@ -66,6 +72,7 @@ public class EnemyType : MonoBehaviour
                 break;
 
             case EnemyTypes.Koblod_Ranged:
+                EnemyName = "코블드 원거리";
                 AggroRnage = 5;
                 ExitPoint = new Vector3(-0.1f, 0.2f, 0);
                 AttackRnage = 3;

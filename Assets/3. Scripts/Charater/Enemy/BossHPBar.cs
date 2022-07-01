@@ -31,14 +31,22 @@ public class BossHPBar : MonoBehaviour
     private float BossHPMaxValue;
     private float CurrenBossHPValue;
 
+    private bool IsFix;
+
     private void Update()
     {
         if (CurrentFill != BossHPBarImage.fillAmount)
             BossHPBarImage.fillAmount = Mathf.Lerp(BossHPBarImage.fillAmount, CurrentFill, Time.deltaTime);
     }
 
-    public void BossHPBarSetActive(bool setactive, EnemyBase parent)
+    public void BossHPBarSetActive(bool setactive, EnemyBase parent, bool Fix = false)
     {
+        if (Fix)
+        {
+            if (setactive) IsFix = true;
+            else IsFix = false;
+        }
+
         if (setactive)
         {
             SetBossHP(parent);
@@ -46,45 +54,65 @@ public class BossHPBar : MonoBehaviour
         }
         else
         {
-            Parent = null;
-            this.GetComponent<CanvasGroup>().alpha = 0;
-        }
-    }
-
-    private void SetBossHP(EnemyBase parent)
-    {
-        BossHPMaxValue = parent.MyStat.BaseMaxHealth;
-        CurrenBossHPValue = parent.MyStat.CurrentHealth;
-        CurrentFill = CurrenBossHPValue / BossHPMaxValue;
-        BossHPBarText.text = CurrenBossHPValue + "/" + BossHPMaxValue;
-
-        if (Parent == null)
-        {
-            Parent = parent;
-            InitializeBossHPBar(parent.name);
-        }
-        else
-        {
-            if(Parent != parent)
+            if (Parent == parent)
             {
-                Parent = parent;
-                InitializeBossHPBar(parent.name);
+                IsFix = false;
+                Parent = null;
+                this.GetComponent<CanvasGroup>().alpha = 0;
             }
         }
     }
 
-    private void InitializeBossHPBar(string bossname)
+    public void SetBossHP(EnemyBase parent)
     {
-        BossName.text = bossname;
-        if (Parent is EnemyUnique)
+        if (Parent != null)
         {
-            BossName.color = Color.red;
-            CrownIcon.SetActive(true);
+            if (Parent == parent)
+                SetValue();
+            else if ((int)parent.GetComponent<EnemyType>().enemyGrade > (int)Parent.GetComponent<EnemyType>().enemyGrade)
+            {
+                if (IsFix)
+                {
+                    Parent = parent;
+                    SetValue();
+                    InitializeBossHPBar();
+                }
+            }
         }
         else
         {
-            BossName.color = Color.yellow;
-            CrownIcon.SetActive(false);
+            if (!IsFix)
+            {
+                Parent = parent;
+                SetValue();
+                InitializeBossHPBar();
+            }
+        }
+    }
+
+    private void SetValue()
+    {
+        BossHPMaxValue = Parent.MyStat.BaseMaxHealth;
+        CurrenBossHPValue = Parent.MyStat.CurrentHealth;
+        CurrentFill = CurrenBossHPValue / BossHPMaxValue;
+        BossHPBarText.text = CurrenBossHPValue + "/" + BossHPMaxValue;
+    }
+
+    private void InitializeBossHPBar()
+    {
+        switch (Parent.GetComponent<EnemyType>().enemyGrade)
+        {
+            case EnemyType.EnemyGrade.Elite:
+                BossName.text = Parent.GetComponent<EnemyType>().EnemyName + "(정예)";
+                BossName.color = Color.yellow;
+                CrownIcon.SetActive(false);
+                break;
+
+            case EnemyType.EnemyGrade.Guv:
+                BossName.text = Parent.GetComponent<EnemyType>().EnemyName + "(우두머리)";
+                CrownIcon.SetActive(true);
+                BossName.color = Color.red;
+                break;
         }
         BossHPBarImage.fillAmount = CurrenBossHPValue / BossHPMaxValue;
     }

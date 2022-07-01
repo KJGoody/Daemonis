@@ -27,7 +27,7 @@ public abstract class Character : MonoBehaviour
     public Stat MyStat { get { return stat; } }   // 스탯 가져오기
 
     // 이동관련
-    private Vector2 direction;
+    protected Vector2 direction;
     public Vector2 Direction
     {
         get { return direction; }
@@ -48,7 +48,7 @@ public abstract class Character : MonoBehaviour
     public List<Buff> OnBuff = new List<Buff>();
     [HideInInspector]
     public float BuffxDamage = 1;
-    private float DebuffxDamage = 1;
+    protected float DebuffxDamage = 1;
 
     public Rigidbody2D rigid2D
     {
@@ -248,7 +248,7 @@ public abstract class Character : MonoBehaviour
             NEWText(TextType);
     }
 
-    private float LevelGapxDamage(int FromLevel, int ToLevel) // 대미지 레벨차이 증감
+    protected float LevelGapxDamage(int FromLevel, int ToLevel) // 대미지 레벨차이 증감
     {
         int LevelGap = ToLevel - FromLevel;
         float xDamage = 1;
@@ -278,7 +278,7 @@ public abstract class Character : MonoBehaviour
             stat.CurrentMana += stat.RecoverMana_onhit;
     }
 
-    private void NEWText(NewTextPool.NewTextPrefabsName TextType, int value = 0)
+    protected void NEWText(NewTextPool.NewTextPrefabsName TextType, int value = 0)
     {
         NewText damageText = NewTextPool.Instance.GetObject(TextType);
         damageText.Value = value;
