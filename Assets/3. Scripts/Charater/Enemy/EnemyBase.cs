@@ -34,6 +34,7 @@ public class EnemyBase : NPC
 
     protected override void Awake()
     {
+        Debug.Log(1);
         enemytype = gameObject.GetComponent<EnemyType>();
         myStartPosition = transform.position;
 

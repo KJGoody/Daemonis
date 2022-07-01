@@ -27,7 +27,7 @@ public class EnemyType : MonoBehaviour
 
     void Awake()
     {
-        switch (enemyType) 
+        switch (enemyType)
         {
             case EnemyTypes.BaseMelee:
                 AggroRnage = 2;
