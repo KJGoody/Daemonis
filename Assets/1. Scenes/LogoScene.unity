@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f0bfb34e994064439b41a6bc8d0e00f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 941090873}
+  BlackBackImage: {fileID: 941090873}
 --- !u!1 &879955268
 GameObject:
   m_ObjectHideFlags: 0

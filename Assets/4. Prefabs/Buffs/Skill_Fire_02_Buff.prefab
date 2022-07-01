@@ -55,7 +55,6 @@ MonoBehaviour:
   buffType: 3
   BuffName: Skill_Fire_02_Buff
   Duration: 0
-  PuffObject: {fileID: 0}
   StackText: {fileID: 0}
   BuffStack: 1
 --- !u!222 &5821058998736763724
@@ -86,7 +85,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3121093022292234586, guid: d151e51b2abb06142b4bd9a08669a741,
+  m_Sprite: {fileID: -2907653677785416422, guid: cc364ba3c66c39a44ac5929f1a248601,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -162,7 +161,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3121093022292234586, guid: d151e51b2abb06142b4bd9a08669a741,
+  m_Sprite: {fileID: -2907653677785416422, guid: cc364ba3c66c39a44ac5929f1a248601,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0

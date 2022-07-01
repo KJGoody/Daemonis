@@ -34,7 +34,6 @@ public class EnemyBase : NPC
 
     protected override void Awake()
     {
-        Debug.Log(1);
         enemytype = gameObject.GetComponent<EnemyType>();
         myStartPosition = transform.position;
 
@@ -114,11 +113,10 @@ public class EnemyBase : NPC
         base.DeSelect();
     }
 
-    public void CreateResource(GameObject resource, Transform transform, bool IsAttack = false)
+    public void InstantiateAttack(GameObject resource, Transform transform)
     {
         GameObject EnemyAttackPrefab = Instantiate(resource, transform);
-        if(IsAttack)
-            EnemyAttackPrefab.GetComponent<EnemyAttack>().parent = this;
+        EnemyAttackPrefab.GetComponent<EnemyAttack>().parent = this;
     }
 
     public override void TakeDamage(bool IsPhysic, float HitPercent, float PureDamage, int FromLevel, Vector2 knockbackDir, NewTextPool.NewTextPrefabsName TextType) // ÇÇ°Ý
@@ -164,8 +162,6 @@ public class EnemyBase : NPC
     {
         if (MyTarget == null)
         {
-            //float distance = Vector2.Distance(transform.position, target.position);
-            //myAggroRange = distance;
             MyTarget = target;
         }
     }

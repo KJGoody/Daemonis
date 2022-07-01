@@ -380,6 +380,7 @@ MonoBehaviour:
   myAttackRange: 0
   MyAttackTime: 1000
   EnemyEXP: 3
+  EnemyName: "\uCF54\uBCFC\uD2B8(\uCC54\uD53C\uC5B8)"
 --- !u!114 &7473943990315529614
 MonoBehaviour:
   m_ObjectHideFlags: 0

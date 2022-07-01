@@ -121,13 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc06bfb1b97f074fb1b63e0f2f06c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PuffObject: {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b,
-    type: 3}
   spellName: 0
   MyTarget: {fileID: 0}
   atkDir: {x: 0, y: 0}
   speed: 5
-  damage: 5
+  StackxDamage: 0
   CastTime: 0.3
 --- !u!212 &7089291890261483673
 SpriteRenderer:
@@ -169,13 +167,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: -1472609794933242058, guid: b462cb498fb1f784785f392805e76761,
+  m_Sprite: {fileID: -8838512315827752654, guid: e8322e871eb343144ba16af4cf4d9c9b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3, y: 3}
+  m_Size: {x: 4, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -202,7 +200,7 @@ Animator:
   m_GameObject: {fileID: 8440346083036277406}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f20e89e673c82634699ca87ee83107cd, type: 2}
+  m_Controller: {fileID: 9100000, guid: bac5f5cd43e76854998b5ea44092b2da, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -229,7 +227,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 4, y: 4}
-    newSize: {x: 3, y: 3}
+    newSize: {x: 4, y: 4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
