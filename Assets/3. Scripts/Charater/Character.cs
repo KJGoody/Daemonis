@@ -25,6 +25,7 @@ public abstract class Character : MonoBehaviour
     // 스탯
     protected Stat stat;
     public Stat MyStat { get { return stat; } }   // 스탯 가져오기
+    protected float RegenTime = 0f;
 
     // 이동관련
     protected Vector2 direction;
@@ -55,7 +56,8 @@ public abstract class Character : MonoBehaviour
         get { return myRigid2D; }
     }
 
-    private float RegenTime = 0f;
+    public enum AttackType { Normal, Tick }
+    public enum DamageType { Physic, Masic, True }
 
     protected virtual void Awake()
     {
@@ -221,16 +223,26 @@ public abstract class Character : MonoBehaviour
     }
 
     // 대미지 계산
-    public virtual void TakeDamage(bool IsPhysic, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, NewTextPool.NewTextPrefabsName TextType)
+    public virtual void TakeDamage(DamageType damageType, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, NewTextPool.NewTextPrefabsName TextType, AttackType attackType = AttackType.Normal)
     {
         if (ChanceMaker.GetThisChanceResult_Percentage(HitPercent, MyStat.DodgePercent))
         {
             float PureDamage = pureDamage * DebuffxDamage;
-            int Damage;
-            if (IsPhysic)
-                Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.BaseDefence + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
-            else
-                Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.BaseMagicRegist + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
+            int Damage = 0;
+            switch (damageType) 
+            {
+                case DamageType.Physic:
+                    Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.BaseDefence + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
+                    break;
+
+                case DamageType.Masic:
+                    Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.BaseMagicRegist + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
+                    break;
+
+                case DamageType.True:
+                    Damage = (int)Mathf.Floor((PureDamage + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
+                    break;
+            }
 
             if (TextType.Equals(NewTextPool.NewTextPrefabsName.Critical))
                 Damage *= (int)Player.MyInstance.MyStat.CriticalDamage / 100;

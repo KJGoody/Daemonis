@@ -64,10 +64,12 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
             UIManager.MyInstance.UpdateStackSize(this);
         }
     }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         HandScript.MyInstance.SelectItem(MyItem);
     }
+
     private void UpdateSlot()
     {
         UIManager.MyInstance.UpdateStackSize(this);

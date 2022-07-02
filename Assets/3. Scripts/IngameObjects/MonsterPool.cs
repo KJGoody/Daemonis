@@ -28,12 +28,17 @@ public class MonsterPool : MonoBehaviour
 
     [SerializeField]
     private GameObject[] MonsterPrefab;
+    [SerializeField]
     private MonsterPoolQueue[] MonsterPoolQueues;
 
     public enum MonsterPrefabName
     {
-        Kobold_Melee,
-        Kobold_Ranged
+        Kobold_Melee = 0,
+        Kobold_Melee_Elite = 1,
+        Kobold_Melee_Guv = 2,
+        Kobold_Ranged = 3,
+        Kobold_Ranged_Elite = 4,
+        Kobold_Ranged_Guv = 5
     }
 
     private void Awake()
@@ -41,8 +46,13 @@ public class MonsterPool : MonoBehaviour
         MonsterPoolQueues = new MonsterPoolQueue[MonsterPrefab.Length];
         for (int i = 0; i < MonsterPoolQueues.Length; i++)
             MonsterPoolQueues[i] = new MonsterPoolQueue();
+
         Initialize(20, MonsterPrefabName.Kobold_Melee);
+        Initialize(10, MonsterPrefabName.Kobold_Melee_Elite);
+        Initialize(5, MonsterPrefabName.Kobold_Melee_Guv);
         Initialize(20, MonsterPrefabName.Kobold_Ranged);
+        Initialize(10, MonsterPrefabName.Kobold_Ranged_Elite);
+        Initialize(5, MonsterPrefabName.Kobold_Ranged_Guv);
     }
 
     private void Initialize(int initCount, MonsterPrefabName index)

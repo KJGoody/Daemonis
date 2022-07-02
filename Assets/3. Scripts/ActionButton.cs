@@ -95,6 +95,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
                         {
                             if(HandScript.MyInstance.MyMoveable is ItemBase)
                             {
+                                // 이미 설정되어 있는 버튼을 초기화
                                 AlreadySetButton.UseableItem = new Stack<IUseable>();
                                 AlreadySetButton.count = 0;
                                 AlreadySetButton.MyIcon.sprite = null;
@@ -102,16 +103,19 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
                                 UIManager.MyInstance.UpdateStackSize(AlreadySetButton);
                                 AlreadySetButton = null;
 
+                                // 새로운 버튼에 할당
                                 SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
                                 HandScript.MyInstance.SkillBlindControll();
                             }
                             else
                             {
+                                // 이미 설정되어 있는 버튼을 초기화
                                 AlreadySetButton.UseableSpell = null;
                                 AlreadySetButton.MyIcon.sprite = null;
                                 AlreadySetButton.MyIcon.color = new Color(0, 0, 0, 0);
                                 AlreadySetButton = null;
 
+                                // 새로운 버튼에 할당
                                 SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
                                 HandScript.MyInstance.SkillBlindControll();
                             }
@@ -207,7 +211,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
 
     private bool IsSetIUseable(IUseable useable)
     {   // IUseable이 이미 설정이 되어있는지 확인하는 함수
-        foreach (ActionButton actionButton in GameManager.MyInstance.DATA.ActionButtons)
+        foreach (ActionButton actionButton in GameManager.MyInstance.ActionButtons)
         {
             if (actionButton.UseableSpell != null)
                 if (actionButton.UseableSpell.GetName().Equals(useable.GetName()))

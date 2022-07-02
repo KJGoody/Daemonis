@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     public SaveLoadData SavedData { get; private set; }
     public SaveLoadData DATA;
+    public ActionButton[] ActionButtons;
 
     [SerializeField]
     private Player player;
@@ -128,10 +129,6 @@ public class GameManager : MonoBehaviour
 public class SaveLoadData
 {
     public int Gold;
-
-    // 액션버튼 인스턴스
-    public ActionButton[] ActionButtons;
-
 
     public SaveLoadData()
     {

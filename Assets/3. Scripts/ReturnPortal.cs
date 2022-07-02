@@ -11,6 +11,7 @@ public class ReturnPortal : MonoBehaviour
         activeButton = GameObject.Find("Canvas").transform.Find("ActiveButton").gameObject;
         activeButton.SetActive(true);
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         activeButton = GameObject.Find("Canvas").transform.Find("ActiveButton").gameObject;

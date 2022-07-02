@@ -39,17 +39,32 @@ public class BossHPBar : MonoBehaviour
             BossHPBarImage.fillAmount = Mathf.Lerp(BossHPBarImage.fillAmount, CurrentFill, Time.deltaTime);
     }
 
-    public void BossHPBarSetActive(bool setactive, EnemyBase parent, bool Fix = false)
+    public void BossHPBarSetActive(bool setactive)
     {
+        if (setactive) this.GetComponent<CanvasGroup>().alpha = 1;
+        else this.GetComponent<CanvasGroup>().alpha = 0;
+    }
+
+    public void BossHPBarSetActive(bool setactive, EnemyBase parent, bool Fix = false, Character.AttackType attackType = Character.AttackType.Normal)
+    {
+        // 체력바 표시 대상 고정
         if (Fix)
-        {
-            if (setactive) IsFix = true;
-            else IsFix = false;
-        }
+            if (setactive)
+            {
+                Parent = parent;
+                SetValue();
+                InitializeBossHPBar();
+                IsFix = true;
+            }
+            else
+            {
+                Parent = null;
+                IsFix = false;
+            }
 
         if (setactive)
         {
-            SetBossHP(parent);
+            SetBossHP(parent, attackType);
             this.GetComponent<CanvasGroup>().alpha = 1;
         }
         else
@@ -63,25 +78,27 @@ public class BossHPBar : MonoBehaviour
         }
     }
 
-    public void SetBossHP(EnemyBase parent)
+    public void SetBossHP(EnemyBase parent, Character.AttackType attackType)
     {
-        if (Parent != null)
+        if (IsFix || attackType == Character.AttackType.Tick)
         {
             if (Parent == parent)
                 SetValue();
-            else if ((int)parent.GetComponent<EnemyType>().enemyGrade > (int)Parent.GetComponent<EnemyType>().enemyGrade)
+        }
+        else
+        {
+            if (Parent != null)
             {
-                if (IsFix)
+                if (Parent == parent)
+                    SetValue();
+                else if ((int)parent.GetComponent<EnemyType>().enemyGrade >= (int)Parent.GetComponent<EnemyType>().enemyGrade)
                 {
                     Parent = parent;
                     SetValue();
                     InitializeBossHPBar();
                 }
             }
-        }
-        else
-        {
-            if (!IsFix)
+            else
             {
                 Parent = parent;
                 SetValue();
@@ -103,13 +120,14 @@ public class BossHPBar : MonoBehaviour
         switch (Parent.GetComponent<EnemyType>().enemyGrade)
         {
             case EnemyType.EnemyGrade.Elite:
-                BossName.text = Parent.GetComponent<EnemyType>().EnemyName + "(정예)";
+                // 이름 표시 예: 코볼드 근거리 LV.1 (정예)
+                BossName.text = Parent.GetComponent<EnemyType>().EnemyName + " LV." + Parent.MyStat.Level + " (정예)";
                 BossName.color = Color.yellow;
                 CrownIcon.SetActive(false);
                 break;
 
             case EnemyType.EnemyGrade.Guv:
-                BossName.text = Parent.GetComponent<EnemyType>().EnemyName + "(우두머리)";
+                BossName.text = Parent.GetComponent<EnemyType>().EnemyName + " LV." + Parent.MyStat.Level + " (우두머리)";
                 CrownIcon.SetActive(true);
                 BossName.color = Color.red;
                 break;

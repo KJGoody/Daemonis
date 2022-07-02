@@ -295,6 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 4
+  EnemyName: 
   enemyGrade: 1
   AggroRnage: 0
   ExitPoint: {x: 0, y: 0, z: 0}
@@ -318,9 +319,9 @@ MonoBehaviour:
   level: 1
   levelUpEXP: 0
   currentEXP: 0
-  attack: 30
+  attack: 45
   attackPercent: 0
-  maxHealth: 800
+  maxHealth: 2400
   maxHealthPercent: 0
   currentHealth: 0
   maxMana: 0
@@ -373,7 +374,6 @@ MonoBehaviour:
   OnBuff: []
   BuffxDamage: 1
   enemytype: {fileID: 0}
-  EnemyName: "\uCF54\uBCFC\uD2B8(\uCC54\uD53C\uC5B8)"
   myStartPosition: {x: 0, y: 0, z: 0}
   HealthBarImage: {fileID: 894972729353884794}
   ExitPoint: {fileID: 3774030598729366747}

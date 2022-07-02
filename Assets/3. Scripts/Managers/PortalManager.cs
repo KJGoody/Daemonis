@@ -82,11 +82,8 @@ public class PortalManager : MonoBehaviour
         Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
         Player.MyInstance.MyStat.CurrentMana = Player.MyInstance.MyStat.CurrentMaxMana;
 
-        switch (LoadSceneName)
-        {
-            case "Main":
-                Destroy(usingPortal);
-                break;
-        }
+        BossHPBar.Instance.BossHPBarSetActive(false);
+        if (usingPortal != null)
+            Destroy(usingPortal);
     }
 }

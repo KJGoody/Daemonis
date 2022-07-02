@@ -7,7 +7,7 @@ public class EnemyBase : NPC
 {
     [HideInInspector]
     public EnemyType enemytype;
-    private IState currentState;
+    protected IState currentState;
 
     [HideInInspector]
     public Vector3 myStartPosition;
@@ -27,7 +27,7 @@ public class EnemyBase : NPC
 
     private bool IsKnockBack = false;
 
-    private MonsterGate ParentGate;
+    protected MonsterGate ParentGate;
 
     [SerializeField]
     protected int EnemyEXP;
@@ -73,10 +73,10 @@ public class EnemyBase : NPC
                     MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Ranged);
                     break;
             }
+
             InitializeEnemyBase();
             ParentGate.CurrentEnemyNum--;
         }
-
 
         base.Update();
     }
@@ -119,13 +119,13 @@ public class EnemyBase : NPC
         EnemyAttackPrefab.GetComponent<EnemyAttack>().parent = this;
     }
 
-    public override void TakeDamage(bool IsPhysic, float HitPercent, float PureDamage, int FromLevel, Vector2 knockbackDir, NewTextPool.NewTextPrefabsName TextType) // 피격
+    public override void TakeDamage(DamageType damageType, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, NewTextPool.NewTextPrefabsName TextType, AttackType attackType = AttackType.Normal) // 피격
     {
         HealthBarImage.SetActive(true);
         if (knockbackDir != Vector2.zero)
             StartCoroutine(KnockBack(knockbackDir, 1));
 
-        base.TakeDamage(IsPhysic, HitPercent, PureDamage, FromLevel, knockbackDir, TextType);
+        base.TakeDamage(damageType, HitPercent, pureDamage, FromLevel, knockbackDir, TextType);
 
         if (stat.CurrentHealth <= 0)
         {
@@ -166,9 +166,8 @@ public class EnemyBase : NPC
         }
     }
 
-    protected IEnumerator Death()
+    protected virtual IEnumerator Death()
     {
-
         yield return new WaitForSeconds(3f);
         SetLayersRecursively(_prefabs.transform, "None");
 
@@ -191,7 +190,7 @@ public class EnemyBase : NPC
         ParentGate.DeathEnemyNum++;
     }
 
-    private void SetLayersRecursively(Transform Object, string name)
+    protected void SetLayersRecursively(Transform Object, string name)
     {
         Object.gameObject.layer = LayerMask.NameToLayer(name);
         foreach (Transform Child in Object)
@@ -207,7 +206,6 @@ public class EnemyBase : NPC
         if(ChanceMaker.GetThisChanceResult_Percentage(50))
             SoundManager.Instance.PlaySFXSound("MoiusesquealSound" + Random.Range(1, 5));
     }
-    
     
     public void InitializeEnemyBase()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 class IdleState : IState
 {
     private EnemyBase parent;
-    private Coroutine courrentCoroutine;
+    private Coroutine currentCoroutine;
 
     public void Enter(EnemyBase parent)
     {
@@ -15,12 +15,14 @@ class IdleState : IState
         Collider2D collider = Physics2D.OverlapCircle(parent.transform.position, parent.myAggroRange / 2, LayerMask.GetMask("PlayerHitBox"));
         if (collider != null && collider.CompareTag("Player"))
             parent.SetTarget(collider.transform);
-        courrentCoroutine = parent.StartCoroutine(NextPatrol());
+        if(parent.gameObject.activeSelf)
+            currentCoroutine = parent.StartCoroutine(NextPatrol());
     }
 
     public void Exit()
     {
-        parent.StopCoroutine(courrentCoroutine);
+        if(currentCoroutine != null)
+            parent.StopCoroutine(currentCoroutine);
     }
 
     public void Update()

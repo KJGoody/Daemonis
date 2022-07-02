@@ -90,7 +90,7 @@ public class Player : Character
     public void CastSpell(string spellIName) // 스킬 사용
     {
         if (MyTarget != null)
-            if (!MyTarget.parent.gameObject.GetComponent<EnemyBase>().IsAlive)
+            if (!MyTarget.parent.gameObject.GetComponent<EnemyBase>().IsAlive || MyTarget.parent.gameObject.activeSelf == false)
                 MyTarget = null;
 
         if (MyTarget == null && SearchEnemy()) 
@@ -343,9 +343,9 @@ public class Player : Character
         }
     }
 
-    public override void TakeDamage(bool IsPhysic, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, NewTextPool.NewTextPrefabsName TextType)
+    public override void TakeDamage(DamageType damageType, float HitPercent, float pureDamage, int FromLevel, Vector2 knockbackDir, NewTextPool.NewTextPrefabsName TextType, AttackType attackType = AttackType.Normal)
     {
-        base.TakeDamage(IsPhysic, HitPercent, pureDamage, FromLevel, knockbackDir, TextType);
+        base.TakeDamage(damageType, HitPercent, pureDamage, FromLevel, knockbackDir, TextType);
 
         if(MyStat.CurrentHealth <= 0)
         {

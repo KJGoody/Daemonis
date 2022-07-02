@@ -26,10 +26,22 @@ public class MonsterGate : MonoBehaviour
     [HideInInspector]
     public int DeathEnemyNum = 0;
 
+    private int TotalEliteNum;
+    [HideInInspector]
+    public int CurrnentEliteNum;
+    [HideInInspector]
+    public int DeathEliteNum = 0;
+
+    private int TotalGuvNum = 0;
+    [HideInInspector]
+    public int CurrnetGuvNum;
+    [HideInInspector]
+    public int DeathGuvNum = 0;
+
     private GNode[,] Grid;
     private Vector3 GridCenter;
     [SerializeField]
-    private  Vector2 GridSize;    // 그리드 크기
+    private Vector2 GridSize;    // 그리드 크기
     private int GridSizeX;      // 그리드 x 크기
     private int GridSizeY;      // 그리드 y 크기
     private readonly float Radius = 0.5f;
@@ -38,6 +50,9 @@ public class MonsterGate : MonoBehaviour
 
     private void Start()
     {
+        TotalEliteNum = Random.Range(0, 3 + 1);
+        if (ChanceMaker.GetThisChanceResult_Percentage(25))
+            TotalGuvNum = 1;
         CreateGrid();
     }
 
@@ -49,13 +64,13 @@ public class MonsterGate : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") && CurrentCoroutine != null)
+        if (collision.CompareTag("Player") && CurrentCoroutine != null)
         {
             StopCoroutine(CurrentCoroutine);
             TotalEnemyNum = 0;
             CurrentCoroutine = null;
         }
-            
+
     }
 
     private IEnumerator SponeEnemy()
@@ -73,14 +88,10 @@ public class MonsterGate : MonoBehaviour
                     newStartPosition = Grid[Random.Range(0, GridSizeX), Random.Range(0, GridSizeY)];
                 } while (newStartPosition.IsWall);
 
-                if (ChanceMaker.GetThisChanceResult_Percentage(50))
-                    MonsterPool.Instance.GetObject(MonsterPool.MonsterPrefabName.Kobold_Melee).PositioningEnemyBase(this, newStartPosition.WorldPos);
-                else
-                    MonsterPool.Instance.GetObject(MonsterPool.MonsterPrefabName.Kobold_Ranged).PositioningEnemyBase(this, newStartPosition.WorldPos);
+                PositioningEnemy(newStartPosition.WorldPos);
 
                 TotalEnemyNum++;
                 CurrentEnemyNum++;
-                //yield return new WaitForSeconds(Random.value);
                 yield return new WaitForSeconds(0.01f);
             }
             else
@@ -102,23 +113,40 @@ public class MonsterGate : MonoBehaviour
             {
                 worldPosition = worldBottomLeft + Vector3.right * (x + Radius) + Vector3.up * (y + Radius);
                 bool iswall = Physics2D.OverlapCircle(worldPosition, Radius - 0.1f, LayerMask.GetMask("Wall"));    // 해당 노드의 레이어 확인
-                if(!iswall)
+                if (!iswall)
                     iswall = Physics2D.OverlapCircle(worldPosition, Radius - 0.1f, LayerMask.GetMask("Water"));    // 해당 노드의 레이어 확인
 
                 Grid[x, y] = new GNode(iswall, worldPosition, x, y);
             }
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawWireCube(transform.position, new Vector3(GridSize.x, GridSize.y));
-    //    if (Grid != null)
-    //    {
-    //        foreach (GNode n in Grid)
-    //        {
-    //            Gizmos.color = (n.IsWall) ? Color.red : Color.white;
-    //            Gizmos.DrawCube(n.WorldPos, Vector3.one * (Radius * 2 - 0.1f));
-    //        }
-    //    }
-    //}
+    private void PositioningEnemy(Vector3 newworldposition)
+    {
+        if(TotalGuvNum - DeathGuvNum > CurrnetGuvNum)
+        {
+            if (ChanceMaker.GetThisChanceResult_Percentage(50))
+                MonsterPool.Instance.GetObject(MonsterPool.MonsterPrefabName.Kobold_Melee_Guv).PositioningEnemyBase(this, newworldposition);
+            else
+                MonsterPool.Instance.GetObject(MonsterPool.MonsterPrefabName.Kobold_Ranged_Guv).PositioningEnemyBase(this, newworldposition);
+            
+            CurrnetGuvNum += 1;
+            return;
+        }
+
+        if(TotalEliteNum - DeathEliteNum > CurrnentEliteNum)
+        {
+            if (ChanceMaker.GetThisChanceResult_Percentage(50))
+                MonsterPool.Instance.GetObject(MonsterPool.MonsterPrefabName.Kobold_Melee_Elite).PositioningEnemyBase(this, newworldposition);
+            else
+                MonsterPool.Instance.GetObject(MonsterPool.MonsterPrefabName.Kobold_Ranged_Elite).PositioningEnemyBase(this, newworldposition);
+
+            CurrnentEliteNum += 1;
+            return;
+        }
+
+        if (ChanceMaker.GetThisChanceResult_Percentage(50))
+            MonsterPool.Instance.GetObject(MonsterPool.MonsterPrefabName.Kobold_Melee).PositioningEnemyBase(this, newworldposition);
+        else
+            MonsterPool.Instance.GetObject(MonsterPool.MonsterPrefabName.Kobold_Ranged).PositioningEnemyBase(this, newworldposition);
+    }
 }

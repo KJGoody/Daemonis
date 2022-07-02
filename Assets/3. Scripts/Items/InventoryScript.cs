@@ -65,6 +65,7 @@ public class InventoryScript : MonoBehaviour
         // 중첩이 불가능한 아이템은 빈슬롯에 추가합니다.
         PlaceInEmpty(item);
     }
+
     private bool PlaceInStack(ItemBase item)
     {
         // 인벤토리 슬롯들을 검사합니다.
@@ -80,6 +81,7 @@ public class InventoryScript : MonoBehaviour
         }
         return false;
     }
+
     public void FindUseSlot(ItemBase item)
     {
         foreach (SlotScript slots in MySlots)

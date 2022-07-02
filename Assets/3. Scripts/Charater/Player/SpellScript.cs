@@ -187,9 +187,9 @@ public class SpellScript : MonoBehaviour
         float PureDamage = (WeaponxDamage * Player.MyInstance.MyStat.BaseAttack * SpellxDamage) * Player.MyInstance.BuffxDamage;
             
         if(ChanceMaker.GetThisChanceResult_Percentage(Player.MyInstance.MyStat.CriticalPercent))
-            character.TakeDamage(false, Player.MyInstance.MyStat.HitPercent, PureDamage, Player.MyInstance.MyStat.Level, direction, NewTextPool.NewTextPrefabsName.Critical);
+            character.TakeDamage(Character.DamageType.Masic, Player.MyInstance.MyStat.HitPercent, PureDamage, Player.MyInstance.MyStat.Level, direction, NewTextPool.NewTextPrefabsName.Critical);
         else
-            character.TakeDamage(false, Player.MyInstance.MyStat.HitPercent, PureDamage, Player.MyInstance.MyStat.Level, direction, NewTextPool.NewTextPrefabsName.Enemy);
+            character.TakeDamage(Character.DamageType.Masic, Player.MyInstance.MyStat.HitPercent, PureDamage, Player.MyInstance.MyStat.Level, direction, NewTextPool.NewTextPrefabsName.Enemy);
         // 무기 배수    // 플레이어 공격력               // 스킬 배수
     }
 
