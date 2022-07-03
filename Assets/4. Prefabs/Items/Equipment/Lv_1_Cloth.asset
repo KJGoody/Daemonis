@@ -19,10 +19,12 @@ MonoBehaviour:
   effect: "\uCD5C\uB300 \uCCB4\uB825 50"
   limitLevel: 1
   kind: 1
+  slot: {fileID: 0}
   part: 1
-  sprite:
+  ItemSprite:
   - {fileID: -3499911447275618549, guid: 4f02dac3803218740a6b6c344d0184a8, type: 3}
   - {fileID: -8885491863550766914, guid: 4f02dac3803218740a6b6c344d0184a8, type: 3}
   - {fileID: -2284963529676358950, guid: 4f02dac3803218740a6b6c344d0184a8, type: 3}
-  baseOption: BaseMaxHealth
-  optionValue: 50
+  BaseOption: 
+  BaseOptionValue: 0
+  WeaponxDamage: 0

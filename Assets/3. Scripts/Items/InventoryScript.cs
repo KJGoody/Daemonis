@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void ItemCountChanged(ItemBase item);
+public delegate void ItemCountChanged(Item_Base item);
 public class InventoryScript : MonoBehaviour
 {
     private static InventoryScript instance;
@@ -24,7 +24,7 @@ public class InventoryScript : MonoBehaviour
     private CanvasGroup canvasGroup;
     public List<SlotScript> MySlots { get { return slots; } }
     private SlotScript fromSlot;
-    public ItemBase[] items;
+    public Item_Base[] items;
     
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class InventoryScript : MonoBehaviour
         AddSlots(40);
     }
     
-    public void OnItemCountChanged(ItemBase item)
+    public void OnItemCountChanged(Item_Base item)
     {
         // 이벤트에 등록된 델리게이트에 있다면
         if (itemCountChangedEvent != null)
@@ -51,10 +51,10 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
-    public void AddItem(ItemBase item)
+    public void AddItem(Item_Base item)
     {
         // 추가되려는 아이템이 중첩 가능 아이템인지 확인합니다.
-        if (item.MyStackSize > 0)
+        if (item is Item_Consumable)
         {
             // 가능하다면 PlaceInStack() 함수를 호출합니다.
             if (PlaceInStack(item))
@@ -66,14 +66,14 @@ public class InventoryScript : MonoBehaviour
         PlaceInEmpty(item);
     }
 
-    private bool PlaceInStack(ItemBase item)
+    private bool PlaceInStack(Item_Base item)
     {
         // 인벤토리 슬롯들을 검사합니다.
         foreach (SlotScript slots in MySlots)
         {
             // 해당 슬롯에 있는 아이템과 중첩시킬 수 있는지 확인합니다.
             // 중첩이 가능하면 아이템을 중첩시키고 반복문을 중단합니다.
-            if (slots.StackItem(item))
+            if (slots.StackItem(item as Item_Consumable))
             {
                 OnItemCountChanged(item);
                 return true;
@@ -82,7 +82,7 @@ public class InventoryScript : MonoBehaviour
         return false;
     }
 
-    public void FindUseSlot(ItemBase item)
+    public void FindUseSlot(Item_Base item)
     {
         foreach (SlotScript slots in MySlots)
         {
@@ -90,7 +90,7 @@ public class InventoryScript : MonoBehaviour
                 item.MySlot = slots;
         }
     }
-    public void FindEquipment(ItemBase item)
+    public void FindEquipment(Item_Equipment item)
     {
         foreach (SlotScript slots in MySlots)
         {
@@ -101,7 +101,7 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
-    private bool PlaceInEmpty(ItemBase item)
+    private bool PlaceInEmpty(Item_Base item)
     {
         foreach (SlotScript slot in slots)
         {
@@ -130,10 +130,10 @@ public class InventoryScript : MonoBehaviour
             {
 
                 // 해당 슬롯에 등록된 모든 아이템을
-                foreach (ItemBase item in slot.MyItems)
+                foreach (Item_Base item in slot.MyItems)
                 {
                     // useables 에 담는다.
-                    useables.Push(item as IUseable);
+                    useables.Push(item);
                 }
             }
         }

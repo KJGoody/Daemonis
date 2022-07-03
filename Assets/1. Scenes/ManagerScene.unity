@@ -464,8 +464,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1157021318}
-  - {fileID: 2045431790}
   - {fileID: 1999419824}
+  - {fileID: 2045431790}
   - {fileID: 285320594}
   - {fileID: 437330976}
   - {fileID: 1467593601}
@@ -9930,8 +9930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b930d7ef3c31d3a4c8ee6e2c4f2e05f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropItem: {fileID: 1411184612657943188, guid: 2c677614418dfb64b8277b05c990cdb8,
-    type: 3}
+  dropItem: {fileID: 531805050654809122, guid: 2c677614418dfb64b8277b05c990cdb8, type: 3}
   equipmentPerLv:
   - items:
     - {fileID: 11400000, guid: f6fd31f718dbc9b46bf6e4c03b82df86, type: 2}
@@ -24719,7 +24718,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1513366696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f97b6bbfb4aad54dac378dd02668cde, type: 3}
+  m_Script: {fileID: 11500000, guid: 401b3a19a4e70c84391fb16ea65e8b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1518261612
@@ -32629,7 +32628,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 54665777}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1999419825
 BoxCollider2D:
@@ -33450,7 +33449,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 54665777}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2045431791
 MonoBehaviour:

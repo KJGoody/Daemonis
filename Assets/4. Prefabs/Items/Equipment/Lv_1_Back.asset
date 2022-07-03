@@ -19,8 +19,10 @@ MonoBehaviour:
   effect: "\uB9C8\uBC95 \uBC29\uC5B4\uB825 5"
   limitLevel: 1
   kind: 1
+  slot: {fileID: 0}
   part: 5
-  sprite:
+  ItemSprite:
   - {fileID: 21300000, guid: 212b32565e0811240ba82be820937aed, type: 3}
-  baseOption: BaseMagicRegist
-  optionValue: 5
+  BaseOption: 
+  BaseOptionValue: 0
+  WeaponxDamage: 0

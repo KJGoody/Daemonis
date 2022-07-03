@@ -4,7 +4,7 @@ using UnityEngine;
 
 // 상단 메뉴 버튼 만들기
 [CreateAssetMenu(fileName = "HealthPotion", menuName = "Items/Potion", order = 2)]
-public class HealthPotion : ItemInfo
+public class HealthPotion : ItemInfo_Consumable
 {
     // 포션아이템의 회복량
     [SerializeField]

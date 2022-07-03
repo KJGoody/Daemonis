@@ -70,7 +70,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
                 {   // 물약 쿨타임 설정 후 쿨다운 이미지 생성 코루틴 시작
                     CoolTime = 3f;
                     StartCoroutine(StartCoolDown());
-                    ItemBase itemBase = UseableItem.Peek() as ItemBase;
+                    Item_Base itemBase = UseableItem.Peek() as Item_Base;
                     itemBase.Use();
                 }
             }
@@ -93,7 +93,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
                     {
                         if(AlreadySetButton.CurrentCollTime == 0)
                         {
-                            if(HandScript.MyInstance.MyMoveable is ItemBase)
+                            if(HandScript.MyInstance.MyMoveable is Item_Base)
                             {
                                 // 이미 설정되어 있는 버튼을 초기화
                                 AlreadySetButton.UseableItem = new Stack<IUseable>();
@@ -135,7 +135,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
     public void SetUseable(IUseable useable)
     {
         // 액션 퀵슬롯에 등록되려는 것이 아이템이라면
-        if (useable is ItemBase)
+        if (useable is Item_Base)
         {
             // 해당 아이템과 같은 종류의 아이템을 가진 리스트를 저장하고
             UseableItem = InventoryScript.MyInstance.GetUseables(useable);
@@ -169,7 +169,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
         }
     }
 
-    public void UpdateItemCount(ItemBase item)
+    public void UpdateItemCount(Item_Base item)
     {
         // 아이템이 IUseable(인터페이스)을 상속받았으며
         // useables 배열의 아이템개수가 1개 이상이면

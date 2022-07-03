@@ -11,29 +11,34 @@ public class LootNotice : MonoBehaviour
     private Image image;
     [SerializeField]
     private Text text;
+
     private void Awake()
     {
         LootNoticeManager.MyInstance.AddLootNotice(gameObject);
-        
     }
-    public void SetDescript(ItemBase _Item) // 정보 설정
+
+    public void SetDescript(Item_Base _Item) // 정보 설정
     {
         image.sprite = _Item.MyIcon;
         text.text = _Item.MyName;
     }
+
     public void SetGoldInfo(int _gold, Sprite _sprite) // 골드 정보 설정
     {
         image.sprite = _sprite;
         text.text = _gold + " 골드";
     }
+
     void Start()
     {
-        Invoke("Off", 3);
+        StartCoroutine(NoticeOff(3));
     }
-    public void  Off() // 사라짐
+
+    public IEnumerator NoticeOff(float Seconds = 0)
     {
+        yield return new WaitForSeconds(Seconds);
+
         anim.SetTrigger("Off");
         LootNoticeManager.MyInstance.noticeList.Remove(gameObject);
-
     }
 }

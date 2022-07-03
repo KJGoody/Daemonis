@@ -39,7 +39,7 @@ public class LootNoticeManager : MonoBehaviour
     public void DeleteLootNotice()
     {
         LootNotice a = noticeList[0].GetComponent<LootNotice>();
-        a.Off();
+        StartCoroutine(a.NoticeOff());
     }
 
 }

@@ -32,7 +32,7 @@ public class Player : Character
         }
     }
 
-    public ItemBase[] usingEquipment = new ItemBase[6]; // 장착중인 장비 아이템
+    public Item_Equipment[] usingEquipment = new Item_Equipment[6]; // 장착중인 장비 아이템
     public delegate void UseEquipment(int partNum);
     public event UseEquipment useEquipment;
 
@@ -260,27 +260,27 @@ public class Player : Character
                 }
     }
 
-    public void EquipItem(ItemBase newItem) // 장비 장착
+    public void EquipItem(Item_Equipment newItem) // 장비 장착
     {
         int partNum = 0;
         switch (newItem.GetPart)
         {
-            case Part.Helmet:
+            case ItemInfo_Equipment.Part.Helmet:
                 partNum = 0;
                 break;
-            case Part.Cloth:
+            case ItemInfo_Equipment.Part.Cloth:
                 partNum = 1;
                 break;
-            case Part.Shoes:
+            case ItemInfo_Equipment.Part.Shoes:
                 partNum = 2;
                 break;
-            case Part.Weapon:
+            case ItemInfo_Equipment.Part.Weapon:
                 partNum = 3;
                 break;
-            case Part.Shoulder:
+            case ItemInfo_Equipment.Part.Shoulder:
                 partNum = 4;
                 break;
-            case Part.Back:
+            case ItemInfo_Equipment.Part.Back:
                 partNum = 5;
                 break;
         }
@@ -302,18 +302,20 @@ public class Player : Character
         _spriteList.ChangeItem(partNum);
     }
 
-    public void Plus(string option, float value) // 추가옵션 스탯 적용
+    public void PlusStat(string option, float value) // 추가옵션 스탯 적용
     {
+        // stat에서 option과 같은 이름의 변수를 가지고 온다.
         PropertyInfo optionName = stat.GetType().GetProperty(option);
-        //float a = (float)System.Convert.ToDouble(optionName.GetValue(stat));
+
         float b = (float)System.Convert.ToDouble(optionName.GetValue(stat));
         switch (option)
         {
-            case "BaseAttack": case "BaseMaxHealth": case "BaseMaxMana": case "BaseDefence":
-            case "BaseMagicRegist": case "BaseAttackSpeed" : case "HealthRegen":
-            case "ManaRegen": case "RecoverHealth_onhit": case "RecoverMana_onhit":
+            case "BaseAttack":      case "BaseMaxHealth":       case "BaseMaxMana":         case "BaseDefence":
+            case "BaseMagicRegist": case "BaseAttackSpeed" :    case "HealthRegen":
+            case "ManaRegen":       case "RecoverHealth_onhit": case "RecoverMana_onhit":
                 optionName.SetValue(stat, (int)(b + value));
                 break;
+
             default:
                 optionName.SetValue(stat, (float)(b + value));
                 break;

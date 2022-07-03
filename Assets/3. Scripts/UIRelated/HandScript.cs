@@ -38,7 +38,7 @@ public class HandScript : MonoBehaviour
 
     public GameObject usingEquipment_Panel;
     public PlayerInfoPanel playerInfoPanel;
-    private ItemBase myItem;    // 아이템 정보
+    private Item_Base myItem;    // 아이템 정보
     [Header ("Select Item Tooltip")]
     #region 아이템 선택관련 변수 SI = Select Item
     [SerializeField]
@@ -152,7 +152,7 @@ public class HandScript : MonoBehaviour
     }
 
     // 아이템 구현 함수 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    public void SelectItem(ItemBase item) // 아이템 선택
+    public void SelectItem(Item_Base item) // 아이템 선택
     {
         // 선택한 아이템 정보 표시
         myItem = item;
@@ -164,27 +164,28 @@ public class HandScript : MonoBehaviour
         SI_Descript.text = myItem.MyDescript;
         switch (myItem.GetKind)
         {
-            case Kinds.Potion: // 선택한 아이템이 포션일 때 추옵,세트옵 감추기
+            case ItemInfo_Base.Kinds.Potion: // 선택한 아이템이 포션일 때 추옵,세트옵 감추기
                 SI_Obj_Option.SetActive(false);
                 SI_Obj_SetOption.SetActive(false);
                 break;
-            case Kinds.Equipment: // 선택한 아이템이 장비일 때 추옵, 세트옵 표시
+
+            case ItemInfo_Base.Kinds.Equipment: // 선택한 아이템이 장비일 때 추옵, 세트옵 표시
                 SI_Obj_Option.SetActive(true);
 
-                for(int i = 0; i < myItem.addOptionList.Count; i++) // 추옵 표시
+                for(int i = 0; i < (myItem as Item_Equipment).addOptionList.Count; i++) // 추옵 표시
                 {
-                    AddOptionInfo optionInfo = SI_Obj_AddOptions[i].GetComponent<AddOptionInfo>();
-                    optionInfo.SetAddOptionPrefab(myItem.addOptionList[i]);
+                    ItemAddOptionInfo optionInfo = SI_Obj_AddOptions[i].GetComponent<ItemAddOptionInfo>();
+                    optionInfo.SetAddOptionPrefab((myItem as Item_Equipment).addOptionList[i]);
                     SI_Obj_AddOptions[i].SetActive(true);
                 }
-                for(int i = 6; i > myItem.addOptionList.Count; i--)
+                for(int i = 6; i > (myItem as Item_Equipment).addOptionList.Count; i--)
                 {
                     SI_Obj_AddOptions[i-1].SetActive(false);
                 }
                 SI_Obj_SetOption.SetActive(false); // 나중에 세트장비 조건문으로 활성화
 
                 // 장비 부위에 따라 착용중인 장비 표시
-                int partNum = (int)item.GetPart;
+                int partNum = (int)(item as Item_Equipment).GetPart;
                 if(Player.MyInstance.usingEquipment[partNum] != null)
                 {
                     playerInfoPanel.ShowUsingEquipment(partNum);
@@ -203,9 +204,9 @@ public class HandScript : MonoBehaviour
 
     public void EquipButton() // 장착버튼용 (포션이랑 장비 나누기 위함)
     {
-        if (myItem.GetKind == Kinds.Potion)
+        if (myItem.GetKind == ItemInfo_Base.Kinds.Potion)
             EquipPotion();
-        else if (myItem.GetKind == Kinds.Equipment)
+        else if (myItem.GetKind == ItemInfo_Base.Kinds.Equipment)
             UseEquipment();
         
     }
@@ -218,7 +219,7 @@ public class HandScript : MonoBehaviour
 
     public void UseEquipment() // 장비 장착할때
     {
-        int partNum = (int)myItem.GetPart;
+        int partNum = (int)(myItem as Item_Equipment).GetPart;
         if (Player.MyInstance.usingEquipment[partNum] != null)
         {
             Player.MyInstance.UnequipItem(partNum);
@@ -235,8 +236,8 @@ public class HandScript : MonoBehaviour
     }
     public void RemoveItem() // 아이템 삭제 버튼
     {
-        if (myItem.itemInfo.GetKind == Kinds.Equipment)
-            myItem.EquipmentRemove();
+        if (myItem.itemInfo.GetKind == ItemInfo_Base.Kinds.Equipment)
+            (myItem as Item_Equipment).Remove();
         else
             myItem.Remove();
         SI_Panel.SetActive(false);
@@ -259,7 +260,7 @@ public class HandScript : MonoBehaviour
         icon.color = new Color(0, 0, 0, 0);
         if (myItem != null)
         {
-            if (myItem.GetKind == Kinds.Potion)
+            if (myItem.GetKind == ItemInfo_Base.Kinds.Potion)
                 HandScript.MyInstance.ResetEquipPotion(); // 이거만 포션 전용 코드
         }
         // 복사한 스킬의 아이콘 정보를 전달한다.

@@ -8,7 +8,7 @@ public class PlayerInfoPanel : MonoBehaviour
     public Image[] equipment_Img = new Image[6];
     public Sprite[] emtyImg = new Sprite[6];
     private int itemNum;
-    private ItemBase ueItem;
+    private Item_Base ueItem;
     [Header("Using Equipment Tooltip")]
     #region 장착 장비아이템 관련 변수 UE = Using Equipment
     [SerializeField]
@@ -121,20 +121,20 @@ public class PlayerInfoPanel : MonoBehaviour
             UE_Descript.text = ueItem.MyDescript;
             switch (ueItem.GetKind)
             {
-                case Kinds.Potion:
+                case ItemInfo_Base.Kinds.Potion:
                     UE_Obj_Option.SetActive(false);
                     UE_Obj_SetOption.SetActive(false);
                     break;
-                case Kinds.Equipment:
+                case ItemInfo_Base.Kinds.Equipment:
                     UE_Obj_Option.SetActive(true);
 
-                    for (int i = 0; i < ueItem.addOptionList.Count; i++)
+                    for (int i = 0; i < (ueItem as Item_Equipment).addOptionList.Count; i++)
                     {
-                        AddOptionInfo optionInfo = UE_Obj_AddOptions[i].GetComponent<AddOptionInfo>();
-                        optionInfo.SetAddOptionPrefab(ueItem.addOptionList[i]);
+                        ItemAddOptionInfo optionInfo = UE_Obj_AddOptions[i].GetComponent<ItemAddOptionInfo>();
+                        optionInfo.SetAddOptionPrefab((ueItem as Item_Equipment).addOptionList[i]);
                         UE_Obj_AddOptions[i].SetActive(true);
                     }
-                    for (int i = 6; i > ueItem.addOptionList.Count; i--)
+                    for (int i = 6; i > (ueItem as Item_Equipment).addOptionList.Count; i--)
                     {
                         UE_Obj_AddOptions[i - 1].SetActive(false);
                     }
