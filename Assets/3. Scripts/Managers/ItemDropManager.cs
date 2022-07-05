@@ -66,7 +66,6 @@ public class ItemDropManager : MonoBehaviour
         ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
         // 장비 종류 설정
         int setKind = Random.Range(0, 42);
-
         // 등급 설정
         float[] myQualityProb = new float[6];
         int a = 0;
@@ -74,14 +73,15 @@ public class ItemDropManager : MonoBehaviour
             myQualityProb[a++] = (float)System.Convert.ToDouble(value);
         Item_Base.Quality newQuality = (Item_Base.Quality)(int)ChanceMaker.Choose(myQualityProb); // 할당된 확률 배열로 가중치 랜덤뽑기로 등급 설정
         m_Level = 0;
-        item.SetItem(equipmentPerLv[SetLvNum(m_Level)].items[setKind], newQuality); // 설정한 정보 아이템에 넣어주기
+
+        item.SetItem_Equipment(equipmentPerLv[SetLvNum(m_Level)].items[setKind], newQuality); // 설정한 정보 아이템에 넣어주기
 
     }
 
     public void DropPotion(Transform dropPosition, int m_Level) // 임시
     {
         ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
-        item.SetItem(potion, Item_Base.Quality.Normal); 
+        item.SetItem_Consumable(potion, Item_Base.Quality.Normal); 
     }
 
     public int SetLvNum(int monsterLv) // 몬스터 레벨로 설정 레벨 잡아주기

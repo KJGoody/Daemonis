@@ -74,25 +74,25 @@ public class SPUM_SpriteList : MonoBehaviour
             switch (partNum)
             {
                 case 0:  // 모자
-                    _hairList[1].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[0];
+                    _hairList[1].sprite = Player.MyInstance.usingEquipment[partNum].ItemSprite[0];
 
                     break;
 
                 case 1:  // 옷
-                    for (var i = 0; i < Player.MyInstance.usingEquipment[partNum].itemSprite.Length; i++)
+                    for (var i = 0; i < Player.MyInstance.usingEquipment[partNum].ItemSprite.Length; i++)
                     {
-                        switch (Player.MyInstance.usingEquipment[partNum].itemSprite[i].name)
+                        switch (Player.MyInstance.usingEquipment[partNum].ItemSprite[i].name)
                         {
                             case "Body":
-                                _clothList[0].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                _clothList[0].sprite = Player.MyInstance.usingEquipment[partNum].ItemSprite[i];
                                 break;
 
                             case "Left":
-                                _clothList[1].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                _clothList[1].sprite = Player.MyInstance.usingEquipment[partNum].ItemSprite[i];
                                 break;
 
                             case "Right":
-                                _clothList[2].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                _clothList[2].sprite = Player.MyInstance.usingEquipment[partNum].ItemSprite[i];
                                 break;
 
                         }
@@ -100,43 +100,43 @@ public class SPUM_SpriteList : MonoBehaviour
                     break;
 
                 case 2: // 신발
-                    for (var i = 0; i < Player.MyInstance.usingEquipment[partNum].itemSprite.Length; i++)
+                    for (var i = 0; i < Player.MyInstance.usingEquipment[partNum].ItemSprite.Length; i++)
                     {
-                        switch (Player.MyInstance.usingEquipment[partNum].itemSprite[i].name)
+                        switch (Player.MyInstance.usingEquipment[partNum].ItemSprite[i].name)
                         {
                             case "Left":
-                                _pantList[0].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                _pantList[0].sprite = Player.MyInstance.usingEquipment[partNum].ItemSprite[i];
                                 break;
 
                             case "Right":
-                                _pantList[1].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                _pantList[1].sprite = Player.MyInstance.usingEquipment[partNum].ItemSprite[i];
                                 break;
                         }
                     }
                     break;
 
                 case 3:  // 무기
-                    _weaponList[0].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[0];
+                    _weaponList[0].sprite = Player.MyInstance.usingEquipment[partNum].ItemSprite[0];
                     break;
 
                 case 4:  // 어깨
-                    for (var i = 0; i < Player.MyInstance.usingEquipment[partNum].itemSprite.Length; i++)
+                    for (var i = 0; i < Player.MyInstance.usingEquipment[partNum].ItemSprite.Length; i++)
                     {
-                        switch (Player.MyInstance.usingEquipment[partNum].itemSprite[i].name)
+                        switch (Player.MyInstance.usingEquipment[partNum].ItemSprite[i].name)
                         {
                             case "Left":
-                                _armorList[1].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                _armorList[1].sprite = Player.MyInstance.usingEquipment[partNum].ItemSprite[i];
                                 break;
 
                             case "Right":
-                                _armorList[2].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[i];
+                                _armorList[2].sprite = Player.MyInstance.usingEquipment[partNum].ItemSprite[i];
                                 break;
                         }
                     }
                     break;
 
                 case 5:  // 망토
-                    _backList[0].sprite = Player.MyInstance.usingEquipment[partNum].itemSprite[0];
+                    _backList[0].sprite = Player.MyInstance.usingEquipment[partNum].ItemSprite[0];
                     break;
 
             }

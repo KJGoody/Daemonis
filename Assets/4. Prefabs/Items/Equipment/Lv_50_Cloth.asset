@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e024271b387c1f94788a088cbd8ccc0c, type: 3}
   m_Name: Lv_50_Cloth
   m_EditorClassIdentifier: 
+  kind: 1
   icon: {fileID: 5139297274989699595, guid: 3b33ed795368fe8428945bce994099f7, type: 3}
-  stackSize: 0
+  slot: {fileID: 0}
   itemName: "\uC804\uC124 \uC637"
   descript: "\uC804\uC124 \uC637\uC774\uB2E4."
   effect: "\uCD5C\uB300 \uCCB4\uB825 50"
   limitLevel: 20
-  kind: 1
   part: 1
-  sprite:
+  ItemSprite:
   - {fileID: 5139297274989699595, guid: 3b33ed795368fe8428945bce994099f7, type: 3}
   - {fileID: -2564005511455622327, guid: 3b33ed795368fe8428945bce994099f7, type: 3}
   - {fileID: -9173065611269503925, guid: 3b33ed795368fe8428945bce994099f7, type: 3}
-  baseOption: BaseMaxHealth
-  optionValue: 50
+  BaseOption: BaseMaxHealth
+  BaseOptionValue: 50
+  WeaponxDamage: 0

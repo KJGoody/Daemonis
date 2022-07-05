@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -236,7 +234,7 @@ public class HandScript : MonoBehaviour
     }
     public void RemoveItem() // 아이템 삭제 버튼
     {
-        if (myItem.itemInfo.GetKind == ItemInfo_Base.Kinds.Equipment)
+        if (myItem.ItemInfo().GetKind == ItemInfo_Base.Kinds.Equipment)
             (myItem as Item_Equipment).Remove();
         else
             myItem.Remove();

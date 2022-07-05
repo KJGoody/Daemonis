@@ -5,7 +5,13 @@ using UnityEngine;
 public class Item_Base : IMoveable, IDescribable, IUseable
 {
     public ItemInfo_Base itemInfo;
-    public Sprite MyIcon { get { return itemInfo.MyIcon; } } // 아이템 아이콘 이미지
+    public virtual ItemInfo_Base ItemInfo()
+    {
+        ItemInfo_Base itemInfo = this.itemInfo;
+        return itemInfo;
+    }
+
+    public Sprite MyIcon { get { return ItemInfo().MyIcon; } } // 아이템 아이콘 이미지
 
     public enum Quality { Normal, Advanced, Rare, Epic, Legendary, Relic }
     public Quality quality; // 아이템의 등급
@@ -79,13 +85,13 @@ public class Item_Base : IMoveable, IDescribable, IUseable
             }
             #endregion
 
-            return string.Format("<color={0}>{1}</color>", color, itemInfo.itemName);
+            return string.Format("<color={0}>{1}</color>", color, ItemInfo().itemName);
         }
     }
 
 
-    public ItemInfo_Base.Kinds GetKind { get { return itemInfo.GetKind; } } // 아이템 종류
-    public string MyDescript { get { return itemInfo.descript; } } // 아이템 배경설명
+    public ItemInfo_Base.Kinds GetKind { get { return ItemInfo().GetKind; } } // 아이템 종류
+    public string MyDescript { get { return ItemInfo().descript; } } // 아이템 배경설명
     public virtual string GetDescription()
     {
         string color = string.Empty;
@@ -107,15 +113,15 @@ public class Item_Base : IMoveable, IDescribable, IUseable
         }
         #endregion
 
-        return string.Format("<color={0}>{1}</color>", color, itemInfo.itemName);
+        return string.Format("<color={0}>{1}</color>", color, ItemInfo().itemName);
     }
-    public int MyLimitLevel { get { return itemInfo.limitLevel; } } // 아이템 사용 제한 레벨
-    public string MyEffect { get { return itemInfo.effect; } } // 아이템 효과
+    public int MyLimitLevel { get { return ItemInfo().limitLevel; } } // 아이템 사용 제한 레벨
+    public string MyEffect { get { return ItemInfo().effect; } } // 아이템 효과
 
     public SlotScript MySlot
     {
-        get { return itemInfo.slot; }
-        set { itemInfo.slot = value; }
+        get { return ItemInfo().slot; }
+        set { ItemInfo().slot = value; }
     }
 
     public virtual void Use() { }

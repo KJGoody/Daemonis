@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e024271b387c1f94788a088cbd8ccc0c, type: 3}
   m_Name: Lv_1_Shoulder
   m_EditorClassIdentifier: 
+  kind: 1
   icon: {fileID: 5487422452042007272, guid: 30f062d19cf1a0049966363ea35a446f, type: 3}
-  stackSize: 0
+  slot: {fileID: 0}
   itemName: "\uD5C8\uB984\uD55C \uC5B4\uAE68\uC7A5\uC2DD"
   descript: "\uD5C8\uB984\uD55C \uC5B4\uAE68\uC7A5\uC2DD\uC774\uB2E4."
   effect: "\uBB3C\uB9AC \uBC29\uC5B4\uB825 5"
   limitLevel: 1
-  kind: 1
   part: 4
-  sprite:
+  ItemSprite:
   - {fileID: -7242055515239927182, guid: 30f062d19cf1a0049966363ea35a446f, type: 3}
   - {fileID: 5487422452042007272, guid: 30f062d19cf1a0049966363ea35a446f, type: 3}
-  baseOption: BaseDefence
-  optionValue: 5
+  BaseOption: BaseDefence
+  BaseOptionValue: 5

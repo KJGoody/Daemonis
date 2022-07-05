@@ -3,9 +3,12 @@ using UnityEngine.UI;
 
 public class ItemCart : MonoBehaviour
 {
-    [SerializeField]
     private Item_Base item;
     public Item_Base Item { get { return item; } }
+
+    private Item_Equipment item_Equipment;
+    private Item_Consumable item_Consumable;
+
     [SerializeField]
     private Text ItemName;
     [SerializeField]
@@ -28,21 +31,29 @@ public class ItemCart : MonoBehaviour
 
     private readonly float[] EquipmentQualityProb = new float[] { 5f, 4f, 3f, 2f, 1f, 0.5f };
 
-    public void SetItem(ItemInfo_Base _item, Item_Base.Quality _quality) // 몬스터에서 드랍할때 이걸로 추가할 예정
+    public void SetItem_Consumable(ItemInfo_Consumable ItemInfo, Item_Base.Quality quality)
     {
         isKind = IsKind.Item;
-        item = new Item_Base();
-        item.itemInfo = _item;
-        item.quality = _quality;
+        item_Consumable = new Item_Consumable();
+        item_Consumable.itemInfo = ItemInfo;
+        item_Consumable.quality = quality;
 
-        if (item.GetKind == ItemInfo_Base.Kinds.Equipment)
-        {
-            item.quality = (Item_Base.Quality)SetRandomEquipmentQuality();
-            (item as Item_Equipment).SetAddOption();
-        }
+        item = item_Consumable;
+        ItemName.text = item_Consumable.MyName;
+        ItemSprite.sprite = item_Consumable.MyIcon;
+    }
 
-        ItemName.text = item.MyName;
-        ItemSprite.sprite = item.MyIcon;
+    public void SetItem_Equipment(ItemInfo_Equipment ItemInfo, Item_Base.Quality quality)
+    {
+        isKind = IsKind.Item;
+        item_Equipment = new Item_Equipment();
+        item_Equipment.itemInfo = ItemInfo;
+        item_Equipment.quality = (Item_Base.Quality)SetRandomEquipmentQuality();
+        item_Equipment.SetAddOption();
+
+        item = item_Equipment;
+        ItemName.text = item_Equipment.MyName;
+        ItemSprite.sprite = item_Equipment.MyIcon;
     }
 
     public int SetRandomEquipmentQuality() // 장비 퀄리티 랜덤
@@ -95,7 +106,16 @@ public class ItemCart : MonoBehaviour
 
                     case IsKind.Item:
                         // 인벤토리에 아이템 추가
-                        InventoryScript.MyInstance.AddItem(item);
+                        switch (item.GetKind)
+                        {
+                            case ItemInfo_Base.Kinds.Potion:
+                                InventoryScript.MyInstance.AddItem(item, true);
+                                break;
+
+                            default:
+                                InventoryScript.MyInstance.AddItem(item);
+                                break;
+                        }
                         // 아이템 획득 알림
                         notice.GetComponent<LootNotice>().SetDescript(item);
                         break;
@@ -114,6 +134,7 @@ public class ItemCart : MonoBehaviour
         if (UpTime >= 0.7f)
             IsUp = true;
     }
+
     private void LootingToPlayer() // 아이템 플레이어쪽으로
     {
         Speed += Time.deltaTime * 15;

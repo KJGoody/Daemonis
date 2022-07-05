@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+
 public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
 {
     // 슬롯에 등록된 아이템 리스트
@@ -30,10 +31,10 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
         {
             if (!IsEmpty)
                 return MyItems.Peek();
+
             return null;
         }
     }
-
 
     private void Awake()
     {
@@ -52,7 +53,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
         return true;
     }
 
-    public void RemoveItem(Item_Base item)
+    public void RemoveItem()
     {
         // 자기 자신이 빈슬롯이 아니라면
         if (!IsEmpty)
@@ -94,76 +95,4 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable
         }
         return false;
     }
-
-
-    #region
-    //public bool IsFull
-    //{
-    //    get
-    //    {
-    //        // 빈슬롯이거나, 슬롯의 아이템 슬롯 개수가 MyStackSize 보다 작으면
-    //        if (IsEmpty || MyCount < MyItem.MyStackSize)
-    //        {
-    //            return false;
-    //        }
-
-    //        else return true;
-    //    }
-    //}
-
-
-
-    //private bool PutItemBack()
-    //{
-    //    // 현재 슬롯과 이동시키려는 슬롯이 같다면
-    //    if (InventoryScript.MyInstance.FromSlot == this)
-    //    {
-    //        // 슬롯의 색상을 원래대로 변경한다.
-    //        InventoryScript.MyInstance.FromSlot.MyIcon.color = Color.white;
-    //        return true;
-    //    }
-
-    //    return false;
-    //}
-    ////private bool SwapItems(SlotScript from)
-    ////{
-    ////    // 슬롯이 비어있다면
-    ////    if (IsEmpty)
-    ////    {
-    ////        return false;
-    ////    }
-
-    ////    // 동일한 아이템이 아니거나
-    ////    // 이동하려는 아이템 개수 + 현재 아이템 개수 가 아이템의 StackSize 보다 크다면
-    ////    if (from.MyItem.GetType() != MyItem.GetType() || from.MyCount + MyCount > MyItem.MyStackSize)
-    ////    {
-    ////        ObservableStack<Item> tmpFrom = new ObservableStack<Item>(from.items);
-
-    ////        // from 슬롯의 아이템 리스트를 초기화
-    ////        from.items.Clear();
-    ////        // from 슬롯의 아이템 리스트에 해당 슬롯의 아이템리스트 전달
-    ////        from.AddItem();
-
-    ////        // 현재 슬롯의 아이템 리스트 초기화
-    ////        items.Clear();
-
-    ////        // 현재 슬롯의 아이템 리스트를 tmpFrom 으로 변경
-    ////        AddItems(tmpFrom);
-
-    ////        return true;
-    ////    }
-
-    ////    return false;
-    ////}
-    //public void UseItem()
-    //{
-    //    // 해당 아이템 IUseable 인터페이스를 상속받았다면
-    //    if (MyItem is IUseable)
-    //    {
-    //        // 해당 아이템을 사용한다.
-    //        (MyItem as IUseable).Use();
-    //    }
-
-    //}
-    #endregion
 }

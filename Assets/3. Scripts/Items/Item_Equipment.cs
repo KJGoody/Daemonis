@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Item_Equipment : Item_Base
 {
-    public new ItemInfo_Equipment itemInfo; 
+    public new ItemInfo_Equipment itemInfo;
+    public override ItemInfo_Base ItemInfo()
+    {
+        ItemInfo_Equipment itemInfo = this.itemInfo;
+        return itemInfo;
+    }
 
     public List<ItemAddOption> addOptionList = new List<ItemAddOption>();
     public void SetAddOption() // 추가옵션 설정
@@ -25,29 +30,29 @@ public class Item_Equipment : Item_Base
     {
         get
         {
-            ItemInfo_Equipment equipmentItem = itemInfo as ItemInfo_Equipment;
+            ItemInfo_Equipment equipmentItem = itemInfo;
             return equipmentItem.GetPart;
         }
     }
 
-    public Sprite[] itemSprite
+    public Sprite[] ItemSprite
     {
         get
         {
-            ItemInfo_Equipment equipmentItem = itemInfo as ItemInfo_Equipment;
+            ItemInfo_Equipment equipmentItem = itemInfo;
             return equipmentItem.GetItemSprite;
         }
     }
 
     public float GetWeaponxDamage()
     {
-        ItemInfo_Equipment equipmentItem = itemInfo as ItemInfo_Equipment;
-        return equipmentItem.WeaponxDamage;
+        ItemInfo_Equipment equipmentItem = itemInfo;
+        return equipmentItem.GetWeaponxDamage();
     }
 
     public void ActiveEquipment(bool isActive) // 장비 착용 & 해제
     {
-        ItemInfo_Equipment equipmentItem = itemInfo as ItemInfo_Equipment;
+        ItemInfo_Equipment equipmentItem = itemInfo;
         equipmentItem.ActiveEquipmentStat(isActive); // 장비 베이스 스탯 증감
         if (addOptionList.Count > 0) // 추가 옵션 증감
         {
@@ -82,6 +87,6 @@ public class Item_Equipment : Item_Base
     public override void Remove()
     {
         InventoryScript.MyInstance.FindEquipment(this);
-        MySlot.RemoveItem(this);
+        MySlot.RemoveItem();
     }
 }

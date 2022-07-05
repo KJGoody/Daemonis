@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e024271b387c1f94788a088cbd8ccc0c, type: 3}
   m_Name: Lv_30_Shoes
   m_EditorClassIdentifier: 
+  kind: 1
   icon: {fileID: -8689043950204658225, guid: 00b5e24862555c0498ee8468d1373812, type: 3}
-  stackSize: 0
+  slot: {fileID: 0}
   itemName: "\uC804\uBB38\uAC00 \uC2E0\uBC1C"
   descript: "\uC804\uBB38\uAC00 \uC2E0\uBC1C\uC774\uB2E4."
   effect: "\uCD5C\uB300 \uB9C8\uB098 25"
   limitLevel: 10
-  kind: 1
   part: 2
-  sprite:
+  ItemSprite:
   - {fileID: -8689043950204658225, guid: 00b5e24862555c0498ee8468d1373812, type: 3}
   - {fileID: 2663260297176595946, guid: 00b5e24862555c0498ee8468d1373812, type: 3}
-  baseOption: BaseMaxMana
-  optionValue: 25
+  BaseOption: BaseMaxMana
+  BaseOptionValue: 25
+  WeaponxDamage: 0

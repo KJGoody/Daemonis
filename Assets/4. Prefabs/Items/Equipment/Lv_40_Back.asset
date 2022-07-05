@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e024271b387c1f94788a088cbd8ccc0c, type: 3}
   m_Name: Lv_40_Back
   m_EditorClassIdentifier: 
+  kind: 1
   icon: {fileID: 21300000, guid: edb8828a1de01c94fa7581e0e280567b, type: 3}
-  stackSize: 0
+  slot: {fileID: 0}
   itemName: "\uC601\uC6C5\uC758 \uB9DD\uD1A0"
   descript: "\uC601\uC6C5\uC758 \uB9DD\uD1A0\uC774\uB2E4."
   effect: "\uB9C8\uBC95\uBC29\uC5B4\uB825 5"
   limitLevel: 20
-  kind: 1
   part: 5
-  sprite:
+  ItemSprite:
   - {fileID: 21300000, guid: edb8828a1de01c94fa7581e0e280567b, type: 3}
-  baseOption: BaseMagicRegist
-  optionValue: 5
+  BaseOption: BaseMagicRegist
+  BaseOptionValue: 5
+  WeaponxDamage: 0
