@@ -145,7 +145,7 @@ public class Player : Character
         _prefabs.PlayAnimation(4);
 
         Spell newSpell = SpellBook.MyInstance.GetSpell(spellIName);
-        if (newSpell.spellType.Equals(Spell.SpellType.Immediate))
+        if (newSpell.spellType.Equals(SpellInfo.SpellType.Immediate))
         {   // 점화 스킬 구현방식
             for (int i = targetGroups.Count - 1; i >= 0; i--)
             {
@@ -181,10 +181,10 @@ public class Player : Character
     {
         switch (spell.spellType)
         {
-            case Spell.SpellType.Launch:
+            case SpellInfo.SpellType.Launch:
                 return Instantiate(spell.MySpellPrefab, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
 
-            case Spell.SpellType.AOE:
+            case SpellInfo.SpellType.AOE:
                 if (MyTarget != null)
                     return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
                 else
@@ -200,10 +200,10 @@ public class Player : Character
                     return Instantiate(spell.MySpellPrefab, ExitPoint, Quaternion.identity).GetComponent<SpellScript>();
                 }
 
-            case Spell.SpellType.Toggle:
+            case SpellInfo.SpellType.Toggle:
                 return Instantiate(spell.MySpellPrefab, transform).GetComponent<SpellScript>();
 
-            case Spell.SpellType.AE:
+            case SpellInfo.SpellType.AE:
                 if (MyTarget != null)
                     return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
                 else

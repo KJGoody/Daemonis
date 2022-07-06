@@ -2,12 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Items //행에 해당되는 이름
-{
-    public ItemInfo_Equipment[] items;
-}
-
 public class ItemDropManager : MonoBehaviour
 {
     private static ItemDropManager instance;
@@ -22,7 +16,7 @@ public class ItemDropManager : MonoBehaviour
     }
     
     public ItemCart dropItem; // 드랍아이템 프리팹
-    public Items[] equipmentPerLv; // 기본 장비 아이템 리스트 열에 해당되는 이름
+    private DataArray_Item_Equipment[] equipmentPerLv; // 기본 장비 아이템 리스트 열에 해당되는 이름
     public ItemInfo_Consumable potion;
 
     private float equipmentDropProb = 10; // 장비 드랍 기본확률
@@ -36,6 +30,7 @@ public class ItemDropManager : MonoBehaviour
 
     private void Start()
     {
+        equipmentPerLv = DataTableManager.Instance.GetDataTable_Item_Equipment.Data_Item_Equipment;
         qualityProb = CSVReader.Read("EquipmentQualityProb"); // 장비 등급 확률표 읽어옴
         StartCoroutine(InitItem());
     }
@@ -65,14 +60,13 @@ public class ItemDropManager : MonoBehaviour
         // 아이템 프리팹 생성
         ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
         // 장비 종류 설정
-        int setKind = Random.Range(0, 42);
+        int setKind = Random.Range(0, 6);
         // 등급 설정
         float[] myQualityProb = new float[6];
         int a = 0;
         foreach (var value in qualityProb[SetLvNum(m_Level)].Values) // 레벨마다 다른 확률을 엑셀로 가져와서 배열에 할당
             myQualityProb[a++] = (float)System.Convert.ToDouble(value);
         Item_Base.Quality newQuality = (Item_Base.Quality)(int)ChanceMaker.Choose(myQualityProb); // 할당된 확률 배열로 가중치 랜덤뽑기로 등급 설정
-        m_Level = 0;
 
         item.SetItem_Equipment(equipmentPerLv[SetLvNum(m_Level)].items[setKind], newQuality); // 설정한 정보 아이템에 넣어주기
 

@@ -25,8 +25,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public SaveLoadData SavedData { get; private set; }
     public SaveLoadData DATA;
+    private SaveLoadData SavedData;
+    public SaveLoadData GetSavedData { get { return SavedData; } }
     public ActionButton[] ActionButtons;
 
     [SerializeField]

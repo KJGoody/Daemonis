@@ -5,48 +5,24 @@ using UnityEngine;
 public class Spell : IUseable, IMoveable
 {
     [SerializeField]
-    private GameObject spellPrefab;
-    [SerializeField]
-    private Sprite icon;
-    [SerializeField]
-    private string name;
-    [SerializeField]
-    private string description;     // 설명란
-    [SerializeField]
-    private float SpellCoolTime;
-    [SerializeField]
-    private int SpellMana;
+    private SpellInfo spellInfo;
 
-    public enum SpellType
-    {
-        #region 스킬 타입
-        Launch,
-        Buff,
-        AOE,
-        Toggle,
-        Immediate,
-        AE,
-        Passive,
-        None
-        #endregion
-    }
-    public SpellType spellType;
-
-    public GameObject MySpellPrefab { get { return spellPrefab; } }
-    public Sprite MyIcon { get { return icon; } }
-    public string MyName { get { return name; } }
+    public GameObject MySpellPrefab { get { return spellInfo.spellPrefab; } }
+    public Sprite MyIcon { get { return spellInfo.SpellIcon; } }
+    public string MyName { get { return spellInfo.SpellName; } }
     public String MyDescription
     {
-        get { return description; }
-        set { description = value; }
+        get { return spellInfo.SpellDescription; }
+        set { spellInfo.SpellDescription = value; }
     }
-    public float MySpellCoolTime { get { return SpellCoolTime; } }
-    public int MySpellMana { get { return SpellMana; } }
+    public SpellInfo.SpellType spellType { get { return spellInfo.spellType; } }
+    public float MySpellCoolTime { get { return spellInfo.SpellCoolTime; } }
+    public int MySpellMana { get { return spellInfo.SpellMana; } }
 
 
     public void Use()
     {
-        if (spellType.Equals(SpellType.Buff))
+        if (spellInfo.spellType.Equals(SpellInfo.SpellType.Buff))
             Player.MyInstance.NewBuff(MyName);
         else
             Player.MyInstance.CastSpell(MyName);

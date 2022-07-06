@@ -12,6 +12,8 @@ public class LootNotice : MonoBehaviour
     [SerializeField]
     private Text text;
 
+    private Coroutine CurrentCoroutine;
+
     private void Awake()
     {
         LootNoticeManager.MyInstance.AddLootNotice(gameObject);
@@ -31,11 +33,14 @@ public class LootNotice : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(NoticeOff(3));
+        CurrentCoroutine = StartCoroutine(NoticeOff(3));
     }
 
     public IEnumerator NoticeOff(float Seconds = 0)
     {
+        if (Seconds == 0)
+            StopCoroutine(CurrentCoroutine);
+
         yield return new WaitForSeconds(Seconds);
 
         anim.SetTrigger("Off");

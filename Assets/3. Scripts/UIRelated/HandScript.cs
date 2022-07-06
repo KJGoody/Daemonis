@@ -102,7 +102,7 @@ public class HandScript : MonoBehaviour
 
         switch (spell.spellType) 
         {
-            case Spell.SpellType.Passive: // 스킬이 패시브일시 버튼 비활성화
+            case SpellInfo.SpellType.Passive: // 스킬이 패시브일시 버튼 비활성화
                 SpellEquipButton.SetActive(false);
                 selectName.text = spell.MyName + " (패시브)";
                 break;
