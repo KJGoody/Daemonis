@@ -12,7 +12,7 @@ public class Item_Base : IMoveable, IDescribable, IUseable
     }
 
     public Sprite MyIcon { get { return ItemInfo().MyIcon; } } // 아이템 아이콘 이미지
-
+    public Sprite GetIcon() { return ItemInfo().MyIcon; }
     public enum Quality { Normal, Advanced, Rare, Epic, Legendary, Relic }
     public Quality quality; // 아이템의 등급
     public string MyQualityText // 아이템 등급 표시
@@ -88,6 +88,7 @@ public class Item_Base : IMoveable, IDescribable, IUseable
             return string.Format("<color={0}>{1}</color>", color, ItemInfo().itemName);
         }
     }
+    public string GetJustName { get { return ItemInfo().itemName; } }
 
 
     public ItemInfo_Base.Kinds GetKind { get { return ItemInfo().GetKind; } } // 아이템 종류

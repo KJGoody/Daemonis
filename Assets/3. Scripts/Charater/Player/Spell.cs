@@ -4,8 +4,7 @@ using UnityEngine;
 [Serializable]
 public class Spell : IUseable, IMoveable
 {
-    [SerializeField]
-    private SpellInfo spellInfo;
+    public SpellInfo spellInfo;
 
     public GameObject MySpellPrefab { get { return spellInfo.spellPrefab; } }
     public Sprite MyIcon { get { return spellInfo.SpellIcon; } }

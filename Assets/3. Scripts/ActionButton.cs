@@ -18,9 +18,18 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
     private TextMeshProUGUI stackSize;
     public TextMeshProUGUI MyStackText { get { return stackSize; } }
 
-    private IUseable UseableSpell;
+    public IUseable UseableSpell;
     // 사용 가능 아이템 리스트
     private Stack<IUseable> UseableItem = new Stack<IUseable>();
+    public Stack<IUseable> GetUseableItem 
+    {
+        get 
+        {
+            if (UseableItem.Count == 0)
+                return null;
+            return UseableItem; 
+        }
+    }
     private int count;
     public int MyCount { get { return count; } }
     public Button MyButton { get; private set; }
@@ -153,13 +162,13 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
             // MyUseable은 인터페이스로 Spell 에서 상속받고 있다.
             this.UseableSpell = useable;
         }
-        UpdateVisual();
+        UpdateVisual(useable);
     }
 
-    public void UpdateVisual()
+    public void UpdateVisual(IUseable useable)
     {
         // ActionButton의 이미지를 변경한다.
-        MyIcon.sprite = HandScript.MyInstance.Put().MyIcon;
+        MyIcon.sprite = (useable as IMoveable).MyIcon;
         MyIcon.color = Color.white;
         if (count > 1)
         {

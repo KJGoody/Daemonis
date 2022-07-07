@@ -17,7 +17,7 @@ public class ItemDropManager : MonoBehaviour
     
     public ItemCart dropItem; // 드랍아이템 프리팹
     private DataArray_Item_Equipment[] equipmentPerLv; // 기본 장비 아이템 리스트 열에 해당되는 이름
-    public ItemInfo_Consumable potion;
+    private DataArray_Item_Consumable[] HealthPotionLv;
 
     private float equipmentDropProb = 10; // 장비 드랍 기본확률
     public float EquipmentDropProb // 장비 드랍확률
@@ -30,7 +30,9 @@ public class ItemDropManager : MonoBehaviour
 
     private void Start()
     {
-        equipmentPerLv = DataTableManager.Instance.GetDataTable_Item_Equipment.Data_Item_Equipment;
+        equipmentPerLv = DataTableManager.Instance.GetDataTable_Item_Equipment.Data_Item_Equipments;
+        HealthPotionLv = DataTableManager.Instance.GetDataTable_Item_Consumable.Data_Item_Consumables;
+
         qualityProb = CSVReader.Read("EquipmentQualityProb"); // 장비 등급 확률표 읽어옴
         StartCoroutine(InitItem());
     }
@@ -75,7 +77,7 @@ public class ItemDropManager : MonoBehaviour
     public void DropPotion(Transform dropPosition, int m_Level) // 임시
     {
         ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
-        item.SetItem_Consumable(potion, Item_Base.Quality.Normal); 
+        item.SetItem_Consumable(HealthPotionLv[SetLvNum(m_Level)].items[0], Item_Base.Quality.Normal); 
     }
 
     public int SetLvNum(int monsterLv) // 몬스터 레벨로 설정 레벨 잡아주기
