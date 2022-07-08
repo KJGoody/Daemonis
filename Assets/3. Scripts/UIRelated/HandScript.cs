@@ -206,8 +206,8 @@ public class HandScript : MonoBehaviour
             EquipPotion();
         else if (myItem.GetKind == ItemInfo_Base.Kinds.Equipment)
             UseEquipment();
-        
     }
+
     public void EquipPotion() // 포션 등록 시작
     {
         MyMoveable = myItem;
@@ -226,12 +226,14 @@ public class HandScript : MonoBehaviour
         playerInfoPanel.ShowUsingEquipment(partNum,false);
         SI_Panel.SetActive(false);
     }
+
     public void ResetEquipPotion() // 포션 등록 취소
     {
         MyMoveable = null;
         SI_Obj_Blind.SetActive(false);
 
     }
+
     public void RemoveItem() // 아이템 삭제 버튼
     {
         if (myItem.ItemInfo().GetKind == ItemInfo_Base.Kinds.Equipment)
@@ -241,14 +243,17 @@ public class HandScript : MonoBehaviour
         SI_Panel.SetActive(false);
         myItem = null;
     }
+
     public void Close_SI_Panel() // 선택 아이템 패널 닫기
     {
         SI_Panel.SetActive(false);
     }
+
     public void Close_UE_Panel() // 선택 아이템 패널 닫기
     {
         UE_Panel.SetActive(false);
     }
+
     public IMoveable Put() // MyMoveable에 넣어져있는것 슬롯에 넣는 함수
     {
         IMoveable tmp = MyMoveable;
@@ -264,6 +269,7 @@ public class HandScript : MonoBehaviour
         // 복사한 스킬의 아이콘 정보를 전달한다.
         return tmp;
     }
+
     public void Drop()
     {
         // 복사한 스킬 아이콘 정보를 null 로 만든다.

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item_Consumable : Item_Base
 {
-    public new ItemInfo_Consumable itemInfo;
+    public ItemInfo_Consumable itemInfo;
     public override ItemInfo_Base ItemInfo()
     {
         ItemInfo_Consumable itemInfo = this.itemInfo;

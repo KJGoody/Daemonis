@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item_Equipment : Item_Base
 {
-    public new ItemInfo_Equipment itemInfo;
+    public ItemInfo_Equipment itemInfo;
     public override ItemInfo_Base ItemInfo()
     {
         ItemInfo_Equipment itemInfo = this.itemInfo;
@@ -26,34 +26,19 @@ public class Item_Equipment : Item_Base
         }
     }
 
-    public ItemInfo_Equipment.Part GetPart
-    {
-        get
-        {
-            ItemInfo_Equipment equipmentItem = itemInfo;
-            return equipmentItem.GetPart;
-        }
-    }
+    public ItemInfo_Equipment.Part GetPart { get { return (ItemInfo() as ItemInfo_Equipment).GetPart; } }
 
-    public Sprite[] ItemSprite
-    {
-        get
-        {
-            ItemInfo_Equipment equipmentItem = itemInfo;
-            return equipmentItem.GetItemSprite;
-        }
-    }
+    public Sprite[] ItemSprite { get { return (ItemInfo() as ItemInfo_Equipment).GetItemSprite; } }
 
     public float GetWeaponxDamage()
     {
         ItemInfo_Equipment equipmentItem = itemInfo;
-        return equipmentItem.GetWeaponxDamage();
+        return (ItemInfo() as ItemInfo_Equipment).GetWeaponxDamage();
     }
 
     public void ActiveEquipment(bool isActive) // 장비 착용 & 해제
     {
-        ItemInfo_Equipment equipmentItem = itemInfo;
-        equipmentItem.ActiveEquipmentStat(isActive); // 장비 베이스 스탯 증감
+        (ItemInfo() as ItemInfo_Equipment).ActiveEquipmentStat(isActive); // 장비 베이스 스탯 증감
         if (addOptionList.Count > 0) // 추가 옵션 증감
         {
             for (int i = 0; i < addOptionList.Count; i++)

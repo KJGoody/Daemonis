@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Item_Base : IMoveable, IDescribable, IUseable
 {
-    public ItemInfo_Base itemInfo;
     public virtual ItemInfo_Base ItemInfo()
     {
-        ItemInfo_Base itemInfo = this.itemInfo;
-        return itemInfo;
+        return null;
     }
 
     public Sprite MyIcon { get { return ItemInfo().MyIcon; } } // 아이템 아이콘 이미지

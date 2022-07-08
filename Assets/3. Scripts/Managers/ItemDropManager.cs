@@ -34,7 +34,7 @@ public class ItemDropManager : MonoBehaviour
         HealthPotionLv = DataTableManager.Instance.GetDataTable_Item_Consumable.Data_Item_Consumables;
 
         qualityProb = CSVReader.Read("EquipmentQualityProb"); // 장비 등급 확률표 읽어옴
-        StartCoroutine(InitItem());
+        //StartCoroutine(InitItem());
     }
 
     public void DropGold(Transform dropPosition, int m_Level)

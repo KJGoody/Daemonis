@@ -114,7 +114,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
 
                                 // 새로운 버튼에 할당
                                 SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
-                                HandScript.MyInstance.SkillBlindControll();
+                                HandScript.MyInstance.ResetEquipPotion();
                             }
                             else
                             {
@@ -134,7 +134,10 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
                     else
                     {
                         SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
-                        HandScript.MyInstance.SkillBlindControll();
+                        if (HandScript.MyInstance.MyMoveable is Item_Base)
+                            HandScript.MyInstance.ResetEquipPotion();
+                        else
+                            HandScript.MyInstance.SkillBlindControll();
                     }
                 }
             }

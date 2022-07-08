@@ -375,8 +375,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 959.76025, y: 247.79465}
-  m_SizeDelta: {x: -916.0387, y: -495.5892}
+  m_AnchoredPosition: {x: 1050.1641, y: 275}
+  m_SizeDelta: {x: -700.3276, y: -550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &36537550
 MonoBehaviour:
@@ -560,7 +560,7 @@ MonoBehaviour:
   level: 100
   levelUpEXP: 10
   currentEXP: 0
-  attack: 200
+  attack: 100000
   attackPercent: 0
   maxHealth: 500
   maxHealthPercent: 0
@@ -19257,8 +19257,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -200.68762, y: 0.18170166}
-  m_SizeDelta: {x: 417.9768, y: 380.3108}
+  m_AnchoredPosition: {x: -200.00002, y: -5}
+  m_SizeDelta: {x: 400, y: 390.00003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1008725297
 MonoBehaviour:
@@ -32729,7 +32729,188 @@ MonoBehaviour:
   fadeIn_IMG: {fileID: 880840951}
   fadeIn_OBJ: {fileID: 880840949}
   DATA:
+    EquipmentData: []
+    EquipmentQuality: 
+    E_AddOptionQuality_0: 000000000000000000000000000000000000000000000000
+    E_AddOptionQuality_1: 000000000000000000000000000000000000000000000000
+    E_AddOptionQuality_2: 000000000000000000000000000000000000000000000000
+    E_AddOptionQuality_3: 000000000000000000000000000000000000000000000000
+    E_AddOptionQuality_4: 000000000000000000000000000000000000000000000000
+    E_AddOptionQuality_5: 000000000000000000000000000000000000000000000000
+    E_AddOptionNum_0: 000000000000000000000000000000000000000000000000
+    E_AddOptionNum_1: 000000000000000000000000000000000000000000000000
+    E_AddOptionNum_2: 000000000000000000000000000000000000000000000000
+    E_AddOptionNum_3: 000000000000000000000000000000000000000000000000
+    E_AddOptionNum_4: 000000000000000000000000000000000000000000000000
+    E_AddOptionNum_5: 000000000000000000000000000000000000000000000000
+    E_AddOptionValue_0:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    E_AddOptionValue_1:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    E_AddOptionValue_2:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    E_AddOptionValue_3:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    E_AddOptionValue_4:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    E_AddOptionValue_5:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     Gold: 0
+    ActionButtonsData:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    InventoryData:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    InventoryItemQuality: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    InventoryStackData: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    I_AddOptionQuality_0: 
+    I_AddOptionQuality_1: 
+    I_AddOptionQuality_2: 
+    I_AddOptionQuality_3: 
+    I_AddOptionQuality_4: 
+    I_AddOptionQuality_5: 
+    I_AddOptionQuality_6: 
+    I_AddOptionQuality_7: 
+    I_AddOptionQuality_8: 
+    I_AddOptionQuality_9: 
+    I_AddOptionQuality_10: 
+    I_AddOptionQuality_11: 
+    I_AddOptionQuality_12: 
+    I_AddOptionQuality_13: 
+    I_AddOptionQuality_14: 
+    I_AddOptionQuality_15: 
+    I_AddOptionQuality_16: 
+    I_AddOptionQuality_17: 
+    I_AddOptionQuality_18: 
+    I_AddOptionQuality_19: 
+    I_AddOptionQuality_20: 
+    I_AddOptionQuality_21: 
+    I_AddOptionQuality_22: 
+    I_AddOptionQuality_23: 
+    I_AddOptionQuality_24: 
+    I_AddOptionQuality_25: 
+    I_AddOptionQuality_26: 
+    I_AddOptionQuality_27: 
+    I_AddOptionNum_0: 
+    I_AddOptionNum_1: 
+    I_AddOptionNum_2: 
+    I_AddOptionNum_3: 
+    I_AddOptionNum_4: 
+    I_AddOptionNum_5: 
+    I_AddOptionNum_6: 
+    I_AddOptionNum_7: 
+    I_AddOptionNum_8: 
+    I_AddOptionNum_9: 
+    I_AddOptionNum_10: 
+    I_AddOptionNum_11: 
+    I_AddOptionNum_12: 
+    I_AddOptionNum_13: 
+    I_AddOptionNum_14: 
+    I_AddOptionNum_15: 
+    I_AddOptionNum_16: 
+    I_AddOptionNum_17: 
+    I_AddOptionNum_18: 
+    I_AddOptionNum_19: 
+    I_AddOptionNum_20: 
+    I_AddOptionNum_21: 
+    I_AddOptionNum_22: 
+    I_AddOptionNum_23: 
+    I_AddOptionNum_24: 
+    I_AddOptionNum_25: 
+    I_AddOptionNum_26: 
+    I_AddOptionNum_27: 
+    I_AddOptionValue_0: []
+    I_AddOptionValue_1: []
+    I_AddOptionValue_2: []
+    I_AddOptionValue_3: []
+    I_AddOptionValue_4: []
+    I_AddOptionValue_5: []
+    I_AddOptionValue_6: []
+    I_AddOptionValue_7: []
+    I_AddOptionValue_8: []
+    I_AddOptionValue_9: []
+    I_AddOptionValue_10: []
+    I_AddOptionValue_11: []
+    I_AddOptionValue_12: []
+    I_AddOptionValue_13: []
+    I_AddOptionValue_14: []
+    I_AddOptionValue_15: []
+    I_AddOptionValue_16: []
+    I_AddOptionValue_17: []
+    I_AddOptionValue_18: []
+    I_AddOptionValue_19: []
+    I_AddOptionValue_20: []
+    I_AddOptionValue_21: []
+    I_AddOptionValue_22: []
+    I_AddOptionValue_23: []
+    I_AddOptionValue_24: []
+    I_AddOptionValue_25: []
+    I_AddOptionValue_26: []
+    I_AddOptionValue_27: []
   ActionButtons:
   - {fileID: 1401042047}
   - {fileID: 1567556285}

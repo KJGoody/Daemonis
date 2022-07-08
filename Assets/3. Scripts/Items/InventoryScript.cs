@@ -34,7 +34,6 @@ public class InventoryScript : MonoBehaviour
 
     public void AddItem(Item_Base item, bool CanStack = false)
     {
-        Debug.Log(1);
         // 추가되려는 아이템이 중첩 가능 아이템인지 확인합니다.
         if (CanStack)
         {
@@ -72,6 +71,7 @@ public class InventoryScript : MonoBehaviour
                 item.MySlot = slots;
         }
     }
+
     public void FindEquipment(Item_Equipment item)
     {
         foreach (SlotScript slots in GameManager.MyInstance.Slots)
@@ -120,11 +120,8 @@ public class InventoryScript : MonoBehaviour
             }
         }
 
-
         return useables;
     }
-
-
 
     public SlotScript FromSlot // 흠
     {
