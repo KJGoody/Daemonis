@@ -103,8 +103,8 @@ public class PlayerInfoPanel : MonoBehaviour
         {
 
             ShowUsingEquipment(partNum);// 기존 ShowUsingEquipment 기능은 같음
-            UE_Panel.SetActive(setActive); // false인 경우 패널 닫아주는것
         }
+        UE_Panel.SetActive(setActive); // false인 경우 패널 닫아주는것
     }
     public void ShowUsingEquipment(int partNum) // 장착중인 장비 표시
     {

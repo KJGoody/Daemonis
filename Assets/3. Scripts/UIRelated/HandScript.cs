@@ -165,6 +165,7 @@ public class HandScript : MonoBehaviour
             case ItemInfo_Base.Kinds.Potion: // 선택한 아이템이 포션일 때 추옵,세트옵 감추기
                 SI_Obj_Option.SetActive(false);
                 SI_Obj_SetOption.SetActive(false);
+                playerInfoPanel.ShowUsingEquipment(0, false);
                 break;
 
             case ItemInfo_Base.Kinds.Equipment: // 선택한 아이템이 장비일 때 추옵, 세트옵 표시
@@ -187,6 +188,10 @@ public class HandScript : MonoBehaviour
                 if(Player.MyInstance.usingEquipment[partNum] != null)
                 {
                     playerInfoPanel.ShowUsingEquipment(partNum);
+                }
+                else
+                {
+                    playerInfoPanel.ShowUsingEquipment(partNum,false);
                 }
                 break;
 
