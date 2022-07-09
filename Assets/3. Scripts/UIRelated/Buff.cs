@@ -9,13 +9,7 @@ public class Buff : MonoBehaviour
 {
     [SerializeField]
     private Image BuffFillImage;
-    public enum BuffType
-    {
-        Standard,
-        Stack,
-        Toggle,
-        Passive
-    }
+    public enum BuffType { Standard, Stack, Toggle, Passive }
     [SerializeField]
     private BuffType buffType;
     public string BuffName;
@@ -28,7 +22,7 @@ public class Buff : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI StackText;
     private Color TextColor;
-    
+
     private Character Target;
     private bool InTargetGroup = false;
     [HideInInspector]
@@ -79,7 +73,7 @@ public class Buff : MonoBehaviour
         Target = target;
         Target.OnBuff.Add(this);
 
-        if(!buffType.Equals(BuffType.Passive))
+        if (!buffType.Equals(BuffType.Passive))
             StartCoroutine(ActivationBuff());
 
         switch (BuffName)
@@ -131,9 +125,9 @@ public class Buff : MonoBehaviour
         {
             if (Target.IsAlive)
             {
-                if(ChanceMaker.GetThisChanceResult_Percentage(Player.MyInstance.MyStat.CriticalPercent))
+                if (ChanceMaker.GetThisChanceResult_Percentage(Player.MyInstance.MyStat.CriticalPercent))
                     Target.TakeDamage(Character.DamageType.Masic, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, NewTextPool.NewTextPrefabsName.Critical, Character.AttackType.Tick);
-                else    
+                else
                     Target.TakeDamage(Character.DamageType.Masic, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, NewTextPool.NewTextPrefabsName.Enemy, Character.AttackType.Tick);
             }
             yield return new WaitForSeconds(WaitForSconds);
