@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject[] dontDestroyObj;
-    private NPC currentTarget;
+    private INpc currentTarget;
 
     private void Awake()
     {
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
             {
                 if (currentTarget != null)
                     currentTarget.DeSelect();
-                currentTarget = hit.collider.GetComponent<NPC>();
+                currentTarget = hit.collider.GetComponent<INpc>();
                 player.MyTarget = currentTarget.Select();
             }
             else

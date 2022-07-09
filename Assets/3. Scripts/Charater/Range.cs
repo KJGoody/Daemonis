@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class Range : MonoBehaviour
 {
-    private EnemyBase parent;
+    private INpc parent;
 
     private void Start()
     {
-        parent = GetComponentInParent<EnemyBase>();
+        parent = GetComponentInParent<INpc>();
     }
-
-
+    
     // Player가 들어왔을 때
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             parent.SetTarget(collision.transform);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            parent.SetTarget(null);
         }
     }
 }
