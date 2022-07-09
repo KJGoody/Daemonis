@@ -14435,11 +14435,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793317085}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-<<<<<<< Updated upstream
   m_LocalPosition: {x: -1183.0117, y: -597.3589, z: -10}
-=======
-  m_LocalPosition: {x: -1183.012, y: -597.3589, z: -10}
->>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 900256415}
@@ -21395,21 +21391,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6987801306936585253, guid: c818316c85f964340a6f30c98fc3593b,
         type: 3}
-      propertyPath: m_Color.b
-      value: 0.24705882
-      objectReference: {fileID: 0}
-    - target: {fileID: 6987801306936585253, guid: c818316c85f964340a6f30c98fc3593b,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.2901961
-      objectReference: {fileID: 0}
-    - target: {fileID: 6987801306936585253, guid: c818316c85f964340a6f30c98fc3593b,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.3882353
-      objectReference: {fileID: 0}
-    - target: {fileID: 6987801306936585253, guid: c818316c85f964340a6f30c98fc3593b,
-        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -21802,21 +21783,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 6987801308762066535, guid: c818316c85f964340a6f30c98fc3593b,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.24594164
-      objectReference: {fileID: 0}
-    - target: {fileID: 6987801308762066535, guid: c818316c85f964340a6f30c98fc3593b,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.2916898
-      objectReference: {fileID: 0}
-    - target: {fileID: 6987801308762066535, guid: c818316c85f964340a6f30c98fc3593b,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.38679248
       objectReference: {fileID: 0}
     - target: {fileID: 6987801308762066535, guid: c818316c85f964340a6f30c98fc3593b,
         type: 3}
@@ -29261,11 +29227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598727260}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-<<<<<<< Updated upstream
   m_LocalPosition: {x: -1183.0117, y: -597.3589, z: -10}
-=======
-  m_LocalPosition: {x: -1183.012, y: -597.3589, z: -10}
->>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1675068945}

@@ -161,12 +161,10 @@ public class SpellScript : MonoBehaviour
             {
                 if (!CheckHitEnemy(collision))
                 {
-                    SpendDamage(collision);
-                    Player.MyInstance.RecoverOnHit();
-
                     if (Player.MyInstance.IsOnBuff("Skill_Fire_02_Buff"))       // 발화 중일 시 디버프 생성
                         collision.transform.parent.GetComponent<EnemyBase>().NewBuff("Skill_Fire_02_Debuff");
-
+                    SpendDamage(collision);
+                    Player.MyInstance.RecoverOnHit();
                     if (!IsToggleAttack)
                         PuffPool.Instance.GetObject(PuffPool.PuffPrefabsName.Hit_01).PositioningPuff(transform.position);
                     else

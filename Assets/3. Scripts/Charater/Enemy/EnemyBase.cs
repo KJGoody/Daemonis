@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class EnemyBase : Character, INpc
+public class EnemyBase : NPC
 {
     [HideInInspector]
     public EnemyType enemytype;
@@ -99,15 +99,18 @@ public class EnemyBase : Character, INpc
         currentState.Enter(this);
     }
 
-    public virtual Transform Select()
+    public override Transform Select()
     {
         HealthBarImage.SetActive(true);
-        return hitBox;
+
+        return base.Select();
     }
 
-    public virtual void DeSelect()
+    public override void DeSelect()
     {
         HealthBarImage.SetActive(false);
+
+        base.DeSelect();
     }
 
     public void InstantiateAttack(GameObject resource, Transform transform)

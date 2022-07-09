@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject[] dontDestroyObj;
-    private INpc currentTarget;
+    private NPC currentTarget;
 
     private void Awake()
     {
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
             {
                 if (currentTarget != null)
                     currentTarget.DeSelect();
-                currentTarget = hit.collider.GetComponent<INpc>();
+                currentTarget = hit.collider.GetComponent<NPC>();
                 player.MyTarget = currentTarget.Select();
             }
             else
@@ -122,7 +122,6 @@ public class GameManager : MonoBehaviour
         // Equipment 저장 부분
         for (int i = 0; i < 6; i++)
         {
-            // 만약 플레이어의 장비가 비어있지 않다면 실행
             if (Player.MyInstance.usingEquipment[i] != null)
             {
                 Item_Equipment equipment = Player.MyInstance.usingEquipment[i];
@@ -147,7 +146,6 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                // 만약 저장된 부분이 없다면 해당 데이터를 초기화 해주는 부분이다.
                 DATA.EquipmentData[i] = null;
                 DATA.EquipmentQuality[i] = 0;
 
@@ -199,7 +197,6 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case ItemInfo_Base.Kinds.Potion:
-                        // 자신의 카운트를 저장한다.
                         DATA.InventoryStackData[i] = Slots[i].MyItems.Count;
                         break;
                 }

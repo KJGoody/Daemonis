@@ -17,8 +17,8 @@ public abstract class Character : MonoBehaviour
     public enum LayerName { idle = 0, move = 1, attack = 4, death = 2, }
     public LayerName _layerName = LayerName.idle;
 
+    public bool IsAlive { get { return stat.CurrentHealth > 0; } }      // 생존 확인
     // 상태확인
-    public bool IsAlive { get { return stat.CurrentHealth > 0; } }
     public bool IsMoving { get { return direction.x != 0 || direction.y != 0; } }
     public bool IsAttacking { get; set; }
 
@@ -43,14 +43,10 @@ public abstract class Character : MonoBehaviour
     [HideInInspector]
     public float RushSpeed = 0f;
 
-    // 버프
     [SerializeField]
     private BuffManager buffManager;
     [HideInInspector]
     public List<Buff> OnBuff = new List<Buff>();
-
-    // 데미지 관련
-    protected Queue<int> DamageQueue;
     [HideInInspector]
     public float BuffxDamage = 1;
     protected float DebuffxDamage = 1;
