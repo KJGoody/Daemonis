@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
     private SaveLoadData SavedData;
     public SaveLoadData GetSavedData { get { return SavedData; } }
 
+    [HideInInspector]
+    public string CurrnetStageName;
+
     public ActionButton[] ActionButtons;
     public SlotScript[] Slots;
 

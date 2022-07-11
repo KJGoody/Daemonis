@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour, INpc
 {
-
     public virtual void SetTarget(Transform target)
     {
 

@@ -59,6 +59,14 @@ public class PortalManager : MonoBehaviour
             Destroy(usingPortal);
     
         usingPortal = Instantiate(returnPortal, Player.MyInstance.transform.position,Quaternion.identity);
+
+        switch (GameManager.MyInstance.CurrnetStageName)
+        {
+            case "1_Cave":
+                usingPortal.GetComponent<ReturnPortal>().UnLoadSceneName = "1_Cave";
+                usingPortal.GetComponent<ReturnPortal>().LoadSceneName = "Main";
+                break;
+        }
     }
 
     public void _UnloadSceneName(string UnloeadSceneName)
@@ -70,6 +78,7 @@ public class PortalManager : MonoBehaviour
     public void _LoadSceneName(string LoadSceneName)
     {
         GameManager.MyInstance.SaveData();
+        GameManager.MyInstance.CurrnetStageName = LoadSceneName;
 
         LoadingSceneManager.LoadScene(LoadSceneName);
 
