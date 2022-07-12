@@ -8,13 +8,4 @@ public interface IClickable
         get;
         set;
     }
-
-    int MyCount
-    {
-        get;
-    }
-    TextMeshProUGUI MyStackText
-    {
-        get;
-    }
 }

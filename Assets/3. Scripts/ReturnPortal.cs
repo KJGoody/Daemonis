@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ReturnPortal : MonoBehaviour
 {
-    ActiveButton activeButton;
-
     [HideInInspector]
     public string UnLoadSceneName;
     [HideInInspector]
@@ -13,15 +11,11 @@ public class ReturnPortal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        activeButton = GameObject.Find("Canvas").transform.Find("ActiveButton").gameObject.GetComponent<ActiveButton>();
-        activeButton.SetButton(ActiveButton.Role.PortalButton, UnLoadSceneName, LoadSceneName);
-        //activeButton.SetActive(true);
+        ActiveButton.Instance.SetButton(ActiveButton.Role.PortalButton, UnLoadSceneName, LoadSceneName);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        activeButton = GameObject.Find("Canvas").transform.Find("ActiveButton").gameObject.GetComponent<ActiveButton>();
-        activeButton.ResetButton();
-        //activeButton.SetActive(false);
+        ActiveButton.Instance.ResetButton();
     }
 }

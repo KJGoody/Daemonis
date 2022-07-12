@@ -5,6 +5,19 @@ using UnityEngine.UI;
 
 public class ActiveButton : MonoBehaviour
 {
+    private static ActiveButton instance;
+    public static ActiveButton Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = FindObjectOfType<ActiveButton>();
+            return instance;
+        }
+    }
+
+    [SerializeField]
+    private CanvasGroup SetActive;
     [SerializeField]
     private Image Image;
     [SerializeField]
@@ -17,17 +30,10 @@ public class ActiveButton : MonoBehaviour
     }
     private Role RoleName;
 
-    public delegate void ClickButton();
-    public event ClickButton Click;
-
     [HideInInspector]
     public string UnloadSceneName;
     [HideInInspector]
     public string LoadSceneName;
-
-    public delegate void ClickButton_Portal(string SceneName);
-    public event ClickButton_Portal UnLoadScene;
-    public event ClickButton_Portal LoadScene;
 
     public void SetButton(Role RoleName, string UnloadSceneName = null, string LoadSceneName = null)
     {
@@ -40,8 +46,6 @@ public class ActiveButton : MonoBehaviour
                 Image.sprite = Images[0];
                 this.UnloadSceneName = UnloadSceneName;
                 this.LoadSceneName = LoadSceneName;
-                UnLoadScene = PortalManager.MyInstance._UnloadSceneName;
-                LoadScene = PortalManager.MyInstance._LoadSceneName;
                 break;
 
             case Role.MerchantButton:
@@ -49,19 +53,15 @@ public class ActiveButton : MonoBehaviour
                 break;
         }
 
-        gameObject.SetActive(true);
+        ButtonSetActive(true);
     }
 
-    public void ResetButton(bool Set = false)
+    public void ResetButton()
     {
-        Click = null;
-
-        UnLoadScene = null;
-        LoadScene = null;
         UnloadSceneName = null;
         LoadSceneName = null;
 
-        gameObject.SetActive(Set);
+        ButtonSetActive(false);
     }
 
     public void _ClickButton()
@@ -69,14 +69,28 @@ public class ActiveButton : MonoBehaviour
         switch (RoleName)
         {
             case Role.PortalButton:
-                UnLoadScene(UnloadSceneName);
-                LoadScene(LoadSceneName);
+                PortalManager.MyInstance._UnloadSceneName(UnloadSceneName);
+                PortalManager.MyInstance._LoadSceneName(LoadSceneName);
                 ResetButton();
                 break;
 
             case Role.MerchantButton:
-                Click();
+                UIManager.MyInstance.OpenClose(StorePanel.Instance.storePanel);
                 break;
+        }
+    }
+
+    public void ButtonSetActive(bool B)
+    {
+        if (B)
+        {
+            SetActive.alpha = 1;
+            SetActive.blocksRaycasts = true;
+        }
+        else
+        {
+            SetActive.alpha = 0;
+            SetActive.blocksRaycasts = false;
         }
     }
 }

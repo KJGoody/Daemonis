@@ -124,7 +124,6 @@ public class UIManager : MonoBehaviour
         // UI 가 꺼져있을 땐 레이케스트 충돌이 무시되어 다른 조작(적 선택 등)을
         // 할 수 있게 만든다.
         canvasGroup.blocksRaycasts = (canvasGroup.blocksRaycasts) == true ? false : true;
-        
     }
 
     // 튤팁UI 활성화
@@ -148,29 +147,29 @@ public class UIManager : MonoBehaviour
         Array.Find(actionButtons, x => x.gameObject.name == buttonName).MyButton.onClick.Invoke();
     }
 
-    public void UpdateStackSize(IClickable clickable)
+    public void UpdateStackSize(IStackable stackable)
     {
-        if (clickable.MyCount > 1)
+        if (stackable.MyCount > 1)
         {
             // 해당 슬롯의 중첩개수 표시하기
-            clickable.MyStackText.text = clickable.MyCount.ToString();
-            clickable.MyStackText.color = Color.white;
-            clickable.MyIcon.color = Color.white;
+            stackable.MyStackText.text = stackable.MyCount.ToString();
+            stackable.MyStackText.color = Color.white;
+            (stackable as IClickable).MyIcon.color = Color.white;
         }
 
         else
         {
             // 해당 슬롯의 텍스트 투명하게 만들기
-            clickable.MyStackText.color = new Color(0, 0, 0, 0);
+            stackable.MyStackText.color = new Color(0, 0, 0, 0);
         }
 
-        if (clickable.MyCount == 0)
+        if (stackable.MyCount == 0)
         {
             // 해당 슬롯의 아이콘 투명하게 만들기
-            clickable.MyIcon.color = new Color(0, 0, 0, 0);
+            (stackable as IClickable).MyIcon.color = new Color(0, 0, 0, 0);
 
             // 해당 슬롯의 텍스트 투명하게 만들기
-            clickable.MyStackText.color = new Color(0, 0, 0, 0);
+            stackable.MyStackText.color = new Color(0, 0, 0, 0);
 
         }
     }

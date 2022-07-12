@@ -16,8 +16,6 @@ public class InventoryScript : MonoBehaviour
     }
     public event ItemCountChanged itemCountChangedEvent;
 
-    [SerializeField]
-    private GameObject slotPrefab;
     // 가방 안의 슬롯 리스트
     private SlotScript fromSlot;
     public Item_Base[] items;

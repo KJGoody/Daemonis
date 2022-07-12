@@ -33,7 +33,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public string CurrnetStageName;
 
-    public ActionButton[] ActionButtons;
+    public CastingButton[] CastingButtons;
+    public QuickSlotButton[] QuickSlotButtons;
     public SlotScript[] Slots;
 
     [SerializeField]
@@ -223,17 +224,17 @@ public class GameManager : MonoBehaviour
         // ActionButton 저장 부분
         for (int i = 0; i < 5; i++)
         {
-            if (ActionButtons[i].UseableSpell != null)
-                DATA.ActionButtonsData[i] = ActionButtons[i].UseableSpell.GetName();
+            if (CastingButtons[i].Spell != null)
+                DATA.ActionButtonsData[i] = CastingButtons[i].Spell.GetName();
             else
                 DATA.ActionButtonsData[i] = null;
         }
-        for (int i = 5; i < 9; i++)
+        for (int i = 0; i < 4; i++)
         {
-            if (ActionButtons[i].GetUseableItem != null)
-                DATA.ActionButtonsData[i] = (ActionButtons[i].GetUseableItem.Peek() as Item_Base).GetJustName;
+            if (QuickSlotButtons[i].GetUseableItem != null)
+                DATA.ActionButtonsData[i + 5] = (QuickSlotButtons[i].GetUseableItem.Peek() as Item_Base).GetJustName;
             else
-                DATA.ActionButtonsData[i] = null;
+                DATA.ActionButtonsData[i + 5] = null;
         }
 
         // 지금까지의 변경사항을 저장한다.
@@ -251,11 +252,11 @@ public class GameManager : MonoBehaviour
         DATA = SavedData;
 
         // Equipment 로드 부분
-        for(int i = 0; i < 6; i++)
+        for (int i = 0; i < 6; i++)
         {
-            if(DATA.EquipmentData[i] != null)
+            if (DATA.EquipmentData[i] != null)
             {
-                if(DataTableManager.Instance.GetItemInfo_Equipment(DATA.EquipmentData[i]) != null)
+                if (DataTableManager.Instance.GetItemInfo_Equipment(DATA.EquipmentData[i]) != null)
                 {
                     Item_Equipment DataItem = new Item_Equipment();
                     DataItem.itemInfo = DataTableManager.Instance.GetItemInfo_Equipment(DATA.EquipmentData[i]);
@@ -375,24 +376,24 @@ public class GameManager : MonoBehaviour
                 {
                     Spell DataSpell = new Spell();
                     DataSpell.spellInfo = DataTableManager.Instance.GetSpellData(DATA.ActionButtonsData[i]);
-                    ActionButtons[i].SetUseable(DataSpell);
+                    CastingButtons[i].SetUseable(DataSpell);
                 }
                 else
                     DATA.ActionButtonsData[i] = null;
             }
         }
-        for (int i = 5; i < 9; i++)
+        for (int i = 0; i < 4; i++)
         {
-            if (DATA.ActionButtonsData[i] != null)
+            if (DATA.ActionButtonsData[i + 5] != null)
             {
-                if (DataTableManager.Instance.GetItemInfo_Consumable(DATA.ActionButtonsData[i]) != null)
+                if (DataTableManager.Instance.GetItemInfo_Consumable(DATA.ActionButtonsData[i + 5]) != null)
                 {
                     Item_Consumable Dataitem = new Item_Consumable();
-                    Dataitem.itemInfo = DataTableManager.Instance.GetItemInfo_Consumable(DATA.ActionButtonsData[i]);
-                    ActionButtons[i].SetUseable(Dataitem);
+                    Dataitem.itemInfo = DataTableManager.Instance.GetItemInfo_Consumable(DATA.ActionButtonsData[i + 5]);
+                    QuickSlotButtons[i].SetUseable(Dataitem);
                 }
                 else
-                    DATA.ActionButtonsData[i] = null;
+                    DATA.ActionButtonsData[i + 5] = null;
             }
         }
     }
