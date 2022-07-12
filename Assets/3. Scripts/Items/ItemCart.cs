@@ -48,17 +48,12 @@ public class ItemCart : MonoBehaviour
         isKind = IsKind.Item;
         item_Equipment = new Item_Equipment();
         item_Equipment.itemInfo = ItemInfo;
-        item_Equipment.quality = (Item_Base.Quality)SetRandomEquipmentQuality();
+        item_Equipment.quality = quality;
         item_Equipment.SetAddOption();
 
         item = item_Equipment;
         ItemName.text = item_Equipment.MyName;
         ItemSprite.sprite = item_Equipment.MyIcon;
-    }
-
-    public int SetRandomEquipmentQuality() // Àåºñ Ä÷¸®Æ¼ ·£´ý
-    {
-        return (int)ChanceMaker.Choose(EquipmentQualityProb);
     }
 
     public void SetGold(int _gold)

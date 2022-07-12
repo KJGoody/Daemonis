@@ -35,4 +35,5 @@ public abstract class ItemInfo_Base : ScriptableObject
     public virtual string GetDescription() { return itemName; }
     public string effect;  // 아이템 효과 서술
     public int limitLevel; // 아이템 제한 레벨
+    public int Cost;
 }

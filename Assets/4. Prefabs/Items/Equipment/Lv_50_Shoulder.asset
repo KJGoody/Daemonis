@@ -19,6 +19,7 @@ MonoBehaviour:
   descript: "\uC804\uC124 \uC5B4\uAE68\uC774\uB2E4."
   effect: "\uBB3C\uB9AC \uBC29\uC5B4\uB825 5"
   limitLevel: 20
+  Cost: 50
   part: 4
   ItemSprite:
   - {fileID: 3853730050919906448, guid: 59f453d63a917464684bd4854d965672, type: 3}

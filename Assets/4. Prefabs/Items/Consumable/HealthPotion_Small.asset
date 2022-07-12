@@ -20,5 +20,6 @@ MonoBehaviour:
     \uB2E4\uCE5C \uC0C1\uCC98\uAC00 \uB098\uC744\uAC83 \uAC19\uB2E4."
   effect: "\uCCB4\uB825 10\uCD08\uAC04 \uCD08\uB2F9 20 \uD68C\uBCF5"
   limitLevel: 1
+  Cost: 10
   stackSize: 5
   health: 20

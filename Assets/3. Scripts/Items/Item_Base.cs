@@ -116,6 +116,7 @@ public class Item_Base : IMoveable, IDescribable, IUseable
     }
     public int MyLimitLevel { get { return ItemInfo().limitLevel; } } // 아이템 사용 제한 레벨
     public string MyEffect { get { return ItemInfo().effect; } } // 아이템 효과
+    public int MyCost { get { return ItemInfo().Cost; } }
 
     public SlotScript MySlot
     {

@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -19,8 +15,6 @@ public class UIManager : MonoBehaviour
     }
 
     [SerializeField]
-    private ActionButton[] actionButtons;
-    [SerializeField]
     private CanvasGroup[] menu; // 메뉴창 0:캐릭터 1:스킬 2:인벤토리 3:옵션 4:메뉴리스트
     [SerializeField]
     private Image[] menuImage; //메뉴 이미지
@@ -29,19 +23,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Sprite[] menuActiveImage; //메뉴 활성화 이미지
     [SerializeField]
-    private GameObject tooltip; //툴팁
-    private Text tooltipText;
-    [SerializeField]
     private CanvasGroup bigMap; // 전체맵
-
-    private void Awake()
-    {
-        // Tag 가 keybind로 설정된 게임오브젝트를 찾습니다.
-        //keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
-
-        // 아이템 툴팁 참조
-        tooltipText = tooltip.GetComponentInChildren<Text>();
-    }
 
     void Update()
     {
@@ -124,27 +106,6 @@ public class UIManager : MonoBehaviour
         // UI 가 꺼져있을 땐 레이케스트 충돌이 무시되어 다른 조작(적 선택 등)을
         // 할 수 있게 만든다.
         canvasGroup.blocksRaycasts = (canvasGroup.blocksRaycasts) == true ? false : true;
-    }
-
-    // 튤팁UI 활성화
-    public void ShowTooltip(Vector3 position, IDescribable description)
-    {
-        tooltip.SetActive(true);
-        tooltip.transform.position = position;
-
-        // 아이템의 내용을 툴팁게임오브젝트에 전달
-        tooltipText.text = description.GetDescription();
-    }
-
-    // 튤팁UI 비활성화
-    public void HideTooltip()
-    {
-        tooltip.SetActive(false);
-    }
-
-    public void ClickActionButton(string buttonName)
-    {
-        Array.Find(actionButtons, x => x.gameObject.name == buttonName).MyButton.onClick.Invoke();
     }
 
     public void UpdateStackSize(IStackable stackable)

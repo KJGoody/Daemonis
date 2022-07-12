@@ -19,9 +19,9 @@ MonoBehaviour:
   descript: "\uC544\uB9C8\uAC9F\uB3C8 \uC9C0\uD321\uC774\uC774\uB2E4."
   effect: "\uACF5\uACA9\uB825 10"
   limitLevel: 20
+  Cost: 60
   part: 3
   ItemSprite:
   - {fileID: 21300000, guid: 310fdafdc086d2848a715719d34569da, type: 3}
   BaseOption: BaseAttack
   BaseOptionValue: 10
-  WeaponxDamage: 0

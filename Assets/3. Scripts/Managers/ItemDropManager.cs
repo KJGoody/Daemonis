@@ -71,7 +71,6 @@ public class ItemDropManager : MonoBehaviour
         Item_Base.Quality newQuality = (Item_Base.Quality)(int)ChanceMaker.Choose(myQualityProb); // 할당된 확률 배열로 가중치 랜덤뽑기로 등급 설정
 
         item.SetItem_Equipment(equipmentPerLv[SetLvNum(m_Level)].items[setKind], newQuality); // 설정한 정보 아이템에 넣어주기
-
     }
 
     public void DropPotion(Transform dropPosition, int m_Level) // 임시
@@ -86,21 +85,5 @@ public class ItemDropManager : MonoBehaviour
             monsterLv = 50;
         int levelNum = monsterLv / 10;
         return levelNum;
-    }
-    
-    private IEnumerator InitItem()
-    {
-        yield return new WaitForSeconds(0.1f);
-
-        Item_Equipment[] items = new Item_Equipment[4];
-
-        for (int i = 0; i < 4; i++)
-        {
-            items[i] = new Item_Equipment();
-            items[i].itemInfo = equipmentPerLv[0].items[i];
-            Player.MyInstance.EquipItem(items[i]);
-        }
-        Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
-        Player.MyInstance.MyStat.CurrentMana = Player.MyInstance.MyStat.CurrentMaxMana;
     }
 }

@@ -19,6 +19,7 @@ MonoBehaviour:
   descript: "\uACAC\uC2B5 \uC637\uC774\uB2E4."
   effect: "\uCD5C\uB300 \uCCB4\uB825 50"
   limitLevel: 10
+  Cost: 10
   part: 1
   ItemSprite:
   - {fileID: -576155092459198760, guid: 4b8e3a3b8f24e0f418aa9d0f9f2d8160, type: 3}
@@ -26,4 +27,3 @@ MonoBehaviour:
   - {fileID: 1631552425848404438, guid: 4b8e3a3b8f24e0f418aa9d0f9f2d8160, type: 3}
   BaseOption: BaseMaxHealth
   BaseOptionValue: 50
-  WeaponxDamage: 0

@@ -3,29 +3,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IStackable
+public class SlotScript : Slot_Base, IStackable
 {
     // 슬롯에 등록된 아이템 리스트
     // 중첩개수가 2개 이상인 아이템이 있을 수 있다.
     private ObservableStack<Item_Base> items = new ObservableStack<Item_Base>();
     public ObservableStack<Item_Base> MyItems { get { return items; } }
-
-    // 아이템의 아이콘
-    [SerializeField]
-    private Image icon;  
-    public Image MyIcon
-    {
-        get { return icon; }
-        set { icon = value; }
-    }
-
-    [SerializeField]
-    private TextMeshProUGUI stackSize;
-    public TextMeshProUGUI MyStackText { get { return stackSize; } }
-    public int MyCount { get { return MyItems.Count; } }
-
-    // 빈 슬롯 여부
-    public bool IsEmpty { get { return MyItems.Count == 0; } }
     public Item_Base MyItem
     {
         get
@@ -36,6 +19,14 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IStac
             return null;
         }
     }
+
+    [SerializeField]
+    private TextMeshProUGUI stackSize;
+    public TextMeshProUGUI MyStackText { get { return stackSize; } }
+    public int MyCount { get { return MyItems.Count; } }
+
+    // 빈 슬롯 여부
+    public bool IsEmpty { get { return MyItems.Count == 0; } }
 
     private void Awake()
     {
@@ -67,7 +58,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IClickable, IStac
         }
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public override void OnPointerClick(PointerEventData eventData)
     {
         HandScript.MyInstance.SelectItem(MyItem);
     }

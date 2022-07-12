@@ -19,9 +19,9 @@ MonoBehaviour:
   descript: "\uC815\uC2DD \uB9DD\uD1A0\uC774\uB2E4."
   effect: "\uB9C8\uBC95\uBC29\uC5B4\uB825 5"
   limitLevel: 10
+  Cost: 20
   part: 5
   ItemSprite:
   - {fileID: 21300000, guid: d99dd3b722fdf2545a41305e3215fc95, type: 3}
   BaseOption: BaseMagicRegist
   BaseOptionValue: 5
-  WeaponxDamage: 0

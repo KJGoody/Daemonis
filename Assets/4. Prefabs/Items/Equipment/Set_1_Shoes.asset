@@ -19,10 +19,10 @@ MonoBehaviour:
   descript: "\uC544\uB9C8\uAC9F\uB3C8 \uC2E0\uBC1C\uC774\uB2E4."
   effect: "\uCD5C\uB300 \uB9C8\uB098 25"
   limitLevel: 20
+  Cost: 60
   part: 2
   ItemSprite:
   - {fileID: -4693028567966441959, guid: 8e54454d3d802eb42a63257898550497, type: 3}
   - {fileID: -6189030637214119438, guid: 8e54454d3d802eb42a63257898550497, type: 3}
   BaseOption: BaseMaxMana
   BaseOptionValue: 25
-  WeaponxDamage: 0

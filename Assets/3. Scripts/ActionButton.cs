@@ -4,16 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
+public class ActionButton : Slot_Base
 {
-    public Image icon;
-    public Image MyIcon
-    {
-        get { return icon; }
-        set { icon = value; }
-    }
-    // 사용 가능 아이템 리스트
-
     public Button MyButton { get; private set; }
 
     [SerializeField]
@@ -33,8 +25,6 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
 
     // 클릭이 발생했는지 감지. 
     // IPointerClickHandler 에 명시된 함수이다.
-    public virtual void OnPointerClick(PointerEventData eventData) { }
-
     public virtual void SetUseable(IUseable useable) { UpdateVisual(useable); }
 
     protected virtual void UpdateVisual(IUseable useable)
