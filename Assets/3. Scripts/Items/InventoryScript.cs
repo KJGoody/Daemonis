@@ -16,8 +16,6 @@ public class InventoryScript : MonoBehaviour
     }
     public event ItemCountChanged itemCountChangedEvent;
 
-    // 가방 안의 슬롯 리스트
-    private SlotScript fromSlot;
     public Item_Base[] items;
     
     public void OnItemCountChanged(Item_Base item)
@@ -121,22 +119,10 @@ public class InventoryScript : MonoBehaviour
         return useables;
     }
 
-    public SlotScript FromSlot // 흠
+    public int GetEmptySlotNum()
     {
-        get
-        {
-            return fromSlot;
-        }
+        int EmptyNum = 0;
 
-        set
-        {
-            fromSlot = value;
-            if (value != null)
-            {
-                // 슬롯의 색상을 변경합니다.
-                fromSlot.MyIcon.color = Color.gray;
-            }
-        }
+        return EmptyNum;
     }
-
 }

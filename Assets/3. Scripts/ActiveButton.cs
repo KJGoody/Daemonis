@@ -76,6 +76,7 @@ public class ActiveButton : MonoBehaviour
 
             case Role.MerchantButton:
                 UIManager.MyInstance.OpenClose(StorePanel.Instance.storePanel);
+                UIManager.MyInstance.OpenClose(StorePanel.Instance.InventoryPanel);
                 break;
         }
     }

@@ -106,7 +106,7 @@ public class QuickSlotButton : ActionButton, IStackable
 
         //  이동모드 상태 해제
         //InventoryScript.MyInstance.FromSlot.MyIcon.color = Color.white;
-        InventoryScript.MyInstance.FromSlot = null;
+        //InventoryScript.MyInstance.FromSlot = null;
 
         base.SetUseable(useable);
     }

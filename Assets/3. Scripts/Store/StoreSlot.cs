@@ -13,6 +13,25 @@ public class StoreSlot : Slot_Base
     [HideInInspector]
     public Item_Base Item;
 
+    private bool CnaBuy = true;
+
+    private void Update()
+    {
+        if(Item != null)
+        {
+            if(Item.MyCost > GameManager.MyInstance.DATA.Gold)
+            {
+                CnaBuy = false;
+                ItemCost.color = Color.red;
+            }
+            else
+            {
+                CnaBuy = true;
+                ItemCost.color = Color.white;
+            }
+        }
+    }
+
     public void SetSlot(Item_Base item)
     {
         if(item != null)
@@ -27,10 +46,16 @@ public class StoreSlot : Slot_Base
         {
             Item = null;
             icon.sprite = null;
-            ItemName.text = null;
+            ItemName.text = "0";
             ItemCost.gameObject.SetActive(false);
         }
     }
 
-
+    public void _Click()
+    {
+        if(Item != null && CnaBuy)
+        {
+            StorePanel.Instance.buysellWindow.SetWindow(true, Item);
+        }
+    }
 }

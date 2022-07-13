@@ -16,19 +16,18 @@ public class StorePanel : MonoBehaviour
     }
 
     public CanvasGroup storePanel;
-    [SerializeField]
-    private CanvasGroup Panel;
-    [SerializeField]
-    private GameObject BuyWindow;
-    [SerializeField]
-    private StoreSlot BuySlot;
+    public CanvasGroup InventoryPanel;
+    public BuySellWindow buysellWindow;
 
     [SerializeField]
-    private Transform StoreView;
+    private Transform ProductView;
+    [SerializeField]
+    private Transform StuffTap;
+
     [SerializeField]
     private StoreSlot[] StoreSlots;
-    private Item_Base[] StoreSlots_Stuff = new Item_Base[6];
-    private Item_Equipment[] StoreSlots_Equipment = new Item_Equipment[6];
+    private Item_Base[] StoreSlots_Stuff = new Item_Base[4];
+    private Item_Equipment[] StoreSlots_Equipment = new Item_Equipment[4];
 
     private enum CurrentTapName { Stuff, Equipment, Sell }
     private CurrentTapName CurrentTap;
@@ -37,6 +36,7 @@ public class StorePanel : MonoBehaviour
     private List<Dictionary<string, object>> qualityProb; // 장비 등급 확률표
     private DataArray_Item_Consumable[] HealthPotionLv;
 
+    [HideInInspector]
     public bool CanReStock = true;
 
     private void Start()
@@ -46,48 +46,31 @@ public class StorePanel : MonoBehaviour
         HealthPotionLv = DataTableManager.Instance.GetDataTable_Item_Consumable.Data_Item_Consumables;
 
         ReStock();
-    }
-
-    public void _SelectTap(Transform MyTransform)
-    {
-        MyTransform.SetSiblingIndex(3);
-        StoreView.SetSiblingIndex(2);
-        switch (MyTransform.name) 
-        {
-            case "StuffTap":
-                CurrentTap = CurrentTapName.Stuff;
-                break;
-
-            case "EquipmentTap":
-                CurrentTap = CurrentTapName.Equipment;
-                break;
-
-            case "SellTap":
-                CurrentTap = CurrentTapName.Sell;
-                break;
-        }
-
-        UpdateStoreSlots();
+        _SelectTap(StuffTap);
     }
 
     private void ReStock()
     {
         if (CanReStock)
         {
-            InStockItem_Stuff();
-            InStockItem_Equipment();
+            SetStockItem_Stuff();
+            SetStockItem_Equipment();
             CanReStock = false;
         }
     }
 
-    private void InStockItem_Stuff()
+    private void SetStockItem_Stuff()
     {
-
+        for(int i = 0; i < 4; i++)
+        {
+            StoreSlots_Stuff[i] = new Item_Consumable();
+            (StoreSlots_Stuff[i] as Item_Consumable).itemInfo = HealthPotionLv[0].items[0];
+        }
     }
 
-    private void InStockItem_Equipment()
+    private void SetStockItem_Equipment()
     {
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < 4; i++)
         {
             int setKind = Random.Range(0, 6);
             float[] myQualityProb = new float[6];
@@ -110,15 +93,26 @@ public class StorePanel : MonoBehaviour
         return levelNum;
     }
 
-    private bool IsInStock(string ItemName)
+    public void _SelectTap(Transform MyTransform)
     {
-        foreach(StoreSlot slot in StoreSlots)
+        MyTransform.SetSiblingIndex(2);
+        ProductView.SetSiblingIndex(1);
+        switch (MyTransform.name)
         {
-            if (slot.Item != null)
-                if (slot.Item.MyName == ItemName)
-                    return true;
+            case "StuffTap":
+                CurrentTap = CurrentTapName.Stuff;
+                break;
+
+            case "EquipmentTap":
+                CurrentTap = CurrentTapName.Equipment;
+                break;
+
+            case "SellTap":
+                CurrentTap = CurrentTapName.Sell;
+                break;
         }
-        return false;
+
+        UpdateStoreSlots();
     }
 
     private void UpdateStoreSlots()
@@ -141,12 +135,18 @@ public class StorePanel : MonoBehaviour
 
     private void SetSlots(Item_Base[] storeSlots)
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (storeSlots != null)
                 StoreSlots[i].SetSlot(storeSlots[i]);
             else
                 StoreSlots[i].SetSlot(null);
         }
+    }
+
+    public void _CloseStorePanel()
+    {
+        _SelectTap(StuffTap);
+        buysellWindow._CloseWindow();
     }
 }
