@@ -68,14 +68,27 @@ public class BuySellWindow : MonoBehaviour
         {
             if(ItemView.Item is Item_Consumable)
             {
-
+                if(InventoryScript.MyInstance.CanStackSlotNum(ItemView.Item) >= ItemCount)
+                {
+                    _CloseWindow();
+                    GameManager.MyInstance.DATA.Gold = Bill;
+                    for(int i = 0; i < ItemCount; i++)
+                        InventoryScript.MyInstance.AddItem(ItemView.Item, true);
+                    //GameManager.MyInstance.SaveData();
+                }
             }
             else
             {
                 if(InventoryScript.MyInstance.GetEmptySlotNum() >= ItemCount)
                 {
-
-                    InventoryScript.MyInstance.AddItem(ItemView.Item);
+                    _CloseWindow();
+                    GameManager.MyInstance.DATA.Gold = Bill;
+                    for (int i = 0; i < ItemCount; i++)
+                    {
+                        (ItemView.Item as Item_Equipment).SetAddOption();
+                        InventoryScript.MyInstance.AddItem(ItemView.Item);
+                    }
+                    //GameManager.MyInstance.SaveData();
                 }
             }
         }

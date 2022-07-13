@@ -29,8 +29,6 @@ public class ItemCart : MonoBehaviour
     private bool IsUp = false;
     private float UpTime = 0;
 
-    private readonly float[] EquipmentQualityProb = new float[] { 5f, 4f, 3f, 2f, 1f, 0.5f };
-
     public void SetItem_Consumable(ItemInfo_Consumable ItemInfo, Item_Base.Quality quality)
     {
         isKind = IsKind.Item;

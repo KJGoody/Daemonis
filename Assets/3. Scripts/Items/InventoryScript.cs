@@ -17,7 +17,7 @@ public class InventoryScript : MonoBehaviour
     public event ItemCountChanged itemCountChangedEvent;
 
     public Item_Base[] items;
-    
+
     public void OnItemCountChanged(Item_Base item)
     {
         // 이벤트에 등록된 델리게이트에 있다면
@@ -122,7 +122,31 @@ public class InventoryScript : MonoBehaviour
     public int GetEmptySlotNum()
     {
         int EmptyNum = 0;
+        foreach (SlotScript slot in GameManager.MyInstance.Slots)
+        {
+            if (slot.IsEmpty)
+                EmptyNum++;
+        }
 
         return EmptyNum;
+    }
+
+    public int CanStackSlotNum(Item_Base Item)
+    {
+        int SlotNum = 0;
+        foreach(SlotScript slot in GameManager.MyInstance.Slots)
+        {
+            if (slot.IsEmpty)
+                SlotNum++;
+            else
+            {
+                if(slot.MyItem.MyName == Item.MyName)
+                {
+                    if (slot.MyItems.Count < (slot.MyItem as Item_Consumable).StackSize)
+                        SlotNum++;
+                }
+            }
+        }
+        return SlotNum;
     }
 }

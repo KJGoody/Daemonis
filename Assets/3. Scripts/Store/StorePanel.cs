@@ -65,6 +65,7 @@ public class StorePanel : MonoBehaviour
         {
             StoreSlots_Stuff[i] = new Item_Consumable();
             (StoreSlots_Stuff[i] as Item_Consumable).itemInfo = HealthPotionLv[0].items[0];
+            StoreSlots_Stuff[i].quality = Item_Base.Quality.Normal;
         }
     }
 
