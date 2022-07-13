@@ -15,9 +15,15 @@ public class StorePanel : MonoBehaviour
         }
     }
 
-    public CanvasGroup storePanel;
-    public CanvasGroup InventoryPanel;
-    public BuySellWindow buysellWindow;
+    [SerializeField]
+    private CanvasGroup storePanel;
+    [SerializeField]
+    private CanvasGroup InventoryPanel;
+
+    [SerializeField]
+    private GameObject RemoveButton;
+    [SerializeField]
+    private GameObject SellButton;
 
     [SerializeField]
     private Transform ProductView;
@@ -38,6 +44,29 @@ public class StorePanel : MonoBehaviour
 
     [HideInInspector]
     public bool CanReStock = true;
+
+    public void OpenStore()
+    {
+        storePanel.alpha = 1;
+        storePanel.blocksRaycasts = true;
+
+        if(InventoryPanel.alpha != 1)
+        {
+            UIManager.MyInstance.OpenClose(InventoryPanel);
+        }
+
+        RemoveButton.SetActive(false);
+        SellButton.SetActive(true);
+    }
+
+    public void _CloseStore()
+    {
+        _SelectTap(StuffTap);
+        BuySellWindow.Instance._CloseWindow();
+
+        RemoveButton.SetActive(true);
+        SellButton.SetActive(false);
+    }
 
     private void Start()
     {
@@ -78,11 +107,11 @@ public class StorePanel : MonoBehaviour
             int a = 0;
             foreach (var value in qualityProb[SetLvNum()].Values) // 레벨마다 다른 확률을 엑셀로 가져와서 배열에 할당
                 myQualityProb[a++] = (float)System.Convert.ToDouble(value);
-            Item_Base.Quality newQuality = (Item_Base.Quality)(int)ChanceMaker.Choose(myQualityProb); // 할당된 확률 배열로 가중치 랜덤뽑기로 등급 설정
+            int newQuality = (int)ChanceMaker.Choose(myQualityProb); // 할당된 확률 배열로 가중치 랜덤뽑기로 등급 설정
 
             StoreSlots_Equipment[i] = new Item_Equipment();
             StoreSlots_Equipment[i].itemInfo = equipmentPerLv[SetLvNum()].items[setKind];
-            StoreSlots_Equipment[i].quality = newQuality;
+            StoreSlots_Equipment[i].quality = (Item_Base.Quality)newQuality;
         }
     }
 
@@ -143,11 +172,5 @@ public class StorePanel : MonoBehaviour
             else
                 StoreSlots[i].SetSlot(null);
         }
-    }
-
-    public void _CloseStorePanel()
-    {
-        _SelectTap(StuffTap);
-        buysellWindow._CloseWindow();
     }
 }

@@ -7,8 +7,7 @@ public class StoreSlot : Slot_Base
 {
     [SerializeField]
     private Text ItemName;
-    [SerializeField]
-    private Text ItemCost;
+    public Text ItemCost;
 
     [HideInInspector]
     public Item_Base Item;
@@ -55,7 +54,7 @@ public class StoreSlot : Slot_Base
     {
         if(Item != null && CnaBuy)
         {
-            StorePanel.Instance.buysellWindow.SetWindow(true, Item);
+            BuySellWindow.Instance.SetWindow(true, Item);
         }
     }
 }

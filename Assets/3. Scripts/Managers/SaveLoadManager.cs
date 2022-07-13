@@ -65,7 +65,7 @@ public static class SaveLoadManager
 
                 stream.Close();
 
-                Debug.Log(json);
+                //Debug.Log(json);
                 return data;
             }
         }

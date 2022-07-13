@@ -241,12 +241,14 @@ public class HandScript : MonoBehaviour
 
     public void RemoveItem() // 아이템 삭제 버튼
     {
-        if (myItem.ItemInfo().GetKind == ItemInfo_Base.Kinds.Equipment)
-            (myItem as Item_Equipment).Remove();
-        else
-            myItem.Remove();
+        myItem.Remove();
         SI_Panel.SetActive(false);
         myItem = null;
+    }
+
+    public void _SellItem()
+    {
+        BuySellWindow.Instance.SetWindow(false, myItem);
     }
 
     public void Close_SI_Panel() // 선택 아이템 패널 닫기

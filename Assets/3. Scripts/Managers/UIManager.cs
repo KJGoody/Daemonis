@@ -117,7 +117,6 @@ public class UIManager : MonoBehaviour
             stackable.MyStackText.color = Color.white;
             (stackable as IClickable).MyIcon.color = Color.white;
         }
-
         else
         {
             // 해당 슬롯의 텍스트 투명하게 만들기
