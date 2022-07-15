@@ -131,22 +131,22 @@ public class InventoryScript : MonoBehaviour
         return EmptyNum;
     }
 
-    public int CanStackSlotNum(Item_Base Item)
+    public int CanStackNum(Item_Base Item)
     {
-        int SlotNum = 0;
+        int CountNum = 0;
         foreach(SlotScript slot in GameManager.MyInstance.Slots)
         {
             if (slot.IsEmpty)
-                SlotNum++;
+                CountNum += (Item as Item_Consumable).StackSize;
             else
             {
                 if(slot.MyItem.MyName == Item.MyName)
                 {
                     if (slot.MyItems.Count < (slot.MyItem as Item_Consumable).StackSize)
-                        SlotNum++;
+                        CountNum += (Item as Item_Consumable).StackSize - slot.MyItems.Count;
                 }
             }
         }
-        return SlotNum;
+        return CountNum;
     }
 }

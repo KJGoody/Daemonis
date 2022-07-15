@@ -138,7 +138,7 @@ public class BuySellWindow : MonoBehaviour
         {
             if (ItemView.Item is Item_Consumable)
             {
-                if (InventoryScript.MyInstance.CanStackSlotNum(ItemView.Item) >= ItemCount)
+                if (InventoryScript.MyInstance.CanStackNum(ItemView.Item) >= ItemCount)
                 {
                     _CloseWindow();
                     GameManager.MyInstance.DATA.Gold = Bill;

@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StoreSlot : Slot_Base
 {
     [SerializeField]
-    private Text ItemName;
+    protected Text ItemName;
     public Text ItemCost;
 
     [HideInInspector]
@@ -14,11 +12,11 @@ public class StoreSlot : Slot_Base
 
     private bool CnaBuy = true;
 
-    private void Update()
+    protected virtual void Update()
     {
-        if(Item != null)
+        if (Item != null)
         {
-            if(Item.MyCost > GameManager.MyInstance.DATA.Gold)
+            if (Item.MyCost > GameManager.MyInstance.DATA.Gold)
             {
                 CnaBuy = false;
                 ItemCost.color = Color.red;
