@@ -8677,6 +8677,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LockedLevel: 20
+--- !u!1 &408552650 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8170153791668043269, guid: 0d230cc8be529a542a08cb878ab14b18,
+    type: 3}
+  m_PrefabInstance: {fileID: 441241125}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &425410992
 GameObject:
   m_ObjectHideFlags: 0
@@ -21288,6 +21294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storePanel: {fileID: 959579500}
   InventoryPanel: {fileID: 291227922}
+  Joystick: {fileID: 408552650}
   RemoveButton: {fileID: 1017250949}
   SellButton: {fileID: 853345652}
   ProductView: {fileID: 1657235609}
@@ -36224,7 +36231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae12d8a6656e6a40897b015505be933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StorePanelView: {fileID: 903577600}
   BuySellText: {fileID: 1958006940}
   ItemView: {fileID: 2017015434}
   ItemCountButtons: {fileID: 1927937760}

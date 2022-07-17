@@ -15,20 +15,16 @@ public class StorePanel : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private CanvasGroup storePanel;
-    [SerializeField]
-    private CanvasGroup InventoryPanel;
+    [SerializeField] private CanvasGroup storePanel;
+    [SerializeField] private CanvasGroup InventoryPanel;
 
-    [SerializeField]
-    private GameObject RemoveButton;
-    [SerializeField]
-    private GameObject SellButton;
+    [SerializeField] private GameObject Joystick;
 
-    [SerializeField]
-    private Transform ProductView;
-    [SerializeField]
-    private Transform StuffTap;
+    [SerializeField] private GameObject RemoveButton;
+    [SerializeField] private GameObject SellButton;
+
+    [SerializeField] private Transform ProductView;
+    [SerializeField] private Transform StuffTap;
 
     [SerializeField]
     private StoreSlot[] StoreSlots;
@@ -50,11 +46,12 @@ public class StorePanel : MonoBehaviour
         storePanel.alpha = 1;
         storePanel.blocksRaycasts = true;
 
-        if(InventoryPanel.alpha != 1)
+        if (InventoryPanel.alpha != 1)
         {
             UIManager.MyInstance.OpenClose(InventoryPanel);
         }
 
+        Joystick.SetActive(false);
         RemoveButton.SetActive(false);
         SellButton.SetActive(true);
     }
@@ -64,6 +61,7 @@ public class StorePanel : MonoBehaviour
         _SelectTap(StuffTap);
         BuySellWindow.Instance._CloseWindow();
 
+        Joystick.SetActive(true);
         RemoveButton.SetActive(true);
         SellButton.SetActive(false);
     }
@@ -90,7 +88,7 @@ public class StorePanel : MonoBehaviour
 
     private void SetStockItem_Stuff()
     {
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             StoreSlots_Stuff[i] = new Item_Consumable();
             (StoreSlots_Stuff[i] as Item_Consumable).itemInfo = HealthPotionLv[0].items[0];
@@ -100,7 +98,7 @@ public class StorePanel : MonoBehaviour
 
     private void SetStockItem_Equipment()
     {
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             int setKind = Random.Range(0, 6);
             float[] myQualityProb = new float[6];

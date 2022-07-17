@@ -17,7 +17,6 @@ public class BuySellWindow : MonoBehaviour
         }
     }
 
-    [SerializeField] private CanvasGroup StorePanelView;
     [SerializeField] private Text BuySellText;
     [SerializeField] private StoreSlot ItemView;
     [SerializeField] private GameObject ItemCountButtons;
@@ -78,14 +77,12 @@ public class BuySellWindow : MonoBehaviour
 
         GetComponent<CanvasGroup>().alpha = 1;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
-        StorePanelView.blocksRaycasts = false;
     }
 
     public void _CloseWindow()
     {
         GetComponent<CanvasGroup>().alpha = 0;
         GetComponent<CanvasGroup>().blocksRaycasts = false;
-        StorePanelView.blocksRaycasts = true;
     }
 
     public void _ItemCountAddSub(int Num)
