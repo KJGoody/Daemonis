@@ -16,6 +16,6 @@ public class TestCSV : MonoBehaviour
                   data[i]["4"] + data[i]["4"].GetType().ToString() + " " +
                   data[i]["5"] + data[i]["5"].GetType().ToString());
         }
-
+        
     }
 }
