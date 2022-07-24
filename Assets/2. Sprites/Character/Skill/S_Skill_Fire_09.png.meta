@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: cdedf7f7117c0ab4a8f46047deb24aa0
+guid: 879fbd420ee13334ca8000a0477a6511
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 761173597367677731
-    second: Skill_Fire_07Sprite_0
+      213: -5382658593099287584
+    second: S_Skill_Fire_09_0
   - first:
-      213: 3949726537949216966
-    second: Skill_Fire_07Sprite_1
+      213: 7098901061456845513
+    second: S_Skill_Fire_09_1
   - first:
-      213: -7481281850237684215
-    second: Skill_Fire_07Sprite_2
+      213: 391037587640954579
+    second: S_Skill_Fire_09_2
   - first:
-      213: -5156200308377331270
-    second: Skill_Fire_07Sprite_3
-  - first:
-      213: 8059149966547442192
-    second: Skill_Fire_07Sprite_4
-  - first:
-      213: 66779590288591772
-    second: Skill_Fire_07Sprite_5
+      213: -1097240988421966906
+    second: S_Skill_Fire_09_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -106,6 +100,18 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -121,7 +127,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skill_Fire_07Sprite_0
+      name: S_Skill_Fire_09_0
       rect:
         serializedVersion: 2
         x: 0
@@ -135,14 +141,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 323b18b9a5b309a00800000000000000
-      internalID: 761173597367677731
+      spriteID: 0e3fc133784fc45b0800000000000000
+      internalID: -5382658593099287584
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill_Fire_07Sprite_1
+      name: S_Skill_Fire_09_1
       rect:
         serializedVersion: 2
         x: 128
@@ -156,35 +162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c085661c5f30d630800000000000000
-      internalID: 3949726537949216966
+      spriteID: 9ca57cf57ec548260800000000000000
+      internalID: 7098901061456845513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill_Fire_07Sprite_2
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 90671047bc52d2890800000000000000
-      internalID: -7481281850237684215
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skill_Fire_07Sprite_3
+      name: S_Skill_Fire_09_2
       rect:
         serializedVersion: 2
         x: 0
@@ -198,14 +183,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab9d864632f7178b0800000000000000
-      internalID: -5156200308377331270
+      spriteID: 3de2a293d9e3d6500800000000000000
+      internalID: 391037587640954579
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill_Fire_07Sprite_4
+      name: S_Skill_Fire_09_3
       rect:
         serializedVersion: 2
         x: 128
@@ -219,29 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01a59a3023ad7df60800000000000000
-      internalID: 8059149966547442192
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skill_Fire_07Sprite_5
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c9bc56dfeaf3de000800000000000000
-      internalID: 66779590288591772
+      spriteID: 6c33c1c6221d5c0f0800000000000000
+      internalID: -1097240988421966906
       vertices: []
       indices: 
       edges: []
@@ -249,7 +213,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2a61403cb58cf6f46b1db1dc65a431d4
+    spriteID: adeb25d44d417954c8f3b098b3d20c9b
     internalID: 0
     vertices: []
     indices: 

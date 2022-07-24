@@ -27,6 +27,9 @@ public class DataTableManager : MonoBehaviour
     private DataTable_Spell dataTable_Spell;
     public DataTable_Spell GetDataTable_Spell { get { return dataTable_Spell; } }
 
+    [SerializeField]
+    private DataTable_Sprite dataTable_Sprite;
+
     public ItemInfo_Equipment GetItemInfo_Equipment(string Name)
     {
         foreach (DataArray_Item_Equipment Data in dataTable_Item_Equipment.Data_Item_Equipments)
@@ -55,5 +58,13 @@ public class DataTableManager : MonoBehaviour
                     return SpellInfo;
 
         return null;
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < dataTable_Sprite.SpritesCategory[0].Sprites.Length; i++)
+        {
+            Debug.Log(dataTable_Sprite.SpritesCategory[0].Sprites[i].name.GetType());
+        }
     }
 }

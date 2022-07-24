@@ -14155,15 +14155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b120ecfca0cf145b48c59678133866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spells:
-  - spellInfo: {fileID: 0}
-  - spellInfo: {fileID: 0}
-  - spellInfo: {fileID: 0}
-  - spellInfo: {fileID: 0}
-  - spellInfo: {fileID: 0}
-  - spellInfo: {fileID: 0}
-  - spellInfo: {fileID: 0}
-  - spellInfo: {fileID: 0}
 --- !u!114 &683259552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28142,6 +28133,7 @@ MonoBehaviour:
   dataTable_Item_Consumable: {fileID: 11400000, guid: e9322e22a7c3c74488cbd4cb74e13eef,
     type: 2}
   dataTable_Spell: {fileID: 11400000, guid: 881bb20233fab394682c09d1e93549c1, type: 2}
+  dataTable_Sprite: {fileID: 11400000, guid: 3e8be68010a11f94a98ebf4362f1d768, type: 2}
 --- !u!1 &1316762246
 GameObject:
   m_ObjectHideFlags: 0

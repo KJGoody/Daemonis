@@ -4,31 +4,31 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 3845358642940931319
-    second: Skill_Fire_06Sprite_0
+    second: S_Skill_Fire_06_0
   - first:
       213: -1778994996087855033
-    second: Skill_Fire_06Sprite_1
+    second: S_Skill_Fire_06_1
   - first:
       213: -2312243050919873022
-    second: Skill_Fire_06Sprite_2
+    second: S_Skill_Fire_06_2
   - first:
       213: -6277507652795990200
-    second: Skill_Fire_06Sprite_3
+    second: S_Skill_Fire_06_3
   - first:
       213: 8154845546641589721
-    second: Skill_Fire_06Sprite_4
+    second: S_Skill_Fire_06_4
   - first:
       213: -5049347843788122732
-    second: Skill_Fire_06Sprite_5
+    second: S_Skill_Fire_06_5
   - first:
       213: 5810908135716403994
-    second: Skill_Fire_06Sprite_6
+    second: S_Skill_Fire_06_6
   - first:
       213: -3187888877553126979
-    second: Skill_Fire_06Sprite_7
+    second: S_Skill_Fire_06_7
   - first:
       213: -372233705745644320
-    second: Skill_Fire_06Sprite_8
+    second: S_Skill_Fire_06_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,7 +130,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skill_Fire_06Sprite_0
+      name: S_Skill_Fire_06_0
       rect:
         serializedVersion: 2
         x: 0
@@ -151,10 +151,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill_Fire_06Sprite_1
+      name: S_Skill_Fire_06_1
       rect:
         serializedVersion: 2
-        x: 256
+        x: 254
         y: 512
         width: 256
         height: 256
@@ -172,7 +172,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill_Fire_06Sprite_2
+      name: S_Skill_Fire_06_2
       rect:
         serializedVersion: 2
         x: 512
@@ -193,7 +193,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill_Fire_06Sprite_3
+      name: S_Skill_Fire_06_3
       rect:
         serializedVersion: 2
         x: 0
@@ -214,10 +214,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill_Fire_06Sprite_4
+      name: S_Skill_Fire_06_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 257
         y: 256
         width: 256
         height: 256
@@ -235,11 +235,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill_Fire_06Sprite_5
+      name: S_Skill_Fire_06_5
       rect:
         serializedVersion: 2
         x: 512
-        y: 256
+        y: 258
         width: 256
         height: 256
       alignment: 0
@@ -256,7 +256,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill_Fire_06Sprite_6
+      name: S_Skill_Fire_06_6
       rect:
         serializedVersion: 2
         x: 0
@@ -277,7 +277,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill_Fire_06Sprite_7
+      name: S_Skill_Fire_06_7
       rect:
         serializedVersion: 2
         x: 256
@@ -298,7 +298,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill_Fire_06Sprite_8
+      name: S_Skill_Fire_06_8
       rect:
         serializedVersion: 2
         x: 512
