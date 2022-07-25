@@ -38,7 +38,7 @@ public class ItemCart : MonoBehaviour
 
         item = item_Consumable;
         ItemName.text = item_Consumable.MyName;
-        ItemSprite.sprite = item_Consumable.MyIcon;
+        ItemSprite.sprite = item_Consumable.Icon;
     }
 
     public void SetItem_Equipment(ItemInfo_Equipment ItemInfo, Item_Base.Quality quality)
@@ -51,7 +51,7 @@ public class ItemCart : MonoBehaviour
 
         item = item_Equipment;
         ItemName.text = item_Equipment.MyName;
-        ItemSprite.sprite = item_Equipment.MyIcon;
+        ItemSprite.sprite = item_Equipment.Icon;
     }
 
     public void SetGold(int _gold)

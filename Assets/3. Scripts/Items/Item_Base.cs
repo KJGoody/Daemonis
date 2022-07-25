@@ -9,7 +9,7 @@ public class Item_Base : IMoveable, IDescribable, IUseable
         return null;
     }
 
-    public Sprite MyIcon { get { return ItemInfo().MyIcon; } } // 아이템 아이콘 이미지
+    public Sprite Icon { get { return ItemInfo().MyIcon; } } // 아이템 아이콘 이미지
     public Sprite GetIcon() { return ItemInfo().MyIcon; }
     public enum Quality { Normal, Advanced, Rare, Epic, Legendary, Relic }
     public Quality quality; // 아이템의 등급

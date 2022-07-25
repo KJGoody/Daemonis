@@ -39,7 +39,7 @@ public class SlotScript : Slot_Base, IStackable
     public bool AddItem(Item_Base item)
     {
         MyItems.Push(item);
-        icon.sprite = item.MyIcon;
+        icon.sprite = item.Icon;
         icon.color = Color.white;
         item.MySlot = this;
         return true;

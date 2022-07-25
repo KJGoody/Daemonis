@@ -1,13 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SpellInfo")]
-public class SpellInfo : ScriptableObject
+[System.Serializable]
+public class SpellInfo
 {
-    public GameObject spellPrefab;
-    public Sprite SpellIcon;
-    public string SpellName;
-    public string SpellDescription;     // 설명란
-
+    public string ID;
+    public string Name;
+    public GameObject Prefab;
     public enum SpellType
     {
         #region 스킬 타입
@@ -21,8 +19,9 @@ public class SpellInfo : ScriptableObject
         None
         #endregion
     }
-    public SpellType spellType;
-
-    public float SpellCoolTime;
-    public int SpellMana;
+    public SpellType Type;
+    public Sprite Icon;
+    public string Description;     // 설명란
+    public float CoolTime;
+    public int ManaCost;
 }

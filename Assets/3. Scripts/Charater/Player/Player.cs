@@ -32,21 +32,18 @@ public class Player : Character
         }
     }
 
-    public Item_Equipment[] usingEquipment = new Item_Equipment[6]; // 장착중인 장비 아이템
+    // 장착중인 장비 아이템
+    public Item_Equipment[] usingEquipment = new Item_Equipment[6];
     public delegate void UseEquipment(int partNum);
     public event UseEquipment useEquipment;
 
-    private FloatingJoystick joy; //조이스틱
-    [SerializeField]
-    private Transform exitPoint; // 스킬 발사 위치
-    [SerializeField]
-    private GameObject lvUp_Particle; // 레벨업 이펙트
-    [HideInInspector]
-    public Vector2 atkDir; // 공격 방향
+    private FloatingJoystick joy;  //조이스틱
+    [SerializeField] private Transform exitPoint;  // 스킬 발사 위치
+    [SerializeField] private GameObject lvUp_Particle;  // 레벨업 이펙트
+    [HideInInspector] public Vector2 atkDir;  // 공격 방향
 
     private List<TargetGroup> targetGroups = new List<TargetGroup>();
-    [SerializeField]
-    private GameObject YOUDIEWindow; // 캐릭터 사망 패널
+    [SerializeField]    private GameObject YOUDIEWindow;  // 캐릭터 사망 패널
 
     protected override void Start()
     {
@@ -93,9 +90,9 @@ public class Player : Character
             if (!MyTarget.parent.gameObject.GetComponent<EnemyBase>().IsAlive || MyTarget.parent.gameObject.activeSelf == false)
                 MyTarget = null;
 
-        if (MyTarget == null && SearchEnemy()) 
+        if (MyTarget == null && SearchEnemy())
             AutoTarget();
-        
+
         if (!IsAttacking)
             StartCoroutine(CastingSpell(spellIName));
     }
@@ -118,7 +115,7 @@ public class Player : Character
 
     private GameObject FindNearestObject() // 가까운 적 타겟팅
     {
-                                                                                 // 확인 범위
+        // 확인 범위
         Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, 7, LayerMask.GetMask("HitBox"));
 
         List<GameObject> objects = new List<GameObject>();
@@ -141,12 +138,13 @@ public class Player : Character
     private IEnumerator CastingSpell(string spellIName)
     {
         IsAttacking = true;
+        // 타겟이 있다면 타겟 방향을 바라보도록한다.
         if (MyTarget != null) LookAtTarget();
         _prefabs.PlayAnimation(4);
 
         Spell newSpell = SpellBook.MyInstance.GetSpell(spellIName);
-        if (newSpell.spellType.Equals(SpellInfo.SpellType.Immediate))
-        {   // 점화 스킬 구현방식
+        if (newSpell.Type.Equals(SpellInfo.SpellType.Immediate))
+        {
             for (int i = targetGroups.Count - 1; i >= 0; i--)
             {
                 if (targetGroups[i].GroupName.Equals("Skill_Fire_02_Debuff"))
@@ -154,7 +152,7 @@ public class Player : Character
                     {
                         if (Vector2.Distance(transform.position, targetGroups[i].Targets[j].position) < 7)
                         {
-                            SpellScript spellScript = Instantiate(newSpell.MySpellPrefab, targetGroups[i].Targets[j]).GetComponent<SpellScript>();
+                            SpellScript spellScript = Instantiate(newSpell.Prefab, targetGroups[i].Targets[j]).GetComponent<SpellScript>();
                             spellScript.MyTarget = targetGroups[i].Targets[j];
                             spellScript.StackxDamage = targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().GetBuff("Skill_Fire_02_Debuff").BuffStack;
                             targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().OffBuff("Skill_Fire_02_Debuff");
@@ -179,14 +177,14 @@ public class Player : Character
 
     private SpellScript InstantiateSpell(Spell spell)
     {
-        switch (spell.spellType)
+        switch (spell.Type)
         {
             case SpellInfo.SpellType.Launch:
-                return Instantiate(spell.MySpellPrefab, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
+                return Instantiate(spell.Prefab, exitPoint.position, Quaternion.identity).GetComponent<SpellScript>();
 
             case SpellInfo.SpellType.AOE:
                 if (MyTarget != null)
-                    return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
+                    return Instantiate(spell.Prefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
                 else
                 {
                     Vector3 ExitPoint = transform.position + new Vector3(atkDir.x, atkDir.y, 0).normalized * 2;
@@ -197,15 +195,15 @@ public class Player : Character
                         else
                             ExitPoint += new Vector3(-1, 0, 0).normalized * 2;
                     }
-                    return Instantiate(spell.MySpellPrefab, ExitPoint, Quaternion.identity).GetComponent<SpellScript>();
+                    return Instantiate(spell.Prefab, ExitPoint, Quaternion.identity).GetComponent<SpellScript>();
                 }
 
             case SpellInfo.SpellType.Toggle:
-                return Instantiate(spell.MySpellPrefab, transform).GetComponent<SpellScript>();
+                return Instantiate(spell.Prefab, transform).GetComponent<SpellScript>();
 
             case SpellInfo.SpellType.AE:
                 if (MyTarget != null)
-                    return Instantiate(spell.MySpellPrefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
+                    return Instantiate(spell.Prefab, MyTarget.position, Quaternion.identity).GetComponent<SpellScript>();
                 else
                 {
                     Vector3 ExitPoint = transform.position + new Vector3(atkDir.x, atkDir.y, 0).normalized * 2;
@@ -216,7 +214,7 @@ public class Player : Character
                         else
                             ExitPoint += new Vector3(-1, 0, 0).normalized * 2;
                     }
-                    return Instantiate(spell.MySpellPrefab, ExitPoint, Quaternion.identity).GetComponent<SpellScript>();
+                    return Instantiate(spell.Prefab, ExitPoint, Quaternion.identity).GetComponent<SpellScript>();
                 }
         }
         return null;
@@ -310,9 +308,16 @@ public class Player : Character
         float b = (float)System.Convert.ToDouble(optionName.GetValue(stat));
         switch (option)
         {
-            case "BaseAttack":      case "BaseMaxHealth":       case "BaseMaxMana":         case "BaseDefence":
-            case "BaseMagicRegist": case "BaseAttackSpeed" :    case "HealthRegen":
-            case "ManaRegen":       case "RecoverHealth_onhit": case "RecoverMana_onhit":
+            case "BaseAttack":
+            case "BaseMaxHealth":
+            case "BaseMaxMana":
+            case "BaseDefence":
+            case "BaseMagicRegist":
+            case "BaseAttackSpeed":
+            case "HealthRegen":
+            case "ManaRegen":
+            case "RecoverHealth_onhit":
+            case "RecoverMana_onhit":
                 optionName.SetValue(stat, (int)(b + value));
                 break;
 
@@ -328,7 +333,7 @@ public class Player : Character
         if (Repeat)
             EXP = MonsterExP;
         else
-            EXP = MonsterExP + MonsterExP * ( MyStat.ExpPlus / 100f );
+            EXP = MonsterExP + MonsterExP * (MyStat.ExpPlus / 100f);
 
         if (MyStat.LevelUpEXP > MyStat.CurrentEXP + EXP)
             MyStat.CurrentEXP += EXP;
@@ -349,7 +354,7 @@ public class Player : Character
     {
         base.TakeDamage(damageType, HitPercent, pureDamage, FromLevel, knockbackDir, TextType);
 
-        if(MyStat.CurrentHealth <= 0)
+        if (MyStat.CurrentHealth <= 0)
         {
             YOUDIEWindow.SetActive(true);
             transform.Find("HitBox_Player").gameObject.SetActive(false);

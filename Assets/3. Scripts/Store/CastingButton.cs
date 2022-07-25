@@ -15,12 +15,12 @@ public class CastingButton : ActionButton
             if (Spell != null)
             {
                 // 현재 쿨타임이 0일 경우에만 사용할 수 있다. && 플레이어의 현재 마나가 스킬 마나보다 많아야 한다. && 공격중이 아니여야 한다.
-                if (CurrentCollTime == 0 && Player.MyInstance.MyStat.CurrentMana - (Spell as Spell).MySpellMana >= 0 && !Player.MyInstance.IsAttacking)
+                if (CurrentCollTime == 0 && Player.MyInstance.MyStat.CurrentMana - (Spell as Spell).ManaCost >= 0 && !Player.MyInstance.IsAttacking)
                 {
-                    CoolTime = (Spell as Spell).MySpellCoolTime;
+                    CoolTime = (Spell as Spell).CoolTime;
                     StartCoroutine(StartCoolDown());
 
-                    Player.MyInstance.MyStat.CurrentMana -= (Spell as Spell).MySpellMana;
+                    Player.MyInstance.MyStat.CurrentMana -= (Spell as Spell).ManaCost;
 
                     Spell.Use();
                 }

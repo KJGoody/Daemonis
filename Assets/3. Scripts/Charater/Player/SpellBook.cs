@@ -20,24 +20,21 @@ public class SpellBook : MonoBehaviour
 
     private Spell[] spells; // 스킬 리스트
 
-    private DataArray_Spell[] SpellData;
-
     private void Start()
     {
         spells = new Spell[8];
-        SpellData = DataTableManager.Instance.GetDataTable_Spell.Data_Spell;
 
         for(int i = 0; i < spells.Length; i++)
         {
             Spell Data = new Spell();
-            Data.spellInfo = SpellData[0].SpellInfos[i];
+            Data.Info = DataTableManager.Instance.spellInfos[i];
             spells[i] = Data;
         }
     }
 
     public Spell GetSpell(string spellName) // 스킬 검색
     {
-        Spell spell = Array.Find(spells, x => x.MyName == spellName);
+        Spell spell = Array.Find(spells, x => x.Name == spellName);
 
         return spell;
     }

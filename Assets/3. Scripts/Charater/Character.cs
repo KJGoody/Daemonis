@@ -145,6 +145,7 @@ public abstract class Character : MonoBehaviour
 
     public virtual void LookAtTarget() // 타겟 바라보기
     {
+        Debug.Log((MyTarget.transform.position - transform.position).x);
         if ((MyTarget.transform.position - transform.position).x > 0)
             _prefabs.transform.localScale = new Vector3(-1, 1, 1);
         else if ((MyTarget.transform.position - transform.position).x < 0)
@@ -153,30 +154,27 @@ public abstract class Character : MonoBehaviour
 
     public void NewBuff(string buffName)
     {
-        StartBuff(buffName);
-    }
-
-    private void StartBuff(string buffName)
-    {
         bool IsAlreadyIn = false;
         int Index = 0;
 
+        // 만약 켜져있는 버프가 있다면
         if (OnBuff.Count > 0)
         {
             for (int i = 0; i < OnBuff.Count; i++)
             {
+                // 켜져있는 버프 중 새로운 버프 이름과 같은 것이 있다면 참을 반환하면서 인덱스를 저장한다.
                 if (OnBuff[i].BuffName.Equals(buffName))
                 {
                     IsAlreadyIn = true;
                     Index = i;
                 }
             }
+
+            // 만약 버프가 켜져 있을 경우 기존 버프를 리셋하고, 꺼져 있을 경우 새로 추가한다.
             if (IsAlreadyIn)
                 OnBuff[Index].ResetBuff();
             else
                 buffManager.AddBuffImage(buffName, this);
-
-
         }
         else
             buffManager.AddBuffImage(buffName, this);

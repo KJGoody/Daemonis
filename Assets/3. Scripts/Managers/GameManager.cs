@@ -372,14 +372,14 @@ public class GameManager : MonoBehaviour
         {
             if (DATA.ActionButtonsData[i] != null)
             {
-                if (DataTableManager.Instance.GetSpellData(DATA.ActionButtonsData[i]) != null)
-                {
-                    Spell DataSpell = new Spell();
-                    DataSpell.spellInfo = DataTableManager.Instance.GetSpellData(DATA.ActionButtonsData[i]);
-                    CastingButtons[i].SetUseable(DataSpell);
-                }
-                else
-                    DATA.ActionButtonsData[i] = null;
+                //if (DataTableManager.Instance.GetSpellData(DATA.ActionButtonsData[i]) != null)
+                //{
+                //    Spell DataSpell = new Spell();
+                //    DataSpell.Info = DataTableManager.Instance.GetSpellData(DATA.ActionButtonsData[i]);
+                //    CastingButtons[i].SetUseable(DataSpell);
+                //}
+                //else
+                //    DATA.ActionButtonsData[i] = null;
             }
         }
         for (int i = 0; i < 4; i++)

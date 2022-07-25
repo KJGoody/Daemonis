@@ -34,7 +34,7 @@ public class StoreSlot : Slot_Base
         if(item != null)
         {
             Item = item;
-            icon.sprite = Item.MyIcon;
+            icon.sprite = Item.Icon;
             ItemName.text = Item.MyName;
             ItemCost.text = Item.MyCost.ToString();
             ItemCost.gameObject.SetActive(true);

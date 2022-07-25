@@ -83,7 +83,7 @@ public class PlayerInfoPanel : MonoBehaviour
     {
         if (Player.MyInstance.usingEquipment[partNum] != null)
         {
-            equipment_Img[partNum].sprite = Player.MyInstance.usingEquipment[partNum].MyIcon;
+            equipment_Img[partNum].sprite = Player.MyInstance.usingEquipment[partNum].Icon;
             equipment_Img[partNum].color= new Color(1,1,1,1);
         }
         else
@@ -113,7 +113,7 @@ public class PlayerInfoPanel : MonoBehaviour
             itemNum = partNum;
             ueItem = Player.MyInstance.usingEquipment[partNum];
 
-            UE_Image.sprite = ueItem.MyIcon;
+            UE_Image.sprite = ueItem.Icon;
             UE_Name.text = ueItem.MyName;
             UE_Quality.text = ueItem.MyQualityText;
             UE_LimitLvl.text = "제한 레벨 : " + ueItem.MyLimitLevel;

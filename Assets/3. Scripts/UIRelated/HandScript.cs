@@ -92,7 +92,7 @@ public class HandScript : MonoBehaviour
         this.MyMoveable = moveable;
         Debug.Log("Take");
         // 클릭한 스킬 아이콘 정보를 Icon 에 담는다.
-        icon.sprite = moveable.MyIcon;
+        icon.sprite = moveable.Icon;
         icon.color = Color.white;
     }
 
@@ -100,22 +100,22 @@ public class HandScript : MonoBehaviour
     {
         spell = SpellBook.MyInstance.GetSpell(spellName); // 이름으로 스킬 찾기
 
-        switch (spell.spellType) 
+        switch (spell.Type) 
         {
             case SpellInfo.SpellType.Passive: // 스킬이 패시브일시 버튼 비활성화
                 SpellEquipButton.SetActive(false);
-                selectName.text = spell.MyName + " (패시브)";
+                selectName.text = spell.Name + " (패시브)";
                 break;
 
             default:
                 SpellEquipButton.SetActive(true);
-                selectName.text = spell.MyName;
+                selectName.text = spell.Name;
                 break;
         }
 
         // 스킬 선택창에 표시
-        selectDescription.text = spell.MyDescription;
-        selectImage.sprite = spell.MyIcon;
+        selectDescription.text = spell.Description;
+        selectImage.sprite = spell.Icon;
         Color color = new Color(1, 1, 1, 1);
         selectImage.color = color;
     }
@@ -154,7 +154,7 @@ public class HandScript : MonoBehaviour
     {
         // 선택한 아이템 정보 표시
         myItem = item;
-        SI_Image.sprite = myItem.MyIcon;
+        SI_Image.sprite = myItem.Icon;
         SI_Name.text = myItem.MyName;
         SI_Quality.text = myItem.MyQualityText;
         SI_LimitLvl.text = "제한 레벨 : "+myItem.MyLimitLevel;

@@ -30,7 +30,7 @@ public class ActionButton : Slot_Base
     protected virtual void UpdateVisual(IUseable useable)
     {
         // ActionButton의 이미지를 변경한다.
-        MyIcon.sprite = (useable as IMoveable).MyIcon;
+        MyIcon.sprite = (useable as IMoveable).Icon;
         MyIcon.color = Color.white;
     }
 
