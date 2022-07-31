@@ -13,9 +13,14 @@ public class Item_Consumable : Item_Base
 
     public int StackSize { get { return itemInfo.StackSize; } }
 
+    public override int GetPriorty()
+    {
+        return (int)(Mathf.Pow(10, (int)GetKind) + (int)quality);
+    }
+
     public override void Use()
     {
-        if(this.GetKind == ItemInfo_Base.Kinds.Potion)
+        if (this.GetKind == ItemInfo_Base.Kinds.Potion)
         {
             HealthPotion healthPotion = itemInfo as HealthPotion;
             healthPotion.Use();

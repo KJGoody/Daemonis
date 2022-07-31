@@ -22,23 +22,18 @@ public class InventoryScript : MonoBehaviour
     {
         // 이벤트에 등록된 델리게이트에 있다면
         if (itemCountChangedEvent != null)
-        {
             // 이벤트에 등록된 모든 델리게이트호출 
             itemCountChangedEvent.Invoke(item);
-        }
     }
 
     public void AddItem(Item_Base item, bool CanStack = false)
     {
         // 추가되려는 아이템이 중첩 가능 아이템인지 확인합니다.
         if (CanStack)
-        {
             // 가능하다면 PlaceInStack() 함수를 호출합니다.
             if (PlaceInStack(item as Item_Consumable))
-            {
                 return;
-            }
-        }
+
         // 중첩이 불가능한 아이템은 빈슬롯에 추가합니다.
         PlaceInEmpty(item);
     }
@@ -96,6 +91,33 @@ public class InventoryScript : MonoBehaviour
         return false;
     }
 
+    private void Start()
+    {
+        SortItem();
+    }
+
+    private void SortItem()
+    {
+        int SlotNum = 28 - GetEmptySlotNum();
+        SlotScript[] tempSlot = new SlotScript[SlotNum];
+        int j = 0;
+        for(int i  = 0; i < 28; i++)
+            if (!GameManager.MyInstance.Slots[i].IsEmpty)
+                tempSlot[j++] = GameManager.MyInstance.Slots[i];
+
+        int[] IndexArray = new int[SlotNum];
+        int[] PriortyArray = new int[SlotNum];
+
+        for(int i = 0; i < SlotNum; i++)
+        {
+            IndexArray[i] = tempSlot[i].MyItem.GetPriorty();
+            PriortyArray[i] = tempSlot[i].MyItem.GetPriorty();
+        }
+
+        Debug.Log(IndexArray);
+        Debug.Log(PriortyArray);
+    }
+
     public Stack<IUseable> GetUseables(IUseable type)
     {
         Stack<IUseable> useables = new Stack<IUseable>();
@@ -119,6 +141,7 @@ public class InventoryScript : MonoBehaviour
         return useables;
     }
 
+    // 상점에서 구매 할때 빈 슬롯의 알기위한 함수
     public int GetEmptySlotNum()
     {
         int EmptyNum = 0;
@@ -131,6 +154,7 @@ public class InventoryScript : MonoBehaviour
         return EmptyNum;
     }
 
+    // 상점에서 소모 아이템 구매 할때 구매 가능한 개수를 구하는 함수
     public int CanStackNum(Item_Base Item)
     {
         int CountNum = 0;

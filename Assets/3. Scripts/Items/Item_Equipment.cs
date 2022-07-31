@@ -60,6 +60,11 @@ public class Item_Equipment : Item_Base
         }
     }
 
+    public override int GetPriorty()
+    {
+        return (int)(Mathf.Pow(10, (int)GetKind) * ((int)GetPart + 1) + (int)quality);
+    }
+
     public override void Use()
     {
         if (this.GetKind == ItemInfo_Base.Kinds.Equipment)

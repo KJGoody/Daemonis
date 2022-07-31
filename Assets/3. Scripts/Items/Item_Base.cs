@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Item_Base : IMoveable, IDescribable, IUseable
 {
-    public virtual ItemInfo_Base ItemInfo()
-    {
-        return null;
-    }
+    public virtual ItemInfo_Base ItemInfo() { return null; }
 
     public Sprite Icon { get { return ItemInfo().MyIcon; } } // 아이템 아이콘 이미지
     public Sprite GetIcon() { return ItemInfo().MyIcon; }
     public enum Quality { Normal, Advanced, Rare, Epic, Legendary, Relic }
-    public Quality quality; // 아이템의 등급
-    public string MyQualityText // 아이템 등급 표시
+    // 아이템의 등급
+    public Quality quality;
+    public string MyQualityText
     {
         get
         {
@@ -54,7 +52,8 @@ public class Item_Base : IMoveable, IDescribable, IUseable
     }
 
     public string GetName() { return MyName; }
-    public string MyName // 아이템 이름 표시
+    // 아이템의 이름 표시
+    public string MyName
     {
         get
         {
@@ -88,8 +87,8 @@ public class Item_Base : IMoveable, IDescribable, IUseable
     }
     public string GetJustName { get { return ItemInfo().itemName; } }
 
-
-    public ItemInfo_Base.Kinds GetKind { get { return ItemInfo().GetKind; } } // 아이템 종류
+    // 아이템의 종류
+    public ItemInfo_Base.Kinds GetKind { get { return ItemInfo().GetKind; } }
     public string MyDescript { get { return ItemInfo().descript; } } // 아이템 배경설명
     public virtual string GetDescription()
     {
@@ -123,6 +122,8 @@ public class Item_Base : IMoveable, IDescribable, IUseable
         get { return ItemInfo().slot; }
         set { ItemInfo().slot = value; }
     }
+
+    public virtual int GetPriorty() { return 0; }
 
     public virtual void Use() { }
     public virtual void Remove() { }

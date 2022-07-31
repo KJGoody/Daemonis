@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class ItemInfo_Base : ScriptableObject
 {
-    public enum Kinds { Common, Equipment, Potion }
+    public enum Kinds { Common, Potion, Equipment }
     [SerializeField]
     private Kinds kind;// 아이템 종류
     public Kinds GetKind
