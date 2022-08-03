@@ -27,7 +27,7 @@ public class SpellBook : MonoBehaviour
         for(int i = 0; i < spells.Length; i++)
         {
             Spell Data = new Spell();
-            Data.Info = DataTableManager.Instance.spellInfos[i];
+            Data.SetSpellInfo(DataTableManager.Instance.SpellInfos[i]);
             spells[i] = Data;
         }
     }

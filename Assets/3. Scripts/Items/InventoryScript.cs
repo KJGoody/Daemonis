@@ -58,7 +58,7 @@ public class InventoryScript : MonoBehaviour
     {
         foreach (SlotScript slots in GameManager.MyInstance.Slots)
         {
-            if (!slots.IsEmpty && slots.MyItem.MyName == item.MyName && slots.MyItem.quality == item.quality)
+            if (!slots.IsEmpty && slots.MyItem.Name == item.Name && slots.MyItem.quality == item.quality)
                 item.MySlot = slots;
         }
     }
@@ -67,7 +67,7 @@ public class InventoryScript : MonoBehaviour
     {
         foreach (SlotScript slots in GameManager.MyInstance.Slots)
         {
-            if (!slots.IsEmpty && slots.MyItem.MyName == item.MyName && slots.MyItem.quality == item.quality && slots.MyItem == item)
+            if (!slots.IsEmpty && slots.MyItem.Name == item.Name && slots.MyItem.quality == item.quality && slots.MyItem == item)
             {
                 item.MySlot = slots;
             }
@@ -114,8 +114,8 @@ public class InventoryScript : MonoBehaviour
             PriortyArray[i] = tempSlot[i].MyItem.GetPriorty();
         }
 
-        Debug.Log(IndexArray);
-        Debug.Log(PriortyArray);
+        //Debug.Log(IndexArray);
+        //Debug.Log(PriortyArray);
     }
 
     public Stack<IUseable> GetUseables(IUseable type)
@@ -126,7 +126,7 @@ public class InventoryScript : MonoBehaviour
         {
             // 빈슬롯이 아니고
             // 슬롯에 등록된 아이템이 type의 아이템과 같은 종류의 아이템이라면
-            if (!slot.IsEmpty && slot.MyItem.MyName == type.GetName())
+            if (!slot.IsEmpty && slot.MyItem.Name == type.GetName())
             {
 
                 // 해당 슬롯에 등록된 모든 아이템을
@@ -164,7 +164,7 @@ public class InventoryScript : MonoBehaviour
                 CountNum += (Item as Item_Consumable).StackSize;
             else
             {
-                if(slot.MyItem.MyName == Item.MyName)
+                if(slot.MyItem.Name == Item.Name)
                 {
                     if (slot.MyItems.Count < (slot.MyItem as Item_Consumable).StackSize)
                         CountNum += (Item as Item_Consumable).StackSize - slot.MyItems.Count;

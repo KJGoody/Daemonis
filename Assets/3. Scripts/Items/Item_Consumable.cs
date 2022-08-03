@@ -15,12 +15,12 @@ public class Item_Consumable : Item_Base
 
     public override int GetPriorty()
     {
-        return (int)(Mathf.Pow(10, (int)GetKind) + (int)quality);
+        return (int)(Mathf.Pow(10, (int)Kind) + (int)quality);
     }
 
     public override void Use()
     {
-        if (this.GetKind == ItemInfo_Base.Kinds.Potion)
+        if (Kind == ItemInfo_Base.Kinds.Potion)
         {
             HealthPotion healthPotion = itemInfo as HealthPotion;
             healthPotion.Use();

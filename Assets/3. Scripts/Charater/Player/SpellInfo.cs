@@ -4,8 +4,6 @@ using UnityEngine;
 public class SpellInfo
 {
     public string ID;
-    public string Name;
-    public GameObject Prefab;
     public enum SpellType
     {
         #region 스킬 타입
@@ -20,8 +18,10 @@ public class SpellInfo
         #endregion
     }
     public SpellType Type;
+    public GameObject Prefab;
     public Sprite Icon;
-    public string Description;     // 설명란
+    public string Name;
+    public string Description;
     public float CoolTime;
     public int ManaCost;
 }

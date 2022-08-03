@@ -53,7 +53,7 @@ public class BuySellWindow : MonoBehaviour
             CostMent.text = "구매 금액";
             ChangeMent.text = "구매 후 금액";
 
-            Cost = ItemView.Item.MyCost;
+            Cost = ItemView.Item.Cost;
             Bill = GameManager.MyInstance.DATA.Gold - (Cost * ItemCount);
             ClickButton = BuyItem;
         }
@@ -66,7 +66,7 @@ public class BuySellWindow : MonoBehaviour
             CostMent.text = "판매 금액";
             ChangeMent.text = "판매 후 금액";
 
-            Cost = ItemView.Item.MyCost / 2;
+            Cost = ItemView.Item.Cost / 2;
             ItemView.ItemCost.text = Cost.ToString();
             Bill = GameManager.MyInstance.DATA.Gold + (Cost * ItemCount);
             ClickButton = SellItem;
@@ -104,7 +104,7 @@ public class BuySellWindow : MonoBehaviour
             int MaxItemCount = 0;
             foreach (SlotScript slot in GameManager.MyInstance.Slots)
                 if (!slot.IsEmpty)
-                    if (slot.MyItem.MyName == ItemView.Item.MyName)
+                    if (slot.MyItem.Name == ItemView.Item.Name)
                         MaxItemCount += slot.MyCount;
 
             if (ItemCount <= 0)

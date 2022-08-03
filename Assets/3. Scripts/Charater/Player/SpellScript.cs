@@ -180,13 +180,7 @@ public class SpellScript : MonoBehaviour
     {
         Character character = collision.GetComponentInParent<Character>();
 
-        float WeaponxDamage;
-        if (Player.MyInstance.usingEquipment[3] != null)
-            WeaponxDamage = Player.MyInstance.usingEquipment[3].GetWeaponxDamage();
-        else
-            WeaponxDamage = 1;
-
-        float PureDamage = (WeaponxDamage * Player.MyInstance.MyStat.BaseAttack * SpellxDamage) * Player.MyInstance.BuffxDamage;
+        float PureDamage = (Player.MyInstance.MyStat.BaseAttack * SpellxDamage) * Player.MyInstance.BuffxDamage;
             
         if(ChanceMaker.GetThisChanceResult_Percentage(Player.MyInstance.MyStat.CriticalPercent))
             character.TakeDamage(Character.DamageType.Masic, Player.MyInstance.MyStat.HitPercent, PureDamage, Player.MyInstance.MyStat.Level, direction, NewTextPool.NewTextPrefabsName.Critical);

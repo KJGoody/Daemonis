@@ -15,7 +15,11 @@ public class DataTableManager : MonoBehaviour
         }
     }
 
-    public SpellInfo[] spellInfos;
+    private ItemInfo_Equipment[] equipmentInfos;
+    public ItemInfo_Equipment[] EquipmentInfos { get { return equipmentInfos; } }
+
+    private SpellInfo[] spellInfos;
+    public SpellInfo[] SpellInfos { get { return spellInfos; } }
 
     [SerializeField]
     private DataTable_Item_Equipment dataTable_Item_Equipment;
@@ -25,14 +29,12 @@ public class DataTableManager : MonoBehaviour
     private DataTable_Item_Consumable dataTable_Item_Consumable;
     public DataTable_Item_Consumable GetDataTable_Item_Consumable { get { return dataTable_Item_Consumable; } }
 
-    [SerializeField]
-    private DataTable_Sprite dataTable_Sprite;
 
     public ItemInfo_Equipment GetItemInfo_Equipment(string Name)
     {
         foreach (DataArray_Item_Equipment Data in dataTable_Item_Equipment.Data_Item_Equipments)
             foreach (ItemInfo_Equipment ItemInfo in Data.items)
-                if (Name == ItemInfo.itemName)
+                if (Name == ItemInfo.Name)
                     return ItemInfo;
 
         return null;
@@ -42,7 +44,7 @@ public class DataTableManager : MonoBehaviour
     {
         foreach (DataArray_Item_Consumable Data in dataTable_Item_Consumable.Data_Item_Consumables)
             foreach (ItemInfo_Consumable ItemInfo in Data.items)
-                if (Name == ItemInfo.itemName)
+                if (Name == ItemInfo.Name)
                     return ItemInfo;
 
         return null;
@@ -60,17 +62,24 @@ public class DataTableManager : MonoBehaviour
 
     private void Awake()
     {
-        List<Dictionary<string, object>> DataTable_Spell = CSVReader.Read("Test");
+        LoadDataTable_SpellInfo();
+    }
+
+    private void LoadDataTable_SpellInfo()
+    {
+        // 스팰 데이터 테이블을 불러오기
+        List<Dictionary<string, object>> DataTable_Spell = CSVReader.Read("DataTable_Spell");
+        // 데이터 테이블의 크기로 
         spellInfos = new SpellInfo[DataTable_Spell.Count];
-        for(int i = 0; i < DataTable_Spell.Count; i++)
+
+        for (int i = 0; i < DataTable_Spell.Count; i++)
         {
+            // SpellInfo를 생성하여 데이터를 입력한다.
             SpellInfo info = new SpellInfo();
             info.ID = DataTable_Spell[i]["ID"].ToString();
-            info.Name = DataTable_Spell[i]["Name"].ToString();
-            info.Prefab = Resources.Load<GameObject>("Prefabs/" + DataTable_Spell[i]["Prefab"].ToString());
-
             switch (DataTable_Spell[i]["Type"].ToString())
             {
+                #region 스팰 타입
                 case "Launch":
                     info.Type = SpellInfo.SpellType.Launch;
                     break;
@@ -95,9 +104,11 @@ public class DataTableManager : MonoBehaviour
                 case "None":
                     info.Type = SpellInfo.SpellType.None;
                     break;
+                    #endregion
             }
-
+            info.Prefab = Resources.Load<GameObject>("Prefabs/" + DataTable_Spell[i]["Prefab"].ToString());
             info.Icon = Resources.Load<Sprite>("Sprites/" + DataTable_Spell[i]["Icon"].ToString());
+            info.Name = DataTable_Spell[i]["Name"].ToString();
             info.Description = DataTable_Spell[i]["Description"].ToString();
             info.CoolTime = float.Parse(DataTable_Spell[i]["CoolTime"].ToString());
             info.ManaCost = int.Parse(DataTable_Spell[i]["ManaCost"].ToString());

@@ -22,7 +22,7 @@ public class LootNotice : MonoBehaviour
     public void SetDescript(Item_Base _Item) // 정보 설정
     {
         image.sprite = _Item.Icon;
-        text.text = _Item.MyName;
+        text.text = _Item.Name;
     }
 
     public void SetGoldInfo(int _gold, Sprite _sprite) // 골드 정보 설정

@@ -26,20 +26,18 @@ public class Item_Equipment : Item_Base
         }
     }
 
-    public ItemInfo_Equipment.Part GetPart { get { return (ItemInfo() as ItemInfo_Equipment).GetPart; } }
-
-    public Sprite[] ItemSprite { get { return (ItemInfo() as ItemInfo_Equipment).GetItemSprite; } }
-
-    public float GetWeaponxDamage()
-    {
-        ItemInfo_Equipment equipmentItem = itemInfo;
-        return (ItemInfo() as ItemInfo_Equipment).GetWeaponxDamage();
-    }
+    public ItemInfo_Equipment.Part GetPart { get { return (ItemInfo() as ItemInfo_Equipment).part; } }
+    public Sprite[] ItemSprite { get { return (ItemInfo() as ItemInfo_Equipment).ItemSprite; } }
 
     public void ActiveEquipment(bool isActive) // 장비 착용 & 해제
     {
-        (ItemInfo() as ItemInfo_Equipment).ActiveEquipmentStat(isActive); // 장비 베이스 스탯 증감
-        if (addOptionList.Count > 0) // 추가 옵션 증감
+        // 장비 베이스 스탯 증감
+        if (isActive)
+            Player.MyInstance.PlusStat((ItemInfo() as ItemInfo_Equipment).BaseOption, (ItemInfo() as ItemInfo_Equipment).BaseOptionValue);
+        else
+            Player.MyInstance.PlusStat((ItemInfo() as ItemInfo_Equipment).BaseOption, -(ItemInfo() as ItemInfo_Equipment).BaseOptionValue);
+        // 추가 옵션 증감
+        if (addOptionList.Count > 0)
         {
             for (int i = 0; i < addOptionList.Count; i++)
             {
@@ -62,12 +60,12 @@ public class Item_Equipment : Item_Base
 
     public override int GetPriorty()
     {
-        return (int)(Mathf.Pow(10, (int)GetKind) * ((int)GetPart + 1) + (int)quality);
+        return (int)(Mathf.Pow(10, (int)Kind) * ((int)GetPart + 1) + (int)quality);
     }
 
     public override void Use()
     {
-        if (this.GetKind == ItemInfo_Base.Kinds.Equipment)
+        if (Kind == ItemInfo_Base.Kinds.Equipment)
         {
             Player.MyInstance.EquipItem(this);
             Remove();

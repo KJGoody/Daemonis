@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
             if (Player.MyInstance.usingEquipment[i] != null)
             {
                 Item_Equipment equipment = Player.MyInstance.usingEquipment[i];
-                DATA.EquipmentData[i] = equipment.GetJustName;
+                DATA.EquipmentData[i] = equipment.GetName();
                 DATA.EquipmentQuality[i] = (int)equipment.quality;
 
                 if ((int)equipment.quality > 0)
@@ -171,12 +171,12 @@ public class GameManager : MonoBehaviour
             {
                 Item_Base SlotItem = Slots[i].MyItem;
                 // 아이템의 순수 문자열을 저장
-                DATA.InventoryData[i] = SlotItem.GetJustName;
+                DATA.InventoryData[i] = SlotItem.GetName();
                 // 아이템의 퀄리티를 저장
                 DATA.InventoryItemQuality[i] = (int)SlotItem.quality;
 
                 // 아이템의 종류에 따라 다르게 저장
-                switch (Slots[i].MyItem.GetKind)
+                switch (Slots[i].MyItem.Kind)
                 {
                     case ItemInfo_Base.Kinds.Equipment:
                         // 장비는 스텍이 필요 없으므로 로드할때에 아이템의 종류을 알수 있도록 -1로 설정한다.
@@ -232,7 +232,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             if (QuickSlotButtons[i].GetUseableItem != null)
-                DATA.ActionButtonsData[i + 5] = (QuickSlotButtons[i].GetUseableItem.Peek() as Item_Base).GetJustName;
+                DATA.ActionButtonsData[i + 5] = (QuickSlotButtons[i].GetUseableItem.Peek() as Item_Base).GetName();
             else
                 DATA.ActionButtonsData[i + 5] = null;
         }

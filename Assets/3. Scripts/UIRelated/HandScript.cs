@@ -155,12 +155,12 @@ public class HandScript : MonoBehaviour
         // 선택한 아이템 정보 표시
         myItem = item;
         SI_Image.sprite = myItem.Icon;
-        SI_Name.text = myItem.MyName;
+        SI_Name.text = myItem.Name;
         SI_Quality.text = myItem.MyQualityText;
-        SI_LimitLvl.text = "제한 레벨 : "+myItem.MyLimitLevel;
-        SI_DefaultStat.text = "사용 효과 : "+myItem.MyEffect;
-        SI_Descript.text = myItem.MyDescript;
-        switch (myItem.GetKind)
+        SI_LimitLvl.text = "제한 레벨 : "+myItem.LimitLevel;
+        SI_DefaultStat.text = "사용 효과 : "+myItem.Effect;
+        SI_Descript.text = myItem.Descript;
+        switch (myItem.Kind)
         {
             case ItemInfo_Base.Kinds.Potion: // 선택한 아이템이 포션일 때 추옵,세트옵 감추기
                 SI_Obj_Option.SetActive(false);
@@ -207,9 +207,9 @@ public class HandScript : MonoBehaviour
 
     public void EquipButton() // 장착버튼용 (포션이랑 장비 나누기 위함)
     {
-        if (myItem.GetKind == ItemInfo_Base.Kinds.Potion)
+        if (myItem.Kind == ItemInfo_Base.Kinds.Potion)
             EquipPotion();
-        else if (myItem.GetKind == ItemInfo_Base.Kinds.Equipment)
+        else if (myItem.Kind == ItemInfo_Base.Kinds.Equipment)
             UseEquipment();
     }
 
@@ -270,7 +270,7 @@ public class HandScript : MonoBehaviour
         icon.color = new Color(0, 0, 0, 0);
         if (myItem != null)
         {
-            if (myItem.GetKind == ItemInfo_Base.Kinds.Potion)
+            if (myItem.Kind == ItemInfo_Base.Kinds.Potion)
                 HandScript.MyInstance.ResetEquipPotion(); // 이거만 포션 전용 코드
         }
         // 복사한 스킬의 아이콘 정보를 전달한다.

@@ -74,7 +74,7 @@ public class SlotScript : Slot_Base, IStackable
         // 빈슬롯이 아니고
         // 해당 슬롯에 있는 아이템 이름과
         // 추가되려는 아이템의 이름이 동일하다면
-        if (!IsEmpty && item.MyName == MyItem.MyName)
+        if (!IsEmpty && item.Name == MyItem.Name)
         {
             // 아이템의 중첩개수가
             // 아이템의 MyStackSize 보다 작다면

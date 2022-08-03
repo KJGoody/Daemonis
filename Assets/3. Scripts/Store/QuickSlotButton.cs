@@ -128,7 +128,7 @@ public class QuickSlotButton : ActionButton, IStackable
         if (item is IUseable && Item.Count > 0)
         {
             // useables 에 등록된 아이템과 item 이 같은 타입이라면
-            if (Item.Peek().GetName() == item.MyName)
+            if (Item.Peek().GetName() == item.GetName())
             {
 
                 // 인벤토리에서 해당 아이템과 같은 모든 아이템을 찾아서

@@ -114,12 +114,12 @@ public class PlayerInfoPanel : MonoBehaviour
             ueItem = Player.MyInstance.usingEquipment[partNum];
 
             UE_Image.sprite = ueItem.Icon;
-            UE_Name.text = ueItem.MyName;
+            UE_Name.text = ueItem.Name;
             UE_Quality.text = ueItem.MyQualityText;
-            UE_LimitLvl.text = "제한 레벨 : " + ueItem.MyLimitLevel;
-            UE_DefaultStat.text = "사용 효과 : " + ueItem.MyEffect;
-            UE_Descript.text = ueItem.MyDescript;
-            switch (ueItem.GetKind)
+            UE_LimitLvl.text = "제한 레벨 : " + ueItem.LimitLevel;
+            UE_DefaultStat.text = "사용 효과 : " + ueItem.Effect;
+            UE_Descript.text = ueItem.Descript;
+            switch (ueItem.Kind)
             {
                 case ItemInfo_Base.Kinds.Potion:
                     UE_Obj_Option.SetActive(false);

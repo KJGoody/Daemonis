@@ -37,7 +37,7 @@ public class ItemCart : MonoBehaviour
         item_Consumable.quality = quality;
 
         item = item_Consumable;
-        ItemName.text = item_Consumable.MyName;
+        ItemName.text = item_Consumable.Name;
         ItemSprite.sprite = item_Consumable.Icon;
     }
 
@@ -50,7 +50,7 @@ public class ItemCart : MonoBehaviour
         item_Equipment.SetAddOption();
 
         item = item_Equipment;
-        ItemName.text = item_Equipment.MyName;
+        ItemName.text = item_Equipment.Name;
         ItemSprite.sprite = item_Equipment.Icon;
     }
 
@@ -99,7 +99,7 @@ public class ItemCart : MonoBehaviour
 
                     case IsKind.Item:
                         // 인벤토리에 아이템 추가
-                        switch (item.GetKind)
+                        switch (item.Kind)
                         {
                             case ItemInfo_Base.Kinds.Potion:
                                 InventoryScript.MyInstance.AddItem(item, true);

@@ -16,7 +16,7 @@ public class StoreSlot : Slot_Base
     {
         if (Item != null)
         {
-            if (Item.MyCost > GameManager.MyInstance.DATA.Gold)
+            if (Item.Cost > GameManager.MyInstance.DATA.Gold)
             {
                 CnaBuy = false;
                 ItemCost.color = Color.red;
@@ -35,8 +35,8 @@ public class StoreSlot : Slot_Base
         {
             Item = item;
             icon.sprite = Item.Icon;
-            ItemName.text = Item.MyName;
-            ItemCost.text = Item.MyCost.ToString();
+            ItemName.text = Item.Name;
+            ItemCost.text = Item.Cost.ToString();
             ItemCost.gameObject.SetActive(true);
         }
         else
