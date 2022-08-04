@@ -13,11 +13,6 @@ public class Item_Consumable : Item_Base
 
     public int StackSize { get { return itemInfo.StackSize; } }
 
-    public override int GetPriorty()
-    {
-        return (int)(Mathf.Pow(10, (int)Kind) + (int)quality);
-    }
-
     public override void Use()
     {
         if (Kind == ItemInfo_Base.Kinds.Potion)
@@ -35,5 +30,10 @@ public class Item_Consumable : Item_Base
             InventoryScript.MyInstance.FindUseSlot(this);
             MySlot.RemoveItem();
         }
+    }
+
+    public override int GetPriorty()
+    {
+        return (int)(Mathf.Pow(10, (int)Kind) + (int)quality);
     }
 }

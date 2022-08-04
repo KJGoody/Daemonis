@@ -28085,7 +28085,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af24c4360ee9d5b468fd170e40849d9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellInfos: []
   dataTable_Item_Equipment: {fileID: 11400000, guid: 8ca55b839e6593b48a84e9e39a6d200f,
     type: 2}
   dataTable_Item_Consumable: {fileID: 11400000, guid: e9322e22a7c3c74488cbd4cb74e13eef,

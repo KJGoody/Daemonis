@@ -115,7 +115,7 @@ public class PlayerInfoPanel : MonoBehaviour
 
             UE_Image.sprite = ueItem.Icon;
             UE_Name.text = ueItem.Name;
-            UE_Quality.text = ueItem.MyQualityText;
+            UE_Quality.text = ueItem.QualityText;
             UE_LimitLvl.text = "제한 레벨 : " + ueItem.LimitLevel;
             UE_DefaultStat.text = "사용 효과 : " + ueItem.Effect;
             UE_Descript.text = ueItem.Descript;

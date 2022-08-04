@@ -156,7 +156,7 @@ public class HandScript : MonoBehaviour
         myItem = item;
         SI_Image.sprite = myItem.Icon;
         SI_Name.text = myItem.Name;
-        SI_Quality.text = myItem.MyQualityText;
+        SI_Quality.text = myItem.QualityText;
         SI_LimitLvl.text = "제한 레벨 : "+myItem.LimitLevel;
         SI_DefaultStat.text = "사용 효과 : "+myItem.Effect;
         SI_Descript.text = myItem.Descript;
