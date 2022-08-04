@@ -15,30 +15,26 @@ public class DataTableManager : MonoBehaviour
         }
     }
 
-    private ItemInfo_Equipment[] equipmentInfos;
-    public ItemInfo_Equipment[] EquipmentInfos { get { return equipmentInfos; } }
-
     private SpellInfo[] spellInfos;
     public SpellInfo[] SpellInfos { get { return spellInfos; } }
 
-    [SerializeField]
-    private DataTable_Item_Equipment dataTable_Item_Equipment;
-    public DataTable_Item_Equipment GetDataTable_Item_Equipment { get { return dataTable_Item_Equipment; } }
+    private ItemInfo_Equipment[] equipmentInfos;
+    public ItemInfo_Equipment[] EquipmentInfos { get { return equipmentInfos; } }
 
     [SerializeField]
     private DataTable_Item_Consumable dataTable_Item_Consumable;
     public DataTable_Item_Consumable GetDataTable_Item_Consumable { get { return dataTable_Item_Consumable; } }
 
 
-    public ItemInfo_Equipment GetItemInfo_Equipment(string Name)
-    {
-        foreach (DataArray_Item_Equipment Data in dataTable_Item_Equipment.Data_Item_Equipments)
-            foreach (ItemInfo_Equipment ItemInfo in Data.items)
-                if (Name == ItemInfo.Name)
-                    return ItemInfo;
+    //public ItemInfo_Equipment GetItemInfo_Equipment(string Name)
+    //{
+    //    foreach (DataArray_Item_Equipment Data in dataTable_Item_Equipment.Data_Item_Equipments)
+    //        foreach (ItemInfo_Equipment ItemInfo in Data.items)
+    //            if (Name == ItemInfo.Name)
+    //                return ItemInfo;
 
-        return null;
-    }
+    //    return null;
+    //}
 
     public ItemInfo_Consumable GetItemInfo_Consumable(string Name)
     {
@@ -115,5 +111,10 @@ public class DataTableManager : MonoBehaviour
 
             spellInfos[i] = info;
         }
+    }
+
+    private void LoadDataTable_EquipmentInfo()
+    {
+        List<Dictionary<string, object>> DataTable_Spell = CSVReader.Read("DataTable_Spell");
     }
 }
