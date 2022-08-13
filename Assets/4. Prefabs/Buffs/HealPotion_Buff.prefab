@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuffFillImage: {fileID: 5692452803647626730}
   buffType: 0
-  BuffName: HealPotion_Buff
+  BuffName: B_Potion_Health
   Duration: 10
   StackText: {fileID: 0}
   BuffStack: 1

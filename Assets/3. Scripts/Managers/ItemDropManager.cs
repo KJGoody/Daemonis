@@ -16,29 +16,16 @@ public class ItemDropManager : MonoBehaviour
     }
     
     public ItemCart dropItem; // 드랍아이템 프리팹
-    private DataArray_Item_Equipment[] equipmentPerLv; // 기본 장비 아이템 리스트 열에 해당되는 이름
-    private DataArray_Item_Consumable[] HealthPotionLv;
 
     private float equipmentDropProb = 10; // 장비 드랍 기본확률
-    public float EquipmentDropProb // 장비 드랍확률
+    private float EquipmentDropProb // 장비 드랍확률
     {
         get { return equipmentDropProb + equipmentDropProb * Player.MyInstance.MyStat.ItemDropPercent; }
     }
     private int baseGold = 100; // 골드 기본 획득량
 
-    List<Dictionary<string, object>> qualityProb; // 장비 등급 확률표
-
-    private void Start()
-    {
-        equipmentPerLv = DataTableManager.Instance.GetDataTable_Item_Equipment.Data_Item_Equipments;
-        HealthPotionLv = DataTableManager.Instance.GetDataTable_Item_Consumable.Data_Item_Consumables;
-
-        qualityProb = CSVReader.Read("EquipmentQualityProb"); // 장비 등급 확률표 읽어옴
-        //StartCoroutine(InitItem());
-    }
-
     public void DropGold(Transform dropPosition, int m_Level)
-    {   // Enemy에서 골드를 드랍하게 하는 함수
+    {   
         if (ChanceMaker.GetThisChanceResult_Percentage(60))
         {
             ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
@@ -49,7 +36,7 @@ public class ItemDropManager : MonoBehaviour
     }
 
     public void DropItem(Transform dropPosition, int m_Level)
-    {   // Enemy에서 사용 아이템을 드랍하게 하는 함수
+    {   
         if (ChanceMaker.GetThisChanceResult_Percentage(EquipmentDropProb)) // 장비 드랍확률 통해서 장비 드랍
             DropEquipment(dropPosition, m_Level);
 
@@ -61,29 +48,12 @@ public class ItemDropManager : MonoBehaviour
     {
         // 아이템 프리팹 생성
         ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
-        // 장비 종류 설정
-        int setKind = Random.Range(0, 6);
-        // 등급 설정
-        float[] myQualityProb = new float[6];
-        int a = 0;
-        foreach (var value in qualityProb[SetLvNum(m_Level)].Values) // 레벨마다 다른 확률을 엑셀로 가져와서 배열에 할당
-            myQualityProb[a++] = (float)System.Convert.ToDouble(value);
-        Item_Base.Quality newQuality = (Item_Base.Quality)(int)ChanceMaker.Choose(myQualityProb); // 할당된 확률 배열로 가중치 랜덤뽑기로 등급 설정
-
-        item.SetItem_Equipment(equipmentPerLv[SetLvNum(m_Level)].items[setKind], newQuality); // 설정한 정보 아이템에 넣어주기
+        item.SetItem_Equipment(DataTableManager.Instance.GetItemInfo_Equipment(m_Level), DataTableManager.Instance.GetQuality(m_Level)); // 설정한 정보 아이템에 넣어주기
     }
 
-    public void DropPotion(Transform dropPosition, int m_Level) // 임시
+    public void DropPotion(Transform dropPosition, int m_Level)
     {
         ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
-        item.SetItem_Consumable(HealthPotionLv[SetLvNum(m_Level)].items[0], Item_Base.Quality.Normal); 
-    }
-
-    public int SetLvNum(int monsterLv) // 몬스터 레벨로 설정 레벨 잡아주기
-    {
-        if (monsterLv > 50)
-            monsterLv = 50;
-        int levelNum = monsterLv / 10;
-        return levelNum;
+        item.SetItem_Consumable(DataTableManager.Instance.GetItemInfo_Consumable(m_Level), Item_Base.Quality.Normal); 
     }
 }

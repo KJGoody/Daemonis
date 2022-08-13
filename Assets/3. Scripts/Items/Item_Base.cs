@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item_Base : IMoveable, IUseable
 {
     public virtual ItemInfo_Base ItemInfo() { return null; }
+    public string ID { get { return ItemInfo().ID; } }
     public ItemInfo_Base.Kinds Kind { get { return ItemInfo().Kind; } }
     public Sprite Icon { get { return ItemInfo().Icon; } }
     public string Name

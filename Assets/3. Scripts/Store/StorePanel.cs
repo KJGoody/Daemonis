@@ -34,12 +34,7 @@ public class StorePanel : MonoBehaviour
     private enum CurrentTapName { Stuff, Equipment, Sell }
     private CurrentTapName CurrentTap;
 
-    private DataArray_Item_Equipment[] equipmentPerLv; // 기본 장비 아이템 리스트 열에 해당되는 이름
-    private List<Dictionary<string, object>> qualityProb; // 장비 등급 확률표
-    private DataArray_Item_Consumable[] HealthPotionLv;
-
-    [HideInInspector]
-    public bool CanReStock = true;
+    [HideInInspector] public bool CanReStock = true;
 
     public void OpenStore()
     {
@@ -68,10 +63,6 @@ public class StorePanel : MonoBehaviour
 
     private void Start()
     {
-        equipmentPerLv = DataTableManager.Instance.GetDataTable_Item_Equipment.Data_Item_Equipments;
-        qualityProb = CSVReader.Read("EquipmentQualityProb"); // 장비 등급 확률표 읽어옴
-        HealthPotionLv = DataTableManager.Instance.GetDataTable_Item_Consumable.Data_Item_Consumables;
-
         ReStock();
         _SelectTap(StuffTap);
     }
@@ -91,34 +82,43 @@ public class StorePanel : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             StoreSlots_Stuff[i] = new Item_Consumable();
-            (StoreSlots_Stuff[i] as Item_Consumable).itemInfo = HealthPotionLv[0].items[0];
+            ItemInfo_Consumable tempInfo;
+            do
+            {
+                tempInfo = DataTableManager.Instance.GetItemInfo_Consumable(Player.MyInstance.MyStat.Level);
+            } while (IsAlrealyStock(tempInfo));
+
+            string[] kind = tempInfo.ID.Split('_');
+            switch (kind[1])
+            {
+                case "Potion":
+                    (StoreSlots_Stuff[i] as Item_Potion).itemInfo = tempInfo as ItemInfo_Potion;
+                    break;
+            }
             StoreSlots_Stuff[i].quality = Item_Base.Quality.Normal;
         }
+    }
+
+    private bool IsAlrealyStock(ItemInfo_Consumable ItemInfo)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (StoreSlots_Stuff[i] != null)
+                if (StoreSlots_Stuff[i].ID == ItemInfo.ID)
+                    return true;
+        }
+
+        return false;
     }
 
     private void SetStockItem_Equipment()
     {
         for (int i = 0; i < 4; i++)
         {
-            int setKind = Random.Range(0, 6);
-            float[] myQualityProb = new float[6];
-            int a = 0;
-            foreach (var value in qualityProb[SetLvNum()].Values) // 레벨마다 다른 확률을 엑셀로 가져와서 배열에 할당
-                myQualityProb[a++] = (float)System.Convert.ToDouble(value);
-            int newQuality = (int)ChanceMaker.Choose(myQualityProb); // 할당된 확률 배열로 가중치 랜덤뽑기로 등급 설정
-
             StoreSlots_Equipment[i] = new Item_Equipment();
-            StoreSlots_Equipment[i].itemInfo = equipmentPerLv[SetLvNum()].items[setKind];
-            StoreSlots_Equipment[i].quality = (Item_Base.Quality)newQuality;
+            StoreSlots_Equipment[i].itemInfo = DataTableManager.Instance.GetItemInfo_Equipment(Player.MyInstance.MyStat.Level);
+            StoreSlots_Equipment[i].quality = DataTableManager.Instance.GetQuality(Player.MyInstance.MyStat.Level);
         }
-    }
-
-    private int SetLvNum()
-    {
-        if (Player.MyInstance.MyStat.Level > 50)
-            Player.MyInstance.MyStat.Level = 50;
-        int levelNum = Player.MyInstance.MyStat.Level / 10;
-        return levelNum;
     }
 
     public void _SelectTap(Transform MyTransform)

@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class Spell : IUseable, IMoveable
 {
-    private SpellInfo Info;
+    public SpellInfo Info;
     public void SetSpellInfo(SpellInfo spellInfo) { Info = spellInfo; }
     public SpellInfo.SpellType Type { get { return Info.Type; } }
     public GameObject Prefab { get { return Info.Prefab; } }

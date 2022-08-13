@@ -9,13 +9,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-
-    // 페이드인 효과
-    Color color;
-    [SerializeField]
-    Image fadeIn_IMG;
-    [SerializeField]
-    GameObject fadeIn_OBJ;
     public static GameManager MyInstance
     {
         get
@@ -26,29 +19,53 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public SaveLoadData DATA;
-    private SaveLoadData SavedData;
-    public SaveLoadData GetSavedData { get { return SavedData; } }
+    // 페이드인 효과
+    Color color;
+    [SerializeField] Image fadeIn_IMG;
+    [SerializeField] GameObject fadeIn_OBJ;
 
-    [HideInInspector]
-    public string CurrnetStageName;
+    // 저장
+    public SaveLoadData DATA;
+
+    [HideInInspector] public string CurrnetStageName;
 
     public CastingButton[] CastingButtons;
     public QuickSlotButton[] QuickSlotButtons;
     public SlotScript[] Slots;
 
-    [SerializeField]
-    private Player player;
-    [SerializeField]
-    private GameObject quitPanel;
-
-    [SerializeField]
-    private GameObject[] dontDestroyObj;
+    [SerializeField] private Player player;
     private INpc currentTarget;
+    [SerializeField] private GameObject quitPanel;
+
+    [SerializeField] private GameObject[] dontDestroyObj;
 
     private void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) // 씬이 로딩될때 실행
+    {
+        StartCoroutine(FadeIn());
+    }
+
+    public IEnumerator FadeIn() // 검정색 페이드인
+    {
+        fadeIn_OBJ.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+
+        while (color.a > 0)
+        {
+            color.a -= Time.deltaTime;
+            fadeIn_IMG.color = color;
+            yield return null;
+        }
+
+        if (fadeIn_IMG.color.a <= 0)
+            fadeIn_OBJ.SetActive(false);
+
+        color.a = 1;
+        fadeIn_IMG.color = color;
     }
 
     private void Start()
@@ -66,6 +83,11 @@ public class GameManager : MonoBehaviour
                 quitPanel.SetActive(false);
         }
         ClickTarget();
+    }
+
+    public void GameQuit() //게임 종료
+    {
+        Application.Quit();
     }
 
     private void ClickTarget() // 타겟 선택
@@ -91,36 +113,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode) // 씬이 로딩될때 실행
-    {
-        StartCoroutine(FadeIn());
-    }
-
-    public IEnumerator FadeIn() // 검정색 페이드인
-    {
-        fadeIn_OBJ.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-
-        while (color.a > 0)
-        {
-            color.a -= Time.deltaTime;
-            fadeIn_IMG.color = color;
-            yield return null;
-        }
-
-        if (fadeIn_IMG.color.a <= 0)
-            fadeIn_OBJ.SetActive(false);
-
-        color.a = 1;
-        fadeIn_IMG.color = color;
-
-    }
-    public void GameQuit() //게임 종료
-    {
-        Application.Quit();
-    }
-
-
     public void SaveData()
     {
         // Equipment 저장 부분
@@ -129,8 +121,8 @@ public class GameManager : MonoBehaviour
             if (Player.MyInstance.usingEquipment[i] != null)
             {
                 Item_Equipment equipment = Player.MyInstance.usingEquipment[i];
-                DATA.EquipmentData[i] = equipment.GetName();
-                DATA.EquipmentQuality[i] = (int)equipment.quality;
+                DATA.E_Data[i] = equipment.ID;
+                DATA.E_Quality[i] = (int)equipment.quality;
 
                 if ((int)equipment.quality > 0)
                 {
@@ -140,7 +132,7 @@ public class GameManager : MonoBehaviour
                     float[] AddOptionValue = DATA.GetArray("E_AddOptionValue_" + i) as float[];
 
                     // 나오는 것은 List에서는 반대로 저장이 되어 있으므로 반대로 저장해줌
-                    for (int j = DATA.EquipmentQuality[i]; j >= 0; j--)
+                    for (int j = DATA.E_Quality[i]; j >= 0; j--)
                     {
                         AddOptionQuality[j] = equipment.addOptionList[j].Quality;
                         AddOptionNum[j] = equipment.addOptionList[j].Num;
@@ -150,15 +142,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                DATA.EquipmentData[i] = null;
-                DATA.EquipmentQuality[i] = 0;
-
-                int[] AddOptionQuality = DATA.GetArray("E_AddOptionQuality_" + i) as int[];
-                AddOptionQuality = new int[6];
-                int[] AddOptionNum = DATA.GetArray("E_AddOptionNum_" + i) as int[];
-                AddOptionNum = new int[6];
-                float[] AddOptionValue = DATA.GetArray("E_AddOptionValue_" + i) as float[];
-                AddOptionValue = new float[6];
+                DATA.E_Data[i] = null;
+                DATA.E_Quality[i] = 0;
             }
         }
 
@@ -170,17 +155,17 @@ public class GameManager : MonoBehaviour
             if (Slots[i].MyItem != null)
             {
                 Item_Base SlotItem = Slots[i].MyItem;
-                // 아이템의 순수 문자열을 저장
-                DATA.InventoryData[i] = SlotItem.GetName();
+                // 아이템의 ID를 저장
+                DATA.I_Data[i] = SlotItem.ID;
                 // 아이템의 퀄리티를 저장
-                DATA.InventoryItemQuality[i] = (int)SlotItem.quality;
+                DATA.I_ItemQuality[i] = (int)SlotItem.quality;
 
                 // 아이템의 종류에 따라 다르게 저장
                 switch (Slots[i].MyItem.Kind)
                 {
                     case ItemInfo_Base.Kinds.Equipment:
                         // 장비는 스텍이 필요 없으므로 로드할때에 아이템의 종류을 알수 있도록 -1로 설정한다.
-                        DATA.InventoryStackData[i] = -1;
+                        DATA.I_StackData[i] = -1;
                         // 퀄리티가 일반이면 추가 옵션이 없으므로 조건문을 넣어줌
                         if ((int)Slots[i].MyItem.quality > 0)
                         {
@@ -190,7 +175,7 @@ public class GameManager : MonoBehaviour
                             float[] AddOptionValue = DATA.GetArray("I_AddOptionValue_" + i) as float[];
 
                             // 나오는 것은 List에서는 반대로 저장이 되어 있으므로 반대로 저장해줌
-                            for (int j = DATA.InventoryItemQuality[i]; j >= 0; j--)
+                            for (int j = DATA.I_ItemQuality[i]; j >= 0; j--)
                             {
                                 Debug.Log(j);
                                 AddOptionQuality[j] = (SlotItem as Item_Equipment).addOptionList[j].Quality;
@@ -201,38 +186,35 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case ItemInfo_Base.Kinds.Potion:
-                        DATA.InventoryStackData[i] = Slots[i].MyItems.Count;
+                        // ItemInfo_Consumable
+                        DATA.I_StackData[i] = Slots[i].MyItems.Count;
+                        // ItemInfo_Potion
                         break;
                 }
             }
             else
             {
                 // 만약 아이템이 없다면 없는 부분을 초기화해주는 부분
-                DATA.InventoryData[i] = null;
-                DATA.InventoryItemQuality[i] = 0;
-                DATA.InventoryStackData[i] = 0;
-
-                int[] AddOptionQuality = DATA.GetArray("I_AddOptionQuality_" + i) as int[];
-                AddOptionQuality = new int[6];
-                int[] AddOptionNum = DATA.GetArray("I_AddOptionNum_" + i) as int[];
-                AddOptionNum = new int[6];
-                float[] AddOptionValue = DATA.GetArray("I_AddOptionValue_" + i) as float[];
-                AddOptionValue = new float[6];
+                DATA.I_Data[i] = null;
+                DATA.I_ItemQuality[i] = 0;
+                DATA.I_StackData[i] = 0;
             }
         }
 
-        // ActionButton 저장 부분
+        // 캐스팅 버튼 저장 부분
         for (int i = 0; i < 5; i++)
         {
             if (CastingButtons[i].Spell != null)
-                DATA.ActionButtonsData[i] = CastingButtons[i].Spell.GetName();
+                DATA.ActionButtonsData[i] = (CastingButtons[i].Spell as SpellInfo).ID;
             else
                 DATA.ActionButtonsData[i] = null;
         }
+
+        // 퀵슬롯 저장 부분
         for (int i = 0; i < 4; i++)
         {
             if (QuickSlotButtons[i].GetUseableItem != null)
-                DATA.ActionButtonsData[i + 5] = (QuickSlotButtons[i].GetUseableItem.Peek() as Item_Base).GetName();
+                DATA.ActionButtonsData[i + 5] = (QuickSlotButtons[i].GetUseableItem.Peek() as Item_Base).ID;
             else
                 DATA.ActionButtonsData[i + 5] = null;
         }
@@ -244,23 +226,20 @@ public class GameManager : MonoBehaviour
     public void LoadData()
     {
         if (SaveLoadManager.FileExists("Data"))
-            SavedData = SaveLoadManager.DataLoad<SaveLoadData>("Data");
+            DATA = SaveLoadManager.DataLoad<SaveLoadData>("Data");
         else
-            SavedData = new SaveLoadData();
-
-        // 저장되어있는 사항을 로드한다.
-        DATA = SavedData;
+            DATA = new SaveLoadData();
 
         // Equipment 로드 부분
         for (int i = 0; i < 6; i++)
         {
-            if (DATA.EquipmentData[i] != null)
+            if (DATA.E_Data[i] != null)
             {
-                if (DataTableManager.Instance.GetItemInfo_Equipment(DATA.EquipmentData[i]) != null)
+                if (DataTableManager.Instance.GetItemInfo_Equipment(DATA.E_Data[i]) != null)
                 {
                     Item_Equipment DataItem = new Item_Equipment();
-                    DataItem.itemInfo = DataTableManager.Instance.GetItemInfo_Equipment(DATA.EquipmentData[i]);
-                    DataItem.quality = (Item_Base.Quality)DATA.EquipmentQuality[i];
+                    DataItem.itemInfo = DataTableManager.Instance.GetItemInfo_Equipment(DATA.E_Data[i]);
+                    DataItem.quality = (Item_Base.Quality)DATA.E_Quality[i];
                     for (int j = 0; j < (int)DataItem.quality + 1; j++)
                     {
                         int[] AddOptionQuality = DATA.GetArray("E_AddOptionQuality_" + i) as int[];
@@ -272,97 +251,79 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    DATA.EquipmentData[i] = null;
-                    DATA.EquipmentQuality[i] = 0;
-
-                    int[] AddOptionQuality = DATA.GetArray("I_AddOptionQuality_" + i) as int[];
-                    AddOptionQuality = new int[6];
-                    int[] AddOptionNum = DATA.GetArray("I_AddOptionNum_" + i) as int[];
-                    AddOptionNum = new int[6];
-                    float[] AddOptionValue = DATA.GetArray("I_AddOptionValue_" + i) as float[];
-                    AddOptionValue = new float[6];
+                    DATA.E_Data[i] = null;
+                    DATA.E_Quality[i] = 0;
                 }
             }
             else
             {
-                DATA.EquipmentData[i] = null;
-                DATA.EquipmentQuality[i] = 0;
-
-                int[] AddOptionQuality = DATA.GetArray("I_AddOptionQuality_" + i) as int[];
-                AddOptionQuality = new int[6];
-                int[] AddOptionNum = DATA.GetArray("I_AddOptionNum_" + i) as int[];
-                AddOptionNum = new int[6];
-                float[] AddOptionValue = DATA.GetArray("I_AddOptionValue_" + i) as float[];
-                AddOptionValue = new float[6];
+                DATA.E_Data[i] = null;
+                DATA.E_Quality[i] = 0;
             }
         }
 
         // inventory 저장 부분
         for (int i = 0; i < 28; i++)
         {
-            if (DATA.InventoryData[i] != null)
+            if (DATA.I_Data[i] != null)
             {
-                if (DATA.InventoryStackData[i] < 0)
+                switch (DATA.I_StackData[i])
                 {
-                    if (DataTableManager.Instance.GetItemInfo_Equipment(DATA.InventoryData[i]) != null)
-                    {
-                        Item_Equipment DataItem = new Item_Equipment();
-                        DataItem.itemInfo = DataTableManager.Instance.GetItemInfo_Equipment(DATA.InventoryData[i]);
-                        DataItem.quality = (Item_Base.Quality)DATA.InventoryItemQuality[i];
-                        for (int j = 0; j < (int)DataItem.quality + 1; j++)
+                    // 장비
+                    case -1:
+                        if (DataTableManager.Instance.GetItemInfo_Equipment(DATA.I_Data[i]) != null)
                         {
-                            int[] AddOptionQuality = DATA.GetArray("I_AddOptionQuality_" + i) as int[];
-                            int[] AddOptionNum = DATA.GetArray("I_AddOptionNum_" + i) as int[];
-                            float[] AddOptionValue = DATA.GetArray("I_AddOptionValue_" + i) as float[];
-                            DataItem.addOptionList.Add(new ItemAddOption(AddOptionQuality[j], AddOptionNum[j], AddOptionValue[j]));
-                        }
+                            Item_Equipment DataItem = new Item_Equipment();
+                            DataItem.itemInfo = DataTableManager.Instance.GetItemInfo_Equipment(DATA.I_Data[i]);
+                            DataItem.quality = (Item_Base.Quality)DATA.I_ItemQuality[i];
+                            for (int j = 0; j < (int)DataItem.quality + 1; j++)
+                            {
+                                int[] AddOptionQuality = DATA.GetArray("I_AddOptionQuality_" + i) as int[];
+                                int[] AddOptionNum = DATA.GetArray("I_AddOptionNum_" + i) as int[];
+                                float[] AddOptionValue = DATA.GetArray("I_AddOptionValue_" + i) as float[];
+                                DataItem.addOptionList.Add(new ItemAddOption(AddOptionQuality[j], AddOptionNum[j], AddOptionValue[j]));
+                            }
 
-                        Slots[i].AddItem(DataItem);
-                        InventoryScript.MyInstance.OnItemCountChanged(DataItem);
-                    }
-                    else
-                    {
-                        DATA.InventoryData[i] = null;
-                        DATA.InventoryItemQuality[i] = 0;
-                        DATA.InventoryStackData[i] = 0;
-
-                        int[] AddOptionQuality = DATA.GetArray("I_AddOptionQuality_" + i) as int[];
-                        AddOptionQuality = new int[6];
-                        int[] AddOptionNum = DATA.GetArray("I_AddOptionNum_" + i) as int[];
-                        AddOptionNum = new int[6];
-                        float[] AddOptionValue = DATA.GetArray("I_AddOptionValue_" + i) as float[];
-                        AddOptionValue = new float[6];
-                    }
-                }
-                else if (DATA.InventoryStackData[i] > 0)
-                {
-                    if (DataTableManager.Instance.GetItemInfo_Consumable(DATA.InventoryData[i]) != null)
-                    {
-                        Item_Consumable DataItem = new Item_Consumable();
-                        DataItem.itemInfo = DataTableManager.Instance.GetItemInfo_Consumable(DATA.InventoryData[i]);
-                        for (int j = 0; j < DATA.InventoryStackData[i]; j++)
-                        {
                             Slots[i].AddItem(DataItem);
                             InventoryScript.MyInstance.OnItemCountChanged(DataItem);
                         }
-                    }
-                    else
-                    {
-                        DATA.InventoryData[i] = null;
-                        DATA.InventoryStackData[i] = 0;
-                    }
-                }
-                else
-                {
-                    DATA.InventoryData[i] = null;
-                    DATA.InventoryStackData[i] = 0;
+                        else
+                        {
+                            DATA.I_Data[i] = null;
+                            DATA.I_ItemQuality[i] = 0;
+                            DATA.I_StackData[i] = 0;
+                        }
+                        break;
 
-                    int[] AddOptionQuality = DATA.GetArray("I_AddOptionQuality_" + i) as int[];
-                    AddOptionQuality = new int[6];
-                    int[] AddOptionNum = DATA.GetArray("I_AddOptionNum_" + i) as int[];
-                    AddOptionNum = new int[6];
-                    float[] AddOptionValue = DATA.GetArray("I_AddOptionValue_" + i) as float[];
-                    AddOptionValue = new float[6];
+                    // 스택형 아이템
+                    default:
+                        if (DataTableManager.Instance.GetItemInfo_Consumable(DATA.I_Data[i]) != null)
+                        {
+                            string[] kind = DATA.I_Data[i].Split('_');
+                            switch (kind[1])
+                            {
+                                case "Potion":
+                                    Item_Potion DataItem = new Item_Potion();
+                                    DataItem.itemInfo = DataTableManager.Instance.GetItemInfo_Consumable(DATA.I_Data[i]) as ItemInfo_Potion;
+                                    for (int j = 0; j < DATA.I_StackData[i]; j++)
+                                    {
+                                        Slots[i].AddItem(DataItem);
+                                        InventoryScript.MyInstance.OnItemCountChanged(DataItem);
+                                    }
+                                    break;
+
+                                default:
+                                    DATA.I_Data[i] = null;
+                                    DATA.I_StackData[i] = 0;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            DATA.I_Data[i] = null;
+                            DATA.I_StackData[i] = 0;
+                        }
+                        break;
                 }
             }
         }
@@ -372,14 +333,14 @@ public class GameManager : MonoBehaviour
         {
             if (DATA.ActionButtonsData[i] != null)
             {
-                //if (DataTableManager.Instance.GetSpellData(DATA.ActionButtonsData[i]) != null)
-                //{
-                //    Spell DataSpell = new Spell();
-                //    DataSpell.Info = DataTableManager.Instance.GetSpellData(DATA.ActionButtonsData[i]);
-                //    CastingButtons[i].SetUseable(DataSpell);
-                //}
-                //else
-                //    DATA.ActionButtonsData[i] = null;
+                if (DataTableManager.Instance.GetSpellData(DATA.ActionButtonsData[i]) != null)
+                {
+                    Spell DataSpell = new Spell();
+                    DataSpell.Info = DataTableManager.Instance.GetSpellData(DATA.ActionButtonsData[i]);
+                    CastingButtons[i].SetUseable(DataSpell);
+                }
+                else
+                    DATA.ActionButtonsData[i] = null;
             }
         }
         for (int i = 0; i < 4; i++)
@@ -388,8 +349,8 @@ public class GameManager : MonoBehaviour
             {
                 if (DataTableManager.Instance.GetItemInfo_Consumable(DATA.ActionButtonsData[i + 5]) != null)
                 {
-                    Item_Consumable Dataitem = new Item_Consumable();
-                    Dataitem.itemInfo = DataTableManager.Instance.GetItemInfo_Consumable(DATA.ActionButtonsData[i + 5]);
+                    Item_Potion Dataitem = new Item_Potion();
+                    Dataitem.itemInfo = DataTableManager.Instance.GetItemInfo_Consumable(DATA.ActionButtonsData[i + 5]) as ItemInfo_Potion;
                     QuickSlotButtons[i].SetUseable(Dataitem);
                 }
                 else
@@ -402,8 +363,9 @@ public class GameManager : MonoBehaviour
 [System.Serializable]
 public class SaveLoadData
 {
-    public string[] EquipmentData;
-    public int[] EquipmentQuality;
+    // E == Equipment
+    public string[] E_Data;
+    public int[] E_Quality;
     #region E_AddOptionQuality
     public int[] E_AddOptionQuality_0;
     public int[] E_AddOptionQuality_1;
@@ -433,9 +395,10 @@ public class SaveLoadData
 
     public string[] ActionButtonsData;
 
-    public string[] InventoryData;
-    public int[] InventoryItemQuality;
-    public int[] InventoryStackData;
+    // I == Inventory
+    public string[] I_Data;
+    public int[] I_ItemQuality;
+    public int[] I_StackData;
     // 아이템 AddOption 저장 부분
     #region I_AddOptionQuality
     public int[] I_AddOptionQuality_0;
@@ -530,8 +493,8 @@ public class SaveLoadData
 
     public SaveLoadData()
     {
-        EquipmentData = new string[6];
-        EquipmentQuality = new int[6];
+        E_Data = new string[6];
+        E_Quality = new int[6];
         #region E_AddOptionQuality
         E_AddOptionQuality_0 = new int[6];
         E_AddOptionQuality_1 = new int[6];
@@ -561,9 +524,9 @@ public class SaveLoadData
 
         ActionButtonsData = new string[9];
 
-        InventoryData = new string[28];
-        InventoryItemQuality = new int[28];
-        InventoryStackData = new int[28];
+        I_Data = new string[28];
+        I_ItemQuality = new int[28];
+        I_StackData = new int[28];
         #region I_AddOptionQuality
         I_AddOptionQuality_0 = new int[6];
         I_AddOptionQuality_1 = new int[6];

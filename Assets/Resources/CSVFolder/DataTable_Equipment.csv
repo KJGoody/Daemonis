@@ -1,37 +1,37 @@
-ID,Kind,Icon,Name,Descript,Effect,LimitLevel,Cost,Part,ItemSprite,BaseOption,BaseOptionValue
-Equipment_1_Back,Equipment,S_1_Equipment_Back, 망토, 망토이다.,마법 방어력 5,1,100,Back,S_1_Equipment_Back,BaseMagicRegist,5
-Equipment_1_Cloth,Equipment,S_1_Equipment_Cloth, 옷, 옷이다.,최대체력 50,1,100,Cloth,S_1_Equipment_Cloth,BaseMaxHealth,50
-Equipment_1_Helmet,Equipment,S_1_Equipment_Helmet, 모자, 모자이다.,최대체력 25,1,100,Helmet,S_1_Equipment_Helmet,BaseMaxHealth,25
-Equipment_1_Shoes,Equipment,S_1_Equipment_Shoes, 신발, 신발이다.,최대마나 25,1,100,Shoes,S_1_Equipment_Shoes,BaseMaxMana,25
-Equipment_1_Shoulder,Equipment,S_1_Equipment_Shoulder, 어깨장식, 어깨장식이다.,방어력 5,1,100,Shoulder,S_1_Equipment_Shoulder,BaseDefence,5
-Equipment_1_Staff,Equipment,S_1_Equipment_Staff, 지팡이, 지팡이다.,공격력 10,1,100,Staff,S_1_Equipment_Staff,BaseAttack,10
-Equipment_10_Back,Equipment,S_10_Equipment_Back, 망토, 망토이다.,마법 방어력 5,10,1000,Back,S_10_Equipment_Back,BaseMagicRegist,5
-Equipment_10_Cloth,Equipment,S_10_Equipment_Cloth, 옷, 옷이다.,최대체력 50,10,1000,Cloth,S_10_Equipment_Cloth,BaseMaxHealth,50
-Equipment_10_Helmet,Equipment,S_10_Equipment_Helmet, 모자, 모자이다.,최대체력 25,10,1000,Helmet,S_10_Equipment_Helmet,BaseMaxHealth,25
-Equipment_10_Shoes,Equipment,S_10_Equipment_Shoes, 신발, 신발이다.,최대마나 25,10,1000,Shoes,S_10_Equipment_Shoes,BaseMaxMana,25
-Equipment_10_Shoulder,Equipment,S_10_Equipment_Shoulder, 어깨장식, 어깨장식이다.,방어력 5,10,1000,Shoulder,S_10_Equipment_Shoulder,BaseDefence,5
-Equipment_10_Staff,Equipment,S_10_Equipment_Staff, 지팡이, 지팡이다.,공격력 10,10,1000,Staff,S_10_Equipment_Staff,BaseAttack,10
-Equipment_20_Back,Equipment,S_20_Equipment_Back, 망토, 망토이다.,마법 방어력 5,20,2000,Back,S_20_Equipment_Back,BaseMagicRegist,5
-Equipment_20_Cloth,Equipment,S_20_Equipment_Cloth, 옷, 옷이다.,최대체력 50,20,2000,Cloth,S_20_Equipment_Cloth,BaseMaxHealth,50
-Equipment_20_Helmet,Equipment,S_20_Equipment_Helmet, 모자, 모자이다.,최대체력 25,20,2000,Helmet,S_20_Equipment_Helmet,BaseMaxHealth,25
-Equipment_20_Shoes,Equipment,S_20_Equipment_Shoes, 신발, 신발이다.,최대마나 25,20,2000,Shoes,S_20_Equipment_Shoes,BaseMaxMana,25
-Equipment_20_Shoulder,Equipment,S_20_Equipment_Shoulder, 어깨장식, 어깨장식이다.,방어력 5,20,2000,Shoulder,S_20_Equipment_Shoulder,BaseDefence,5
-Equipment_20_Staff,Equipment,S_20_Equipment_Staff, 지팡이, 지팡이다.,공격력 10,30,3000,Staff,S_20_Equipment_Staff,BaseAttack,10
-Equipment_30_Back,Equipment,S_30_Equipment_Back, 망토, 망토이다.,마법 방어력 5,30,3000,Back,S_30_Equipment_Back,BaseMagicRegist,5
-Equipment_30_Cloth,Equipment,S_30_Equipment_Cloth, 옷, 옷이다.,최대체력 50,30,3000,Cloth,S_30_Equipment_Cloth,BaseMaxHealth,50
-Equipment_30_Helmet,Equipment,S_30_Equipment_Helmet, 모자, 모자이다.,최대체력 25,30,3000,Helmet,S_30_Equipment_Helmet,BaseMaxHealth,25
-Equipment_30_Shoes,Equipment,S_30_Equipment_Shoes, 신발, 신발이다.,최대마나 25,30,3000,Shoes,S_30_Equipment_Shoes,BaseMaxMana,25
-Equipment_30_Shoulder,Equipment,S_30_Equipment_Shoulder, 어깨장식, 어깨장식이다.,방어력 5,30,3000,Shoulder,S_30_Equipment_Shoulder,BaseDefence,5
-Equipment_30_Staff,Equipment,S_30_Equipment_Staff, 지팡이, 지팡이다.,공격력 10,30,3000,Staff,S_30_Equipment_Staff,BaseAttack,10
-Equipment_40_Back,Equipment,S_40_Equipment_Back, 망토, 망토이다.,마법 방어력 5,40,4000,Back,S_40_Equipment_Back,BaseMagicRegist,5
-Equipment_40_Cloth,Equipment,S_40_Equipment_Cloth, 옷, 옷이다.,최대체력 50,40,4000,Cloth,S_40_Equipment_Cloth,BaseMaxHealth,50
-Equipment_40_Helmet,Equipment,S_40_Equipment_Helmet, 모자, 모자이다.,최대체력 25,40,4000,Helmet,S_40_Equipment_Helmet,BaseMaxHealth,25
-Equipment_40_Shoes,Equipment,S_40_Equipment_Shoes, 신발, 신발이다.,최대마나 25,40,4000,Shoes,S_40_Equipment_Shoes,BaseMaxMana,25
-Equipment_40_Shoulder,Equipment,S_40_Equipment_Shoulder, 어깨장식, 어깨장식이다.,방어력 5,40,4000,Shoulder,S_40_Equipment_Shoulder,BaseDefence,5
-Equipment_40_Staff,Equipment,S_40_Equipment_Staff, 지팡이, 지팡이다.,공격력 10,40,4000,Staff,S_40_Equipment_Staff,BaseAttack,10
-Equipment_50_Back,Equipment,S_50_Equipment_Back, 망토, 망토이다.,마법 방어력 5,50,5000,Back,S_50_Equipment_Back,BaseMagicRegist,5
-Equipment_50_Cloth,Equipment,S_50_Equipment_Cloth, 옷, 옷이다.,최대체력 50,50,5000,Cloth,S_50_Equipment_Cloth,BaseMaxHealth,50
-Equipment_50_Helmet,Equipment,S_50_Equipment_Helmet, 모자, 모자이다.,최대체력 25,50,5000,Helmet,S_50_Equipment_Helmet,BaseMaxHealth,25
-Equipment_50_Shoes,Equipment,S_50_Equipment_Shoes, 신발, 신발이다.,최대마나 25,50,5000,Shoes,S_50_Equipment_Shoes,BaseMaxMana,25
-Equipment_50_Shoulder,Equipment,S_50_Equipment_Shoulder, 어깨장식, 어깨장식이다.,방어력 5,50,5000,Shoulder,S_50_Equipment_Shoulder,BaseDefence,5
-Equipment_50_Staff,Equipment,S_50_Equipment_Staff, 지팡이, 지팡이다.,공격력 10,50,5000,Staff,S_50_Equipment_Staff,BaseAttack,10
+ID,Icon,Name,Descript,Effect,LimitLevel,Cost,Part,ItemSprite,BaseOption,BaseOptionValue
+Equipment_1_Back,S_1_Equipment_Back, 망토, 망토이다.,마법 방어력 5,1,100,Back,S_1_Equipment_Back,BaseMagicRegist,5
+Equipment_1_Cloth,S_1_Equipment_Cloth, 옷, 옷이다.,최대체력 50,1,100,Cloth,S_1_Equipment_Cloth,BaseMaxHealth,50
+Equipment_1_Helmet,S_1_Equipment_Helmet, 모자, 모자이다.,최대체력 25,1,100,Helmet,S_1_Equipment_Helmet,BaseMaxHealth,25
+Equipment_1_Shoes,S_1_Equipment_Shoes, 신발, 신발이다.,최대마나 25,1,100,Shoes,S_1_Equipment_Shoes,BaseMaxMana,25
+Equipment_1_Shoulder,S_1_Equipment_Shoulder, 어깨장식, 어깨장식이다.,방어력 5,1,100,Shoulder,S_1_Equipment_Shoulder,BaseDefence,5
+Equipment_1_Staff,S_1_Equipment_Staff, 지팡이, 지팡이다.,공격력 10,1,100,Staff,S_1_Equipment_Staff,BaseAttack,10
+Equipment_10_Back,S_10_Equipment_Back, 망토, 망토이다.,마법 방어력 5,10,1000,Back,S_10_Equipment_Back,BaseMagicRegist,5
+Equipment_10_Cloth,S_10_Equipment_Cloth, 옷, 옷이다.,최대체력 50,10,1000,Cloth,S_10_Equipment_Cloth,BaseMaxHealth,50
+Equipment_10_Helmet,S_10_Equipment_Helmet, 모자, 모자이다.,최대체력 25,10,1000,Helmet,S_10_Equipment_Helmet,BaseMaxHealth,25
+Equipment_10_Shoes,S_10_Equipment_Shoes, 신발, 신발이다.,최대마나 25,10,1000,Shoes,S_10_Equipment_Shoes,BaseMaxMana,25
+Equipment_10_Shoulder,S_10_Equipment_Shoulder, 어깨장식, 어깨장식이다.,방어력 5,10,1000,Shoulder,S_10_Equipment_Shoulder,BaseDefence,5
+Equipment_10_Staff,S_10_Equipment_Staff, 지팡이, 지팡이다.,공격력 10,10,1000,Staff,S_10_Equipment_Staff,BaseAttack,10
+Equipment_20_Back,S_20_Equipment_Back, 망토, 망토이다.,마법 방어력 5,20,2000,Back,S_20_Equipment_Back,BaseMagicRegist,5
+Equipment_20_Cloth,S_20_Equipment_Cloth, 옷, 옷이다.,최대체력 50,20,2000,Cloth,S_20_Equipment_Cloth,BaseMaxHealth,50
+Equipment_20_Helmet,S_20_Equipment_Helmet, 모자, 모자이다.,최대체력 25,20,2000,Helmet,S_20_Equipment_Helmet,BaseMaxHealth,25
+Equipment_20_Shoes,S_20_Equipment_Shoes, 신발, 신발이다.,최대마나 25,20,2000,Shoes,S_20_Equipment_Shoes,BaseMaxMana,25
+Equipment_20_Shoulder,S_20_Equipment_Shoulder, 어깨장식, 어깨장식이다.,방어력 5,20,2000,Shoulder,S_20_Equipment_Shoulder,BaseDefence,5
+Equipment_20_Staff,S_20_Equipment_Staff, 지팡이, 지팡이다.,공격력 10,30,3000,Staff,S_20_Equipment_Staff,BaseAttack,10
+Equipment_30_Back,S_30_Equipment_Back, 망토, 망토이다.,마법 방어력 5,30,3000,Back,S_30_Equipment_Back,BaseMagicRegist,5
+Equipment_30_Cloth,S_30_Equipment_Cloth, 옷, 옷이다.,최대체력 50,30,3000,Cloth,S_30_Equipment_Cloth,BaseMaxHealth,50
+Equipment_30_Helmet,S_30_Equipment_Helmet, 모자, 모자이다.,최대체력 25,30,3000,Helmet,S_30_Equipment_Helmet,BaseMaxHealth,25
+Equipment_30_Shoes,S_30_Equipment_Shoes, 신발, 신발이다.,최대마나 25,30,3000,Shoes,S_30_Equipment_Shoes,BaseMaxMana,25
+Equipment_30_Shoulder,S_30_Equipment_Shoulder, 어깨장식, 어깨장식이다.,방어력 5,30,3000,Shoulder,S_30_Equipment_Shoulder,BaseDefence,5
+Equipment_30_Staff,S_30_Equipment_Staff, 지팡이, 지팡이다.,공격력 10,30,3000,Staff,S_30_Equipment_Staff,BaseAttack,10
+Equipment_40_Back,S_40_Equipment_Back, 망토, 망토이다.,마법 방어력 5,40,4000,Back,S_40_Equipment_Back,BaseMagicRegist,5
+Equipment_40_Cloth,S_40_Equipment_Cloth, 옷, 옷이다.,최대체력 50,40,4000,Cloth,S_40_Equipment_Cloth,BaseMaxHealth,50
+Equipment_40_Helmet,S_40_Equipment_Helmet, 모자, 모자이다.,최대체력 25,40,4000,Helmet,S_40_Equipment_Helmet,BaseMaxHealth,25
+Equipment_40_Shoes,S_40_Equipment_Shoes, 신발, 신발이다.,최대마나 25,40,4000,Shoes,S_40_Equipment_Shoes,BaseMaxMana,25
+Equipment_40_Shoulder,S_40_Equipment_Shoulder, 어깨장식, 어깨장식이다.,방어력 5,40,4000,Shoulder,S_40_Equipment_Shoulder,BaseDefence,5
+Equipment_40_Staff,S_40_Equipment_Staff, 지팡이, 지팡이다.,공격력 10,40,4000,Staff,S_40_Equipment_Staff,BaseAttack,10
+Equipment_50_Back,S_50_Equipment_Back, 망토, 망토이다.,마법 방어력 5,50,5000,Back,S_50_Equipment_Back,BaseMagicRegist,5
+Equipment_50_Cloth,S_50_Equipment_Cloth, 옷, 옷이다.,최대체력 50,50,5000,Cloth,S_50_Equipment_Cloth,BaseMaxHealth,50
+Equipment_50_Helmet,S_50_Equipment_Helmet, 모자, 모자이다.,최대체력 25,50,5000,Helmet,S_50_Equipment_Helmet,BaseMaxHealth,25
+Equipment_50_Shoes,S_50_Equipment_Shoes, 신발, 신발이다.,최대마나 25,50,5000,Shoes,S_50_Equipment_Shoes,BaseMaxMana,25
+Equipment_50_Shoulder,S_50_Equipment_Shoulder, 어깨장식, 어깨장식이다.,방어력 5,50,5000,Shoulder,S_50_Equipment_Shoulder,BaseDefence,5
+Equipment_50_Staff,S_50_Equipment_Staff, 지팡이, 지팡이다.,공격력 10,50,5000,Staff,S_50_Equipment_Staff,BaseAttack,10

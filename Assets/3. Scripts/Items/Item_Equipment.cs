@@ -11,9 +11,13 @@ public class Item_Equipment : Item_Base
         return itemInfo;
     }
     public ItemInfo_Equipment.Part GetPart { get { return (ItemInfo() as ItemInfo_Equipment).part; } }
-    public Sprite[] ItemSprite { get { return (ItemInfo() as ItemInfo_Equipment).ItemSprite; } }
+    public Sprite GetItemSprite(int index)
+    {
+        Object[] sprites = Resources.LoadAll("Sprites/" + (ItemInfo() as ItemInfo_Equipment).ItemSprite);
+        return sprites[index] as Sprite;
+    }
 
-        public override void Use()
+    public override void Use()
     {
         if (Kind == ItemInfo_Base.Kinds.Equipment)
         {

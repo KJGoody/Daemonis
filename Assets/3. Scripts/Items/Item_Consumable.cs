@@ -4,24 +4,7 @@ using UnityEngine;
 
 public class Item_Consumable : Item_Base
 {
-    public ItemInfo_Consumable itemInfo;
-    public override ItemInfo_Base ItemInfo()
-    {
-        ItemInfo_Consumable itemInfo = this.itemInfo;
-        return itemInfo;
-    }
-
-    public int StackSize { get { return itemInfo.StackSize; } }
-
-    public override void Use()
-    {
-        if (Kind == ItemInfo_Base.Kinds.Potion)
-        {
-            HealthPotion healthPotion = itemInfo as HealthPotion;
-            healthPotion.Use();
-            Remove();
-        }
-    }
+    public int StackSize { get { return (ItemInfo() as ItemInfo_Consumable).StackSize; } }
 
     public override void Remove()
     {

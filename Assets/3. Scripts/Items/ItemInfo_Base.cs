@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class ItemInfo_Base : ScriptableObject
+public abstract class ItemInfo_Base
 {
     public string ID;
     public enum Kinds { Common, Potion, Equipment }

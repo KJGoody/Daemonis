@@ -9,12 +9,9 @@ public class ItemCart : MonoBehaviour
     private Item_Equipment item_Equipment;
     private Item_Consumable item_Consumable;
 
-    [SerializeField]
-    private Text ItemName;
-    [SerializeField]
-    private SpriteRenderer ItemSprite;
-    [SerializeField]
-    private Sprite GoldImage;
+    [SerializeField] private Text ItemName;
+    [SerializeField] private SpriteRenderer ItemSprite;
+    [SerializeField] private Sprite GoldImage;
 
     public enum IsKind { Gold, Item }
     public IsKind isKind;
@@ -24,17 +21,23 @@ public class ItemCart : MonoBehaviour
     private Vector2 StartPos;
     private Transform PlayerTransform;
 
-    [HideInInspector]
-    public bool IsLooting = false;
+    [HideInInspector] public bool IsLooting = false;
     private bool IsUp = false;
     private float UpTime = 0;
 
     public void SetItem_Consumable(ItemInfo_Consumable ItemInfo, Item_Base.Quality quality)
     {
         isKind = IsKind.Item;
-        item_Consumable = new Item_Consumable();
-        item_Consumable.itemInfo = ItemInfo;
-        item_Consumable.quality = quality;
+
+        string[] kind = ItemInfo.ID.Split('_');
+        switch (kind[1])
+        {
+            case "Potion":
+                item_Consumable = new Item_Potion();
+                (item_Consumable as Item_Potion).itemInfo = ItemInfo as ItemInfo_Potion;
+                item_Consumable.quality = quality;
+                break;
+        }
 
         item = item_Consumable;
         ItemName.text = item_Consumable.Name;
@@ -85,7 +88,7 @@ public class ItemCart : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             // ∞ÒµÂ Or º≥¡§«— æ∆¿Ã≈€ µÓ±ﬁ æ∆¿Ã≈€∏∏ »πµÊ
-            if (isKind == IsKind.Gold || OptionPanel.MyInstance.lootingQuality[(int)item.quality]) 
+            if (isKind == IsKind.Gold || OptionPanel.MyInstance.lootingQuality[(int)item.quality])
             {
                 GameObject notice = Instantiate(Resources.Load("LootNotice") as GameObject, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
                 notice.transform.SetParent(GameObject.Find("ItemLooting").transform);
