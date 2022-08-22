@@ -19,7 +19,7 @@ public class HandScript : MonoBehaviour
     }
 
     private Spell spell;
-    [Header ("Select Skill")]
+    [Header("Select Skill")]
     #region 스킬 선택관련 변수
     [SerializeField]
     private Text selectName;
@@ -37,7 +37,7 @@ public class HandScript : MonoBehaviour
     public GameObject usingEquipment_Panel;
     public PlayerInfoPanel playerInfoPanel;
     private Item_Base myItem;    // 아이템 정보
-    [Header ("Select Item Tooltip")]
+    [Header("Select Item Tooltip")]
     #region 아이템 선택관련 변수 SI = Select Item
     [SerializeField]
     private Image SI_Image; // 선택한 아이템 화면에 보이는 이미지
@@ -100,7 +100,7 @@ public class HandScript : MonoBehaviour
     {
         spell = SpellBook.MyInstance.GetSpell(spellName); // 이름으로 스킬 찾기
 
-        switch (spell.Type) 
+        switch (spell.Type)
         {
             case SpellInfo.SpellType.Passive: // 스킬이 패시브일시 버튼 비활성화
                 SpellEquipButton.SetActive(false);
@@ -157,8 +157,8 @@ public class HandScript : MonoBehaviour
         SI_Image.sprite = myItem.Icon;
         SI_Name.text = myItem.Name;
         SI_Quality.text = myItem.QualityText;
-        SI_LimitLvl.text = "제한 레벨 : "+myItem.LimitLevel;
-        SI_DefaultStat.text = "사용 효과 : "+myItem.Effect;
+        SI_LimitLvl.text = "제한 레벨 : " + myItem.LimitLevel;
+        SI_DefaultStat.text = "사용 효과 : " + myItem.Effect;
         SI_Descript.text = myItem.Descript;
         switch (myItem.Kind)
         {
@@ -171,27 +171,27 @@ public class HandScript : MonoBehaviour
             case ItemInfo_Base.Kinds.Equipment: // 선택한 아이템이 장비일 때 추옵, 세트옵 표시
                 SI_Obj_Option.SetActive(true);
 
-                for(int i = 0; i < (myItem as Item_Equipment).addOptionList.Count; i++) // 추옵 표시
+                for (int i = 0; i < (myItem as Item_Equipment).addOptionList.Count; i++) // 추옵 표시
                 {
                     ItemAddOptionInfo optionInfo = SI_Obj_AddOptions[i].GetComponent<ItemAddOptionInfo>();
                     optionInfo.SetAddOptionPrefab((myItem as Item_Equipment).addOptionList[i]);
                     SI_Obj_AddOptions[i].SetActive(true);
                 }
-                for(int i = 6; i > (myItem as Item_Equipment).addOptionList.Count; i--)
+                for (int i = 6; i > (myItem as Item_Equipment).addOptionList.Count; i--)
                 {
-                    SI_Obj_AddOptions[i-1].SetActive(false);
+                    SI_Obj_AddOptions[i - 1].SetActive(false);
                 }
                 SI_Obj_SetOption.SetActive(false); // 나중에 세트장비 조건문으로 활성화
 
                 // 장비 부위에 따라 착용중인 장비 표시
                 int partNum = (int)(item as Item_Equipment).Part;
-                if(Player.MyInstance.usingEquipment[partNum] != null)
+                if (Player.MyInstance.usingEquipment[partNum] != null)
                 {
                     playerInfoPanel.ShowUsingEquipment(partNum);
                 }
                 else
                 {
-                    playerInfoPanel.ShowUsingEquipment(partNum,false);
+                    playerInfoPanel.ShowUsingEquipment(partNum, false);
                 }
                 break;
 
@@ -201,7 +201,7 @@ public class HandScript : MonoBehaviour
         SI_Panel.SetActive(true);
 
         // content size filtter 바로 안늘어나는 버그 해결용
-        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)SI_CSF_Descript.transform); 
+        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)SI_CSF_Descript.transform);
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)SI_CSF_Panel.transform);
     }
 
@@ -226,9 +226,9 @@ public class HandScript : MonoBehaviour
         if (Player.MyInstance.usingEquipment[partNum] != null)
         {
             Player.MyInstance.UnequipItem(partNum);
-        }    
+        }
         myItem.Use();
-        playerInfoPanel.ShowUsingEquipment(partNum,false);
+        playerInfoPanel.ShowUsingEquipment(partNum, false);
         SI_Panel.SetActive(false);
     }
 
