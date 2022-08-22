@@ -3,12 +3,10 @@ using UnityEngine.UI;
 
 public class StoreSlot : Slot_Base
 {
-    [SerializeField]
-    protected Text ItemName;
+    [SerializeField] protected Text ItemName;
     public Text ItemCost;
 
-    [HideInInspector]
-    public Item_Base Item;
+    [HideInInspector] public Item_Base Item;
 
     private bool CnaBuy = true;
 
@@ -31,7 +29,7 @@ public class StoreSlot : Slot_Base
 
     public void SetSlot(Item_Base item)
     {
-        if(item != null)
+        if (item != null)
         {
             Item = item;
             icon.sprite = Item.Icon;
@@ -50,7 +48,7 @@ public class StoreSlot : Slot_Base
 
     public void _Click()
     {
-        if(Item != null && CnaBuy)
+        if (Item != null && CnaBuy)
         {
             BuySellWindow.Instance.SetWindow(true, Item);
         }

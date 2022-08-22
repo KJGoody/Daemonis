@@ -17,8 +17,9 @@ public class DataTableManager : MonoBehaviour
 
     private SpellInfo[] spellInfos;
     public SpellInfo[] SpellInfos { get { return spellInfos; } }
-    private ItemInfo_Equipment[] equipmentInfos;
-    private ItemInfo_Consumable[] consumalbeInfos;
+    private ItemInfo_Equipment[] EquipmentInfos;
+    private ItemInfo_Consumable[] ConsumalbeInfos;
+    public int GetConsumalbeInfosLength { get { return ConsumalbeInfos.Length; } }
 
     private List<Dictionary<string, object>> QualityProb; // 장비 등급 확률표
 
@@ -33,7 +34,7 @@ public class DataTableManager : MonoBehaviour
 
     public ItemInfo_Equipment GetItemInfo_Equipment(string ID)
     {
-        foreach (ItemInfo_Equipment Data in equipmentInfos)
+        foreach (ItemInfo_Equipment Data in EquipmentInfos)
             if (Data.ID == ID)
                 return Data;
 
@@ -45,7 +46,7 @@ public class DataTableManager : MonoBehaviour
         if (Level > 50) Level = 50;
 
         List<ItemInfo_Equipment> array = new List<ItemInfo_Equipment>();
-        foreach (ItemInfo_Equipment Data in equipmentInfos)
+        foreach (ItemInfo_Equipment Data in EquipmentInfos)
             if (Data.LimitLevel / 10 == Level / 10)
                 array.Add(Data);
 
@@ -56,7 +57,7 @@ public class DataTableManager : MonoBehaviour
 
     public ItemInfo_Consumable GetItemInfo_Consumable(string ID)
     {
-        foreach (ItemInfo_Consumable Data in consumalbeInfos)
+        foreach (ItemInfo_Consumable Data in ConsumalbeInfos)
                 if (Data.ID == ID)
                     return Data;
 
@@ -68,7 +69,7 @@ public class DataTableManager : MonoBehaviour
         if (Level > 50) Level = 50;
 
         List<ItemInfo_Consumable> array = new List<ItemInfo_Consumable>();
-        foreach (ItemInfo_Consumable Data in consumalbeInfos)
+        foreach (ItemInfo_Consumable Data in ConsumalbeInfos)
             if (Data.LimitLevel <= Level)
                 array.Add(Data);
 
@@ -153,7 +154,7 @@ public class DataTableManager : MonoBehaviour
     private void LoadDataTable_EquipmentInfo()
     {
         List<Dictionary<string, object>> DataTable_Equipment = CSVReader.Read("DataTable_Equipment");
-        equipmentInfos = new ItemInfo_Equipment[DataTable_Equipment.Count];
+        EquipmentInfos = new ItemInfo_Equipment[DataTable_Equipment.Count];
 
         for (int i = 0; i < DataTable_Equipment.Count; i++)
         {
@@ -199,14 +200,14 @@ public class DataTableManager : MonoBehaviour
             info.BaseOption = DataTable_Equipment[i]["BaseOption"].ToString();
             info.BaseOptionValue = int.Parse(DataTable_Equipment[i]["BaseOptionValue"].ToString());
 
-            equipmentInfos[i] = info;
+            EquipmentInfos[i] = info;
         }
     }
 
     private void LoadDataTable_Consumable()
     {
         List<Dictionary<string, object>> DataTable_Consumable = CSVReader.Read("DataTable_Consumable");
-        consumalbeInfos = new ItemInfo_Consumable[DataTable_Consumable.Count];
+        ConsumalbeInfos = new ItemInfo_Consumable[DataTable_Consumable.Count];
 
         for (int i = 0; i < DataTable_Consumable.Count; i++)
         {
@@ -229,7 +230,7 @@ public class DataTableManager : MonoBehaviour
                     info.BuffName = DataTable_Consumable[i]["BuffName"].ToString();
                     info.Value = int.Parse(DataTable_Consumable[i]["Value"].ToString());
 
-                    consumalbeInfos[i] = info;
+                    ConsumalbeInfos[i] = info;
                     break;
             }
         }

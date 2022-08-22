@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IMoveable
 {
-    Sprite Icon { get; }
+    public Sprite Icon { get; }
 }

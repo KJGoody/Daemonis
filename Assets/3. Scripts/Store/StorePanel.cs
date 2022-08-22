@@ -28,7 +28,7 @@ public class StorePanel : MonoBehaviour
 
     [SerializeField]
     private StoreSlot[] StoreSlots;
-    private Item_Base[] StoreSlots_Stuff = new Item_Base[4];
+    private Item_Consumable[] StoreSlots_Stuff = new Item_Consumable[4];
     private Item_Equipment[] StoreSlots_Equipment = new Item_Equipment[4];
 
     private enum CurrentTapName { Stuff, Equipment, Sell }
@@ -80,18 +80,29 @@ public class StorePanel : MonoBehaviour
     private void SetStockItem_Stuff()
     {
         for (int i = 0; i < 4; i++)
-        {
             StoreSlots_Stuff[i] = new Item_Consumable();
+
+        for (int i = 0; i < 4; i++)
+        {
             ItemInfo_Consumable tempInfo;
+            int TryCount = 0;
             do
             {
                 tempInfo = DataTableManager.Instance.GetItemInfo_Consumable(Player.MyInstance.MyStat.Level);
+                TryCount++;
+                if (TryCount > DataTableManager.Instance.GetConsumalbeInfosLength)
+                    break;
+
             } while (IsAlrealyStock(tempInfo));
+
+            if (TryCount > DataTableManager.Instance.GetConsumalbeInfosLength)
+                continue;
 
             string[] kind = tempInfo.ID.Split('_');
             switch (kind[1])
             {
                 case "Potion":
+                    StoreSlots_Stuff[i] = new Item_Potion();
                     (StoreSlots_Stuff[i] as Item_Potion).itemInfo = tempInfo as ItemInfo_Potion;
                     break;
             }
@@ -103,7 +114,7 @@ public class StorePanel : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            if (StoreSlots_Stuff[i] != null)
+            if (StoreSlots_Stuff[i].ItemInfo() != null)
                 if (StoreSlots_Stuff[i].ID == ItemInfo.ID)
                     return true;
         }
