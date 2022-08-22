@@ -690,7 +690,7 @@ MonoBehaviour:
   HealthBar: {fileID: 1928098329}
   ManaBar: {fileID: 1531559611}
   ExpBar: {fileID: 133555253}
-  level: 100
+  level: 1
   levelUpEXP: 10
   currentEXP: 0
   attack: 100000
@@ -37142,7 +37142,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    Gold: 0
+    Gold: 2147483647
     ActionButtonsData:
     - 
     - 

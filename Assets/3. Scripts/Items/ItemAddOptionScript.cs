@@ -39,12 +39,12 @@ public class ItemAddOptionScript : MonoBehaviour
         ValueProbTable = CSVReader.Read("AddOptionValueProb");
     }
 
-    public int SetRandomQuality(Item_Base.Quality quality)   // 추가 옵션의 등급을 랜덤하게 설정
+    public int SetRandomQuality(Item_Base.Qualitys Quality)   // 추가 옵션의 등급을 랜덤하게 설정
     {   
-        return (int)ChanceMaker.Choose(GetAddOptionQualityProbTable(quality));
+        return (int)ChanceMaker.Choose(GetAddOptionQualityProbTable(Quality));
     }
 
-    private float[] GetAddOptionQualityProbTable(Item_Base.Quality quality)   // 아이템의 티어를 바탕으로 추가 옵션 등급확률 가져오기
+    private float[] GetAddOptionQualityProbTable(Item_Base.Qualitys quality)   // 아이템의 티어를 바탕으로 추가 옵션 등급확률 가져오기
     {
         float[] AddOptionQualityPropTable = new float[6];
         int ItemQualityNum = (int)quality;

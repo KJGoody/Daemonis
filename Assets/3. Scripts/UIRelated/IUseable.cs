@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IUseable
 {
-    string GetName();
-    void Use();
+    public string Name { get; }
+    public void Use();
 }

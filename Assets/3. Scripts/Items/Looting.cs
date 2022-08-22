@@ -8,11 +8,11 @@ public class Looting : MonoBehaviour
         {
             ItemCart DropItem = collision.GetComponent<ItemCart>();
 
-            if(DropItem.isKind == ItemCart.IsKind.Gold) // 골드면 그냥 루팅
+            if(DropItem.Kind == ItemCart.Kinds.Gold) // 골드면 그냥 루팅
             {
                 DropItem.IsLooting = true;
             }
-            else if (OptionPanel.MyInstance.lootingQuality[(int)DropItem.Item.quality].isOn) // 옵션에서 해당 등급이 선택돼있는지
+            else if (OptionPanel.MyInstance.lootingQuality[(int)DropItem.Item.Quality].isOn) // 옵션에서 해당 등급이 선택돼있는지
             {
                 DropItem.IsLooting = true;
             }

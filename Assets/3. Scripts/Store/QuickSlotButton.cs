@@ -128,7 +128,7 @@ public class QuickSlotButton : ActionButton, IStackable
         if (item is IUseable && Item.Count > 0)
         {
             // useables 에 등록된 아이템과 item 이 같은 타입이라면
-            if (Item.Peek().GetName() == item.GetName())
+            if (Item.Peek().Name == item.Name)
             {
 
                 // 인벤토리에서 해당 아이템과 같은 모든 아이템을 찾아서
@@ -149,7 +149,7 @@ public class QuickSlotButton : ActionButton, IStackable
         foreach (QuickSlotButton quickSlot in GameManager.MyInstance.QuickSlotButtons)
         {
             if (quickSlot.Item.Count > 0)
-                if (quickSlot.Item.Peek().GetName().Equals(useable.GetName()))
+                if (quickSlot.Item.Peek().Name.Equals(useable.Name))
                 {
                     AlreadySetButton = quickSlot;
                     return true;

@@ -19,7 +19,6 @@ public class DataTableManager : MonoBehaviour
     public SpellInfo[] SpellInfos { get { return spellInfos; } }
     private ItemInfo_Equipment[] EquipmentInfos;
     private ItemInfo_Consumable[] ConsumalbeInfos;
-    public int GetConsumalbeInfosLength { get { return ConsumalbeInfos.Length; } }
 
     private List<Dictionary<string, object>> QualityProb; // 장비 등급 확률표
 
@@ -64,7 +63,7 @@ public class DataTableManager : MonoBehaviour
         return null;
     }
 
-    public ItemInfo_Consumable GetItemInfo_Consumable(int Level)
+    public List<ItemInfo_Consumable> GetItemInfo_Consumables(int Level)
     {
         if (Level > 50) Level = 50;
 
@@ -73,12 +72,24 @@ public class DataTableManager : MonoBehaviour
             if (Data.LimitLevel <= Level)
                 array.Add(Data);
 
+        return array;
+    }
+
+    public ItemInfo_Consumable GetItemInfo_Consumable(int Level)
+    {
+        if (Level > 50) Level = 50;
+
+        List<ItemInfo_Consumable> array = new List<ItemInfo_Consumable>();
+        foreach (ItemInfo_Consumable Data in ConsumalbeInfos)
+            if (Data.LimitLevel / 10 == Level / 10)
+                array.Add(Data);
+
         int RandomNum = Random.Range(0, array.Count);
 
         return array[RandomNum];
     }
 
-    public Item_Base.Quality GetQuality(int Level)
+    public Item_Base.Qualitys GetQuality(int Level)
     {
         if (Level > 50) Level = 50;
 
@@ -88,7 +99,7 @@ public class DataTableManager : MonoBehaviour
             myQualityProb[a++] = (float)System.Convert.ToDouble(value);
         int newQuality = (int)ChanceMaker.Choose(myQualityProb); // 할당된 확률 배열로 가중치 랜덤뽑기로 등급 설정
 
-        return (Item_Base.Quality)newQuality;
+        return (Item_Base.Qualitys)newQuality;
     } 
 
     private void Awake()
@@ -172,27 +183,27 @@ public class DataTableManager : MonoBehaviour
             {
                 #region 파트 구분
                 case "Helmet":
-                    info.part = ItemInfo_Equipment.Part.Helmet;
+                    info.Part = ItemInfo_Equipment.Parts.Helmet;
                     break;
 
                 case "Cloth":
-                    info.part = ItemInfo_Equipment.Part.Cloth;
+                    info.Part = ItemInfo_Equipment.Parts.Cloth;
                     break;
 
                 case "Shoes":
-                    info.part = ItemInfo_Equipment.Part.Shoes;
+                    info.Part = ItemInfo_Equipment.Parts.Shoes;
                     break;
 
                 case "Weapon":
-                    info.part = ItemInfo_Equipment.Part.Weapon;
+                    info.Part = ItemInfo_Equipment.Parts.Weapon;
                     break;
 
                 case "Shoulder":
-                    info.part = ItemInfo_Equipment.Part.Shoulder;
+                    info.Part = ItemInfo_Equipment.Parts.Shoulder;
                     break;
 
                 case "Back":
-                    info.part = ItemInfo_Equipment.Part.Back;
+                    info.Part = ItemInfo_Equipment.Parts.Back;
                     break;
                     #endregion
             }

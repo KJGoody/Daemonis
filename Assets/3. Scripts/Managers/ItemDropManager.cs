@@ -54,6 +54,6 @@ public class ItemDropManager : MonoBehaviour
     public void DropPotion(Transform dropPosition, int m_Level)
     {
         ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
-        item.SetItem_Consumable(DataTableManager.Instance.GetItemInfo_Consumable(m_Level), Item_Base.Quality.Normal); 
+        item.SetItem_Consumable(DataTableManager.Instance.GetItemInfo_Consumable(m_Level), Item_Base.Qualitys.Normal); 
     }
 }

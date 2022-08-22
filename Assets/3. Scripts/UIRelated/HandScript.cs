@@ -184,7 +184,7 @@ public class HandScript : MonoBehaviour
                 SI_Obj_SetOption.SetActive(false); // 나중에 세트장비 조건문으로 활성화
 
                 // 장비 부위에 따라 착용중인 장비 표시
-                int partNum = (int)(item as Item_Equipment).GetPart;
+                int partNum = (int)(item as Item_Equipment).Part;
                 if(Player.MyInstance.usingEquipment[partNum] != null)
                 {
                     playerInfoPanel.ShowUsingEquipment(partNum);
@@ -222,7 +222,7 @@ public class HandScript : MonoBehaviour
 
     public void UseEquipment() // 장비 장착할때
     {
-        int partNum = (int)(myItem as Item_Equipment).GetPart;
+        int partNum = (int)(myItem as Item_Equipment).Part;
         if (Player.MyInstance.usingEquipment[partNum] != null)
         {
             Player.MyInstance.UnequipItem(partNum);

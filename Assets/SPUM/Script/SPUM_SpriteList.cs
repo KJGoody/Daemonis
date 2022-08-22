@@ -75,13 +75,12 @@ public class SPUM_SpriteList : MonoBehaviour
             {
                 case 0:  // 모자
                     _hairList[1].sprite = Player.MyInstance.usingEquipment[partNum].GetItemSprite(0);
-
                     break;
 
                 case 1:  // 옷
                     for (var i = 0; i < 3; i++)
                     {
-                        switch (Player.MyInstance.usingEquipment[partNum].GetItemSprite(i).name)
+                        switch (Player.MyInstance.usingEquipment[partNum].GetItemSpriteName(i))
                         {
                             case "Body":
                                 _clothList[0].sprite = Player.MyInstance.usingEquipment[partNum].GetItemSprite(i);
@@ -102,7 +101,7 @@ public class SPUM_SpriteList : MonoBehaviour
                 case 2: // 신발
                     for (var i = 0; i < 2; i++)
                     {
-                        switch (Player.MyInstance.usingEquipment[partNum].GetItemSprite(i).name)
+                        switch (Player.MyInstance.usingEquipment[partNum].GetItemSpriteName(i))
                         {
                             case "Left":
                                 _pantList[0].sprite = Player.MyInstance.usingEquipment[partNum].GetItemSprite(i);
@@ -122,7 +121,7 @@ public class SPUM_SpriteList : MonoBehaviour
                 case 4:  // 어깨
                     for (var i = 0; i < 2; i++)
                     {
-                        switch (Player.MyInstance.usingEquipment[partNum].GetItemSprite(i).name)
+                        switch (Player.MyInstance.usingEquipment[partNum].GetItemSpriteName(i))
                         {
                             case "Left":
                                 _armorList[1].sprite = Player.MyInstance.usingEquipment[partNum].GetItemSprite(i);

@@ -80,7 +80,7 @@ public class CastingButton : ActionButton
         foreach (CastingButton castingButton in GameManager.MyInstance.CastingButtons)
         {
             if (castingButton.Spell != null)
-                if (castingButton.Spell.GetName().Equals(useable.GetName()))
+                if (castingButton.Spell.Name.Equals(useable.Name))
                 {
                     AlreadySetButton = castingButton;
                     return true;

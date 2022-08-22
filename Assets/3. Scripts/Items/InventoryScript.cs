@@ -58,7 +58,7 @@ public class InventoryScript : MonoBehaviour
     {
         foreach (SlotScript slots in GameManager.MyInstance.Slots)
         {
-            if (!slots.IsEmpty && slots.MyItem.Name == item.Name && slots.MyItem.quality == item.quality)
+            if (!slots.IsEmpty && slots.MyItem.Name == item.Name && slots.MyItem.Quality == item.Quality)
                 item.MySlot = slots;
         }
     }
@@ -67,7 +67,7 @@ public class InventoryScript : MonoBehaviour
     {
         foreach (SlotScript slots in GameManager.MyInstance.Slots)
         {
-            if (!slots.IsEmpty && slots.MyItem.Name == item.Name && slots.MyItem.quality == item.quality && slots.MyItem == item)
+            if (!slots.IsEmpty && slots.MyItem.Name == item.Name && slots.MyItem.Quality == item.Quality && slots.MyItem == item)
             {
                 item.MySlot = slots;
             }
@@ -126,7 +126,7 @@ public class InventoryScript : MonoBehaviour
         {
             // 빈슬롯이 아니고
             // 슬롯에 등록된 아이템이 type의 아이템과 같은 종류의 아이템이라면
-            if (!slot.IsEmpty && slot.MyItem.Name == type.GetName())
+            if (!slot.IsEmpty && slot.MyItem.Name == type.Name)
             {
 
                 // 해당 슬롯에 등록된 모든 아이템을

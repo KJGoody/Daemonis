@@ -122,9 +122,9 @@ public class GameManager : MonoBehaviour
             {
                 Item_Equipment equipment = Player.MyInstance.usingEquipment[i];
                 DATA.E_Data[i] = equipment.ID;
-                DATA.E_Quality[i] = (int)equipment.quality;
+                DATA.E_Quality[i] = (int)equipment.Quality;
 
-                if ((int)equipment.quality > 0)
+                if ((int)equipment.Quality > 0)
                 {
                     // AddOption을 하나하나 저장해주는 부분
                     int[] AddOptionQuality = DATA.GetArray("E_AddOptionQuality_" + i) as int[];
@@ -158,7 +158,7 @@ public class GameManager : MonoBehaviour
                 // 아이템의 ID를 저장
                 DATA.I_Data[i] = SlotItem.ID;
                 // 아이템의 퀄리티를 저장
-                DATA.I_ItemQuality[i] = (int)SlotItem.quality;
+                DATA.I_ItemQuality[i] = (int)SlotItem.Quality;
 
                 // 아이템의 종류에 따라 다르게 저장
                 switch (Slots[i].MyItem.Kind)
@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
                         // 장비는 스텍이 필요 없으므로 로드할때에 아이템의 종류을 알수 있도록 -1로 설정한다.
                         DATA.I_StackData[i] = -1;
                         // 퀄리티가 일반이면 추가 옵션이 없으므로 조건문을 넣어줌
-                        if ((int)Slots[i].MyItem.quality > 0)
+                        if ((int)Slots[i].MyItem.Quality > 0)
                         {
                             // AddOption을 하나하나 저장해주는 부분
                             int[] AddOptionQuality = DATA.GetArray("I_AddOptionQuality_" + i) as int[];
@@ -238,9 +238,9 @@ public class GameManager : MonoBehaviour
                 if (DataTableManager.Instance.GetItemInfo_Equipment(DATA.E_Data[i]) != null)
                 {
                     Item_Equipment DataItem = new Item_Equipment();
-                    DataItem.itemInfo = DataTableManager.Instance.GetItemInfo_Equipment(DATA.E_Data[i]);
-                    DataItem.quality = (Item_Base.Quality)DATA.E_Quality[i];
-                    for (int j = 0; j < (int)DataItem.quality + 1; j++)
+                    DataItem.SetInfo(DataTableManager.Instance.GetItemInfo_Equipment(DATA.E_Data[i]));
+                    DataItem.Quality = (Item_Base.Qualitys)DATA.E_Quality[i];
+                    for (int j = 0; j < (int)DataItem.Quality + 1; j++)
                     {
                         int[] AddOptionQuality = DATA.GetArray("E_AddOptionQuality_" + i) as int[];
                         int[] AddOptionNum = DATA.GetArray("E_AddOptionNum_" + i) as int[];
@@ -274,9 +274,9 @@ public class GameManager : MonoBehaviour
                         if (DataTableManager.Instance.GetItemInfo_Equipment(DATA.I_Data[i]) != null)
                         {
                             Item_Equipment DataItem = new Item_Equipment();
-                            DataItem.itemInfo = DataTableManager.Instance.GetItemInfo_Equipment(DATA.I_Data[i]);
-                            DataItem.quality = (Item_Base.Quality)DATA.I_ItemQuality[i];
-                            for (int j = 0; j < (int)DataItem.quality + 1; j++)
+                            DataItem.SetInfo(DataTableManager.Instance.GetItemInfo_Equipment(DATA.I_Data[i]));
+                            DataItem.Quality = (Item_Base.Qualitys)DATA.I_ItemQuality[i];
+                            for (int j = 0; j < (int)DataItem.Quality + 1; j++)
                             {
                                 int[] AddOptionQuality = DATA.GetArray("I_AddOptionQuality_" + i) as int[];
                                 int[] AddOptionNum = DATA.GetArray("I_AddOptionNum_" + i) as int[];
@@ -304,7 +304,7 @@ public class GameManager : MonoBehaviour
                             {
                                 case "Potion":
                                     Item_Potion DataItem = new Item_Potion();
-                                    DataItem.itemInfo = DataTableManager.Instance.GetItemInfo_Consumable(DATA.I_Data[i]) as ItemInfo_Potion;
+                                    DataItem.SetInfo(DataTableManager.Instance.GetItemInfo_Consumable(DATA.I_Data[i]) as ItemInfo_Potion);
                                     for (int j = 0; j < DATA.I_StackData[i]; j++)
                                     {
                                         Slots[i].AddItem(DataItem);
@@ -350,7 +350,7 @@ public class GameManager : MonoBehaviour
                 if (DataTableManager.Instance.GetItemInfo_Consumable(DATA.ActionButtonsData[i + 5]) != null)
                 {
                     Item_Potion Dataitem = new Item_Potion();
-                    Dataitem.itemInfo = DataTableManager.Instance.GetItemInfo_Consumable(DATA.ActionButtonsData[i + 5]) as ItemInfo_Potion;
+                    Dataitem.SetInfo(DataTableManager.Instance.GetItemInfo_Consumable(DATA.ActionButtonsData[i + 5]) as ItemInfo_Potion);
                     QuickSlotButtons[i].SetUseable(Dataitem);
                 }
                 else

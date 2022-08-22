@@ -84,29 +84,33 @@ public class StorePanel : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            ItemInfo_Consumable tempInfo;
+            ItemInfo_Consumable tempInfo = new ItemInfo_Consumable();
+            List<ItemInfo_Consumable> Array = DataTableManager.Instance.GetItemInfo_Consumables(Player.MyInstance.MyStat.Level);
             int TryCount = 0;
             do
             {
-                tempInfo = DataTableManager.Instance.GetItemInfo_Consumable(Player.MyInstance.MyStat.Level);
-                TryCount++;
-                if (TryCount > DataTableManager.Instance.GetConsumalbeInfosLength)
+                if (TryCount >= Array.Count)
+                {
+                    TryCount++;
                     break;
+                }
+                else
+                    tempInfo = Array[TryCount++];
 
             } while (IsAlrealyStock(tempInfo));
 
-            if (TryCount > DataTableManager.Instance.GetConsumalbeInfosLength)
-                continue;
+            if (TryCount > Array.Count)
+                break;
 
             string[] kind = tempInfo.ID.Split('_');
             switch (kind[1])
             {
                 case "Potion":
                     StoreSlots_Stuff[i] = new Item_Potion();
-                    (StoreSlots_Stuff[i] as Item_Potion).itemInfo = tempInfo as ItemInfo_Potion;
+                    (StoreSlots_Stuff[i] as Item_Potion).SetInfo(tempInfo as ItemInfo_Potion);
                     break;
             }
-            StoreSlots_Stuff[i].quality = Item_Base.Quality.Normal;
+            StoreSlots_Stuff[i].Quality = Item_Base.Qualitys.Normal;
         }
     }
 
@@ -114,7 +118,7 @@ public class StorePanel : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            if (StoreSlots_Stuff[i].ItemInfo() != null)
+            if (StoreSlots_Stuff[i].IsSetInfo)
                 if (StoreSlots_Stuff[i].ID == ItemInfo.ID)
                     return true;
         }
@@ -127,8 +131,8 @@ public class StorePanel : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             StoreSlots_Equipment[i] = new Item_Equipment();
-            StoreSlots_Equipment[i].itemInfo = DataTableManager.Instance.GetItemInfo_Equipment(Player.MyInstance.MyStat.Level);
-            StoreSlots_Equipment[i].quality = DataTableManager.Instance.GetQuality(Player.MyInstance.MyStat.Level);
+            StoreSlots_Equipment[i].SetInfo(DataTableManager.Instance.GetItemInfo_Equipment(Player.MyInstance.MyStat.Level));
+            StoreSlots_Equipment[i].Quality = DataTableManager.Instance.GetQuality(Player.MyInstance.MyStat.Level);
         }
     }
 

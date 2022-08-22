@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Item_Consumable : Item_Base
 {
-    public override ItemInfo_Base ItemInfo() { return null; }
-    public int StackSize { get { return (ItemInfo() as ItemInfo_Consumable).StackSize; } }
+    public bool IsSetInfo = false;
+    public virtual int StackSize { get; } 
 
     public override void Remove()
     {
@@ -18,6 +18,6 @@ public class Item_Consumable : Item_Base
 
     public override int GetPriorty()
     {
-        return (int)(Mathf.Pow(10, (int)Kind) + (int)quality);
+        return (int)(Mathf.Pow(10, (int)Kind) + (int)Quality);
     }
 }

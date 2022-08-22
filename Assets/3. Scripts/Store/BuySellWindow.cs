@@ -153,8 +153,8 @@ public class BuySellWindow : MonoBehaviour
                     for (int i = 0; i < ItemCount; i++)
                     {
                         Item_Equipment BuyItem = new Item_Equipment();
-                        BuyItem.itemInfo = (ItemView.Item as Item_Equipment).itemInfo;
-                        BuyItem.quality = ItemView.Item.quality;
+                        BuyItem.SetInfo((ItemView.Item as Item_Equipment).GetInfo());
+                        BuyItem.Quality = ItemView.Item.Quality;
                         BuyItem.SetAddOption();
                         InventoryScript.MyInstance.AddItem(BuyItem);
                     }

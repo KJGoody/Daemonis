@@ -261,24 +261,24 @@ public class Player : Character
     public void EquipItem(Item_Equipment newItem) // ¿Â∫Ò ¿Â¬¯
     {
         int partNum = 0;
-        switch (newItem.GetPart)
+        switch (newItem.Part)
         {
-            case ItemInfo_Equipment.Part.Helmet:
+            case ItemInfo_Equipment.Parts.Helmet:
                 partNum = 0;
                 break;
-            case ItemInfo_Equipment.Part.Cloth:
+            case ItemInfo_Equipment.Parts.Cloth:
                 partNum = 1;
                 break;
-            case ItemInfo_Equipment.Part.Shoes:
+            case ItemInfo_Equipment.Parts.Shoes:
                 partNum = 2;
                 break;
-            case ItemInfo_Equipment.Part.Weapon:
+            case ItemInfo_Equipment.Parts.Weapon:
                 partNum = 3;
                 break;
-            case ItemInfo_Equipment.Part.Shoulder:
+            case ItemInfo_Equipment.Parts.Shoulder:
                 partNum = 4;
                 break;
-            case ItemInfo_Equipment.Part.Back:
+            case ItemInfo_Equipment.Parts.Back:
                 partNum = 5;
                 break;
         }
