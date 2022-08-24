@@ -85,7 +85,7 @@ public class StorePanel : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             ItemInfo_Consumable tempInfo = new ItemInfo_Consumable();
-            List<ItemInfo_Consumable> Array = DataTableManager.Instance.GetItemInfo_Consumables(Player.MyInstance.MyStat.Level);
+            List<ItemInfo_Consumable> Array = DataTableManager.Instance.GetInfo_Consumables(Player.MyInstance.MyStat.Level);
             int TryCount = 0;
             do
             {
@@ -131,7 +131,7 @@ public class StorePanel : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             StoreSlots_Equipment[i] = new Item_Equipment();
-            StoreSlots_Equipment[i].SetInfo(DataTableManager.Instance.GetItemInfo_Equipment(Player.MyInstance.MyStat.Level));
+            StoreSlots_Equipment[i].SetInfo(DataTableManager.Instance.GetInfo_Equipment(Player.MyInstance.MyStat.Level));
             StoreSlots_Equipment[i].Quality = DataTableManager.Instance.GetQuality(Player.MyInstance.MyStat.Level);
         }
     }

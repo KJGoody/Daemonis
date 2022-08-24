@@ -22,7 +22,7 @@ public class DataTableManager : MonoBehaviour
 
     private List<Dictionary<string, object>> QualityProb; // 장비 등급 확률표
 
-    public SpellInfo GetSpellData(string ID)
+    public SpellInfo GetInfo_Spell(string ID)
     {
         foreach (SpellInfo Data in spellInfos)
             if (Data.ID == ID)
@@ -31,7 +31,7 @@ public class DataTableManager : MonoBehaviour
         return null;
     }
 
-    public ItemInfo_Equipment GetItemInfo_Equipment(string ID)
+    public ItemInfo_Equipment GetInfo_Equipment(string ID)
     {
         foreach (ItemInfo_Equipment Data in EquipmentInfos)
             if (Data.ID == ID)
@@ -40,7 +40,7 @@ public class DataTableManager : MonoBehaviour
         return null;
     }
 
-    public ItemInfo_Equipment GetItemInfo_Equipment(int Level)
+    public ItemInfo_Equipment GetInfo_Equipment(int Level)
     {
         if (Level > 50) Level = 50;
 
@@ -54,7 +54,7 @@ public class DataTableManager : MonoBehaviour
         return array[RandomNum];
     }
 
-    public ItemInfo_Consumable GetItemInfo_Consumable(string ID)
+    public ItemInfo_Consumable GetInfo_Consumable(string ID)
     {
         foreach (ItemInfo_Consumable Data in ConsumalbeInfos)
                 if (Data.ID == ID)
@@ -63,7 +63,7 @@ public class DataTableManager : MonoBehaviour
         return null;
     }
 
-    public List<ItemInfo_Consumable> GetItemInfo_Consumables(int Level)
+    public List<ItemInfo_Consumable> GetInfo_Consumables(int Level)
     {
         if (Level > 50) Level = 50;
 
@@ -75,7 +75,7 @@ public class DataTableManager : MonoBehaviour
         return array;
     }
 
-    public ItemInfo_Consumable GetItemInfo_Consumable(int Level)
+    public ItemInfo_Consumable GetInfo_Consumable(int Level)
     {
         if (Level > 50) Level = 50;
 
@@ -137,8 +137,8 @@ public class DataTableManager : MonoBehaviour
                 case "Toggle":
                     info.Type = SpellInfo.SpellType.Toggle;
                     break;
-                case "Immediate":
-                    info.Type = SpellInfo.SpellType.Immediate;
+                case "Target":
+                    info.Type = SpellInfo.SpellType.Target;
                     break;
                 case "AE":
                     info.Type = SpellInfo.SpellType.AE;
@@ -157,6 +157,9 @@ public class DataTableManager : MonoBehaviour
             info.Description = DataTable_Spell[i]["Description"].ToString();
             info.CoolTime = float.Parse(DataTable_Spell[i]["CoolTime"].ToString());
             info.ManaCost = int.Parse(DataTable_Spell[i]["ManaCost"].ToString());
+            info.Speed = int.Parse(DataTable_Spell[i]["Speed"].ToString());
+            info.SpellxDamage = float.Parse(DataTable_Spell[i]["SpellxDamage"].ToString());
+            info.Sound = DataTable_Spell[i]["Sound"].ToString();
 
             spellInfos[i] = info;
         }

@@ -11,7 +11,7 @@ public class SpellInfo
         Buff,
         AOE,
         Toggle,
-        Immediate,
+        Target,
         AE,
         Passive,
         None
@@ -24,4 +24,7 @@ public class SpellInfo
     public string Description;
     public float CoolTime;
     public int ManaCost;
+    public int Speed;
+    public float SpellxDamage;
+    public string Sound;
 }

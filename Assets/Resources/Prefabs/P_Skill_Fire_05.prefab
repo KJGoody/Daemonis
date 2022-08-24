@@ -165,14 +165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc06bfb1b97f074fb1b63e0f2f06c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PuffObject: {fileID: 8815432756072557739, guid: c672cb838fee79c4db6bad64b246122b,
-    type: 3}
-  spellName: 3
+  Name: 3
   MyTarget: {fileID: 0}
-  atkDir: {x: 0, y: 0}
-  speed: 0
-  damage: 5
-  CastTime: 0.3
+  Direction: {x: 0, y: 0}
+  StackxDamage: 0
 --- !u!58 &7906806010784386282
 CircleCollider2D:
   m_ObjectHideFlags: 0

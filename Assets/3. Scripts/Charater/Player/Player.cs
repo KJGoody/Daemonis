@@ -40,7 +40,7 @@ public class Player : Character
     private FloatingJoystick joy;  //조이스틱
     [SerializeField] private Transform exitPoint;  // 스킬 발사 위치
     [SerializeField] private GameObject lvUp_Particle;  // 레벨업 이펙트
-    [HideInInspector] public Vector2 atkDir;  // 공격 방향
+    private Vector2 atkDir;  // 공격 방향
 
     private List<TargetGroup> targetGroups = new List<TargetGroup>();
     [SerializeField]    private GameObject YOUDIEWindow;  // 캐릭터 사망 패널
@@ -49,7 +49,7 @@ public class Player : Character
     {
         joy = GameObject.Find("Floating Joystick").GetComponent<FloatingJoystick>();
 
-        NewBuff("Skill_Fire_02_Buff");
+        NewBuff("Skill_Fire_02");
 
         base.Start();
     }
@@ -84,7 +84,7 @@ public class Player : Character
         }
     }
 
-    public void CastSpell(string spellIName) // 스킬 사용
+    public void CastSpell(string Spell_ID) // 스킬 사용
     {
         if (MyTarget != null)
             if (!MyTarget.parent.gameObject.GetComponent<EnemyBase>().IsAlive || MyTarget.parent.gameObject.activeSelf == false)
@@ -94,7 +94,7 @@ public class Player : Character
             AutoTarget();
 
         if (!IsAttacking)
-            StartCoroutine(CastingSpell(spellIName));
+            StartCoroutine(CastingSpell(Spell_ID));
     }
 
     private bool SearchEnemy() // 적이 있는지 검색
@@ -135,29 +135,32 @@ public class Player : Character
         return neareastObject;
     }
 
-    private IEnumerator CastingSpell(string spellIName)
+    private IEnumerator CastingSpell(string Spell_ID)
     {
         IsAttacking = true;
+
         // 타겟이 있다면 타겟 방향을 바라보도록한다.
         if (MyTarget != null) LookAtTarget();
         _prefabs.PlayAnimation(4);
 
-        Spell newSpell = SpellBook.MyInstance.GetSpell(spellIName);
-        if (newSpell.Type.Equals(SpellInfo.SpellType.Immediate))
+        Spell newSpell = new Spell();
+        newSpell.SetSpellInfo(DataTableManager.Instance.GetInfo_Spell(Spell_ID));
+        if (newSpell.Type.Equals(SpellInfo.SpellType.Target))
         {
-            for (int i = targetGroups.Count - 1; i >= 0; i--)
+            switch (Spell_ID)
             {
-                if (targetGroups[i].GroupName.Equals("Skill_Fire_02_Debuff"))
-                    for (int j = targetGroups[i].Targets.Count - 1; j >= 0; j--)
-                    {
-                        if (Vector2.Distance(transform.position, targetGroups[i].Targets[j].position) < 7)
-                        {
-                            SpellScript spellScript = Instantiate(newSpell.Prefab, targetGroups[i].Targets[j]).GetComponent<SpellScript>();
-                            spellScript.MyTarget = targetGroups[i].Targets[j];
-                            spellScript.StackxDamage = targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().GetBuff("Skill_Fire_02_Debuff").BuffStack;
-                            targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().OffBuff("Skill_Fire_02_Debuff");
-                        }
-                    }
+                case "Skill_Fire_07":
+                    for (int i = targetGroups.Count - 1; i >= 0; i--)
+                        if (targetGroups[i].GroupName.Equals("Skill_Fire_02_Debuff"))
+                            for (int j = targetGroups[i].Targets.Count - 1; j >= 0; j--)
+                                if (Vector2.Distance(transform.position, targetGroups[i].Targets[j].position) < 7)
+                                {
+                                    SpellScript spellScript = Instantiate(newSpell.Prefab, targetGroups[i].Targets[j]).GetComponent<SpellScript>();
+                                    spellScript.MyTarget = targetGroups[i].Targets[j];
+                                    spellScript.StackxDamage = targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().GetBuff("Skill_Fire_02_Debuff").BuffStack;
+                                    targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().OffBuff("Skill_Fire_02_Debuff");
+                                }
+                    break;
             }
 
             yield return new WaitForSeconds(0.3f);
@@ -166,11 +169,11 @@ public class Player : Character
         else
         {
             SpellScript spellScript = InstantiateSpell(newSpell);
-            spellScript.atkDir = atkDir;
+            spellScript.Direction = atkDir;
             if (MyTarget != null)
                 spellScript.MyTarget = MyTarget;
 
-            yield return new WaitForSeconds(spellScript.CastTime);
+            yield return new WaitForSeconds(0.3f);
             IsAttacking = false;
         }
     }

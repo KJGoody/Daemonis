@@ -10,7 +10,7 @@ public class ItemCart : MonoBehaviour
     [SerializeField] private SpriteRenderer S_Item;
 
     public enum Kinds { Gold, Item }
-    public Kinds Kind;
+    [HideInInspector] public Kinds Kind;
 
     private int GoldValue;
     private float Speed;

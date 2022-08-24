@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class Spell : IUseable, IMoveable
 {
-    public SpellInfo Info;
+    private SpellInfo Info;
     public void SetSpellInfo(SpellInfo spellInfo) { Info = spellInfo; }
     public SpellInfo.SpellType Type { get { return Info.Type; } }
     public GameObject Prefab { get { return Info.Prefab; } }
@@ -19,8 +19,8 @@ public class Spell : IUseable, IMoveable
     public void Use()
     {
         if (Info.Type.Equals(SpellInfo.SpellType.Buff))
-            Player.MyInstance.NewBuff(Name);
+            Player.MyInstance.NewBuff(Info.ID);
         else
-            Player.MyInstance.CastSpell(Name);
+            Player.MyInstance.CastSpell(Info.ID);
     }
 }

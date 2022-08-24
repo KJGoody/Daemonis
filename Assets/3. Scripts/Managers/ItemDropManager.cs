@@ -48,12 +48,12 @@ public class ItemDropManager : MonoBehaviour
     {
         // 아이템 프리팹 생성
         ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
-        item.SetItem_Equipment(DataTableManager.Instance.GetItemInfo_Equipment(m_Level), DataTableManager.Instance.GetQuality(m_Level)); // 설정한 정보 아이템에 넣어주기
+        item.SetItem_Equipment(DataTableManager.Instance.GetInfo_Equipment(m_Level), DataTableManager.Instance.GetQuality(m_Level)); // 설정한 정보 아이템에 넣어주기
     }
 
     public void DropPotion(Transform dropPosition, int m_Level)
     {
         ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
-        item.SetItem_Consumable(DataTableManager.Instance.GetItemInfo_Consumable(m_Level), Item_Base.Qualitys.Normal); 
+        item.SetItem_Consumable(DataTableManager.Instance.GetInfo_Consumable(m_Level), Item_Base.Qualitys.Normal); 
     }
 }

@@ -7,8 +7,7 @@ using TMPro;
 [System.Serializable]
 public class Buff : MonoBehaviour
 {
-    [SerializeField]
-    private Image BuffFillImage;
+    [SerializeField] private Image BuffFillImage;
     public enum BuffType
     {
         Standard,
@@ -16,23 +15,19 @@ public class Buff : MonoBehaviour
         Toggle,
         Passive
     }
-    [SerializeField]
-    private BuffType buffType;
+    [SerializeField] private BuffType buffType;
     public string BuffName;
-    [SerializeField]
-    private float Duration;
+    [SerializeField] private float Duration;
     private float currentTime;
 
     private BuffManager MyManager;
     private Puff PuffObject;
-    [SerializeField]
-    private TextMeshProUGUI StackText;
+    [SerializeField] private TextMeshProUGUI StackText;
     private Color TextColor;
-    
+
     private Character Target;
     private bool InTargetGroup = false;
-    [HideInInspector]
-    public int BuffStack = 1;
+    [HideInInspector] public int BuffStack = 1;
 
 
     private void Awake()
@@ -79,16 +74,16 @@ public class Buff : MonoBehaviour
         Target = target;
         Target.OnBuff.Add(this);
 
-        if(!buffType.Equals(BuffType.Passive))
+        if (!buffType.Equals(BuffType.Passive))
             StartCoroutine(ActivationBuff());
 
         switch (BuffName)
         {
-            case "Skill_Fire_02_Debuff":
+            case "Debuff_Skill_Fire_02":
                 StartCoroutine(Skill_Fire_02_Debuff());
                 break;
 
-            case "HealPotion_Buff":
+            case "B_Potion_Health":
                 StartCoroutine(HealPotion_Buff());
                 break;
         }
@@ -131,9 +126,9 @@ public class Buff : MonoBehaviour
         {
             if (Target.IsAlive)
             {
-                if(ChanceMaker.GetThisChanceResult_Percentage(Player.MyInstance.MyStat.CriticalPercent))
+                if (ChanceMaker.GetThisChanceResult_Percentage(Player.MyInstance.MyStat.CriticalPercent))
                     Target.TakeDamage(Character.DamageType.Masic, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, NewTextPool.NewTextPrefabsName.Critical, Character.AttackType.Tick);
-                else    
+                else
                     Target.TakeDamage(Character.DamageType.Masic, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, NewTextPool.NewTextPrefabsName.Enemy, Character.AttackType.Tick);
             }
             yield return new WaitForSeconds(WaitForSconds);

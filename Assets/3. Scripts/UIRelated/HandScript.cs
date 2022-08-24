@@ -96,9 +96,10 @@ public class HandScript : MonoBehaviour
         icon.color = Color.white;
     }
 
-    public void SelectSpell(string spellName) // 스킬 선택
+    public void SelectSpell(string Spell_ID) // 스킬 선택
     {
-        spell = SpellBook.MyInstance.GetSpell(spellName); // 이름으로 스킬 찾기
+        spell = new Spell();
+        spell.SetSpellInfo(DataTableManager.Instance.GetInfo_Spell(Spell_ID)); // 이름으로 스킬 찾기
 
         switch (spell.Type)
         {

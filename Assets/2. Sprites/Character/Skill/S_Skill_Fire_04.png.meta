@@ -3,17 +3,26 @@ guid: 561a501040a5ff34087ea555b8c1b1b9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8778979201212029339
+      213: -7702419880405158668
     second: S_Skill_Fire_04_0
   - first:
-      213: 5025392093005433973
+      213: 8299417188411519792
     second: S_Skill_Fire_04_1
   - first:
-      213: 2073037720394901869
+      213: 8268329659425166279
     second: S_Skill_Fire_04_2
   - first:
-      213: -3143241884814676496
+      213: -3360005411296939950
     second: S_Skill_Fire_04_3
+  - first:
+      213: -2753262480937719911
+    second: S_Skill_Fire_04_4
+  - first:
+      213: -5483529941051646412
+    second: S_Skill_Fire_04_5
+  - first:
+      213: -9197480398249249689
+    second: S_Skill_Fire_04_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -119,18 +128,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
-        width: 128
-        height: 128
+        y: 0
+        width: 198
+        height: 212
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9919ca021335d970800000000000000
-      internalID: 8778979201212029339
+      spriteID: 4f43b8d8de18b1590800000000000000
+      internalID: -7702419880405158668
       vertices: []
       indices: 
       edges: []
@@ -139,19 +148,19 @@ TextureImporter:
       name: S_Skill_Fire_04_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
-        width: 128
-        height: 128
+        x: 198
+        y: 0
+        width: 198
+        height: 212
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57c45a0ab77cdb540800000000000000
-      internalID: 5025392093005433973
+      spriteID: 0333a0ee5f37d2370800000000000000
+      internalID: 8299417188411519792
       vertices: []
       indices: 
       edges: []
@@ -160,19 +169,19 @@ TextureImporter:
       name: S_Skill_Fire_04_2
       rect:
         serializedVersion: 2
-        x: 0
+        x: 396
         y: 0
-        width: 128
-        height: 128
+        width: 198
+        height: 212
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d69af12c2d8e4cc10800000000000000
-      internalID: 2073037720394901869
+      spriteID: 7c31ddb84020fb270800000000000000
+      internalID: 8268329659425166279
       vertices: []
       indices: 
       edges: []
@@ -181,19 +190,82 @@ TextureImporter:
       name: S_Skill_Fire_04_3
       rect:
         serializedVersion: 2
-        x: 128
+        x: 594
         y: 0
-        width: 128
-        height: 128
+        width: 198
+        height: 212
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0fded7cc826f064d0800000000000000
-      internalID: -3143241884814676496
+      spriteID: 250714861ecde51d0800000000000000
+      internalID: -3360005411296939950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_Skill_Fire_04_4
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 0
+        width: 198
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 997eb4a6c527ac9d0800000000000000
+      internalID: -2753262480937719911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_Skill_Fire_04_5
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 0
+        width: 198
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43ed564529696e3b0800000000000000
+      internalID: -5483529941051646412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_Skill_Fire_04_6
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 0
+        width: 198
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7643cb1ee4cfb5080800000000000000
+      internalID: -9197480398249249689
       vertices: []
       indices: 
       edges: []
@@ -201,7 +273,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 2fc4646328b26a5469cf667e632f5800
     internalID: 0
     vertices: []
     indices: 

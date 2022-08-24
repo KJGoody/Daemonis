@@ -235,10 +235,10 @@ public class GameManager : MonoBehaviour
         {
             if (DATA.E_Data[i] != null)
             {
-                if (DataTableManager.Instance.GetItemInfo_Equipment(DATA.E_Data[i]) != null)
+                if (DataTableManager.Instance.GetInfo_Equipment(DATA.E_Data[i]) != null)
                 {
                     Item_Equipment DataItem = new Item_Equipment();
-                    DataItem.SetInfo(DataTableManager.Instance.GetItemInfo_Equipment(DATA.E_Data[i]));
+                    DataItem.SetInfo(DataTableManager.Instance.GetInfo_Equipment(DATA.E_Data[i]));
                     DataItem.Quality = (Item_Base.Qualitys)DATA.E_Quality[i];
                     for (int j = 0; j < (int)DataItem.Quality + 1; j++)
                     {
@@ -271,10 +271,10 @@ public class GameManager : MonoBehaviour
                 {
                     // 장비
                     case -1:
-                        if (DataTableManager.Instance.GetItemInfo_Equipment(DATA.I_Data[i]) != null)
+                        if (DataTableManager.Instance.GetInfo_Equipment(DATA.I_Data[i]) != null)
                         {
                             Item_Equipment DataItem = new Item_Equipment();
-                            DataItem.SetInfo(DataTableManager.Instance.GetItemInfo_Equipment(DATA.I_Data[i]));
+                            DataItem.SetInfo(DataTableManager.Instance.GetInfo_Equipment(DATA.I_Data[i]));
                             DataItem.Quality = (Item_Base.Qualitys)DATA.I_ItemQuality[i];
                             for (int j = 0; j < (int)DataItem.Quality + 1; j++)
                             {
@@ -297,14 +297,14 @@ public class GameManager : MonoBehaviour
 
                     // 스택형 아이템
                     default:
-                        if (DataTableManager.Instance.GetItemInfo_Consumable(DATA.I_Data[i]) != null)
+                        if (DataTableManager.Instance.GetInfo_Consumable(DATA.I_Data[i]) != null)
                         {
                             string[] kind = DATA.I_Data[i].Split('_');
                             switch (kind[1])
                             {
                                 case "Potion":
                                     Item_Potion DataItem = new Item_Potion();
-                                    DataItem.SetInfo(DataTableManager.Instance.GetItemInfo_Consumable(DATA.I_Data[i]) as ItemInfo_Potion);
+                                    DataItem.SetInfo(DataTableManager.Instance.GetInfo_Consumable(DATA.I_Data[i]) as ItemInfo_Potion);
                                     for (int j = 0; j < DATA.I_StackData[i]; j++)
                                     {
                                         Slots[i].AddItem(DataItem);
@@ -333,10 +333,10 @@ public class GameManager : MonoBehaviour
         {
             if (DATA.ActionButtonsData[i] != null)
             {
-                if (DataTableManager.Instance.GetSpellData(DATA.ActionButtonsData[i]) != null)
+                if (DataTableManager.Instance.GetInfo_Spell(DATA.ActionButtonsData[i]) != null)
                 {
                     Spell DataSpell = new Spell();
-                    DataSpell.Info = DataTableManager.Instance.GetSpellData(DATA.ActionButtonsData[i]);
+                    DataSpell.SetSpellInfo(DataTableManager.Instance.GetInfo_Spell(DATA.ActionButtonsData[i]));
                     CastingButtons[i].SetUseable(DataSpell);
                 }
                 else
@@ -347,10 +347,10 @@ public class GameManager : MonoBehaviour
         {
             if (DATA.ActionButtonsData[i + 5] != null)
             {
-                if (DataTableManager.Instance.GetItemInfo_Consumable(DATA.ActionButtonsData[i + 5]) != null)
+                if (DataTableManager.Instance.GetInfo_Consumable(DATA.ActionButtonsData[i + 5]) != null)
                 {
                     Item_Potion Dataitem = new Item_Potion();
-                    Dataitem.SetInfo(DataTableManager.Instance.GetItemInfo_Consumable(DATA.ActionButtonsData[i + 5]) as ItemInfo_Potion);
+                    Dataitem.SetInfo(DataTableManager.Instance.GetInfo_Consumable(DATA.ActionButtonsData[i + 5]) as ItemInfo_Potion);
                     QuickSlotButtons[i].SetUseable(Dataitem);
                 }
                 else

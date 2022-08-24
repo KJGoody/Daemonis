@@ -86,7 +86,7 @@ public class PortalManager : MonoBehaviour
         {
             Player.MyInstance.transform.Find("HitBox_Player").gameObject.SetActive(true);
             Player.MyInstance.rigid2D.simulated = true;
-            Player.MyInstance.NewBuff("Skill_Fire_02_Buff");
+            Player.MyInstance.NewBuff("Skill_Fire_02");
         }
         Player.MyInstance.MyStat.CurrentHealth = Player.MyInstance.MyStat.CurrentMaxHealth;
         Player.MyInstance.MyStat.CurrentMana = Player.MyInstance.MyStat.CurrentMaxMana;

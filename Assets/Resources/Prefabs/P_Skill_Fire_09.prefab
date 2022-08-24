@@ -121,12 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc06bfb1b97f074fb1b63e0f2f06c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 7
+  Name: 7
   MyTarget: {fileID: 0}
-  atkDir: {x: 0, y: 0}
-  speed: 2
+  Direction: {x: 0, y: 0}
   StackxDamage: 0
-  CastTime: 0.3
 --- !u!212 &7089291890261483673
 SpriteRenderer:
   m_ObjectHideFlags: 0

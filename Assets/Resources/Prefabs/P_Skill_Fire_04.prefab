@@ -103,7 +103,7 @@ Transform:
   m_GameObject: {fileID: 8440346083036277406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 3232571191555017598}
   m_Father: {fileID: 0}
@@ -121,12 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc06bfb1b97f074fb1b63e0f2f06c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 2
+  Name: 2
   MyTarget: {fileID: 0}
-  atkDir: {x: 0, y: 0}
-  speed: 5
+  Direction: {x: 0, y: 0}
   StackxDamage: 0
-  CastTime: 0.3
 --- !u!212 &7089291890261483673
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -167,16 +165,16 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: -2554913593723263831, guid: 1033160627b693443a43f1781a4dadce,
+  m_Sprite: {fileID: -7702419880405158668, guid: 561a501040a5ff34087ea555b8c1b1b9,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3, y: 3}
+  m_Size: {x: 6.1875, y: 6.625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!210 &-4260425782238387153
@@ -200,7 +198,7 @@ Animator:
   m_GameObject: {fileID: 8440346083036277406}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f6c7643f011e4b545abb58b8d8d4bdf1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8b77bb837066a1b42a35865ce449f3d4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -222,18 +220,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.22, y: 0}
+  m_Offset: {x: 0.8, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
-    newSize: {x: 3, y: 3}
+    oldSize: {x: 6.1875, y: 6.625}
+    newSize: {x: 6.1875, y: 6.625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 1}
+  m_Size: {x: 1.2, y: 1.5}
   m_EdgeRadius: 0
 --- !u!50 &954079744089848340
 Rigidbody2D:

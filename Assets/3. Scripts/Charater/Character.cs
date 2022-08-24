@@ -145,7 +145,6 @@ public abstract class Character : MonoBehaviour
 
     public virtual void LookAtTarget() // 타겟 바라보기
     {
-        Debug.Log((MyTarget.transform.position - transform.position).x);
         if ((MyTarget.transform.position - transform.position).x > 0)
             _prefabs.transform.localScale = new Vector3(-1, 1, 1);
         else if ((MyTarget.transform.position - transform.position).x < 0)
