@@ -5,10 +5,8 @@ using System;
 
 public class BuffManager : MonoBehaviour
 {
-    [HideInInspector]
-    public List<GameObject> BuffList = new List<GameObject>();
-    [SerializeField]
-    private Buff[] buffs;
+    [HideInInspector] public List<GameObject> BuffList = new List<GameObject>();
+    [SerializeField] private Buff[] buffs;
 
     public void AddBuffImage(string BuffName, Character target)
     {

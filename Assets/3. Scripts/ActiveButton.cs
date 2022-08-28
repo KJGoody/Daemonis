@@ -16,24 +16,20 @@ public class ActiveButton : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private CanvasGroup SetActive;
-    [SerializeField]
-    private Image Image;
-    [SerializeField]
-    private Sprite[] Images;
+    [SerializeField] private CanvasGroup SetActive;
+    [SerializeField] private Image Image;
+    [SerializeField] private Sprite[] Images;
 
     public enum Role
     {
         PortalButton,
-        MerchantButton
+        MerchantButton,
+        ChesterButton
     }
     private Role RoleName;
 
-    [HideInInspector]
-    public string UnloadSceneName;
-    [HideInInspector]
-    public string LoadSceneName;
+    [HideInInspector] public string UnloadSceneName;
+    [HideInInspector] public string LoadSceneName;
 
     public void SetButton(Role RoleName, string UnloadSceneName = null, string LoadSceneName = null)
     {
@@ -51,6 +47,11 @@ public class ActiveButton : MonoBehaviour
             case Role.MerchantButton:
                 Image.sprite = Images[1];
                 break;
+
+            case Role.ChesterButton:
+                Image.sprite = Images[1];
+                break;
+
         }
 
         ButtonSetActive(true);
@@ -76,6 +77,10 @@ public class ActiveButton : MonoBehaviour
 
             case Role.MerchantButton:
                 StorePanel.Instance.OpenStore();
+                break;
+
+            case Role.ChesterButton:
+                ChestPanel.Instance.OpenChest();
                 break;
         }
     }

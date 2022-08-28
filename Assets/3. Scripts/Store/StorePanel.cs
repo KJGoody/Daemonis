@@ -26,8 +26,7 @@ public class StorePanel : MonoBehaviour
     [SerializeField] private Transform ProductView;
     [SerializeField] private Transform StuffTap;
 
-    [SerializeField]
-    private StoreSlot[] StoreSlots;
+    [SerializeField] private StoreSlot[] StoreSlots;
     private Item_Consumable[] StoreSlots_Stuff = new Item_Consumable[4];
     private Item_Equipment[] StoreSlots_Equipment = new Item_Equipment[4];
 

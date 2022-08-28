@@ -22,6 +22,7 @@ public class SpellScript : MonoBehaviour
         Skill_Fire_10,
         Skill_Fire_11,
         Skill_Fire_12,
+        Skill_Fire_12_Object,
         Skill_Fire_13 
         #endregion
     }
@@ -65,6 +66,9 @@ public class SpellScript : MonoBehaviour
 
                 case SpellNames.Skill_Fire_12:
                     return "Skill_Fire_12";
+
+                case SpellNames.Skill_Fire_12_Object:
+                    return "Skill_Fire_12_Object";
 
                 case SpellNames.Skill_Fire_13:
                     return "Skill_Fire_13";
@@ -125,19 +129,35 @@ public class SpellScript : MonoBehaviour
                 StartCoroutine(Skill_Fire_07());
                 break;
 
+            // 분출구
             case SpellNames.Skill_Fire_08:
                 StartCoroutine(Skill_Fire_08());
                 break;
 
-            case SpellNames.Skill_Fire_09:   // 화염 토네이도
+            // 화염 토네이도
+            case SpellNames.Skill_Fire_09:
                 StartCoroutine(Skill_Fire_09());
                 break;
-        }
 
-        if (SpellType == SpellInfo.SpellType.Toggle || SpellType == SpellInfo.SpellType.Target)  // 토글 공격은 리기드바디가 없음
-            transform.position += new Vector3(0, 0.3f);  // 토글 중심점 위치 변경
-        else
+            // 화염 폭발
+            case SpellNames.Skill_Fire_10:
+                StartCoroutine(Skill_Fire_10());
+                break;
+
+            // 운석 충돌
+            case SpellNames.Skill_Fire_12:
+                StartCoroutine(Skill_Fire_12());
+                break;
+
+            // 심판의 창
+            case SpellNames.Skill_Fire_13:
+                StartCoroutine(Skill_Fire_13());
+                break;
+        }
+        if(SpellType ==  SpellInfo.SpellType.Launch)
             myRigidbody = GetComponent<Rigidbody2D>();
+        else if (SpellType == SpellInfo.SpellType.Toggle || SpellType == SpellInfo.SpellType.Target)  // 토글 공격은 리기드바디가 없음
+            transform.position += new Vector3(0, 0.3f);  // 토글 중심점 위치 변경
 
         // 진행 방향 설정
         if (MyTarget != null)
@@ -189,18 +209,22 @@ public class SpellScript : MonoBehaviour
                         break;
                 }
             }
-            else
+            else if (SpellType == SpellInfo.SpellType.Launch)
             {
                 myRigidbody.velocity = Direction.normalized * Speed; // direction을 normalized하여 방향값으로 바꿔주고 발사하는 힘 적용
-                float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;  // Math.Atan2 탄젠트 값으로 각도를 산출 https://m.blog.naver.com/PostView.nhn?blogId=sang9151&logNo=220821255191&categoryNo=50&proxyReferer=https%3A%2F%2Fwww.google.com%2F
-                                                                                      // Mathf.Rad2Deg 라디안 각도 변환해주는 상수 http://jw910911.tistory.com/6
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);  // 축 중심 각도로 회전
-                if (transform.localScale.y >= 0)
+
+                if(Name != SpellNames.Skill_Fire_12_Object)
                 {
-                    if (angle >= 90 && angle <= 180)
-                        transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
-                    else if (angle >= -180 && angle <= -90)
-                        transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+                    float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;  // Math.Atan2 탄젠트 값으로 각도를 산출 https://m.blog.naver.com/PostView.nhn?blogId=sang9151&logNo=220821255191&categoryNo=50&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+                                                                                          // Mathf.Rad2Deg 라디안 각도 변환해주는 상수 http://jw910911.tistory.com/6
+                    transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);  // 축 중심 각도로 회전
+                    if (transform.localScale.y >= 0)
+                    {
+                        if (angle >= 90 && angle <= 180)
+                            transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+                        else if (angle >= -180 && angle <= -90)
+                            transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+                    }
                 }
             }
         }
@@ -220,7 +244,7 @@ public class SpellScript : MonoBehaviour
             if (Name.Equals(SpellNames.Skill_Fire_09))
             {
                 if (CurrentCoroutine == null)      // 토네이도에 접촉 시 코루틴 시작
-                    CurrentCoroutine = StartCoroutine(TickDamage());
+                    CurrentCoroutine = StartCoroutine(TickDamage(0.5f, 0.3f));
             }
             else
             {
@@ -293,28 +317,8 @@ public class SpellScript : MonoBehaviour
 
     private IEnumerator Skill_Fire_03()
     {
-        float AOERadius = 0.5f;             // 장판 범위
-        int AOETimes = 5;                   // 장판 피격 횟수
-        float AOEWaitForSeconds = 0.5f;     // 다음 피격 시간
-
-        for (int i = 0; i < AOETimes; i++)
-        {
-            Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, AOERadius, LayerMask.GetMask("HitBox"));
-            if (collisions != null)
-            {
-                for (int j = 0; j < collisions.Length; j++)
-                    if (collisions[j].CompareTag("Enemy"))
-                    {
-                        if (Player.MyInstance.IsOnBuff("Skill_Fire_02"))
-                            collisions[j].transform.parent.GetComponent<EnemyBase>().NewBuff("Debuff_Skill_Fire_02");
-                        SpendDamage(collisions[j]);
-                        Player.MyInstance.RecoverOnHit();
-                        PuffPool.Instance.GetObject(PuffPool.PuffPrefabsName.Hit_01).PositioningPuff(collisions[j].transform.position);
-                    }
-            }
-
-            yield return new WaitForSeconds(AOEWaitForSeconds);
-        }
+        StartCoroutine(TickDamage(0.5f, 0.5f));
+        yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }
 
@@ -350,11 +354,24 @@ public class SpellScript : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            
-            //for (int i = 0; i < 6; i++)
-            //{
 
-            //}
+            SpellScript spell_1 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            spell_1.Direction = new Vector2(Direction.x, Direction.y);  // 정방향
+            SpellScript spell_2 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            spell_2.Direction = new Vector2(Direction.y, -Direction.x);  // 우측
+            SpellScript spell_3 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            spell_3.Direction = new Vector2(-Direction.x, -Direction.y);  // 하단
+            SpellScript spell_4 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            spell_4.Direction = new Vector2(-Direction.y, Direction.x);  // 좌측
+
+            SpellScript spell_5 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            spell_5.Direction = new Vector2(Direction.x + Direction.y, Direction.y - Direction.x);  // 우측 상단
+            SpellScript spell_6 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            spell_6.Direction = new Vector2(Direction.y - Direction.x, -Direction.x - Direction.y);  // 우측 하단
+            SpellScript spell_7 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            spell_7.Direction = new Vector2(-Direction.x - Direction.y, -Direction.y + Direction.x);  // 좌측 하단
+            SpellScript spell_8 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            spell_8.Direction = new Vector2(-Direction.y + Direction.x, Direction.x + Direction.y);  // 좌측 상단
         }
     }
 
@@ -362,6 +379,30 @@ public class SpellScript : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         Destroy(gameObject);
+    }
+
+    private IEnumerator Skill_Fire_10()
+    {
+        yield return new WaitForSeconds(0.04f);
+        StartCoroutine(TickDamage(0.5f, 10f));
+    }
+
+    private IEnumerator Skill_Fire_12()
+    {
+        SpellScript spell = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_12_Object"), 
+            new Vector2(transform.position.x - 5, transform.position.y + 5), 
+            Quaternion.identity).GetComponent<SpellScript>();
+        spell.Direction = new Vector2(-spell.transform.position.x + transform.position.x, -spell.transform.position.y + transform.position.y);
+        yield return new WaitForSeconds(0.85f);
+        Destroy(spell.gameObject);
+        GetComponent<Animator>().SetTrigger("Start");
+        StartCoroutine(TickDamage(0.5f, 10f));
+    }
+
+    private IEnumerator Skill_Fire_13()
+    {
+        yield return new WaitForSeconds(0.03f);
+        StartCoroutine(TickDamage(0.5f, 10f));
     }
 
     private GameObject FindNearestObject()
@@ -386,11 +427,8 @@ public class SpellScript : MonoBehaviour
         return neareastObject.transform.parent.gameObject;
     }
 
-    private IEnumerator TickDamage()
+    private IEnumerator TickDamage(float Radius, float WaitSconds)
     {
-        float Radius = 0.5f;
-        float WaitForSconds = 0.3f;
-
         while (true)
         {
             Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, Radius, LayerMask.GetMask("HitBox"));
@@ -406,7 +444,7 @@ public class SpellScript : MonoBehaviour
                         PuffPool.Instance.GetObject(PuffPool.PuffPrefabsName.Hit_01).PositioningPuff(collisions[j].transform.position);
                     }
             }
-            yield return new WaitForSeconds(WaitForSconds);
+            yield return new WaitForSeconds(WaitSconds);
         }
     }
 }

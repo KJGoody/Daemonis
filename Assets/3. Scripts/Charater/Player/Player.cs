@@ -145,7 +145,7 @@ public class Player : Character
 
         Spell newSpell = new Spell();
         newSpell.SetSpellInfo(DataTableManager.Instance.GetInfo_Spell(Spell_ID));
-        if (newSpell.Type.Equals(SpellInfo.SpellType.Target))
+        if (newSpell.Type == SpellInfo.SpellType.Target)
         {
             switch (Spell_ID)
             {

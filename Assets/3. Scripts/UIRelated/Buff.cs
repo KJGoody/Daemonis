@@ -19,15 +19,19 @@ public class Buff : MonoBehaviour
     public string BuffName;
     [SerializeField] private float Duration;
     private float currentTime;
-
-    private BuffManager MyManager;
-    private Puff PuffObject;
-    [SerializeField] private TextMeshProUGUI StackText;
-    private Color TextColor;
+    private bool IsActive;
+    private delegate void DeActive();
+    private DeActive DeActiveFunc;
 
     private Character Target;
-    private bool InTargetGroup = false;
+    private BuffManager MyManager;
+
+    private Puff PuffObject;
+    [SerializeField] private TextMeshProUGUI StackText;
     [HideInInspector] public int BuffStack = 1;
+    private Color TextColor;
+
+    private bool InTargetGroup = false;
 
 
     private void Awake()
@@ -80,17 +84,26 @@ public class Buff : MonoBehaviour
         switch (BuffName)
         {
             case "Debuff_Skill_Fire_02":
-                StartCoroutine(Skill_Fire_02_Debuff());
+                StartCoroutine(Debuff_Skill_Fire_02());
+                break;
+
+            case "Skill_Fire_14":
+                Buff_Skill_Fire_14();
                 break;
 
             case "B_Potion_Health":
-                StartCoroutine(HealPotion_Buff());
+                StartCoroutine(Buff_HealPotion());
+                break;
+
+            case "B_Potion_Mana":
+                StartCoroutine(Buff_ManaPotion());
                 break;
         }
     }
 
     private IEnumerator ActivationBuff()
     {
+        IsActive = true;
         while (currentTime > 0)
         {
             currentTime -= 0.1f;
@@ -103,16 +116,50 @@ public class Buff : MonoBehaviour
 
     public void DeActivationBuff()
     {
+        IsActive = false;
+        if(DeActiveFunc != null)
+            DeActiveFunc();
+
         Target.OnBuff.Remove(this);
         MyManager.BuffList.Remove(gameObject);
+        //-- Debuff_Skill_Fire_02 --
         if (PuffObject != null)
             PuffPool.Instance.ReturnObject(PuffObject, PuffPool.PuffPrefabsName.Fire);
         if (InTargetGroup)
             Player.MyInstance.RemoveTarget(BuffName, Target.transform);
+        //-- Debuff_Skill_Fire_02 --
         Destroy(gameObject);
     }
 
-    private IEnumerator Skill_Fire_02_Debuff()
+    private void Buff_Skill_Fire_14()
+    {
+        if (IsActive)
+            Player.MyInstance.BuffxDamage += 10;
+        else
+            Player.MyInstance.BuffxDamage -= 10;
+
+        DeActiveFunc = Buff_Skill_Fire_14;
+    }
+
+    private IEnumerator Buff_HealPotion()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            Player.MyInstance.MyStat.CurrentHealth += 20;
+        }
+    }
+
+    private IEnumerator Buff_ManaPotion()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            Player.MyInstance.MyStat.CurrentMana += 20;
+        }
+    }
+
+    private IEnumerator Debuff_Skill_Fire_02()
     {
         Player.MyInstance.AddTarget(BuffName, Target.transform);
         InTargetGroup = true;
@@ -132,15 +179,6 @@ public class Buff : MonoBehaviour
                     Target.TakeDamage(Character.DamageType.Masic, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, NewTextPool.NewTextPrefabsName.Enemy, Character.AttackType.Tick);
             }
             yield return new WaitForSeconds(WaitForSconds);
-        }
-    }
-
-    private IEnumerator HealPotion_Buff()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1);
-            Player.MyInstance.MyStat.CurrentHealth += 20;
         }
     }
 }

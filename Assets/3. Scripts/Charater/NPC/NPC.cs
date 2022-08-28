@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour, INpc
 {
-    [SerializeField]
-    private SPUM_Prefabs CharacterImage;
+    [SerializeField] private SPUM_Prefabs CharacterImage;
     protected Transform Target;
 
     private void Update()
     {
-        if(Target != null)
+        if (Target != null)
         {
             if ((Target.transform.position - transform.position).x > 0)
                 CharacterImage.transform.localScale = new Vector3(-1, 1, 1);
@@ -17,7 +16,7 @@ public class NPC : MonoBehaviour, INpc
         }
     }
 
-    public virtual void SetTarget(Transform target) 
+    public virtual void SetTarget(Transform target)
     {
         Target = target;
     }
