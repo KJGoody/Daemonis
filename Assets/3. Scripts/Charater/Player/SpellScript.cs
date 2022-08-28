@@ -84,7 +84,7 @@ public class SpellScript : MonoBehaviour
     private float SpellxDamage;  // 스킬 데미지 배수
     [HideInInspector] public float StackxDamage;  // 스텍 배수
 
-    private Coroutine TickCoroutine;
+    private Coroutine CurrentCoroutine;
 
     private List<GameObject> HitEnemy = new List<GameObject>();
 
@@ -192,10 +192,16 @@ public class SpellScript : MonoBehaviour
             else
             {
                 myRigidbody.velocity = Direction.normalized * Speed; // direction을 normalized하여 방향값으로 바꿔주고 발사하는 힘 적용
-                                                                     // Math.Atan2 탄젠트 값으로 각도를 산출 https://m.blog.naver.com/PostView.nhn?blogId=sang9151&logNo=220821255191&categoryNo=50&proxyReferer=https%3A%2F%2Fwww.google.com%2F
-                                                                     // Mathf.Rad2Deg 라디안 각도 변환해주는 상수 http://jw910911.tistory.com/6
-                float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // 축 중심 각도로 회전
+                float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;  // Math.Atan2 탄젠트 값으로 각도를 산출 https://m.blog.naver.com/PostView.nhn?blogId=sang9151&logNo=220821255191&categoryNo=50&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+                                                                                      // Mathf.Rad2Deg 라디안 각도 변환해주는 상수 http://jw910911.tistory.com/6
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);  // 축 중심 각도로 회전
+                if (transform.localScale.y >= 0)
+                {
+                    if (angle >= 90 && angle <= 180)
+                        transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+                    else if (angle >= -180 && angle <= -90)
+                        transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+                }
             }
         }
     }
@@ -213,8 +219,8 @@ public class SpellScript : MonoBehaviour
         {
             if (Name.Equals(SpellNames.Skill_Fire_09))
             {
-                if (TickCoroutine == null)      // 토네이도에 접촉 시 코루틴 시작
-                    TickCoroutine = StartCoroutine(TickDamage());
+                if (CurrentCoroutine == null)      // 토네이도에 접촉 시 코루틴 시작
+                    CurrentCoroutine = StartCoroutine(TickDamage());
             }
             else
             {
@@ -334,8 +340,22 @@ public class SpellScript : MonoBehaviour
 
     private IEnumerator Skill_Fire_08()
     {
+        StartCoroutine(Skill_Fire_08_Object());
         yield return new WaitForSeconds(10f);
         Destroy(gameObject);
+    }
+
+    private IEnumerator Skill_Fire_08_Object()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            
+            //for (int i = 0; i < 6; i++)
+            //{
+
+            //}
+        }
     }
 
     private IEnumerator Skill_Fire_09()
