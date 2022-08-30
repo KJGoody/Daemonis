@@ -22,6 +22,7 @@ public class SpellScript : MonoBehaviour
         Skill_Fire_09,
         Skill_Fire_10,
         Skill_Fire_11,
+        Skill_Fire_11_Object,
         Skill_Fire_12,
         Skill_Fire_12_Object,
         Skill_Fire_13 
@@ -68,6 +69,9 @@ public class SpellScript : MonoBehaviour
                 case SpellNames.Skill_Fire_11:
                     return "Skill_Fire_11";
 
+                case SpellNames.Skill_Fire_11_Object:
+                    return "Skill_Fire_11_Object";
+
                 case SpellNames.Skill_Fire_12:
                     return "Skill_Fire_12";
 
@@ -98,6 +102,26 @@ public class SpellScript : MonoBehaviour
 
     private void Start()
     {
+        // 리기드바디 설정
+        if(SpellType ==  SpellInfo.SpellType.Launch)
+            myRigidbody = GetComponent<Rigidbody2D>();
+        else if (SpellType == SpellInfo.SpellType.Toggle || SpellType == SpellInfo.SpellType.Target)  // 토글 공격은 리기드바디가 없음
+            transform.position += new Vector3(0, 0.3f);  // 토글 중심점 위치 변경
+
+        // 진행 방향 설정
+        if (MyTarget != null)
+            Direction = MyTarget.position - transform.position;
+        else
+        {
+            if (Direction == Vector2.zero)
+            {
+                if (Player.MyInstance._prefabs.transform.localScale.x == -1)  // 플레이어가 바라보고 있는 방향확인
+                    Direction = new Vector2(1, 0);  // localscale이 -1일때 왼쪽을 보고 있음
+                else
+                    Direction = new Vector2(-1, 0);
+            }
+        }
+
         // 스팰 아이디로 기본 정보를 받아온다.
         SpellType = DataTableManager.Instance.GetInfo_Spell(GetName).Type;
         Speed = DataTableManager.Instance.GetInfo_Spell(GetName).Speed;
@@ -166,6 +190,14 @@ public class SpellScript : MonoBehaviour
 
             // 자동 화살
             case SpellNames.Skill_Fire_11:
+                StartCoroutine(Skill_Fire_11());
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
+                break;
+
+            // 화살
+            case SpellNames.Skill_Fire_11_Object:
+                StartCoroutine(Skill_Fire_11_Object());
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
 
             // 운석 충돌
@@ -180,26 +212,6 @@ public class SpellScript : MonoBehaviour
                 SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
         }
-
-        // 리기드바디 설정
-        if(SpellType ==  SpellInfo.SpellType.Launch)
-            myRigidbody = GetComponent<Rigidbody2D>();
-        else if (SpellType == SpellInfo.SpellType.Toggle || SpellType == SpellInfo.SpellType.Target)  // 토글 공격은 리기드바디가 없음
-            transform.position += new Vector3(0, 0.3f);  // 토글 중심점 위치 변경
-
-        // 진행 방향 설정
-        if (MyTarget != null)
-            Direction = MyTarget.position - transform.position;
-        else
-        {
-            if (Direction == Vector2.zero)
-            {
-                if (Player.MyInstance._prefabs.transform.localScale.x == -1)  // 플레이어가 바라보고 있는 방향확인
-                    Direction = new Vector2(1, 0);  // localscale이 -1일때 왼쪽을 보고 있음
-                else
-                    Direction = new Vector2(-1, 0);
-            }
-        }
     }
 
     // Update is called once per frame
@@ -207,19 +219,17 @@ public class SpellScript : MonoBehaviour
     {
         if (SpellType != SpellInfo.SpellType.Target)
         {
-            if (MyTarget == null && Name == SpellNames.Skill_Fire_09)    // 토네이도 공격 시 오토타겟팅
-            {
-                if (GameObject.FindWithTag("Enemy") != null)
-                {
-                    if (FindNearestObject() != null)
-                        MyTarget = FindNearestObject().transform.Find("HitBox").transform;
-                    else
-                        MyTarget = null;
-                }
-            }
-
             if (Name.Equals(SpellNames.Skill_Fire_09))
             {
+                if (MyTarget == null)
+                    if (GameObject.FindWithTag("Enemy") != null)
+                    {
+                        if (FindNearestObject() != null)
+                            MyTarget = FindNearestObject().transform.Find("HitBox").transform;
+                        else
+                            MyTarget = null;
+                    }
+
                 if (MyTarget != null)
                     if (!MyTarget.parent.gameObject.GetComponent<EnemyBase>().IsAlive)
                         MyTarget = null;
@@ -243,16 +253,7 @@ public class SpellScript : MonoBehaviour
 
                 if(Name != SpellNames.Skill_Fire_12_Object)
                 {
-                    float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;  // Math.Atan2 탄젠트 값으로 각도를 산출 https://m.blog.naver.com/PostView.nhn?blogId=sang9151&logNo=220821255191&categoryNo=50&proxyReferer=https%3A%2F%2Fwww.google.com%2F
-                                                                                          // Mathf.Rad2Deg 라디안 각도 변환해주는 상수 http://jw910911.tistory.com/6
-                    transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);  // 축 중심 각도로 회전
-                    if (transform.localScale.y >= 0)
-                    {
-                        if (angle >= 90 && angle <= 180)
-                            transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
-                        else if (angle >= -180 && angle <= -90)
-                            transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
-                    }
+                    ChangeAngle();
                 }
             }
         }
@@ -297,6 +298,20 @@ public class SpellScript : MonoBehaviour
                         PuffPool.Instance.GetObject(PuffPool.PuffPrefabsName.Hit_01).PositioningPuff(transform.position);
                 }
             }
+        }
+    }
+
+    private void ChangeAngle()
+    {
+        float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;  // Math.Atan2 탄젠트 값으로 각도를 산출 https://m.blog.naver.com/PostView.nhn?blogId=sang9151&logNo=220821255191&categoryNo=50&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+                                                                              // Mathf.Rad2Deg 라디안 각도 변환해주는 상수 http://jw910911.tistory.com/6
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);  // 축 중심 각도로 회전
+        if (transform.localScale.y >= 0)
+        {
+            if (angle >= 90 && angle <= 180)
+                transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+            else if (angle >= -180 && angle <= -90)
+                transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
         }
     }
 
@@ -411,6 +426,58 @@ public class SpellScript : MonoBehaviour
     {
         yield return new WaitForSeconds(0.04f);
         StartCoroutine(TickDamage(0.5f, 10f));
+    }
+
+    private IEnumerator Skill_Fire_11()
+    {
+        ChangeAngle();
+        StartCoroutine(Skill_Fire_11_AttackSystem());
+        yield return new WaitForSeconds(15f);
+        Destroy(gameObject);
+    }
+
+    private IEnumerator Skill_Fire_11_AttackSystem()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.5f);
+            //-- 활 회전 및 방향 설정 --
+            // 오토 타겟팅
+            if(MyTarget == null)
+            {
+                if (GameObject.FindWithTag("Enemy") != null)
+                {
+                    if (FindNearestObject() != null)
+                        MyTarget = FindNearestObject().transform.Find("HitBox").transform;
+                    else
+                        MyTarget = null;
+                }
+            }
+
+            if (MyTarget != null)
+                if (!MyTarget.parent.gameObject.GetComponent<EnemyBase>().IsAlive)
+                    MyTarget = null;
+
+            if (MyTarget != null)
+                Direction = MyTarget.transform.position - transform.position;
+
+            ChangeAngle();
+            GetComponent<Animator>().SetTrigger("Attack");
+            yield return new WaitForSeconds(0.01f);
+
+            // 화살 발사
+            SpellScript spell = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_11_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            spell.Direction = Direction;
+            if(MyTarget != null)
+                spell.MyTarget = MyTarget;
+            
+        }
+    }
+
+    private IEnumerator Skill_Fire_11_Object()
+    {
+        yield return new WaitForSeconds(10f);
+        Destroy(gameObject);
     }
 
     private IEnumerator Skill_Fire_12()

@@ -219,6 +219,19 @@ public class Player : Character
                     }
                     return Instantiate(spell.Prefab, ExitPoint, Quaternion.identity).GetComponent<SpellScript>();
                 }
+
+            case SpellInfo.SpellType.Turret:
+                {
+                    Vector3 ExitPoint = transform.position + new Vector3(atkDir.x, atkDir.y, 0).normalized * 2;
+                    if (ExitPoint == transform.position)
+                    {
+                        if (_prefabs.transform.localScale.x == -1)
+                            ExitPoint += new Vector3(1, 0, 0).normalized * 2;
+                        else
+                            ExitPoint += new Vector3(-1, 0, 0).normalized * 2;
+                    }
+                    return Instantiate(spell.Prefab, ExitPoint, Quaternion.identity).GetComponent<SpellScript>();
+                }
         }
         return null;
     }

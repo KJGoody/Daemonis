@@ -84,11 +84,10 @@ GameObject:
   - component: {fileID: 7527969048852949218}
   - component: {fileID: 7089291890261483673}
   - component: {fileID: -4260425782238387153}
-  - component: {fileID: 3318411572377474205}
   - component: {fileID: 4348590965333436126}
   - component: {fileID: 954079744089848340}
   m_Layer: 14
-  m_Name: P_Skill_Fire_01
+  m_Name: P_Skill_Fire_11_Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +102,7 @@ Transform:
   m_GameObject: {fileID: 8440346083036277406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children:
   - {fileID: 3232571191555017598}
   m_Father: {fileID: 0}
@@ -121,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc06bfb1b97f074fb1b63e0f2f06c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 0
+  Name: 11
   MyTarget: {fileID: 0}
   Direction: {x: 0, y: 0}
   StackxDamage: 0
@@ -165,8 +164,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: -7865960698109428270, guid: fb2a8694dd25d88408401ab8324b1093,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: d68fcd2fb2be72e4e8d3162c0602123e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -188,25 +186,6 @@ SortingGroup:
   m_SortingLayerID: -822470091
   m_SortingLayer: 6
   m_SortingOrder: 0
---- !u!95 &3318411572377474205
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8440346083036277406}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d11fb04d81894dc4897c6a79a44082ec, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!61 &4348590965333436126
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -220,18 +199,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.99, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.625, y: 3.125}
+    pivot: {x: 0.75, y: 0.52}
+    oldSize: {x: 16, y: 16}
     newSize: {x: 4, y: 4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6, y: 1.6}
+  m_Size: {x: 5, y: 2}
   m_EdgeRadius: 0
 --- !u!50 &954079744089848340
 Rigidbody2D:
