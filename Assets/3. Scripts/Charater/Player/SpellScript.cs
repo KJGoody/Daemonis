@@ -164,6 +164,10 @@ public class SpellScript : MonoBehaviour
                 SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
 
+            // 자동 화살
+            case SpellNames.Skill_Fire_11:
+                break;
+
             // 운석 충돌
             case SpellNames.Skill_Fire_12:
                 StartCoroutine(Skill_Fire_12());
@@ -176,6 +180,8 @@ public class SpellScript : MonoBehaviour
                 SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
         }
+
+        // 리기드바디 설정
         if(SpellType ==  SpellInfo.SpellType.Launch)
             myRigidbody = GetComponent<Rigidbody2D>();
         else if (SpellType == SpellInfo.SpellType.Toggle || SpellType == SpellInfo.SpellType.Target)  // 토글 공격은 리기드바디가 없음

@@ -9,8 +9,9 @@ Skill_Fire_07,점화,P_Skill_Fire_07,Target,S_Icon_Skill_Fire_07,적의 화상 �
 Skill_Fire_08,분출구,P_Skill_Fire_08,Launch,S_Icon_Skill_Fire_08,사방으로 불꽃을 발사하는 구를 발사한다.,0,0,2,1,Skill_Fire_01
 Skill_Fire_09,화염 토네이도,P_Skill_Fire_09,Launch,S_Icon_Skill_Fire_09,몬스터를 자동으로 추적하여 공격하는 화염 토네이도를 소환한다.,15,1,2,0.2,Skill_Fire_09
 Skill_Fire_10,화염 폭발,P_Skill_Fire_10,AE,S_Icon_Skill_Fire_10,일정 범위에 폭발하는 공격을 한다.,0,0,0,1,Skill_Fire_01
-Skill_Fire_11,자동활,P_Skill_Fire_11,AOE,S_Icon_Skill_Fire_11,사거리 안의 적을 자동으로 공격하는 활을 소환한다.,0,0,0,1,Skill_Fire_01
+Skill_Fire_11,자동활,P_Skill_Fire_11,Turret,S_Icon_Skill_Fire_11,사거리 안의 적을 자동으로 공격하는 활을 소환한다.,0,0,1,1,Skill_Fire_01
 Skill_Fire_12,운석 강타,P_Skill_Fire_12,AE,S_Icon_Skill_Fire_12,거대한 운석이 떨어져 강력한 범위형 대미지를 준다.,0,0,0,1,Skill_Fire_01
 Skill_Fire_13,심판의 창,P_Skill_Fire_13,AE,S_Icon_Skill_Fire_13,거대한 창이 떨어져 강력한 범위형 대미지를 준다.,0,0,10,10,Skill_Fire_01
 Skill_Fire_14,화염 신,None,Buff,S_Icon_Skill_Fire_14,지속 시간 동안 화염 스킬의 쿨타임이 감소하고 화염 스킬의 피해가 증폭 된다.,0,0,0,1,Skill_Fire_14
 Skill_Fire_12_Object,운석,P_Skill_Fire_12_Object,Launch,None,null,0,0,8,0,Skill_Fire_01
+Skill_Public_1,텔레포트,P_Skill_Public_1,Move,S_Icon_Skill_Public_1,일정 거리를 순간이동 한다.,0,0,0,0,Skill_Fire_01

@@ -8,13 +8,14 @@ public class SpellInfo
     {
         #region 스킬 타입
         Launch,
-        Buff,
-        AOE,
-        Toggle,
-        Target,
         AE,
+        AOE,
+        Target,
+        Turret,
+        Toggle,
         Passive,
-        None
+        Buff,
+        Move
         #endregion
     }
     public SpellType Type;

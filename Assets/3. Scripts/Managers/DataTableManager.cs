@@ -128,26 +128,37 @@ public class DataTableManager : MonoBehaviour
                 case "Launch":
                     info.Type = SpellInfo.SpellType.Launch;
                     break;
-                case "Buff":
-                    info.Type = SpellInfo.SpellType.Buff;
-                    break;
-                case "AOE":
-                    info.Type = SpellInfo.SpellType.AOE;
-                    break;
-                case "Toggle":
-                    info.Type = SpellInfo.SpellType.Toggle;
-                    break;
-                case "Target":
-                    info.Type = SpellInfo.SpellType.Target;
-                    break;
+
                 case "AE":
                     info.Type = SpellInfo.SpellType.AE;
                     break;
+
+                case "AOE":
+                    info.Type = SpellInfo.SpellType.AOE;
+                    break;
+
+                case "Target":
+                    info.Type = SpellInfo.SpellType.Target;
+                    break;
+
+                case "Turret":
+                    info.Type = SpellInfo.SpellType.Turret;
+                    break;
+
+                case "Toggle":
+                    info.Type = SpellInfo.SpellType.Toggle;
+                    break;
+
                 case "Passive":
                     info.Type = SpellInfo.SpellType.Passive;
                     break;
+
+                case "Buff":
+                    info.Type = SpellInfo.SpellType.Buff;
+                    break;
+
                 case "None":
-                    info.Type = SpellInfo.SpellType.None;
+                    info.Type = SpellInfo.SpellType.Move;
                     break;
                     #endregion
             }
