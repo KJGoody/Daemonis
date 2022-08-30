@@ -30,6 +30,8 @@ public class BuySellWindow : MonoBehaviour
     [SerializeField] private Text ChangeMent;
     [SerializeField] private Text ChangeText;
 
+    [SerializeField] private Text BuySellButtonText;
+
     private bool WindowState_IsBuy;
 
     private int Bill;
@@ -50,6 +52,7 @@ public class BuySellWindow : MonoBehaviour
         if (WindowState_IsBuy)
         {
             BuySellText.text = "구매";
+            BuySellButtonText.text = "구매";
             CostMent.text = "구매 금액";
             ChangeMent.text = "구매 후 금액";
 
@@ -63,6 +66,7 @@ public class BuySellWindow : MonoBehaviour
                 ItemCountButtons.SetActive(false);
 
             BuySellText.text = "판매";
+            BuySellButtonText.text = "판매";
             CostMent.text = "판매 금액";
             ChangeMent.text = "판매 후 금액";
 

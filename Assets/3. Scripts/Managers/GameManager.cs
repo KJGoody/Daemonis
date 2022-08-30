@@ -358,6 +358,16 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public void _LevelUp()
+    {
+        Player.MyInstance.MyStat.Level += 10;
+    }
+
+    public void _MoneyUp()
+    {
+        DATA.Gold += 10000;
+    }
 }
 
 [System.Serializable]
