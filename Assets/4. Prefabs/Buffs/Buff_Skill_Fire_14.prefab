@@ -134,6 +134,8 @@ MonoBehaviour:
   Duration: 10
   StackText: {fileID: 0}
   BuffStack: 1
+  BuffEffect: {fileID: 2537145060094924388, guid: bf5b54aaa88ffcf4e90ec8974d4317ad,
+    type: 3}
 --- !u!222 &5821058998736763724
 CanvasRenderer:
   m_ObjectHideFlags: 0

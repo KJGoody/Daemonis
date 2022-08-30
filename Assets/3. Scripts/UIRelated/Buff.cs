@@ -33,6 +33,7 @@ public class Buff : MonoBehaviour
 
     private bool InTargetGroup = false;
 
+    [SerializeField] private GameObject BuffEffect;
 
     private void Awake()
     {
@@ -134,10 +135,18 @@ public class Buff : MonoBehaviour
     private void Buff_Skill_Fire_14()
     {
         if (IsActive)
+        {
             Player.MyInstance.BuffxDamage += 10;
+            BuffEffect = Instantiate(BuffEffect, Player.MyInstance.gameObject.transform);
+            BuffEffect.transform.position = BuffEffect.transform.position + new Vector3(0, 1, 0);
+        }
         else
+        {
             Player.MyInstance.BuffxDamage -= 10;
+            Destroy(BuffEffect);
+        }
 
+        
         DeActiveFunc = Buff_Skill_Fire_14;
     }
 

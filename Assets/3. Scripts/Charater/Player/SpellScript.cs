@@ -18,6 +18,7 @@ public class SpellScript : MonoBehaviour
         Skill_Fire_06,
         Skill_Fire_07,
         Skill_Fire_08,
+        Skill_Fire_08_Object,
         Skill_Fire_09,
         Skill_Fire_10,
         Skill_Fire_11,
@@ -54,6 +55,9 @@ public class SpellScript : MonoBehaviour
 
                 case SpellNames.Skill_Fire_08:
                     return "Skill_Fire_08";
+
+                case SpellNames.Skill_Fire_08_Object:
+                    return "Skill_Fire_01";
 
                 case SpellNames.Skill_Fire_09:
                     return "Skill_Fire_09";
@@ -96,7 +100,6 @@ public class SpellScript : MonoBehaviour
     {
         // 스팰 아이디로 기본 정보를 받아온다.
         SpellType = DataTableManager.Instance.GetInfo_Spell(GetName).Type;
-        SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
         Speed = DataTableManager.Instance.GetInfo_Spell(GetName).Speed;
         SpellxDamage = DataTableManager.Instance.GetInfo_Spell(GetName).SpellxDamage;
 
@@ -105,55 +108,72 @@ public class SpellScript : MonoBehaviour
             // 화염구
             case SpellNames.Skill_Fire_01:
                 StartCoroutine(Skill_Fire_01());
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
 
             // 용암지대 
             case SpellNames.Skill_Fire_03:
                 StartCoroutine(Skill_Fire_03());
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
 
             // 피닉스
             case SpellNames.Skill_Fire_04:
                 StartCoroutine(Skill_Fire_04());
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
 
             // 화염 위성
             case SpellNames.Skill_Fire_05:
                 StartCoroutine(Skill_Fire_05());
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
 
             // 용의 숨결
             case SpellNames.Skill_Fire_06:
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
 
             // 점화
             case SpellNames.Skill_Fire_07:
                 Skill_Fire_07();
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound, 0.2f);
                 break;
 
             // 분출구
             case SpellNames.Skill_Fire_08:
                 StartCoroutine(Skill_Fire_08());
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
+                break;
+
+            // 분출구 오브젝트
+            case SpellNames.Skill_Fire_08_Object:
+                StartCoroutine(Skill_Fire_01());
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound, 0.125f);
                 break;
 
             // 화염 토네이도
             case SpellNames.Skill_Fire_09:
                 StartCoroutine(Skill_Fire_09());
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
 
             // 화염 폭발
             case SpellNames.Skill_Fire_10:
                 StartCoroutine(Skill_Fire_10());
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
 
             // 운석 충돌
             case SpellNames.Skill_Fire_12:
                 StartCoroutine(Skill_Fire_12());
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
 
             // 심판의 창
             case SpellNames.Skill_Fire_13:
                 StartCoroutine(Skill_Fire_13());
+                SoundManager.Instance.PlaySFXSound(DataTableManager.Instance.GetInfo_Spell(GetName).Sound);
                 break;
         }
         if(SpellType ==  SpellInfo.SpellType.Launch)
