@@ -1,37 +1,31 @@
 fileFormatVersion: 2
-guid: 8dcc3a41fda3fcd489a7efec5ef40d69
+guid: afd86361a486479419d813245ecf437e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6113454252966460918
-    second: S_Skill_Fire_03_0
+      213: -5365380578202176451
+    second: S_Skill_Fire_07_0
   - first:
-      213: -8473717732997982803
-    second: S_Skill_Fire_03_1
+      213: 6072125190950556776
+    second: S_Skill_Fire_07_1
   - first:
-      213: -1740219906913218783
-    second: S_Skill_Fire_03_2
+      213: -8845609521126420659
+    second: S_Skill_Fire_07_2
   - first:
-      213: 4895983017091537397
-    second: S_Skill_Fire_03_3
+      213: -7539240889572880506
+    second: S_Skill_Fire_07_3
   - first:
-      213: -1879109919734425223
-    second: S_Skill_Fire_03_4
+      213: -77933111259379174
+    second: S_Skill_Fire_07_4
   - first:
-      213: -1411467904708022438
-    second: S_Skill_Fire_03_5
+      213: -391045065727160603
+    second: S_Skill_Fire_07_5
   - first:
-      213: 1980291802903236484
-    second: S_Skill_Fire_03_6
+      213: 2809580988444323279
+    second: S_Skill_Fire_07_6
   - first:
-      213: 5796968126414599202
-    second: S_Skill_Fire_03_7
-  - first:
-      213: -6779196993287451224
-    second: S_Skill_Fire_03_8
-  - first:
-      213: -365882917679407486
-    second: S_Skill_Fire_03_9
+      213: -1868419560256883284
+    second: S_Skill_Fire_07_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -133,7 +127,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: S_Skill_Fire_03_0
+      name: S_Skill_Fire_07_0
       rect:
         serializedVersion: 2
         x: 0
@@ -147,14 +141,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0245555fb5a82ba0800000000000000
-      internalID: -6113454252966460918
+      spriteID: d34ba778ac65a85b0800000000000000
+      internalID: -5365380578202176451
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: S_Skill_Fire_03_1
+      name: S_Skill_Fire_07_1
       rect:
         serializedVersion: 2
         x: 256
@@ -168,14 +162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da51ab51e9e476a80800000000000000
-      internalID: -8473717732997982803
+      spriteID: 8641f4e80b5844450800000000000000
+      internalID: 6072125190950556776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: S_Skill_Fire_03_2
+      name: S_Skill_Fire_07_2
       rect:
         serializedVersion: 2
         x: 512
@@ -189,14 +183,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12fcf59f63f79d7e0800000000000000
-      internalID: -1740219906913218783
+      spriteID: d4f427fa1051e3580800000000000000
+      internalID: -8845609521126420659
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: S_Skill_Fire_03_3
+      name: S_Skill_Fire_07_3
       rect:
         serializedVersion: 2
         x: 768
@@ -210,14 +204,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f916103d9602f340800000000000000
-      internalID: 4895983017091537397
+      spriteID: 68f88e40b5c3f5790800000000000000
+      internalID: -7539240889572880506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: S_Skill_Fire_03_4
+      name: S_Skill_Fire_07_4
       rect:
         serializedVersion: 2
         x: 1024
@@ -231,14 +225,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9791154eb7f0ce5e0800000000000000
-      internalID: -1879109919734425223
+      spriteID: a1ac42b8f302beef0800000000000000
+      internalID: -77933111259379174
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: S_Skill_Fire_03_5
+      name: S_Skill_Fire_07_5
       rect:
         serializedVersion: 2
         x: 1280
@@ -252,14 +246,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5f63004b65796ce0800000000000000
-      internalID: -1411467904708022438
+      spriteID: 5eec926a59ab29af0800000000000000
+      internalID: -391045065727160603
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: S_Skill_Fire_03_6
+      name: S_Skill_Fire_07_6
       rect:
         serializedVersion: 2
         x: 1536
@@ -273,14 +267,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48f4aa717e86b7b10800000000000000
-      internalID: 1980291802903236484
+      spriteID: fcd2aefe503adf620800000000000000
+      internalID: 2809580988444323279
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: S_Skill_Fire_03_7
+      name: S_Skill_Fire_07_7
       rect:
         serializedVersion: 2
         x: 1792
@@ -294,50 +288,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 224343d1cc7f27050800000000000000
-      internalID: 5796968126414599202
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: S_Skill_Fire_03_8
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 0
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ad84b890447be1a0800000000000000
-      internalID: -6779196993287451224
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: S_Skill_Fire_03_9
-      rect:
-        serializedVersion: 2
-        x: 2304
-        y: 0
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 28ed556cc6f1ceaf0800000000000000
-      internalID: -365882917679407486
+      spriteID: ca53f7b2f4a0216e0800000000000000
+      internalID: -1868419560256883284
       vertices: []
       indices: 
       edges: []
@@ -345,7 +297,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 1cd6d46ed75f71448a06d7a5328b6745
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

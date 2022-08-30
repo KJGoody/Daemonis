@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spell : IUseable, IMoveable
 {
     private SpellInfo Info;
+    public string ID { get { return Info.ID; } }
     public void SetSpellInfo(SpellInfo spellInfo) { Info = spellInfo; }
     public SpellInfo.SpellType Type { get { return Info.Type; } }
     public GameObject Prefab { get { return Info.Prefab; } }

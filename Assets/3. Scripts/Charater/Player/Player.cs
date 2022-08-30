@@ -151,14 +151,14 @@ public class Player : Character
             {
                 case "Skill_Fire_07":
                     for (int i = targetGroups.Count - 1; i >= 0; i--)
-                        if (targetGroups[i].GroupName.Equals("Skill_Fire_02_Debuff"))
+                        if (targetGroups[i].GroupName.Equals("Debuff_Skill_Fire_02"))
                             for (int j = targetGroups[i].Targets.Count - 1; j >= 0; j--)
                                 if (Vector2.Distance(transform.position, targetGroups[i].Targets[j].position) < 7)
                                 {
                                     SpellScript spellScript = Instantiate(newSpell.Prefab, targetGroups[i].Targets[j]).GetComponent<SpellScript>();
                                     spellScript.MyTarget = targetGroups[i].Targets[j];
-                                    spellScript.StackxDamage = targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().GetBuff("Skill_Fire_02_Debuff").BuffStack;
-                                    targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().OffBuff("Skill_Fire_02_Debuff");
+                                    spellScript.StackxDamage = targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().GetBuff("Debuff_Skill_Fire_02").BuffStack;
+                                    targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().OffBuff("Debuff_Skill_Fire_02");
                                 }
                     break;
             }

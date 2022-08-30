@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             if (CastingButtons[i].Spell != null)
-                DATA.ActionButtonsData[i] = (CastingButtons[i].Spell as SpellInfo).ID;
+                DATA.ActionButtonsData[i] = (CastingButtons[i].Spell as Spell).ID;
             else
                 DATA.ActionButtonsData[i] = null;
         }

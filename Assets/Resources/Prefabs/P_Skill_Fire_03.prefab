@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 7527969048852949218}
   - component: {fileID: 7089291890261483673}
   - component: {fileID: -4260425782238387153}
+  - component: {fileID: 4272891036293628941}
   m_Layer: 14
   m_Name: P_Skill_Fire_03
   m_TagString: Untagged
@@ -162,12 +163,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: 222672fd7364a7144b32fba544f684e9, type: 3}
+  m_Sprite: {fileID: -6113454252966460918, guid: 8dcc3a41fda3fcd489a7efec5ef40d69,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 8, y: 8.0078125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -184,3 +186,22 @@ SortingGroup:
   m_SortingLayerID: 735885497
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!95 &4272891036293628941
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440346083036277406}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fcd060af34b833546b7b2a3a71800295, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

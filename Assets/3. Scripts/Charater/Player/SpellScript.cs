@@ -50,7 +50,7 @@ public class SpellScript : MonoBehaviour
                     return "Skill_Fire_06";
 
                 case SpellNames.Skill_Fire_07:
-                    return "Skill_Fire_0";
+                    return "Skill_Fire_07";
 
                 case SpellNames.Skill_Fire_08:
                     return "Skill_Fire_08";
@@ -107,7 +107,8 @@ public class SpellScript : MonoBehaviour
                 StartCoroutine(Skill_Fire_01());
                 break;
 
-            case SpellNames.Skill_Fire_03:   // 용암 지대
+            // 용암지대 
+            case SpellNames.Skill_Fire_03:
                 StartCoroutine(Skill_Fire_03());
                 break;
 
@@ -125,8 +126,9 @@ public class SpellScript : MonoBehaviour
             case SpellNames.Skill_Fire_06:
                 break;
 
-            case SpellNames.Skill_Fire_07:   // 점화
-                StartCoroutine(Skill_Fire_07());
+            // 점화
+            case SpellNames.Skill_Fire_07:
+                Skill_Fire_07();
                 break;
 
             // 분출구
@@ -334,12 +336,10 @@ public class SpellScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private IEnumerator Skill_Fire_07()
+    private void Skill_Fire_07()
     {
         SpendDamage(MyTarget.GetComponent<Collider2D>());
         Player.MyInstance.RecoverOnHit();
-        yield return new WaitForSeconds(0.3f);
-        Destroy(gameObject);
     }
 
     private IEnumerator Skill_Fire_08()
