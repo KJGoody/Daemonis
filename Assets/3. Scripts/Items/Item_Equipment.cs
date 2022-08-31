@@ -34,7 +34,6 @@ public class Item_Equipment : Item_Base
     }
     public void ActiveEquipment(bool isActive) // 장비 착용 & 해제
     {
-        Debug.Log(Part);
         // 장비 베이스 스탯 증감
         if (isActive)
             Player.MyInstance.PlusStat(Info.BaseOption, Info.BaseOptionValue);

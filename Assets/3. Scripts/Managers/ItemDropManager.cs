@@ -15,8 +15,6 @@ public class ItemDropManager : MonoBehaviour
         }
     }
     
-    public ItemCart dropItem; // 드랍아이템 프리팹
-
     private float equipmentDropProb = 10; // 장비 드랍 기본확률
     private float EquipmentDropProb // 장비 드랍확률
     {
@@ -28,7 +26,9 @@ public class ItemDropManager : MonoBehaviour
     {   
         if (ChanceMaker.GetThisChanceResult_Percentage(60))
         {
-            ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
+            ItemCart item = Instantiate(Resources.Load<GameObject>("Prefabs/P_DropItem"),
+                dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f),
+                Quaternion.identity).GetComponent<ItemCart>();
             // 골드량 계산식 (((몬스터 레벨 * 기본골드) * 골획 배율) * 난수범위0.9~1.1)
             int randomGold = (int)(((m_Level * baseGold) + (m_Level * baseGold * (Player.MyInstance.MyStat.GoldPlus / 100))) * Random.Range(0.9f, 1.1f));
             item.SetGold(randomGold);
@@ -47,13 +47,17 @@ public class ItemDropManager : MonoBehaviour
     public void DropEquipment(Transform dropPosition, int m_Level)  // 장비 드랍함수
     {
         // 아이템 프리팹 생성
-        ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
+        ItemCart item = Instantiate(Resources.Load<GameObject>("Prefabs/P_DropItem"),
+            dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), 
+            Quaternion.identity).GetComponent<ItemCart>();
         item.SetItem_Equipment(DataTableManager.Instance.GetInfo_Equipment(m_Level), DataTableManager.Instance.GetQuality(m_Level)); // 설정한 정보 아이템에 넣어주기
     }
 
     public void DropPotion(Transform dropPosition, int m_Level)
     {
-        ItemCart item = Instantiate(dropItem, dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), Quaternion.identity).GetComponent<ItemCart>();
+        ItemCart item = Instantiate(Resources.Load<GameObject>("Prefabs/P_DropItem"),
+            dropPosition.position + ((Vector3)Random.insideUnitCircle * 0.5f), 
+            Quaternion.identity).GetComponent<ItemCart>();
         item.SetItem_Consumable(DataTableManager.Instance.GetInfo_Consumable(m_Level), Item_Base.Qualitys.Normal); 
     }
 }

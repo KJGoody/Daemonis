@@ -40,6 +40,18 @@ public class DataTableManager : MonoBehaviour
         return null;
     }
 
+    public List<ItemInfo_Equipment> GetInfo_Equipments(int Level)
+    {
+        if (Level > 50) Level = 50;
+
+        List<ItemInfo_Equipment> array = new List<ItemInfo_Equipment>();
+        foreach (ItemInfo_Equipment Data in EquipmentInfos)
+            if (Data.LimitLevel / 10 == Level / 10)
+                array.Add(Data);
+
+        return array;
+    }
+
     public ItemInfo_Equipment GetInfo_Equipment(int Level)
     {
         if (Level > 50) Level = 50;

@@ -862,9 +862,9 @@ TextureImporter:
       name: ui2_40
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 280
-        width: 36
+        width: 37
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
