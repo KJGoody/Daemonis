@@ -368,6 +368,20 @@ public class GameManager : MonoBehaviour
     {
         DATA.Gold += 10000;
     }
+
+    public void _GetEquipment()
+    {
+        List<ItemInfo_Equipment> array = DataTableManager.Instance.GetInfo_Equipments(Player.MyInstance.MyStat.Level);
+
+        for (int i =0; i < array.Count; i++)
+        {
+            ItemCart dropitem = Instantiate(Resources.Load<GameObject>("Prefabs/P_DropItem"),
+                Player.MyInstance.transform.position + ((Vector3)Random.insideUnitCircle * 0.5f),
+                Quaternion.identity).GetComponent<ItemCart>();
+
+            dropitem.SetItem_Equipment(array[i], DataTableManager.Instance.GetQuality(Player.MyInstance.MyStat.Level));
+        }
+    }
 }
 
 [System.Serializable]
