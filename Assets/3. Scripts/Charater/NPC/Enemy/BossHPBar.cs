@@ -16,14 +16,10 @@ public class BossHPBar : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private Text BossName;
-    [SerializeField]
-    private GameObject CrownIcon;
-    [SerializeField]
-    private Image BossHPBarImage;
-    [SerializeField]
-    private Text BossHPBarText;
+    [SerializeField] private Text BossName;
+    [SerializeField] private GameObject CrownIcon;
+    [SerializeField] private Image BossHPBarImage;
+    [SerializeField] private Text BossHPBarText;
 
     private EnemyBase Parent;
 
