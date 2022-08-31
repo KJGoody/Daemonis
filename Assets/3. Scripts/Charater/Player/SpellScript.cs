@@ -360,7 +360,7 @@ public class SpellScript : MonoBehaviour
 
     private IEnumerator Skill_Fire_03()
     {
-        StartCoroutine(TickDamage(0.5f, 0.5f));
+        StartCoroutine(TickDamage(2.5f, 0.5f));
         yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }
@@ -425,7 +425,7 @@ public class SpellScript : MonoBehaviour
     private IEnumerator Skill_Fire_10()
     {
         yield return new WaitForSeconds(0.04f);
-        StartCoroutine(TickDamage(0.5f, 10f));
+        StartCoroutine(TickDamage(2, 10f));
     }
 
     private IEnumerator Skill_Fire_11()
@@ -489,13 +489,13 @@ public class SpellScript : MonoBehaviour
         yield return new WaitForSeconds(0.85f);
         Destroy(spell.gameObject);
         GetComponent<Animator>().SetTrigger("Start");
-        StartCoroutine(TickDamage(0.5f, 10f));
+        StartCoroutine(TickDamage(2f, 10f));
     }
 
     private IEnumerator Skill_Fire_13()
     {
         yield return new WaitForSeconds(0.03f);
-        StartCoroutine(TickDamage(0.5f, 10f));
+        StartCoroutine(TickDamage(2f, 10f));
     }
 
     private GameObject FindNearestObject()

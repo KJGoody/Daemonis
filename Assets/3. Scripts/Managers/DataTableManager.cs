@@ -255,7 +255,7 @@ public class DataTableManager : MonoBehaviour
                     ItemInfo_Potion info = new ItemInfo_Potion();
                     // ItemInfo_Base;
                     info.ID = DataTable_Consumable[i]["ID"].ToString();
-                    info.Kind = ItemInfo_Base.Kinds.Equipment;
+                    info.Kind = ItemInfo_Base.Kinds.Potion;
                     info.Icon = Resources.Load<Sprite>("Sprites/" + DataTable_Consumable[i]["Icon"].ToString());
                     info.Name = DataTable_Consumable[i]["Name"].ToString();
                     info.Descript = DataTable_Consumable[i]["Effect"].ToString();
