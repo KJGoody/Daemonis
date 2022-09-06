@@ -805,7 +805,7 @@ TextureImporter:
         height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 4, y: 4, z: 4, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -883,10 +883,10 @@ TextureImporter:
       name: ui2_46
       rect:
         serializedVersion: 2
-        x: 3
-        y: 225
-        width: 495
-        height: 29
+        x: 0
+        y: 222
+        width: 500
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -910,7 +910,7 @@ TextureImporter:
         height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 6, z: 6, w: 8}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -925,10 +925,10 @@ TextureImporter:
       name: ui2_76
       rect:
         serializedVersion: 2
-        x: 3
-        y: 150
-        width: 495
-        height: 29
+        x: 0
+        y: 147
+        width: 500
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -946,10 +946,10 @@ TextureImporter:
       name: ui2_91
       rect:
         serializedVersion: 2
-        x: 3
-        y: 115
-        width: 495
-        height: 29
+        x: 0
+        y: 112
+        width: 500
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -973,7 +973,7 @@ TextureImporter:
         height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 7, y: 6, z: 6, w: 8}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -988,10 +988,10 @@ TextureImporter:
       name: ui2_136
       rect:
         serializedVersion: 2
-        x: 3
-        y: 42
-        width: 240
-        height: 29
+        x: 1
+        y: 39
+        width: 244
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

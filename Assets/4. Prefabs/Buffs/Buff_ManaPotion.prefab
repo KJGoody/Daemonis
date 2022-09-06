@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5058824, g: 0.75686276, b: 0.2784314, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -134,6 +134,7 @@ MonoBehaviour:
   Duration: 10
   StackText: {fileID: 0}
   BuffStack: 1
+  BuffEffect: {fileID: 0}
 --- !u!222 &5821058998736763724
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -162,7 +163,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 988388304942147450, guid: 2706cbe210c3061428438916a6a4648b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 241b90eebe0e1f2478e9bd8665684120, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

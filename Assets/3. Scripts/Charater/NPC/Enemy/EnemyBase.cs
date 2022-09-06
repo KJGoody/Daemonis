@@ -165,6 +165,8 @@ public class EnemyBase : Character, INpc
 
     protected virtual IEnumerator Death()
     {
+        InvadeGage.Instance.CurrentValue += 1;
+
         yield return new WaitForSeconds(3f);
         SetLayersRecursively(_prefabs.transform, "None");
 

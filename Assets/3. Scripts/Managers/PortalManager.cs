@@ -72,7 +72,10 @@ public class PortalManager : MonoBehaviour
     public void _UnloadSceneName(string UnloeadSceneName)
     {
         if (SceneManager.GetSceneByName(UnloeadSceneName).IsValid())
+        {
             SceneManager.UnloadSceneAsync(UnloeadSceneName);
+            GameManager.MyInstance.CallUnLoadSceneEvent();
+        }
     }
 
     public void _LoadSceneName(string LoadSceneName)

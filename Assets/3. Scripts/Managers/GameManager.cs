@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour
     Color color;
     [SerializeField] Image fadeIn_IMG;
     [SerializeField] GameObject fadeIn_OBJ;
+    [SerializeField] private GameObject[] dontDestroyObj;
 
     // 저장
     public SaveLoadData DATA;
-
     [HideInInspector] public string CurrnetStageName;
 
     public CastingButton[] CastingButtons;
@@ -35,9 +35,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Player player;
     private INpc currentTarget;
+
     [SerializeField] private GameObject quitPanel;
 
-    [SerializeField] private GameObject[] dontDestroyObj;
+    public delegate void UnLoadScene();
+    public event UnLoadScene UnLoadSceneEvent;
 
     private void Awake()
     {
@@ -177,7 +179,6 @@ public class GameManager : MonoBehaviour
                             // 나오는 것은 List에서는 반대로 저장이 되어 있으므로 반대로 저장해줌
                             for (int j = DATA.I_ItemQuality[i]; j >= 0; j--)
                             {
-                                Debug.Log(j);
                                 AddOptionQuality[j] = (SlotItem as Item_Equipment).addOptionList[j].Quality;
                                 AddOptionNum[j] = (SlotItem as Item_Equipment).addOptionList[j].Num;
                                 AddOptionValue[j] = (SlotItem as Item_Equipment).addOptionList[j].value;
@@ -359,6 +360,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void CallUnLoadSceneEvent()
+    {
+        if(UnLoadSceneEvent != null)
+            UnLoadSceneEvent();
+    }
+
+    //-- 개발 모드 --
     public void _LevelUp()
     {
         Player.MyInstance.MyStat.Level += 10;
