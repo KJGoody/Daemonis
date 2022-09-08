@@ -27,7 +27,7 @@ public class EnemyBase : Character, INpc
 
     private bool IsKnockBack = false;
 
-    protected MonsterGate ParentGate;
+    protected EnemySpawn ParentGate;
 
     [SerializeField]
     protected int EnemyEXP;
@@ -66,11 +66,11 @@ public class EnemyBase : Character, INpc
             switch (enemytype.enemyType)
             {
                 case EnemyType.EnemyTypes.Koblod_Melee:
-                    MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Melee);
+                    EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee);
                     break;
 
                 case EnemyType.EnemyTypes.Koblod_Ranged:
-                    MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Ranged);
+                    EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged);
                     break;
             }
 
@@ -176,11 +176,11 @@ public class EnemyBase : Character, INpc
         switch (enemytype.enemyType)
         {
             case EnemyType.EnemyTypes.Koblod_Melee:
-                MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Melee);
+                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee);
                 break;
 
             case EnemyType.EnemyTypes.Koblod_Ranged:
-                MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Ranged);
+                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged);
                 break;
         }
 
@@ -196,7 +196,7 @@ public class EnemyBase : Character, INpc
             SetLayersRecursively(Child, name);
     }
 
-    public void PositioningEnemyBase(MonsterGate parentGate, Vector3 startPosition)
+    public void PositioningEnemyBase(EnemySpawn parentGate, Vector3 startPosition)
     {
         ParentGate = parentGate;
         myStartPosition = startPosition;

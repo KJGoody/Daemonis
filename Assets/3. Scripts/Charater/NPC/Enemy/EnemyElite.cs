@@ -22,11 +22,11 @@ public class EnemyElite : EnemyBase
             switch (enemytype.enemyType)
             {
                 case EnemyType.EnemyTypes.Koblod_Melee:
-                    MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Melee_Elite);
+                    EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Elite);
                     break;
 
                 case EnemyType.EnemyTypes.Koblod_Ranged:
-                    MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Ranged_Elite);
+                    EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Elite);
                     break;
             }
 
@@ -138,11 +138,11 @@ public class EnemyElite : EnemyBase
         switch (enemytype.enemyType)
         {
             case EnemyType.EnemyTypes.Koblod_Melee:
-                MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Melee_Elite);
+                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Elite);
                 break;
 
             case EnemyType.EnemyTypes.Koblod_Ranged:
-                MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Ranged_Elite);
+                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Elite);
                 break;
         }
 

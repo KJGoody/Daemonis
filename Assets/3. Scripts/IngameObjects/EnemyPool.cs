@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class MonsterPoolQueue
+public class EnemyPoolQueue
 {
     public Queue<EnemyBase> EnemyScripts;
 
-    public MonsterPoolQueue()
+    public EnemyPoolQueue()
     {
         EnemyScripts = new Queue<EnemyBase>();
     }
 }
 
-public class MonsterPool : MonoBehaviour
+public class EnemyPool : MonoBehaviour
 {
-    private static MonsterPool instance;
-    public static MonsterPool Instance
+    private static EnemyPool instance;
+    public static EnemyPool Instance
     {
         get
         {
             if (instance == null)
-                instance = FindObjectOfType<MonsterPool>();
+                instance = FindObjectOfType<EnemyPool>();
             return instance;
         }
     }
@@ -29,7 +29,7 @@ public class MonsterPool : MonoBehaviour
     [SerializeField]
     private GameObject[] MonsterPrefab;
     [SerializeField]
-    private MonsterPoolQueue[] MonsterPoolQueues;
+    private EnemyPoolQueue[] EnemyPoolQueues;
 
     public enum MonsterPrefabName
     {
@@ -43,9 +43,9 @@ public class MonsterPool : MonoBehaviour
 
     private void Awake()
     {
-        MonsterPoolQueues = new MonsterPoolQueue[MonsterPrefab.Length];
-        for (int i = 0; i < MonsterPoolQueues.Length; i++)
-            MonsterPoolQueues[i] = new MonsterPoolQueue();
+        EnemyPoolQueues = new EnemyPoolQueue[MonsterPrefab.Length];
+        for (int i = 0; i < EnemyPoolQueues.Length; i++)
+            EnemyPoolQueues[i] = new EnemyPoolQueue();
 
         Initialize(20, MonsterPrefabName.Kobold_Melee);
         Initialize(10, MonsterPrefabName.Kobold_Melee_Elite);
@@ -58,7 +58,7 @@ public class MonsterPool : MonoBehaviour
     private void Initialize(int initCount, MonsterPrefabName index)
     {
         for (int i = 0; i < initCount; i++)
-            MonsterPoolQueues[(int)index].EnemyScripts.Enqueue(CreateNewObject(index));
+            EnemyPoolQueues[(int)index].EnemyScripts.Enqueue(CreateNewObject(index));
     }
 
     private EnemyBase CreateNewObject(MonsterPrefabName index)
@@ -71,9 +71,9 @@ public class MonsterPool : MonoBehaviour
 
     public EnemyBase GetObject(MonsterPrefabName index)
     {
-        if (MonsterPoolQueues[(int)index].EnemyScripts.Count > 0)
+        if (EnemyPoolQueues[(int)index].EnemyScripts.Count > 0)
         {
-            var obj = MonsterPoolQueues[(int)index].EnemyScripts.Dequeue();
+            var obj = EnemyPoolQueues[(int)index].EnemyScripts.Dequeue();
             obj.transform.SetParent(null);
             obj.gameObject.SetActive(true);
             return obj;
@@ -91,6 +91,6 @@ public class MonsterPool : MonoBehaviour
     {
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(transform);
-        MonsterPoolQueues[(int)index].EnemyScripts.Enqueue(obj);
+        EnemyPoolQueues[(int)index].EnemyScripts.Enqueue(obj);
     }
 }

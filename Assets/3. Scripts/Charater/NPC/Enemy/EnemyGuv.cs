@@ -22,11 +22,11 @@ public class EnemyGuv : EnemyBase
             switch (enemytype.enemyType)
             {
                 case EnemyType.EnemyTypes.Koblod_Melee:
-                    MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Melee_Guv);
+                    EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Guv);
                     break;
 
                 case EnemyType.EnemyTypes.Koblod_Ranged:
-                    MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Ranged_Guv);
+                    EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Guv);
                     break;
             }
 
@@ -138,11 +138,11 @@ public class EnemyGuv : EnemyBase
         switch (enemytype.enemyType)
         {
             case EnemyType.EnemyTypes.Koblod_Melee:
-                MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Melee_Guv);
+                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Guv);
                 break;
 
             case EnemyType.EnemyTypes.Koblod_Ranged:
-                MonsterPool.Instance.ReturnObject(this, MonsterPool.MonsterPrefabName.Kobold_Ranged_Guv);
+                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Guv);
                 break;
         }
 
