@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class GNode
 {
-    public bool IsWall;
+    public enum LayerTypes { None, Floor, Water, Wall };
+    public LayerTypes LayerType;
     public Vector3 WorldPos;
     public int Gridx;
     public int Gridy;
 
-    public GNode(bool isWall, Vector3 worldPos, int gridx, int gridy)
+    public GNode(LayerTypes layerType, Vector3 worldPos, int gridx, int gridy)
     {
-        IsWall = isWall;
+        LayerType = layerType;
         WorldPos = worldPos;
         Gridx = gridx;
         Gridy = gridy;
@@ -20,17 +21,17 @@ public class GNode
 
 public class EnemySpawn : MonoBehaviour
 {
-    private int TotalEnemyNum;
+    private int MaxEnemyNum;
+    private int LimitCurrentEnemyNum;
     [HideInInspector] public int CurrentEnemyNum;
-    [HideInInspector] public int DeathEnemyNum = 0;
 
-    private int TotalEliteNum;
+    [HideInInspector] public int TotalEliteNum;
     [HideInInspector] public int CurrnentEliteNum;
-    [HideInInspector] public int DeathEliteNum = 0;
 
-    private int TotalGuvNum = 0;
+    [HideInInspector] public int TotalGuvNum = 0;
     [HideInInspector] public int CurrnetGuvNum;
-    [HideInInspector] public int DeathGuvNum = 0;
+
+    private bool EndSpawn = false;
 
     private GNode[,] Grid;
     private Vector3 GridCenter;
@@ -52,70 +53,58 @@ public class EnemySpawn : MonoBehaviour
             for (int y = 0; y < GridSizeY; y++)
             {
                 worldPosition = worldBottomLeft + Vector3.right * (x + Radius) + Vector3.up * (y + Radius);
-                bool iswall = Physics2D.OverlapCircle(worldPosition, Radius - 0.1f, LayerMask.GetMask("Wall"));    // 해당 노드의 레이어 확인
-                if (!iswall)
-                    iswall = Physics2D.OverlapCircle(worldPosition, Radius - 0.1f, LayerMask.GetMask("Water"));    // 해당 노드의 레이어 확인
-
-                Grid[x, y] = new GNode(iswall, worldPosition, x, y);
+                GNode.LayerTypes layerType;
+                if (Physics2D.OverlapCircle(worldPosition, Radius - 0.1f, LayerMask.GetMask("Floor")))    // 해당 노드의 레이어 확인
+                    layerType = GNode.LayerTypes.Floor;
+                else if (Physics2D.OverlapCircle(worldPosition, Radius - 0.1f, LayerMask.GetMask("Wall")))    // 해당 노드의 레이어 확인
+                    layerType = GNode.LayerTypes.Wall;
+                else if (Physics2D.OverlapCircle(worldPosition, Radius - 0.1f, LayerMask.GetMask("Water")))    // 해당 노드의 레이어 확인
+                    layerType = GNode.LayerTypes.Water;
+                else
+                    layerType = GNode.LayerTypes.None;
+                Grid[x, y] = new GNode(layerType, worldPosition, x, y);
             }
     }
 
-    private Coroutine CurrentCoroutine;
-
     private void Start()
     {
+        MaxEnemyNum = 80;
+        LimitCurrentEnemyNum = 20;
         TotalEliteNum = Random.Range(0, 3 + 1);
         if (ChanceMaker.GetThisChanceResult_Percentage(25))
             TotalGuvNum = 1;
         CreateGrid();
+        StartCoroutine(SpawnEnemy());
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        if (collision.CompareTag("Player") && CurrentCoroutine == null)
-            CurrentCoroutine = StartCoroutine(SponeEnemy());
+        if (EndSpawn)
+            if (LimitCurrentEnemyNum > CurrentEnemyNum)
+                StartCoroutine(SpawnEnemy());
     }
 
-    public void OnTriggerExit2D(Collider2D collision)
+    private IEnumerator SpawnEnemy()
     {
-        if (collision.CompareTag("Player") && CurrentCoroutine != null)
+        while (CurrentEnemyNum < MaxEnemyNum)
         {
-            StopCoroutine(CurrentCoroutine);
-            TotalEnemyNum = 0;
-            CurrentCoroutine = null;
-        }
-
-    }
-
-    private IEnumerator SponeEnemy()
-    {
-        while (TotalEnemyNum < 15 - DeathEnemyNum)
-        {
-            if (DeathEnemyNum >= 15)
-                Destroy(gameObject);
-
-            if (CurrentEnemyNum < 15)
+            GNode newStartPosition;
+            do
             {
-                GNode newStartPosition;
-                do
-                {
-                    newStartPosition = Grid[Random.Range(0, GridSizeX), Random.Range(0, GridSizeY)];
-                } while (newStartPosition.IsWall);
+                newStartPosition = Grid[Random.Range(0, GridSizeX), Random.Range(0, GridSizeY)];
+            } while (newStartPosition.LayerType != GNode.LayerTypes.Floor);
 
-                PositioningEnemy(newStartPosition.WorldPos);
+            PositioningEnemy(newStartPosition.WorldPos);
 
-                TotalEnemyNum++;
-                CurrentEnemyNum++;
-                yield return new WaitForSeconds(0.01f);
-            }
-            else
-                yield return new WaitForSeconds(0.1f);
+            CurrentEnemyNum++;
+            yield return new WaitForSeconds(0.01f);
         }
+        EndSpawn = true;
     }
 
     private void PositioningEnemy(Vector3 newworldposition)
     {
-        if (TotalGuvNum - DeathGuvNum > CurrnetGuvNum)
+        if (TotalGuvNum > CurrnetGuvNum)
         {
             if (ChanceMaker.GetThisChanceResult_Percentage(50))
                 EnemyPool.Instance.GetObject(EnemyPool.MonsterPrefabName.Kobold_Melee_Guv).PositioningEnemyBase(this, newworldposition);
@@ -126,7 +115,7 @@ public class EnemySpawn : MonoBehaviour
             return;
         }
 
-        if (TotalEliteNum - DeathEliteNum > CurrnentEliteNum)
+        if (TotalEliteNum > CurrnentEliteNum)
         {
             if (ChanceMaker.GetThisChanceResult_Percentage(50))
                 EnemyPool.Instance.GetObject(EnemyPool.MonsterPrefabName.Kobold_Melee_Elite).PositioningEnemyBase(this, newworldposition);

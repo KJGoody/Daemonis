@@ -174,7 +174,7 @@ public class DataTableManager : MonoBehaviour
                     break;
                     #endregion
             }
-            info.Prefab = Resources.Load<GameObject>("Prefabs/" + DataTable_Spell[i]["Prefab"].ToString());
+            info.Prefab = Resources.Load<GameObject>("Prefabs/Skills/" + DataTable_Spell[i]["Prefab"].ToString());
             info.Icon = Resources.Load<Sprite>("Sprites/" + DataTable_Spell[i]["Icon"].ToString());
             info.Name = DataTable_Spell[i]["Name"].ToString();
             info.Description = DataTable_Spell[i]["Description"].ToString();

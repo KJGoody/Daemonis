@@ -16,25 +16,25 @@ public class EnemyGuv : EnemyBase
             currentState.Update();
         }
 
-        if (Vector2.Distance(transform.position, Player.MyInstance.transform.position) > 10)
-        {
-            ChangeState(new IdleState());
-            switch (enemytype.enemyType)
-            {
-                case EnemyType.EnemyTypes.Koblod_Melee:
-                    EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Guv);
-                    break;
+        //if (Vector2.Distance(transform.position, Player.MyInstance.transform.position) > 10)
+        //{
+        //    ChangeState(new IdleState());
+        //    switch (enemytype.enemyType)
+        //    {
+        //        case EnemyType.EnemyTypes.Koblod_Melee:
+        //            EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Guv);
+        //            break;
 
-                case EnemyType.EnemyTypes.Koblod_Ranged:
-                    EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Guv);
-                    break;
-            }
+        //        case EnemyType.EnemyTypes.Koblod_Ranged:
+        //            EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Guv);
+        //            break;
+        //    }
 
-            InitializeEnemyBase();
-            ParentGate.CurrentEnemyNum--;
+        //    InitializeEnemyBase();
+        //    ParentGate.CurrentEnemyNum--;
 
-            ParentGate.CurrnetGuvNum--;
-        }
+        //    ParentGate.CurrnetGuvNum--;
+        //}
 
         HandleLayers();
 
@@ -129,6 +129,12 @@ public class EnemyGuv : EnemyBase
 
     protected override IEnumerator Death()
     {
+        InvadeGage.Instance.CurrentValue += 1;
+        ParentGate.CurrentEnemyNum--;
+
+        ParentGate.TotalGuvNum++;
+        ParentGate.CurrnetGuvNum--;
+
         yield return new WaitForSeconds(3f);
         SetLayersRecursively(_prefabs.transform, "None");
 
@@ -147,10 +153,5 @@ public class EnemyGuv : EnemyBase
         }
 
         InitializeEnemyBase();
-        ParentGate.CurrentEnemyNum--;
-        ParentGate.DeathEnemyNum++;
-
-        ParentGate.CurrnetGuvNum--;
-        ParentGate.DeathGuvNum++;
     }
 }

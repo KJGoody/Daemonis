@@ -396,22 +396,22 @@ public class SpellScript : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
 
-            SpellScript spell_1 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            SpellScript spell_1 = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
             spell_1.Direction = new Vector2(Direction.x, Direction.y);  // 정방향
-            SpellScript spell_2 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            SpellScript spell_2 = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
             spell_2.Direction = new Vector2(Direction.y, -Direction.x);  // 우측
-            SpellScript spell_3 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            SpellScript spell_3 = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
             spell_3.Direction = new Vector2(-Direction.x, -Direction.y);  // 하단
-            SpellScript spell_4 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            SpellScript spell_4 = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
             spell_4.Direction = new Vector2(-Direction.y, Direction.x);  // 좌측
 
-            SpellScript spell_5 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            SpellScript spell_5 = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
             spell_5.Direction = new Vector2(Direction.x + Direction.y, Direction.y - Direction.x);  // 우측 상단
-            SpellScript spell_6 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            SpellScript spell_6 = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
             spell_6.Direction = new Vector2(Direction.y - Direction.x, -Direction.x - Direction.y);  // 우측 하단
-            SpellScript spell_7 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            SpellScript spell_7 = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
             spell_7.Direction = new Vector2(-Direction.x - Direction.y, -Direction.y + Direction.x);  // 좌측 하단
-            SpellScript spell_8 = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            SpellScript spell_8 = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_08_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
             spell_8.Direction = new Vector2(-Direction.y + Direction.x, Direction.x + Direction.y);  // 좌측 상단
         }
     }
@@ -466,7 +466,7 @@ public class SpellScript : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
 
             // 화살 발사
-            SpellScript spell = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_11_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
+            SpellScript spell = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_11_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
             spell.Direction = Direction;
             if(MyTarget != null)
                 spell.MyTarget = MyTarget;
@@ -482,7 +482,7 @@ public class SpellScript : MonoBehaviour
 
     private IEnumerator Skill_Fire_12()
     {
-        SpellScript spell = Instantiate(Resources.Load<GameObject>("Prefabs/P_Skill_Fire_12_Object"), 
+        SpellScript spell = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_12_Object"), 
             new Vector2(transform.position.x - 5, transform.position.y + 5), 
             Quaternion.identity).GetComponent<SpellScript>();
         spell.Direction = new Vector2(-spell.transform.position.x + transform.position.x, -spell.transform.position.y + transform.position.y);

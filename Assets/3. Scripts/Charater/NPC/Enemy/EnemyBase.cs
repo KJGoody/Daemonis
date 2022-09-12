@@ -49,6 +49,11 @@ public class EnemyBase : Character, INpc
         base.Start();
     }
 
+    private void OnEnable()
+    {
+        MyTarget = Player.MyInstance.transform;
+    }
+
     protected override void Update()
     {
         if (IsAlive)
@@ -60,23 +65,23 @@ public class EnemyBase : Character, INpc
             currentState.Update();
         }
 
-        if(Vector2.Distance(transform.position, Player.MyInstance.transform.position) > 10)
-        {
-            ChangeState(new IdleState());
-            switch (enemytype.enemyType)
-            {
-                case EnemyType.EnemyTypes.Koblod_Melee:
-                    EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee);
-                    break;
+        //if(Vector2.Distance(transform.position, Player.MyInstance.transform.position) > 10)
+        //{
+        //    ChangeState(new IdleState());
+        //    switch (enemytype.enemyType)
+        //    {
+        //        case EnemyType.EnemyTypes.Koblod_Melee:
+        //            EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee);
+        //            break;
 
-                case EnemyType.EnemyTypes.Koblod_Ranged:
-                    EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged);
-                    break;
-            }
+        //        case EnemyType.EnemyTypes.Koblod_Ranged:
+        //            EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged);
+        //            break;
+        //    }
 
-            InitializeEnemyBase();
-            ParentGate.CurrentEnemyNum--;
-        }
+        //    InitializeEnemyBase();
+        //    ParentGate.CurrentEnemyNum--;
+        //}
 
         base.Update();
     }
@@ -166,6 +171,7 @@ public class EnemyBase : Character, INpc
     protected virtual IEnumerator Death()
     {
         InvadeGage.Instance.CurrentValue += 1;
+        ParentGate.CurrentEnemyNum--;
 
         yield return new WaitForSeconds(3f);
         SetLayersRecursively(_prefabs.transform, "None");
@@ -185,8 +191,6 @@ public class EnemyBase : Character, INpc
         }
 
         InitializeEnemyBase();
-        ParentGate.CurrentEnemyNum--;
-        ParentGate.DeathEnemyNum++;
     }
 
     protected void SetLayersRecursively(Transform Object, string name)

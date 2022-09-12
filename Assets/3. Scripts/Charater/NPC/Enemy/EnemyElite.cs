@@ -16,25 +16,25 @@ public class EnemyElite : EnemyBase
             currentState.Update();
         }
 
-        if (Vector2.Distance(transform.position, Player.MyInstance.transform.position) > 10)
-        {
-            ChangeState(new IdleState());
-            switch (enemytype.enemyType)
-            {
-                case EnemyType.EnemyTypes.Koblod_Melee:
-                    EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Elite);
-                    break;
+        //if (Vector2.Distance(transform.position, Player.MyInstance.transform.position) > 10)
+        //{
+        //    ChangeState(new IdleState());
+        //    switch (enemytype.enemyType)
+        //    {
+        //        case EnemyType.EnemyTypes.Koblod_Melee:
+        //            EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Elite);
+        //            break;
 
-                case EnemyType.EnemyTypes.Koblod_Ranged:
-                    EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Elite);
-                    break;
-            }
+        //        case EnemyType.EnemyTypes.Koblod_Ranged:
+        //            EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Elite);
+        //            break;
+        //    }
 
-            InitializeEnemyBase();
-            ParentGate.CurrentEnemyNum--;
+        //    InitializeEnemyBase();
+        //    ParentGate.CurrentEnemyNum--;
 
-            ParentGate.CurrnentEliteNum--;
-        }
+        //    ParentGate.CurrnentEliteNum--;
+        //}
 
         HandleLayers();
 
@@ -129,6 +129,12 @@ public class EnemyElite : EnemyBase
 
     protected override IEnumerator Death()
     {
+        InvadeGage.Instance.CurrentValue += 1;
+        ParentGate.CurrentEnemyNum--;
+
+        ParentGate.TotalEliteNum++; 
+        ParentGate.CurrnentEliteNum--;
+
         yield return new WaitForSeconds(3f);
         SetLayersRecursively(_prefabs.transform, "None");
 
@@ -147,10 +153,5 @@ public class EnemyElite : EnemyBase
         }
 
         InitializeEnemyBase();
-        ParentGate.CurrentEnemyNum--;
-        ParentGate.DeathEnemyNum++;
-
-        ParentGate.CurrnentEliteNum--;
-        ParentGate.DeathEliteNum++;
     }
 }
