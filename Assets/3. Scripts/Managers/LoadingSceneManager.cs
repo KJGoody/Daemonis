@@ -23,10 +23,10 @@ public class LoadingSceneManager : MonoBehaviour
     public static void LoadScene(string sceneNmae)
     {
         nextScene = sceneNmae;
-        SceneManager.LoadSceneAsync("LoadingScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("4.LoadingScene", LoadSceneMode.Additive);
     }
 
-    public void InitScene() // ¾À ±³Ã¼ ½Ã ÃÊ±âÈ­
+    private void InitScene() // ¾À ±³Ã¼ ½Ã ÃÊ±âÈ­
     {
         Player.MyInstance.transform.position = new Vector3(0, 0, 0);
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
@@ -41,7 +41,7 @@ public class LoadingSceneManager : MonoBehaviour
         }
     }
 
-    IEnumerator LoadScene() // ¾À ·Îµù
+    private IEnumerator LoadScene() // ¾À ·Îµù
     {
         yield return null;
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive);
@@ -57,7 +57,7 @@ public class LoadingSceneManager : MonoBehaviour
             if (time > 2.5f)
             {
                 op.allowSceneActivation = true;
-                SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("LoadingScene"));
+                SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("4.LoadingScene"));
                 GameManager.MyInstance.StartCoroutine(GameManager.MyInstance.FadeIn());
             }
 

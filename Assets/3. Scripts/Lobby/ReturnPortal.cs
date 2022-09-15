@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class ReturnPortal : MonoBehaviour
 {
-    [HideInInspector]
-    public string UnLoadSceneName;
-    [HideInInspector]
-    public string LoadSceneName;
+    [HideInInspector] public string UnLoadSceneName;
+    [HideInInspector] public string LoadSceneName;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -81,7 +81,7 @@ public class ItemCart : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && IsLooting)
         {
             // 골드 Or 설정한 아이템 등급 아이템만 획득
             if (Kind == Kinds.Gold || OptionPanel.MyInstance.lootingQuality[(int)item.Quality])
@@ -100,12 +100,14 @@ public class ItemCart : MonoBehaviour
                         // 인벤토리에 아이템 추가
                         switch (item.Kind)
                         {
-                            case ItemInfo_Base.Kinds.Potion:
-                                InventoryScript.MyInstance.AddItem(item, true);
+                            case ItemInfo_Base.Kinds.Equipment:
+                                InventoryScript.MyInstance.AddItem(item);
+                                Looting.Instance.LootingSlotNum--;
                                 break;
 
-                            default:
-                                InventoryScript.MyInstance.AddItem(item);
+                            case ItemInfo_Base.Kinds.Potion:
+                                InventoryScript.MyInstance.AddItem(item, true);
+                                Looting.Instance.LootingCansStackNum--;
                                 break;
                         }
                         // 아이템 획득 알림

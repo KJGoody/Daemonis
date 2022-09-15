@@ -11,7 +11,7 @@ public class ChestPanel : MonoBehaviour
         {
             if(instance == null)
                 instance = FindObjectOfType<ChestPanel>();
-            return Instance;
+            return instance;
         }
     }
 

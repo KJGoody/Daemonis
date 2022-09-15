@@ -39,7 +39,11 @@ public class NewText : MonoBehaviour
     private IEnumerator ReturnObject()
     {
         yield return new WaitForSeconds(1);
-        NewTextPool.Instance.ReturnObject(this, TextType);
+
+        if (NewTextPool.Instance == null)
+            Destroy(gameObject);
+        else
+            NewTextPool.Instance.ReturnObject(this, TextType);
     }
 
     public void PositioningDamageText(Transform Position)
