@@ -16,26 +16,6 @@ public class EnemyGuv : EnemyBase
             currentState.Update();
         }
 
-        //if (Vector2.Distance(transform.position, Player.MyInstance.transform.position) > 10)
-        //{
-        //    ChangeState(new IdleState());
-        //    switch (enemytype.enemyType)
-        //    {
-        //        case EnemyType.EnemyTypes.Koblod_Melee:
-        //            EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Guv);
-        //            break;
-
-        //        case EnemyType.EnemyTypes.Koblod_Ranged:
-        //            EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Guv);
-        //            break;
-        //    }
-
-        //    InitializeEnemyBase();
-        //    ParentGate.CurrentEnemyNum--;
-
-        //    ParentGate.CurrnetGuvNum--;
-        //}
-
         HandleLayers();
 
         RegenTime += Time.deltaTime;
@@ -102,8 +82,8 @@ public class EnemyGuv : EnemyBase
                 myRigid2D.velocity = direction;
 
                 // EnemyBase TakeDamage ºÎºÐ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                Player.MyInstance.SpendEXP(EnemyEXP);
-                ChangeState(new IdleState());
+                Player.MyInstance.SpendEXP(enemytype.EXP);
+                ChangeState(new FollowState());
 
                 SoundManager.Instance.PlaySFXSound("BodyExploding" + Random.Range(1, 3));
                 _prefabs.PlayAnimation(2);

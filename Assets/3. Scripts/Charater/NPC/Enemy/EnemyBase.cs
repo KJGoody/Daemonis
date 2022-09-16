@@ -5,45 +5,30 @@ using UnityEngine.Rendering;
 
 public class EnemyBase : Character, INpc
 {
-    [HideInInspector]
-    public EnemyType enemytype;
+    [HideInInspector] public EnemyType enemytype;
     protected IState currentState;
 
-    [HideInInspector]
-    public Vector3 myStartPosition;
-    [SerializeField]
-    protected GameObject HealthBarImage;
+    [SerializeField] protected GameObject HealthBarImage;
     public Transform ExitPoint;
-    [HideInInspector]
-    public float RubbingTime = 0f;
 
-    [HideInInspector]
-    public float myAggroRange;
-    [HideInInspector]
-    public float myAttackRange;
+    [HideInInspector] public float myAttackRange;
 
-    [HideInInspector]
-    public float MyAttackTime = 1000f;
+    [HideInInspector] public float MyAttackTime = 1000f;
 
     private bool IsKnockBack = false;
 
     protected EnemySpawn ParentGate;
 
-    [SerializeField]
-    protected int EnemyEXP;
-
     protected override void Awake()
     {
-        enemytype = gameObject.GetComponent<EnemyType>();
-        myStartPosition = transform.position;
+        enemytype = GetComponent<EnemyType>();
 
         base.Awake();
     }
 
     protected override void Start()
     {
-        ChangeState(new IdleState());
-        myAggroRange = enemytype.AggroRnage;
+        ChangeState(new FollowState());
         myAttackRange = enemytype.AttackRnage;
 
         base.Start();
@@ -59,29 +44,10 @@ public class EnemyBase : Character, INpc
         if (IsAlive)
         {
             if (!IsAttacking)
-            {
                 MyAttackTime += Time.deltaTime;
-            }
+            
             currentState.Update();
         }
-
-        //if(Vector2.Distance(transform.position, Player.MyInstance.transform.position) > 10)
-        //{
-        //    ChangeState(new IdleState());
-        //    switch (enemytype.enemyType)
-        //    {
-        //        case EnemyType.EnemyTypes.Koblod_Melee:
-        //            EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee);
-        //            break;
-
-        //        case EnemyType.EnemyTypes.Koblod_Ranged:
-        //            EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged);
-        //            break;
-        //    }
-
-        //    InitializeEnemyBase();
-        //    ParentGate.CurrentEnemyNum--;
-        //}
 
         base.Update();
     }
@@ -89,11 +55,8 @@ public class EnemyBase : Character, INpc
     protected override void FixedUpdate()
     {
         if (!IsKnockBack)
-        {
             base.FixedUpdate();
-        }
     }
-
 
     public void ChangeState(IState newState)
     {
@@ -102,6 +65,11 @@ public class EnemyBase : Character, INpc
 
         currentState = newState;
         currentState.Enter(this);
+    }
+
+    public void SetTarget(Transform target)
+    {
+        if (MyTarget == null) MyTarget = target;
     }
 
     public virtual Transform Select()
@@ -131,8 +99,8 @@ public class EnemyBase : Character, INpc
 
         if (stat.CurrentHealth <= 0)
         {
-            Player.MyInstance.SpendEXP(EnemyEXP);
-            ChangeState(new IdleState());
+            Player.MyInstance.SpendEXP(enemytype.EXP);
+            ChangeState(new FollowState());
 
             SoundManager.Instance.PlaySFXSound("BodyExploding" + Random.Range(1, 3));
             _prefabs.PlayAnimation(2);
@@ -150,6 +118,7 @@ public class EnemyBase : Character, INpc
         }
     }
 
+
     protected IEnumerator KnockBack(Vector2 direction, float force) // ÇÇ°Ý ½Ã ³Ë¹é
     {
         IsKnockBack = true;
@@ -160,13 +129,6 @@ public class EnemyBase : Character, INpc
         IsKnockBack = false;
     }
 
-    public void SetTarget(Transform target)
-    {
-        if (MyTarget == null)
-        {
-            MyTarget = target;
-        }
-    }
 
     protected virtual IEnumerator Death()
     {
@@ -203,13 +165,12 @@ public class EnemyBase : Character, INpc
     public void PositioningEnemyBase(EnemySpawn parentGate, Vector3 startPosition)
     {
         ParentGate = parentGate;
-        myStartPosition = startPosition;
         transform.position = startPosition;
 
-        if(ChanceMaker.GetThisChanceResult_Percentage(50))
-            SoundManager.Instance.PlaySFXSound("MoiusesquealSound" + Random.Range(1, 5));
+        if (ChanceMaker.GetThisChanceResult_Percentage(50))
+            SoundManager.Instance.PlaySFXSound(enemytype.Sound + Random.Range(1, 5));
     }
-    
+
     public void InitializeEnemyBase()
     {
         MyStat.InitializeHealth();

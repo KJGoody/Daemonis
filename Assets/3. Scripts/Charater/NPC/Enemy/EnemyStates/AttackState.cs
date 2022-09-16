@@ -21,29 +21,15 @@ public class AttackState : IState
 
     public void Update()
     {
-        if (parent.MyTarget != null)
+        float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);
+        // 공격거리 보다 멀리있으면 Follow 상태로 변경한다.
+        if (distance >= parent.myAttackRange * 1.1f && !parent.IsAttacking) // 플레이어 사거리 + 공격 여유 거리(플레이어 사거리 * 0.1f) = 플레이어 인식 벗어나는 거리
         {
-            float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);
-            // 공격거리 보다 멀리있으면 Follow 상태로 변경한다.
-            if (distance >= parent.myAttackRange * 1.1f && !parent.IsAttacking) // 플레이어 사거리 + 공격 여유 거리(플레이어 사거리 * 0.1f) = 플레이어 인식 벗어나는 거리
-            {
-                parent.ChangeState(new FollowState());
-            }
-        }
-        else
-        {
-            // 공격 중에 타겟이 없으면 Idle상태로 변경한다.
-            parent.ChangeState(new IdleState());
+            parent.ChangeState(new FollowState());
         }
 
-        if (parent.MyTarget != null)
-        {
-            // 공격시 플레이어 시선처리
-            if ((parent.MyTarget.transform.position - parent.transform.position).x > 0)
-                parent._prefabs.transform.localScale = new Vector3(-1, 1, 1);
-            else if ((parent.MyTarget.transform.position - parent.transform.position).x < 0)
-                parent._prefabs.transform.localScale = new Vector3(1, 1, 1);
-        }
+        // 공격시 플레이어 시선처리
+        parent.LookAtTarget();
 
         if (parent.MyAttackTime >= attackCooldown && !parent.IsAttacking)
         {

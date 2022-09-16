@@ -10,8 +10,7 @@ public abstract class Character : MonoBehaviour
     protected Rigidbody2D myRigid2D;
     public SPUM_Prefabs _prefabs;
     public SPUM_SpriteList _spriteList;
-    [SerializeField]
-    protected Transform hitBox; // 캐릭터 히트박스
+    [SerializeField] protected Transform hitBox; // 캐릭터 히트박스
 
     // 애니메이션
     public enum LayerName { idle = 0, move = 1, attack = 4, death = 2, }
@@ -35,20 +34,14 @@ public abstract class Character : MonoBehaviour
         set { direction = value; }
     }
 
-    [HideInInspector]
-    public Transform MyTarget;
+    [HideInInspector] public Transform MyTarget;
 
-    [HideInInspector]
-    public bool IsRushing;
-    [HideInInspector]
-    public float RushSpeed = 0f;
+    [HideInInspector] public bool IsRushing;
+    [HideInInspector] public float RushSpeed = 0f;
 
-    [SerializeField]
-    private BuffManager buffManager;
-    [HideInInspector]
-    public List<Buff> OnBuff = new List<Buff>();
-    [HideInInspector]
-    public float BuffxDamage = 1;
+    [SerializeField] private BuffManager buffManager;
+    [HideInInspector] public List<Buff> OnBuff = new List<Buff>();
+    [HideInInspector] public float BuffxDamage = 1;
     protected float DebuffxDamage = 1;
 
     public Rigidbody2D rigid2D
@@ -143,7 +136,7 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    public virtual void LookAtTarget() // 타겟 바라보기
+    public void LookAtTarget() // 타겟 바라보기
     {
         if ((MyTarget.transform.position - transform.position).x > 0)
             _prefabs.transform.localScale = new Vector3(-1, 1, 1);
@@ -226,7 +219,7 @@ public abstract class Character : MonoBehaviour
         {
             float PureDamage = pureDamage * DebuffxDamage;
             int Damage = 0;
-            switch (damageType) 
+            switch (damageType)
             {
                 case DamageType.Physic:
                     Damage = (int)Mathf.Floor((PureDamage * (PureDamage / (PureDamage + stat.BaseDefence + 1)) + (Random.Range(-pureDamage, pureDamage) / 10)) * LevelGapxDamage(FromLevel, MyStat.Level));
