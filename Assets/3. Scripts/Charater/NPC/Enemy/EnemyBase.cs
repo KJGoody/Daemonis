@@ -29,7 +29,7 @@ public class EnemyBase : Character, INpc
     protected override void Start()
     {
         ChangeState(new FollowState());
-        myAttackRange = enemytype.AttackRnage;
+        myAttackRange = enemytype.AttackRange;
 
         base.Start();
     }
@@ -143,12 +143,28 @@ public class EnemyBase : Character, INpc
 
         switch (enemytype.enemyType)
         {
-            case EnemyType.EnemyTypes.Koblod_Melee:
+            case EnemyType.EnemyTypes.Enemy_1_Koblod_Melee_Normal:
                 EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee);
                 break;
 
-            case EnemyType.EnemyTypes.Koblod_Ranged:
+            case EnemyType.EnemyTypes.Enemy_1_Kobold_Melee_Elite:
+                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Elite);
+                break;
+
+            case EnemyType.EnemyTypes.Enemy_1_Kobold_Melee_Guv:
+                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Guv);
+                break;
+
+            case EnemyType.EnemyTypes.Enemy_1_Kobold_Ranged_Normal:
                 EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged);
+                break;
+
+            case EnemyType.EnemyTypes.Enemy_1_Kobold_Ranged_Elite:
+                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Elite);
+                break;
+
+            case EnemyType.EnemyTypes.Enemy_1_Kobold_Ranged_Guv:
+                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Guv);
                 break;
         }
 

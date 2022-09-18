@@ -1,7 +1,7 @@
-﻿ID,Name,Sound,AttackRange,AttackDelay,EXP,Attack,MaxHealth,MoveSpeed,HitPercent
-Enemy_1_Kobold_Melee_Normal,코블드 근거리,Sound_Kobold,0.75,1,1,30,800,2,95
-Enemy_1_Kobold_Melee_Elite,코블드 근거리,Sound_Kobold,0.75,1,1,45,2400,2,95
-Enemy_1_Kobold_Melee_Guv,코블드 근거리,Sound_Kobold,0.75,1,1,60,6400,2,95
-Enemy_1_Kobold_Ranged_Normal,코블드 원거리,Sound_Kobold,3,2,1,20,600,2,95
-Enemy_1_Kobold_Ranged_Elite,코블드 원거리,Sound_Kobold,3,2,1,30,1800,2,95
-Enemy_1_Kobold_Ranged_Guv,코블드 원거리,Sound_Kobold,3,2,1,40,4200,2,95
+﻿ID,Name,Sound,AttackType,AttackRange,AttackDelay,EXP,Attack,MaxHealth,MoveSpeed,HitPercent
+Enemy_1_Kobold_Melee_Normal,코블드 근거리,Sound_Kobold,BaseMelee,0.75,1,1,30,800,2,95
+Enemy_1_Kobold_Melee_Elite,코블드 근거리,Sound_Kobold,BaseMelee,0.75,1,1,45,2400,2,95
+Enemy_1_Kobold_Melee_Guv,코블드 근거리,Sound_Kobold,BaseMelee,0.75,1,1,60,6400,2,95
+Enemy_1_Kobold_Ranged_Normal,코블드 원거리,Sound_Kobold,Kobold_Ranged,3,2,1,20,600,2,95
+Enemy_1_Kobold_Ranged_Elite,코블드 원거리,Sound_Kobold,Kobold_Ranged,3,2,1,30,1800,2,95
+Enemy_1_Kobold_Ranged_Guv,코블드 원거리,Sound_Kobold,Kobold_Ranged,3,2,1,40,4200,2,95

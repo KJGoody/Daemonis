@@ -11,89 +11,71 @@ public class EnemyAttack : MonoBehaviour
         BaseRushAttack,
         BaseAOEAttack,                         // 장판을 소환하고 일정시간마다 장판오브젝트를 생성해서 플레이어에게 데미지를 준다.
         BaseAEAttack,                         // 장판 공격의 실질적 데미지
-        Kobold_Melee_Attack,
-        Kobold_Ranged_Attack
+        Kobold_Ranged
     }
-    [SerializeField]
-    private EnemyAttackType enemyAttackType;
-    private bool IsAOEAttack = false;
+    [SerializeField] private EnemyAttackType enemyAttackType;
 
-    [HideInInspector]
-    public EnemyBase parent;
+    [HideInInspector] public EnemyBase parent;
 
     private Transform MyTarget;
     private Vector3 direction;
 
     private Rigidbody2D myRigidbody;
-    [SerializeField]
-    private float speed;
+    [SerializeField] private float speed;
     private int AttackxDamage;
 
 
     private void Awake()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
+        
         MyTarget = GameObject.Find("Player").GetComponent<Transform>();
         direction = MyTarget.position - transform.position;
-        
+
     }
 
     private void Start()
     {
+        AttackxDamage = 1;
+
         switch (enemyAttackType)
         {
             case EnemyAttackType.BaseMeleeAttack:
-                AttackxDamage = 1;
+                myRigidbody = GetComponent<Rigidbody2D>();
                 StartCoroutine(BaseMeleeAttack());
                 break;
 
             case EnemyAttackType.BaseRangedAttack:
-                AttackxDamage = 1;
+            case EnemyAttackType.Kobold_Ranged:
+                myRigidbody = GetComponent<Rigidbody2D>();
                 StartCoroutine(BaseRangedAttack());
                 break;
 
-            case EnemyAttackType.BaseRushAttack:
-                AttackxDamage = 1;
-                StartCoroutine(BaseRushAttack());
-                break;
-
             case EnemyAttackType.BaseAOEAttack:
-                IsAOEAttack = true;
-                this.GetComponent<SpriteRenderer>().enabled = false;
-                AttackxDamage = 1;
+                GetComponent<SpriteRenderer>().enabled = false;
                 StartCoroutine(BaseAOEAttack());
                 break;
 
             case EnemyAttackType.BaseAEAttack:
-                AttackxDamage = 1;
                 StartCoroutine(BaseAEAttack());
                 break;
-
-            case EnemyAttackType.Kobold_Melee_Attack:
-                AttackxDamage = 1;
-                StartCoroutine(Kobold_Melee_Attack());
-                break;
-
-            case EnemyAttackType.Kobold_Ranged_Attack:
-                AttackxDamage = 1;
-                StartCoroutine(Kobold_Ranged_Attack());
-                break;
         }
-
     }
 
     private void FixedUpdate()
     {
-        if (enemyAttackType.Equals(EnemyAttackType.Kobold_Ranged_Attack))
+        switch (enemyAttackType)
         {
-            myRigidbody.velocity = direction.normalized * speed;
-            transform.Rotate(new Vector3(0, 0, Time.deltaTime * -600));
-        }
-        else
-        {
-            myRigidbody.velocity = direction.normalized * speed;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            case EnemyAttackType.BaseRangedAttack:
+                myRigidbody.velocity = direction.normalized * speed;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                break;
+
+            case EnemyAttackType.BaseMeleeAttack:
+            case EnemyAttackType.Kobold_Ranged:
+                myRigidbody.velocity = direction.normalized * speed;
+                transform.Rotate(new Vector3(0, 0, Time.deltaTime * -600));
+                break;
         }
     }
 
@@ -102,12 +84,9 @@ public class EnemyAttack : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
             Destroy(gameObject);
 
-        if (collision.CompareTag("Player") && !IsAOEAttack)
+        if (collision.CompareTag("Player"))
         {
             SpendDamage(collision);
-            speed = 0;
-            myRigidbody.velocity = Vector3.zero;
-            MyTarget = null;
             Destroy(gameObject);
         }
     }
@@ -120,38 +99,29 @@ public class EnemyAttack : MonoBehaviour
         character.TakeDamage(Character.DamageType.Physic, parent.MyStat.HitPercent, PureDamage, parent.MyStat.Level, direction, NewTextPool.NewTextPrefabsName.Player);            // 데미지 전송
     }
 
-    IEnumerator BaseMeleeAttack()
+    private IEnumerator BaseMeleeAttack()
     {
         yield return new WaitForSeconds(0.15f);     // 객체 생존시간
         Destroy(gameObject);
     }
 
-    IEnumerator BaseRangedAttack()
+    private IEnumerator BaseRangedAttack()
     {
         yield return new WaitForSeconds(10);
         Destroy(gameObject);
     }
 
-    IEnumerator BaseRushAttack()
-    {
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
-    }
-
-    IEnumerator BaseAOEAttack()
+    private IEnumerator BaseAOEAttack()
     {
         float AOERadius = 0.5f;     // 장판 범위   
         int AOETimes = 5;           // 장판 피격 횟수
         float AOEWaitForSeconds = 0.5f;     // 다음 피격 시간
 
-            // 위험지역 표시
-        WarningArea warningarea = Instantiate(Resources.Load("EnemyAttack/WaringArea") as GameObject, transform).GetComponent<WarningArea>();
-        warningarea.destroyTime = 1f;
-        yield return new WaitForSeconds(1f + 0.5f);
-        this.GetComponent<SpriteRenderer>().enabled = true;
+        // 위험지역 표시
+        yield return StartCoroutine(WarningArea(1));
 
         // AOE 공격 시작
-        for(int i = 0; i < AOETimes; i++)
+        for (int i = 0; i < AOETimes; i++)
         {
             Collider2D collider = Physics2D.OverlapCircle(transform.position, AOERadius, LayerMask.GetMask("Player"));
             if (collider != null)
@@ -162,21 +132,17 @@ public class EnemyAttack : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator BaseAEAttack()
+    private IEnumerator BaseAEAttack()
     {
         yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
 
-    private IEnumerator Kobold_Melee_Attack()
+    private IEnumerator WarningArea(int destoryseconds)
     {
-        yield return new WaitForSeconds(0.15f);     // 객체 생존시간
-        Destroy(gameObject);
-    }
-
-    private IEnumerator Kobold_Ranged_Attack()
-    {
-        yield return new WaitForSeconds(100000);
-        Destroy(gameObject);
+        WarningArea warningarea = Instantiate(Resources.Load("EnemyAttack/WaringArea") as GameObject, transform).GetComponent<WarningArea>();
+        warningarea.destroyTime = destoryseconds;
+        yield return new WaitForSeconds(destoryseconds + 0.5f);
+        GetComponent<SpriteRenderer>().enabled = true;
     }
 }

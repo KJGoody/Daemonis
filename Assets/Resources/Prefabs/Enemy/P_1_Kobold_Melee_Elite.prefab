@@ -189,13 +189,13 @@ GameObject:
   - component: {fileID: 894972729840216767}
   - component: {fileID: 7782529544631918906}
   - component: {fileID: 1530950419950964358}
-  - component: {fileID: 4277402539058028038}
+  - component: {fileID: 2864731036773692271}
   - component: {fileID: 9198583228697994435}
   - component: {fileID: 894972729840216755}
   - component: {fileID: 894972729840216764}
   - component: {fileID: 773316890317846061}
   m_Layer: 6
-  m_Name: Kobold_Melee(Guv)
+  m_Name: P_1_Kobold_Melee_Elite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,7 +210,7 @@ Transform:
   m_GameObject: {fileID: 894972729840216760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7823382231672393959}
   - {fileID: 969211591644480493}
@@ -232,12 +232,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05a2d85ef7c3974889c64301465a79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 4
-  EnemyName: 
-  enemyGrade: 2
-  ExitPoint: {x: 0, y: 0, z: 0}
+  enemyType: 5
+  ID: 
+  Name: 
+  Sound: 
+  AttackType: 0
   AttackRnage: 0
   AttackDelay: 0
+  EXP: 0
 --- !u!114 &1530950419950964358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,12 +255,12 @@ MonoBehaviour:
   HealthBar: {fileID: 894972730622518897}
   ManaBar: {fileID: 0}
   ExpBar: {fileID: 0}
-  level: 4
+  level: 1
   levelUpEXP: 0
   currentEXP: 0
-  attack: 60
+  attack: 45
   attackPercent: 0
-  maxHealth: 6400
+  maxHealth: 2400
   maxHealthPercent: 0
   currentHealth: 0
   maxMana: 0
@@ -288,7 +290,7 @@ MonoBehaviour:
   expPlus: 0
   vampiricRate: 0
   potionCooldown: 0
---- !u!114 &4277402539058028038
+--- !u!114 &2864731036773692271
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,7 +299,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 894972729840216760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b35f3dd51d61a4daf3f0eac32148b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d18a4d4d13d8c246ac2702ceff3053f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _prefabs: {fileID: 7823382231672393956}
@@ -311,12 +313,10 @@ MonoBehaviour:
   OnBuff: []
   BuffxDamage: 1
   enemytype: {fileID: 0}
-  myStartPosition: {x: 0, y: 0, z: 0}
   HealthBarImage: {fileID: 894972729353884794}
   ExitPoint: {fileID: 3774030598729366747}
   myAttackRange: 0
   MyAttackTime: 1000
-  EnemyEXP: 3
 --- !u!70 &9198583228697994435
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -838,7 +838,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4f254edd6dbeb0443a6352b01d23ff2a, type: 2}
+      objectReference: {fileID: 2100000, guid: 11ed277869b077e4aaf6191cbed0a409, type: 2}
     - target: {fileID: 2422605159496279674, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -863,12 +863,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 79127f4156dfa454eba5aa1d91518b55, type: 2}
+      objectReference: {fileID: 2100000, guid: 12e936e444225b84e87e887442a9361d, type: 2}
     - target: {fileID: 2422605159743333857, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4f254edd6dbeb0443a6352b01d23ff2a, type: 2}
+      objectReference: {fileID: 2100000, guid: 11ed277869b077e4aaf6191cbed0a409, type: 2}
     - target: {fileID: 2422605160853478630, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -878,12 +878,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4f254edd6dbeb0443a6352b01d23ff2a, type: 2}
+      objectReference: {fileID: 2100000, guid: 11ed277869b077e4aaf6191cbed0a409, type: 2}
     - target: {fileID: 3995800191093290477, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4f254edd6dbeb0443a6352b01d23ff2a, type: 2}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 6987801306918981021, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1038,12 +1038,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e40738ebaef98e4468362d9df488c135, type: 2}
+      objectReference: {fileID: 2100000, guid: 5d7e4821c564244499fe3f75f7137933, type: 2}
     - target: {fileID: 6987801308185098018, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e9808edf22a92f14aaf1d90c7342becd, type: 2}
+      objectReference: {fileID: 2100000, guid: 33140c05593cbbc4d904783bc1a9ce69, type: 2}
     - target: {fileID: 6987801308273629815, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1053,12 +1053,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e40738ebaef98e4468362d9df488c135, type: 2}
+      objectReference: {fileID: 2100000, guid: 5d7e4821c564244499fe3f75f7137933, type: 2}
     - target: {fileID: 6987801308337685585, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: 973294658573d9d4d98ca06e339d76f8, type: 2}
     - target: {fileID: 6987801308469234165, guid: 76af63be2e62e8443b5a065c1e5fa8be,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

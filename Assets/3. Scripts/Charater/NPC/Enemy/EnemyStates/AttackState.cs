@@ -35,60 +35,52 @@ public class AttackState : IState
         {
             parent.MyAttackTime = 0;
             parent.IsAttacking = true;
-            switch (parent.enemytype.enemyType)                       // 애니미타입에 따라 공격 모션을 다르게 설정
+            switch (parent.enemytype.AttackType)                       // 애니미타입에 따라 공격 모션을 다르게 설정
             {
-                case EnemyType.EnemyTypes.BaseMelee:
+                case EnemyTypeInfo.AttackTypes.BaseMelee:
                     parent.StartCoroutine(meleeAttack());
                     break;
 
-                case EnemyType.EnemyTypes.BaseRanged:
+                case EnemyTypeInfo.AttackTypes.BaseRanged:
                     parent.StartCoroutine(rangedAttack());
                     break;
 
-                case EnemyType.EnemyTypes.BaseRush:
-                    parent.StartCoroutine(RushAttack());
-                    break;
-
-                case EnemyType.EnemyTypes.BaseAOE:
+                case EnemyTypeInfo.AttackTypes.BaseAOE:
                     parent.StartCoroutine(AOEAttack());
                     break;
 
-                case EnemyType.EnemyTypes.Koblod_Melee:
-                    parent.StartCoroutine(Kobold_Melee_Attack());
-                    break;
-
-                case EnemyType.EnemyTypes.Koblod_Ranged:
-                    parent.StartCoroutine(Kobold_Ranged_Attack());
+                case EnemyTypeInfo.AttackTypes.Kobold_Ranged:
+                    parent.StartCoroutine(Kobold_Ranged());
                     break;
             }
         }
     }
 
-    IEnumerator meleeAttack()
+    private IEnumerator meleeAttack()
     {
         yield return new WaitForSeconds(0.5f); // 선딜
         parent._prefabs.PlayAnimation(4);
 
         yield return new WaitForSeconds(0.15f); // 애니메이션 내려찍기 시작
-        parent.InstantiateAttack(Resources.Load("Character/EnemyAttack/BaseMelee_Attack") as GameObject, parent.ExitPoint);
+        parent.InstantiateAttack(Resources.Load("Prefabs/EnemyAttack/P_A_BaseMelee") as GameObject, parent.ExitPoint);
         yield return new WaitForSeconds(0.15f); // 애니메이션 종료
 
         parent.IsAttacking = false;
     }
 
-    IEnumerator rangedAttack()
+    private IEnumerator rangedAttack()
     {
         yield return new WaitForSeconds(0.5f); // 선딜
         parent._prefabs.PlayAnimation(5);
 
         yield return new WaitForSeconds(0.2f);
-        parent.InstantiateAttack(Resources.Load("Character/EnemyAttack/BaseRanged_Attack") as GameObject, parent.ExitPoint);
+        parent.InstantiateAttack(Resources.Load("Prefabs/EnemyAttack/P_A_BaseRanged") as GameObject, parent.ExitPoint);
         yield return new WaitForSeconds(0.1f);
 
         parent.IsAttacking = false;
     }
 
-    IEnumerator RushAttack()
+    private IEnumerator RushAttack()
     {
         parent._prefabs.PlayAnimation(4);           // 선딜 모션
         yield return new WaitForSeconds(1f);        // 선딜
@@ -97,7 +89,7 @@ public class AttackState : IState
         parent.gameObject.layer = 7;                // Rushing레이어로 바꾸기, 플레이어와 충돌무시
         parent.Direction = parent.MyTarget.transform.position - parent.transform.position;
         parent.RushSpeed = 7f;
-        parent.InstantiateAttack(Resources.Load("Character/EnemyAttack/BaseRush_Attack") as GameObject, parent.ExitPoint);
+        parent.InstantiateAttack(Resources.Load("Prefabs/EnemyAttack/BaseRush_Attack") as GameObject, parent.ExitPoint);
         yield return new WaitForSeconds(0.5f);
 
         parent.Direction = Vector2.zero;
@@ -106,34 +98,23 @@ public class AttackState : IState
         parent.IsAttacking = false;
     }
 
-    IEnumerator AOEAttack()
+    private IEnumerator AOEAttack()
     {
         yield return new WaitForSeconds(0.5f); // 선딜
         parent._prefabs.PlayAnimation(6);
         yield return new WaitForSeconds(1f);
-        parent.InstantiateAttack(Resources.Load("Character/EnemyAttack/BaseAOE_Attack") as GameObject, parent.MyTarget);
+        parent.InstantiateAttack(Resources.Load("Prefabs/EnemyAttack/P_A_BaseAOE") as GameObject, parent.MyTarget);
         parent.IsAttacking = false;
     }
 
-    private IEnumerator Kobold_Melee_Attack()
-    {
-        yield return new WaitForSeconds(0.5f); // 선딜
-        parent._prefabs.PlayAnimation(4);
-
-        yield return new WaitForSeconds(0.15f); // 애니메이션 내려찍기 시작
-        parent.InstantiateAttack(Resources.Load("Character/EnemyAttack/Kobold_Melee_Attack") as GameObject, parent.ExitPoint);
-        yield return new WaitForSeconds(0.15f); // 애니메이션 종료
-
-        parent.IsAttacking = false;
-    }
-
-    private IEnumerator Kobold_Ranged_Attack()
+    private IEnumerator Kobold_Ranged()
     {
         yield return new WaitForSeconds(0.5f); // 선딜
         parent._prefabs.PlayAnimation(4);
 
         yield return new WaitForSeconds(0.15f);
-        parent.InstantiateAttack(Resources.Load("Character/EnemyAttack/Kobold_Ranged_Attack") as GameObject, parent.ExitPoint);        yield return new WaitForSeconds(0.15f);
+        parent.InstantiateAttack(Resources.Load("Prefabs/EnemyAttack/P_A_Kobold_Ranged") as GameObject, parent.ExitPoint);      
+        yield return new WaitForSeconds(0.15f);
 
         parent.IsAttacking = false;
     }

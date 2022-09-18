@@ -109,29 +109,9 @@ public class EnemyElite : EnemyBase
 
     protected override IEnumerator Death()
     {
-        InvadeGage.Instance.CurrentValue += 1;
-        ParentGate.CurrentEnemyNum--;
-
         ParentGate.TotalEliteNum++; 
         ParentGate.CurrnentEliteNum--;
 
-        yield return new WaitForSeconds(3f);
-        SetLayersRecursively(_prefabs.transform, "None");
-
-        yield return new WaitForSeconds(0.2f);
-        SetLayersRecursively(_prefabs.transform, "Default");
-
-        switch (enemytype.enemyType)
-        {
-            case EnemyType.EnemyTypes.Koblod_Melee:
-                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Elite);
-                break;
-
-            case EnemyType.EnemyTypes.Koblod_Ranged:
-                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Elite);
-                break;
-        }
-
-        InitializeEnemyBase();
+        yield return StartCoroutine(base.Death());
     }
 }

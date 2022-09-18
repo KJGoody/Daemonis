@@ -19,6 +19,7 @@ public class DataTableManager : MonoBehaviour
     public SpellInfo[] SpellInfos { get { return spellInfos; } }
     private ItemInfo_Equipment[] EquipmentInfos;
     private ItemInfo_Consumable[] ConsumalbeInfos;
+    private EnemyTypeInfo[] EnemyInfos;
 
     private List<Dictionary<string, object>> QualityProb; // 장비 등급 확률표
 
@@ -101,6 +102,15 @@ public class DataTableManager : MonoBehaviour
         return array[RandomNum];
     }
 
+    public EnemyTypeInfo GetEnemyType(string strEnemyType)
+    {
+        foreach (EnemyTypeInfo Data in EnemyInfos)
+            if (Data.ID == strEnemyType)
+                return Data;
+
+        return null;
+    }
+
     public Item_Base.Qualitys GetQuality(int Level)
     {
         if (Level > 50) Level = 50;
@@ -119,6 +129,7 @@ public class DataTableManager : MonoBehaviour
         LoadDataTable_SpellInfo();
         LoadDataTable_EquipmentInfo();
         LoadDataTable_Consumable();
+        LoadDataTable_Enemy();
         QualityProb = CSVReader.Read("EquipmentQualityProb"); // 장비 등급 확률표 읽어옴
     }
 
@@ -270,6 +281,35 @@ public class DataTableManager : MonoBehaviour
                     ConsumalbeInfos[i] = info;
                     break;
             }
+        }
+    }
+
+    private void LoadDataTable_Enemy()
+    {
+        List<Dictionary<string, object>> DataTable_Enemy = CSVReader.Read("DataTable_Enemy");
+        EnemyInfos = new EnemyTypeInfo[DataTable_Enemy.Count];
+
+        for (int i = 0; i < DataTable_Enemy.Count; i++)
+        {
+            EnemyTypeInfo info = new EnemyTypeInfo();
+            info.ID = DataTable_Enemy[i]["ID"].ToString();
+            info.Name = DataTable_Enemy[i]["Name"].ToString();
+            info.Sound = DataTable_Enemy[i]["Sound"].ToString();
+            switch (DataTable_Enemy[i]["AttackType"].ToString())
+            {
+                case "BaseMelee":
+                    info.AttackType = EnemyTypeInfo.AttackTypes.BaseMelee;
+                    break;
+
+                case "Kobold_Ranged":
+                    info.AttackType = EnemyTypeInfo.AttackTypes.Kobold_Ranged;
+                    break;
+            }
+            info.AttackRange = float.Parse(DataTable_Enemy[i]["AttackRange"].ToString());
+            info.AttackDelay = float.Parse(DataTable_Enemy[i]["AttackDelay"].ToString());
+            info.EXP = int.Parse(DataTable_Enemy[i]["EXP"].ToString());
+
+            EnemyInfos[i] = info;
         }
     }
 }

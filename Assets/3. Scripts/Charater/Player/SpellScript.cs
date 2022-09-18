@@ -225,7 +225,7 @@ public class SpellScript : MonoBehaviour
                     if (GameObject.FindWithTag("Enemy") != null)
                     {
                         if (FindNearestObject() != null)
-                            MyTarget = FindNearestObject().transform.Find("HitBox").transform;
+                            MyTarget = FindNearestObject().transform.Find("EnemyHitBox").transform;
                         else
                             MyTarget = null;
                     }
@@ -448,7 +448,7 @@ public class SpellScript : MonoBehaviour
                 if (GameObject.FindWithTag("Enemy") != null)
                 {
                     if (FindNearestObject() != null)
-                        MyTarget = FindNearestObject().transform.Find("HitBox").transform;
+                        MyTarget = FindNearestObject().transform.Find("EnemyHitBox").transform;
                     else
                         MyTarget = null;
                 }
@@ -500,7 +500,7 @@ public class SpellScript : MonoBehaviour
 
     private GameObject FindNearestObject()
     {
-        Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, 7, LayerMask.GetMask("HitBox"));
+        Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, 7, LayerMask.GetMask("EnemyHitBox"));
 
         List<GameObject> objects = new List<GameObject>();
         for (int i = 0; i < collisions.Length; i++)
@@ -524,7 +524,7 @@ public class SpellScript : MonoBehaviour
     {
         while (true)
         {
-            Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, Radius, LayerMask.GetMask("HitBox"));
+            Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, Radius, LayerMask.GetMask("EnemyHitBox"));
             if (collisions != null)
             {
                 for (int j = 0; j < collisions.Length; j++)

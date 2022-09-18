@@ -116,7 +116,7 @@ public class Player : Character
     private GameObject FindNearestObject() // 가까운 적 타겟팅
     {
         // 확인 범위
-        Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, 7, LayerMask.GetMask("HitBox"));
+        Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, 7, LayerMask.GetMask("EnemyHitBox"));
 
         List<GameObject> objects = new List<GameObject>();
         for (int i = 0; i < collisions.Length; i++)

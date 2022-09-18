@@ -21,12 +21,12 @@ TagManager:
   - Minimap
   - PlayerCam
   - FindCollider
-  - HitBox
-  - AttackCollider
+  - EnemyHitBox
+  - PlayerAttack
   - TargetCollider
   - PlayerHitBox
   - None
-  - 
+  - EnemyAttack
   - 
   - 
   - 

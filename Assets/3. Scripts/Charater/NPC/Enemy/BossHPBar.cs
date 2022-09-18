@@ -94,7 +94,7 @@ public class BossHPBar : MonoBehaviour
             {
                 if (Target == target)
                     SetValue();
-                else if ((int)target.GetComponent<EnemyType>().enemyGrade >= (int)Target.GetComponent<EnemyType>().enemyGrade)
+                else if (target.GetComponent<EnemyType>().EnemeyGade.Length <= Target.GetComponent<EnemyType>().EnemeyGade.Length)
                 {
                     Target = target;
                     SetValue();
@@ -120,16 +120,16 @@ public class BossHPBar : MonoBehaviour
 
     private void InitializeBossHPBar()
     {
-        switch (Target.GetComponent<EnemyType>().enemyGrade)
+        switch (Target.GetComponent<EnemyType>().EnemeyGade)
         {
-            case EnemyType.EnemyGrade.Elite:
+            case "Elite":
                 // 이름 표시 예: 코볼드 근거리 LV.1 (정예)
                 BossName.text = Target.GetComponent<EnemyType>().Name + " LV." + Target.MyStat.Level + " (정예)";
                 BossName.color = Color.yellow;
                 CrownIcon.SetActive(false);
                 break;
 
-            case EnemyType.EnemyGrade.Guv:
+            case "Guv":
                 BossName.text = Target.GetComponent<EnemyType>().Name + " LV." + Target.MyStat.Level + " (우두머리)";
                 CrownIcon.SetActive(true);
                 BossName.color = Color.red;
