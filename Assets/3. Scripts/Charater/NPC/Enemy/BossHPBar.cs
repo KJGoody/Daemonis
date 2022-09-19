@@ -20,6 +20,7 @@ public class BossHPBar : MonoBehaviour
     [SerializeField] private GameObject CrownIcon;
     [SerializeField] private Image BossHPBarImage;
     [SerializeField] private Text BossHPBarText;
+    [SerializeField] private Text Buff;
 
     private EnemyBase Target;
 
@@ -31,11 +32,20 @@ public class BossHPBar : MonoBehaviour
 
     private void Update()
     {
-        if(Target != null && Target.gameObject.activeSelf == false)
+        if(Target != null)
+        {
+            if (Target.gameObject.activeSelf == false || !Target.IsAlive)
+            {
+                Target = null;
+                IsFix = false;
+            }
+        }
+        else
         {
             Target = null;
             IsFix = false;
         }
+
         if (CurrentFill != BossHPBarImage.fillAmount)
             BossHPBarImage.fillAmount = Mathf.Lerp(BossHPBarImage.fillAmount, CurrentFill, Time.deltaTime);
     }
@@ -136,5 +146,13 @@ public class BossHPBar : MonoBehaviour
                 break;
         }
         BossHPBarImage.fillAmount = CurrenBossHPValue / BossHPMaxValue;
+
+        string BuffList = "";
+        for(int i = 0; i < Target.OnBuff.Count; i++)
+        {
+            if(Target.OnBuff[i].BuffText != "")
+                BuffList += Target.OnBuff[i].BuffText + ", ";
+        }
+        Buff.text = BuffList.Substring(0, BuffList.Length -2);
     }
 }

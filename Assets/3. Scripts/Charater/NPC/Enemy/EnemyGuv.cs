@@ -24,11 +24,11 @@ public class EnemyGuv : EnemyBase
                 break;
         }
 
-        int temp = 0;
+        int temp;
         do
         {
             temp = Random.Range(0, 3);
-        } while (randomnum != temp);
+        } while (randomnum == temp);
 
         switch (temp)
         {
