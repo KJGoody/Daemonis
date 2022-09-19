@@ -3074,7 +3074,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Act_1_7
+          m_StringArgument: Act_2_7
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &126172077
@@ -10269,7 +10269,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Act_1_3
+          m_StringArgument: Act_2_3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &333855668
@@ -16524,10 +16524,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chestPanael: {fileID: 544136145}
+  InventoryPanel: {fileID: 0}
   Joystick: {fileID: 408552650}
   EquipButton: {fileID: 499693168}
   PutButton: {fileID: 1768730279}
   SelectItem: {fileID: 1740403458}
+  ChestSlots: []
 --- !u!225 &544136145
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -20130,7 +20132,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Act_1_9
+          m_StringArgument: Act_2_9
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &710027710
@@ -21308,7 +21310,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Act_1_6
+          m_StringArgument: Act_2_6
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &741505197
@@ -23158,7 +23160,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793317085}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1183.0122, y: -597.3589, z: -10}
+  m_LocalPosition: {x: -1183.012, y: -597.3589, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 900256415}
@@ -30040,7 +30042,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Act_1_2
+          m_StringArgument: Act_2_2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1013056949
@@ -37164,7 +37166,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Act_1_5
+          m_StringArgument: Act_2_5
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1300523895
@@ -40438,7 +40440,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Act_1_10
+          m_StringArgument: Act_2_10
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1465032880
@@ -42075,7 +42077,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Act_1_1
+          m_StringArgument: Act_2_1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1520487037
@@ -43077,7 +43079,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2059058357}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.67857146
+  m_Size: 0.6785714
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -44135,7 +44137,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Act_1_8
+          m_StringArgument: Act_2_8
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1569253666
@@ -45283,7 +45285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598727260}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1183.0122, y: -597.3589, z: -10}
+  m_LocalPosition: {x: -1183.012, y: -597.3589, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1675068945}
@@ -52762,7 +52764,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Act_1_4
+          m_StringArgument: Act_2_4
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1873240878
