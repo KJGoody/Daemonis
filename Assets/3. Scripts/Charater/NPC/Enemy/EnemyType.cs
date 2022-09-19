@@ -76,6 +76,7 @@ public class EnemyType : MonoBehaviour
     private EnemyTypeInfo Info;
     public string ID { get { return Info.ID; } }
     public string Name { get { return Info.Name; } }
+    public GameObject Prefab { get { return Info.Prefab; } }
     public string Sound { get { return Info.Sound; } }
     public EnemyTypeInfo.AttackTypes AttackType { get { return Info.AttackType; } }
     public float AttackRange { get { return Info.AttackRange; } }

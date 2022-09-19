@@ -5,6 +5,47 @@ using UnityEngine.Rendering;
 
 public class EnemyGuv : EnemyBase
 {
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        int randomnum = Random.Range(0, 3);
+        switch (randomnum)
+        {
+            case 1:
+                NewBuff("B_E_Dodge");
+                break;
+
+            case 2:
+                NewBuff("B_E_Angry");
+                break;
+
+            case 3:
+                NewBuff("B_E_Recovery");
+                break;
+        }
+
+        int temp = 0;
+        do
+        {
+            temp = Random.Range(0, 3);
+        } while (randomnum != temp);
+
+        switch (temp)
+        {
+            case 1:
+                NewBuff("B_E_Dodge");
+                break;
+
+            case 2:
+                NewBuff("B_E_Angry");
+                break;
+
+            case 3:
+                NewBuff("B_E_Recovery");
+                break;
+        }
+    }
+
     protected override void Update()
     {
         if (IsAlive)
@@ -105,13 +146,5 @@ public class EnemyGuv : EnemyBase
         else
             NEWText(TextType);
         // Character TakeDamge ºÎºÐ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    }
-
-    protected override IEnumerator Death()
-    {
-        ParentGate.TotalGuvNum++;
-        ParentGate.CurrnetGuvNum--;
-        
-        yield return base.Death();
     }
 }

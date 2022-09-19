@@ -39,7 +39,7 @@ public abstract class Character : MonoBehaviour
     [HideInInspector] public bool IsRushing;
     [HideInInspector] public float RushSpeed = 0f;
 
-    [SerializeField] private BuffManager buffManager;
+    [SerializeField] protected BuffManager buffManager;
     [HideInInspector] public List<Buff> OnBuff = new List<Buff>();
     [HideInInspector] public float BuffxDamage = 1;
     protected float DebuffxDamage = 1;

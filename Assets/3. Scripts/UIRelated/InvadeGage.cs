@@ -34,11 +34,11 @@ public class InvadeGage : MonoBehaviour
         }
     }
 
-    public void On()
+    public void On(int MaxValue)
     {
         GetComponent<CanvasGroup>().alpha = 1;
         GameManager.MyInstance.UnLoadSceneEvent += Off;
-        MaxValue = 100;
+        this.MaxValue = MaxValue;
     }
 
     public void Off()

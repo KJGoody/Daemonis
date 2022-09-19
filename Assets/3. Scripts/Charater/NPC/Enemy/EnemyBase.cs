@@ -34,7 +34,7 @@ public class EnemyBase : Character, INpc
         base.Start();
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         MyTarget = Player.MyInstance.transform;
     }
@@ -130,7 +130,7 @@ public class EnemyBase : Character, INpc
     }
 
 
-    protected virtual IEnumerator Death()
+    protected IEnumerator Death()
     {
         InvadeGage.Instance.CurrentValue += 1;
         ParentGate.CurrentEnemyNum--;
@@ -141,32 +141,7 @@ public class EnemyBase : Character, INpc
         yield return new WaitForSeconds(0.2f);
         SetLayersRecursively(_prefabs.transform, "Default");
 
-        switch (enemytype.enemyType)
-        {
-            case EnemyType.EnemyTypes.Enemy_1_Koblod_Melee_Normal:
-                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee);
-                break;
-
-            case EnemyType.EnemyTypes.Enemy_1_Kobold_Melee_Elite:
-                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Elite);
-                break;
-
-            case EnemyType.EnemyTypes.Enemy_1_Kobold_Melee_Guv:
-                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Melee_Guv);
-                break;
-
-            case EnemyType.EnemyTypes.Enemy_1_Kobold_Ranged_Normal:
-                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged);
-                break;
-
-            case EnemyType.EnemyTypes.Enemy_1_Kobold_Ranged_Elite:
-                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Elite);
-                break;
-
-            case EnemyType.EnemyTypes.Enemy_1_Kobold_Ranged_Guv:
-                EnemyPool.Instance.ReturnObject(this, EnemyPool.MonsterPrefabName.Kobold_Ranged_Guv);
-                break;
-        }
+        EnemyPool.Instance.ReturnObject(this, EnemyPool.Instance.GetIndex(GetComponent<EnemyType>().Prefab));
 
         InitializeEnemyBase();
     }

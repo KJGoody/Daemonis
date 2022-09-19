@@ -6,6 +6,7 @@ public class EnemyTypeInfo
 {
     public string ID;
     public string Name;
+    public GameObject Prefab;
     public string Sound;
     public enum AttackTypes
     {
@@ -20,4 +21,10 @@ public class EnemyTypeInfo
     public float AttackRange; // 공격 사거리
     public float AttackDelay; // 공격 딜레이
     public int EXP;
+    //--Stat--
+    public int Level;
+    public int Attack;
+    public int MaxHealth;
+    public int MoveSpeed;
+    public int HitPercent;
 }

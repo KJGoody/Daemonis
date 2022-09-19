@@ -19,6 +19,7 @@ public class DataTableManager : MonoBehaviour
     public SpellInfo[] SpellInfos { get { return spellInfos; } }
     private ItemInfo_Equipment[] EquipmentInfos;
     private ItemInfo_Consumable[] ConsumalbeInfos;
+    private StageInfo[] StageInfos;
     private EnemyTypeInfo[] EnemyInfos;
 
     private List<Dictionary<string, object>> QualityProb; // 장비 등급 확률표
@@ -102,6 +103,15 @@ public class DataTableManager : MonoBehaviour
         return array[RandomNum];
     }
 
+    public StageInfo GetStageInfo(string StageID)
+    {
+        foreach (StageInfo Data in StageInfos)
+            if (Data.ID == StageID)
+                return Data;
+
+        return null;
+    }
+
     public EnemyTypeInfo GetEnemyType(string strEnemyType)
     {
         foreach (EnemyTypeInfo Data in EnemyInfos)
@@ -109,6 +119,20 @@ public class DataTableManager : MonoBehaviour
                 return Data;
 
         return null;
+    }
+
+    public List<GameObject> GetEnemyPrefabs(string CurrentStage)
+    {
+        List<GameObject> array = new List<GameObject>();
+        foreach (EnemyTypeInfo Data in EnemyInfos)
+        {
+            string[] DataSplit = Data.ID.Split('_');
+            string[] CurrentStageSplit = CurrentStage.Split('_');
+            if (DataSplit[1] == CurrentStageSplit[1])
+                array.Add(Data.Prefab);
+        }
+
+        return array;
     }
 
     public Item_Base.Qualitys GetQuality(int Level)
@@ -129,6 +153,7 @@ public class DataTableManager : MonoBehaviour
         LoadDataTable_SpellInfo();
         LoadDataTable_EquipmentInfo();
         LoadDataTable_Consumable();
+        LoadDataTable_Stage();
         LoadDataTable_Enemy();
         QualityProb = CSVReader.Read("EquipmentQualityProb"); // 장비 등급 확률표 읽어옴
     }
@@ -284,6 +309,27 @@ public class DataTableManager : MonoBehaviour
         }
     }
 
+    private void LoadDataTable_Stage()
+    {
+        List<Dictionary<string, object>> DataTable_Stage = CSVReader.Read("DataTable_Stage");
+        StageInfos = new StageInfo[DataTable_Stage.Count];
+
+        for (int i = 0; i < DataTable_Stage.Count; i++)
+        {
+            StageInfo info = new StageInfo();
+            info.ID = DataTable_Stage[i]["ID"].ToString();
+            info.MapPrefabs = DataTable_Stage[i]["MapPrefabs"].ToString();
+            info.EnemyMaxNum = int.Parse(DataTable_Stage[i]["EnemyMaxNum"].ToString());
+            info.EnemyMinNum = int.Parse(DataTable_Stage[i]["EnemyMinNum"].ToString());
+            info.ElitePercent = int.Parse(DataTable_Stage[i]["ElitePercent"].ToString());
+            info.GuvPercent = int.Parse(DataTable_Stage[i]["GuvPercent"].ToString());
+            info.InvadeGage = int.Parse(DataTable_Stage[i]["InvadeGage"].ToString());
+            info.EnemyStatPercent = float.Parse(DataTable_Stage[i]["EnemyStatPercent"].ToString());
+
+            StageInfos[i] = info;
+        }
+    }
+
     private void LoadDataTable_Enemy()
     {
         List<Dictionary<string, object>> DataTable_Enemy = CSVReader.Read("DataTable_Enemy");
@@ -294,6 +340,7 @@ public class DataTableManager : MonoBehaviour
             EnemyTypeInfo info = new EnemyTypeInfo();
             info.ID = DataTable_Enemy[i]["ID"].ToString();
             info.Name = DataTable_Enemy[i]["Name"].ToString();
+            info.Prefab = Resources.Load<GameObject>("Prefabs/Enemy/" + DataTable_Enemy[i]["Prefab"].ToString());
             info.Sound = DataTable_Enemy[i]["Sound"].ToString();
             switch (DataTable_Enemy[i]["AttackType"].ToString())
             {
@@ -308,6 +355,12 @@ public class DataTableManager : MonoBehaviour
             info.AttackRange = float.Parse(DataTable_Enemy[i]["AttackRange"].ToString());
             info.AttackDelay = float.Parse(DataTable_Enemy[i]["AttackDelay"].ToString());
             info.EXP = int.Parse(DataTable_Enemy[i]["EXP"].ToString());
+            //--Stat--
+            info.Level = int.Parse(DataTable_Enemy[i]["Level"].ToString());
+            info.Attack = int.Parse(DataTable_Enemy[i]["Attack"].ToString());
+            info.MaxHealth = int.Parse(DataTable_Enemy[i]["MaxHealth"].ToString());
+            info.MoveSpeed = int.Parse(DataTable_Enemy[i]["MoveSpeed"].ToString());
+            info.HitPercent = int.Parse(DataTable_Enemy[i]["HitPercent"].ToString());
 
             EnemyInfos[i] = info;
         }

@@ -53,7 +53,7 @@ public class PortalManager : MonoBehaviour
 
         usingPortal = Instantiate(returnPortal, Player.MyInstance.transform.position, Quaternion.identity);
 
-        if (GameManager.MyInstance.CurrnetStageName == "5.IngameMap")
+        if (GameManager.MyInstance.CurrnetSceneName == "5.IngameMap")
         {
             usingPortal.GetComponent<ReturnPortal>().UnLoadSceneName = "5.IngameMap";
             usingPortal.GetComponent<ReturnPortal>().LoadSceneName = "3.Lobby";
@@ -72,7 +72,7 @@ public class PortalManager : MonoBehaviour
     public void _LoadSceneName(string LoadSceneName)
     {
         GameManager.MyInstance.SaveData();
-        GameManager.MyInstance.CurrnetStageName = LoadSceneName;
+        GameManager.MyInstance.CurrnetSceneName = LoadSceneName;
 
         LoadingSceneManager.LoadScene(LoadSceneName);
 
@@ -88,5 +88,10 @@ public class PortalManager : MonoBehaviour
         BossHPBar.Instance.BossHPBarSetActive(false);
         if (usingPortal != null)
             Destroy(usingPortal);
+    }
+
+    public void _SetCurrentStageID(string StageID)
+    {
+        GameManager.MyInstance.CurrentStageID = StageID;
     }
 }

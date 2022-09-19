@@ -21,21 +21,9 @@ public class GNode
 
 public class EnemySpawn : MonoBehaviour
 {
-    private int MaxEnemyNum;
-    private int LimitCurrentEnemyNum;
-    [HideInInspector] public int CurrentEnemyNum;
-
-    [HideInInspector] public int TotalEliteNum;
-    [HideInInspector] public int CurrnentEliteNum;
-
-    [HideInInspector] public int TotalGuvNum = 0;
-    [HideInInspector] public int CurrnetGuvNum;
-
-    private bool EndSpawn = false;
-
     private GNode[,] Grid;
     private Vector3 GridCenter;
-    [SerializeField] private Vector2 GridSize;    // 그리드 크기
+    private readonly Vector2 GridSize = new Vector2(50, 50);    // 그리드 크기
     private int GridSizeX;      // 그리드 x 크기
     private int GridSizeY;      // 그리드 y 크기
     private readonly float Radius = 0.5f;
@@ -66,15 +54,23 @@ public class EnemySpawn : MonoBehaviour
             }
     }
 
-    private void Start()
+    private int MaxEnemyNum;
+    private int LimitCurrentEnemyNum;
+    [HideInInspector] public int CurrentEnemyNum;
+
+    private int ElitePercent;
+    private int GuvPercent;
+
+    private bool EndSpawn = false;
+
+    public void SetEnemySpawn(int maxnum, int minnum, int elitepercent, int guvpercent)
     {
-        MaxEnemyNum = 80;
-        LimitCurrentEnemyNum = 20;
-        TotalEliteNum = Random.Range(0, 3 + 1);
-        if (ChanceMaker.GetThisChanceResult_Percentage(25))
-            TotalGuvNum = 1;
+        MaxEnemyNum = maxnum;
+        LimitCurrentEnemyNum = minnum;
+        ElitePercent = elitepercent;
+        GuvPercent = guvpercent;
+
         CreateGrid();
-        StartCoroutine(SpawnEnemy());
     }
 
     private void Update()
@@ -84,7 +80,7 @@ public class EnemySpawn : MonoBehaviour
                 StartCoroutine(SpawnEnemy());
     }
 
-    private IEnumerator SpawnEnemy()
+    public IEnumerator SpawnEnemy()
     {
         while (CurrentEnemyNum < MaxEnemyNum)
         {
@@ -104,31 +100,18 @@ public class EnemySpawn : MonoBehaviour
 
     private void PositioningEnemy(Vector3 newworldposition)
     {
-        if (TotalGuvNum > CurrnetGuvNum)
+        if (ChanceMaker.GetThisChanceResult_Percentage(GuvPercent))
         {
-            if (ChanceMaker.GetThisChanceResult_Percentage(50))
-                EnemyPool.Instance.GetObject(EnemyPool.MonsterPrefabName.Kobold_Melee_Guv).PositioningEnemyBase(this, newworldposition);
-            else
-                EnemyPool.Instance.GetObject(EnemyPool.MonsterPrefabName.Kobold_Ranged_Guv).PositioningEnemyBase(this, newworldposition);
-
-            CurrnetGuvNum += 1;
+            EnemyPool.Instance.GetObject(Random.Range(0, EnemyPool.Instance.BaseNum) * 3 + 2).PositioningEnemyBase(this, newworldposition);
             return;
         }
 
-        if (TotalEliteNum > CurrnentEliteNum)
+        if (ChanceMaker.GetThisChanceResult_Percentage(ElitePercent))
         {
-            if (ChanceMaker.GetThisChanceResult_Percentage(50))
-                EnemyPool.Instance.GetObject(EnemyPool.MonsterPrefabName.Kobold_Melee_Elite).PositioningEnemyBase(this, newworldposition);
-            else
-                EnemyPool.Instance.GetObject(EnemyPool.MonsterPrefabName.Kobold_Ranged_Elite).PositioningEnemyBase(this, newworldposition);
-
-            CurrnentEliteNum += 1;
+            EnemyPool.Instance.GetObject(Random.Range(0, EnemyPool.Instance.BaseNum) * 3 + 1).PositioningEnemyBase(this, newworldposition);
             return;
         }
 
-        if (ChanceMaker.GetThisChanceResult_Percentage(50))
-            EnemyPool.Instance.GetObject(EnemyPool.MonsterPrefabName.Kobold_Melee).PositioningEnemyBase(this, newworldposition);
-        else
-            EnemyPool.Instance.GetObject(EnemyPool.MonsterPrefabName.Kobold_Ranged).PositioningEnemyBase(this, newworldposition);
+        EnemyPool.Instance.GetObject(Random.Range(0, EnemyPool.Instance.BaseNum) * 3).PositioningEnemyBase(this, newworldposition);
     }
 }

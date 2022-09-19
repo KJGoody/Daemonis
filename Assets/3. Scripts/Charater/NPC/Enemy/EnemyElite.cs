@@ -5,6 +5,25 @@ using UnityEngine.Rendering;
 
 public class EnemyElite : EnemyBase
 {
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        switch(Random.Range(0, 3))
+        {
+            case 0:
+                NewBuff("B_E_Dodge");
+                break;
+
+            case 1:
+                NewBuff("B_E_Angry");
+                break;
+
+            case 2:
+                NewBuff("B_E_Recovery");
+                break;
+        }
+    }
+
     protected override void Update()
     {
         if (IsAlive)
@@ -105,13 +124,5 @@ public class EnemyElite : EnemyBase
         else
             NEWText(TextType);
         // Character TakeDamge ºÎºÐ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    }
-
-    protected override IEnumerator Death()
-    {
-        ParentGate.TotalEliteNum++; 
-        ParentGate.CurrnentEliteNum--;
-
-        yield return StartCoroutine(base.Death());
     }
 }

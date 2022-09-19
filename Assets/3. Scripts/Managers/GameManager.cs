@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
 
     // ¿˙¿Â
     public SaveLoadData DATA;
-    [HideInInspector] public string CurrnetStageName;
+    [HideInInspector] public string CurrnetSceneName;
+    [HideInInspector] public string CurrentStageID;
 
     public CastingButton[] CastingButtons;
     public QuickSlotButton[] QuickSlotButtons;

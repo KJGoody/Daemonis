@@ -37,7 +37,7 @@ public class Buff : MonoBehaviour
 
     private void Awake()
     {
-        if (buffType.Equals(BuffType.Passive))
+        if (buffType == BuffType.Passive)
         {
             BuffFillImage.gameObject.SetActive(false);
         }
@@ -99,6 +99,18 @@ public class Buff : MonoBehaviour
             case "B_Potion_Mana":
                 StartCoroutine(Buff_ManaPotion());
                 break;
+
+            case "B_E_Dodge":
+                B_E_Dodge();
+                break;
+
+            case "B_E_Angry":
+                B_E_Angry();
+                break;
+
+            case "B_E_Recovery":
+                StartCoroutine(B_E_Recovery());
+                break;
         }
     }
 
@@ -139,15 +151,14 @@ public class Buff : MonoBehaviour
             Player.MyInstance.BuffxDamage += 10;
             BuffEffect = Instantiate(BuffEffect, Player.MyInstance.gameObject.transform);
             BuffEffect.transform.position = BuffEffect.transform.position + new Vector3(0, 1, 0);
+
+            DeActiveFunc = Buff_Skill_Fire_14;
         }
         else
         {
             Player.MyInstance.BuffxDamage -= 10;
             Destroy(BuffEffect);
         }
-
-        
-        DeActiveFunc = Buff_Skill_Fire_14;
     }
 
     private IEnumerator Buff_HealPotion()
@@ -188,6 +199,45 @@ public class Buff : MonoBehaviour
                     Target.TakeDamage(Character.DamageType.Masic, 1, TickDamage * BuffStack, Target.MyStat.Level, Vector2.zero, NewTextPool.NewTextPrefabsName.Enemy, Character.AttackType.Tick);
             }
             yield return new WaitForSeconds(WaitForSconds);
+        }
+    }
+
+    private void B_E_Dodge()
+    {
+        if (IsActive)
+        {
+            Target.MyStat.DodgePercent += 1;
+
+            DeActiveFunc = B_E_Dodge;
+        }
+        else
+            Target.MyStat.DodgePercent -= 1;
+    }
+
+    private void B_E_Angry()
+    {
+        if (IsActive)
+        {
+            Target.MyStat.AttackPercent += 10;
+            Target.MyStat.AttackSpeedPercent += 10;
+            Target.MyStat.MoveSpeedPercent += 10;
+
+            DeActiveFunc = B_E_Angry;
+        }
+        else
+        {
+            Target.MyStat.AttackPercent -= 10;
+            Target.MyStat.AttackSpeedPercent -= 10;
+            Target.MyStat.MoveSpeedPercent -= 10;
+        }
+    }
+
+    private IEnumerator B_E_Recovery()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            Target.MyStat.CurrentHealth += 100;
         }
     }
 }
