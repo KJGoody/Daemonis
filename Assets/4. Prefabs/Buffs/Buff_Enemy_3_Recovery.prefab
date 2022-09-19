@@ -54,6 +54,7 @@ MonoBehaviour:
   BuffFillImage: {fileID: 3632800514072586103}
   buffType: 3
   BuffName: B_E_Recovery
+  BuffText: "\uD68C\uBCF5"
   Duration: 0
   StackText: {fileID: 0}
   BuffStack: 1

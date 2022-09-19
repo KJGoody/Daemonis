@@ -17,6 +17,7 @@ public class Buff : MonoBehaviour
     }
     [SerializeField] private BuffType buffType;
     public string BuffName;
+    public string BuffText;
     [SerializeField] private float Duration;
     private float currentTime;
     private bool IsActive;
