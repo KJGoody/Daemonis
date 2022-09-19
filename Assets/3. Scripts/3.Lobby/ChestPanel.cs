@@ -34,4 +34,10 @@ public class ChestPanel : MonoBehaviour
         EquipButton.SetActive(false);
         PutButton.SetActive(true);
     }
+
+    public void CloseChest()
+    {
+        chestPanael.alpha = 0;
+        chestPanael.blocksRaycasts = false;
+    }
 }
