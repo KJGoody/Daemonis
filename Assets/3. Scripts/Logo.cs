@@ -18,8 +18,8 @@ public class Logo : MonoBehaviour
     IEnumerator FadeOut()
     {
         // 비동기로 씬을 불러온다.
-        AsyncOperation asyncOper = SceneManager.LoadSceneAsync("ManagerScene");
-        AsyncOperation asyncOper1 = SceneManager.LoadSceneAsync("Main", LoadSceneMode.Additive);
+        AsyncOperation asyncOper = SceneManager.LoadSceneAsync("2.ManagerScene");
+        AsyncOperation asyncOper1 = SceneManager.LoadSceneAsync("3.Lobby", LoadSceneMode.Additive);
         asyncOper.allowSceneActivation = false;
         asyncOper1.allowSceneActivation = false;
 
