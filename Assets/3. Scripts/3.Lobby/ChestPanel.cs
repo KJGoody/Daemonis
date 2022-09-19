@@ -39,5 +39,9 @@ public class ChestPanel : MonoBehaviour
     {
         chestPanael.alpha = 0;
         chestPanael.blocksRaycasts = false;
+
+        Joystick.SetActive(true);
+        EquipButton.SetActive(true);
+        PutButton.SetActive(false);
     }
 }
