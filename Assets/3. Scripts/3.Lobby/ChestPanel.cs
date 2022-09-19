@@ -16,6 +16,7 @@ public class ChestPanel : MonoBehaviour
     }
 
     [SerializeField] private CanvasGroup chestPanael;
+    [SerializeField] private CanvasGroup InventoryPanel;
 
     [SerializeField] private GameObject Joystick;
 
@@ -24,11 +25,18 @@ public class ChestPanel : MonoBehaviour
 
     [SerializeField] private GameObject SelectItem;
 
+    [SerializeField] private SlotScript[] ChestSlots;
+
 
     public void OpenChest()
     {
         chestPanael.alpha = 1;
         chestPanael.blocksRaycasts = true;
+
+        if (InventoryPanel.alpha != 1)
+        {
+            UIManager.MyInstance.OpenClose(InventoryPanel);
+        }
 
         Joystick.SetActive(false);
         EquipButton.SetActive(false);
@@ -39,6 +47,8 @@ public class ChestPanel : MonoBehaviour
     {
         chestPanael.alpha = 0;
         chestPanael.blocksRaycasts = false;
+
+        BuySellWindow.Instance._CloseWindow();
 
         Joystick.SetActive(true);
         EquipButton.SetActive(true);
