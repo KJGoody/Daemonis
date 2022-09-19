@@ -22390,7 +22390,7 @@ MonoBehaviour:
   - {x: 1.9994042, y: -23.28125, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -399660
+  m_InstanceId: 391532
 --- !u!1 &8460554056831548359
 GameObject:
   m_ObjectHideFlags: 0
@@ -22402,7 +22402,7 @@ GameObject:
   - component: {fileID: 4969853591681052769}
   - component: {fileID: 2837970979803810233}
   - component: {fileID: 7012657256300775661}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: Minimap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
