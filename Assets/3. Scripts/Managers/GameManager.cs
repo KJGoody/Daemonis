@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public CastingButton[] CastingButtons;
     public QuickSlotButton[] QuickSlotButtons;
-    public SlotScript[] Slots;
+    public Slot_Inventory[] Slots;
 
     [SerializeField] private Player player;
     private INpc currentTarget;
@@ -155,22 +155,22 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 28; i++)
         {
             // 만약 비어있지 않다면 저장 시작
-            if (Slots[i].MyItem != null)
+            if (Slots[i].Item != null)
             {
-                Item_Base SlotItem = Slots[i].MyItem;
+                Item_Base SlotItem = Slots[i].Item;
                 // 아이템의 ID를 저장
                 DATA.I_Data[i] = SlotItem.ID;
                 // 아이템의 퀄리티를 저장
                 DATA.I_ItemQuality[i] = (int)SlotItem.Quality;
 
                 // 아이템의 종류에 따라 다르게 저장
-                switch (Slots[i].MyItem.Kind)
+                switch (Slots[i].Item.Kind)
                 {
                     case ItemInfo_Base.Kinds.Equipment:
                         // 장비는 스텍이 필요 없으므로 로드할때에 아이템의 종류을 알수 있도록 -1로 설정한다.
                         DATA.I_StackData[i] = -1;
                         // 퀄리티가 일반이면 추가 옵션이 없으므로 조건문을 넣어줌
-                        if ((int)Slots[i].MyItem.Quality > 0)
+                        if ((int)Slots[i].Item.Quality > 0)
                         {
                             // AddOption을 하나하나 저장해주는 부분
                             int[] AddOptionQuality = DATA.GetArray("I_AddOptionQuality_" + i) as int[];
@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour
 
                     case ItemInfo_Base.Kinds.Potion:
                         // ItemInfo_Consumable
-                        DATA.I_StackData[i] = Slots[i].MyItems.Count;
+                        DATA.I_StackData[i] = Slots[i].GetItems.Count;
                         // ItemInfo_Potion
                         break;
                 }

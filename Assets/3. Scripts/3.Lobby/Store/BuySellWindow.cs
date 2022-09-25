@@ -106,10 +106,10 @@ public class BuySellWindow : MonoBehaviour
         else
         {
             int MaxItemCount = 0;
-            foreach (SlotScript slot in GameManager.MyInstance.Slots)
+            foreach (Slot_Inventory slot in GameManager.MyInstance.Slots)
                 if (!slot.IsEmpty)
-                    if (slot.MyItem.Name == ItemView.Item.Name)
-                        MaxItemCount += slot.MyCount;
+                    if (slot.Item.Name == ItemView.Item.Name)
+                        MaxItemCount += slot.GetCount;
 
             if (ItemCount <= 0)
                 ItemCount = 1;

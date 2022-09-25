@@ -2,12 +2,12 @@ using TMPro;
 
 public interface IStackable
 {
-    TextMeshProUGUI MyStackText
+    TextMeshProUGUI GetStackText
     {
         get;
     }
 
-    int MyCount
+    int GetCount
     {
         get;
     }

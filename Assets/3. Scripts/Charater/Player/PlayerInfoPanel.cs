@@ -5,38 +5,39 @@ using UnityEngine.UI;
 
 public class PlayerInfoPanel : MonoBehaviour
 {
+    #region Instance
+    private static PlayerInfoPanel instance;
+    public static PlayerInfoPanel Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = FindObjectOfType<PlayerInfoPanel>();
+            return instance;
+        }
+    }
+    #endregion
     public Image[] equipment_Img = new Image[6];
     public Sprite[] emtyImg = new Sprite[6];
     private int itemNum;
     private Item_Base ueItem;
+
     [Header("Using Equipment Tooltip")]
     #region 장착 장비아이템 관련 변수 UE = Using Equipment
-    [SerializeField]
-    private Image UE_Image; // 선택한 아이템 화면에 보이는 이미지
-    [SerializeField]
-    private Text UE_Name;   // 아이템 이름
-    [SerializeField]
-    private Text UE_LimitLvl;// 제한 레벨
-    [SerializeField]
-    private Text UE_DefaultStat;// 기본효과(기본스탯같은) 설명
-    [SerializeField]
-    private Text UE_Descript;// 아이템 배경?설명 (아이템 소개)
-    [SerializeField]
-    private Text UE_Quality;// 아이템 등급
-    [SerializeField]
-    private GameObject UE_Panel;// 선택아이템 패널
-    [SerializeField]
-    private GameObject UE_Obj_Option;// 추가옵션 오브젝트
-    [SerializeField]
-    private GameObject UE_Obj_SetOption;// 세트옵션 오브젝트
-    [SerializeField]
-    private GameObject[] UE_Obj_AddOptions;// 추가옵션들
+    [SerializeField] private Image UE_Image; // 선택한 아이템 화면에 보이는 이미지
+    [SerializeField] private Text UE_Name;   // 아이템 이름
+    [SerializeField] private Text UE_LimitLvl;// 제한 레벨
+    [SerializeField] private Text UE_DefaultStat;// 기본효과(기본스탯같은) 설명
+    [SerializeField] private Text UE_Descript;// 아이템 배경?설명 (아이템 소개)
+    [SerializeField] private Text UE_Quality;// 아이템 등급
+    [SerializeField] private GameObject UE_Panel;// 선택아이템 패널
+    [SerializeField] private GameObject UE_Obj_Option;// 추가옵션 오브젝트
+    [SerializeField] private GameObject UE_Obj_SetOption;// 세트옵션 오브젝트
+    [SerializeField] private GameObject[] UE_Obj_AddOptions;// 추가옵션들
     //[SerializeField]
     //private GameObject UE_Obj_Blind;// 블라인드 패널 오브젝트
-    [SerializeField]
-    private ContentSizeFitter UE_CSF_Descript;
-    [SerializeField]
-    private ContentSizeFitter UE_CSF_Panel;
+    [SerializeField] private ContentSizeFitter UE_CSF_Descript;
+    [SerializeField] private ContentSizeFitter UE_CSF_Panel;
     #endregion
 
     [Header("Stat Text")]
@@ -71,12 +72,11 @@ public class PlayerInfoPanel : MonoBehaviour
         Player.MyInstance.useEquipment += ChangeEquipment;
         initEquipment();
     }
+
     public void initEquipment()
     {
-        for(int i = 0; i < equipment_Img.Length; i++)
-        {
+        for (int i = 0; i < equipment_Img.Length; i++)
             ChangeEquipment(i);
-        }
     }
 
     public void ChangeEquipment(int partNum) // 착용된 장비 이미지 교체
@@ -84,28 +84,21 @@ public class PlayerInfoPanel : MonoBehaviour
         if (Player.MyInstance.usingEquipment[partNum] != null)
         {
             equipment_Img[partNum].sprite = Player.MyInstance.usingEquipment[partNum].Icon;
-            equipment_Img[partNum].color= new Color(1,1,1,1);
+            equipment_Img[partNum].color = new Color(1, 1, 1, 1);
         }
         else
         {
             equipment_Img[partNum].sprite = emtyImg[partNum];
-            equipment_Img[partNum].color= new Color(1,1,1,0.5f);
+            equipment_Img[partNum].color = new Color(1, 1, 1, 0.5f);
         }
     }
+
     public void UnequipButton() // 장착해제 버튼
     {
         Player.MyInstance.UnequipItem(itemNum);
         ChangeEquipment(itemNum);
     }
-    public void ShowUsingEquipment(int partNum, bool setActive = true) // 인수 하나가 더 필요한 상황이 있어서 만든것
-    {
-        if(Player.MyInstance.usingEquipment[partNum] != null)
-        {
 
-            ShowUsingEquipment(partNum);// 기존 ShowUsingEquipment 기능은 같음
-        }
-        UE_Panel.SetActive(setActive); // false인 경우 패널 닫아주는것
-    }
     public void ShowUsingEquipment(int partNum) // 장착중인 장비 표시
     {
         if (Player.MyInstance.usingEquipment[partNum] != null)
@@ -125,6 +118,7 @@ public class PlayerInfoPanel : MonoBehaviour
                     UE_Obj_Option.SetActive(false);
                     UE_Obj_SetOption.SetActive(false);
                     break;
+
                 case ItemInfo_Base.Kinds.Equipment:
                     UE_Obj_Option.SetActive(true);
 
@@ -149,10 +143,25 @@ public class PlayerInfoPanel : MonoBehaviour
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)UE_CSF_Panel.transform);
         }
     }
+
+    public void Close_UE_Panel()
+    {
+        UE_Panel.SetActive(false);
+    }
+
+    public void Reset_UI_Panel_Transform(bool IsOn)
+    {
+        if (IsOn)
+            UE_Panel.GetComponent<RectTransform>().anchoredPosition = new Vector3(770, 400, 0);
+        else
+            UE_Panel.GetComponent<RectTransform>().anchoredPosition = new Vector3(1175, 400, 0);
+    }
+
     void Update()
     {
         UpdateStat();
     }
+
     void UpdateStat() // 스탯 표시
     {
         Stat stat = Player.MyInstance.MyStat;

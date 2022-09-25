@@ -34,62 +34,37 @@ public class HandScript : MonoBehaviour
     private GameObject SpellEquipButton;
     #endregion
 
-    public GameObject usingEquipment_Panel;
-    public PlayerInfoPanel playerInfoPanel;
     private Item_Base myItem;    // 아이템 정보
     [Header("Select Item Tooltip")]
     #region 아이템 선택관련 변수 SI = Select Item
-    [SerializeField]
-    private Image SI_Image; // 선택한 아이템 화면에 보이는 이미지
-    [SerializeField]
-    private Text SI_Name;   // 아이템 이름
-    [SerializeField]
-    private Text SI_LimitLvl;// 제한 레벨
-    [SerializeField]
-    private Text SI_DefaultStat;// 기본효과(기본스탯같은) 설명
-    [SerializeField]
-    private Text SI_Descript;// 아이템 배경설명 (아이템 소개)
-    [SerializeField]
-    private Text SI_Quality;// 아이템 등급
-    [SerializeField]
-    private GameObject SI_Panel;// 선택아이템 패널
-    [SerializeField]
-    private GameObject SI_Obj_Option;// 추가옵션 오브젝트
-    [SerializeField]
-    private GameObject SI_Obj_SetOption;// 세트옵션 오브젝트
-    [SerializeField]
-    private GameObject SI_Obj_Blind;// 블라인드 패널 오브젝트
-    [SerializeField]
-    private GameObject[] SI_Obj_AddOptions;// 추가옵션들
-    [SerializeField]
-    private ContentSizeFitter SI_CSF_Descript;
-    [SerializeField]
-    private ContentSizeFitter SI_CSF_Panel;
+    [SerializeField] private Image SI_Image; // 선택한 아이템 화면에 보이는 이미지
+    [SerializeField] private Text SI_Name;   // 아이템 이름
+    [SerializeField] private Text SI_LimitLvl;// 제한 레벨
+    [SerializeField] private Text SI_DefaultStat;// 기본효과(기본스탯같은) 설명
+    [SerializeField] private Text SI_Descript;// 아이템 배경설명 (아이템 소개)
+    [SerializeField] private Text SI_Quality;// 아이템 등급
+    [SerializeField] private GameObject SI_Panel;// 선택아이템 패널
+    [SerializeField] private GameObject SI_Obj_Option;// 추가옵션 오브젝트
+    [SerializeField] private GameObject SI_Obj_SetOption;// 세트옵션 오브젝트
+    [SerializeField] private GameObject SI_Obj_Blind;// 블라인드 패널 오브젝트
+    [SerializeField] private GameObject[] SI_Obj_AddOptions;// 추가옵션들
+    [SerializeField] private ContentSizeFitter SI_CSF_Descript;
+    [SerializeField] private ContentSizeFitter SI_CSF_Panel;
     #endregion
-    [SerializeField]
-    private GameObject UE_Panel;// 장착아이템 패널
 
     // IMoveable은 Spell에서 상속받는다.
     public IMoveable MyMoveable { get; set; }
 
     private Image icon;
-    [SerializeField]
-    private Vector3 offset; // 없어도됨
 
     private void Start()
     {
         icon = GetComponent<Image>();
     }
 
-    private void Update()
-    {
-        // 마우스를 따라 아이콘이 이동한다.
-        // icon.transform.position = Input.mousePosition + offset;
-    }
-
     public void TakeMoveable(IMoveable moveable)
     {
-        this.MyMoveable = moveable;
+        MyMoveable = moveable;
         Debug.Log("Take");
         // 클릭한 스킬 아이콘 정보를 Icon 에 담는다.
         icon.sprite = moveable.Icon;
@@ -166,7 +141,7 @@ public class HandScript : MonoBehaviour
             case ItemInfo_Base.Kinds.Potion: // 선택한 아이템이 포션일 때 추옵,세트옵 감추기
                 SI_Obj_Option.SetActive(false);
                 SI_Obj_SetOption.SetActive(false);
-                playerInfoPanel.ShowUsingEquipment(0, false);
+                PlayerInfoPanel.Instance.Close_UE_Panel();
                 break;
 
             case ItemInfo_Base.Kinds.Equipment: // 선택한 아이템이 장비일 때 추옵, 세트옵 표시
@@ -188,11 +163,11 @@ public class HandScript : MonoBehaviour
                 int partNum = (int)(item as Item_Equipment).Part;
                 if (Player.MyInstance.usingEquipment[partNum] != null)
                 {
-                    playerInfoPanel.ShowUsingEquipment(partNum);
+                    PlayerInfoPanel.Instance.ShowUsingEquipment(partNum);
                 }
                 else
                 {
-                    playerInfoPanel.ShowUsingEquipment(partNum, false);
+                    PlayerInfoPanel.Instance.Close_UE_Panel();
                 }
                 break;
 
@@ -229,7 +204,7 @@ public class HandScript : MonoBehaviour
             Player.MyInstance.UnequipItem(partNum);
         }
         myItem.Use();
-        playerInfoPanel.ShowUsingEquipment(partNum, false);
+        PlayerInfoPanel.Instance.Close_UE_Panel();
         SI_Panel.SetActive(false);
     }
 
@@ -237,7 +212,6 @@ public class HandScript : MonoBehaviour
     {
         MyMoveable = null;
         SI_Obj_Blind.SetActive(false);
-
     }
 
     public void RemoveItem() // 아이템 삭제 버튼
@@ -252,14 +226,14 @@ public class HandScript : MonoBehaviour
         BuySellWindow.Instance.SetWindow(false, myItem);
     }
 
+    public void _MoveToChest()
+    {
+        ChestPanel.Instance.MoveToChest(myItem);
+    }
+
     public void Close_SI_Panel() // 선택 아이템 패널 닫기
     {
         SI_Panel.SetActive(false);
-    }
-
-    public void Close_UE_Panel() // 선택 아이템 패널 닫기
-    {
-        UE_Panel.SetActive(false);
     }
 
     public IMoveable Put() // MyMoveable에 넣어져있는것 슬롯에 넣는 함수
@@ -272,7 +246,7 @@ public class HandScript : MonoBehaviour
         if (myItem != null)
         {
             if (myItem.Kind == ItemInfo_Base.Kinds.Potion)
-                HandScript.MyInstance.ResetEquipPotion(); // 이거만 포션 전용 코드
+                ResetEquipPotion(); // 이거만 포션 전용 코드
         }
         // 복사한 스킬의 아이콘 정보를 전달한다.
         return tmp;

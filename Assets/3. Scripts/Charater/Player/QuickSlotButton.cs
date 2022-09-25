@@ -16,18 +16,18 @@ public class QuickSlotButton : ActionButton, IStackable
         }
     }
     private int count;
-    public int MyCount { get { return count; } }
+    public int GetCount { get { return count; } }
 
     [SerializeField]
     private TextMeshProUGUI stackSize;
-    public TextMeshProUGUI MyStackText { get { return stackSize; } }
+    public TextMeshProUGUI GetStackText { get { return stackSize; } }
 
     private QuickSlotButton AlreadySetButton;
 
     protected override void Start()
     {
         base.Start();
-        InventoryScript.MyInstance.itemCountChangedEvent += new ItemCountChanged(UpdateItemCount);
+        InventoryScript.MyInstance.itemCountChangedEvent += new InventoryScript.ItemCountChanged(UpdateItemCount);
 
     }
 
@@ -66,30 +66,24 @@ public class QuickSlotButton : ActionButton, IStackable
                     {
                         if (AlreadySetButton.CurrentCollTime == 0)
                         {
-                            if (HandScript.MyInstance.MyMoveable is Item_Base)
-                            {
-                                // 이미 설정되어 있는 버튼을 초기화
-                                AlreadySetButton.Item = new Stack<IUseable>();
-                                AlreadySetButton.count = 0;
-                                AlreadySetButton.MyIcon.sprite = null;
-                                AlreadySetButton.MyIcon.color = new Color(0, 0, 0, 0);
-                                UIManager.MyInstance.UpdateStackSize(AlreadySetButton);
-                                AlreadySetButton = null;
+                            // 이미 설정되어 있는 버튼을 초기화
+                            AlreadySetButton.Item = new Stack<IUseable>();
+                            AlreadySetButton.count = 0;
+                            AlreadySetButton.MyIcon.sprite = null;
+                            AlreadySetButton.MyIcon.color = new Color(0, 0, 0, 0);
+                            UIManager.MyInstance.UpdateStackSize(AlreadySetButton);
+                            AlreadySetButton = null;
 
-                                // 새로운 버튼에 할당
-                                SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
-                                HandScript.MyInstance.ResetEquipPotion();
-                            }
+                            // 새로운 버튼에 할당
+                            SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
+                            HandScript.MyInstance.ResetEquipPotion();
                         }
                     }
                     // 설정되어 있지 않다면 정상적으로 등록한다.
                     else
                     {
                         SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
-                        if (HandScript.MyInstance.MyMoveable is Item_Base)
-                            HandScript.MyInstance.ResetEquipPotion();
-                        else
-                            HandScript.MyInstance.SkillBlindControll();
+                        HandScript.MyInstance.ResetEquipPotion();
                     }
                 }
             }

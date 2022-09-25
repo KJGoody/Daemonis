@@ -59,10 +59,7 @@ public class CastingButton : ActionButton
                     else
                     {
                         SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
-                        if (HandScript.MyInstance.MyMoveable is Item_Base)
-                            HandScript.MyInstance.ResetEquipPotion();
-                        else
-                            HandScript.MyInstance.SkillBlindControll();
+                        HandScript.MyInstance.SkillBlindControll();
                     }
                 }
             }

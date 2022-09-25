@@ -5,8 +5,7 @@ using TMPro;
 
 public class Slot_Base : MonoBehaviour, IPointerClickHandler, IClickable
 {
-    [SerializeField]
-    protected Image icon;
+    [SerializeField] protected Image icon;
     public Image MyIcon
     {
         get { return icon; }

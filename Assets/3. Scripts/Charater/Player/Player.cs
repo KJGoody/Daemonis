@@ -43,7 +43,7 @@ public class Player : Character
     private Vector2 atkDir;  // 공격 방향
 
     private List<TargetGroup> targetGroups = new List<TargetGroup>();
-    [SerializeField]    private GameObject YOUDIEWindow;  // 캐릭터 사망 패널
+    [SerializeField] private GameObject YOUDIEWindow;  // 캐릭터 사망 패널
 
     protected override void Start()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ActionButton : Slot_Base
+public abstract class ActionButton : Slot_Base
 {
     public Button MyButton { get; private set; }
 
@@ -21,7 +21,7 @@ public class ActionButton : Slot_Base
     }
 
     // 클릭 발생하면 실행
-    protected virtual void OnClick() { }
+    protected abstract void OnClick();
 
     // 클릭이 발생했는지 감지. 
     // IPointerClickHandler 에 명시된 함수이다.
@@ -52,5 +52,5 @@ public class ActionButton : Slot_Base
     }
 
     // IUseable이 이미 설정이 되어있는지 확인하는 함수
-    protected virtual bool IsSetIUseable(IUseable useable) { return true; }
+    protected abstract bool IsSetIUseable(IUseable useable);
 }

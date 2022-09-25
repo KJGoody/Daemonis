@@ -14,21 +14,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private CanvasGroup[] menu; // 메뉴창 0:캐릭터 1:스킬 2:인벤토리 3:옵션 4:메뉴리스트
-    [SerializeField]
-    private Image[] menuImage; //메뉴 이미지
-    [SerializeField]
-    private Sprite[] menuNormalImage; //메뉴 평소 이미지
-    [SerializeField]
-    private Sprite[] menuActiveImage; //메뉴 활성화 이미지
-    [SerializeField]
-    private CanvasGroup bigMap; // 전체맵
+    [SerializeField] private CanvasGroup[] menu; // 메뉴창 0:캐릭터 1:스킬 2:인벤토리 3:옵션 4:메뉴리스트
+    [SerializeField] private Image[] menuImage; //메뉴 이미지
+    [SerializeField] private Sprite[] menuNormalImage; //메뉴 평소 이미지
+    [SerializeField] private Sprite[] menuActiveImage; //메뉴 활성화 이미지
+    [SerializeField] private CanvasGroup bigMap; // 전체맵
 
     void Update()
     {
         // 개발용 키보드 단축키
-        if (Input.GetKeyDown(KeyCode.Y)) 
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             OpenClose(menu[0]);
         }
@@ -59,12 +54,18 @@ public class UIManager : MonoBehaviour
         {
             case "Charactor":
                 if (canvasGroup.alpha == 1)
+                {
                     menuImage[0].sprite = menuActiveImage[0];
-                else if(canvasGroup.alpha == 0)
+                    PlayerInfoPanel.Instance.Reset_UI_Panel_Transform(true);
+                }
+                else if (canvasGroup.alpha == 0)
+                {
                     menuImage[0].sprite = menuNormalImage[0];
+                    PlayerInfoPanel.Instance.Reset_UI_Panel_Transform(false);
+                }
 
-                if (menu[2].alpha != 1 || menu[0].alpha != 1) // 캐릭터창과 아이템창이 모두 닫혀있으면
-                    HandScript.MyInstance.Close_UE_Panel(); // 장착아이템창을 끈다
+                if (menu[2].alpha != 1 && menu[0].alpha != 1) // 캐릭터창과 아이템창이 모두 닫혀있으면
+                    PlayerInfoPanel.Instance.Close_UE_Panel(); // 장착아이템창을 끈다
                 break;
 
             case "SpellBook":
@@ -84,7 +85,7 @@ public class UIManager : MonoBehaviour
 
                 HandScript.MyInstance.Close_SI_Panel(); // 선택아이템창 끄기
                 if (menu[0].alpha != 1) // 캐릭터창이 닫혀있으면
-                    HandScript.MyInstance.Close_UE_Panel(); // 장착 아이템창 끄기
+                    PlayerInfoPanel.Instance.Close_UE_Panel(); // 장착 아이템창 끄기
                 break;
 
             case "Option":
@@ -105,31 +106,31 @@ public class UIManager : MonoBehaviour
         // UI 가 커져있을 땐 레이케스트 충돌이 되도록 만들고
         // UI 가 꺼져있을 땐 레이케스트 충돌이 무시되어 다른 조작(적 선택 등)을
         // 할 수 있게 만든다.
-        canvasGroup.blocksRaycasts = (canvasGroup.blocksRaycasts) == true ? false : true;
+        canvasGroup.blocksRaycasts = canvasGroup.blocksRaycasts != true;
     }
 
     public void UpdateStackSize(IStackable stackable)
     {
-        if (stackable.MyCount > 1)
+        if (stackable.GetCount > 1)
         {
             // 해당 슬롯의 중첩개수 표시하기
-            stackable.MyStackText.text = stackable.MyCount.ToString();
-            stackable.MyStackText.color = Color.white;
+            stackable.GetStackText.text = stackable.GetCount.ToString();
+            stackable.GetStackText.color = Color.white;
             (stackable as IClickable).MyIcon.color = Color.white;
         }
         else
         {
             // 해당 슬롯의 텍스트 투명하게 만들기
-            stackable.MyStackText.color = new Color(0, 0, 0, 0);
+            stackable.GetStackText.color = new Color(0, 0, 0, 0);
         }
 
-        if (stackable.MyCount == 0)
+        if (stackable.GetCount == 0)
         {
             // 해당 슬롯의 아이콘 투명하게 만들기
             (stackable as IClickable).MyIcon.color = new Color(0, 0, 0, 0);
 
             // 해당 슬롯의 텍스트 투명하게 만들기
-            stackable.MyStackText.color = new Color(0, 0, 0, 0);
+            stackable.GetStackText.color = new Color(0, 0, 0, 0);
 
         }
     }

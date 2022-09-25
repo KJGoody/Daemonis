@@ -70,5 +70,5 @@ public class Item_Base : IMoveable, IUseable, IItem
         }
     }
 
-    public SlotScript MySlot;
+    public Slot_Stack MySlot;
 }
