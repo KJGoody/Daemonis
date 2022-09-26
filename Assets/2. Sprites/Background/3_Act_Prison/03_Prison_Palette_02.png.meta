@@ -35,6 +35,18 @@ TextureImporter:
   - first:
       213: -1540300321446192562
     second: 03_Prison_Palette_02_10
+  - first:
+      213: -5600541813186549677
+    second: 03_Prison_Palette_02_11
+  - first:
+      213: 7500657656689157363
+    second: 03_Prison_Palette_02_12
+  - first:
+      213: 881830711057061614
+    second: 03_Prison_Palette_02_13
+  - first:
+      213: -1994166387855734768
+    second: 03_Prison_Palette_02_14
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -362,6 +374,90 @@ TextureImporter:
       bones: []
       spriteID: e4a97ccb401cf9ae0800000000000000
       internalID: -1540300321446192562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_11
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3582b43d4e0e642b0800000000000000
+      internalID: -5600541813186549677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_12
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f465c80660b71860800000000000000
+      internalID: 7500657656689157363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_13
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee6169c0c54ec3c00800000000000000
+      internalID: 881830711057061614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_14
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 018c5dc5c3c4354e0800000000000000
+      internalID: -1994166387855734768
       vertices: []
       indices: 
       edges: []
