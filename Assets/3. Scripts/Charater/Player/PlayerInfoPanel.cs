@@ -149,14 +149,6 @@ public class PlayerInfoPanel : MonoBehaviour
         UE_Panel.SetActive(false);
     }
 
-    public void Reset_UI_Panel_Transform(bool IsOn)
-    {
-        if (IsOn)
-            UE_Panel.GetComponent<RectTransform>().anchoredPosition = new Vector3(770, 400, 0);
-        else
-            UE_Panel.GetComponent<RectTransform>().anchoredPosition = new Vector3(1175, 400, 0);
-    }
-
     void Update()
     {
         UpdateStat();

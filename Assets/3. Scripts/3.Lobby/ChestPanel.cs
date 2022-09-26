@@ -85,14 +85,14 @@ public class ChestPanel : MonoBehaviour
             MovePanel.SetMoveToChestPanel(item as Item_Consumable); 
         else
         {
-            AddItem(item);
             item.Remove();
+            AddItem(item);
             HandScript.MyInstance.Close_SI_Panel();
             PlayerInfoPanel.Instance.Close_UE_Panel();
         }
     }
 
-    private void AddItem(Item_Base itme, bool CansStack = false)
+    public void AddItem(Item_Base itme, bool CansStack = false)
     {
         if (CansStack)
             if (PlaceInStack(itme as Item_Consumable))
@@ -124,16 +124,6 @@ public class ChestPanel : MonoBehaviour
         }
     }
 
-    public int GetEmptySlotNum()
-    {
-        int EmptyNum = 0;
-        foreach (Slot_Chest slot in Slots)
-            if (slot.IsEmpty)
-                EmptyNum++;
-
-        return EmptyNum;
-    }
-
     // 상점에서 소모 아이템 구매 할때 구매 가능한 개수를 구하는 함수
     public int CanStackNum(Item_Base Item)
     {
@@ -152,9 +142,21 @@ public class ChestPanel : MonoBehaviour
         return CountNum;
     }
 
+    public Slot_Stack GetItem(Item_Base item)
+    {
+        foreach (Slot_Chest slot in Slots)
+        {
+            if (!slot.IsEmpty && slot.Item.ID == item.ID)
+                return slot;
+        }
+
+        return null;
+    }
+
     public void SelectItemEvent(Item_Base item)
     {
         SelectItem = item;
+        CurrentSlot = item.MySlot as Slot_Chest;
         SP_Image.sprite = item.Icon;
         SP_Name.text = item.Name;
         SP_Quality.text = item.QualityText;
@@ -165,7 +167,6 @@ public class ChestPanel : MonoBehaviour
         {
             case ItemInfo_Base.Kinds.Potion:
                 SP_Obj_Option.SetActive(false);
-                PlayerInfoPanel.Instance.Close_UE_Panel();
                 break;
 
             case ItemInfo_Base.Kinds.Equipment: // 선택한 아이템이 장비일 때 추옵, 세트옵 표시
@@ -181,17 +182,6 @@ public class ChestPanel : MonoBehaviour
                 {
                     SP_Obj_AddOptions[i - 1].SetActive(false);
                 }
-
-                // 장비 부위에 따라 착용중인 장비 표시
-                int partNum = (int)(item as Item_Equipment).Part;
-                if (Player.MyInstance.usingEquipment[partNum] != null)
-                {
-                    PlayerInfoPanel.Instance.ShowUsingEquipment(partNum);
-                }
-                else
-                {
-                    PlayerInfoPanel.Instance.Close_UE_Panel();
-                }
                 break;
         }
         SelectPanel.SetActive(true);
@@ -204,13 +194,11 @@ public class ChestPanel : MonoBehaviour
     public void _TackOut()
     {
         if(SelectItem is Item_Consumable)
-            MovePanel.SetMoveToChestPanel(SelectItem as Item_Consumable);
+            MovePanel.SetMoveToChestPanel(SelectItem as Item_Consumable, true);
         else
         {
             InventoryScript.MyInstance.AddItem(SelectItem);
-            SelectItem.Remove();
-            SelectPanel.SetActive(false);
-            PlayerInfoPanel.Instance.Close_UE_Panel();
+            _Remove();
         }
     }
 
@@ -221,7 +209,9 @@ public class ChestPanel : MonoBehaviour
 
     public void _Remove()
     {
-        SelectItem.Remove();
+        CurrentSlot.RemoveItem();
         SelectPanel.SetActive(false);
+        CurrentSlot = null;
+        SelectItem = null;
     }
 }

@@ -54,15 +54,9 @@ public class UIManager : MonoBehaviour
         {
             case "Charactor":
                 if (canvasGroup.alpha == 1)
-                {
                     menuImage[0].sprite = menuActiveImage[0];
-                    PlayerInfoPanel.Instance.Reset_UI_Panel_Transform(true);
-                }
                 else if (canvasGroup.alpha == 0)
-                {
                     menuImage[0].sprite = menuNormalImage[0];
-                    PlayerInfoPanel.Instance.Reset_UI_Panel_Transform(false);
-                }
 
                 if (menu[2].alpha != 1 && menu[0].alpha != 1) // 캐릭터창과 아이템창이 모두 닫혀있으면
                     PlayerInfoPanel.Instance.Close_UE_Panel(); // 장착아이템창을 끈다

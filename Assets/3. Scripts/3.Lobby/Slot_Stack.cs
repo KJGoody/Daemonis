@@ -35,6 +35,6 @@ public abstract class Slot_Stack : Slot_Base, IStackable
     }
 
     public abstract bool AddItem(Item_Base item);
-    public abstract bool RemoveItem();
+    public abstract void RemoveItem();
     public abstract bool StackItem(Item_Consumable item);
 }

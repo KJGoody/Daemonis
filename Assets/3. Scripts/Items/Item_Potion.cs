@@ -67,4 +67,11 @@ public class Item_Potion : Item_Consumable
         Player.MyInstance.NewBuff(Info.BuffName);
         Remove();
     }
+
+    public override Item_Consumable Clone()
+    {
+        Item_Potion temp = new Item_Potion();
+        temp.SetInfo(Info);
+        return temp;
+    }
 }

@@ -70,11 +70,13 @@ public class InventoryScript : MonoBehaviour
 
     public void FindUseSlot(Item_Base item)
     {
+        Item_Base temp = new Item_Base();
         foreach (Slot_Inventory slots in GameManager.MyInstance.Slots)
         {
             if (!slots.IsEmpty && slots.Item.Name == item.Name && slots.Item.Quality == item.Quality)
-                item.MySlot = slots;
+                temp = slots.Item;
         }
+        item.MySlot = temp.MySlot;
     }
 
     public void FindEquipment(Item_Equipment item)
@@ -86,6 +88,16 @@ public class InventoryScript : MonoBehaviour
                 item.MySlot = slots;
             }
         }
+    }
+
+    public Slot_Stack GetItem(Item_Base item)
+    {
+        foreach(Slot_Inventory slot in GameManager.MyInstance.Slots)
+        {
+            if (!slot.IsEmpty && slot.Item.ID == item.ID)
+                return slot;
+        }
+        return null;
     }
 
     private void Start()

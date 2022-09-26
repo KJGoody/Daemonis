@@ -6,23 +6,22 @@ public class Slot_Chest : Slot_Stack
 {
     public override bool AddItem(Item_Base item)
     {
+        item.MySlot = this;
         Items.Push(item);
         icon.sprite = item.Icon;
         icon.color = Color.white;
-        item.MySlot = this;
         return true;
     }
 
-    public override bool RemoveItem()
+    public override void RemoveItem()
     {
         // 자기 자신이 빈슬롯이 아니라면
         if (!IsEmpty)
         {
+            Items.Pop();
             // 해당 슬롯의 아이템아이콘을 투명화시킵니다.
             UIManager.MyInstance.UpdateStackSize(this);
-            return true;
         }
-        return false;
     }
 
     public override void OnPointerClick(PointerEventData eventData)
@@ -43,8 +42,8 @@ public class Slot_Chest : Slot_Stack
             if (Items.Count < (Item as Item_Consumable).StackSize)
             {
                 // 아이템을 중첩시킵니다.
-                Items.Push(item);
                 item.MySlot = this;
+                Items.Push(item);
                 return true;
             }
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 // 델리게이트
 public delegate void UpdateStackEvent();
-
+[System.Serializable]
 public class ObservableStack<T> : Stack<T>
 {
     // 이벤트

@@ -9,15 +9,13 @@ public class Item_Consumable : Item_Base
 
     public override void Remove()
     {
-        if (MySlot != null)
-        {
-            InventoryScript.MyInstance.FindUseSlot(this);
-            MySlot.RemoveItem();
-        }
+        MySlot.RemoveItem();
     }
 
     public override int GetPriorty()
     {
         return (int)(Mathf.Pow(10, (int)Kind) + (int)Quality);
     }
+
+    public virtual Item_Consumable Clone() { return null; }
 }
