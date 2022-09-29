@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Act1_Elite_Weapon1_Outline
+  m_Name: M_Act1_Guv_Weapon2
   m_Shader: {fileID: -6465566751694194690, guid: 7b072b0602364eb49ab04a43875b26db,
     type: 3}
   m_ShaderKeywords: 
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_ddca0ab77b764465bd25aaa78ae18b13:
-        m_Texture: {fileID: 2800000, guid: 841bcd825f617cd43a7b949719d23298, type: 3}
+        m_Texture: {fileID: 2800000, guid: f73d734465130cc4299544c3941e1528, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlphaTex:

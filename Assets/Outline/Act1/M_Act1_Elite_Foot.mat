@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Act1_Guv_Foot_Outline
+  m_Name: M_Act1_Elite_Foot
   m_Shader: {fileID: -6465566751694194690, guid: 7b072b0602364eb49ab04a43875b26db,
     type: 3}
   m_ShaderKeywords: 
@@ -60,7 +60,7 @@ Material:
     - _Outline: 0
     - _OutlineSize: 1
     m_Colors:
-    - Color_4faa1cf8e41248f8b26630084ad7e263: {r: 1, g: 0, b: 0, a: 0}
+    - Color_4faa1cf8e41248f8b26630084ad7e263: {r: 0, g: 0, b: 0.5019608, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}

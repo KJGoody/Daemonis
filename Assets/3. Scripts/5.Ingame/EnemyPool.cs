@@ -27,7 +27,7 @@ public class EnemyPool : MonoBehaviour
     }
 
     [SerializeField] private List<GameObject> EnemyPrefabsArray;
-    public int BaseNum;
+    [HideInInspector] public int BaseNum;
     private EnemyPoolQueue[] EnemyPoolQueues;
 
     public void SetEnemyPool(List<GameObject> array)

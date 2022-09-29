@@ -16,7 +16,10 @@ public class EnemyType : MonoBehaviour
         Enemy_1_Kobold_Melee_Guv,
         Enemy_1_Kobold_Ranged_Normal,
         Enemy_1_Kobold_Ranged_Elite,
-        Enemy_1_Kobold_Ranged_Guv
+        Enemy_1_Kobold_Ranged_Guv,
+        Enemy_1_Kobold_Melee_Boss,
+        Enemy_1_Kobold_Rnaged_Boss
+
 
         #endregion
     }
@@ -40,6 +43,10 @@ public class EnemyType : MonoBehaviour
                     return "Enemy_1_Kobold_Ranged_Elite";
                 case EnemyTypes.Enemy_1_Kobold_Ranged_Guv:
                     return "Enemy_1_Kobold_Ranged_Guv";
+                case EnemyTypes.Enemy_1_Kobold_Melee_Boss:
+                    return "EnemyJ_1_Kobold_Melee_Boss";
+                case EnemyTypes.Enemy_1_Kobold_Rnaged_Boss:
+                    return "Enemy_1_Kobold_Ranged_Boss";
 
                 default:
                     return null;
@@ -66,6 +73,10 @@ public class EnemyType : MonoBehaviour
                 case EnemyTypes.Enemy_1_Kobold_Ranged_Guv:
                     return "Guv";
 
+                case EnemyTypes.Enemy_1_Kobold_Melee_Boss:
+                case EnemyTypes.Enemy_1_Kobold_Rnaged_Boss:
+                    return "Boss";
+
                 default:
                     return null;
                     #endregion
@@ -82,6 +93,12 @@ public class EnemyType : MonoBehaviour
     public float AttackRange { get { return Info.AttackRange; } }
     public float AttackDelay { get { return Info.AttackDelay; } }
     public int EXP { get { return Info.EXP; } }
+    //-- Stat --
+    public int Level { get { return Info.Level; } }
+    public int Attack { get { return Info.Attack; } }
+    public int MaxHealth { get { return Info.MaxHealth; } }
+    public int MoveSpeed { get { return Info.MoveSpeed; } }
+    public int HitPercent { get { return Info.HitPercent; } }
 
     private void Awake()
     {

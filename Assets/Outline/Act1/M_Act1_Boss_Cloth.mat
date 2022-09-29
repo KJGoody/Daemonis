@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Act1_Guv_Cloth_Outline
+  m_Name: M_Act1_Boss_Cloth
   m_Shader: {fileID: -6465566751694194690, guid: 7aed88775b1fe93438ce7d2579d19ca9,
     type: 3}
   m_ShaderKeywords: 

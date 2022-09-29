@@ -128,7 +128,7 @@ public class DataTableManager : MonoBehaviour
         {
             string[] DataSplit = Data.ID.Split('_');
             string[] CurrentStageSplit = CurrentStage.Split('_');
-            if (DataSplit[1] == CurrentStageSplit[1])
+            if (DataSplit[1] == CurrentStageSplit[1] && DataSplit[DataSplit.Length - 1] != "Boss")
                 array.Add(Data.Prefab);
         }
 
