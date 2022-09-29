@@ -1,21 +1,21 @@
-﻿ID,MapPrefabs,EnemyMaxNum,EnemyMinNum,ElitePercent,GuvPercent,InvadeGage,EnemyStatPercent
-Act_1_1,P_Map_1_Cave,10,2,1,0,20,0.1
-Act_1_2,P_Map_1_Cave,15,3,1,0,30,0.2
-Act_1_3,P_Map_1_Cave,20,4,2,0,40,0.4
-Act_1_4,P_Map_1_Cave,25,5,2,0,50,0.6
-Act_1_5,P_Map_1_Cave,30,6,3,1,60,0.8
-Act_1_6,P_Map_1_Cave,35,7,3,1,70,1
-Act_1_7,P_Map_1_Cave,40,8,4,1,80,1.2
-Act_1_8,P_Map_1_Cave,45,9,4,1,90,1.4
-Act_1_9,P_Map_1_Cave,50,10,5,2,100,1.6
-Act_1_10,P_Map_1_Cave,55,11,5,2,110,1.8
-Act_2_1,P_Map_2_Ruined,60,12,5,2,120,1.8
-Act_2_2,P_Map_2_Ruined,65,13,5,2,130,1.8
-Act_2_3,P_Map_2_Ruined,70,14,5,3,140,1.8
-Act_2_4,P_Map_2_Ruined,75,15,5,3,150,1.8
-Act_2_5,P_Map_2_Ruined,80,16,5,3,160,1.8
-Act_2_6,P_Map_2_Ruined,80,17,5,3,170,1.8
-Act_2_7,P_Map_2_Ruined,80,18,5,3,180,1.8
-Act_2_8,P_Map_2_Ruined,80,19,5,3,190,1.8
-Act_2_9,P_Map_2_Ruined,80,20,5,3,200,1.8
-Act_2_10,P_Map_2_Ruined,80,20,5,3,200,1.8
+﻿ID,MapPrefabs,EnemyMaxNum,EnemyMinNum,ElitePercent,GuvPercent,InvadeGage,EnemyStatPercent,BossID,Name,Prefab,Sound,AttackType,AttackRange,AttackDelay,EXP,Level,Attack,MaxHealth,MoveSpeed,HitPercent,DropTime
+Act_1_1,P_Map_1_Cave,10,2,1,0,1,0.1,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
+Act_1_2,P_Map_1_Cave,15,3,1,0,30,0.2,Enemy_Kobold_Ranged_Boss,코블드 원거리,P_Kobold_Ranged_Boss,Sound_Kobold,Kobold_Ranged,5,2,1,10,60,4800,2,95,10
+Act_1_3,P_Map_1_Cave,20,4,2,0,40,0.4,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
+Act_1_4,P_Map_1_Cave,25,5,2,0,50,0.6,Enemy_Kobold_Ranged_Boss,코블드 원거리,P_Kobold_Ranged_Boss,Sound_Kobold,Kobold_Ranged,5,2,1,10,60,4800,2,95,10
+Act_1_5,P_Map_1_Cave,30,6,3,1,60,0.8,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
+Act_1_6,P_Map_1_Cave,35,7,3,1,70,1,Enemy_Kobold_Ranged_Boss,코블드 원거리,P_Kobold_Ranged_Boss,Sound_Kobold,Kobold_Ranged,5,2,1,10,60,4800,2,95,10
+Act_1_7,P_Map_1_Cave,40,8,4,1,80,1.2,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
+Act_1_8,P_Map_1_Cave,45,9,4,1,90,1.4,Enemy_Kobold_Ranged_Boss,코블드 원거리,P_Kobold_Ranged_Boss,Sound_Kobold,Kobold_Ranged,5,2,1,10,60,4800,2,95,10
+Act_1_9,P_Map_1_Cave,50,10,5,2,100,1.6,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
+Act_1_10,P_Map_1_Cave,55,11,5,2,110,1.8,Enemy_Kobold_Ranged_Boss,코블드 원거리,P_Kobold_Ranged_Boss,Sound_Kobold,Kobold_Ranged,5,2,1,10,60,4800,2,95,10
+Act_2_1,P_Map_2_Ruined,60,12,5,2,120,1.8,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
+Act_2_2,P_Map_2_Ruined,65,13,5,2,130,1.8,Enemy_Kobold_Ranged_Boss,코블드 원거리,P_Kobold_Ranged_Boss,Sound_Kobold,Kobold_Ranged,5,2,1,10,60,4800,2,95,10
+Act_2_3,P_Map_2_Ruined,70,14,5,3,140,1.8,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
+Act_2_4,P_Map_2_Ruined,75,15,5,3,150,1.8,Enemy_Kobold_Ranged_Boss,코블드 원거리,P_Kobold_Ranged_Boss,Sound_Kobold,Kobold_Ranged,5,2,1,10,60,4800,2,95,10
+Act_2_5,P_Map_2_Ruined,80,16,5,3,160,1.8,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
+Act_2_6,P_Map_2_Ruined,80,17,5,3,170,1.8,Enemy_Kobold_Ranged_Boss,코블드 원거리,P_Kobold_Ranged_Boss,Sound_Kobold,Kobold_Ranged,5,2,1,10,60,4800,2,95,10
+Act_2_7,P_Map_2_Ruined,80,18,5,3,180,1.8,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
+Act_2_8,P_Map_2_Ruined,80,19,5,3,190,1.8,Enemy_Kobold_Ranged_Boss,코블드 원거리,P_Kobold_Ranged_Boss,Sound_Kobold,Kobold_Ranged,5,2,1,10,60,4800,2,95,10
+Act_2_9,P_Map_2_Ruined,80,20,5,3,200,1.8,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
+Act_2_10,P_Map_2_Ruined,80,20,5,3,200,1.8,Enemy_Kobold_Ranged_Boss,코블드 원거리,P_Kobold_Ranged_Boss,Sound_Kobold,Kobold_Ranged,5,2,1,10,60,4800,2,95,10

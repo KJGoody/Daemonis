@@ -62,6 +62,7 @@ public class EnemySpawn : MonoBehaviour
     private int GuvPercent;
 
     private bool EndSpawn = false;
+    private Coroutine CurrentCoroutine;
 
     public void SetEnemySpawn(int maxnum, int minnum, int elitepercent, int guvpercent)
     {
@@ -76,8 +77,18 @@ public class EnemySpawn : MonoBehaviour
     private void Update()
     {
         if (EndSpawn)
-            if (LimitCurrentEnemyNum > CurrentEnemyNum)
-                StartCoroutine(SpawnEnemy());
+        {
+            if (!InvadeGage.Instance.IsBossTime)
+            {
+                if (LimitCurrentEnemyNum > CurrentEnemyNum)
+                    CurrentCoroutine = StartCoroutine(SpawnEnemy());
+            }
+            else
+            {
+                if (CurrentCoroutine != null)
+                    StopCoroutine(CurrentCoroutine);
+            }
+        }
     }
 
     public IEnumerator SpawnEnemy()
@@ -96,6 +107,7 @@ public class EnemySpawn : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         EndSpawn = true;
+        CurrentCoroutine = null;
     }
 
     private void PositioningEnemy(Vector3 newworldposition)

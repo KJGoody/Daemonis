@@ -234,6 +234,10 @@ public class Stat : MonoBehaviour
             else
                 return moveSpeed;
         }
+        set
+        {
+            moveSpeed = value;
+        }
     }
     public float MoveSpeedPercent
     {
@@ -409,7 +413,7 @@ public class Stat : MonoBehaviour
         }
     }
 
-    private void Awake()
+    public void SetStat()
     {
         currentHealth = CurrentMaxHealth;
         HealthBar.Initialize(CurrentMaxHealth, CurrentMaxHealth);

@@ -29,7 +29,15 @@ public class EnemyBase : Character, INpc
     protected override void Start()
     {
         ChangeState(new FollowState());
+        // Base Set
         myAttackRange = enemytype.AttackRange;
+        //-- Stat --
+        MyStat.Level = enemytype.Level;
+        MyStat.BaseAttack = enemytype.Attack;
+        MyStat.BaseMaxHealth = enemytype.MaxHealth;
+        MyStat.MoveSpeed = enemytype.MoveSpeed;
+        MyStat.HitPercent = enemytype.HitPercent;
+        MyStat.SetStat();
 
         base.Start();
     }
@@ -41,6 +49,11 @@ public class EnemyBase : Character, INpc
 
     protected override void Update()
     {
+        if (InvadeGage.Instance.IsBossTime)
+        {
+            EnemyPool.Instance.ReturnObject(this, EnemyPool.Instance.GetIndex(GetComponent<EnemyType>().Prefab));
+        }
+
         if (IsAlive)
         {
             if (!IsAttacking)
@@ -130,7 +143,7 @@ public class EnemyBase : Character, INpc
     }
 
 
-    protected IEnumerator Death()
+    protected virtual IEnumerator Death()
     {
         InvadeGage.Instance.CurrentValue += 1;
         ParentGate.CurrentEnemyNum--;

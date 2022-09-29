@@ -48,6 +48,11 @@ public class EnemyGuv : EnemyBase
 
     protected override void Update()
     {
+        if (InvadeGage.Instance.IsBossTime)
+        {
+            EnemyPool.Instance.ReturnObject(this, EnemyPool.Instance.GetIndex(GetComponent<EnemyType>().Prefab));
+        }
+
         if (IsAlive)
         {
             if (!IsAttacking)

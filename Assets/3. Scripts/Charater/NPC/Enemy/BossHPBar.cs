@@ -135,12 +135,18 @@ public class BossHPBar : MonoBehaviour
             case "Elite":
                 // 이름 표시 예: 코볼드 근거리 LV.1 (정예)
                 BossName.text = Target.GetComponent<EnemyType>().Name + " LV." + Target.MyStat.Level + " (정예)";
-                BossName.color = Color.yellow;
+                BossName.color = Color.blue;
                 CrownIcon.SetActive(false);
                 break;
 
             case "Guv":
                 BossName.text = Target.GetComponent<EnemyType>().Name + " LV." + Target.MyStat.Level + " (우두머리)";
+                CrownIcon.SetActive(true);
+                BossName.color = Color.yellow;
+                break;
+
+            case "Boss":
+                BossName.text = Target.GetComponent<EnemyType>().Name + " LV." + Target.MyStat.Level + " (보스)";
                 CrownIcon.SetActive(true);
                 BossName.color = Color.red;
                 break;

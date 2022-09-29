@@ -34,6 +34,8 @@ public class InvadeGage : MonoBehaviour
         }
     }
 
+    [HideInInspector] public bool IsBossTime = false;
+
     public void On(int MaxValue)
     {
         GetComponent<CanvasGroup>().alpha = 1;
@@ -54,5 +56,8 @@ public class InvadeGage : MonoBehaviour
             FillImage.fillAmount = Mathf.Lerp(FillImage.fillAmount, CurrentFill, Time.deltaTime * 2);
             Percent.text = Mathf.FloorToInt(CurrentFill * 100) + "%";
         }
+
+        if(FillImage.fillAmount > 0.99f && !IsBossTime)
+            IsBossTime = true;
     }
 }

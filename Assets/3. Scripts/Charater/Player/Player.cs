@@ -51,6 +51,8 @@ public class Player : Character
 
         NewBuff("Skill_Fire_02");
 
+        MyStat.SetStat();
+
         base.Start();
     }
     protected override void Update()

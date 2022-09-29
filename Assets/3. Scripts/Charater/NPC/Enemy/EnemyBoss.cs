@@ -3,22 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class EnemyElite : EnemyBase
+public class EnemyBoss : EnemyBase
 {
+    [HideInInspector] public int DropTime;
+
     protected override void OnEnable()
     {
         base.OnEnable();
-        switch(Random.Range(0, 3))
+        int randomnum = Random.Range(0, 3);
+        switch (randomnum)
         {
-            case 0:
+            case 1:
                 NewBuff("B_E_Dodge");
                 break;
 
-            case 1:
+            case 2:
                 NewBuff("B_E_Angry");
                 break;
 
+            case 3:
+                NewBuff("B_E_Recovery");
+                break;
+        }
+
+        int temp;
+        do
+        {
+            temp = Random.Range(0, 3);
+        } while (randomnum == temp);
+
+        switch (temp)
+        {
+            case 1:
+                NewBuff("B_E_Dodge");
+                break;
+
             case 2:
+                NewBuff("B_E_Angry");
+                break;
+
+            case 3:
                 NewBuff("B_E_Recovery");
                 break;
         }
@@ -26,11 +50,6 @@ public class EnemyElite : EnemyBase
 
     protected override void Update()
     {
-        if (InvadeGage.Instance.IsBossTime)
-        {
-            EnemyPool.Instance.ReturnObject(this, EnemyPool.Instance.GetIndex(GetComponent<EnemyType>().Prefab));
-        }
-
         if (IsAlive)
         {
             if (!IsAttacking)
@@ -71,8 +90,6 @@ public class EnemyElite : EnemyBase
         BossHPBar.Instance.BossHPBarSetActive(true, this, false, attackType);
         // EnemyBase TakeDamage 何盒 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         HealthBarImage.SetActive(true);
-        if (knockbackDir != Vector2.zero)
-            StartCoroutine(KnockBack(knockbackDir, 1));
         // EnemyBase TakeDamage 何盒 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
         // Character TakeDamge 何盒 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -117,8 +134,11 @@ public class EnemyElite : EnemyBase
                 transform.Find("EnemyBody").gameObject.SetActive(false);
                 myRigid2D.simulated = false;
 
-                ItemDropManager.MyInstance.DropGold(transform, stat.Level);
-                ItemDropManager.MyInstance.DropItem(transform, stat.Level);
+                for (int i = 0; i < DropTime; i++)
+                {
+                    ItemDropManager.MyInstance.DropGold(transform, stat.Level);
+                    ItemDropManager.MyInstance.DropItem(transform, stat.Level);
+                }
 
                 StartCoroutine(Death());
                 ComboManager.Instance.IncreaseCombo();
@@ -129,5 +149,12 @@ public class EnemyElite : EnemyBase
         else
             NEWText(TextType);
         // Character TakeDamge 何盒 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    }
+
+    protected override IEnumerator Death()
+    {
+        yield return new WaitForSeconds(3f);
+        IngameManager.ClearStage = true;
+        Destroy(gameObject);
     }
 }

@@ -12,4 +12,7 @@ public class StageInfo
     public int GuvPercent;
     public int InvadeGage;
     public float EnemyStatPercent;
+    //-- Boss --
+    public EnemyTypeInfo BossInfo;
+    public int DropTime;
 }

@@ -95,11 +95,10 @@ public class DataTableManager : MonoBehaviour
 
         List<ItemInfo_Consumable> array = new List<ItemInfo_Consumable>();
         foreach (ItemInfo_Consumable Data in ConsumalbeInfos)
-            if (Data.LimitLevel / 10 == Level / 10)
+            if (Data.LimitLevel / 10 <= Level / 10)
                 array.Add(Data);
 
         int RandomNum = Random.Range(0, array.Count);
-
         return array[RandomNum];
     }
 
@@ -128,7 +127,7 @@ public class DataTableManager : MonoBehaviour
         {
             string[] DataSplit = Data.ID.Split('_');
             string[] CurrentStageSplit = CurrentStage.Split('_');
-            if (DataSplit[1] == CurrentStageSplit[1] && DataSplit[DataSplit.Length - 1] != "Boss")
+            if (DataSplit[1] == CurrentStageSplit[1])
                 array.Add(Data.Prefab);
         }
 
@@ -153,8 +152,8 @@ public class DataTableManager : MonoBehaviour
         LoadDataTable_SpellInfo();
         LoadDataTable_EquipmentInfo();
         LoadDataTable_Consumable();
-        LoadDataTable_Stage();
         LoadDataTable_Enemy();
+        LoadDataTable_Stage();
         QualityProb = CSVReader.Read("EquipmentQualityProb"); // Àåºñ µî±Þ È®·üÇ¥ ÀÐ¾î¿È
     }
 
@@ -309,27 +308,6 @@ public class DataTableManager : MonoBehaviour
         }
     }
 
-    private void LoadDataTable_Stage()
-    {
-        List<Dictionary<string, object>> DataTable_Stage = CSVReader.Read("DataTable_Stage");
-        StageInfos = new StageInfo[DataTable_Stage.Count];
-
-        for (int i = 0; i < DataTable_Stage.Count; i++)
-        {
-            StageInfo info = new StageInfo();
-            info.ID = DataTable_Stage[i]["ID"].ToString();
-            info.MapPrefabs = DataTable_Stage[i]["MapPrefabs"].ToString();
-            info.EnemyMaxNum = int.Parse(DataTable_Stage[i]["EnemyMaxNum"].ToString());
-            info.EnemyMinNum = int.Parse(DataTable_Stage[i]["EnemyMinNum"].ToString());
-            info.ElitePercent = int.Parse(DataTable_Stage[i]["ElitePercent"].ToString());
-            info.GuvPercent = int.Parse(DataTable_Stage[i]["GuvPercent"].ToString());
-            info.InvadeGage = int.Parse(DataTable_Stage[i]["InvadeGage"].ToString());
-            info.EnemyStatPercent = float.Parse(DataTable_Stage[i]["EnemyStatPercent"].ToString());
-
-            StageInfos[i] = info;
-        }
-    }
-
     private void LoadDataTable_Enemy()
     {
         List<Dictionary<string, object>> DataTable_Enemy = CSVReader.Read("DataTable_Enemy");
@@ -363,6 +341,54 @@ public class DataTableManager : MonoBehaviour
             info.HitPercent = int.Parse(DataTable_Enemy[i]["HitPercent"].ToString());
 
             EnemyInfos[i] = info;
+        }
+    }
+
+    private void LoadDataTable_Stage()
+    {
+        List<Dictionary<string, object>> DataTable_Stage = CSVReader.Read("DataTable_Stage");
+        StageInfos = new StageInfo[DataTable_Stage.Count];
+
+        for (int i = 0; i < DataTable_Stage.Count; i++)
+        {
+            StageInfo info = new StageInfo();
+            info.ID = DataTable_Stage[i]["ID"].ToString();
+            info.MapPrefabs = DataTable_Stage[i]["MapPrefabs"].ToString();
+            info.EnemyMaxNum = int.Parse(DataTable_Stage[i]["EnemyMaxNum"].ToString());
+            info.EnemyMinNum = int.Parse(DataTable_Stage[i]["EnemyMinNum"].ToString());
+            info.ElitePercent = int.Parse(DataTable_Stage[i]["ElitePercent"].ToString());
+            info.GuvPercent = int.Parse(DataTable_Stage[i]["GuvPercent"].ToString());
+            info.InvadeGage = int.Parse(DataTable_Stage[i]["InvadeGage"].ToString());
+            info.EnemyStatPercent = float.Parse(DataTable_Stage[i]["EnemyStatPercent"].ToString());
+
+            EnemyTypeInfo bossinfo = new EnemyTypeInfo();
+            bossinfo.ID = DataTable_Stage[i]["BossID"].ToString();
+            bossinfo.Name = DataTable_Stage[i]["Name"].ToString();
+            bossinfo.Prefab = Resources.Load<GameObject>("Prefabs/Enemy/" + DataTable_Stage[i]["Prefab"].ToString());
+            bossinfo.Sound = DataTable_Stage[i]["Sound"].ToString();
+            switch (DataTable_Stage[i]["AttackType"].ToString())
+            {
+                case "BaseMelee":
+                    bossinfo.AttackType = EnemyTypeInfo.AttackTypes.BaseMelee;
+                    break;
+
+                case "Kobold_Ranged":
+                    bossinfo.AttackType = EnemyTypeInfo.AttackTypes.Kobold_Ranged;
+                    break;
+            }
+            bossinfo.AttackRange = float.Parse(DataTable_Stage[i]["AttackRange"].ToString());
+            bossinfo.AttackDelay = float.Parse(DataTable_Stage[i]["AttackDelay"].ToString());
+            bossinfo.EXP = int.Parse(DataTable_Stage[i]["EXP"].ToString());
+            //--Stat--
+            bossinfo.Level = int.Parse(DataTable_Stage[i]["Level"].ToString());
+            bossinfo.Attack = int.Parse(DataTable_Stage[i]["Attack"].ToString());
+            bossinfo.MaxHealth = int.Parse(DataTable_Stage[i]["MaxHealth"].ToString());
+            bossinfo.MoveSpeed = int.Parse(DataTable_Stage[i]["MoveSpeed"].ToString());
+            bossinfo.HitPercent = int.Parse(DataTable_Stage[i]["HitPercent"].ToString());
+            info.BossInfo = bossinfo;
+            info.DropTime = int.Parse(DataTable_Stage[i]["DropTime"].ToString());
+
+            StageInfos[i] = info;
         }
     }
 }

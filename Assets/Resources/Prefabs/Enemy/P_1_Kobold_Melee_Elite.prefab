@@ -248,12 +248,12 @@ MonoBehaviour:
   HealthBar: {fileID: 894972730622518897}
   ManaBar: {fileID: 0}
   ExpBar: {fileID: 0}
-  level: 1
+  level: 0
   levelUpEXP: 0
   currentEXP: 0
-  attack: 45
+  attack: 0
   attackPercent: 0
-  maxHealth: 2400
+  maxHealth: 0
   maxHealthPercent: 0
   currentHealth: 0
   maxMana: 0
@@ -263,12 +263,12 @@ MonoBehaviour:
   defencePercent: 0
   magicRegist: 0
   magicRegistPercent: 0
-  moveSpeed: 2
+  moveSpeed: 0
   moveSpeedPercent: 0
   attackSpeed: 0
   attackSpeedPercent: 0
   dodgePercent: 0
-  hitPercent: 95
+  hitPercent: 0
   criticalPercent: 0
   criticalDamage: 0
   healthRegen: 0
