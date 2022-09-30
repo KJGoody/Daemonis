@@ -154,7 +154,7 @@ public class EnemyBoss : EnemyBase
     protected override IEnumerator Death()
     {
         yield return new WaitForSeconds(3f);
-        IngameManager.ClearStage = true;
+        ClearPanel.Instance.ClearGame();
         Destroy(gameObject);
     }
 }

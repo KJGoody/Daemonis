@@ -190,7 +190,6 @@ GameObject:
   - component: {fileID: 7782529544631918906}
   - component: {fileID: 1530950419950964358}
   - component: {fileID: 1878331781660206863}
-  - component: {fileID: -8363580730263987541}
   - component: {fileID: 9198583228697994435}
   - component: {fileID: 894972729840216755}
   - component: {fileID: 894972729840216764}
@@ -311,33 +310,7 @@ MonoBehaviour:
   ExitPoint: {fileID: 3774030598729366747}
   myAttackRange: 0
   MyAttackTime: 1000
---- !u!114 &-8363580730263987541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 894972729840216760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b35f3dd51d61a4daf3f0eac32148b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefabs: {fileID: 976042539147984628}
-  _spriteList: {fileID: 5543055166589280748}
-  hitBox: {fileID: 894972730089825394}
-  _layerName: 0
-  MyTarget: {fileID: 0}
-  IsRushing: 0
-  RushSpeed: 0
-  buffManager: {fileID: 2664561610396503658}
-  OnBuff: []
-  BuffxDamage: 1
-  enemytype: {fileID: 0}
-  HealthBarImage: {fileID: 894972729353884794}
-  ExitPoint: {fileID: 3774030598729366747}
-  myAttackRange: 0
-  MyAttackTime: 1000
+  DropTime: 0
 --- !u!70 &9198583228697994435
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

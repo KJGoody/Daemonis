@@ -396,6 +396,8 @@ public class GameManager : MonoBehaviour
 [System.Serializable]
 public class SaveLoadData
 {
+    public int[] ClearStageNum;
+
     // E == Equipment
     public string[] E_Data;
     public int[] E_Quality;
@@ -526,6 +528,8 @@ public class SaveLoadData
 
     public SaveLoadData()
     {
+        ClearStageNum = new int[3];
+
         E_Data = new string[6];
         E_Quality = new int[6];
         #region E_AddOptionQuality

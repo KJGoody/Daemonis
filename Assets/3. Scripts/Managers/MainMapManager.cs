@@ -14,6 +14,7 @@ public class MainMapManager : MonoBehaviour
         selectActNum = 0;
         SetActInfo(selectActNum);
     }
+
     public void MoveButton(bool next)
     {
         if (next)
@@ -32,6 +33,7 @@ public class MainMapManager : MonoBehaviour
         }
         SetActInfo(selectActNum);
     }
+
     private void SetActInfo(int num)
     {
         switch (num)

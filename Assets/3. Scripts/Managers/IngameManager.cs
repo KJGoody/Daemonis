@@ -6,7 +6,6 @@ public class IngameManager : MonoBehaviour
 {
     private StageInfo Info;
     private bool BossOnce;
-    [HideInInspector] public static bool ClearStage = false;
 
     private void Awake()
     {
@@ -29,11 +28,6 @@ public class IngameManager : MonoBehaviour
             EnemyBoss Boss = Instantiate(Info.BossInfo.Prefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<EnemyBoss>();
             Boss.enemytype.SetInfo = Info.BossInfo;
             Boss.DropTime = Info.DropTime;
-        }
-
-        if (ClearStage)
-        {
-
         }
     }
 }
