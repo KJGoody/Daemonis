@@ -47,6 +47,42 @@ TextureImporter:
   - first:
       213: -1994166387855734768
     second: 03_Prison_Palette_02_14
+  - first:
+      213: -978485188280076950
+    second: 03_Prison_Palette_02_15
+  - first:
+      213: -5016801510059601192
+    second: 03_Prison_Palette_02_16
+  - first:
+      213: -1867548440869475932
+    second: 03_Prison_Palette_02_17
+  - first:
+      213: -9125442009170677481
+    second: 03_Prison_Palette_02_18
+  - first:
+      213: -6413977414056724312
+    second: 03_Prison_Palette_02_19
+  - first:
+      213: -1564335770385899749
+    second: 03_Prison_Palette_02_20
+  - first:
+      213: -556049734261704924
+    second: 03_Prison_Palette_02_21
+  - first:
+      213: -7108267897329281456
+    second: 03_Prison_Palette_02_22
+  - first:
+      213: 2924382317094428659
+    second: 03_Prison_Palette_02_23
+  - first:
+      213: -9149450575918046018
+    second: 03_Prison_Palette_02_24
+  - first:
+      213: 6281076439564729982
+    second: 03_Prison_Palette_02_25
+  - first:
+      213: -1864684905570254134
+    second: 03_Prison_Palette_02_26
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -458,6 +494,258 @@ TextureImporter:
       bones: []
       spriteID: 018c5dc5c3c4354e0800000000000000
       internalID: -1994166387855734768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_15
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a65b59ec7e8bb62f0800000000000000
+      internalID: -978485188280076950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d211445b9db06ab0800000000000000
+      internalID: -5016801510059601192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a9e32576922516e0800000000000000
+      internalID: -1867548440869475932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_18
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71174f067daeb5180800000000000000
+      internalID: -9125442009170677481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a835cd4689fcf6a0800000000000000
+      internalID: -6413977414056724312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_20
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1f16b0b7ec5a4ae0800000000000000
+      internalID: -1564335770385899749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_21
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42771e776b38848f0800000000000000
+      internalID: -556049734261704924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_22
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0561063320c5a5d90800000000000000
+      internalID: -7108267897329281456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_23
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ffd8dd293e759820800000000000000
+      internalID: 2924382317094428659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb469645d2f960180800000000000000
+      internalID: -9149450575918046018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_25
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7eb4534ebdda2750800000000000000
+      internalID: 6281076439564729982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_Prison_Palette_02_26
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac2c37935fe4f16e0800000000000000
+      internalID: -1864684905570254134
       vertices: []
       indices: 
       edges: []
