@@ -10,12 +10,8 @@ public class Merchant : NPC
         base.SetTarget(target);
 
         if(target != null)
-        {
             ActiveButton.Instance.SetButton(ActiveButton.Role.MerchantButton);
-        }
         else
-        {
             ActiveButton.Instance.ResetButton();
-        }
     }
 }

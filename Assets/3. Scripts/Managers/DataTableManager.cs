@@ -15,93 +15,55 @@ public class DataTableManager : MonoBehaviour
         }
     }
 
-    private SpellInfo[] spellInfos;
-    public SpellInfo[] SpellInfos { get { return spellInfos; } }
-    private ItemInfo_Equipment[] EquipmentInfos;
-    private ItemInfo_Consumable[] ConsumalbeInfos;
+    //-- StageInfo --
     private StageInfo[] StageInfos;
-    private EnemyTypeInfo[] EnemyInfos;
-
-    private List<Dictionary<string, object>> QualityProb; // 장비 등급 확률표
-
-    public SpellInfo GetInfo_Spell(string ID)
+    private void LoadDataTable_Stage()
     {
-        foreach (SpellInfo Data in spellInfos)
-            if (Data.ID == ID)
-                return Data;
+        List<Dictionary<string, object>> DataTable_Stage = CSVReader.Read("DataTable_Stage");
+        StageInfos = new StageInfo[DataTable_Stage.Count];
 
-        return null;
+        for (int i = 0; i < DataTable_Stage.Count; i++)
+        {
+            StageInfo info = new StageInfo();
+            info.ID = DataTable_Stage[i]["ID"].ToString();
+            info.MapPrefabs = DataTable_Stage[i]["MapPrefabs"].ToString();
+            info.EnemyMaxNum = int.Parse(DataTable_Stage[i]["EnemyMaxNum"].ToString());
+            info.EnemyMinNum = int.Parse(DataTable_Stage[i]["EnemyMinNum"].ToString());
+            info.ElitePercent = int.Parse(DataTable_Stage[i]["ElitePercent"].ToString());
+            info.GuvPercent = int.Parse(DataTable_Stage[i]["GuvPercent"].ToString());
+            info.InvadeGage = int.Parse(DataTable_Stage[i]["InvadeGage"].ToString());
+            info.EnemyStatPercent = float.Parse(DataTable_Stage[i]["EnemyStatPercent"].ToString());
+
+            EnemyTypeInfo bossinfo = new EnemyTypeInfo();
+            bossinfo.ID = DataTable_Stage[i]["BossID"].ToString();
+            bossinfo.Name = DataTable_Stage[i]["Name"].ToString();
+            bossinfo.Prefab = Resources.Load<GameObject>("Prefabs/Enemy/" + DataTable_Stage[i]["Prefab"].ToString());
+            bossinfo.Sound = DataTable_Stage[i]["Sound"].ToString();
+            switch (DataTable_Stage[i]["AttackType"].ToString())
+            {
+                case "BaseMelee":
+                    bossinfo.AttackType = EnemyTypeInfo.AttackTypes.BaseMelee;
+                    break;
+
+                case "Kobold_Ranged":
+                    bossinfo.AttackType = EnemyTypeInfo.AttackTypes.Kobold_Ranged;
+                    break;
+            }
+            bossinfo.AttackRange = float.Parse(DataTable_Stage[i]["AttackRange"].ToString());
+            bossinfo.AttackDelay = float.Parse(DataTable_Stage[i]["AttackDelay"].ToString());
+            bossinfo.EXP = int.Parse(DataTable_Stage[i]["EXP"].ToString());
+            //--Stat--
+            bossinfo.Level = int.Parse(DataTable_Stage[i]["Level"].ToString());
+            bossinfo.Attack = int.Parse(DataTable_Stage[i]["Attack"].ToString());
+            bossinfo.MaxHealth = int.Parse(DataTable_Stage[i]["MaxHealth"].ToString());
+            bossinfo.MoveSpeed = int.Parse(DataTable_Stage[i]["MoveSpeed"].ToString());
+            bossinfo.HitPercent = int.Parse(DataTable_Stage[i]["HitPercent"].ToString());
+            info.BossInfo = bossinfo;
+            info.DropTime = int.Parse(DataTable_Stage[i]["DropTime"].ToString());
+
+            StageInfos[i] = info;
+        }
     }
-
-    public ItemInfo_Equipment GetInfo_Equipment(string ID)
-    {
-        foreach (ItemInfo_Equipment Data in EquipmentInfos)
-            if (Data.ID == ID)
-                return Data;
-
-        return null;
-    }
-
-    public List<ItemInfo_Equipment> GetInfo_Equipments(int Level)
-    {
-        if (Level > 50) Level = 50;
-
-        List<ItemInfo_Equipment> array = new List<ItemInfo_Equipment>();
-        foreach (ItemInfo_Equipment Data in EquipmentInfos)
-            if (Data.LimitLevel / 10 == Level / 10)
-                array.Add(Data);
-
-        return array;
-    }
-
-    public ItemInfo_Equipment GetInfo_Equipment(int Level)
-    {
-        if (Level > 50) Level = 50;
-
-        List<ItemInfo_Equipment> array = new List<ItemInfo_Equipment>();
-        foreach (ItemInfo_Equipment Data in EquipmentInfos)
-            if (Data.LimitLevel / 10 == Level / 10)
-                array.Add(Data);
-
-        int RandomNum = Random.Range(0, array.Count);
-
-        return array[RandomNum];
-    }
-
-    public ItemInfo_Consumable GetInfo_Consumable(string ID)
-    {
-        foreach (ItemInfo_Consumable Data in ConsumalbeInfos)
-                if (Data.ID == ID)
-                    return Data;
-
-        return null;
-    }
-
-    public List<ItemInfo_Consumable> GetInfo_Consumables(int Level)
-    {
-        if (Level > 50) Level = 50;
-
-        List<ItemInfo_Consumable> array = new List<ItemInfo_Consumable>();
-        foreach (ItemInfo_Consumable Data in ConsumalbeInfos)
-            if (Data.LimitLevel <= Level)
-                array.Add(Data);
-
-        return array;
-    }
-
-    public ItemInfo_Consumable GetInfo_Consumable(int Level)
-    {
-        if (Level > 50) Level = 50;
-
-        List<ItemInfo_Consumable> array = new List<ItemInfo_Consumable>();
-        foreach (ItemInfo_Consumable Data in ConsumalbeInfos)
-            if (Data.LimitLevel / 10 <= Level / 10)
-                array.Add(Data);
-
-        int RandomNum = Random.Range(0, array.Count);
-        return array[RandomNum];
-    }
-
     public StageInfo GetStageInfo(string StageID)
     {
         foreach (StageInfo Data in StageInfos)
@@ -110,53 +72,43 @@ public class DataTableManager : MonoBehaviour
 
         return null;
     }
+    //-- StageInfo --
 
-    public EnemyTypeInfo GetEnemyType(string strEnemyType)
+    //-- QuestDialog --
+    private DialogData[] QuestDialog;
+    private void LoadDataTable_QuestDialog()
     {
-        foreach (EnemyTypeInfo Data in EnemyInfos)
-            if (Data.ID == strEnemyType)
-                return Data;
+        List<Dictionary<string, object>> DataTable_QuestDialog = CSVReader.Read("DataTable_QuestDialog");
+        QuestDialog = new DialogData[DataTable_QuestDialog.Count];
 
-        return null;
-    }
-
-    public List<GameObject> GetEnemyPrefabs(string CurrentStage)
-    {
-        List<GameObject> array = new List<GameObject>();
-        foreach (EnemyTypeInfo Data in EnemyInfos)
+        for (int i = 0; i < DataTable_QuestDialog.Count; i++)
         {
-            string[] DataSplit = Data.ID.Split('_');
-            string[] CurrentStageSplit = CurrentStage.Split('_');
-            if (DataSplit[1] == CurrentStageSplit[1])
-                array.Add(Data.Prefab);
+            DialogData info = new DialogData();
+            info.QuestIndex = int.Parse(DataTable_QuestDialog[i]["QuestIndex"].ToString());
+            info.QuestStat = int.Parse(DataTable_QuestDialog[i]["QuestStat"].ToString());
+            info.ActorName = DataTable_QuestDialog[i]["ActorName"].ToString();
+            info.Speech = DataTable_QuestDialog[i]["Speech"].ToString();
+
+            QuestDialog[i] = info;
         }
+    }
+    public List<DialogData> GetDialogArray()
+    {
+        int questIndex = GameManager.MyInstance.DATA.CurrentQuestIndex;
+
+        List<DialogData> array = new List<DialogData>();
+        for (int i = 0; i < QuestDialog.Length; i++)
+            if(questIndex == QuestDialog[i].QuestIndex)
+                if (GameManager.MyInstance.DATA.QuestStat[questIndex] == QuestDialog[i].QuestStat)
+                    array.Add(QuestDialog[i]);
 
         return array;
     }
+    //-- QuestDialog --
 
-    public Item_Base.Qualitys GetQuality(int Level)
-    {
-        if (Level > 50) Level = 50;
-
-        float[] myQualityProb = new float[6];
-        int a = 0;
-        foreach (var value in QualityProb[Level / 10].Values) // 레벨마다 다른 확률을 엑셀로 가져와서 배열에 할당
-            myQualityProb[a++] = (float)System.Convert.ToDouble(value);
-        int newQuality = (int)ChanceMaker.Choose(myQualityProb); // 할당된 확률 배열로 가중치 랜덤뽑기로 등급 설정
-
-        return (Item_Base.Qualitys)newQuality;
-    } 
-
-    private void Awake()
-    {
-        LoadDataTable_SpellInfo();
-        LoadDataTable_EquipmentInfo();
-        LoadDataTable_Consumable();
-        LoadDataTable_Enemy();
-        LoadDataTable_Stage();
-        QualityProb = CSVReader.Read("EquipmentQualityProb"); // 장비 등급 확률표 읽어옴
-    }
-
+    //-- SpellInfo --
+    private SpellInfo[] spellInfos;
+    public SpellInfo[] SpellInfos { get { return spellInfos; } }
     private void LoadDataTable_SpellInfo()
     {
         // 스팰 데이터 테이블을 불러오기
@@ -222,7 +174,18 @@ public class DataTableManager : MonoBehaviour
             spellInfos[i] = info;
         }
     }
+    public SpellInfo GetInfo_Spell(string ID)
+    {
+        foreach (SpellInfo Data in spellInfos)
+            if (Data.ID == ID)
+                return Data;
 
+        return null;
+    }
+    //-- SpellInfo --
+
+    //-- EquipmentInfo --
+    private ItemInfo_Equipment[] EquipmentInfos;
     private void LoadDataTable_EquipmentInfo()
     {
         List<Dictionary<string, object>> DataTable_Equipment = CSVReader.Read("DataTable_Equipment");
@@ -275,11 +238,46 @@ public class DataTableManager : MonoBehaviour
             EquipmentInfos[i] = info;
         }
     }
+    public ItemInfo_Equipment GetInfo_Equipment(string ID)
+    {
+        foreach (ItemInfo_Equipment Data in EquipmentInfos)
+            if (Data.ID == ID)
+                return Data;
 
+        return null;
+    }
+    public List<ItemInfo_Equipment> GetInfo_Equipments(int Level)
+    {
+        if (Level > 50) Level = 50;
+
+        List<ItemInfo_Equipment> array = new List<ItemInfo_Equipment>();
+        foreach (ItemInfo_Equipment Data in EquipmentInfos)
+            if (Data.LimitLevel / 10 == Level / 10)
+                array.Add(Data);
+
+        return array;
+    }
+    public ItemInfo_Equipment GetInfo_Equipment(int Level)
+    {
+        if (Level > 50) Level = 50;
+
+        List<ItemInfo_Equipment> array = new List<ItemInfo_Equipment>();
+        foreach (ItemInfo_Equipment Data in EquipmentInfos)
+            if (Data.LimitLevel / 10 == Level / 10)
+                array.Add(Data);
+
+        int RandomNum = Random.Range(0, array.Count);
+
+        return array[RandomNum];
+    }
+    //-- EquipmentInfo --
+
+    //-- ConsumableInfo --
+    private ItemInfo_Consumable[] ConsumableInfos;
     private void LoadDataTable_Consumable()
     {
         List<Dictionary<string, object>> DataTable_Consumable = CSVReader.Read("DataTable_Consumable");
-        ConsumalbeInfos = new ItemInfo_Consumable[DataTable_Consumable.Count];
+        ConsumableInfos = new ItemInfo_Consumable[DataTable_Consumable.Count];
 
         for (int i = 0; i < DataTable_Consumable.Count; i++)
         {
@@ -302,12 +300,46 @@ public class DataTableManager : MonoBehaviour
                     info.BuffName = DataTable_Consumable[i]["BuffName"].ToString();
                     info.Value = int.Parse(DataTable_Consumable[i]["Value"].ToString());
 
-                    ConsumalbeInfos[i] = info;
+                    ConsumableInfos[i] = info;
                     break;
             }
         }
     }
+    public ItemInfo_Consumable GetInfo_Consumable(string ID)
+    {
+        foreach (ItemInfo_Consumable Data in ConsumableInfos)
+                if (Data.ID == ID)
+                    return Data;
 
+        return null;
+    }
+    public List<ItemInfo_Consumable> GetInfo_Consumables(int Level)
+    {
+        if (Level > 50) Level = 50;
+
+        List<ItemInfo_Consumable> array = new List<ItemInfo_Consumable>();
+        foreach (ItemInfo_Consumable Data in ConsumableInfos)
+            if (Data.LimitLevel <= Level)
+                array.Add(Data);
+
+        return array;
+    }
+    public ItemInfo_Consumable GetInfo_Consumable(int Level)
+    {
+        if (Level > 50) Level = 50;
+
+        List<ItemInfo_Consumable> array = new List<ItemInfo_Consumable>();
+        foreach (ItemInfo_Consumable Data in ConsumableInfos)
+            if (Data.LimitLevel / 10 <= Level / 10)
+                array.Add(Data);
+
+        int RandomNum = Random.Range(0, array.Count);
+        return array[RandomNum];
+    }
+    //-- ConsumableInfo --
+
+    //-- EnemyInfo --
+    private EnemyTypeInfo[] EnemyInfos;
     private void LoadDataTable_Enemy()
     {
         List<Dictionary<string, object>> DataTable_Enemy = CSVReader.Read("DataTable_Enemy");
@@ -343,52 +375,55 @@ public class DataTableManager : MonoBehaviour
             EnemyInfos[i] = info;
         }
     }
-
-    private void LoadDataTable_Stage()
+    public EnemyTypeInfo GetEnemyType(string strEnemyType)
     {
-        List<Dictionary<string, object>> DataTable_Stage = CSVReader.Read("DataTable_Stage");
-        StageInfos = new StageInfo[DataTable_Stage.Count];
+        foreach (EnemyTypeInfo Data in EnemyInfos)
+            if (Data.ID == strEnemyType)
+                return Data;
 
-        for (int i = 0; i < DataTable_Stage.Count; i++)
-        {
-            StageInfo info = new StageInfo();
-            info.ID = DataTable_Stage[i]["ID"].ToString();
-            info.MapPrefabs = DataTable_Stage[i]["MapPrefabs"].ToString();
-            info.EnemyMaxNum = int.Parse(DataTable_Stage[i]["EnemyMaxNum"].ToString());
-            info.EnemyMinNum = int.Parse(DataTable_Stage[i]["EnemyMinNum"].ToString());
-            info.ElitePercent = int.Parse(DataTable_Stage[i]["ElitePercent"].ToString());
-            info.GuvPercent = int.Parse(DataTable_Stage[i]["GuvPercent"].ToString());
-            info.InvadeGage = int.Parse(DataTable_Stage[i]["InvadeGage"].ToString());
-            info.EnemyStatPercent = float.Parse(DataTable_Stage[i]["EnemyStatPercent"].ToString());
-
-            EnemyTypeInfo bossinfo = new EnemyTypeInfo();
-            bossinfo.ID = DataTable_Stage[i]["BossID"].ToString();
-            bossinfo.Name = DataTable_Stage[i]["Name"].ToString();
-            bossinfo.Prefab = Resources.Load<GameObject>("Prefabs/Enemy/" + DataTable_Stage[i]["Prefab"].ToString());
-            bossinfo.Sound = DataTable_Stage[i]["Sound"].ToString();
-            switch (DataTable_Stage[i]["AttackType"].ToString())
-            {
-                case "BaseMelee":
-                    bossinfo.AttackType = EnemyTypeInfo.AttackTypes.BaseMelee;
-                    break;
-
-                case "Kobold_Ranged":
-                    bossinfo.AttackType = EnemyTypeInfo.AttackTypes.Kobold_Ranged;
-                    break;
-            }
-            bossinfo.AttackRange = float.Parse(DataTable_Stage[i]["AttackRange"].ToString());
-            bossinfo.AttackDelay = float.Parse(DataTable_Stage[i]["AttackDelay"].ToString());
-            bossinfo.EXP = int.Parse(DataTable_Stage[i]["EXP"].ToString());
-            //--Stat--
-            bossinfo.Level = int.Parse(DataTable_Stage[i]["Level"].ToString());
-            bossinfo.Attack = int.Parse(DataTable_Stage[i]["Attack"].ToString());
-            bossinfo.MaxHealth = int.Parse(DataTable_Stage[i]["MaxHealth"].ToString());
-            bossinfo.MoveSpeed = int.Parse(DataTable_Stage[i]["MoveSpeed"].ToString());
-            bossinfo.HitPercent = int.Parse(DataTable_Stage[i]["HitPercent"].ToString());
-            info.BossInfo = bossinfo;
-            info.DropTime = int.Parse(DataTable_Stage[i]["DropTime"].ToString());
-
-            StageInfos[i] = info;
-        }
+        return null;
     }
+    public List<GameObject> GetEnemyPrefabs(string CurrentStage)
+    {
+        List<GameObject> array = new List<GameObject>();
+        foreach (EnemyTypeInfo Data in EnemyInfos)
+        {
+            string[] DataSplit = Data.ID.Split('_');
+            string[] CurrentStageSplit = CurrentStage.Split('_');
+            if (DataSplit[1] == CurrentStageSplit[1])
+                array.Add(Data.Prefab);
+        }
+
+        return array;
+    }
+    //-- EnemyInfo --
+
+    //-- QualityProb --
+    private List<Dictionary<string, object>> QualityProb; // 장비 등급 확률표
+    public Item_Base.Qualitys GetQuality(int Level)
+    {
+        if (Level > 50) Level = 50;
+
+        float[] myQualityProb = new float[6];
+        int a = 0;
+        foreach (var value in QualityProb[Level / 10].Values) // 레벨마다 다른 확률을 엑셀로 가져와서 배열에 할당
+            myQualityProb[a++] = (float)System.Convert.ToDouble(value);
+        int newQuality = (int)ChanceMaker.Choose(myQualityProb); // 할당된 확률 배열로 가중치 랜덤뽑기로 등급 설정
+
+        return (Item_Base.Qualitys)newQuality;
+    } 
+    //-- QualityProb --
+
+    private void Awake()
+    {
+        LoadDataTable_Stage();
+        LoadDataTable_QuestDialog();
+        LoadDataTable_SpellInfo();
+        LoadDataTable_EquipmentInfo();
+        LoadDataTable_Consumable();
+
+        LoadDataTable_Enemy();
+        QualityProb = CSVReader.Read("EquipmentQualityProb"); // 장비 등급 확률표 읽어옴
+    }
+
 }

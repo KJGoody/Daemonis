@@ -24,7 +24,8 @@ public class ActiveButton : MonoBehaviour
     {
         PortalButton,
         MerchantButton,
-        ChesterButton
+        ChesterButton,
+        QuesterButton
     }
     private Role RoleName;
 
@@ -49,6 +50,10 @@ public class ActiveButton : MonoBehaviour
                 break;
 
             case Role.ChesterButton:
+                Image.sprite = Images[1];
+                break;
+
+            case Role.QuesterButton:
                 Image.sprite = Images[1];
                 break;
 
@@ -81,6 +86,11 @@ public class ActiveButton : MonoBehaviour
 
             case Role.ChesterButton:
                 ChestPanel.Instance.OpenChest();
+                break;
+
+            case Role.QuesterButton:
+                DialogScript.Instance.OpenQuestPanel();
+                ResetButton();
                 break;
         }
     }
