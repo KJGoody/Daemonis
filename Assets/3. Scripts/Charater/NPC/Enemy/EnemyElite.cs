@@ -29,6 +29,7 @@ public class EnemyElite : EnemyBase
         if (InvadeGage.Instance.IsBossTime)
         {
             EnemyPool.Instance.ReturnObject(this, EnemyPool.Instance.GetIndex(GetComponent<EnemyType>().Prefab));
+            
         }
 
         if (IsAlive)

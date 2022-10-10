@@ -176,7 +176,7 @@ public abstract class Character : MonoBehaviour
     {
         for (int i = OnBuff.Count - 1; i >= 0; i--)
         {
-            if (OnBuff[i].BuffName.Equals(buffName))
+            if (OnBuff[i].BuffName == buffName)
                 OnBuff[i].DeActivationBuff();
         }
     }
@@ -187,12 +187,8 @@ public abstract class Character : MonoBehaviour
         if (OnBuff.Count > 0)
         {
             foreach (Buff buff in OnBuff)
-            {
-                if (buff.BuffName.Equals(buffName))
+                if (buff.BuffName == buffName)
                     return true;
-                else
-                    return false;
-            }
         }
         return false;
     }
@@ -203,7 +199,7 @@ public abstract class Character : MonoBehaviour
         {
             foreach (Buff buff in OnBuff)
             {
-                if (buff.BuffName.Equals(buffName))
+                if (buff.BuffName == buffName)
                     return buff;
             }
             return null;

@@ -1,9 +1,9 @@
-﻿QuestIndex,종류,시작 엔피씨,완료 엔피씨,내용,보상,처치 목표,처치 마릿수,목표 스테이지
-0,대화,퀘스트NPC,,인트로 대화 듣기,,,,
-1,대화,퀘스트NPC,,장비장착 튜토리얼,,,,
-2,대화,퀘스트NPC,,마을 설명,100G,,,
-3,대화,상점 NPC,,상점 이용 튜토리얼,,,,
-4,대화,퀘스트NPC,,스킬 장착 튜토리얼,,,,
-5,처치,퀘스트NPC,퀘스트NPC,고블린 10마리 처치,"100EXP,300G",고블린,10,
-6,클리어,퀘스트NPC,퀘스트NPC,1-3 스테이지 클리어,"500EXP,500G",,,1-3스테이지
-7,처치,퀘스트NPC,상점NPC,고블린 50마리 처치,아이템,고블린,50,
+﻿QuestIndex,Type,NPC,DoneNPC,QuestText,GoalNum,TargetStage,Reward
+0,대화,None,Quester,인트로 대화 듣기,None,None,None
+1,대화,None,Quester,장비장착 튜토리얼,None,None,None
+2,대화,None,Quester,마을 설명,None,None,100G
+3,대화,None,Merchant,상점 이용 튜토리얼,None,None,None
+4,대화,None,Quester,스킬 장착 튜토리얼,None,None,None
+5,처치,Quester,Quester,고블린 10마리 처치,None,10,EXP_100/Gold_300
+6,클리어,Quester,Quester,1-3 스테이지 클리어,None,None,EXP_500/Gold_500
+7,처치,Quester,Merchant,고블린 50마리 처치,None,50,아이템

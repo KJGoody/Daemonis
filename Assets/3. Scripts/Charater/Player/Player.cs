@@ -159,8 +159,13 @@ public class Player : Character
                                 {
                                     SpellScript spellScript = Instantiate(newSpell.Prefab, targetGroups[i].Targets[j]).GetComponent<SpellScript>();
                                     spellScript.MyTarget = targetGroups[i].Targets[j];
-                                    spellScript.StackxDamage = targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().GetBuff("Debuff_Skill_Fire_02").BuffStack;
-                                    targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().OffBuff("Debuff_Skill_Fire_02");
+                                    if (targetGroups[i].Targets[j].gameObject.activeSelf)
+                                    {
+                                        spellScript.StackxDamage = targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().GetBuff("Debuff_Skill_Fire_02").BuffStack;
+                                        targetGroups[i].Targets[j].transform.GetComponent<EnemyBase>().OffBuff("Debuff_Skill_Fire_02");
+                                    }
+                                    else
+                                        targetGroups[i].Targets.Remove(targetGroups[i].Targets[j]);
                                 }
                     break;
             }

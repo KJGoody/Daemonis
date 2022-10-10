@@ -64,13 +64,16 @@ public class Buff : MonoBehaviour
 
     public void ResetBuff() // 버프 갱신
     {
-        currentTime = Duration;
-        BuffFillImage.fillAmount = 1;
-        if (buffType == BuffType.Stack)
+        if(buffType != BuffType.Passive)
         {
-            if (BuffStack < 5)
-                BuffStack++;
-            StackText.text = BuffStack.ToString();
+            currentTime = Duration;
+            BuffFillImage.fillAmount = 1;
+            if (buffType == BuffType.Stack)
+            {
+                if (BuffStack < 5)
+                    BuffStack++;
+                StackText.text = BuffStack.ToString();
+            }
         }
     }
 
