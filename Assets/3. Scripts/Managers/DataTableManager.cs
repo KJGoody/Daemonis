@@ -94,17 +94,72 @@ public class DataTableManager : MonoBehaviour
     }
     public List<DialogData> GetDialogArray()
     {
-        int questIndex = GameManager.MyInstance.DATA.CurrentQuestIndex;
+        int questIndex = GameManager.MyInstance.DATA.Quest_Main;
 
         List<DialogData> array = new List<DialogData>();
         for (int i = 0; i < QuestDialog.Length; i++)
             if(questIndex == QuestDialog[i].QuestIndex)
-                if (GameManager.MyInstance.DATA.QuestStat[questIndex] == QuestDialog[i].QuestStat)
+                if (GameManager.MyInstance.DATA.Quest_Main_TalkStat[questIndex] == QuestDialog[i].QuestStat)
                     array.Add(QuestDialog[i]);
 
         return array;
     }
     //-- QuestDialog --
+
+    //-- QuestContent
+    private QuestInfo[] QuestInfoData;
+    private void LoadDataTable_QuestData()
+    {
+        List<Dictionary<string, object>> DataTable_QuestData = CSVReader.Read("DataTable_QuestData");
+        QuestInfoData = new QuestInfo[DataTable_QuestData.Count];
+
+        for (int i = 0; i < DataTable_QuestData.Count; i++)
+        {
+            QuestInfo info = new QuestInfo();
+            info.Index = int.Parse(DataTable_QuestData[i]["Index"].ToString());
+            switch (DataTable_QuestData[i]["Type"])
+            {
+                case "Auto":
+                    info.Type = QuestInfo.Types.Auto;
+                    break;
+
+                case "Talk":
+                    info.Type = QuestInfo.Types.Talk;
+                    break;
+            }
+            info.NPC_Start = DataTable_QuestData[i]["NPC_Start"].ToString();
+            info.NPC_Done = DataTable_QuestData[i]["NPC_Done"].ToString();
+            info.Title = DataTable_QuestData[i]["Title"].ToString();
+            info.Content = DataTable_QuestData[i]["Content"].ToString();
+            switch (DataTable_QuestData[i]["GoalType"])
+            {
+                case "Talk":
+                    info.GoalType = QuestInfo.GoalTypes.Talk;
+                    break;
+
+                case "Stage":
+                    info.GoalType = QuestInfo.GoalTypes.Stage;
+                    break;
+
+                case "Kill":
+                    info.GoalType = QuestInfo.GoalTypes.Kill;
+                    break;
+
+            }
+            info.Goal = DataTable_QuestData[i]["Goal"].ToString();
+            info.Rewards = DataTable_QuestData[i]["Rewards"].ToString();
+
+            QuestInfoData[i] = info;
+        }
+    }
+    public QuestInfo GetQuestInfo(int index)
+    {
+        foreach (QuestInfo data in QuestInfoData)
+            if (data.Index == index)
+                return data;
+        return null;
+    }
+    //-- QuestContent
 
     //-- SpellInfo --
     private SpellInfo[] spellInfos;
@@ -418,6 +473,7 @@ public class DataTableManager : MonoBehaviour
     {
         LoadDataTable_Stage();
         LoadDataTable_QuestDialog();
+        LoadDataTable_QuestData();
         LoadDataTable_SpellInfo();
         LoadDataTable_EquipmentInfo();
         LoadDataTable_Consumable();

@@ -397,8 +397,10 @@ public class GameManager : MonoBehaviour
 public class SaveLoadData
 {
     public int[] ClearStageNum;
-    public int CurrentQuestIndex;
-    public int[] QuestStat;
+
+    public int Quest_Main;
+    public string Quest_Main_Goal;
+    public int[] Quest_Main_TalkStat;
 
     // E == Equipment
     public string[] E_Data;
@@ -531,8 +533,9 @@ public class SaveLoadData
     public SaveLoadData()
     {
         ClearStageNum = new int[3];
-        CurrentQuestIndex = 0;
-        QuestStat = new int[3];
+        Quest_Main = 0;
+        Quest_Main_Goal = null;
+        Quest_Main_TalkStat = new int[3];
 
         E_Data = new string[6];
         E_Quality = new int[6];

@@ -1,5 +1,5 @@
 ﻿ID,MapPrefabs,EnemyMaxNum,EnemyMinNum,ElitePercent,GuvPercent,InvadeGage,EnemyStatPercent,BossID,Name,Prefab,Sound,AttackType,AttackRange,AttackDelay,EXP,Level,Attack,MaxHealth,MoveSpeed,HitPercent,DropTime
-Act_1_1,P_Map_1_Cave,10,2,1,0,1,0.1,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
+Act_1_1,P_Map_1_Cave,10,2,1,0,20,0.1,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
 Act_1_2,P_Map_1_Cave,15,3,1,0,30,0.2,Enemy_Kobold_Ranged_Boss,코블드 원거리,P_Kobold_Ranged_Boss,Sound_Kobold,Kobold_Ranged,5,2,1,10,60,4800,2,95,10
 Act_1_3,P_Map_1_Cave,20,4,2,0,40,0.4,Enemy_Kobold_Melee_Boss,코블드 근거리,P_Kobold_Melee_Boss,Sound_Kobold,BaseMelee,1.25,1,1,10,90,7200,2,95,10
 Act_1_4,P_Map_1_Cave,25,5,2,0,50,0.6,Enemy_Kobold_Ranged_Boss,코블드 원거리,P_Kobold_Ranged_Boss,Sound_Kobold,Kobold_Ranged,5,2,1,10,60,4800,2,95,10
