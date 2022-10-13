@@ -85,7 +85,24 @@ public class DataTableManager : MonoBehaviour
         {
             DialogData info = new DialogData();
             info.QuestIndex = int.Parse(DataTable_QuestDialog[i]["QuestIndex"].ToString());
-            info.QuestStat = int.Parse(DataTable_QuestDialog[i]["QuestStat"].ToString());
+            switch (DataTable_QuestDialog[i]["QuestStat"])
+            {
+                case "Start":
+                    info.QuestStat = DialogData.QuestStats.Start;
+                    break;
+
+                case "Ing":
+                    info.QuestStat = DialogData.QuestStats.Ing;
+                    break;
+
+                case "Done":
+                    info.QuestStat = DialogData.QuestStats.Done;
+                    break;
+
+                case "Just":
+                    info.QuestStat = DialogData.QuestStats.Just;
+                    break;
+            }
             info.ActorName = DataTable_QuestDialog[i]["ActorName"].ToString();
             info.Speech = DataTable_QuestDialog[i]["Speech"].ToString();
 
@@ -99,7 +116,7 @@ public class DataTableManager : MonoBehaviour
         List<DialogData> array = new List<DialogData>();
         for (int i = 0; i < QuestDialog.Length; i++)
             if(questIndex == QuestDialog[i].QuestIndex)
-                if (GameManager.MyInstance.DATA.Quest_Main_TalkStat[questIndex] == QuestDialog[i].QuestStat)
+                if (GameManager.MyInstance.DATA.Quest_Main_TalkStat[questIndex] == (int)QuestDialog[i].QuestStat)
                     array.Add(QuestDialog[i]);
 
         return array;

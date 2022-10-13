@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        LoadData();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) // 씬이 로딩될때 실행
@@ -69,11 +70,6 @@ public class GameManager : MonoBehaviour
 
         color.a = 1;
         fadeIn_IMG.color = color;
-    }
-
-    private void Start()
-    {
-        LoadData();
     }
 
     void Update()
@@ -535,7 +531,7 @@ public class SaveLoadData
         ClearStageNum = new int[3];
         Quest_Main = 0;
         Quest_Main_Goal = null;
-        Quest_Main_TalkStat = new int[3];
+        Quest_Main_TalkStat = new int[7];
 
         E_Data = new string[6];
         E_Quality = new int[6];

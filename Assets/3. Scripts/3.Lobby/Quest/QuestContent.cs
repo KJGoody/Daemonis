@@ -12,6 +12,11 @@ public class QuestContent : MonoBehaviour
 
     public void SetQuestContent(QuestInfo info)
     {
+        Info = info;
+        Title.text = info.Title;
+        Content.text = info.Content;
 
+        if (info.NPC_Start == "None")
+            GameManager.MyInstance.DATA.Quest_Main_TalkStat[info.Index] = (int)DialogData.QuestStats.Done;
     }
 }
