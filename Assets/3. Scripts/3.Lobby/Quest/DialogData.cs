@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class DialogData
 {
     public int QuestIndex;
-    public int QuestStat;
+    public enum QuestStats { Start, Ing, Done, Just}
+    public QuestStats QuestStat;
     public string ActorName;
     public string Speech;
 }
