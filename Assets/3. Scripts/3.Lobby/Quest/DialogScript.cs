@@ -15,27 +15,50 @@ public class DialogScript : MonoBehaviour
             return instance;
         }
     }
+    private string NPCName;
     [SerializeField] private Text ActorName;
     [SerializeField] private Text ActorSpeech;
 
+    [SerializeField] private GameObject Joystick;
+
     private bool IsSkip = false;
 
-    public void OpenQuestPanel()
+    public void OpenDialog(string NPCname, int inedex = 0)
     {
         GetComponent<CanvasGroup>().alpha = 1;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
-        StartCoroutine(Dialog());
+        NPCName = NPCname;
+        Joystick.SetActive(false);
+        StartCoroutine(Dialog(inedex));
     }
 
-    public IEnumerator Dialog()
+    public IEnumerator Dialog(int index)
     {
-        List<DialogData> data = DataTableManager.Instance.GetDialogArray();
-        for(int i = 0; i < data.Count; i++)
+        List<DialogData> data;
+        if(index != 0)
+            data = DataTableManager.Instance.GetDialogArray(index);
+        else
+            data = DataTableManager.Instance.GetDialogArray();
+
+        for (int i = 0; i < data.Count; i++)
             yield return StartCoroutine(Acting(data[i].ActorName, data[i].Speech));
 
+        QuestPanel.Instance.TalkDone(NPCName);
+        yield return new WaitForSeconds(0.1f);
+
+        Joystick.SetActive(true);
         GetComponent<CanvasGroup>().alpha = 0;
         GetComponent<CanvasGroup>().blocksRaycasts = false;
-        ActiveButton.Instance.SetButton(ActiveButton.Role.QuesterButton);
+        switch (NPCName)
+        {
+            case "Merchant":
+                ActiveButton.Instance.SetButton(ActiveButton.Role.MerchantButton, Merchant.IsQuestTalk);
+                break;
+
+            case "Quester":
+                ActiveButton.Instance.SetButton(ActiveButton.Role.QuesterButton, Quester.IsQuestTalk);
+                break;
+        }
     }
 
     private IEnumerator Acting(string actorName, string actorSpeech)

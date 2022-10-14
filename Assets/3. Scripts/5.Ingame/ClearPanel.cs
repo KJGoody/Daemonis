@@ -21,9 +21,9 @@ public class ClearPanel : MonoBehaviour
 
     public void ClearGame()
     {
-
+        QuestPanel.Instance.CheckQuestGoal(QuestInfo.GoalTypes.Stage, GameManager.MyInstance.CurrentStageID);
         string[] stringSplit = GameManager.MyInstance.CurrentStageID.Split('_');
-        if(GameManager.MyInstance.DATA.ClearStageNum[int.Parse(stringSplit[1]) - 1] < int.Parse(stringSplit[2]))
+        if (GameManager.MyInstance.DATA.ClearStageNum[int.Parse(stringSplit[1]) - 1] < int.Parse(stringSplit[2]))
             GameManager.MyInstance.DATA.ClearStageNum[int.Parse(stringSplit[1]) - 1] = int.Parse(stringSplit[2]);
         GameManager.MyInstance.SaveData();
         GetComponent<CanvasGroup>().alpha = 1;

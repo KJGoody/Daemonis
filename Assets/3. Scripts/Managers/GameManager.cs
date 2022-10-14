@@ -359,7 +359,7 @@ public class GameManager : MonoBehaviour
 
     public void CallUnLoadSceneEvent()
     {
-        if(UnLoadSceneEvent != null)
+        if (UnLoadSceneEvent != null)
             UnLoadSceneEvent();
     }
 
@@ -378,7 +378,7 @@ public class GameManager : MonoBehaviour
     {
         List<ItemInfo_Equipment> array = DataTableManager.Instance.GetInfo_Equipments(Player.MyInstance.MyStat.Level);
 
-        for (int i =0; i < array.Count; i++)
+        for (int i = 0; i < array.Count; i++)
         {
             ItemCart dropitem = Instantiate(Resources.Load<GameObject>("Prefabs/P_DropItem"),
                 Player.MyInstance.transform.position + ((Vector3)Random.insideUnitCircle * 0.5f),
@@ -396,7 +396,7 @@ public class SaveLoadData
 
     public int Quest_Main;
     public string Quest_Main_Goal;
-    public int[] Quest_Main_TalkStat;
+    public int Quest_Main_Stat;
 
     // E == Equipment
     public string[] E_Data;
@@ -531,7 +531,7 @@ public class SaveLoadData
         ClearStageNum = new int[3];
         Quest_Main = 0;
         Quest_Main_Goal = null;
-        Quest_Main_TalkStat = new int[7];
+        Quest_Main_Stat = 0;
 
         E_Data = new string[6];
         E_Quality = new int[6];

@@ -28,23 +28,19 @@ public class ActiveButton : MonoBehaviour
         QuesterButton
     }
     private Role RoleName;
+    private bool IsQuestTalk;
 
     [HideInInspector] public string UnloadSceneName;
     [HideInInspector] public string LoadSceneName;
 
-    public void SetButton(Role RoleName, string UnloadSceneName = null, string LoadSceneName = null)
+    public void SetButton(Role RoleName, bool isQuestTalk = false)
     {
         ResetButton();
 
         this.RoleName = RoleName;
+        IsQuestTalk = isQuestTalk;
         switch (RoleName)
         {
-            case Role.PortalButton:
-                Image.sprite = Images[0];
-                this.UnloadSceneName = UnloadSceneName;
-                this.LoadSceneName = LoadSceneName;
-                break;
-
             case Role.MerchantButton:
                 Image.sprite = Images[1];
                 break;
@@ -62,8 +58,21 @@ public class ActiveButton : MonoBehaviour
         ButtonSetActive(true);
     }
 
+    public void SetButton(Role RoleName, string UnloadSceneName, string LoadSceneName)
+    {
+        ResetButton();
+
+        this.RoleName = RoleName;
+        Image.sprite = Images[0];
+        this.UnloadSceneName = UnloadSceneName;
+        this.LoadSceneName = LoadSceneName;
+
+        ButtonSetActive(true);
+    }
+
     public void ResetButton()
     {
+        IsQuestTalk = false;
         UnloadSceneName = null;
         LoadSceneName = null;
 
@@ -81,7 +90,13 @@ public class ActiveButton : MonoBehaviour
                 break;
 
             case Role.MerchantButton:
-                StorePanel.Instance.OpenStore();
+                if (IsQuestTalk)
+                {
+                    DialogScript.Instance.OpenDialog("Merchant");
+                    ResetButton();
+                }
+                else
+                    StorePanel.Instance.OpenStore();
                 break;
 
             case Role.ChesterButton:
@@ -89,7 +104,11 @@ public class ActiveButton : MonoBehaviour
                 break;
 
             case Role.QuesterButton:
-                DialogScript.Instance.OpenQuestPanel();
+                if (IsQuestTalk)
+                    DialogScript.Instance.OpenDialog("Quester");
+                else
+                    DialogScript.Instance.OpenDialog("Quester", (int)DialogData.QuestStats.Ing);
+
                 ResetButton();
                 break;
         }

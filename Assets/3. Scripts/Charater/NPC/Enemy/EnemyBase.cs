@@ -147,6 +147,7 @@ public class EnemyBase : Character, INpc
     {
         InvadeGage.Instance.CurrentValue += 1;
         ParentGate.CurrentEnemyNum--;
+        QuestPanel.Instance.CheckQuestGoal(QuestInfo.GoalTypes.Kill, enemytype.strEnemyType);
 
         yield return new WaitForSeconds(3f);
         SetLayersRecursively(_prefabs.transform, "None");

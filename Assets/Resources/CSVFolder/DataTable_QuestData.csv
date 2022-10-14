@@ -1,9 +1,9 @@
-﻿Index,Type,NPC_Start,NPC_Done,Title,Content,GoalType,Goal,Rewards
-0,Auto,None,Quester,시작의 서막,인트로 대화 듣기,Talk,Quester,None
-1,Auto,None,Quester,시작 중,장비장착 튜토리얼,Talk,Quester,None
-2,Auto,None,Quester,시작 하는 중,마을 설명,Talk,Quester,Gold_100
-3,Talk,Quester,Merchant,상점이란,상점 이용 튜토리얼,Talk,Merchant,None
-4,Auto,None,Quester,스킬이란,스킬 장착 튜토리얼,Talk,Quester,None
-5,Talk,Quester,Quester,고블린죽이기,고블린 10마리 처치,Kill,Enemy_1_Kobold/10,EXP_100/Gold_300
-6,Talk,Quester,Quester,스테이지 클리어,1-3 스테이지 클리어,Stage,Act_1_3,EXP_500/Gold_500
-7,Talk,Quester,Merchant,고블린 살해,고블린 50마리 처치,Kill,Enemy_1_Kobold/50,E_3
+﻿Index,Type,NPC_Start,NPC_Done,Title,Content,Content_Done,GoalType,Goal,Rewards
+0,Auto,None,Quester,시작의 서막,None,인트로 대화 듣기,None,None,None
+1,Auto,None,Quester,시작 중,None,장비장착 튜토리얼,None,None,None
+2,Auto,None,Quester,시작 하는 중,None,마을 설명,None,None,Gold_100
+3,Talk,Quester,Merchant,상점이란,None,상인에게 말걸기,None,None,None
+4,Auto,None,Quester,스킬이란,None,스킬 장착 튜토리얼,None,None,None
+5,Talk,Quester,Quester,고블린죽이기,고블린 10마리 처치,여자에게 말걸기,Kill,Enemy_1_Kobold/10,EXP_100/Gold_300
+6,Talk,Quester,Quester,스테이지 클리어,1-3 스테이지 클리어,여자에게 말걸기,Stage,Act_1_3,EXP_500/Gold_500
+7,Talk,Quester,Merchant,고블린 살해,고블린 50마리 처치,상인에게 말걸기,Kill,Enemy_1_Kobold/50,E_3

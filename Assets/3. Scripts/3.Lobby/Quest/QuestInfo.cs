@@ -7,8 +7,10 @@ public class QuestInfo
     public string NPC_Done;
     public string Title;
     public string Content;
-    public enum GoalTypes { Talk, Stage, Kill }
+    public string Content_Done;
+    public enum GoalTypes { None, Stage, Kill }
     public GoalTypes GoalType;
     public string Goal;
+    public string[] Goal_Kill { get { return Goal.Split('/'); } }
     public string Rewards;
 }

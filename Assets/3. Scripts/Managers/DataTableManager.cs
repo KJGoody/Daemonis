@@ -116,7 +116,19 @@ public class DataTableManager : MonoBehaviour
         List<DialogData> array = new List<DialogData>();
         for (int i = 0; i < QuestDialog.Length; i++)
             if(questIndex == QuestDialog[i].QuestIndex)
-                if (GameManager.MyInstance.DATA.Quest_Main_TalkStat[questIndex] == (int)QuestDialog[i].QuestStat)
+                if (GameManager.MyInstance.DATA.Quest_Main_Stat == (int)QuestDialog[i].QuestStat)
+                    array.Add(QuestDialog[i]);
+
+        return array;
+    }
+    public List<DialogData> GetDialogArray(int index)
+    {
+        int questIndex = GameManager.MyInstance.DATA.Quest_Main;
+
+        List<DialogData> array = new List<DialogData>();
+        for (int i = 0; i < QuestDialog.Length; i++)
+            if (questIndex == QuestDialog[i].QuestIndex)
+                if (index == (int)QuestDialog[i].QuestStat)
                     array.Add(QuestDialog[i]);
 
         return array;
@@ -148,10 +160,11 @@ public class DataTableManager : MonoBehaviour
             info.NPC_Done = DataTable_QuestData[i]["NPC_Done"].ToString();
             info.Title = DataTable_QuestData[i]["Title"].ToString();
             info.Content = DataTable_QuestData[i]["Content"].ToString();
+            info.Content_Done = DataTable_QuestData[i]["Content_Done"].ToString();
             switch (DataTable_QuestData[i]["GoalType"])
             {
-                case "Talk":
-                    info.GoalType = QuestInfo.GoalTypes.Talk;
+                case "None":
+                    info.GoalType = QuestInfo.GoalTypes.None;
                     break;
 
                 case "Stage":
