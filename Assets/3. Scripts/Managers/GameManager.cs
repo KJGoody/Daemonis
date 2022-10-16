@@ -48,6 +48,28 @@ public class GameManager : MonoBehaviour
         LoadData();
     }
 
+    private void Start()
+    {
+        if (DATA.NewGame == 1)
+        {
+            List<ItemInfo_Equipment> array = DataTableManager.Instance.GetInfo_Equipments(Player.MyInstance.MyStat.Level);
+            Item_Equipment cloth = new Item_Equipment();
+            cloth.SetInfo(array[1]);
+            cloth.Quality = DataTableManager.Instance.GetQuality(Player.MyInstance.MyStat.Level);
+            cloth.SetAddOption();
+            Player.MyInstance.EquipItem(cloth);
+
+            Item_Equipment shoes = new Item_Equipment();
+            shoes.SetInfo(array[3]);
+            shoes.Quality = DataTableManager.Instance.GetQuality(Player.MyInstance.MyStat.Level);
+            shoes.SetAddOption();
+            Player.MyInstance.EquipItem(shoes);
+
+            DATA.NewGame = 0;
+            SaveData();
+        }
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) // 씬이 로딩될때 실행
     {
         StartCoroutine(FadeIn());
@@ -392,6 +414,7 @@ public class GameManager : MonoBehaviour
 [System.Serializable]
 public class SaveLoadData
 {
+    public int NewGame;
     public int[] ClearStageNum;
 
     public int Quest_Main;
@@ -528,6 +551,7 @@ public class SaveLoadData
 
     public SaveLoadData()
     {
+        NewGame = 1;
         ClearStageNum = new int[3];
         Quest_Main = 0;
         Quest_Main_Goal = null;

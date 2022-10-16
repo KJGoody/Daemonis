@@ -146,6 +146,7 @@ public class EnemyBase : Character, INpc
     protected virtual IEnumerator Death()
     {
         InvadeGage.Instance.CurrentValue += 1;
+        ClearPanel.Instance.KillCount++;
         ParentGate.CurrentEnemyNum--;
         QuestPanel.Instance.CheckQuestGoal(QuestInfo.GoalTypes.Kill, enemytype.strEnemyType);
 

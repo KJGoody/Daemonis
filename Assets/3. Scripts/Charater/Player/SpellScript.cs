@@ -225,13 +225,13 @@ public class SpellScript : MonoBehaviour
                     if (GameObject.FindWithTag("Enemy") != null)
                     {
                         if (FindNearestObject() != null)
-                            MyTarget = FindNearestObject().transform.Find("EnemyHitBox").transform;
+                            MyTarget = FindNearestObject();
                         else
                             MyTarget = null;
                     }
 
                 if (MyTarget != null)
-                    if (!MyTarget.parent.gameObject.GetComponent<EnemyBase>().IsAlive)
+                    if (!MyTarget.parent.gameObject.GetComponent<EnemyBase>().IsAlive || !MyTarget.parent.gameObject.activeSelf)
                         MyTarget = null;
 
                 if (MyTarget != null)
@@ -453,7 +453,7 @@ public class SpellScript : MonoBehaviour
                 if (GameObject.FindWithTag("Enemy") != null)
                 {
                     if (FindNearestObject() != null)
-                        MyTarget = FindNearestObject().transform.Find("EnemyHitBox").transform;
+                        MyTarget = FindNearestObject();
                     else
                         MyTarget = null;
                 }
@@ -503,14 +503,14 @@ public class SpellScript : MonoBehaviour
         StartCoroutine(TickDamage(2f, 10f));
     }
 
-    private GameObject FindNearestObject()
+    private Transform FindNearestObject()
     {
         Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, 7, LayerMask.GetMask("EnemyHitBox"));
 
-        List<GameObject> objects = new List<GameObject>();
+        List<Transform> objects = new List<Transform>();
         for (int i = 0; i < collisions.Length; i++)
-            if (collisions[i].CompareTag("Enemy"))       // 테그가 적인것을 찾는다.
-                objects.Add(collisions[i].gameObject);
+            if(collisions[i].transform.parent.gameObject.activeSelf)
+                objects.Add(collisions[i].gameObject.transform);
 
         if (objects.Count == 0)     // 만약 리스트가 비었다면 null을 반환
             return null;
@@ -522,7 +522,7 @@ public class SpellScript : MonoBehaviour
             })
         .FirstOrDefault();
 
-        return neareastObject.transform.parent.gameObject;
+        return neareastObject.transform;
     }
 
     private IEnumerator TickDamage(float Radius, float WaitSconds)

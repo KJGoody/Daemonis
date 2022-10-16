@@ -26,6 +26,7 @@ public class ComboManager : MonoBehaviour
     private Animator myAnim;
 
     private int currentCombo = 0;
+    [HideInInspector] public int BestCombo = 0;
 
     private Coroutine nowCoroutine;
 
@@ -99,6 +100,8 @@ public class ComboManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         ComboView.SetActive(false);
+        if (currentCombo > BestCombo)
+            BestCombo = currentCombo;
         currentCombo = 0;
 
         comboNum.color = Color.white;

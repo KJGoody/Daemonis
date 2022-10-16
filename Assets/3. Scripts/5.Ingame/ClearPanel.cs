@@ -18,21 +18,45 @@ public class ClearPanel : MonoBehaviour
 
     [SerializeField] private Text ComboText;
     [SerializeField] private Text KillText;
+    [SerializeField] private Text TotalTimeText;
+    [SerializeField] private Text BossTimeText;
+
+    private Coroutine CurrentCoroutine;
+
+    [HideInInspector] public int KillCount = 0;
 
     public void ClearGame()
     {
         QuestPanel.Instance.CheckQuestGoal(QuestInfo.GoalTypes.Stage, GameManager.MyInstance.CurrentStageID);
+
         string[] stringSplit = GameManager.MyInstance.CurrentStageID.Split('_');
         if (GameManager.MyInstance.DATA.ClearStageNum[int.Parse(stringSplit[1]) - 1] < int.Parse(stringSplit[2]))
             GameManager.MyInstance.DATA.ClearStageNum[int.Parse(stringSplit[1]) - 1] = int.Parse(stringSplit[2]);
-        GameManager.MyInstance.SaveData();
+
+        ComboText.text = "Combo: " + ComboManager.Instance.BestCombo.ToString();
+        ComboManager.Instance.BestCombo = 0;
+        KillText.text = "TotalKill: " + KillCount.ToString();
+        KillCount = 0;
+        TotalTimeText.text = "TotalTime: " + Mathf.FloorToInt(InvadeGage.Instance.TotalTime).ToString();
+        BossTimeText.text = "BossTime: " + Mathf.FloorToInt(InvadeGage.Instance.BossTime).ToString();
+        //GameManager.MyInstance.SaveData();
         GetComponent<CanvasGroup>().alpha = 1;
-        StartCoroutine(Timer());
+        CurrentCoroutine = StartCoroutine(Timer());
     }
 
     private IEnumerator Timer()
     {
         yield return new WaitForSeconds(10f);
         GetComponent<CanvasGroup>().alpha = 0;
+    }
+
+    private void Update()
+    {
+        if(GameManager.MyInstance.CurrnetSceneName != "5.IngameMap")
+        {
+            if(CurrentCoroutine != null)
+                StopCoroutine(CurrentCoroutine);
+            GetComponent<CanvasGroup>().alpha = 0;
+        }
     }
 }

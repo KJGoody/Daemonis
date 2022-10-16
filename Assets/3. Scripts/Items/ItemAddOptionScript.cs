@@ -33,7 +33,7 @@ public class ItemAddOptionScript : MonoBehaviour
     private List<Dictionary<string, object>> QualityProbTable; // 옵션 티어 확률표
     private List<Dictionary<string, object>> ValueProbTable; // 옵션값 확률표
 
-    private void Start()
+    private void Awake()
     {
         QualityProbTable = CSVReader.Read("OptionTierProb");
         ValueProbTable = CSVReader.Read("AddOptionValueProb");

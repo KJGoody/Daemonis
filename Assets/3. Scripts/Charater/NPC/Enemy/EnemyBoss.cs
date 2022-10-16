@@ -155,6 +155,7 @@ public class EnemyBoss : EnemyBase
     {
         yield return new WaitForSeconds(3f);
         ClearPanel.Instance.ClearGame();
+        PortalManager.MyInstance._CreateReturnPortal();
         Destroy(gameObject);
     }
 }
