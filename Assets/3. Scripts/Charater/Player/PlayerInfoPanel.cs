@@ -67,7 +67,7 @@ public class PlayerInfoPanel : MonoBehaviour
     public Text gold_Inventory;
     #endregion
 
-    void Start()
+    void Awake()
     {
         Player.MyInstance.useEquipment += ChangeEquipment;
         initEquipment();

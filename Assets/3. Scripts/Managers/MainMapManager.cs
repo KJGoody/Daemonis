@@ -44,6 +44,9 @@ public class MainMapManager : MonoBehaviour
             case 1:
                 actName_Text.text = "Act_2";
                 break;
+            case 2:
+                actName_Text.text = "Act_3";
+                break;
         }
         for(int i = 0; i < actList_Obj.Length; i++)
         {

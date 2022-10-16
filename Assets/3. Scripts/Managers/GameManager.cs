@@ -409,6 +409,13 @@ public class GameManager : MonoBehaviour
             dropitem.SetItem_Equipment(array[i], DataTableManager.Instance.GetQuality(Player.MyInstance.MyStat.Level));
         }
     }
+
+    public void _StageOpen()
+    {
+        DATA.ClearStageNum[0] = 10;
+        DATA.ClearStageNum[1] = 10;
+        DATA.ClearStageNum[2] = 10;
+    }
 }
 
 [System.Serializable]
