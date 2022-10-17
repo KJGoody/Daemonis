@@ -65,6 +65,12 @@ public class GameManager : MonoBehaviour
             shoes.SetAddOption();
             Player.MyInstance.EquipItem(shoes);
 
+            Item_Equipment Weapon = new Item_Equipment();
+            Weapon.SetInfo(array[5]);
+            Weapon.Quality = DataTableManager.Instance.GetQuality(Player.MyInstance.MyStat.Level);
+            Weapon.SetAddOption();
+            Player.MyInstance.EquipItem(Weapon);
+
             DATA.NewGame = 0;
             SaveData();
         }

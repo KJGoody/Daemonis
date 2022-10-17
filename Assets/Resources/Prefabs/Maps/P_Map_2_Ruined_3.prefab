@@ -318,7 +318,7 @@ MonoBehaviour:
   - {x: 4.9994144, y: -18.28125, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 50164
+  m_InstanceId: 32806
 --- !u!1 &8597850747529260576
 GameObject:
   m_ObjectHideFlags: 0
@@ -11622,7 +11622,8 @@ GameObject:
   - component: {fileID: 9182399653778931451}
   - component: {fileID: 9182399653778931449}
   - component: {fileID: 9182399653778931450}
-  m_Layer: 0
+  - component: {fileID: 7043599345683864379}
+  m_Layer: 3
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22722,6 +22723,22 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!19719996 &7043599345683864379
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9182399653778931452}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &9182399654018345480
 GameObject:
   m_ObjectHideFlags: 0
