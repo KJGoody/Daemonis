@@ -74,6 +74,17 @@ public class Player : Character
             moveVector.x = joy.Horizontal;
             moveVector.y = joy.Vertical;
 
+            // 키보드 대응용 코드 //
+            if (Input.GetKey(KeyCode.W))
+                moveVector.y = 1;
+            if (Input.GetKey(KeyCode.S))
+                moveVector.y = -1;
+            if (Input.GetKey(KeyCode.A))
+                moveVector.x = -1;
+            if (Input.GetKey(KeyCode.D))
+                moveVector.x = 1;
+            ////////////////////////
+            
             Direction = moveVector;
             if (moveVector.x != 0 && moveVector.y != 0)
                 atkDir = moveVector;
