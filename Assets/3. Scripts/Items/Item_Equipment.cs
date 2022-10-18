@@ -24,12 +24,12 @@ public class Item_Equipment : Item_Base
     public ItemInfo_Equipment.Parts Part { get { return Info.Part; } }
     public string GetItemSpriteName(int Index)
     {
-        Object[] sprites = Resources.LoadAll("Sprites/" + Info.ItemSprite);
+        Object[] sprites = Resources.LoadAll("Sprites/Equipments/" + Info.ItemSprite);
         return sprites[Index].name;
     }
     public Sprite GetItemSprite(int Index)
     {
-        Object[] sprites = Resources.LoadAll("Sprites/" + Info.ItemSprite);
+        Object[] sprites = Resources.LoadAll("Sprites/Equipments/" + Info.ItemSprite);
         return sprites[Index] as Sprite;
     }
     public void ActiveEquipment(bool isActive) // 장비 착용 & 해제

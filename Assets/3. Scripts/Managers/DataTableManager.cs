@@ -282,7 +282,7 @@ public class DataTableManager : MonoBehaviour
             // ItemInfo_Base
             info.ID = DataTable_Equipment[i]["ID"].ToString();
             info.Kind = ItemInfo_Base.Kinds.Equipment;
-            info.Icon = Resources.Load<Sprite>("Sprites/" + DataTable_Equipment[i]["Icon"].ToString());
+            info.Icon = Resources.Load<Sprite>("Sprites/Equipments/" + DataTable_Equipment[i]["Icon"].ToString());
             info.Name = DataTable_Equipment[i]["Name"].ToString();
             info.Descript = DataTable_Equipment[i]["Effect"].ToString();
             info.LimitLevel = int.Parse(DataTable_Equipment[i]["LimitLevel"].ToString());
