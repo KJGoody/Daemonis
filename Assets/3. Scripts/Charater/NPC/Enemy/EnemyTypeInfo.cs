@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyTypeInfo
 {
-    public string ID;
+    public string StageNum;
     public string Name;
     public GameObject Prefab;
     public string Sound;
@@ -13,6 +13,7 @@ public class EnemyTypeInfo
         #region »ý·«
         BaseMelee,
         BaseRanged,
+        BaseRush,
         BaseAOE,
         Kobold_Ranged
         #endregion

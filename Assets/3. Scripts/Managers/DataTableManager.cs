@@ -35,7 +35,6 @@ public class DataTableManager : MonoBehaviour
             info.EnemyStatPercent = float.Parse(DataTable_Stage[i]["EnemyStatPercent"].ToString());
 
             EnemyTypeInfo bossinfo = new EnemyTypeInfo();
-            bossinfo.ID = DataTable_Stage[i]["BossID"].ToString();
             bossinfo.Name = DataTable_Stage[i]["Name"].ToString();
             bossinfo.Prefab = Resources.Load<GameObject>("Prefabs/Enemy/" + DataTable_Stage[i]["Prefab"].ToString());
             bossinfo.Sound = DataTable_Stage[i]["Sound"].ToString();
@@ -115,7 +114,7 @@ public class DataTableManager : MonoBehaviour
 
         List<DialogData> array = new List<DialogData>();
         for (int i = 0; i < QuestDialog.Length; i++)
-            if(questIndex == QuestDialog[i].QuestIndex)
+            if (questIndex == QuestDialog[i].QuestIndex)
                 if (GameManager.MyInstance.DATA.Quest_Main_Stat == (int)QuestDialog[i].QuestStat)
                     array.Add(QuestDialog[i]);
 
@@ -393,8 +392,8 @@ public class DataTableManager : MonoBehaviour
     public ItemInfo_Consumable GetInfo_Consumable(string ID)
     {
         foreach (ItemInfo_Consumable Data in ConsumableInfos)
-                if (Data.ID == ID)
-                    return Data;
+            if (Data.ID == ID)
+                return Data;
 
         return null;
     }
@@ -433,7 +432,7 @@ public class DataTableManager : MonoBehaviour
         for (int i = 0; i < DataTable_Enemy.Count; i++)
         {
             EnemyTypeInfo info = new EnemyTypeInfo();
-            info.ID = DataTable_Enemy[i]["ID"].ToString();
+            info.StageNum = DataTable_Enemy[i]["StageNum"].ToString();
             info.Name = DataTable_Enemy[i]["Name"].ToString();
             info.Prefab = Resources.Load<GameObject>("Prefabs/Enemy/" + DataTable_Enemy[i]["Prefab"].ToString());
             info.Sound = DataTable_Enemy[i]["Sound"].ToString();
@@ -441,6 +440,10 @@ public class DataTableManager : MonoBehaviour
             {
                 case "BaseMelee":
                     info.AttackType = EnemyTypeInfo.AttackTypes.BaseMelee;
+                    break;
+
+                case "BaseRush":
+                    info.AttackType = EnemyTypeInfo.AttackTypes.BaseRush;
                     break;
 
                 case "Kobold_Ranged":
@@ -462,8 +465,9 @@ public class DataTableManager : MonoBehaviour
     }
     public EnemyTypeInfo GetEnemyType(string strEnemyType)
     {
+        string[] CurrentStageSplit = GameManager.MyInstance.CurrentStageID.Split('_');
         foreach (EnemyTypeInfo Data in EnemyInfos)
-            if (Data.ID == strEnemyType)
+            if (Data.StageNum == CurrentStageSplit[1] && Data.Prefab.name == strEnemyType)
                 return Data;
 
         return null;
@@ -473,9 +477,8 @@ public class DataTableManager : MonoBehaviour
         List<GameObject> array = new List<GameObject>();
         foreach (EnemyTypeInfo Data in EnemyInfos)
         {
-            string[] DataSplit = Data.ID.Split('_');
             string[] CurrentStageSplit = CurrentStage.Split('_');
-            if (DataSplit[1] == CurrentStageSplit[1])
+            if (Data.StageNum == CurrentStageSplit[1])
                 array.Add(Data.Prefab);
         }
 
@@ -496,7 +499,7 @@ public class DataTableManager : MonoBehaviour
         int newQuality = (int)ChanceMaker.Choose(myQualityProb); // 할당된 확률 배열로 가중치 랜덤뽑기로 등급 설정
 
         return (Item_Base.Qualitys)newQuality;
-    } 
+    }
     //-- QualityProb --
 
     private void Awake()

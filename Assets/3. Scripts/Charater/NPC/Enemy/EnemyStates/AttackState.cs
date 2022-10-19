@@ -52,6 +52,10 @@ public class AttackState : IState
                 case EnemyTypeInfo.AttackTypes.Kobold_Ranged:
                     parent.StartCoroutine(Kobold_Ranged());
                     break;
+
+                case EnemyTypeInfo.AttackTypes.BaseRush:
+                    parent.StartCoroutine(RushAttack());
+                    break;
             }
         }
     }
@@ -89,7 +93,7 @@ public class AttackState : IState
         parent.gameObject.layer = 7;                // Rushing레이어로 바꾸기, 플레이어와 충돌무시
         parent.Direction = parent.MyTarget.transform.position - parent.transform.position;
         parent.RushSpeed = 7f;
-        parent.InstantiateAttack(Resources.Load("Prefabs/EnemyAttack/BaseRush_Attack") as GameObject, parent.ExitPoint);
+        parent.InstantiateAttack(Resources.Load("Prefabs/EnemyAttack/P_A_BaseRush") as GameObject, parent.transform);
         yield return new WaitForSeconds(0.5f);
 
         parent.Direction = Vector2.zero;

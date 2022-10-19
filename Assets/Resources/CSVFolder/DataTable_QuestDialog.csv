@@ -3,11 +3,14 @@
 0,Done,플레이어,어떤 내용이 출력될 예정인가요?
 0,Done,퀘스트NPC,간단한 세계관 소개가 나올 예정입니다.
 1,Done,퀘스트NPC,장비 장착 튜토리얼이 들어갈 예정입니다.
+1,Done,Tutorial,Equip
 2,Done,퀘스트NPC,마을 관련 설명이 나올 예정입니다.
 3,Start,퀘스트NPC,상점 튜토리얼을 진행할 예정입니다.
 3,Ing,퀘스트NPC,퀘스트 진행 중입니다.
 3,Done,상인,상점 튜토리얼이 들어갈 예정입니다.
+3,Done,Tutorial,Store
 4,Done,퀘스트NPC,스킬 튜토리얼이 들어갈 예정입니다.
+4,Done,Tutorial,Spell
 5,Start,퀘스트NPC,간단한 처치 퀘스트입니다.
 5,Ing,퀘스트NPC,퀘스트 진행 중입니다.
 5,Done,퀘스트NPC,퀘스트 완료

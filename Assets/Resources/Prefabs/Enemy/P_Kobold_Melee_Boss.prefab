@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05a2d85ef7c3974889c64301465a79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 10
+  enemyType: 9
 --- !u!114 &1530950419950964358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,6 +310,7 @@ MonoBehaviour:
   ExitPoint: {fileID: 3774030598729366747}
   myAttackRange: 0
   MyAttackTime: 1000
+  DropTime: 0
 --- !u!70 &9198583228697994435
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

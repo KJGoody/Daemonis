@@ -35,13 +35,17 @@ public class DialogScript : MonoBehaviour
     public IEnumerator Dialog(int index)
     {
         List<DialogData> data;
-        if(index != 0)
+        if (index != 0)
             data = DataTableManager.Instance.GetDialogArray(index);
         else
             data = DataTableManager.Instance.GetDialogArray();
 
         for (int i = 0; i < data.Count; i++)
+        {
+            GetComponent<CanvasGroup>().alpha = 1;
+            GetComponent<CanvasGroup>().blocksRaycasts = true;
             yield return StartCoroutine(Acting(data[i].ActorName, data[i].Speech));
+        }
 
         QuestPanel.Instance.TalkDone(NPCName);
         yield return new WaitForSeconds(0.1f);
@@ -63,31 +67,42 @@ public class DialogScript : MonoBehaviour
 
     private IEnumerator Acting(string actorName, string actorSpeech)
     {
-        ActorName.text = actorName;
-
-        string writerText = "";
-        for (int i = 0; i < actorSpeech.Length; i++)
+        switch (actorName)
         {
-            if (IsSkip)
-            {
-                ActorSpeech.text = actorSpeech;
+            case "Tutorial":
+                GetComponent<CanvasGroup>().alpha = 0;
+                GetComponent<CanvasGroup>().blocksRaycasts = false;
+                yield return StartCoroutine(TutorialPanel.Instance.StartTutorial(actorSpeech));
+                break;
+
+            default:
+                ActorName.text = actorName;
+
+                string writerText = "";
+                for (int i = 0; i < actorSpeech.Length; i++)
+                {
+                    if (IsSkip)
+                    {
+                        ActorSpeech.text = actorSpeech;
+                        IsSkip = false;
+                        break;
+                    }
+
+                    writerText += actorSpeech[i];
+                    ActorSpeech.text = writerText;
+                    yield return new WaitForSeconds(0.05f);
+                }
+
+                while (true)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                        break;
+                    yield return null;
+                }
+
                 IsSkip = false;
                 break;
-            }
-
-            writerText += actorSpeech[i];
-            ActorSpeech.text = writerText;
-            yield return new WaitForSeconds(0.05f);
         }
-
-        while (true)
-        {
-            if (Input.GetMouseButtonDown(0))
-                break;
-            yield return null;
-        }
-
-        IsSkip = false;
     }
 
     public void _ClickSkipButton()

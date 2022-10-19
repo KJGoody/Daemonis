@@ -17,7 +17,8 @@ public class BossHPBar : MonoBehaviour
     }
 
     [SerializeField] private Text BossName;
-    [SerializeField] private GameObject CrownIcon;
+    [SerializeField] private GameObject MonsterIcon;
+    [SerializeField] private Sprite[] Icon;
     [SerializeField] private Image BossHPBarImage;
     [SerializeField] private Text BossHPBarText;
     [SerializeField] private Text Buff;
@@ -135,19 +136,21 @@ public class BossHPBar : MonoBehaviour
             case "Elite":
                 // 이름 표시 예: 코볼드 근거리 LV.1 (정예)
                 BossName.text = Target.GetComponent<EnemyType>().Name + " LV." + Target.MyStat.Level + " (정예)";
+                MonsterIcon.SetActive(false);
                 BossName.color = Color.blue;
-                CrownIcon.SetActive(false);
                 break;
 
             case "Guv":
                 BossName.text = Target.GetComponent<EnemyType>().Name + " LV." + Target.MyStat.Level + " (우두머리)";
-                CrownIcon.SetActive(true);
+                MonsterIcon.GetComponent<Image>().sprite = Icon[0]; 
+                MonsterIcon.SetActive(true); 
                 BossName.color = Color.yellow;
                 break;
 
             case "Boss":
                 BossName.text = Target.GetComponent<EnemyType>().Name + " LV." + Target.MyStat.Level + " (보스)";
-                CrownIcon.SetActive(true);
+                MonsterIcon.GetComponent<Image>().sprite = Icon[1];
+                MonsterIcon.SetActive(true);
                 BossName.color = Color.red;
                 break;
         }

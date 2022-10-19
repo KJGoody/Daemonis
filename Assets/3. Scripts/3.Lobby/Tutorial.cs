@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Tutorial : MonoBehaviour
 {
-    public enum TutorialNames { Equip, Spell, Store }
-    [SerializeField] private TutorialNames TutorialName;
     [SerializeField] private GameObject[] Scenes;
 
     public void StartTutorial()
@@ -19,13 +17,13 @@ public class Tutorial : MonoBehaviour
         {
             yield return StartCoroutine(PlayScene(i));
         }
-        TutorialPanel.Instance.EndTutorial(TutorialName);
+        TutorialPanel.Instance.Isdone = true;
     }
 
     private IEnumerator PlayScene(int index)
     {
         Scenes[index].SetActive(true);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(0.5f);
         while (true)
         {
             if (Input.GetMouseButtonDown(0))

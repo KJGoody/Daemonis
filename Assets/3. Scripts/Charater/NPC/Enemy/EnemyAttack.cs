@@ -58,6 +58,9 @@ public class EnemyAttack : MonoBehaviour
             case EnemyAttackType.BaseAEAttack:
                 StartCoroutine(BaseAEAttack());
                 break;
+
+            default:
+                break;
         }
     }
 
@@ -76,13 +79,30 @@ public class EnemyAttack : MonoBehaviour
                 myRigidbody.velocity = direction.normalized * speed;
                 transform.Rotate(new Vector3(0, 0, Time.deltaTime * -600));
                 break;
+
+            case EnemyAttackType.BaseRushAttack:
+                break;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
-            Destroy(gameObject);
+
+        switch (enemyAttackType)
+        {
+            case EnemyAttackType.BaseRangedAttack:
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+                    Destroy(gameObject);
+                break;
+
+            case EnemyAttackType.BaseRushAttack:
+                if (!parent.IsRushing)
+                    Destroy(gameObject);
+                break;
+
+            default:
+                break;
+        }
 
         if (collision.CompareTag("Player"))
         {

@@ -19,38 +19,32 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] private Tutorial Spell;
     [SerializeField] private Tutorial Store;
 
-    private void Start()
-    {
-        StartTutorial_Equipment();
-    }
+    [HideInInspector] public bool Isdone;
 
-    public void StartTutorial_Equipment()
+    public IEnumerator StartTutorial(string tutorialName)
     {
-        Equip.StartTutorial();
-    }
-
-    public void StartTutorial_Spell()
-    {
-        Equip.StartTutorial();
-    }
-
-    public void StartTutorial_Store()
-    {
-        Equip.StartTutorial();
-    }
-
-    public void EndTutorial(Tutorial.TutorialNames tutorialName)
-    {
+        Isdone = false;
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
         switch (tutorialName)
         {
-            case Tutorial.TutorialNames.Equip:
+            case "Equip":
+                Equip.StartTutorial();
                 break;
 
-            case Tutorial.TutorialNames.Spell:
+            case "Spell":
+                Spell.StartTutorial();
                 break;
 
-            case Tutorial.TutorialNames.Store:
+            case "Store":
+                Store.StartTutorial();
                 break;
         }
+        while (true)
+        {
+            if (Isdone)
+                break;
+            yield return null;
+        }
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 }
