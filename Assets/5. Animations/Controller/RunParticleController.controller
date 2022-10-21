@@ -101,8 +101,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4362857243079223721}
-  m_StateMachineBehaviours:
-  - {fileID: 2005603265975616488}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

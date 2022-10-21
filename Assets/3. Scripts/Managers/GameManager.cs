@@ -28,8 +28,7 @@ public class GameManager : MonoBehaviour
     // 저장
     public SaveLoadData DATA;
     [HideInInspector] public string CurrnetSceneName;
-    //[HideInInspector]
-    public string CurrentStageID;
+    [HideInInspector] public string CurrentStageID;
 
     public CastingButton[] CastingButtons;
     public QuickSlotButton[] QuickSlotButtons;
@@ -75,6 +74,8 @@ public class GameManager : MonoBehaviour
             DATA.NewGame = 0;
             SaveData();
         }
+
+        SpawnEffect(true);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) // 씬이 로딩될때 실행
@@ -99,6 +100,16 @@ public class GameManager : MonoBehaviour
 
         color.a = 1;
         fadeIn_IMG.color = color;
+
+        SpawnEffect();
+        player.MyStat.Recovery();
+    }
+
+    public void SpawnEffect(bool isStart = false)
+    {
+        if(isStart)
+            Instantiate(Resources.Load("Prefabs/P_Potal_Spawn"), Player.MyInstance.transform);
+
     }
 
     void Update()
@@ -143,6 +154,8 @@ public class GameManager : MonoBehaviour
 
     public void SaveData()
     {
+        DATA.PlayerLevel = Player.MyInstance.MyStat.Level;
+
         // Equipment 저장 부분
         for (int i = 0; i < 6; i++)
         {
@@ -429,6 +442,8 @@ public class GameManager : MonoBehaviour
 public class SaveLoadData
 {
     public int NewGame;
+
+    public int PlayerLevel;
     public int[] ClearStageNum;
 
     public int Quest_Main;
@@ -565,6 +580,7 @@ public class SaveLoadData
 
     public SaveLoadData()
     {
+        PlayerLevel = 1;
         NewGame = 1;
         ClearStageNum = new int[3];
         Quest_Main = 0;

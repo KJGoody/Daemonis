@@ -113,26 +113,34 @@ public class EnemyType : MonoBehaviour
                 #region »ý·«
                 case EnemyTypes.Enemy_Koblod_Melee_Normal:
                 case EnemyTypes.Enemy_Kobold_Ranged_Normal:
+                case EnemyTypes.Enemy_Kobold_Rush_Normal:
                 case EnemyTypes.Enemy_Dwarf_Melee_Normal:
                 case EnemyTypes.Enemy_Dwarf_Ranged_Normal:
+                case EnemyTypes.Enemy_Dwarf_Rush_Normal:
                     return "Normal";
 
                 case EnemyTypes.Enemy_Kobold_Melee_Elite:
                 case EnemyTypes.Enemy_Kobold_Ranged_Elite:
+                case EnemyTypes.Enemy_Kobold_Rush_Elite:
                 case EnemyTypes.Enemy_Dwarf_Melee_Elite:
                 case EnemyTypes.Enemy_Dwarf_Ranged_Elite:
+                case EnemyTypes.Enemy_Dwarf_Rush_Elite:
                     return "Elite";
 
                 case EnemyTypes.Enemy_Kobold_Melee_Guv:
                 case EnemyTypes.Enemy_Kobold_Ranged_Guv:
+                case EnemyTypes.Enemy_Kobold_Rush_Guv:
                 case EnemyTypes.Enemy_Dwarf_Melee_Guv:
                 case EnemyTypes.Enemy_Dwarf_Ranged_Guv:
+                case EnemyTypes.Enemy_Dwarf_Rush_Guv:
                     return "Guv";
 
                 case EnemyTypes.Enemy_Kobold_Melee_Boss:
                 case EnemyTypes.Enemy_Kobold_Rnaged_Boss:
+                case EnemyTypes.Enemy_Kobold_Rush_Boss:
                 case EnemyTypes.Enemy_Dwarf_Melee_Boss:
                 case EnemyTypes.Enemy_Dwarf_Rnaged_Boss:
+                case EnemyTypes.Enemy_Dwarf_Rush_Boss:
                     return "Boss";
 
                 default:

@@ -49,7 +49,7 @@ public class SoundManager : MonoBehaviour
     {
         if (Instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         //DontDestroyOnLoad(this.gameObject); //여러 씬에서 사용할 것.
 
@@ -64,21 +64,17 @@ public class SoundManager : MonoBehaviour
         }
 
         if (!PlayerPrefs.HasKey("BGMVolume"))
-        {
             PlayerPrefs.SetFloat("BGMVolume", 1f);
-        }
+
         if (!PlayerPrefs.HasKey("SFXVolume"))
-        {
             PlayerPrefs.SetFloat("SFXVolume", 1f);
-        }
+
         if (!PlayerPrefs.HasKey("BGMMute"))
-        {
             PlayerPrefs.SetInt("BGMMute", System.Convert.ToInt16(false));
-        }
+
         if (!PlayerPrefs.HasKey("SFXMute"))
-        {
             PlayerPrefs.SetInt("SFXMute", System.Convert.ToInt16(false));
-        }
+
         SetBGMVolume(PlayerPrefs.GetFloat("BGMVolume"));
         SetSFXVolume(PlayerPrefs.GetFloat("SFXVolume"));
         bgmPlayer.mute = System.Convert.ToBoolean(PlayerPrefs.GetInt("BGMMute"));
@@ -122,12 +118,12 @@ public class SoundManager : MonoBehaviour
     {
         bgmPlayer.loop = true; //BGM 사운드이므로 루프설정
         //bgmPlayer.volume = volume * masterVolumeBGM;
-        if (scene.name == "Main")
+        if (scene.name == "3.Lobby")
         {
             bgmPlayer.clip = lobbyBgmAudioClip;
             bgmPlayer.Play();
         }
-        else if (scene.name == "1_Cave")
+        else if (scene.name == "5.IngameMap")
         {
             bgmPlayer.clip = caveBgmAudioClip;
             bgmPlayer.Play();

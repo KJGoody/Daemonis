@@ -7,14 +7,14 @@ using UnityEngine.SceneManagement;
 public class Logo : MonoBehaviour
 {
     Color color;
-    [SerializeField]
-    Image BlackBackImage;
+    [SerializeField] Image BlackBackImage;
 
     private void Start()
     {
         color = BlackBackImage.color;
         StartCoroutine(FadeOut());
     }
+
     IEnumerator FadeOut()
     {
         // 비동기로 씬을 불러온다.
@@ -23,7 +23,7 @@ public class Logo : MonoBehaviour
         asyncOper.allowSceneActivation = false;
         asyncOper1.allowSceneActivation = false;
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         while (color.a <= 1)
         {
             color.a += Time.deltaTime;
