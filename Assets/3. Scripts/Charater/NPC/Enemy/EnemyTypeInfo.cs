@@ -15,7 +15,9 @@ public class EnemyTypeInfo
         BaseRanged,
         BaseRush,
         BaseAOE,
-        Kobold_Ranged
+        Kobold_Ranged,
+        Dwarf_Ranged,
+        Siren_Ranged
         #endregion
     }
     public AttackTypes AttackType;

@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpellScript : MonoBehaviour
 {
@@ -25,7 +25,7 @@ public class SpellScript : MonoBehaviour
         Skill_Fire_11_Object,
         Skill_Fire_12,
         Skill_Fire_12_Object,
-        Skill_Fire_13 
+        Skill_Fire_13
         #endregion
     }
     [SerializeField] private SpellNames Name;
@@ -103,7 +103,7 @@ public class SpellScript : MonoBehaviour
     private void Start()
     {
         // 리기드바디 설정
-        if(SpellType ==  SpellInfo.SpellType.Launch)
+        if (SpellType == SpellInfo.SpellType.Launch)
             myRigidbody = GetComponent<Rigidbody2D>();
         else if (SpellType == SpellInfo.SpellType.Toggle || SpellType == SpellInfo.SpellType.Target)  // 토글 공격은 리기드바디가 없음
             transform.position += new Vector3(0, 0.3f);  // 토글 중심점 위치 변경
@@ -251,7 +251,7 @@ public class SpellScript : MonoBehaviour
             {
                 myRigidbody.velocity = Direction.normalized * Speed; // direction을 normalized하여 방향값으로 바꿔주고 발사하는 힘 적용
 
-                if(Name != SpellNames.Skill_Fire_12_Object)
+                if (Name != SpellNames.Skill_Fire_12_Object)
                 {
                     ChangeAngle();
                 }
@@ -448,7 +448,7 @@ public class SpellScript : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             //-- 활 회전 및 방향 설정 --
             // 오토 타겟팅
-            if(MyTarget == null)
+            if (MyTarget == null)
             {
                 if (GameObject.FindWithTag("Enemy") != null)
                 {
@@ -473,9 +473,9 @@ public class SpellScript : MonoBehaviour
             // 화살 발사
             SpellScript spell = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_11_Object"), transform.position, Quaternion.identity).GetComponent<SpellScript>();
             spell.Direction = Direction;
-            if(MyTarget != null)
+            if (MyTarget != null)
                 spell.MyTarget = MyTarget;
-            
+
         }
     }
 
@@ -487,8 +487,8 @@ public class SpellScript : MonoBehaviour
 
     private IEnumerator Skill_Fire_12()
     {
-        SpellScript spell = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_12_Object"), 
-            new Vector2(transform.position.x - 5, transform.position.y + 5), 
+        SpellScript spell = Instantiate(Resources.Load<GameObject>("Prefabs/Skills/P_Skill_Fire_12_Object"),
+            new Vector2(transform.position.x - 5, transform.position.y + 5),
             Quaternion.identity).GetComponent<SpellScript>();
         spell.Direction = new Vector2(-spell.transform.position.x + transform.position.x, -spell.transform.position.y + transform.position.y);
         yield return new WaitForSeconds(0.85f);
@@ -509,7 +509,7 @@ public class SpellScript : MonoBehaviour
 
         List<Transform> objects = new List<Transform>();
         for (int i = 0; i < collisions.Length; i++)
-            if(collisions[i].transform.parent.gameObject.activeSelf)
+            if (collisions[i].transform.parent.gameObject.activeSelf)
                 objects.Add(collisions[i].gameObject.transform);
 
         if (objects.Count == 0)     // 만약 리스트가 비었다면 null을 반환

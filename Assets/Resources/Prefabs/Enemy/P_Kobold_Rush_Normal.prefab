@@ -299,6 +299,7 @@ MonoBehaviour:
   _spriteList: {fileID: 3922998916213824513}
   hitBox: {fileID: 894972730089825394}
   _layerName: 0
+  IsAlive: 1
   MyTarget: {fileID: 0}
   IsRushing: 0
   RushSpeed: 0

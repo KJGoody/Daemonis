@@ -11,7 +11,9 @@ public class EnemyAttack : MonoBehaviour
         BaseRushAttack,
         BaseAOEAttack,                         // 장판을 소환하고 일정시간마다 장판오브젝트를 생성해서 플레이어에게 데미지를 준다.
         BaseAEAttack,                         // 장판 공격의 실질적 데미지
-        Kobold_Ranged
+        Kobold_Ranged,
+        Dwarf_Ranged,
+        Siren_Ranged
     }
     [SerializeField] private EnemyAttackType enemyAttackType;
 
@@ -46,6 +48,8 @@ public class EnemyAttack : MonoBehaviour
 
             case EnemyAttackType.BaseRangedAttack:
             case EnemyAttackType.Kobold_Ranged:
+            case EnemyAttackType.Dwarf_Ranged:
+            case EnemyAttackType.Siren_Ranged:
                 myRigidbody = GetComponent<Rigidbody2D>();
                 StartCoroutine(BaseRangedAttack());
                 break;
@@ -69,6 +73,8 @@ public class EnemyAttack : MonoBehaviour
         switch (enemyAttackType)
         {
             case EnemyAttackType.BaseRangedAttack:
+            case EnemyAttackType.Dwarf_Ranged:
+            case EnemyAttackType.Siren_Ranged:
                 myRigidbody.velocity = direction.normalized * speed;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

@@ -39,6 +39,11 @@ public class LoadingSceneManager : MonoBehaviour
         {
             Destroy(dropItems[i]);
         }
+        GameObject[] skills = GameObject.FindGameObjectsWithTag("Skill");
+        for (int i = 0; i < skills.Length; i++)
+        {
+            Destroy(skills[i]);
+        }
     }
 
     private IEnumerator LoadScene() // ¾À ·Îµù

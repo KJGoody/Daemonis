@@ -79,6 +79,18 @@ public class DataTableManager : MonoBehaviour
                 case "Kobold_Ranged":
                     bossinfo.AttackType = EnemyTypeInfo.AttackTypes.Kobold_Ranged;
                     break;
+
+                case "Dwarf_Ranged":
+                    bossinfo.AttackType = EnemyTypeInfo.AttackTypes.Dwarf_Ranged;
+                    break;
+
+                case "Siren_Ranged":
+                    bossinfo.AttackType = EnemyTypeInfo.AttackTypes.Siren_Ranged;
+                    break;
+
+                case "BaseRueh":
+                    bossinfo.AttackType = EnemyTypeInfo.AttackTypes.BaseRush;
+                    break;
             }
             bossinfo.AttackRange = float.Parse(DataTable_Stage[i]["AttackRange"].ToString());
             bossinfo.AttackDelay = float.Parse(DataTable_Stage[i]["AttackDelay"].ToString());
@@ -474,12 +486,20 @@ public class DataTableManager : MonoBehaviour
                     info.AttackType = EnemyTypeInfo.AttackTypes.BaseMelee;
                     break;
 
-                case "BaseRush":
-                    info.AttackType = EnemyTypeInfo.AttackTypes.BaseRush;
-                    break;
-
                 case "Kobold_Ranged":
                     info.AttackType = EnemyTypeInfo.AttackTypes.Kobold_Ranged;
+                    break;
+
+                case "Dwarf_Ranged":
+                    info.AttackType = EnemyTypeInfo.AttackTypes.Dwarf_Ranged;
+                    break;
+
+                case "Siren_Ranged":
+                    info.AttackType = EnemyTypeInfo.AttackTypes.Siren_Ranged;
+                    break;
+
+                case "BaseRueh":
+                    info.AttackType = EnemyTypeInfo.AttackTypes.BaseRush;
                     break;
             }
             info.AttackRange = float.Parse(DataTable_Enemy[i]["AttackRange"].ToString());

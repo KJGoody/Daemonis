@@ -118,20 +118,23 @@ public class Stat : MonoBehaviour
         get { return currentHealth; }
         set
         {
-            if (value > CurrentMaxHealth)
+            if (GetComponent<Character>().IsAlive)
             {
-                currentHealth = CurrentMaxHealth;
-                HealthBar.StatBarCurrentValue = CurrentMaxHealth;
-            }
-            else if (value < 0)
-            {
-                currentHealth = 0;
-                HealthBar.StatBarCurrentValue = 0;
-            }
-            else
-            {
-                currentHealth = value;
-                HealthBar.StatBarCurrentValue = value;
+                if (value > CurrentMaxHealth)
+                {
+                    currentHealth = CurrentMaxHealth;
+                    HealthBar.StatBarCurrentValue = CurrentMaxHealth;
+                }
+                else if (value < 0)
+                {
+                    currentHealth = 0;
+                    HealthBar.StatBarCurrentValue = 0;
+                }
+                else
+                {
+                    currentHealth = value;
+                    HealthBar.StatBarCurrentValue = value;
+                }
             }
         }
     }
@@ -413,10 +416,12 @@ public class Stat : MonoBehaviour
         }
     }
 
-    public void SetLevelStat()
+    public void SetLevelStat(int level)
     {
-        PlayerStatData stat = DataTableManager.Instance.GetPlayerStat(GameManager.MyInstance.DATA.PlayerLevel);
-        Level = stat.Level;
+        if (level >= 50)
+            level = 50;
+
+        PlayerStatData stat = DataTableManager.Instance.GetPlayerStat(level);
         LevelUpEXP = stat.LevelUpEXP;
         BaseAttack = stat.Attack;
         BaseMaxHealth = stat.MaxHealth;

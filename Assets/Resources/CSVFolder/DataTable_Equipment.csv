@@ -27,7 +27,7 @@ Equipment_40_Back,S_Icon_40_Back,영웅 망토,영웅 망토이다.,마법 방�
 Equipment_40_Cloth,S_Icon_40_Cloth,영웅 옷,영웅 옷이다.,최대체력 50,40,4000,Cloth,S_40_Equipment_Cloth,BaseMaxHealth,50
 Equipment_40_Helmet,S_Icon_40_Helmet,영웅 모자,영웅 모자이다.,최대체력 25,40,4000,Helmet,S_40_Equipment_Helmet,BaseMaxHealth,25
 Equipment_40_Shoes,S_Icon_40_Shoes,영웅 신발,영웅 신발이다.,최대마나 25,40,4000,Shoes,S_40_Equipment_Shoes,BaseMaxMana,25
-Equipment_40_Shoulder,S_40_Icon_40_Shoulder,영웅 어깨장식,영웅 어깨장식이다.,방어력 5,40,4000,Shoulder,S_40_Equipment_Shoulder,BaseDefence,5
+Equipment_40_Shoulder,S_Icon_40_Shoulder,영웅 어깨장식,영웅 어깨장식이다.,방어력 5,40,4000,Shoulder,S_40_Equipment_Shoulder,BaseDefence,5
 Equipment_40_Staff,S_Icon_40_Staff,영웅 지팡이,영웅 지팡이다.,공격력 10,40,4000,Weapon,S_40_Equipment_Staff,BaseAttack,10
 Equipment_50_Back,S_Icon_50_Back,전설 망토,전설 망토이다.,마법 방어력 5,50,5000,Back,S_50_Equipment_Back,BaseMagicRegist,5
 Equipment_50_Cloth,S_Icon_50_Cloth,전설 옷,전설 옷이다.,최대체력 50,50,5000,Cloth,S_50_Equipment_Cloth,BaseMaxHealth,50

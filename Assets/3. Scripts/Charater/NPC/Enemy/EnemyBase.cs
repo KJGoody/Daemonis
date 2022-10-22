@@ -145,6 +145,7 @@ public class EnemyBase : Character, INpc
 
     protected virtual IEnumerator Death()
     {
+        IsAlive = false;
         InvadeGage.Instance.CurrentValue += 1;
         ClearPanel.Instance.KillCount++;
         ParentGate.CurrentEnemyNum--;
@@ -179,6 +180,7 @@ public class EnemyBase : Character, INpc
 
     public void InitializeEnemyBase()
     {
+        IsAlive = true;
         MyStat.InitializeHealth();
         _prefabs.transform.GetChild(0).GetComponent<SortingGroup>().sortingLayerName = "EnemyLayer";
         transform.Find("HitBox").gameObject.SetActive(true);
