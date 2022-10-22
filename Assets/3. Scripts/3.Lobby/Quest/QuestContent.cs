@@ -61,7 +61,7 @@ public class QuestContent : MonoBehaviour
             case QuestInfo.GoalTypes.Kill:
                 string[] target = Info.Goal_Kill[0].Split('_');
                 string[] check = goal.Split('_');
-                if (target[1] == check[1] && target[2] == check[2])
+                if (target[1] == check[1])
                 {
                     if (GameManager.MyInstance.DATA.Quest_Main_Goal == "")
                         GameManager.MyInstance.DATA.Quest_Main_Goal = "0";

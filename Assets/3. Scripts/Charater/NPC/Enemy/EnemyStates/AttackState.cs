@@ -53,6 +53,14 @@ public class AttackState : IState
                     parent.StartCoroutine(Kobold_Ranged());
                     break;
 
+                case EnemyTypeInfo.AttackTypes.Dwarf_Ranged:
+                    parent.StartCoroutine(Dwarf_Ranged());
+                    break;
+
+                case EnemyTypeInfo.AttackTypes.Siren_Ranged:
+                    parent.StartCoroutine(Siren_Ranged());
+                    break;
+
                 case EnemyTypeInfo.AttackTypes.BaseRush:
                     parent.StartCoroutine(RushAttack());
                     break;
@@ -118,6 +126,30 @@ public class AttackState : IState
 
         yield return new WaitForSeconds(0.15f);
         parent.InstantiateAttack(Resources.Load("Prefabs/EnemyAttack/P_A_Kobold_Ranged") as GameObject, parent.ExitPoint);      
+        yield return new WaitForSeconds(0.15f);
+
+        parent.IsAttacking = false;
+    }
+
+    private IEnumerator Dwarf_Ranged()
+    {
+        yield return new WaitForSeconds(0.5f); // ¼±µô
+        parent._prefabs.PlayAnimation(4);
+
+        yield return new WaitForSeconds(0.15f);
+        parent.InstantiateAttack(Resources.Load("Prefabs/EnemyAttack/P_A_Dwarf_Ranged") as GameObject, parent.ExitPoint);
+        yield return new WaitForSeconds(0.15f);
+
+        parent.IsAttacking = false;
+    }
+
+    private IEnumerator Siren_Ranged()
+    {
+        yield return new WaitForSeconds(0.5f); // ¼±µô
+        parent._prefabs.PlayAnimation(4);
+
+        yield return new WaitForSeconds(0.15f);
+        parent.InstantiateAttack(Resources.Load("Prefabs/EnemyAttack/P_A_Siren_Ranged") as GameObject, parent.ExitPoint);
         yield return new WaitForSeconds(0.15f);
 
         parent.IsAttacking = false;

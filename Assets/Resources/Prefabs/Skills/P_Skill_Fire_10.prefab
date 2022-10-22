@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1055004581895332261}
   m_Layer: 0
   m_Name: P_Skill_Fire_10
-  m_TagString: Untagged
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

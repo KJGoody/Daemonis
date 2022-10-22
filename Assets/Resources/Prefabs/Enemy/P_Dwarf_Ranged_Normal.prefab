@@ -299,6 +299,7 @@ MonoBehaviour:
   _spriteList: {fileID: 7935224335994896977}
   hitBox: {fileID: 894972730089825394}
   _layerName: 0
+  IsAlive: 1
   MyTarget: {fileID: 0}
   IsRushing: 0
   RushSpeed: 0
@@ -908,6 +909,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 894972729840216767}
     m_Modifications:
+    - target: {fileID: 2426609126886744252, guid: 42983282b8e25704385b4b422f2fbbad,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426609126886744252, guid: 42983282b8e25704385b4b422f2fbbad,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1207576211
+      objectReference: {fileID: 0}
     - target: {fileID: 6974517737606961652, guid: 42983282b8e25704385b4b422f2fbbad,
         type: 3}
       propertyPath: m_Name

@@ -30,7 +30,19 @@ public class EnemyType : MonoBehaviour
         Enemy_Dwarf_Rush_Guv,
         Enemy_Dwarf_Melee_Boss,
         Enemy_Dwarf_Rnaged_Boss,
-        Enemy_Dwarf_Rush_Boss
+        Enemy_Dwarf_Rush_Boss,
+        Enemy_Siren_Melee_Normal,
+        Enemy_Siren_Melee_Elite,
+        Enemy_Siren_Melee_Guv,
+        Enemy_Siren_Ranged_Normal,
+        Enemy_Siren_Ranged_Elite,
+        Enemy_Siren_Ranged_Guv,
+        Enemy_Siren_Rush_Normal,
+        Enemy_Siren_Rush_Elite,
+        Enemy_Siren_Rush_Guv,
+        Enemy_Siren_Melee_Boss,
+        Enemy_Siren_Rnaged_Boss,
+        Enemy_Siren_Rush_Boss
 
         #endregion
     }
@@ -98,6 +110,35 @@ public class EnemyType : MonoBehaviour
                     return "P_Dwarf_Rush_Boss";
                 //-- Act2 --
 
+                //-- Act3 --
+                case EnemyTypes.Enemy_Siren_Melee_Normal:
+                    return "P_Siren_Melee_Normal";
+                case EnemyTypes.Enemy_Siren_Melee_Elite:
+                    return "P_Siren_Melee_Elite";
+                case EnemyTypes.Enemy_Siren_Melee_Guv:
+                    return "P_Siren_Melee_Guv";
+                case EnemyTypes.Enemy_Siren_Ranged_Normal:
+                    return "P_Siren_Ranged_Normal";
+                case EnemyTypes.Enemy_Siren_Ranged_Elite:
+                    return "P_Siren_Ranged_Elite";
+                case EnemyTypes.Enemy_Siren_Ranged_Guv:
+                    return "P_Siren_Ranged_Guv";
+                case EnemyTypes.Enemy_Siren_Rush_Normal:
+                    return "P_Siren_Rush_Normal";
+                case EnemyTypes.Enemy_Siren_Rush_Elite:
+                    return "P_Siren_Rush_Elite";
+                case EnemyTypes.Enemy_Siren_Rush_Guv:
+                    return "P_Siren_Rush_Guv";
+
+                case EnemyTypes.Enemy_Siren_Melee_Boss:
+                    return "P_Siren_Melee_Boss";
+                case EnemyTypes.Enemy_Siren_Rnaged_Boss:
+                    return "P_Siren_Ranged_Boss";
+                case EnemyTypes.Enemy_Siren_Rush_Boss:
+                    return "P_Siren_Rush_Boss";
+                //-- Act3 --
+
+
                 default:
                     return null;
                 #endregion
@@ -117,6 +158,9 @@ public class EnemyType : MonoBehaviour
                 case EnemyTypes.Enemy_Dwarf_Melee_Normal:
                 case EnemyTypes.Enemy_Dwarf_Ranged_Normal:
                 case EnemyTypes.Enemy_Dwarf_Rush_Normal:
+                case EnemyTypes.Enemy_Siren_Melee_Normal:
+                case EnemyTypes.Enemy_Siren_Ranged_Normal:
+                case EnemyTypes.Enemy_Siren_Rush_Normal:
                     return "Normal";
 
                 case EnemyTypes.Enemy_Kobold_Melee_Elite:
@@ -125,6 +169,9 @@ public class EnemyType : MonoBehaviour
                 case EnemyTypes.Enemy_Dwarf_Melee_Elite:
                 case EnemyTypes.Enemy_Dwarf_Ranged_Elite:
                 case EnemyTypes.Enemy_Dwarf_Rush_Elite:
+                case EnemyTypes.Enemy_Siren_Melee_Elite:
+                case EnemyTypes.Enemy_Siren_Ranged_Elite:
+                case EnemyTypes.Enemy_Siren_Rush_Elite:
                     return "Elite";
 
                 case EnemyTypes.Enemy_Kobold_Melee_Guv:
@@ -133,6 +180,9 @@ public class EnemyType : MonoBehaviour
                 case EnemyTypes.Enemy_Dwarf_Melee_Guv:
                 case EnemyTypes.Enemy_Dwarf_Ranged_Guv:
                 case EnemyTypes.Enemy_Dwarf_Rush_Guv:
+                case EnemyTypes.Enemy_Siren_Melee_Guv:
+                case EnemyTypes.Enemy_Siren_Ranged_Guv:
+                case EnemyTypes.Enemy_Siren_Rush_Guv:
                     return "Guv";
 
                 case EnemyTypes.Enemy_Kobold_Melee_Boss:
@@ -141,6 +191,9 @@ public class EnemyType : MonoBehaviour
                 case EnemyTypes.Enemy_Dwarf_Melee_Boss:
                 case EnemyTypes.Enemy_Dwarf_Rnaged_Boss:
                 case EnemyTypes.Enemy_Dwarf_Rush_Boss:
+                case EnemyTypes.Enemy_Siren_Melee_Boss:
+                case EnemyTypes.Enemy_Siren_Rnaged_Boss:
+                case EnemyTypes.Enemy_Siren_Rush_Boss:
                     return "Boss";
 
                 default:

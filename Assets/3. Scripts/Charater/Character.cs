@@ -16,7 +16,8 @@ public abstract class Character : MonoBehaviour
     public enum LayerName { idle = 0, move = 1, attack = 4, death = 2, }
     public LayerName _layerName = LayerName.idle;
 
-    public bool IsAlive { get { return stat.CurrentHealth > 0; } }      // 생존 확인
+    [HideInInspector] public bool IsAlive = true;  // 생존 확인
+
     // 상태확인
     public bool IsMoving { get { return direction.x != 0 || direction.y != 0; } }
     public bool IsAttacking { get; set; }

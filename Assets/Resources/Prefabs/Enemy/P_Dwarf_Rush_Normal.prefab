@@ -299,6 +299,7 @@ MonoBehaviour:
   _spriteList: {fileID: 1955341267702678709}
   hitBox: {fileID: 894972730089825394}
   _layerName: 0
+  IsAlive: 1
   MyTarget: {fileID: 0}
   IsRushing: 0
   RushSpeed: 0
@@ -880,6 +881,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665850511922651884, guid: 8b05bdfc98b214e47871231b255b9343,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665850511922651884, guid: 8b05bdfc98b214e47871231b255b9343,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1207576211
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b05bdfc98b214e47871231b255b9343, type: 3}

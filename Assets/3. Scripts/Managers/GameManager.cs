@@ -409,6 +409,7 @@ public class GameManager : MonoBehaviour
     public void _LevelUp()
     {
         Player.MyInstance.MyStat.Level += 10;
+        Player.MyInstance.MyStat.SetLevelStat(Player.MyInstance.MyStat.Level);
     }
 
     public void _MoneyUp()

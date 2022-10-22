@@ -299,6 +299,7 @@ MonoBehaviour:
   _spriteList: {fileID: 1924814944916966471}
   hitBox: {fileID: 894972730089825394}
   _layerName: 0
+  IsAlive: 1
   MyTarget: {fileID: 0}
   IsRushing: 0
   RushSpeed: 0
@@ -1038,6 +1039,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 59b47b0a1b3dbbb408c3d6cb4b79d4a4, type: 2}
+    - target: {fileID: 6088868963277720611, guid: c29a69c6858d85b429d2b93126d1a96d,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088868963277720611, guid: c29a69c6858d85b429d2b93126d1a96d,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1207576211
+      objectReference: {fileID: 0}
     - target: {fileID: 6088868963317853040, guid: c29a69c6858d85b429d2b93126d1a96d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

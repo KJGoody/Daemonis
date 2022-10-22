@@ -153,6 +153,7 @@ public class EnemyBoss : EnemyBase
 
     protected override IEnumerator Death()
     {
+        IsAlive = false;
         yield return new WaitForSeconds(3f);
         ClearPanel.Instance.ClearGame();
         PortalManager.MyInstance._CreateReturnPortal();

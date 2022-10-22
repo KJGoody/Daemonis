@@ -51,7 +51,8 @@ public class Player : Character
 
         NewBuff("Skill_Fire_02");
 
-        MyStat.SetLevelStat();
+        MyStat.Level = GameManager.MyInstance.DATA.PlayerLevel;
+        MyStat.SetLevelStat(MyStat.Level);
         MyStat.SetStat();
 
         base.Start();
@@ -381,6 +382,7 @@ public class Player : Character
         {
             float surPlusEXP = MyStat.CurrentEXP + EXP - MyStat.LevelUpEXP;
             MyStat.Level++;
+            MyStat.SetLevelStat(MyStat.Level);
             MyStat.CurrentHealth = MyStat.CurrentMaxHealth;
             MyStat.CurrentMana = MyStat.CurrentMaxMana;
             MyStat.CurrentEXP = 0;
@@ -396,9 +398,11 @@ public class Player : Character
 
         if (MyStat.CurrentHealth <= 0)
         {
+            IsAlive = false;
             YOUDIEWindow.SetActive(true);
             transform.Find("HitBox_Player").gameObject.SetActive(false);
             myRigid2D.simulated = false;
+            // 참조) 되살아는 부븐 PortalManager._LoadSceneName
         }
     }
 }

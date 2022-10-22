@@ -76,8 +76,10 @@ public class PortalManager : MonoBehaviour
 
         LoadingSceneManager.LoadScene(LoadSceneName);
 
+        // 플레이어 되살아날때에 처리
         if (!Player.MyInstance.IsAlive)
         {
+            Player.MyInstance.IsAlive = true;
             Player.MyInstance.transform.Find("HitBox_Player").gameObject.SetActive(true);
             Player.MyInstance.rigid2D.simulated = true;
             Player.MyInstance.NewBuff("Skill_Fire_02");
