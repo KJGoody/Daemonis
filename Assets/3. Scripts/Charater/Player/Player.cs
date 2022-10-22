@@ -51,6 +51,7 @@ public class Player : Character
 
         NewBuff("Skill_Fire_02");
 
+        MyStat.SetLevelStat();
         MyStat.SetStat();
 
         base.Start();
@@ -95,6 +96,11 @@ public class Player : Character
                 runParticle.SetTrigger("Run");
             }
         }
+    }
+
+    public void RunParticle(GameObject runparticle)
+    {
+        Instantiate(runparticle, transform.position, Quaternion.identity);
     }
 
     public void CastSpell(string Spell_ID) // 스킬 사용

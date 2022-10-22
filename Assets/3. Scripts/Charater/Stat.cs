@@ -60,7 +60,7 @@ public class Stat : MonoBehaviour
     public float CurrentEXP
     {
         get { return currentEXP; }
-        set 
+        set
         {
             currentEXP = value;
             ExpBar.StatBarCurrentValue = value;
@@ -174,7 +174,7 @@ public class Stat : MonoBehaviour
             }
             else
             {
-                currentMana = value; 
+                currentMana = value;
                 ManaBar.StatBarCurrentValue = value;
             }
         }
@@ -413,6 +413,20 @@ public class Stat : MonoBehaviour
         }
     }
 
+    public void SetLevelStat()
+    {
+        PlayerStatData stat = DataTableManager.Instance.GetPlayerStat(GameManager.MyInstance.DATA.PlayerLevel);
+        Level = stat.Level;
+        LevelUpEXP = stat.LevelUpEXP;
+        BaseAttack = stat.Attack;
+        BaseMaxHealth = stat.MaxHealth;
+        BaseMaxMana = stat.MaxMana;
+        BaseDefence = stat.Defence;
+        BaseMagicRegist = stat.MagicRegist;
+        HealthRegen = stat.HealthRegen;
+        ManaRegen = stat.ManaRegen;
+    }
+
     public void SetStat()
     {
         currentHealth = CurrentMaxHealth;
@@ -424,7 +438,7 @@ public class Stat : MonoBehaviour
             ManaBar.Initialize(CurrentMaxMana, CurrentMaxMana);
         }
 
-        if(ExpBar != null)
+        if (ExpBar != null)
         {
             currentEXP = 0;
             ExpBar.Initialize(LevelUpEXP, currentEXP, true);
@@ -442,10 +456,10 @@ public class Stat : MonoBehaviour
         currentHealth = CurrentMaxHealth;
         HealthBar.Initialize(CurrentMaxHealth, CurrentMaxHealth);
     }
-    private void Update()
+
+    public void Recovery()
     {
-        levelUpEXP = level * 10;
-        if(ExpBar != null)
-            ExpBar.SetMax(levelUpEXP);
+        CurrentHealth = maxHealth;
+        CurrentMana = maxMana;
     }
 }

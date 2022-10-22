@@ -35,23 +35,26 @@ public class BossHPBar : MonoBehaviour
     {
         if(Target != null)
         {
+            // 대상이 비활성화 또는 죽어 있다면 초기화한다.
             if (Target.gameObject.activeSelf == false || !Target.IsAlive)
             {
                 Target = null;
                 IsFix = false;
+                BossHPBarSetActive(false);
             }
         }
         else
         {
-            Target = null;
             IsFix = false;
+                BossHPBarSetActive(false);
         }
 
+        // 몬스터 체력 게이지를 컨트롤한다.
         if (CurrentFill != BossHPBarImage.fillAmount)
             BossHPBarImage.fillAmount = Mathf.Lerp(BossHPBarImage.fillAmount, CurrentFill, Time.deltaTime);
     }
 
-    public void BossHPBarSetActive(bool setactive)
+    public void BossHPBarSetActive(bool setactive)  // 보스 체력바를 보이게 또는 보이지 않게
     {
         if (setactive)
             GetComponent<CanvasGroup>().alpha = 1;
@@ -59,6 +62,7 @@ public class BossHPBar : MonoBehaviour
             GetComponent<CanvasGroup>().alpha = 0;
     }
 
+    // 보스 체력바를 보이게 보이지 않게, 대상의 정보, 현재 대상을 고정으로 표시할 것인가, 공격 타입
     public void BossHPBarSetActive(bool setactive, EnemyBase target, bool Fix = false, Character.AttackType attackType = Character.AttackType.Normal)
     {
         // 체력바 표시 대상 고정
@@ -94,6 +98,7 @@ public class BossHPBar : MonoBehaviour
 
     public void SetBossHP(EnemyBase target, Character.AttackType attackType)
     {
+        // 만약 고정이나 틱데미지일 경우 같은 대상일 경우에만 이미지 업데이트
         if (IsFix || attackType == Character.AttackType.Tick)
         {
             if (Target == target)

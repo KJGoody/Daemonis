@@ -15,6 +15,38 @@ public class DataTableManager : MonoBehaviour
         }
     }
 
+    //-- PlayerStatData
+    private PlayerStatData[] PlayerStatDatas;
+    private void LoadDataTable_PlayerStat()
+    {
+        List<Dictionary<string, object>> DataTable_Stage = CSVReader.Read("DataTable_PlayerStat");
+        PlayerStatDatas = new PlayerStatData[DataTable_Stage.Count];
+
+        for (int i = 0; i < DataTable_Stage.Count; i++)
+        {
+            PlayerStatData info = new PlayerStatData();
+            info.Level = int.Parse(DataTable_Stage[i]["Level"].ToString());
+            info.LevelUpEXP = int.Parse(DataTable_Stage[i]["LevelUpEXP"].ToString());
+            info.Attack = int.Parse(DataTable_Stage[i]["Attack"].ToString());
+            info.MaxHealth = int.Parse(DataTable_Stage[i]["MaxHealth"].ToString());
+            info.MaxMana = int.Parse(DataTable_Stage[i]["MaxMana"].ToString());
+            info.Defence = int.Parse(DataTable_Stage[i]["Defence"].ToString());
+            info.MagicRegist = int.Parse(DataTable_Stage[i]["MagicRegist"].ToString());
+            info.HealthRegen = int.Parse(DataTable_Stage[i]["HealthRegen"].ToString());
+            info.ManaRegen = int.Parse(DataTable_Stage[i]["ManaRegen"].ToString());
+
+            PlayerStatDatas[i] = info;
+        }
+    }
+    public PlayerStatData GetPlayerStat(int level)
+    {
+        foreach(PlayerStatData Data in PlayerStatDatas)
+            if (Data.Level == level)
+                return Data;
+        return null;
+    }
+    //-- PlayerStatData
+    
     //-- StageInfo --
     private StageInfo[] StageInfos;
     private void LoadDataTable_Stage()
@@ -504,6 +536,7 @@ public class DataTableManager : MonoBehaviour
 
     private void Awake()
     {
+        LoadDataTable_PlayerStat();
         LoadDataTable_Stage();
         LoadDataTable_QuestDialog();
         LoadDataTable_QuestData();

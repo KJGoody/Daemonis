@@ -26,16 +26,10 @@ public class OptionPanel : MonoBehaviour
     public Text text_BGM; // 배경음악 음량표시
     public Text text_SFX; // 효과음 음량표시
 
-
-    void Start()
-    {
-        
-    }
-
     public void BGMSlider() // 배경음량 설정
     {
         SoundManager.Instance.SetBGMVolume(volume_BGM.value);
-        text_BGM.text = ""+(int)(volume_BGM.value * 100);
+        text_BGM.text = "" + (int)(volume_BGM.value * 100);
     }
     public void SFXSlider() // 효과음량 설정
     {
