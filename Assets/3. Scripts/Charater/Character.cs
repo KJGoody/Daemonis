@@ -234,6 +234,9 @@ public abstract class Character : MonoBehaviour
             if (TextType.Equals(NewTextPool.NewTextPrefabsName.Critical))
                 Damage *= (int)Player.MyInstance.MyStat.CriticalDamage / 100;
 
+            if (Damage <= 1)
+                Damage = 1;
+
             stat.CurrentHealth -= Damage;
             NEWText(TextType, Damage);
 
