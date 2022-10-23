@@ -4,15 +4,15 @@
 2,Auto,None,Quester,마을 소개,None,마을에 대하여 설명 듣기,None,None,Gold_100
 3,Talk,Quester,Merchant,상점 튜토리얼,None,상인 찾아가기,None,None,None
 4,Auto,None,Quester,스킬 튜토리얼,None,스킬 장착 튜토리얼,None,None,None
-5,Talk,Quester,Quester,모험의 시작,코볼트 10마리 처치,퀘스트NPC 찾아가기,Kill,Enemy_1_Kobold/10,EXP_100/Gold_300
+5,Talk,Quester,Quester,모험의 시작,코볼트 10마리 처치,퀘스트NPC 찾아가기,Kill,Enemy_Kobold/10,EXP_100/Gold_300
 6,Talk,Quester,Quester,스테이지 클리어,1-5 스테이지 클리어,퀘스트NPC 찾아가기,Stage,Act_1_5,EXP_100/Gold_300
-7,Talk,Quester,Merchant,코볼트 처치,코볼트 50마리 처치,상인 찾아가기,Kill,Enemy_1_Kobold/50,E_3
+7,Talk,Quester,Merchant,코볼트 처치,코볼트 50마리 처치,상인 찾아가기,Kill,Enemy_Kobold/50,E_3
 8,Talk,Quester,Quester,스테이지 클리어,1-10 스테이지 클리어,퀘스트NPC 찾아가기,Stage,Act_1_10,EXP_100/Gold_300
-9,Talk,Quester,Quester,난쟁이 대장장이들,드워프 50마리 처치,퀘스트NPC 찾아가기,Kill,Enemy_2_Dwarf/50,EXP_100/Gold_300
+9,Talk,Quester,Quester,난쟁이 대장장이들,드워프 50마리 처치,퀘스트NPC 찾아가기,Kill,Enemy_Dwarf/50,EXP_100/Gold_300
 10,Talk,Quester,Quester,스테이지 클리어,2-5 스테이지 클리어,퀘스트NPC 찾아가기,Stage,Act_2_5,EXP_100/Gold_300
-11,Talk,Quester,Quester,드워프 처치,드워프 100마리 처치,퀘스트NPC 찾아가기,Kill,Enemy_2_Dwarf/100,EXP_100/Gold_300
+11,Talk,Quester,Quester,드워프 처치,드워프 100마리 처치,퀘스트NPC 찾아가기,Kill,Enemy_Dwarf/100,EXP_100/Gold_300
 12,Talk,Quester,Quester,스테이지 클리어,2-10 스테이지 클리어,퀘스트NPC 찾아가기,Stage,Act_2_10,EXP_100/Gold_300
-13,Talk,Quester,Quester,매혹의 감옥,세이렌 100마리 처치,퀘스트NPC 찾아가기,Kill,Enemy_3_Seiren/100,EXP_100/Gold_300
+13,Talk,Quester,Quester,매혹의 감옥,세이렌 100마리 처치,퀘스트NPC 찾아가기,Kill,Enemy_Seiren/100,EXP_100/Gold_300
 14,Talk,Quester,Merchant,스테이지 클리어,3-5 스테이지 클리어,상인 찾아가기,Stage,Act_3_5,E_3
-15,Talk,Quester,Quester,세이렌 처치,세이렌 200마리 처치,퀘스트NPC 찾아가기,Kill,Enemy_3_Seiren/200,EXP_100/Gold_300
+15,Talk,Quester,Quester,세이렌 처치,세이렌 200마리 처치,퀘스트NPC 찾아가기,Kill,Enemy_Seiren/200,EXP_100/Gold_300
 16,Talk,Quester,Quester,스테이지 클리어,3-10 스테이지 클리어,퀘스트NPC 찾아가기,Stage,Act_3_10,EXP_100/Gold_300

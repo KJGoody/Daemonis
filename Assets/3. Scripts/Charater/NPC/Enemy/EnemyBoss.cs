@@ -7,6 +7,20 @@ public class EnemyBoss : EnemyBase
 {
     [HideInInspector] public int DropTime;
 
+    protected override void Start()
+    {
+        ChangeState(new FollowState());
+        // Base Set
+        myAttackRange = enemytype.AttackRange;
+        //-- Stat --
+        MyStat.Level = enemytype.Level;
+        MyStat.BaseAttack = enemytype.Attack;
+        MyStat.BaseMaxHealth = enemytype.MaxHealth;
+        MyStat.MoveSpeed = enemytype.MoveSpeed;
+        MyStat.HitPercent = enemytype.HitPercent;
+        MyStat.SetStat();
+    }
+
     protected override void OnEnable()
     {
         base.OnEnable();
