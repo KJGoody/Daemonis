@@ -86,12 +86,15 @@ public class SoundManager : MonoBehaviour
     // 효과 사운드 재생 : 이름을 필수 매개변수, 볼륨을 선택적 매개변수로 지정
     public void PlaySFXSound(string name, float volume = 1f)
     {
-        if (audioClipsDic.ContainsKey(name) == false)
+        if(name != "None")
         {
-            Debug.Log(name + " is not Contained audioClipsDic");
-            return;
+            if (audioClipsDic.ContainsKey(name) == false)
+            {
+                Debug.Log(name + " is not Contained audioClipsDic");
+                return;
+            }
+            sfxPlayer.PlayOneShot(audioClipsDic[name], volume * masterVolumeSFX);
         }
-        sfxPlayer.PlayOneShot(audioClipsDic[name], volume * masterVolumeSFX);
     }
 
     public void PlaySFXSound(AudioSource parent, string name, float volume = 1f)

@@ -126,6 +126,12 @@ public class EnemyBoss : EnemyBase
                     break;
             }
 
+            if (TextType.Equals(NewTextPool.NewTextPrefabsName.Critical))
+                Damage *= (int)Player.MyInstance.MyStat.CriticalDamage / 100;
+
+            if (Damage <= 1)
+                Damage = 1;
+
             stat.CurrentHealth -= Damage;
             // EnemyElite TeakeDamageºÎºÐ
             BossHPBar.Instance.SetBossHP(this, attackType);
