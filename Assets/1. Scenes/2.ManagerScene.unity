@@ -130407,13 +130407,23 @@ MonoBehaviour:
   masterVolumeSFX: 1
   masterVolumeBGM: 1
   lobbyBgmAudioClip: {fileID: 8300000, guid: f38d136d32ec45d4d9fb61f1d3c60047, type: 3}
-  caveBgmAudioClip: {fileID: 8300000, guid: 9e221d1cfc370964f8f534b8f2836e9f, type: 3}
+  IngameBgmAudioClip_Act1: {fileID: 8300000, guid: 4619901c89c995941aad628ca0edec43,
+    type: 3}
+  IngameBgmAudioClip_Act2: {fileID: 8300000, guid: 665cdd87032e7f64693ca54b3849c956,
+    type: 3}
+  IngameBgmAudioClip_Act3: {fileID: 8300000, guid: e35dfff2c0a67a640b2e8905ba76958c,
+    type: 3}
   sfxAudioClips:
   - {fileID: 8300000, guid: 06aeeff0433de5c4d9fa4abd3dfe395c, type: 3}
   - {fileID: 8300000, guid: ec4bd8626d2027b4a9b5330d5e5ea0d9, type: 3}
   - {fileID: 8300000, guid: 379867c283f9a3540bc7b01cc9c3feb7, type: 3}
+  - {fileID: 8300000, guid: f170896ac4ba34c4e8c9461a9c89afc0, type: 3}
   - {fileID: 8300000, guid: 0b71214f72f9d2744901861b8a78d3e5, type: 3}
+  - {fileID: 8300000, guid: b3820b57a9f7ccd44aee21bd2d746c03, type: 3}
   - {fileID: 8300000, guid: 3078e5a1f0b7da8478842c566aa145f5, type: 3}
+  - {fileID: 8300000, guid: b107497f5b369e740b57d45c60775250, type: 3}
+  - {fileID: 8300000, guid: 9b9c11dc38575ce4c91a1100a9391344, type: 3}
+  - {fileID: 8300000, guid: 2dc873df87f3bfb4cac5e9939989a31d, type: 3}
   - {fileID: 8300000, guid: a4c8d923a0ac94444babf19764cde5e3, type: 3}
   - {fileID: 8300000, guid: 3bc8d3b69f863934698f62a5ed688c1d, type: 3}
   - {fileID: 8300000, guid: 9dad314846d61ee4d864e13b80dfdb2e, type: 3}

@@ -24,23 +24,18 @@ public class SoundManager : MonoBehaviour
 
     public float masterVolumeSFX = 1f;
     public float masterVolumeBGM = 1f;
-    [SerializeField]
-    private AudioClip lobbyBgmAudioClip; // 로비에서 사용할 BGM
-    [SerializeField]
-    private AudioClip caveBgmAudioClip; // 액트1 동굴에서 사용할 BGM
-    //[SerializeField]
-    //private AudioClip loadingBgmAudioClip; // 로딩씬에서 사용할 BGM
-    //[SerializeField]
-    //private AudioClip nightBgmAudioClip; // 저녁맵에서 사용할 BGM
-    //[SerializeField]
-    //private AudioClip chaosBgmAudioClip; // 카오스맵에서 사용할 BGM
-    //[SerializeField]
-    //private AudioClip BossBgmAudioClip; // 카오스맵에서 사용할 BGM
-    //[SerializeField]
-    //private AudioClip CreditAudioClip; // 크레딧창에서 사용할 BGM
+    [SerializeField] private AudioClip lobbyBgmAudioClip; // 로비에서 사용할 BGM
+    [SerializeField] private AudioClip IngameBgmAudioClip_Act1; // 액트1 동굴에서 사용할 BGM
+    [SerializeField] private AudioClip IngameBgmAudioClip_Act2; // 액트2 동굴에서 사용할 BGM
+    [SerializeField] private AudioClip IngameBgmAudioClip_Act3; // 액트3 동굴에서 사용할 BGM
 
-    [SerializeField]
-    private AudioClip[] sfxAudioClips; //효과음들 지정
+    //[SerializeField] private AudioClip loadingBgmAudioClip; // 로딩씬에서 사용할 BGM
+    //[SerializeField] private AudioClip nightBgmAudioClip; // 저녁맵에서 사용할 BGM
+    //[SerializeField] private AudioClip chaosBgmAudioClip; // 카오스맵에서 사용할 BGM
+    //[SerializeField] private AudioClip BossBgmAudioClip; // 카오스맵에서 사용할 BGM
+    //[SerializeField] private AudioClip CreditAudioClip; // 크레딧창에서 사용할 BGM
+
+    [SerializeField] private AudioClip[] sfxAudioClips; //효과음들 지정
 
     Dictionary<string, AudioClip> audioClipsDic = new Dictionary<string, AudioClip>(); //효과음 딕셔너리
     // AudioClip을 Key,Value 형태로 관리하기 위해 딕셔너리 사용
@@ -86,7 +81,7 @@ public class SoundManager : MonoBehaviour
     // 효과 사운드 재생 : 이름을 필수 매개변수, 볼륨을 선택적 매개변수로 지정
     public void PlaySFXSound(string name, float volume = 1f)
     {
-        if(name != "None")
+        if (name != "None")
         {
             if (audioClipsDic.ContainsKey(name) == false)
             {
@@ -108,28 +103,52 @@ public class SoundManager : MonoBehaviour
     {
         if (audioClipsDic.ContainsKey(name) == false)
             return;
-        
+
         AudioSource audioSource = Instantiate(Resources.Load("SFXSoundPlayer") as GameObject, parent).GetComponent<AudioSource>();
-        audioSource.loop = true; 
+        audioSource.loop = true;
         audioSource.clip = audioClipsDic[name];
         audioSource.volume = volume * masterVolumeSFX;
         audioSource.Play();
     }
 
     //BGM 사운드 재생 : 볼륨을 선택적 매개변수로 지정
-    public void PlayBGMSound(Scene scene ,float volume = 1f)
+    public void PlayBGMSound(Scene scene, float volume = 1f)
     {
         bgmPlayer.loop = true; //BGM 사운드이므로 루프설정
         //bgmPlayer.volume = volume * masterVolumeBGM;
-        if (scene.name == "3.Lobby")
+        switch (scene.name)
         {
-            bgmPlayer.clip = lobbyBgmAudioClip;
-            bgmPlayer.Play();
-        }
-        else if (scene.name == "5.IngameMap")
-        {
-            bgmPlayer.clip = caveBgmAudioClip;
-            bgmPlayer.Play();
+            case "3.Lobby":
+                bgmPlayer.clip = lobbyBgmAudioClip;
+                bgmPlayer.Play();
+                break;
+
+            case "5.IngameMap":
+                string[] split = GameManager.MyInstance.CurrentStageID.Split('_');
+                switch (split[1])
+                {
+                    case "1":
+                        bgmPlayer.clip = IngameBgmAudioClip_Act1;
+                        break;
+
+                    case "2":
+                        bgmPlayer.clip = IngameBgmAudioClip_Act2;
+                        break;
+
+                    case "3":
+                        bgmPlayer.clip = IngameBgmAudioClip_Act3;
+                        break;
+
+                    default:
+                        bgmPlayer.clip = IngameBgmAudioClip_Act1;
+                        break;
+                }
+                bgmPlayer.Play();
+                break;
+
+            default:
+                bgmPlayer.Pause();
+                break;
         }
         //else if (SceneManager.GetActiveScene().name == "LoadingScene")
         //{
