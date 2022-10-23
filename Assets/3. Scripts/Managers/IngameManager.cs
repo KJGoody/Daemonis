@@ -7,6 +7,8 @@ public class IngameManager : MonoBehaviour
     private StageInfo Info;
     private bool BossOnce;
 
+    [HideInInspector] public static float StatPercent;
+
     private void Awake()
     {
         Info = DataTableManager.Instance.GetStageInfo(GameManager.MyInstance.CurrentStageID);
@@ -18,6 +20,7 @@ public class IngameManager : MonoBehaviour
         EnemyPool.Instance.SetEnemyPool(DataTableManager.Instance.GetEnemyPrefabs(Info.ID));
         // 인베이드 게이지를 활성화한다.
         InvadeGage.Instance.On(Info.InvadeGage);
+        StatPercent = Info.EnemyStatPercent;
     }
 
     private void Update()

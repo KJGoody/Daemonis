@@ -33,8 +33,8 @@ public class EnemyBase : Character, INpc
         myAttackRange = enemytype.AttackRange;
         //-- Stat --
         MyStat.Level = enemytype.Level;
-        MyStat.BaseAttack = enemytype.Attack;
-        MyStat.BaseMaxHealth = enemytype.MaxHealth;
+        MyStat.BaseAttack = Mathf.RoundToInt(enemytype.Attack * IngameManager.StatPercent);
+        MyStat.BaseMaxHealth = Mathf.RoundToInt(enemytype.MaxHealth * IngameManager.StatPercent);
         MyStat.MoveSpeed = enemytype.MoveSpeed;
         MyStat.HitPercent = enemytype.HitPercent;
         MyStat.SetStat();
@@ -58,7 +58,7 @@ public class EnemyBase : Character, INpc
         {
             if (!IsAttacking)
                 MyAttackTime += Time.deltaTime;
-            
+
             currentState.Update();
         }
 
