@@ -123,8 +123,8 @@ public class EnemyBase : Character, INpc
             transform.Find("EnemyBody").gameObject.SetActive(false);
             myRigid2D.simulated = false;
 
-            ItemDropManager.MyInstance.DropGold(transform, stat.Level);
-            ItemDropManager.MyInstance.DropItem(transform, stat.Level);
+            ItemDropManager.MyInstance.DropGold(transform, Player.MyInstance.MyStat.Level);
+            ItemDropManager.MyInstance.DropItem(transform, Player.MyInstance.MyStat.Level);
 
             StartCoroutine(Death());
             ComboManager.Instance.IncreaseCombo();

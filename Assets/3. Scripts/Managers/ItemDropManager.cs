@@ -15,7 +15,7 @@ public class ItemDropManager : MonoBehaviour
         }
     }
     
-    private float equipmentDropProb = 10; // 장비 드랍 기본확률
+    private float equipmentDropProb = 1; // 장비 드랍 기본확률
     private float EquipmentDropProb // 장비 드랍확률
     {
         get { return equipmentDropProb + equipmentDropProb * Player.MyInstance.MyStat.ItemDropPercent; }
@@ -40,7 +40,7 @@ public class ItemDropManager : MonoBehaviour
         if (ChanceMaker.GetThisChanceResult_Percentage(EquipmentDropProb)) // 장비 드랍확률 통해서 장비 드랍
             DropEquipment(dropPosition, m_Level);
 
-        if (ChanceMaker.GetThisChanceResult_Percentage(20)) // 포션 드랍
+        if (ChanceMaker.GetThisChanceResult_Percentage(5)) // 포션 드랍
             DropPotion(dropPosition, m_Level);
     }
 

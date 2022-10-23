@@ -1,3 +1,3 @@
 ﻿ID,Icon,Name,Descript,Effect,LimitLevel,Cost,StackSize,BuffName,Value
-C_Potion_Health_0,S_Potion_Health_1,소형 체력 물약,소중한 물약,체력을 회복한다.,1,10,5,B_Potion_Health,5
-C_Potion_Mana_0,S_Potion_Mana_1,소형 마나 물약,매우 소중한 물약,마나를 회복한다.,1,10,3,B_Potion_Mana,5
+C_Potion_Health_0,S_Potion_Health_1,소형 체력 물약,소중한 물약,체력을 회복한다.,1,10,100,B_Potion_Health,5
+C_Potion_Mana_0,S_Potion_Mana_1,소형 마나 물약,매우 소중한 물약,마나를 회복한다.,1,10,100,B_Potion_Mana,5

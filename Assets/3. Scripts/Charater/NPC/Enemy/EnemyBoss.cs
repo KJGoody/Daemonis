@@ -156,8 +156,8 @@ public class EnemyBoss : EnemyBase
 
                 for (int i = 0; i < DropTime; i++)
                 {
-                    ItemDropManager.MyInstance.DropGold(transform, stat.Level);
-                    ItemDropManager.MyInstance.DropItem(transform, stat.Level);
+                    ItemDropManager.MyInstance.DropGold(transform, Player.MyInstance.MyStat.Level);
+                    ItemDropManager.MyInstance.DropItem(transform, Player.MyInstance.MyStat.Level);
                 }
 
                 StartCoroutine(Death());
