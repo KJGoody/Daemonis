@@ -39,8 +39,9 @@ public class ClearPanel : MonoBehaviour
         KillCount = 0;
         TotalTimeText.text = "TotalTime: " + Mathf.FloorToInt(InvadeGage.Instance.TotalTime).ToString();
         BossTimeText.text = "BossTime: " + Mathf.FloorToInt(InvadeGage.Instance.BossTime).ToString();
-        //GameManager.MyInstance.SaveData();
+        GameManager.MyInstance.SaveData();
         GetComponent<CanvasGroup>().alpha = 1;
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
         CurrentCoroutine = StartCoroutine(Timer());
     }
 
@@ -48,6 +49,7 @@ public class ClearPanel : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         GetComponent<CanvasGroup>().alpha = 0;
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     private void Update()
@@ -57,6 +59,13 @@ public class ClearPanel : MonoBehaviour
             if(CurrentCoroutine != null)
                 StopCoroutine(CurrentCoroutine);
             GetComponent<CanvasGroup>().alpha = 0;
+            GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
+    }
+
+    public void _Close()
+    {
+        GetComponent<CanvasGroup>().alpha = 0;
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 }

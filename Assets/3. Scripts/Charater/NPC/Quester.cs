@@ -47,4 +47,12 @@ public class Quester : NPC
         else
             ActiveButton.Instance.ResetButton();
     }
+
+    public override Transform Select()
+    {
+        if (IsQuestTalk)
+            DialogScript.Instance.OpenDialog("Quester");
+        
+        return base.Select();
+    }
 }

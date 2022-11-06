@@ -6,7 +6,6 @@ public class ItemCart : MonoBehaviour
     private Item_Base item;
     public Item_Base Item { get { return item; } }
 
-    [SerializeField] private Text T_ItemName;
     [SerializeField] private SpriteRenderer S_Item;
 
     public enum Kinds { Gold, Item }
@@ -35,7 +34,6 @@ public class ItemCart : MonoBehaviour
                 break;
         }
 
-        T_ItemName.text = item.Name;
         S_Item.sprite = item.Icon;
     }
 
@@ -48,7 +46,6 @@ public class ItemCart : MonoBehaviour
         item.Quality = quality;
         (item as Item_Equipment).SetAddOption();
 
-        T_ItemName.text = item.Name;
         S_Item.sprite = item.Icon;
     }
 
@@ -57,7 +54,6 @@ public class ItemCart : MonoBehaviour
         Kind = Kinds.Gold;
         GoldValue = Value;
 
-        T_ItemName.text = Value + " °ñµå";
         S_Item.sprite = Resources.Load<Sprite>("Sprites/S_Gold");
     }
 
