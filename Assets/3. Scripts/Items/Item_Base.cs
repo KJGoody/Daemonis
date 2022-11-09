@@ -30,6 +30,30 @@ public class Item_Base : IMoveable, IUseable, IItem
     //-- Item_Base --
     public enum Qualitys { Normal, Advanced, Rare, Epic, Legendary, Relic }
     public Qualitys Quality;
+    public Color32 GetQualityColor
+    {
+        get
+        {
+            switch (Quality)
+            {
+                case Qualitys.Normal:
+                    return new Color32(214, 214, 214, 255);
+                case Qualitys.Advanced:
+                    return new Color32(0, 255, 0, 255);
+                case Qualitys.Rare:
+                    return new Color32(0, 0, 255, 255);
+                case Qualitys.Epic:
+                    return new Color32(128, 0, 128, 255);
+                case Qualitys.Legendary:
+                    return new Color32(255, 255, 0, 255);
+                case Qualitys.Relic:
+                    return new Color32(255, 102, 0, 255);
+
+                default:
+                    return new Color32(214, 214, 214, 255);
+            }
+        }
+    }
     public string QualityText
     {
         get

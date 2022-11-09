@@ -236,7 +236,6 @@ public class DataTableManager : MonoBehaviour
 
     //-- SpellInfo --
     private SpellInfo[] spellInfos;
-    public SpellInfo[] SpellInfos { get { return spellInfos; } }
     private void LoadDataTable_SpellInfo()
     {
         // 스팰 데이터 테이블을 불러오기

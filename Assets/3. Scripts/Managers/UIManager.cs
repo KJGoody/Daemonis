@@ -125,7 +125,7 @@ public class UIManager : MonoBehaviour
 
             // 해당 슬롯의 텍스트 투명하게 만들기
             stackable.GetStackText.color = new Color(0, 0, 0, 0);
-
+            (stackable as Slot_Base).GetQualityImage.color = Color.clear;
         }
     }
 }

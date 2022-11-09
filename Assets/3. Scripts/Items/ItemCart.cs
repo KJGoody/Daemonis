@@ -7,6 +7,7 @@ public class ItemCart : MonoBehaviour
     public Item_Base Item { get { return item; } }
 
     [SerializeField] private SpriteRenderer S_Item;
+    [SerializeField] private SpriteRenderer S_Quality;
 
     public enum Kinds { Gold, Item }
     [HideInInspector] public Kinds Kind;
@@ -35,6 +36,7 @@ public class ItemCart : MonoBehaviour
         }
 
         S_Item.sprite = item.Icon;
+        S_Quality.color = item.GetQualityColor;
     }
 
     public void SetItem_Equipment(ItemInfo_Equipment ItemInfo, Item_Base.Qualitys quality)
@@ -47,6 +49,7 @@ public class ItemCart : MonoBehaviour
         (item as Item_Equipment).SetAddOption();
 
         S_Item.sprite = item.Icon;
+        S_Quality.color = item.GetQualityColor;
     }
 
     public void SetGold(int Value)

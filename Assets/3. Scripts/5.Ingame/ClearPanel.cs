@@ -66,6 +66,6 @@ public class ClearPanel : MonoBehaviour
     public void _Close()
     {
         GetComponent<CanvasGroup>().alpha = 0;
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 }

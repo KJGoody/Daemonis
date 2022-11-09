@@ -38,6 +38,7 @@ public class HandScript : MonoBehaviour
     [Header("Select Item Tooltip")]
     #region 아이템 선택관련 변수 SI = Select Item
     [SerializeField] private Image SI_Image; // 선택한 아이템 화면에 보이는 이미지
+    [SerializeField] private Image SI_QualityImage;  // 선택한 아이템 퀄리티 이미지
     [SerializeField] private Text SI_Name;   // 아이템 이름
     [SerializeField] private Text SI_LimitLvl;// 제한 레벨
     [SerializeField] private Text SI_DefaultStat;// 기본효과(기본스탯같은) 설명
@@ -131,6 +132,7 @@ public class HandScript : MonoBehaviour
         // 선택한 아이템 정보 표시
         myItem = item;
         SI_Image.sprite = myItem.Icon;
+        SI_QualityImage.color = myItem.GetQualityColor;
         SI_Name.text = myItem.Name;
         SI_Quality.text = myItem.QualityText;
         SI_LimitLvl.text = "제한 레벨 : " + myItem.LimitLevel;

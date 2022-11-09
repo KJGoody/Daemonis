@@ -25,6 +25,7 @@ public class PlayerInfoPanel : MonoBehaviour
     [Header("Using Equipment Tooltip")]
     #region 장착 장비아이템 관련 변수 UE = Using Equipment
     [SerializeField] private Image UE_Image; // 선택한 아이템 화면에 보이는 이미지
+    [SerializeField] private Image UE_QualityImage; // 선택한 아이템 화면에 보이는 이미지
     [SerializeField] private Text UE_Name;   // 아이템 이름
     [SerializeField] private Text UE_LimitLvl;// 제한 레벨
     [SerializeField] private Text UE_DefaultStat;// 기본효과(기본스탯같은) 설명
@@ -107,6 +108,7 @@ public class PlayerInfoPanel : MonoBehaviour
             ueItem = Player.MyInstance.usingEquipment[partNum];
 
             UE_Image.sprite = ueItem.Icon;
+            UE_QualityImage.color = ueItem.GetQualityColor;
             UE_Name.text = ueItem.Name;
             UE_Quality.text = ueItem.QualityText;
             UE_LimitLvl.text = "제한 레벨 : " + ueItem.LimitLevel;

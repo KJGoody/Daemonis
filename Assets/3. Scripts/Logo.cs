@@ -8,15 +8,31 @@ public class Logo : MonoBehaviour
 {
     Color color;
     [SerializeField] Image BlackBackImage;
+    [SerializeField] private GameObject PressToStartText;
 
     private void Start()
     {
         color = BlackBackImage.color;
-        StartCoroutine(FadeOut());
+        StartCoroutine(PressToStart());
+    }
+
+    private IEnumerator PressToStart()
+    {
+        while (true)
+        {
+            yield return null;
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine(FadeOut());
+                break;
+            }
+        }
     }
 
     IEnumerator FadeOut()
     {
+        PressToStartText.SetActive(false);
+
         // 비동기로 씬을 불러온다.
         AsyncOperation asyncOper = SceneManager.LoadSceneAsync("2.ManagerScene");
         AsyncOperation asyncOper1 = SceneManager.LoadSceneAsync("3.Lobby", LoadSceneMode.Additive);
