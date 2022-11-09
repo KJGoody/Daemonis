@@ -88,7 +88,7 @@ public class DataTableManager : MonoBehaviour
                     bossinfo.AttackType = EnemyTypeInfo.AttackTypes.Siren_Ranged;
                     break;
 
-                case "BaseRueh":
+                case "BaseRush":
                     bossinfo.AttackType = EnemyTypeInfo.AttackTypes.BaseRush;
                     break;
             }
