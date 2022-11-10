@@ -23,13 +23,16 @@ public class DialogScript : MonoBehaviour
 
     private bool IsSkip = false;
 
+    private Coroutine CurrnetCoroutine;
+
     public void OpenDialog(string NPCname, int inedex = 0)
     {
         GetComponent<CanvasGroup>().alpha = 1;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         NPCName = NPCname;
         Joystick.SetActive(false);
-        StartCoroutine(Dialog(inedex));
+        if(CurrnetCoroutine == null)
+            CurrnetCoroutine = StartCoroutine(Dialog(inedex));
     }
 
     public IEnumerator Dialog(int index)
@@ -63,6 +66,9 @@ public class DialogScript : MonoBehaviour
                 ActiveButton.Instance.SetButton(ActiveButton.Role.QuesterButton, Quester.IsQuestTalk);
                 break;
         }
+
+        IsSkip = false;
+        CurrnetCoroutine = null;
     }
 
     private IEnumerator Acting(string actorName, string actorSpeech)

@@ -33,6 +33,8 @@ public class StoreSlot : Slot_Base
         {
             Item = item;
             icon.sprite = Item.Icon;
+            if(QualityImage != null)
+                QualityImage.color = Item.GetQualityColor;
             ItemName.text = Item.GetName();
             ItemCost.text = Item.Cost.ToString();
             ItemCost.gameObject.SetActive(true);

@@ -10,6 +10,7 @@ public class Slot_Chest : Slot_Stack
         Items.Push(item);
         icon.sprite = item.Icon;
         icon.color = Color.white;
+        QualityImage.color = item.GetQualityColor;
         return true;
     }
 

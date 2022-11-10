@@ -79,7 +79,11 @@ public class StorePanel : MonoBehaviour
     private void SetStockItem_Stuff()
     {
         for (int i = 0; i < 4; i++)
+        {
+            StoreSlots[i].gameObject.GetComponent<CanvasGroup>().alpha = 1;
+            StoreSlots[i].gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
             StoreSlots_Stuff[i] = new Item_Consumable();
+        }
 
         for (int i = 0; i < 4; i++)
         {
@@ -99,7 +103,7 @@ public class StorePanel : MonoBehaviour
             } while (IsAlrealyStock(tempInfo));
 
             if (TryCount > Array.Count)
-                break;
+                continue;
 
             string[] kind = tempInfo.ID.Split('_');
             switch (kind[1])
@@ -180,7 +184,19 @@ public class StorePanel : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             if (storeSlots != null)
+            {
                 StoreSlots[i].SetSlot(storeSlots[i]);
+                if(storeSlots[i].GetName() != null)
+                {
+                    StoreSlots[i].gameObject.GetComponent<CanvasGroup>().alpha = 1;
+                    StoreSlots[i].gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+                }
+                else
+                {
+                    StoreSlots[i].gameObject.GetComponent<CanvasGroup>().alpha = 0;
+                    StoreSlots[i].gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                }
+            }
             else
                 StoreSlots[i].SetSlot(null);
         }
