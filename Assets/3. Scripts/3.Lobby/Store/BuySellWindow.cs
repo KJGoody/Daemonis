@@ -145,7 +145,7 @@ public class BuySellWindow : MonoBehaviour
                     GameManager.MyInstance.DATA.Gold = Bill;
                     for (int i = 0; i < ItemCount; i++)
                         InventoryScript.MyInstance.AddItem(ItemView.Item, true);
-                    //GameManager.MyInstance.SaveData();
+                    GameManager.MyInstance.SaveData();
                 }
             }
             else
@@ -162,7 +162,7 @@ public class BuySellWindow : MonoBehaviour
                         BuyItem.SetAddOption();
                         InventoryScript.MyInstance.AddItem(BuyItem);
                     }
-                    //GameManager.MyInstance.SaveData();
+                    GameManager.MyInstance.SaveData();
                 }
             }
         }
@@ -174,6 +174,6 @@ public class BuySellWindow : MonoBehaviour
         GameManager.MyInstance.DATA.Gold = Bill;
         for(int i = 0; i < ItemCount; i++)
             ItemView.Item.Remove();
-        //GameManager.MyInstance.SaveData();
+        GameManager.MyInstance.SaveData();
     }
 }
