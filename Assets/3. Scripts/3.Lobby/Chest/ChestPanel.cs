@@ -39,6 +39,7 @@ public class ChestPanel : MonoBehaviour
     private Item_Base SelectItem;
     [SerializeField] private GameObject SelectPanel;
     [SerializeField] private Image SP_Image; // 선택한 아이템 화면에 보이는 이미지
+    [SerializeField] private Image SP_QualityImage;  // 선택한 아이템의 등급 표시
     [SerializeField] private Text SP_Name;   // 아이템 이름
     [SerializeField] private Text SP_LimitLvl;// 제한 레벨
     [SerializeField] private Text SP_DefaultStat;// 기본효과(기본스탯같은) 설명
@@ -48,8 +49,6 @@ public class ChestPanel : MonoBehaviour
     [SerializeField] private GameObject[] SP_Obj_AddOptions;// 추가옵션들
     [SerializeField] private ContentSizeFitter SP_CSF_Descript;
     [SerializeField] private ContentSizeFitter SP_CSF_Panel;
-
-
 
     public void OpenChest()
     {
@@ -157,6 +156,7 @@ public class ChestPanel : MonoBehaviour
     {
         SelectItem = item;
         CurrentSlot = item.MySlot as Slot_Chest;
+        SP_QualityImage.color = item.GetQualityColor;
         SP_Image.sprite = item.Icon;
         SP_Name.text = item.Name;
         SP_Quality.text = item.QualityText;
