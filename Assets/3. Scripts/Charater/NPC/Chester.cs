@@ -17,4 +17,10 @@ public class Chester : NPC
             ActiveButton.Instance.ResetButton();
         }
     }
+
+    public override Transform Select()
+    {
+        ChestPanel.Instance.OpenChest();
+        return base.Select();
+    }
 }

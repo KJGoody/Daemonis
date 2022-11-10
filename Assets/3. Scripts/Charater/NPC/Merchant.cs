@@ -8,6 +8,8 @@ public class Merchant : NPC
     [SerializeField] private Text QuestMark;
     public static bool IsQuestTalk = false;
 
+    private bool IsOverlap = false;
+
     private void Update()
     {
         if (QuestPanel.Instance.StartNPC == "Merchant")
@@ -49,9 +51,23 @@ public class Merchant : NPC
 
     public override Transform Select()
     {
-        if (IsQuestTalk)
-            DialogScript.Instance.OpenDialog("Merchant");
+        if (!IsOverlap)
+        {
+            IsOverlap = true;
+            StartCoroutine(PreventOverlap());
+
+            if (IsQuestTalk)
+                DialogScript.Instance.OpenDialog("Merchant");
+            else
+                StorePanel.Instance.OpenStore();
+        }
         
         return base.Select();
+    }
+
+    private IEnumerator PreventOverlap()
+    {
+        yield return new WaitForSeconds(0.1f);
+        IsOverlap = false;
     }
 }

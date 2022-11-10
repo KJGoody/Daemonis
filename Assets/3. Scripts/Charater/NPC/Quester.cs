@@ -8,6 +8,8 @@ public class Quester : NPC
     [SerializeField] private Text QuestMark;
     public static bool IsQuestTalk = false;
 
+    private bool IsOverlap = false;
+
     private void Update()
     {
         if (QuestPanel.Instance.StartNPC == "Quester")
@@ -50,9 +52,23 @@ public class Quester : NPC
 
     public override Transform Select()
     {
-        if (IsQuestTalk)
-            DialogScript.Instance.OpenDialog("Quester");
-        
+        if (!IsOverlap)
+        {
+            IsOverlap = true;
+            StartCoroutine(PreventOverlap());
+
+            if (IsQuestTalk)
+                DialogScript.Instance.OpenDialog("Quester");
+            else
+                DialogScript.Instance.OpenDialog("Quester", (int)DialogData.QuestStats.Ing);
+        }
+
         return base.Select();
+    }
+
+    private IEnumerator PreventOverlap()
+    {
+        yield return new WaitForSeconds(0.1f);
+        IsOverlap = false;
     }
 }
